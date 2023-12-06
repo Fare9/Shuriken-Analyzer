@@ -8,7 +8,7 @@
 *.obj
 
 # Precompiled Headers
-*.gch
+*.gcha
 *.pch
 
 # Compiled Dynamic libraries
@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# CMake
+build/
+
+# CLion (IntelliJ) folders
+.idea/
