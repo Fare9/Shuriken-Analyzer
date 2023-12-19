@@ -1,17 +1,20 @@
 if(DEX AND DEX_TESTS)
     message(STATUS "Compiling test parse-test-dex")
     configure_file(
-            ${CMAKE_CURRENT_SOURCE_DIR}/parse-test-dex.in
-            ${CMAKE_CURRENT_SOURCE_DIR}/parse-test-dex.inc
+            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.in
+            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.inc
     )
 
     add_executable(parse-test-dex
             ${CMAKE_CURRENT_SOURCE_DIR}/parse-test-dex.cpp
-            $<TARGET_OBEJCTS:shuriken-obj>
-            $<TARGET_OBJECTS:dex-obj>
     )
 
-    target_link_libraries(parse-test-dex spdlog)
+    target_include_directories(parse-test-dex
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH}
+    )
+
+    target_link_libraries(parse-test-dex shuriken)
 
     add_test(NAME parse-test-dex
     COMMAND parse-test-dex)

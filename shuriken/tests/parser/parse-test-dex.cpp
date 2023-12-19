@@ -10,5 +10,7 @@
 #include "dex-files-folder.inc"
 #include "shuriken/parser/shuriken_parsers.h"
 
-
+int main() {
+    return 0;
+}
 

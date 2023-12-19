@@ -40,6 +40,10 @@ endif()
 option(DEX "Disable the DEX analysis from the library (enable by default)" ON)
 option(DEX_TESTS "Compile all the tests for DEX files" OFF)
 
+# Variables that need to be set for compiling dalvik files
+set(JAVAC_BINARY "" CACHE FILEPATH "Path to javac binary for compiling java files")
+set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
+
 # include path, only the parent file, all the files must specify
 # the whole path to its header
 set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include/")
@@ -124,7 +128,7 @@ include(CTest)
 enable_testing()
 
 set(DEX_FILES_FOLDER
-    "${CMAKE_CURRENT_BINARY_DIR}/code/dalvik"
+    "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/"
 )
 
 add_subdirectory(tests)
