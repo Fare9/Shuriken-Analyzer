@@ -16,21 +16,19 @@
 
 namespace shuriken {
     namespace parser {
-        namespace dex {
-            std::unique_ptr<dex::Parser> parse_dex(common::ShurikenStream &file) {
-                auto p = std::make_unique<dex::Parser>();
-                p->parse_dex(file);
-                return std::move(p);
-            }
+        std::unique_ptr<dex::Parser> parse_dex(common::ShurikenStream &file) {
+            auto p = std::make_unique<dex::Parser>();
+            p->parse_dex(file);
+            return std::move(p);
+        }
 
-            std::unique_ptr<dex::Parser> parse_dex(const std::string& file_path) {
-                std::ifstream ifs(file_path);
-                common::ShurikenStream file(ifs);
+        std::unique_ptr<dex::Parser> parse_dex(const std::string& file_path) {
+            std::ifstream ifs(file_path);
+            common::ShurikenStream file(ifs);
 
-                auto p = std::make_unique<dex::Parser>();
-                p->parse_dex(file);
-                return std::move(p);
-            }
+            auto p = std::make_unique<dex::Parser>();
+            p->parse_dex(file);
+            return std::move(p);
         }
     }
 }

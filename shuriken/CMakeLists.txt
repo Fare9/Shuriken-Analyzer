@@ -125,10 +125,9 @@ target_link_libraries(shuriken
 #############################################################
 include(CTest)
 
-enable_testing()
-
 set(DEX_FILES_FOLDER
     "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/"
 )
 
+enable_testing()
 add_subdirectory(tests)
