@@ -2,7 +2,7 @@
 // Shuriken-Analyzer: library for bytecode analysis.
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
-// @file Strings.h
+// @file strings.h
 // @brief Strings of a DEX file
 
 #ifndef SHURIKENLIB_STRINGS_H

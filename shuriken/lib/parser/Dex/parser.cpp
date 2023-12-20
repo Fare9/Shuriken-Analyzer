@@ -33,7 +33,18 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
     const auto & dex_header = header_.get_dex_header_const();
 
     // parsing of the rest of the fields
-    strings_.parse_strings(stream, dex_header.string_ids_off, dex_header.string_ids_size);
-    types_.parse_types(stream, strings_, dex_header.type_ids_off, dex_header.type_ids_size);
+    strings_.parse_strings(stream,
+                           dex_header.string_ids_off,
+                           dex_header.string_ids_size);
+    types_.parse_types(stream,
+                       strings_,
+                       dex_header.type_ids_off,
+                       dex_header.type_ids_size);
+    protos_.parse_protos(stream,
+                         dex_header.proto_ids_size,
+                         dex_header.proto_ids_off,
+                         strings_,
+                         types_);
+
     my_logger->info("Finished parsing dex file");
 }

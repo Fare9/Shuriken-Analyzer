@@ -2,7 +2,7 @@
 // Shuriken-Analyzer: library for bytecode analysis.
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
-// @file Types.h
+// @file types.h
 // @brief Manager of Types for Dalvik
 
 #ifndef SHURIKENLIB_TYPES_H
@@ -89,6 +89,17 @@ namespace shuriken {
                 /// @return beautified representation of the type
                 virtual std::string print_type() = 0;
             };
+
+            /// @brief Operator == for comparison between two DVMTypes
+            inline bool operator==(const DVMType& lhs, const DVMType& rhs) {
+                if ((lhs.get_type() == rhs.get_type()) && (lhs.get_raw_type() == rhs.get_raw_type()))
+                    return true;
+                return false;
+            }
+            /// @Brief Operator != for comparison between two DVMTypes
+            inline bool operator!=(const DVMType& lhs, const DVMType& rhs) {
+                return !(lhs == rhs);
+            }
 
             class DVMFundamental : public DVMType
             {
@@ -280,6 +291,21 @@ namespace shuriken {
                     }
 
                     return ordered_types.at(id).get();
+                }
+
+                /// @brief Get the ID from the given type as parameter
+                /// @param type type to look for the id
+                /// @return ID from the given type
+                std::uint32_t get_id_by_type(DVMType * type) {
+                    auto it = std::ranges::find_if(ordered_types,
+                                                   [&](const std::unique_ptr<DVMType>& t) {
+                        return *type == *t;
+                    });
+
+                    if (it == ordered_types.end())
+                        return -1;
+
+                    return std::distance(ordered_types.begin(), it);
                 }
 
                 /// @brief Dump the content of the Types to an XML file

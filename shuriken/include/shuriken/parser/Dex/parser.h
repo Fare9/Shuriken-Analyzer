@@ -2,7 +2,7 @@
 // Shuriken-Analyzer: library for bytecode analysis.
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
-// @file java.h
+// @file parser.h
 // @brief Parser for the DEX file, here we contain objects for all the other
 // fields
 
@@ -14,6 +14,7 @@
 #include "shuriken/parser/Dex/header.h"
 #include "shuriken/parser/Dex/strings.h"
 #include "shuriken/parser/Dex/types.h"
+#include "shuriken/parser/Dex/protos.h"
 
 namespace shuriken {
     namespace parser {
@@ -27,6 +28,8 @@ namespace shuriken {
                 Strings strings_;
                 /// @brief Types of the DEX file
                 Types types_;
+                /// @brief Protos of the DEX file
+                Protos protos_;
 
             public:
                 /// @brief Default constructor of the java
