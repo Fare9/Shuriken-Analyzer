@@ -45,6 +45,11 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
                          dex_header.proto_ids_off,
                          strings_,
                          types_);
+    fields_.parse_fields(stream,
+                         types_,
+                         strings_,
+                         dex_header.field_ids_off,
+                         dex_header.field_ids_size);
 
     my_logger->info("Finished parsing dex file");
 }

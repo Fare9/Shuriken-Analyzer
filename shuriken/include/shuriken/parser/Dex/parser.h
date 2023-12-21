@@ -15,6 +15,7 @@
 #include "shuriken/parser/Dex/strings.h"
 #include "shuriken/parser/Dex/types.h"
 #include "shuriken/parser/Dex/protos.h"
+#include "shuriken/parser/Dex/fields.h"
 
 namespace shuriken {
     namespace parser {
@@ -30,6 +31,8 @@ namespace shuriken {
                 Types types_;
                 /// @brief Protos of the DEX file
                 Protos protos_;
+                /// @brief Fields of the DEX file
+                Fields fields_;
 
             public:
                 /// @brief Default constructor of the java
@@ -41,7 +44,45 @@ namespace shuriken {
                 /// @param stream stream from where to retrieve the dex data
                 void parse_dex(common::ShurikenStream& stream);
 
+                Header& get_header() {
+                    return header_;
+                }
 
+                const Header& get_header() const {
+                    return header_;
+                }
+
+                Strings& get_strings() {
+                    return strings_;
+                }
+
+                const Strings& get_strings() const {
+                    return strings_;
+                }
+
+                Types& get_types() {
+                    return types_;
+                }
+
+                const Types& get_types() const {
+                    return types_;
+                }
+
+                Protos& get_protos() {
+                    return protos_;
+                }
+
+                const Protos& get_protos() const {
+                    return protos_;
+                }
+
+                Fields& get_fields() {
+                    return fields_;
+                }
+
+                const Fields& get_fields() const {
+                    return fields_;
+                }
             };
 
         }
