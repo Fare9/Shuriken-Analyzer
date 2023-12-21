@@ -296,7 +296,7 @@ namespace shuriken {
                 /// @brief Get the ID from the given type as parameter
                 /// @param type type to look for the id
                 /// @return ID from the given type
-                std::uint32_t get_id_by_type(DVMType * type) {
+                std::int64_t get_id_by_type(DVMType * type) {
                     auto it = std::ranges::find_if(ordered_types,
                                                    [&](const std::unique_ptr<DVMType>& t) {
                         return *type == *t;
