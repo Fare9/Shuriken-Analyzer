@@ -14,9 +14,11 @@ if(DEX AND DEX_TESTS)
             PUBLIC ${SHURIKEN_INCLUDE_PATH}
     )
 
+    # Add dependency on shuriken library
+    add_dependencies(parse-test-dex shuriken)
+
     target_link_libraries(parse-test-dex shuriken)
 
     add_test(NAME parse-test-dex
-    COMMAND parse-test-dex)
-
+            COMMAND parse-test-dex)
 endif ()

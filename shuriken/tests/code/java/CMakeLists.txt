@@ -23,6 +23,8 @@ if(DEX AND DEX_TESTS)
             _thread
     )
 
+    set(D8_RESULTS)
+
     foreach (file ${JAVA_FILES})
         message(STATUS "Compiling ${file}.java -> ${file}.dex")
         add_custom_command(
@@ -37,9 +39,9 @@ if(DEX AND DEX_TESTS)
         list(APPEND D8_RESULTS ${CMAKE_CURRENT_BINARY_DIR}/${file}.dex)
     endforeach ()
 
+    # Create a single custom target for all DEX files
     add_custom_target(DalvikFiles ALL
             DEPENDS ${D8_RESULTS}
     )
-
 
 endif ()
