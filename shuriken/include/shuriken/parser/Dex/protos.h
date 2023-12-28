@@ -104,10 +104,20 @@ namespace shuriken {
                     return make_range(parameters.begin(), parameters.end());
                 }
 
-                it_const_params get_parameters_const() {
+                it_const_params get_parameters_const(){
                     return make_range(parameters.begin(), parameters.end());
                 }
             };
+
+            inline bool operator==(const ProtoID& lhs, const ProtoID& rhs) {
+                if (lhs.get_shorty_idx() == rhs.get_shorty_idx())
+                    return true;
+                return false;
+            }
+
+            inline bool operator!=(const ProtoID& lhs, const ProtoID& rhs) {
+                return !(lhs == rhs);
+            }
 
             class Protos {
             public:
@@ -148,6 +158,18 @@ namespace shuriken {
                     if (id >= protos.size())
                         throw std::runtime_error("Error proto id given is out of bound");
                     return protos[id].get();
+                }
+
+                std::int64_t get_id_by_proto(ProtoID* proto) {
+                    auto it = std::ranges::find_if(protos,
+                                                   [&](const std::unique_ptr<ProtoID>& p) {
+                       return *proto == *p;
+                    });
+
+                    if (it == protos.end())
+                        return -1;
+
+                    return std::distance(protos.begin(), it);
                 }
 
                 size_t get_number_of_protos() const {
