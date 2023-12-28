@@ -33,6 +33,8 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
     const auto & dex_header = header_.get_dex_header_const();
 
     // parsing of the rest of the fields
+    maplist_.parse_map_list(stream,
+                            dex_header.map_off);
     strings_.parse_strings(stream,
                            dex_header.string_ids_off,
                            dex_header.string_ids_size);
@@ -50,6 +52,19 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
                          strings_,
                          dex_header.field_ids_off,
                          dex_header.field_ids_size);
+    methods_.parse_methods(stream,
+                           types_,
+                           protos_,
+                           strings_,
+                           dex_header.method_ids_off,
+                           dex_header.method_ids_size);
+    classes_.parse_classes(stream,
+                           dex_header.class_defs_size,
+                           dex_header.class_defs_off,
+                           strings_,
+                           types_,
+                           fields_,
+                           methods_);
 
     my_logger->info("Finished parsing dex file");
 }

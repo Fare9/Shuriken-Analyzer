@@ -12,10 +12,16 @@
 #include "shuriken/common/shurikenstream.h"
 
 #include "shuriken/parser/Dex/header.h"
+#include "shuriken/parser/Dex/mapitem.h"
 #include "shuriken/parser/Dex/strings.h"
 #include "shuriken/parser/Dex/types.h"
 #include "shuriken/parser/Dex/protos.h"
 #include "shuriken/parser/Dex/fields.h"
+#include "shuriken/parser/Dex/methods.h"
+
+#include "shuriken/parser/Dex/annotations.h"
+#include "shuriken/parser/Dex/encoded.h"
+#include "shuriken/parser/Dex/classes.h"
 
 namespace shuriken {
     namespace parser {
@@ -25,6 +31,8 @@ namespace shuriken {
             private:
                 /// @brief Header of the DEX file
                 Header header_;
+                /// @brief Structure with information of the DEX file
+                MapList maplist_;
                 /// @brief Strings of the DEX file
                 Strings strings_;
                 /// @brief Types of the DEX file
@@ -33,6 +41,10 @@ namespace shuriken {
                 Protos protos_;
                 /// @brief Fields of the DEX file
                 Fields fields_;
+                /// @brief Methods of the DEX file
+                Methods methods_;
+                /// @brief Classes of the DEX file
+                Classes classes_;
 
             public:
                 /// @brief Default constructor of the java
@@ -50,6 +62,14 @@ namespace shuriken {
 
                 const Header& get_header() const {
                     return header_;
+                }
+
+                MapList& get_maplist() {
+                    return maplist_;
+                }
+
+                const MapList& get_maplist() const {
+                    return maplist_;
                 }
 
                 Strings& get_strings() {
@@ -82,6 +102,22 @@ namespace shuriken {
 
                 const Fields& get_fields() const {
                     return fields_;
+                }
+
+                Methods& get_methods() {
+                    return methods_;
+                }
+
+                const Methods& get_methods() const {
+                    return methods_;
+                }
+
+                Classes& get_classes() {
+                    return classes_;
+                }
+
+                const Classes& get_classes() const {
+                    return classes_;
                 }
             };
 
