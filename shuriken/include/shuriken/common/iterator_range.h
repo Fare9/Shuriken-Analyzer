@@ -10,6 +10,7 @@
 #define SHURIKENLIB_ITERATOR_RANGE_H
 
 #include <utility>
+#include <ranges>
 
 namespace shuriken {
 /// A range adaptor for a pair of iterators.
