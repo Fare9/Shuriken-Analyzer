@@ -12,6 +12,6 @@ The project has the next structure:
   * lib/common/: code that can be used by the rest of the project.
   * lib/parser/: different parsers for the supported files.
     * lib/parser/Dex/: Code from the DEX parser.
-* external/: projects that are used inside of Shuriken but are not part of the code.
-
+* external/: projects that are used inside Shuriken but are not part of the code.
+* tests/: code for the different tests of Shuriken.
 
