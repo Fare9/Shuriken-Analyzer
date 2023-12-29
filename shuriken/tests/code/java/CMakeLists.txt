@@ -20,7 +20,7 @@ if(DEX AND DEX_TESTS)
             _loop
             _null
             _pi
-            _thread
+            DexParserTest
     )
 
     set(D8_RESULTS)

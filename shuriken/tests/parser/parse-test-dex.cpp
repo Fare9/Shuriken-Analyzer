@@ -26,7 +26,6 @@ int main() {
             std::string(DEX_FILES_FOLDER) + "_loop.dex",
             std::string(DEX_FILES_FOLDER) + "_null.dex",
             std::string(DEX_FILES_FOLDER) + "_pi.dex",
-            std::string(DEX_FILES_FOLDER) + "_thread.dex",
     };
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser = nullptr;

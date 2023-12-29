@@ -21,4 +21,21 @@ if(DEX AND DEX_TESTS)
 
     add_test(NAME parse-test-dex
             COMMAND parse-test-dex)
+
+    add_executable(headers-test-dex
+            ${CMAKE_CURRENT_SOURCE_DIR}/headers-test-dex.cpp
+    )
+
+    target_include_directories(headers-test-dex
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH}
+    )
+
+    # Add dependency on shuriken library
+    add_dependencies(headers-test-dex shuriken)
+
+    target_link_libraries(headers-test-dex shuriken)
+
+    add_test(NAME headers-test-dex
+            COMMAND headers-test-dex)
 endif ()
