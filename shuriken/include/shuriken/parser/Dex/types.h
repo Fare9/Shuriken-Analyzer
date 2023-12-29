@@ -159,7 +159,7 @@ namespace shuriken {
                     if (!raw_name.starts_with('L') || !raw_name.ends_with(';'))
                         std::runtime_error("Incorrect class name");
 
-                    class_name = raw_name.substr(1, raw_name.length()-1);
+                    class_name = raw_name.substr(1, raw_name.length()-2);
                     std::replace(class_name.begin(), class_name.end(), '/', '.');
 
                     class_name_v = std::string_view (class_name);
@@ -285,7 +285,7 @@ namespace shuriken {
 
                 /// @brief Get a pointer to a DVMType by id
                 /// @param id order of the type
-                /// @return pointer to a DVMType
+                /// @return pointer to a DVMTypeLjava/lang/Object;
                 DVMType* get_type_by_id(std::uint32_t id) {
                     if (id >= ordered_types.size()) {
                         throw std::runtime_error("Error id for type provided is incorrect");

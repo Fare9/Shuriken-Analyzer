@@ -46,9 +46,9 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
 
     for (I = 0; I < instance_fields_size; ++I) {
         instance_field += stream.read_uleb128();
-        access_flags += stream.read_uleb128();
+        access_flags = stream.read_uleb128();
         instance_fields[instance_field] =
-                std::make_unique<EncodedField>(fields.get_field_by_id(static_field),
+                std::make_unique<EncodedField>(fields.get_field_by_id(instance_field),
                                                static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
     }
 
@@ -67,7 +67,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         virtual_method += stream.read_uleb128();
         access_flags = stream.read_uleb128();
         code_offset = stream.read_uleb128();
-        virtual_methods[virtual_method] = std::make_unique<EncodedMethod>(methods.get_method_by_id(direct_method),
+        virtual_methods[virtual_method] = std::make_unique<EncodedMethod>(methods.get_method_by_id(virtual_method),
                                                                           static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
         virtual_methods[virtual_method]->parse_encoded_method(stream, code_offset, types);
     }

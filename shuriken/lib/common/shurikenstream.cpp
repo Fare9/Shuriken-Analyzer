@@ -90,6 +90,9 @@ std::string ShurikenStream::read_dex_string(std::int64_t offset) {
     // save current offset
     auto current_offset = input_file.tellg();
 
+    // set the offset to the given offset
+    input_file.seekg(static_cast<std::streampos>(offset));
+
     utf16_size = read_uleb128();
 
     while (utf16_size--) {
