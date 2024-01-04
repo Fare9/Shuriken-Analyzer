@@ -476,7 +476,7 @@ namespace shuriken {
                 /// @brief Get a constant access to the instructions in raw, an std::span
                 /// will not allow the modification and it provides quick access.
                 /// @return span to the bytecode
-                auto get_bytecode() const {
+                std::span<std::uint8_t> get_bytecode() {
                     std::span bytecode{instructions_raw};
                     return bytecode;
                 }

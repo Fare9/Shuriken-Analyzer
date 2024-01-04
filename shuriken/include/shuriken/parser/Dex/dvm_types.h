@@ -71,6 +71,10 @@ namespace shuriken {
             };
         }
 
+        class Utils {
+        public:
+            static std::string get_types_as_string(TYPES::access_flags ac);
+        };
     }
 }
 #endif //SHURIKENLIB_DVM_TYPES_H

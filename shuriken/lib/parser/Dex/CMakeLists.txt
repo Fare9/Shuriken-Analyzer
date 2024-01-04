@@ -10,4 +10,5 @@ target_sources(dex-obj PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/annotations.cpp
         ${CMAKE_CURRENT_LIST_DIR}/encoded.cpp
         ${CMAKE_CURRENT_LIST_DIR}/classes.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/dvm_types.cpp
 )
