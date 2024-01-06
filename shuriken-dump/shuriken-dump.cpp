@@ -10,6 +10,15 @@
 #include <fmt/core.h>
 
 
+void show_help(std::string& prog_name) {
+    fmt::println("USAGE: {} <file_to_analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
+    fmt::println("\t-h: show file header");
+    fmt::println("\t-c: show classes from file");
+    fmt::println("\t-f: show fields from classes (it needs -c)");
+    fmt::println("\t-m: show methods from classes (it needs -c)");
+    fmt::println("\t-b: show bytecode from methods (it needs -m)");
+}
+
 void print_header(shuriken::parser::dex::Header&);
 void print_classes(shuriken::parser::dex::Classes&);
 void print_method(shuriken::parser::dex::EncodedMethod*, size_t);
@@ -26,9 +35,8 @@ int
 main(int argc, char ** argv) {
     std::vector<std::string> args {argv, argv + argc};
 
-
     if (args.size() == 1) {
-        std::cerr << "USAGE: " + args[0] + " <file_to_analyze>\n";
+        show_help(args[0]);
         return -1;
     }
 
