@@ -7,14 +7,14 @@
 // these classes are for annotations, arrays, fields, try-catch
 // information, etc.
 
-#ifndef SHURIKENLIB_ENCODED_H
-#define SHURIKENLIB_ENCODED_H
+#ifndef SHURIKENLIB_DEX_ENCODED_H
+#define SHURIKENLIB_DEX_ENCODED_H
 
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/common/iterator_range.h"
-#include "shuriken/parser/Dex/strings.h"
-#include "shuriken/parser/Dex/fields.h"
-#include "shuriken/parser/Dex/methods.h"
+#include "shuriken/parser/Dex/dex_strings.h"
+#include "shuriken/parser/Dex/dex_fields.h"
+#include "shuriken/parser/Dex/dex_methods.h"
 #include "shuriken/parser/Dex/dvm_types.h"
 
 #include <iostream>
@@ -51,8 +51,8 @@ namespace shuriken {
                 /// @param types object with types for parsing encoded array
                 /// @param strings object with strings for parsing encoded array
                 void parse_encoded_array(common::ShurikenStream & stream,
-                                         Types & types,
-                                         Strings & strings);
+                                         DexTypes & types,
+                                         DexStrings & strings);
 
                 size_t get_encodedarray_size() const {
                     return values.size();
@@ -120,8 +120,8 @@ namespace shuriken {
                 /// @param types types for parsing the encoded annotation
                 /// @param strings strings for parsing the encoded annotation
                 void parse_encoded_annotation(common::ShurikenStream & stream,
-                                              Types & types,
-                                              Strings & strings);
+                                              DexTypes & types,
+                                              DexStrings & strings);
 
                 /// @brief Get the type of the annotations
                 /// @return annotations type
@@ -175,8 +175,8 @@ namespace shuriken {
                 default;
 
                 void parse_encoded_value(common::ShurikenStream & stream,
-                                         Types & types,
-                                         Strings & strings);
+                                         DexTypes & types,
+                                         DexStrings & strings);
 
                 shuriken::dex::TYPES::value_format get_value_format() const {
                     return format;
@@ -344,7 +344,7 @@ namespace shuriken {
                 /// @param stream stream with DEX data
                 /// @param types types for the EncodedTypePair
                 void parse_encoded_catch_handler(common::ShurikenStream& stream,
-                                                 Types& types);
+                                                 DexTypes& types);
 
                 /// @brief Check value of size to test if there are encodedtypepairs
                 /// @return if there are explicit typed catches
@@ -435,7 +435,7 @@ namespace shuriken {
                 /// @param stream DEX file where to read data
                 /// @param types types of the DEX
                 void parse_code_item_struct(common::ShurikenStream& stream,
-                                            Types& types);
+                                            DexTypes& types);
 
                 /// @brief Get the number of registers used in a method
                 /// @return number of registers
@@ -523,7 +523,7 @@ namespace shuriken {
                 /// @param types types from the DEX
                 void parse_encoded_method(common::ShurikenStream& stream,
                                           std::uint64_t code_off,
-                                          Types& types);
+                                          DexTypes& types);
 
                 /// @brief Get a constant pointer to the MethodID of the method
                 /// @return constant pointer to the MethodID
@@ -559,4 +559,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_ENCODED_H
+#endif //SHURIKENLIB_DEX_ENCODED_H

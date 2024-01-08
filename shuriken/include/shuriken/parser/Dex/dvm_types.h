@@ -3,7 +3,7 @@
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
 // @file dvm_types.h
-// @brief Types that can be used for the Dalvik Virtual Machine
+// @brief DexTypes that can be used for the Dalvik Virtual Machine
 
 #ifndef SHURIKENLIB_DVM_TYPES_H
 #define SHURIKENLIB_DVM_TYPES_H

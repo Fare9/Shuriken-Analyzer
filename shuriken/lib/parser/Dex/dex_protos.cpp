@@ -4,14 +4,14 @@
 //
 // @file protos.cpp
 
-#include "shuriken/parser/Dex/protos.h"
+#include "shuriken/parser/Dex/dex_protos.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
 
 void ProtoID::parse_parameters(
         common::ShurikenStream& stream,
-        Types& types,
+        DexTypes& types,
         std::uint32_t parameters_off) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
@@ -38,11 +38,11 @@ void ProtoID::parse_parameters(
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-void Protos::parse_protos(common::ShurikenStream& stream,
-                  std::uint32_t number_of_protos,
-                  std::uint32_t offset,
-                  Strings& strings,
-                  Types& types) {
+void DexProtos::parse_protos(common::ShurikenStream& stream,
+                             std::uint32_t number_of_protos,
+                             std::uint32_t offset,
+                             DexStrings& strings,
+                             DexTypes& types) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 
@@ -70,7 +70,7 @@ void Protos::parse_protos(common::ShurikenStream& stream,
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-void Protos::to_xml(std::ofstream &xml_file) {
+void DexProtos::to_xml(std::ofstream &xml_file) {
     xml_file << "<protos>\n";
 
     for (const auto &protoid : protos)

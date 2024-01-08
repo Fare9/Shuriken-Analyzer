@@ -4,7 +4,7 @@
 //
 // @file annotations.cpp
 
-#include "shuriken/parser/Dex/annotations.h"
+#include "shuriken/parser/Dex/dex_annotations.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;

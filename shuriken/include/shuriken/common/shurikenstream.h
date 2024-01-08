@@ -24,8 +24,8 @@ namespace shuriken {
             /// @brief Initialize private data
             void initialize();
         public:
-            /// @brief Maximum size for ansii Strings, used for reading
-            /// Strings in Dalvik
+            /// @brief Maximum size for ansii DexStrings, used for reading
+            /// DexStrings in Dalvik
             const std::int32_t MAX_ANSII_STR_SIZE = 256;
 
             /// @brief Constructor of ShurikenStream
@@ -97,7 +97,7 @@ namespace shuriken {
             /// @return string read
             std::string read_ansii_string(std::int64_t offset);
 
-            /// @brief Read a dex string, these Strings start always with their size
+            /// @brief Read a dex string, these DexStrings start always with their size
             /// in uleb128 format.
             /// @param offset the offset in the file where to read the string
             /// @return string read

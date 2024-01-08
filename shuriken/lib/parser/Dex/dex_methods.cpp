@@ -4,7 +4,7 @@
 //
 // @file methods.cpp
 
-#include "shuriken/parser/Dex/methods.h"
+#include "shuriken/parser/Dex/dex_methods.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
@@ -28,11 +28,11 @@ std::string MethodID::pretty_method()  {
     return pretty_name;
 }
 
-void Methods::parse_methods(
+void DexMethods::parse_methods(
         common::ShurikenStream& stream,
-        Types& types,
-        Protos& protos,
-        Strings& strings,
+        DexTypes& types,
+        DexProtos& protos,
+        DexStrings& strings,
         std::uint32_t methods_offset,
         std::uint32_t methods_size
 ) {
@@ -67,8 +67,8 @@ void Methods::parse_methods(
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-void Methods::to_xml(std::ofstream& fos) {
-    fos << "<Methods>\n";
+void DexMethods::to_xml(std::ofstream& fos) {
+    fos << "<DexMethods>\n";
     for (const auto & m : method_ids) {
         fos << "\t<method>\n";
         fos << "\t\t<type>" << m->get_prototype()->get_shorty_idx() << "</type>\n";
@@ -76,5 +76,5 @@ void Methods::to_xml(std::ofstream& fos) {
         fos << "\t\t<class>" << m->get_class()->print_type() << "</type>\n";
         fos << "\t</method>\n";
     }
-    fos << "</Methods>\n";
+    fos << "</DexMethods>\n";
 }

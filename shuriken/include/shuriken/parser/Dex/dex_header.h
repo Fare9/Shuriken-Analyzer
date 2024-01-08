@@ -3,10 +3,10 @@
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
 // @file header.h
-// @brief Header of a DEX file represented by a structure
+// @brief DexHeader of a DEX file represented by a structure
 
-#ifndef SHURIKENLIB_HEADER_H
-#define SHURIKENLIB_HEADER_H
+#ifndef SHURIKENLIB_DEX_HEADER_H
+#define SHURIKENLIB_DEX_HEADER_H
 
 #include "shuriken/common/shurikenstream.h"
 #include <iostream>
@@ -15,7 +15,7 @@
 namespace shuriken {
     namespace parser {
         namespace dex {
-            class Header {
+            class DexHeader {
             public:
 #pragma pack(1)
                 /// @brief Structure with the definition of the DEX header
@@ -32,10 +32,10 @@ namespace shuriken {
                     std::uint32_t link_size;        //! data for statically linked files
                     std::uint32_t link_off;         //!
                     std::uint32_t map_off;          //!
-                    std::uint32_t string_ids_size;  //! number of Strings
-                    std::uint32_t string_ids_off;   //! offset of the Strings
-                    std::uint32_t type_ids_size;    //! number of Types
-                    std::uint32_t type_ids_off;     //! offset of the Types
+                    std::uint32_t string_ids_size;  //! number of DexStrings
+                    std::uint32_t string_ids_off;   //! offset of the DexStrings
+                    std::uint32_t type_ids_size;    //! number of DexTypes
+                    std::uint32_t type_ids_off;     //! offset of the DexTypes
                     std::uint32_t proto_ids_size;   //! number of prototypes
                     std::uint32_t proto_ids_off;    //! offset of the prototypes
                     std::uint32_t field_ids_size;   //! number of fields
@@ -54,13 +54,13 @@ namespace shuriken {
 
             public:
                 /// @brief Constructor for the header, default one
-                Header() = default;
+                DexHeader() = default;
 
                 /// @brief Destructor for the header, default one
-                ~Header() = default;
+                ~DexHeader() = default;
 
-                /// @brief Copy constructor for Header
-                Header(Header& header)
+                /// @brief Copy constructor for DexHeader
+                DexHeader(DexHeader& header)
                 {
                     memcpy(&dexheader, &header.dexheader, sizeof(dexheader_t));
                 }
@@ -104,4 +104,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_HEADER_H
+#endif //SHURIKENLIB_DEX_HEADER_H

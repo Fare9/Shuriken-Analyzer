@@ -8,8 +8,8 @@
 #ifndef SHURIKEN_ANALYZER_FIELDS_H
 #define SHURIKEN_ANALYZER_FIELDS_H
 
-#include "shuriken/parser/Dex/types.h"
-#include "shuriken/parser/Dex/strings.h"
+#include "shuriken/parser/Dex/dex_types.h"
+#include "shuriken/parser/Dex/dex_strings.h"
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/common/iterator_range.h"
 
@@ -85,7 +85,7 @@ namespace shuriken {
                 return !(lhs == rhs);
             }
 
-            class Fields {
+            class DexFields {
             public:
                 using field_ids_t = std::vector<std::unique_ptr<FieldID>>;
                 using it_field_ids = iterator_range<field_ids_t::iterator>;
@@ -95,9 +95,9 @@ namespace shuriken {
                 field_ids_t fields;
             public:
                 /// @brief Default constructor for fields
-                Fields() = default;
+                DexFields() = default;
                 /// @brief Default destructor for fields
-                ~Fields() = default;
+                ~DexFields() = default;
 
                 /// @brief Function for parsing all the fields from
                 /// a dex file
@@ -106,8 +106,8 @@ namespace shuriken {
                 /// @param strings strings to retrieve information
                 void parse_fields(
                         common::ShurikenStream& stream,
-                        Types& types,
-                        Strings& strings,
+                        DexTypes& types,
+                        DexStrings& strings,
                         std::uint32_t fields_offset,
                         std::uint32_t n_of_fields);
 

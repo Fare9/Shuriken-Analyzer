@@ -4,7 +4,7 @@
 //
 // @file mapitem.cpp
 
-#include "shuriken/parser/Dex/mapitem.h"
+#include "shuriken/parser/Dex/dex_mapitem.h"
 #include "shuriken/common/logger.h"
 
 
@@ -12,7 +12,7 @@ using namespace shuriken::parser::dex;
 
 
 
-void MapList::parse_map_list(common::ShurikenStream& stream, std::uint32_t map_off) {
+void DexMapList::parse_map_list(common::ShurikenStream& stream, std::uint32_t map_off) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 

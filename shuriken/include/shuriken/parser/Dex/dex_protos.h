@@ -40,7 +40,7 @@
 #include <vector>
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/common/iterator_range.h"
-#include "shuriken/parser/Dex/types.h"
+#include "shuriken/parser/Dex/dex_types.h"
 
 namespace shuriken {
     namespace parser {
@@ -65,12 +65,12 @@ namespace shuriken {
                 /// @param parameters_off offset where to read the parameters
                 void parse_parameters(
                         common::ShurikenStream& stream,
-                        Types& types,
+                        DexTypes& types,
                         std::uint32_t parameters_off);
             public:
                 ProtoID(
                         common::ShurikenStream& stream,
-                        Types& types,
+                        DexTypes& types,
                         std::string_view shorty_idx,
                         std::uint32_t return_type_idx,
                         std::uint32_t parameters_off) :
@@ -119,7 +119,7 @@ namespace shuriken {
                 return !(lhs == rhs);
             }
 
-            class Protos {
+            class DexProtos {
             public:
                 using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
                 using it_protos = iterator_range<protos_id_t::iterator>;
@@ -128,11 +128,11 @@ namespace shuriken {
                 /// @brief Prototypes that are part of the DEX file
                 protos_id_t protos;
             public:
-                /// @brief Constructor of Protos, default constructor
-                Protos() = default;
+                /// @brief Constructor of DexProtos, default constructor
+                DexProtos() = default;
 
-                /// @brief Destructor of Protos, default destructor
-                ~Protos() = default;
+                /// @brief Destructor of DexProtos, default destructor
+                ~DexProtos() = default;
 
                 /// @brief Parse all the ProtoIDs from the file
                 /// @param stream stream with dex file
@@ -143,8 +143,8 @@ namespace shuriken {
                 void parse_protos(common::ShurikenStream& stream,
                                   std::uint32_t number_of_protos,
                                   std::uint32_t offset,
-                                  Strings& strings,
-                                  Types& types);
+                                  DexStrings& strings,
+                                  DexTypes& types);
 
                 it_protos get_protos() {
                     return make_range(protos.begin(), protos.end());

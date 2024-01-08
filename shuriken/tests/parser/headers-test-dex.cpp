@@ -97,8 +97,8 @@ struct method_data methods[4] = {
 
 
 
-void check_header(shuriken::parser::dex::Header& header);
-void check_class(shuriken::parser::dex::Classes& classes);
+void check_header(shuriken::parser::dex::DexHeader& header);
+void check_class(shuriken::parser::dex::DexClasses& classes);
 
 int main() {
     std::string test_file = std::string(DEX_FILES_FOLDER) + "DexParserTest.dex";
@@ -117,7 +117,7 @@ int main() {
 }
 
 
-void check_header(shuriken::parser::dex::Header& header) {
+void check_header(shuriken::parser::dex::DexHeader& header) {
     auto& dex_header = header.get_dex_header_const();
 
     assert(memcmp(static_cast<const void*>(magic),
@@ -144,7 +144,7 @@ void check_header(shuriken::parser::dex::Header& header) {
 }
 
 
-void check_class(shuriken::parser::dex::Classes& classes) {
+void check_class(shuriken::parser::dex::DexClasses& classes) {
 
     for (const auto& c : classes.get_classdefs()) {
         const auto class_def = c.get();

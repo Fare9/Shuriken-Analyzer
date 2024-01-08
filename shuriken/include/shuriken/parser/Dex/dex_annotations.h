@@ -6,8 +6,8 @@
 // @brief Information about annotations in the DEX file, this is information
 // from the compiler that can be used, for example, for debugging.
 
-#ifndef SHURIKENLIB_ANNOTATIONS_H
-#define SHURIKENLIB_ANNOTATIONS_H
+#ifndef SHURIKENLIB_DEX_ANNOTATIONS_H
+#define SHURIKENLIB_DEX_ANNOTATIONS_H
 
 #include "shuriken/common/iterator_range.h"
 #include "shuriken/common/shurikenstream.h"
@@ -109,4 +109,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_ANNOTATIONS_H
+#endif //SHURIKENLIB_DEX_ANNOTATIONS_H

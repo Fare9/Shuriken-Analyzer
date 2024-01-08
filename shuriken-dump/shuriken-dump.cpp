@@ -19,8 +19,8 @@ void show_help(std::string& prog_name) {
     fmt::println("\t-b: show bytecode from methods (it needs -m)");
 }
 
-void print_header(shuriken::parser::dex::Header&);
-void print_classes(shuriken::parser::dex::Classes&);
+void print_header(shuriken::parser::dex::DexHeader&);
+void print_classes(shuriken::parser::dex::DexClasses&);
 void print_method(shuriken::parser::dex::EncodedMethod*, size_t);
 void print_field(shuriken::parser::dex::EncodedField*, size_t);
 void print_code(std::span<std::uint8_t>);
@@ -66,7 +66,7 @@ main(int argc, char ** argv) {
 
 }
 
-void print_header(shuriken::parser::dex::Header& header) {
+void print_header(shuriken::parser::dex::DexHeader& header) {
     auto& dex_header = header.get_dex_header();
     fmt::println("Dex Header:");
     fmt::print("\tMagic:");
@@ -103,7 +103,7 @@ void print_header(shuriken::parser::dex::Header& header) {
     fmt::print("\tData ids size:         {}\n", dex_header.data_size);
 }
 
-void print_classes(shuriken::parser::dex::Classes& classes) {
+void print_classes(shuriken::parser::dex::DexClasses& classes) {
     size_t I = 0;
     for (auto& c : classes.get_classdefs()) {
         fmt::print("Class #{} data:\n", I);

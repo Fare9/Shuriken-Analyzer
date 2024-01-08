@@ -7,8 +7,8 @@
 // the data section. Androguard retrieves all the information from here, but
 // in some cases, contains less data than the header.
 
-#ifndef SHURIKENLIB_MAPITEM_H
-#define SHURIKENLIB_MAPITEM_H
+#ifndef SHURIKENLIB_DEX_MAPITEM_H
+#define SHURIKENLIB_DEX_MAPITEM_H
 
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/common/iterator_range.h"
@@ -17,7 +17,7 @@
 namespace shuriken {
     namespace parser {
         namespace dex {
-            class MapList {
+            class DexMapList {
             public:
                 /// @brief all possible type codes from the
                 /// mapitems
@@ -88,10 +88,10 @@ namespace shuriken {
                 /// @brief Map of items, each type code will contain a map item
                 map_data_item_t items;
             public:
-                /// @brief Constructor of the MapList
-                MapList() = default;
-                /// @brief Destructor of the MapList
-                ~MapList() = default;
+                /// @brief Constructor of the DexMapList
+                DexMapList() = default;
+                /// @brief Destructor of the DexMapList
+                ~DexMapList() = default;
 
                 /// @brief Parse the map list from the DEX file to create the map
                 /// @param stream DEX file content
@@ -111,4 +111,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_MAPITEM_H
+#endif //SHURIKENLIB_DEX_MAPITEM_H

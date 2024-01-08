@@ -5,12 +5,12 @@
 // @file methods.h
 // @brief Store information about the mehods in the DEX file
 
-#ifndef SHURIKENLIB_METHODS_H
-#define SHURIKENLIB_METHODS_H
+#ifndef SHURIKENLIB_DEX_METHODS_H
+#define SHURIKENLIB_DEX_METHODS_H
 
-#include "shuriken/parser/Dex/strings.h"
-#include "shuriken/parser/Dex/types.h"
-#include "shuriken/parser/Dex/protos.h"
+#include "shuriken/parser/Dex/dex_strings.h"
+#include "shuriken/parser/Dex/dex_types.h"
+#include "shuriken/parser/Dex/dex_protos.h"
 
 #include <memory>
 #include <vector>
@@ -64,7 +64,7 @@ namespace shuriken {
 
             };
 
-            class Methods {
+            class DexMethods {
             public:
                 using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
                 using it_methods = iterator_range<method_ids_t::iterator>;
@@ -73,11 +73,11 @@ namespace shuriken {
                 /// @brief List of methods from the DEX file
                 method_ids_t method_ids;
             public:
-                /// @brief Constructor of Methods, default Constructor
-                Methods() = default;
+                /// @brief Constructor of DexMethods, default Constructor
+                DexMethods() = default;
 
-                /// @bief Destructor of Methods, default Destructor
-                ~Methods() = default;
+                /// @bief Destructor of DexMethods, default Destructor
+                ~DexMethods() = default;
 
                 /// @brief Parse all the method ids objects.
                 /// @param stream stream with the dex file
@@ -87,9 +87,9 @@ namespace shuriken {
                 /// @param methods_size number of methods to read
                 void parse_methods(
                         common::ShurikenStream& stream,
-                        Types& types,
-                        Protos& protos,
-                        Strings& strings,
+                        DexTypes& types,
+                        DexProtos& protos,
+                        DexStrings& strings,
                         std::uint32_t methods_offset,
                         std::uint32_t methods_size
                 );
@@ -128,4 +128,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_METHODS_H
+#endif //SHURIKENLIB_DEX_METHODS_H

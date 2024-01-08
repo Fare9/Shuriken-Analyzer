@@ -2,14 +2,14 @@
 // Shuriken-Analyzer: library for bytecode analysis.
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
-// @file Types.cpp
+// @file DexTypes.cpp
 
-#include "shuriken/parser/Dex/types.h"
+#include "shuriken/parser/Dex/dex_types.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
 
-std::unique_ptr<DVMType> Types::parse_type(std::string_view name) {
+std::unique_ptr<DVMType> DexTypes::parse_type(std::string_view name) {
     switch (name.at(0)) {
 
         case 'Z':
@@ -48,10 +48,10 @@ std::unique_ptr<DVMType> Types::parse_type(std::string_view name) {
     }
 }
 
-void Types::parse_types(common::ShurikenStream& shurikenStream,
-                        Strings& strings_,
-                        std::uint32_t offset_types,
-                        std::uint32_t n_of_types) {
+void DexTypes::parse_types(common::ShurikenStream& shurikenStream,
+                           DexStrings& strings_,
+                           std::uint32_t offset_types,
+                           std::uint32_t n_of_types) {
     auto my_logger = shuriken::logger();
     my_logger->info("Start parsing types");
 
@@ -74,8 +74,8 @@ void Types::parse_types(common::ShurikenStream& shurikenStream,
     my_logger->info("Finished parsing types");
 }
 
-void Types::to_xml(std::ofstream &fos) {
-    fos << "<Types>\n";
+void DexTypes::to_xml(std::ofstream &fos) {
+    fos << "<DexTypes>\n";
 
     for (size_t I = 0; I < ordered_types.size(); ++I)
     {
@@ -85,5 +85,5 @@ void Types::to_xml(std::ofstream &fos) {
         fos << "\t</type>\n";
     }
 
-    fos << "</Types>\n";
+    fos << "</DexTypes>\n";
 }

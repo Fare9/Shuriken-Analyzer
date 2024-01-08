@@ -3,10 +3,10 @@
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
 // @file strings.h
-// @brief Strings of a DEX file
+// @brief DexStrings of a DEX file
 
-#ifndef SHURIKENLIB_STRINGS_H
-#define SHURIKENLIB_STRINGS_H
+#ifndef SHURIKENLIB_DEX_STRINGS_H
+#define SHURIKENLIB_DEX_STRINGS_H
 
 #include "shuriken/common/shurikenstream.h"
 #include <vector>
@@ -22,22 +22,22 @@ namespace shuriken {
 
             using dex_strings_view_t = std::vector<std::string_view>;
 
-            class Strings {
+            class DexStrings {
             private:
-                /// @brief Vector with all the Strings from the dex file
+                /// @brief Vector with all the DexStrings from the dex file
                 dex_strings_t dex_strings;
-                /// @brief View of the previous Strings for quickly accessing them
+                /// @brief View of the previous DexStrings for quickly accessing them
                 dex_strings_view_t  dex_strings_view;
             public:
                 /// @brief Constructor of the class, default one
-                Strings() = default;
+                DexStrings() = default;
                 /// @brief Destructor of the class, default one
-                ~Strings() = default;
+                ~DexStrings() = default;
 
-                /// @brief Function to parse the Strings from the dex file
+                /// @brief Function to parse the DexStrings from the dex file
                 /// @param shuriken_stream stream with the dex file
-                /// @param strings_offset offset in the file where Strings are
-                /// @param n_of_strings number of Strings to read
+                /// @param strings_offset offset in the file where DexStrings are
+                /// @param n_of_strings number of DexStrings to read
                 void parse_strings(common::ShurikenStream& shuriken_stream,
                                    std::uint32_t strings_offset,
                                    std::uint32_t n_of_strings);
@@ -51,14 +51,14 @@ namespace shuriken {
                     return dex_strings_view.at(str_id);
                 }
 
-                /// @brief get the number of Strings from the dex file
-                /// @return number of Strings
+                /// @brief get the number of DexStrings from the dex file
+                /// @return number of DexStrings
                 size_t get_number_of_strings() const {
                     return dex_strings_view.size();
                 }
 
                 /// @brief Get the id from an string_view
-                /// @param str string to look for in Strings
+                /// @param str string to look for in DexStrings
                 /// @return id from the string or -1 if not found
                 std::int64_t get_id_by_string(std::string_view str) const {
                     auto it = std::ranges::find(dex_strings_view, str);
@@ -80,7 +80,7 @@ namespace shuriken {
                     return (dex_strings.size()-1);
                 }
 
-                /// @brief Dump the content of the Strings to an XML file
+                /// @brief Dump the content of the DexStrings to an XML file
                 /// @param fos XML file where to dump the content
                 void to_xml(std::ofstream &fos);
 
@@ -91,4 +91,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_STRINGS_H
+#endif //SHURIKENLIB_DEX_STRINGS_H

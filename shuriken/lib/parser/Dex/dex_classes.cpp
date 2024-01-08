@@ -4,15 +4,15 @@
 //
 // @file classes.cpp
 
-#include "shuriken/parser/Dex/classes.h"
+#include "shuriken/parser/Dex/dex_classes.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
 
 void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
-                           Fields& fields,
-                           Methods& methods,
-                           Types& types) {
+                                          DexFields& fields,
+                                          DexMethods& methods,
+                                          DexTypes& types) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
 
@@ -78,10 +78,10 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
 }
 
 void ClassDef::parse_class_def(common::ShurikenStream& stream,
-                     Strings& strings,
-                     Types& types,
-                     Fields& fields,
-                     Methods& methods) {
+                               DexStrings& strings,
+                               DexTypes& types,
+                               DexFields& fields,
+                               DexMethods& methods) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
     size_t I;
@@ -140,13 +140,13 @@ void ClassDef::parse_class_def(common::ShurikenStream& stream,
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-void Classes::parse_classes(common::ShurikenStream& stream,
-                   std::uint32_t number_of_classes,
-                   std::uint32_t offset,
-                   Strings& strings,
-                   Types& types,
-                   Fields& fields,
-                   Methods& methods) {
+void DexClasses::parse_classes(common::ShurikenStream& stream,
+                               std::uint32_t number_of_classes,
+                               std::uint32_t offset,
+                               DexStrings& strings,
+                               DexTypes& types,
+                               DexFields& fields,
+                               DexMethods& methods) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
     std::unique_ptr<ClassDef> classdef;

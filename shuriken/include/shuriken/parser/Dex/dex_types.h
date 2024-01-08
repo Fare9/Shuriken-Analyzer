@@ -3,13 +3,13 @@
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
 // @file types.h
-// @brief Manager of Types for Dalvik
+// @brief Manager of DexTypes for Dalvik
 
-#ifndef SHURIKENLIB_TYPES_H
-#define SHURIKENLIB_TYPES_H
+#ifndef SHURIKENLIB_DEX_TYPES_H
+#define SHURIKENLIB_DEX_TYPES_H
 
 #include "shuriken/common/shurikenstream.h"
-#include "shuriken/parser/Dex/strings.h"
+#include "shuriken/parser/Dex/dex_strings.h"
 #include <iostream>
 #include <string_view>
 #include <unordered_map>
@@ -20,8 +20,8 @@
 namespace shuriken {
     namespace parser {
         namespace dex {
-            /// @brief Types of the DVM we have by default fundamental,
-            /// classes and array Types
+            /// @brief DexTypes of the DVM we have by default fundamental,
+            /// classes and array DexTypes
             enum type_e
             {
                 FUNDAMENTAL,    //! fundamental type (int, float...)
@@ -30,7 +30,7 @@ namespace shuriken {
                 UNKNOWN         //! maybe wrong?
             };
 
-            /// @brief enum with the fundamental Types
+            /// @brief enum with the fundamental DexTypes
             enum fundamental_e
             {
                 BOOLEAN,
@@ -110,7 +110,7 @@ namespace shuriken {
                 /// @brief name of the fundamental type
                 std::string_view name;
             public:
-                /// @brief Constructor for fundamental Types, these are int, bool, char...
+                /// @brief Constructor for fundamental DexTypes, these are int, bool, char...
                 /// @param fundamental the type of fundamental for the object (only one will exist for fundamental)
                 /// @param raw_name string raw name for the fundamental type from the string table
                 DVMFundamental(fundamental_e fundamental, std::string_view raw_name) :
@@ -246,9 +246,9 @@ namespace shuriken {
                 }
             };
 
-            class Types {
+            class DexTypes {
             private:
-                /// @brief Types from the Dalvik Virtual Machine
+                /// @brief DexTypes from the Dalvik Virtual Machine
                 std::vector<std::unique_ptr<DVMType>> ordered_types;
 
                 /// @brief Parse the provided string and return a new DVMType
@@ -257,18 +257,18 @@ namespace shuriken {
                 std::unique_ptr<DVMType> parse_type(std::string_view name);
 
             public:
-                /// @brief Constructor of the Types object, nothing for initialization
-                Types() = default;
-                /// @brief Destructor of Types
-                ~Types() = default;
+                /// @brief Constructor of the DexTypes object, nothing for initialization
+                DexTypes() = default;
+                /// @brief Destructor of DexTypes
+                ~DexTypes() = default;
 
-                /// @brief Parse all the Types from the DVM
-                /// @param shurikenStream stream where to read the DVM Types
-                /// @param strings_ Strings to retrieve the raw name of the Types
-                /// @param offset_types offset in the file where Types are
-                /// @param n_of_types number of Types to read
+                /// @brief Parse all the DexTypes from the DVM
+                /// @param shurikenStream stream where to read the DVM DexTypes
+                /// @param strings_ DexStrings to retrieve the raw name of the DexTypes
+                /// @param offset_types offset in the file where DexTypes are
+                /// @param n_of_types number of DexTypes to read
                 void parse_types(common::ShurikenStream& shurikenStream,
-                                 Strings& strings_,
+                                 DexStrings& strings_,
                                  std::uint32_t offset_types,
                                  std::uint32_t n_of_types);
 
@@ -309,7 +309,7 @@ namespace shuriken {
                     return std::distance(ordered_types.begin(), it);
                 }
 
-                /// @brief Dump the content of the Types to an XML file
+                /// @brief Dump the content of the DexTypes to an XML file
                 /// @param fos XML file where to dump the content
                 void to_xml(std::ofstream &fos);
             };
@@ -317,4 +317,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_TYPES_H
+#endif //SHURIKENLIB_DEX_TYPES_H

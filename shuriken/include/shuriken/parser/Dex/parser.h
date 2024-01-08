@@ -11,17 +11,17 @@
 
 #include "shuriken/common/shurikenstream.h"
 
-#include "shuriken/parser/Dex/header.h"
-#include "shuriken/parser/Dex/mapitem.h"
-#include "shuriken/parser/Dex/strings.h"
-#include "shuriken/parser/Dex/types.h"
-#include "shuriken/parser/Dex/protos.h"
-#include "shuriken/parser/Dex/fields.h"
-#include "shuriken/parser/Dex/methods.h"
+#include "shuriken/parser/Dex/dex_header.h"
+#include "shuriken/parser/Dex/dex_mapitem.h"
+#include "shuriken/parser/Dex/dex_strings.h"
+#include "shuriken/parser/Dex/dex_types.h"
+#include "shuriken/parser/Dex/dex_protos.h"
+#include "shuriken/parser/Dex/dex_fields.h"
+#include "shuriken/parser/Dex/dex_methods.h"
 
-#include "shuriken/parser/Dex/annotations.h"
-#include "shuriken/parser/Dex/encoded.h"
-#include "shuriken/parser/Dex/classes.h"
+#include "shuriken/parser/Dex/dex_annotations.h"
+#include "shuriken/parser/Dex/dex_encoded.h"
+#include "shuriken/parser/Dex/dex_classes.h"
 
 namespace shuriken {
     namespace parser {
@@ -29,22 +29,22 @@ namespace shuriken {
 
             class Parser {
             private:
-                /// @brief Header of the DEX file
-                Header header_;
+                /// @brief DexHeader of the DEX file
+                DexHeader header_;
                 /// @brief Structure with information of the DEX file
-                MapList maplist_;
-                /// @brief Strings of the DEX file
-                Strings strings_;
-                /// @brief Types of the DEX file
-                Types types_;
-                /// @brief Protos of the DEX file
-                Protos protos_;
-                /// @brief Fields of the DEX file
-                Fields fields_;
-                /// @brief Methods of the DEX file
-                Methods methods_;
-                /// @brief Classes of the DEX file
-                Classes classes_;
+                DexMapList maplist_;
+                /// @brief DexStrings of the DEX file
+                DexStrings strings_;
+                /// @brief DexTypes of the DEX file
+                DexTypes types_;
+                /// @brief DexProtos of the DEX file
+                DexProtos protos_;
+                /// @brief DexFields of the DEX file
+                DexFields fields_;
+                /// @brief DexMethods of the DEX file
+                DexMethods methods_;
+                /// @brief DexClasses of the DEX file
+                DexClasses classes_;
 
             public:
                 /// @brief Default constructor of the java
@@ -56,67 +56,67 @@ namespace shuriken {
                 /// @param stream stream from where to retrieve the dex data
                 void parse_dex(common::ShurikenStream& stream);
 
-                Header& get_header() {
+                DexHeader& get_header() {
                     return header_;
                 }
 
-                const Header& get_header() const {
+                const DexHeader& get_header() const {
                     return header_;
                 }
 
-                MapList& get_maplist() {
+                DexMapList& get_maplist() {
                     return maplist_;
                 }
 
-                const MapList& get_maplist() const {
+                const DexMapList& get_maplist() const {
                     return maplist_;
                 }
 
-                Strings& get_strings() {
+                DexStrings& get_strings() {
                     return strings_;
                 }
 
-                const Strings& get_strings() const {
+                const DexStrings& get_strings() const {
                     return strings_;
                 }
 
-                Types& get_types() {
+                DexTypes& get_types() {
                     return types_;
                 }
 
-                const Types& get_types() const {
+                const DexTypes& get_types() const {
                     return types_;
                 }
 
-                Protos& get_protos() {
+                DexProtos& get_protos() {
                     return protos_;
                 }
 
-                const Protos& get_protos() const {
+                const DexProtos& get_protos() const {
                     return protos_;
                 }
 
-                Fields& get_fields() {
+                DexFields& get_fields() {
                     return fields_;
                 }
 
-                const Fields& get_fields() const {
+                const DexFields& get_fields() const {
                     return fields_;
                 }
 
-                Methods& get_methods() {
+                DexMethods& get_methods() {
                     return methods_;
                 }
 
-                const Methods& get_methods() const {
+                const DexMethods& get_methods() const {
                     return methods_;
                 }
 
-                Classes& get_classes() {
+                DexClasses& get_classes() {
                     return classes_;
                 }
 
-                const Classes& get_classes() const {
+                const DexClasses& get_classes() const {
                     return classes_;
                 }
             };

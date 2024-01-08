@@ -16,7 +16,7 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
     auto my_logger = shuriken::logger();
     my_logger->info("Start parsing dex file");
 
-    if (stream.get_file_size() < sizeof(Header::dexheader_t))
+    if (stream.get_file_size() < sizeof(DexHeader::dexheader_t))
         throw std::runtime_error("Error file provided to java has an incorrect size");
 
     stream.read_data<std::uint8_t[4]>(magic, sizeof(std::uint8_t[4]));

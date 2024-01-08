@@ -3,7 +3,7 @@
 // @author Farenain <kunai.static.analysis@gmail.com>
 //
 // @file shuriken_parsers.h
-// @brief Header which contain the code to retrieve the parsers
+// @brief DexHeader which contain the code to retrieve the parsers
 // included in shuriken, this will return unique_ptr or shared_ptr
 // objects for each parser.
 

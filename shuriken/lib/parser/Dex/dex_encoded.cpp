@@ -5,13 +5,13 @@
 //
 // @file encoded.cpp
 
-#include "shuriken/parser/Dex/encoded.h"
+#include "shuriken/parser/Dex/dex_encoded.h"
 
 using namespace shuriken::parser::dex;
 
 void EncodedArray::parse_encoded_array(common::ShurikenStream &stream,
-                                       shuriken::parser::dex::Types &types,
-                                       shuriken::parser::dex::Strings &strings) {
+                                       shuriken::parser::dex::DexTypes &types,
+                                       shuriken::parser::dex::DexStrings &strings) {
     auto array_size = stream.read_uleb128();
     std::unique_ptr<EncodedValue> value = nullptr;
 
@@ -23,8 +23,8 @@ void EncodedArray::parse_encoded_array(common::ShurikenStream &stream,
 }
 
 void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream & stream,
-                                                 Types & types,
-                                                 Strings & strings) {
+                                                 DexTypes & types,
+                                                 DexStrings & strings) {
     std::unique_ptr<AnnotationElement> annotation;
     std::unique_ptr<EncodedValue> value;
     std::uint64_t name_idx;
@@ -48,8 +48,8 @@ void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream & stream
 }
 
 void EncodedValue::parse_encoded_value(common::ShurikenStream & stream,
-                         Types & types,
-                         Strings & strings) {
+                                       DexTypes & types,
+                                       DexStrings & strings) {
     auto read_from_stream = [&](size_t size) {
         std::uint8_t aux;
         auto& value_data = std::get<std::vector<std::uint8_t>>(value);
@@ -100,7 +100,7 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream & stream,
 }
 
 void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& stream,
-                                 Types& types) {
+                                                      DexTypes& types) {
     std::uint64_t type_idx, addr;
 
     /// the offset of the EncodedCatchHandler
@@ -126,7 +126,7 @@ void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& st
 }
 
 void CodeItemStruct::parse_code_item_struct(common::ShurikenStream& stream,
-                            Types& types) {
+                                            DexTypes& types) {
     // instructions are read in chunks of 16 bits
     std::uint8_t instruction[2];
     size_t I;
@@ -179,8 +179,8 @@ void CodeItemStruct::parse_code_item_struct(common::ShurikenStream& stream,
 }
 
 void EncodedMethod::parse_encoded_method(common::ShurikenStream& stream,
-                          std::uint64_t code_off,
-                          Types& types) {
+                                         std::uint64_t code_off,
+                                         DexTypes& types) {
     auto current_offset = stream.tellg();
 
     if (code_off > 0)

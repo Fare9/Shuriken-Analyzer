@@ -4,7 +4,7 @@
 //
 // @file strings.cpp
 
-#include "shuriken/parser/Dex/strings.h"
+#include "shuriken/parser/Dex/dex_strings.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
@@ -21,9 +21,9 @@ namespace {
     }
 }
 
-void Strings::parse_strings(common::ShurikenStream& shuriken_stream,
-                            std::uint32_t strings_offset,
-                            std::uint32_t n_of_strings) {
+void DexStrings::parse_strings(common::ShurikenStream& shuriken_stream,
+                               std::uint32_t strings_offset,
+                               std::uint32_t n_of_strings) {
     auto my_logger = shuriken::logger();
     my_logger->info("Start parsing strings");
 
@@ -33,7 +33,7 @@ void Strings::parse_strings(common::ShurikenStream& shuriken_stream,
     // move pointer to the given offset
     shuriken_stream.seekg_safe(strings_offset, std::ios_base::beg);
 
-    // read the Strings by offset
+    // read the DexStrings by offset
     for (size_t I = 0; I < n_of_strings; ++I) {
         shuriken_stream.read_data<std::uint32_t>(str_offset, sizeof(std::uint32_t));
 
@@ -42,7 +42,7 @@ void Strings::parse_strings(common::ShurikenStream& shuriken_stream,
 
         dex_strings.emplace_back(shuriken_stream.read_dex_string(str_offset));
     }
-    // create a string_view version of the Strings
+    // create a string_view version of the DexStrings
     for (auto & str : dex_strings) {
         dex_strings_view.emplace_back(str);
     }
@@ -51,19 +51,19 @@ void Strings::parse_strings(common::ShurikenStream& shuriken_stream,
     my_logger->info("Finished parsing strings");
 }
 
-void Strings::to_xml(std::ofstream &fos) {
-    fos << "<Strings>\n";
+void DexStrings::to_xml(std::ofstream &fos) {
+    fos << "<DexStrings>\n";
     for (size_t I = 0, E = dex_strings_view.size(); I < E; I++) {
         fos << "\t<string>\n";
         fos << "\t\t<id>" << I << "</id>\n";
         fos << "\t\t<value>" << dex_strings_view[I] << "</value>\n";
         fos << "\t</string>\n";
     }
-    fos << "</Strings>\n";
+    fos << "</DexStrings>\n";
 }
 
 
-void Strings::dump_binary(std::ofstream &fos, std::int64_t offset) {
+void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
     auto current_offset = fos.tellp();
 
     fos.seekp(offset);

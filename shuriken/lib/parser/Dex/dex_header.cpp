@@ -4,14 +4,14 @@
 //
 // @file header.cpp
 
-#include "shuriken/parser/Dex/header.h"
+#include "shuriken/parser/Dex/dex_header.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
 
 #define ERROR_MESSAGE(field) "Error '" #field "' > 'file size'"
 
-void Header::parse_header(common::ShurikenStream& stream) {
+void DexHeader::parse_header(common::ShurikenStream& stream) {
     auto my_logger = shuriken::logger();
 
     my_logger->info("Start parsing header");
@@ -48,7 +48,7 @@ void Header::parse_header(common::ShurikenStream& stream) {
     my_logger->info("Finished parsing header");
 }
 
-void Header::to_xml(std::ofstream &fos)
+void DexHeader::to_xml(std::ofstream &fos)
 {
     size_t i;
 
@@ -85,7 +85,7 @@ void Header::to_xml(std::ofstream &fos)
     fos << "\t<data_offset>" << dexheader.data_off << "</data_offset>\n";
 }
 
-void Header::dump(std::ofstream &fos) {
+void DexHeader::dump(std::ofstream &fos) {
     fos.seekp(0, std::ofstream::beg);
     fos.write(reinterpret_cast<const char*>(&dexheader), sizeof(dexheader_t));
 }

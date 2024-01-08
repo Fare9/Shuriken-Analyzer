@@ -4,17 +4,17 @@
 //
 // @file classes.h
 // @brief This is an important file, since classes manage all the magic
-// behind the DEX files. Classes will contain all the encoded data
+// behind the DEX files. DexClasses will contain all the encoded data
 // (methods, fields, etc), as well as all the information about them
-// two Classes are important here: `ClassDefsStruct` and `ClassDataItem`.
+// two DexClasses are important here: `ClassDefsStruct` and `ClassDataItem`.
 // `ClassDefsStruct` contains ids and offsets of the other information.
 // while `ClassDataItem` contains all the items.
 
-#ifndef SHURIKENLIB_CLASSES_H
-#define SHURIKENLIB_CLASSES_H
+#ifndef SHURIKENLIB_DEX_CLASSES_H
+#define SHURIKENLIB_DEX_CLASSES_H
 
-#include "shuriken/parser/Dex/encoded.h"
-#include "shuriken/parser/Dex/annotations.h"
+#include "shuriken/parser/Dex/dex_encoded.h"
+#include "shuriken/parser/Dex/dex_annotations.h"
 
 #include <iostream>
 #include <vector>
@@ -54,9 +54,9 @@ namespace shuriken {
                 /// @param methods methods of the DEX file
                 /// @param types types of the DEX file
                 void parse_class_data_item(common::ShurikenStream& stream,
-                                           Fields& fields,
-                                           Methods& methods,
-                                           Types& types);
+                                           DexFields& fields,
+                                           DexMethods& methods,
+                                           DexTypes& types);
 
                 /// @brief Get the number of the static fields
                 /// @return size of static fields
@@ -205,10 +205,10 @@ namespace shuriken {
                 /// @param fields fields of the DEX file
                 /// @param methods methods of the DEX file
                 void parse_class_def(common::ShurikenStream& stream,
-                                     Strings& strings,
-                                     Types& types,
-                                     Fields& fields,
-                                     Methods& methods);
+                                     DexStrings& strings,
+                                     DexTypes& types,
+                                     DexFields& fields,
+                                     DexMethods& methods);
 
                 /// @brief Get a constant reference to the classdefstruct_t
                 /// of the class, this structure contains information about
@@ -288,7 +288,7 @@ namespace shuriken {
             };
 
             /// @brief All classes from the DEX files
-            class Classes {
+            class DexClasses {
             public:
                 using class_defs_t = std::vector<std::unique_ptr<ClassDef>>;
                 using it_class_defs = iterator_range<class_defs_t::iterator>;
@@ -297,10 +297,10 @@ namespace shuriken {
                 /// for each class
                 class_defs_t class_defs;
             public:
-                /// @brief Constructor from Classes
-                Classes() = default;
-                /// @brief Destructor from Classes
-                ~Classes() = default;
+                /// @brief Constructor from DexClasses
+                DexClasses() = default;
+                /// @brief Destructor from DexClasses
+                ~DexClasses() = default;
                 /// @brief Parse all the classes from the DEX files
                 /// @param stream stream with the DEX file
                 /// @param number_of_classes number of classes from the DEX
@@ -312,10 +312,10 @@ namespace shuriken {
                 void parse_classes(common::ShurikenStream& stream,
                                    std::uint32_t number_of_classes,
                                    std::uint32_t offset,
-                                   Strings& strings,
-                                   Types& types,
-                                   Fields& fields,
-                                   Methods& methods);
+                                   DexStrings& strings,
+                                   DexTypes& types,
+                                   DexFields& fields,
+                                   DexMethods& methods);
 
                 /// @brief Get an iterator to the classdefs objects
                 /// @return class def objects from the DEX file
@@ -329,4 +329,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENLIB_CLASSES_H
+#endif //SHURIKENLIB_DEX_CLASSES_H

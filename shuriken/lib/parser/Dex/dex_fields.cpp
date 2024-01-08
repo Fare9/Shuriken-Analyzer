@@ -4,16 +4,16 @@
 //
 // @file fields.cpp
 
-#include "shuriken/parser/Dex/fields.h"
+#include "shuriken/parser/Dex/dex_fields.h"
 #include "shuriken/common/logger.h"
 
 
 using namespace shuriken::parser::dex;
 
-void Fields::parse_fields(
+void DexFields::parse_fields(
         common::ShurikenStream& stream,
-        Types& types,
-        Strings& strings,
+        DexTypes& types,
+        DexStrings& strings,
         std::uint32_t fields_offset,
         std::uint32_t n_of_fields) {
     auto current_offset = stream.tellg();
@@ -43,7 +43,7 @@ void Fields::parse_fields(
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-void Fields::to_xml(std::ofstream& fos) {
+void DexFields::to_xml(std::ofstream& fos) {
     fos << "<fields>\n";
     for (const auto &field : fields)
     {
