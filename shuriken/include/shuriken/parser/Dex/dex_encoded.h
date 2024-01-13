@@ -381,7 +381,7 @@ namespace shuriken {
 
             /// @brief Structure with the information from a
             /// Try code
-#pragma pack(0)
+#pragma pack(1)
             struct TryItem {
                 std::uint32_t start_addr;   //! start address of block of code covered by this entry.
                 //! Count of 16-bit code units to start of first.

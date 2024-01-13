@@ -78,7 +78,7 @@ namespace shuriken {
                     // if it doesn´t exist, add it and return the id
                     dex_strings.push_back(str);
                     dex_strings_view.push_back(dex_strings.back());
-                    return (dex_strings.size()-1);
+                    return static_cast<std::uint32_t>(dex_strings.size()-1);
                 }
 
                 /// @brief Dump the content of the DexStrings to an XML file

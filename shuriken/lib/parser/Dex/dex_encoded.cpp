@@ -40,7 +40,7 @@ void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream & stream
         value = std::make_unique<EncodedValue>();
         value->parse_encoded_value(stream, types, strings);
         // now create an annotation element
-        annotation = std::make_unique<AnnotationElement>(strings.get_string_by_id(name_idx), std::move(value));
+        annotation = std::make_unique<AnnotationElement>(strings.get_string_by_id(static_cast<uint32_t>(name_idx)), std::move(value));
         // add the anotation to the vector
         annotations.push_back(std::move(annotation));
     }
@@ -113,7 +113,7 @@ void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& st
         addr = stream.read_uleb128();
 
         handlers.push_back({
-            .type = types.get_type_by_id(type_idx),
+            .type = types.get_type_by_id(static_cast<uint32_t>(type_idx)),
             .idx = addr
         });
     }

@@ -28,7 +28,7 @@ void ProtoID::parse_parameters(
     // read the number of parameters
     stream.read_data<std::uint32_t>(n_parameters, sizeof(std::uint32_t));
 
-    for (auto I = 0; I < n_parameters; ++I) {
+    for (std::uint32_t I = 0; I < n_parameters; ++I) {
         stream.read_data<std::uint16_t>(type_id, sizeof(std::uint16_t));
         parameters.push_back(types.get_type_by_id(type_id));
     }

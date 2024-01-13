@@ -19,7 +19,7 @@ namespace shuriken {
             std::ifstream& input_file;
 
             /// @brief size of the file
-            std::size_t file_size;
+            std::int64_t file_size;
 
             /// @brief Initialize private data
             void initialize();
@@ -49,7 +49,7 @@ namespace shuriken {
             /// @param buffer parameter of a buffer where to read the data from the file
             /// @param read_size size to read from the file
             template <typename T>
-            void read_data(T& buffer, ssize_t read_size) {
+            void read_data(T& buffer, size_t read_size) {
                 if (read_size < 0) {
                     throw std::runtime_error("read_size cannot be lower than 0");
                 }
