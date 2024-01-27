@@ -4,9 +4,11 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "9-1-create-githun-cicd" ]
+    branches-ignore:
+      - main
   pull_request:
-    branches: [ "9-1-create-githun-cicd" ]
+    branches:
+      - main
 
 jobs:
   build:
