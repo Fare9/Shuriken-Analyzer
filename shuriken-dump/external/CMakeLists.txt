@@ -5,11 +5,19 @@ include(FetchContent)
 set(FETCHCONTENT_QUIET off)
 
 # check if we have connection using PING
+if(CMAKE_HOST_WIN32)
+execute_process(
+        COMMAND ping www.google.com -n 2
+        ERROR_QUIET
+        RESULT_VARIABLE NO_CONNECTION
+)
+else()
 execute_process(
         COMMAND ping www.google.com -c 2
         ERROR_QUIET
         RESULT_VARIABLE NO_CONNECTION
 )
+endif()
 
 if(NOT NO_CONNECTION EQUAL 0)
     set(FETCHCONTENT_FULLY_DISCONNECTED ON)
@@ -18,6 +26,11 @@ else()
     set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
     message(STATUS "Fetch will be used to download external dependencies")
 endif()
+#
+if (GITHUB_ACTION)
+    message(WARNING "Running as a github action, download fetch the content")
+    set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
+endif ()
 
 FetchContent_Declare(
         fmt

@@ -8,7 +8,7 @@
 #define SHURIKENLIB_LOGGER_H
 
 #include <iostream>
-#include <spdlog/spdlog.h>
+#include "spdlog/spdlog.h"
 
 namespace shuriken {
 

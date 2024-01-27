@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <ranges>
+#include <algorithm>
 #include <string_view>
 
 namespace shuriken {
