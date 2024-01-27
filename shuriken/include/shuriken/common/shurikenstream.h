@@ -29,20 +29,13 @@ namespace shuriken {
             const std::int32_t MAX_ANSII_STR_SIZE = 256;
 
             /// @brief Constructor of ShurikenStream
-            ShurikenStream(std::ifstream& input_file) :
-                input_file(input_file), file_size(0) {
-                assert(input_file.is_open() && "Input file must be open");
-
-                initialize();
-            }
+            ShurikenStream(std::ifstream& input_file);
 
             ~ShurikenStream() = default;
 
             /// @brief Get the current file size
             /// @return size of opened file
-            std::size_t get_file_size() const {
-                return file_size;
-            }
+            std::size_t get_file_size() const;
 
             /// @brief Read data from the file to a buffer
             /// @tparam T type of buffer where to read the data
@@ -63,26 +56,17 @@ namespace shuriken {
 
             /// @brief Retrieve the pointer of the current position in the file
             /// @return current position in the file
-            std::streampos tellg() const {
-                return input_file.tellg();
-            }
+            std::streampos tellg() const;
 
             /// @brief Move the pointer inside the file
             /// @param off offset where to move the pointer in the stream file
             /// @param dir direction where to move the pointer in the file
-            void seekg(std::streamoff off, std::ios_base::seekdir dir) {
-                input_file.seekg(off, dir);
-            }
+            void seekg(std::streamoff off, std::ios_base::seekdir dir);
 
             /// @brief Move the pointer inside the file, throw exception if offset is out of bound
             /// @param off offset where to move the pointer in the stream file
             /// @param dir direction where to move the pointer in the file
-            void seekg_safe(std::streamoff off, std::ios_base::seekdir dir) {
-                if (off >= file_size) {
-                    throw std::runtime_error("offset provided is out of bound");
-                }
-                input_file.seekg(off, dir);
-            }
+            void seekg_safe(std::streamoff off, std::ios_base::seekdir dir);
 
             /// @brief Read a number in uleb128 format.
             /// @return uint64_t with the number

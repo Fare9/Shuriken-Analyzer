@@ -60,10 +60,7 @@ namespace shuriken {
                 ~DexHeader() = default;
 
                 /// @brief Copy constructor for DexHeader
-                DexHeader(DexHeader& header)
-                {
-                    memcpy(&dexheader, &header.dexheader, sizeof(dexheader_t));
-                }
+                DexHeader(DexHeader& header);
 
                 /// @brief Parse the header from a ShurikenStream file
                 /// @param stream ShurikenStream where to read the header.
@@ -80,25 +77,16 @@ namespace shuriken {
                 /// @brief Obtain a constant reference of the dex header struct
                 /// if no value will be modified, use this function.
                 /// @return const reference to header structure
-                const dexheader_t &get_dex_header_const() const
-                {
-                    return dexheader;
-                }
+                const dexheader_t &get_dex_header_const() const;
 
                 /// @brief Obtain a reference of the dex header struct
                 /// just in case in the future DEX modification is allowed
                 /// @return reference to header structure
-                dexheader_t &get_dex_header()
-                {
-                    return dexheader;
-                }
+                dexheader_t &get_dex_header();
 
                 /// @brief Obtain the size of the dex header structure
                 /// @return
-                std::uint64_t get_dex_header_size() const
-                {
-                    return sizeof(dexheader_t);
-                }
+                std::uint64_t get_dex_header_size() const;
             };
         }
     }

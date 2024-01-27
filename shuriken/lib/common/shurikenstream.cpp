@@ -7,6 +7,13 @@
 
 using namespace shuriken::common;
 
+ShurikenStream::ShurikenStream(std::ifstream& input_file) :
+input_file(input_file), file_size(0) {
+    assert(input_file.is_open() && "Input file must be open");
+
+    initialize();
+}
+
 void ShurikenStream::initialize() {
     auto curr_pointer = input_file.tellg();
 
@@ -19,6 +26,25 @@ void ShurikenStream::initialize() {
     input_file.seekg(curr_pointer, std::ios::beg);
 
     file_size = static_cast<std::size_t>(fsize);
+}
+
+std::size_t ShurikenStream::get_file_size() const {
+    return file_size;
+}
+
+std::streampos ShurikenStream::tellg() const {
+    return input_file.tellg();
+}
+
+void ShurikenStream::seekg(std::streamoff off, std::ios_base::seekdir dir) {
+    input_file.seekg(off, dir);
+}
+
+void ShurikenStream::seekg_safe(std::streamoff off, std::ios_base::seekdir dir) {
+    if (off >= file_size) {
+        throw std::runtime_error("offset provided is out of bound");
+    }
+    input_file.seekg(off, dir);
 }
 
 std::uint64_t ShurikenStream::read_uleb128()
