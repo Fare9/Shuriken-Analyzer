@@ -75,35 +75,17 @@ namespace shuriken {
                 /// @param stream stream with the DEX file
                 void parse_annotation_directory_item(common::ShurikenStream& stream);
 
-                it_field_annotations get_field_annotations() {
-                    return make_range(field_annotations_by_id.begin(), field_annotations_by_id.end());
-                }
+                it_field_annotations get_field_annotations();
 
-                it_method_annotations get_method_annotations() {
-                    return make_range(method_annotations_by_id.begin(), method_annotations_by_id.end());
-                }
+                it_method_annotations get_method_annotations();
 
-                it_parameter_annotations get_parameter_annotations() {
-                    return make_range(parameter_annotations_by_id.begin(), parameter_annotations_by_id.end());
-                }
+                it_parameter_annotations get_parameter_annotations();
 
-                FieldAnnotation& get_field_annotation_by_id(std::uint32_t field_id) {
-                    if (!field_annotations_by_id.contains(field_id))
-                        throw std::runtime_error("Error field_id provided has no annotation");
-                    return field_annotations_by_id[field_id];
-                }
+                FieldAnnotation& get_field_annotation_by_id(std::uint32_t field_id);
 
-                MethodAnnotation& get_method_annotation_by_id(std::uint32_t method_id) {
-                    if (!method_annotations_by_id.contains(method_id))
-                        throw std::runtime_error("Error method_id provided has no annotation");
-                    return method_annotations_by_id[method_id];
-                }
+                MethodAnnotation& get_method_annotation_by_id(std::uint32_t method_id);
 
-                ParameterAnnotation& get_parameter_annotation_by_id(std::uint32_t method_id) {
-                    if (!parameter_annotations_by_id.contains(method_id))
-                        throw std::runtime_error("Error method_id provided has no annotation");
-                    return parameter_annotations_by_id[method_id];
-                }
+                ParameterAnnotation& get_parameter_annotation_by_id(std::uint32_t method_id);
             };
         }
     }

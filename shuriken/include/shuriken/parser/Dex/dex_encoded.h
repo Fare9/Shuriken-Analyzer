@@ -54,17 +54,11 @@ namespace shuriken {
                                          DexTypes & types,
                                          DexStrings & strings);
 
-                size_t get_encodedarray_size() const {
-                    return values.size();
-                }
+                size_t get_encodedarray_size() const;
 
-                it_encoded_value get_encoded_values() {
-                    return make_range(values.begin(), values.end());
-                }
+                it_encoded_value get_encoded_values();
 
-                it_const_encoded_value get_encoded_values_const() {
-                    return make_range(values.begin(), values.end());
-                }
+                it_const_encoded_value get_encoded_values_const();
             };
 
             /// @brief Annotation element with value and a name
@@ -80,19 +74,13 @@ namespace shuriken {
                 /// @param name name of the annotation
                 /// @param value value of the annotation
                 AnnotationElement(std::string_view name,
-                                  std::unique_ptr < EncodedValue > value):
-                                  name(name), value(std::move(value))
-                                  {}
+                                  std::unique_ptr < EncodedValue > value);
 
-                ~AnnotationElement() {}
+                ~AnnotationElement() = default;
 
-                std::string_view get_name() const {
-                    return name;
-                }
+                std::string_view get_name() const;
 
-                EncodedValue * get_value() {
-                    return value.get();
-                }
+                EncodedValue * get_value();
             };
 
             /// @brief Class to parse and create a vector of
@@ -125,32 +113,20 @@ namespace shuriken {
 
                 /// @brief Get the type of the annotations
                 /// @return annotations type
-                DVMType * get_annotation_type() {
-                    return type;
-                }
+                DVMType * get_annotation_type();
 
                 /// @brief Get the number of annotations
                 /// @return number of annotations
-                size_t get_number_of_annotations() const {
-                    return annotations.size();
-                }
+                size_t get_number_of_annotations() const;
 
-                it_annotation_elements get_annotations() {
-                    return make_range(annotations.begin(), annotations.end());
-                }
+                it_annotation_elements get_annotations();
 
-                it_const_annotation_elements get_annotations_const() {
-                    return make_range(annotations.begin(), annotations.end());
-                }
+                it_const_annotation_elements get_annotations_const();
 
                 /// @brief Get an annotation element by position
                 /// @param pos position to retrieve
                 /// @return pointer to AnnotationElement
-                AnnotationElement * get_annotation_by_pos(std::uint32_t pos) {
-                    if (pos >= annotations.size())
-                        throw std::runtime_error("Error pos annotation out of bound");
-                    return annotations[pos].get();
-                }
+                AnnotationElement * get_annotation_by_pos(std::uint32_t pos);
             };
 
             /// @brief encoded piece of (nearly) arbitrary hierarchically structured data.
@@ -178,78 +154,27 @@ namespace shuriken {
                                          DexTypes & types,
                                          DexStrings & strings);
 
-                shuriken::dex::TYPES::value_format get_value_format() const {
-                    return format;
-                }
+                shuriken::dex::TYPES::value_format get_value_format() const;
 
-                it_data_buffer get_data_buffer() {
-                    if (format == shuriken::dex::TYPES::value_format::VALUE_ARRAY ||
-                        format == shuriken::dex::TYPES::value_format::VALUE_ANNOTATION)
-                        throw std::runtime_error("Error value does not contain a data buffer");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return make_range(value_data.begin(), value_data.end());
-                }
+                it_data_buffer get_data_buffer();
 
-                EncodedArray * get_array_data() {
-                    if (format == shuriken::dex::TYPES::value_format::VALUE_ARRAY)
-                        return std::get < std::unique_ptr < EncodedArray >> (value).get();
-                    return nullptr;
-                }
+                EncodedArray * get_array_data();
 
-                EncodedAnnotation * get_annotation_data() {
-                    if (format == shuriken::dex::TYPES::value_format::VALUE_ANNOTATION)
-                        return std::get < std::unique_ptr < EncodedAnnotation >> (value).get();
-                    return nullptr;
-                }
+                EncodedAnnotation * get_annotation_data();
 
-                std::int32_t convert_data_to_int() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_INT)
-                        throw std::runtime_error("Error encoded value is not an int type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < std::int32_t * > (value_data.data()));
-                }
+                std::int32_t convert_data_to_int();
 
-                std::int64_t convert_data_to_long() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_LONG)
-                        throw std::runtime_error("Error encoded value is not a long type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < std::int64_t * > (value_data.data()));
-                }
+                std::int64_t convert_data_to_long();
 
-                std::uint8_t convert_data_to_byte() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_BYTE)
-                        throw std::runtime_error("Error encoded value is not a byte type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < std::uint8_t * > (value_data.data()));
-                }
+                std::uint8_t convert_data_to_byte();
 
-                std::int16_t convert_data_to_short() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_SHORT)
-                        throw std::runtime_error("Error encoded value is not a short type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < std::int16_t * > (value_data.data()));
-                }
+                std::int16_t convert_data_to_short();
 
-                double convert_data_to_double() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_DOUBLE)
-                        throw std::runtime_error("Error encoded value is not a double type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < double * > (value_data.data()));
-                }
+                double convert_data_to_double();
 
-                float convert_data_to_float() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_FLOAT)
-                        throw std::runtime_error("Error encoded value is not a float type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < float * > (value_data.data()));
-                }
+                float convert_data_to_float();
 
-                std::uint16_t convert_data_to_char() {
-                    if (format != shuriken::dex::TYPES::value_format::VALUE_CHAR)
-                        throw std::runtime_error("Error encoded value is not a char type");
-                    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-                    return * (reinterpret_cast < std::uint16_t * > (value_data.data()));
-                }
+                std::uint16_t convert_data_to_char();
             };
 
             /// @brief encoded field with information about the initial values
@@ -265,46 +190,34 @@ namespace shuriken {
                 /// @brief Constructor of an encoded field
                 /// @param field_idx FieldID for the encoded field
                 /// @param flags
-                EncodedField(FieldID * field_idx, shuriken::dex::TYPES::access_flags flags)
-                        : field_idx(field_idx), flags(flags) {}
+                EncodedField(FieldID * field_idx, shuriken::dex::TYPES::access_flags flags);
+
                 /// @brief Destructor of Encoded Field
                 ~EncodedField() = default;
 
                 /// @brief Get a constant pointer to the FieldID
                 /// @return constant pointer to the FieldID
-                const FieldID* get_field() const {
-                    return field_idx;
-                }
+                const FieldID* get_field() const;
 
                 /// @brief Get a pointer to the FieldID
                 /// @return pointer to the FieldID
-                FieldID* get_field() {
-                    return field_idx;
-                }
+                FieldID* get_field();
 
                 /// @brief Get the access flags from the Field
                 /// @return access flags
-                shuriken::dex::TYPES::access_flags get_flags() {
-                    return flags;
-                }
+                shuriken::dex::TYPES::access_flags get_flags();
 
                 /// @brief Those fields that are static contains an initial value
                 /// @param initial_value initial value for the field
-                void set_initial_value(EncodedArray* initial_value) {
-                    this->initial_value = initial_value;
-                }
+                void set_initial_value(EncodedArray* initial_value);
 
                 /// @brief Get the pointer to the initial value
                 /// @return EncodedArray of initial values
-                const EncodedArray* get_initial_value() const {
-                    return initial_value;
-                }
+                const EncodedArray* get_initial_value() const;
 
                 /// @brief Get the pointer to the initial value
                 /// @return EncodedArray of initial values
-                EncodedArray* get_initial_value() {
-                    return initial_value;
-                }
+                EncodedArray* get_initial_value();
             };
 
             /// @brief Structure with information about the catched exception
@@ -348,35 +261,24 @@ namespace shuriken {
 
                 /// @brief Check value of size to test if there are encodedtypepairs
                 /// @return if there are explicit typed catches
-                bool has_explicit_typed_catches() const {
-                    if (size >= 0) return true; // user should check size of handlers
-                    return false;
-                }
+                bool has_explicit_typed_catches() const;
 
                 /// @brief Get the size of the EncodedCatchHandler
                 /// @return value of size, refer to `size` documentation
                 /// to check the possible values
-                std::int64_t get_size() const {
-                    return size;
-                }
+                std::int64_t get_size() const;
 
                 /// @brief Return the value from catch_all_addr
                 /// @return catch_all_addr value
-                std::uint64_t get_catch_all_addr() const {
-                    return catch_all_addr;
-                }
+                std::uint64_t get_catch_all_addr() const;
 
                 /// @brief Get the offset where encoded catch handler is
                 /// @return offset of encoded catch handler
-                std::uint64_t get_offset() const {
-                    return offset;
-                }
+                std::uint64_t get_offset() const;
 
                 /// @brief Get an iterator to the handle pairs
                 /// @return iterator to handlers
-                it_handler_pairs get_handle_pairs() {
-                    return make_range(handlers.begin(), handlers.end());
-                }
+                it_handler_pairs get_handle_pairs();
             };
 
             /// @brief Structure with the information from a
@@ -439,63 +341,42 @@ namespace shuriken {
 
                 /// @brief Get the number of registers used in a method
                 /// @return number of registers
-                std::uint16_t get_registers_size() const {
-                    return code_item.registers_size;
-                }
+                std::uint16_t get_registers_size() const;
 
                 /// @brief Get the number of words incoming arguments to the method
                 /// @return number of words incoming arguments
-                std::uint16_t get_incomings_args() const {
-                    return code_item.ins_size;
-                }
+                std::uint16_t get_incomings_args() const;
 
                 /// @brief Get the number of words outgoing argument space required by the code
                 /// @return number of words outgoing argument space
-                std::uint16_t get_outgoing_args() const {
-                    return code_item.outs_size;
-                }
+                std::uint16_t get_outgoing_args() const;
 
                 /// @brief Get the number of try items in the method
                 /// @return number of try items
-                std::uint16_t get_number_try_items() const {
-                    return code_item.tries_size;
-                }
+                std::uint16_t get_number_try_items() const;
 
                 /// @brief Get the offset to the debug information
                 /// @return offset to debug information
-                std::uint16_t get_offset_to_debug_info() const {
-                    return code_item.debug_info_off;
-                }
+                std::uint16_t get_offset_to_debug_info() const;
 
                 /// @brief Get size of the dalvik instructions (number of opcodes)
                 /// @return size of dalvik instructions
-                std::uint16_t get_instructions_size() const {
-                    return code_item.insns_size;
-                }
+                std::uint16_t get_instructions_size() const;
 
                 /// @brief Get a constant access to the instructions in raw, an std::span
                 /// will not allow the modification and it provides quick access.
                 /// @return span to the bytecode
-                std::span<std::uint8_t> get_bytecode() {
-                    std::span bytecode{instructions_raw};
-                    return bytecode;
-                }
+                std::span<std::uint8_t> get_bytecode();
 
                 /// @brief Get an iterator to the try items
                 /// @return try items from the method
-                it_try_items get_try_items() {
-                    return make_range(try_items.begin(), try_items.end());
-                }
+                it_try_items get_try_items();
 
                 /// @brief Return the offset where encoded catch handler is read
                 /// @return offset to encoded catch handler list
-                std::uint64_t get_encoded_catch_handler_offset() {
-                    return encoded_catch_handler_list_offset;
-                }
+                std::uint64_t get_encoded_catch_handler_offset();
 
-                it_encoded_catch_handlers get_encoded_catch_handlers() {
-                    return make_range(encoded_catch_handlers.begin(), encoded_catch_handlers.end());
-                }
+                it_encoded_catch_handlers get_encoded_catch_handlers();
             };
 
             class EncodedMethod {
@@ -510,9 +391,7 @@ namespace shuriken {
                 /// @brief Constructor of Encoded method
                 /// @param method_id method of the current encoded method
                 /// @param access_flags access flags of access of the method
-                EncodedMethod(MethodID* method_id, shuriken::dex::TYPES::access_flags access_flags)
-                        : method_id(method_id), access_flags(access_flags)
-                {}
+                EncodedMethod(MethodID* method_id, shuriken::dex::TYPES::access_flags access_flags);
 
                 /// @brief Destructor of Encoded method
                 ~EncodedMethod() = default;
@@ -527,33 +406,21 @@ namespace shuriken {
 
                 /// @brief Get a constant pointer to the MethodID of the method
                 /// @return constant pointer to the MethodID
-                const MethodID* getMethodID() const {
-                    return method_id;
-                }
+                const MethodID* getMethodID() const;
 
                 /// @brief Get a pointer to the MethodID of the encoded method
                 /// @return pointer to the MethodID
-                MethodID* getMethodID() {
-                    return method_id;
-                }
+                MethodID* getMethodID();
 
-                shuriken::dex::TYPES::access_flags get_flags() {
-                    return access_flags;
-                }
+                shuriken::dex::TYPES::access_flags get_flags();
 
                 /// @brief Get the code item from the encoded method
                 /// @return constant pointer to code item
-                const CodeItemStruct* get_code_item() const
-                {
-                    return code_item.get();
-                }
+                const CodeItemStruct* get_code_item() const;
 
                 /// @brief Get the code item from the encoded method
                 /// @return reference to code item
-                CodeItemStruct* get_code_item()
-                {
-                    return code_item.get();
-                }
+                CodeItemStruct* get_code_item();
             };
         }
     }

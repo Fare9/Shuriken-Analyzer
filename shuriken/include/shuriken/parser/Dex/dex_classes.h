@@ -60,97 +60,53 @@ namespace shuriken {
 
                 /// @brief Get the number of the static fields
                 /// @return size of static fields
-                std::size_t get_number_of_static_fields() const {
-                    return static_fields.size();
-                }
+                std::size_t get_number_of_static_fields() const;
 
                 /// @brief Get number of instance fields
                 /// @return size of instance fields
-                std::size_t get_number_of_instance_fields() const {
-                    return instance_fields.size();
-                }
+                std::size_t get_number_of_instance_fields() const;
 
                 /// @brief Get number of direct methods
                 /// @return size of direct methods
-                std::size_t get_number_of_direct_methods() const {
-                    return direct_methods.size();
-                }
+                std::size_t get_number_of_direct_methods() const;
 
                 /// @brief Get number of virtual methods
                 /// @return size of virtual methods
-                std::size_t get_number_of_virtual_methods() const {
-                    return virtual_methods.size();
-                }
+                std::size_t get_number_of_virtual_methods() const;
 
                 /// @brief Get a pointer to static field by the id of the FieldID
                 /// @param id id of the FieldID
                 /// @return pointer to static encodedfield
-                EncodedField* get_static_field_by_id(std::uint32_t id) {
-                    auto it = static_fields.find(id);
-
-                    if (it == static_fields.end())
-                        throw std::runtime_error("Error id value given incorrect");
-
-                    return it->second.get();
-                }
+                EncodedField* get_static_field_by_id(std::uint32_t id);
 
                 /// @brief Get an instance field by the id of the FieldID
                 /// @param id id of the FieldID
                 /// @return pointer to instance encodedfield
-                EncodedField* get_instance_field_by_id(std::uint32_t id) {
-                    auto it = instance_fields.find(id);
-
-                    if (it == instance_fields.end())
-                        throw std::runtime_error("Error id value given incorrect");
-
-                    return it->second.get();
-                }
+                EncodedField* get_instance_field_by_id(std::uint32_t id);
 
                 /// @brief Get a direct method by the id of the MethodID
                 /// @param id id of the MethodID
                 /// @return pointer to direct encodedmethod
-                EncodedMethod* get_direct_method_by_id(std::uint32_t id) {
-                    auto it = direct_methods.find(id);
-
-                    if (it == direct_methods.end())
-                        throw std::runtime_error("Error id value given incorrect");
-
-                    return it->second.get();
-                }
+                EncodedMethod* get_direct_method_by_id(std::uint32_t id);
 
                 /// @brief Get a virtual method by the id of the MethodID
                 /// @param id id of the MethodID
                 /// @return pointer to virtual encodedmethod
-                EncodedMethod* get_virtual_method_by_id(std::uint32_t id) {
-                    auto it = virtual_methods.find(id);
-
-                    if (it == virtual_methods.end())
-                        throw std::runtime_error("Error id value given incorrect");
-
-                    return it->second.get();
-                }
+                EncodedMethod* get_virtual_method_by_id(std::uint32_t id);
 
                 /// @brief Get all the static fields from the class
                 /// @return iterator to static fields
-                it_encoded_fields get_static_fields() {
-                    return make_range(static_fields.begin(), static_fields.end());
-                }
+                it_encoded_fields get_static_fields();
 
                 /// @brief Get all the instance fields from the class
                 /// @return iterator to instance fields
-                it_encoded_fields get_instance_fields() {
-                    return make_range(instance_fields.begin(), instance_fields.end());
-                }
+                it_encoded_fields get_instance_fields();
 
                 /// @brief Get all the direct methods from the class
                 /// @return iterator to direct methods
-                it_encoded_method get_direct_methods() {
-                    return make_range(direct_methods.begin(), direct_methods.end());
-                }
+                it_encoded_method get_direct_methods();
 
-                it_encoded_method get_virtual_methods() {
-                    return make_range(virtual_methods.begin(), virtual_methods.end());
-                }
+                it_encoded_method get_virtual_methods();
             };
 
             /// @brief Definition of class with all the ids and offsets
@@ -214,77 +170,48 @@ namespace shuriken {
                 /// of the class, this structure contains information about
                 /// the class
                 /// @return constant reference to classdefstruct_t structure
-                const classdefstruct_t& get_class_def_struct() const
-                {
-                    return classdefstruct;
-                }
+                const classdefstruct_t& get_class_def_struct() const;
 
                 /// @brief Get a reference to the classdefstruct_t
                 /// of the class, this structure contains information about
                 /// the class
                 /// @return reference to classdefstruct_t structure
-                classdefstruct_t& get_class_def_struct()
-                {
-                    return classdefstruct;
-                }
+                classdefstruct_t& get_class_def_struct();
 
                 /// @brief Get a pointer to the DVMClass of the current class
                 /// @return pointer to DVMClass of current class
-                DVMClass * get_class_idx()
-                {
-                    return class_idx;
-                }
+                DVMClass * get_class_idx();
 
-                auto get_access_flags() const {
-                    return static_cast<
-                        shuriken::dex::TYPES::access_flags
-                        >(classdefstruct.access_flags);
-                }
+                shuriken::dex::TYPES::access_flags get_access_flags() const;
 
                 /// @brief Get a pointer to the DVMClass of
                 /// the super class of the current one
                 /// @return pointer to DVMClass of the super class
-                DVMClass * get_superclass()
-                {
-                    return superclass_idx;
-                }
+                DVMClass * get_superclass();
 
                 /// @brief Get a string_view to the string with the source file
                 /// @return string_view to source file string
-                std::string_view get_source_file() {
-                    return source_file;
-                }
+                std::string_view get_source_file();
 
                 /// @brief Get an iterator to the interfaces implemented by the class
                 /// @return interfaces implemented
-                it_interfaces_list get_interfaces() {
-                    return make_range(interfaces.begin(), interfaces.end());
-                }
+                it_interfaces_list get_interfaces();
 
                 /// @brief Get a constant reference to the class data item
                 /// @return constant reference to the class data item
-                const ClassDataItem& get_class_data_item() const {
-                    return class_data_item;
-                }
+                const ClassDataItem& get_class_data_item() const;
 
                 /// @brief Get a reference to the class data item
                 /// @return reference to the class data item
-                ClassDataItem& get_class_data_item() {
-                    return class_data_item;
-                }
+                ClassDataItem& get_class_data_item();
 
                 /// @brief Return a constant reference to the encoded array
                 /// @return static values as encoded array
-                const EncodedArray& get_static_values() const {
-                    return static_values;
-                }
+                const EncodedArray& get_static_values() const;
 
                 /// @brief Return a reference to the encoded array
                 /// @return static values as encoded array
-                EncodedArray& get_static_values() {
-                    return static_values;
-                }
-
+                EncodedArray& get_static_values();
             };
 
             /// @brief All classes from the DEX files
@@ -319,11 +246,7 @@ namespace shuriken {
 
                 /// @brief Get an iterator to the classdefs objects
                 /// @return class def objects from the DEX file
-                it_class_defs get_classdefs() {
-                    return make_range(class_defs.begin(), class_defs.end());
-                }
-
-
+                it_class_defs get_classdefs();
             };
         }
     }
