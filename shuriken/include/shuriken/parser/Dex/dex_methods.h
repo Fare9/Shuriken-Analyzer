@@ -96,30 +96,20 @@ namespace shuriken {
 
                 /// @brief Get an iterator for going through the methods from the DEX file
                 /// @return iterator with the methods
-                it_methods get_methods()  {
-                    return make_range(method_ids.begin(), method_ids.end());
-                }
+                it_methods get_methods();
 
                 /// @brief Get a constant iterator for going through the methods from the DEX file
                 /// @return constant iterator with the methods
-                it_const_methods get_methods_const() {
-                    return make_range(method_ids.begin(), method_ids.end());
-                }
+                it_const_methods get_methods_const();
 
                 /// @brief Get the number of methods from the DEX file
                 /// @return number of methods
-                size_t get_number_of_methods() const {
-                    return method_ids.size();
-                }
+                size_t get_number_of_methods() const;
 
                 /// @brief Get the MethodID pointer of the provided id.
                 /// @param id id of the method to retrieve
                 /// @return MethodID object
-                MethodID* get_method_by_id(std::uint32_t id) {
-                    if (id >= method_ids.size())
-                        throw std::runtime_error("Error method id out of bound");
-                    return method_ids.at(id).get();
-                }
+                MethodID* get_method_by_id(std::uint32_t id);
 
                 /// @brief Dump the content of the methods as XML
                 void to_xml(std::ofstream& fos);

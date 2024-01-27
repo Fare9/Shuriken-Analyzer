@@ -75,3 +75,36 @@ void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
 
     fos.seekp(current_offset);
 }
+
+
+
+std::string_view DexStrings::get_string_by_id(std::uint32_t str_id) const {
+    if (str_id >= dex_strings_view.size())
+        throw std::runtime_error("Error id of string out of bound");
+    return dex_strings_view.at(str_id);
+}
+
+size_t DexStrings::get_number_of_strings() const {
+    return dex_strings_view.size();
+}
+
+
+std::int64_t DexStrings::get_id_by_string(std::string_view str) const {
+    auto it = std::ranges::find(dex_strings_view, str);
+
+    if (it == dex_strings_view.end())
+        return -1;
+
+    return std::distance(dex_strings_view.begin(), it);
+}
+
+std::uint32_t DexStrings::add_string(std::string str) {
+    // check if the string is already in the table
+    auto value = get_id_by_string(str);
+    if (value != -1)
+        return static_cast<std::uint32_t>(value);
+    // if it doesn´t exist, add it and return the id
+    dex_strings.push_back(str);
+    dex_strings_view.push_back(dex_strings.back());
+    return static_cast<std::uint32_t>(dex_strings.size()-1);
+}

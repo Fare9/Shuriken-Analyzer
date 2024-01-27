@@ -46,40 +46,18 @@ namespace shuriken {
                 /// @brief get an string_view by the id of the string (position in the list)
                 /// @param str_id id of the string to retrieve
                 /// @return a read-only version of the string
-                std::string_view get_string_by_id(std::uint32_t str_id) const {
-                    if (str_id >= dex_strings_view.size())
-                        throw std::runtime_error("Error id of string out of bound");
-                    return dex_strings_view.at(str_id);
-                }
+                std::string_view get_string_by_id(std::uint32_t str_id) const;
 
                 /// @brief get the number of DexStrings from the dex file
                 /// @return number of DexStrings
-                size_t get_number_of_strings() const {
-                    return dex_strings_view.size();
-                }
+                size_t get_number_of_strings() const;
 
                 /// @brief Get the id from an string_view
                 /// @param str string to look for in DexStrings
                 /// @return id from the string or -1 if not found
-                std::int64_t get_id_by_string(std::string_view str) const {
-                    auto it = std::ranges::find(dex_strings_view, str);
+                std::int64_t get_id_by_string(std::string_view str) const;
 
-                    if (it == dex_strings_view.end())
-                        return -1;
-
-                    return std::distance(dex_strings_view.begin(), it);
-                }
-
-                std::uint32_t add_string(std::string str) {
-                    // check if the string is already in the table
-                    auto value = get_id_by_string(str);
-                    if (value != -1)
-                        return static_cast<std::uint32_t>(value);
-                    // if it doesn´t exist, add it and return the id
-                    dex_strings.push_back(str);
-                    dex_strings_view.push_back(dex_strings.back());
-                    return static_cast<std::uint32_t>(dex_strings.size()-1);
-                }
+                std::uint32_t add_string(std::string str);
 
                 /// @brief Dump the content of the DexStrings to an XML file
                 /// @param fos XML file where to dump the content
