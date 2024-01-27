@@ -1,0 +1,76 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: false
+
+      # Set up a matrix to run the following 3 configurations:
+      # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
+      # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
+      # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
+      #
+      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
+      matrix:
+       include:
+          - name: ubuntu-20.04-gcc-compile
+            os: ubuntu-20.04
+            compiler: gcc
+
+          - name: ubuntu-20.04-clang-compile
+            os: ubuntu-20.04
+            compiler: clang
+            
+      # clang custom placeholder
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup compiler on Linux
+      run: |
+        sudo apt-get update
+        if [ "${{ matrix.compiler }}" = "gcc" ]; then
+          sudo apt-get install -y gcc-11 g++-11
+          echo "CC=gcc-11" >> $GITHUB_ENV
+          echo "CXX=g++-11" >> $GITHUB_ENV
+        else
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-16 main"
+          sudo apt-get update
+          sudo apt-get install -y clang-16
+          echo "CC=clang-16" >> $GITHUB_ENV
+          echo "CXX=clang++-16" >> $GITHUB_ENV
+        fi
+      if: runner.os == 'Linux'
+      shell: bash
+    - name: Display compiler version
+      run: $CC --version
+    - name: Install cmake
+      run: sudo apt-get install cmake
+    - name: Install git
+      run: sudo apt install git
+    - name: Install JDK
+      run: sudo apt install default-jdk
+      if: runner.os == 'Linux'
+      shell: bash
+    - name: Display compiler version
+      run: $CC --version
+    - name: Install cmake
+      run: sudo apt-get install cmake
+    - name: Install git
+      run: sudo apt install git
+    - name: Create build in CMake
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON
+    - name: Build with cmake
+      run: cmake --build build/ -j

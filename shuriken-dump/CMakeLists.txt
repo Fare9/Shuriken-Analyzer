@@ -26,8 +26,3 @@ target_link_libraries(shuriken-dump
         spdlog
         fmt
 )
-
-target_include_directories(shuriken-dump
-    PRIVATE
-        "${CMAKE_SOURCE_DIR}/shuriken/include/"
-)

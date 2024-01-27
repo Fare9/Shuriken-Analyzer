@@ -44,9 +44,7 @@ option(DEX_TESTS "Compile all the tests for DEX files" OFF)
 set(JAVAC_BINARY "" CACHE FILEPATH "Path to javac binary for compiling java files")
 set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
 
-# include path, only the parent file, all the files must specify
-# the whole path to its header
-set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include/")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 
 # include the externals
@@ -64,23 +62,20 @@ set_target_properties(spdlog
 message(STATUS "Generating Shuriken object files")
 
 add_library(shuriken-obj
-    OBJECT
+        OBJECT
 )
 
 set_target_properties(shuriken-obj
-    PROPERTIES
-    POSITION_INDEPENDENT_CODE 1
+        PROPERTIES
+        POSITION_INDEPENDENT_CODE 1
 )
 
 # subdirectories for shuriken
 add_subdirectory(lib/common/)
+target_link_libraries(shuriken-obj PRIVATE spdlog::spdlog)
+
 
 # more information of object files
-target_include_directories(shuriken-obj
-        BEFORE
-        PUBLIC ${SHURIKEN_INCLUDE_PATH}
-)
-
 list(APPEND LIB_MODULES
         $<TARGET_OBJECTS:shuriken-obj>
 )
@@ -90,12 +85,13 @@ if (DEX)
     message(STATUS "Generating Shuriken DEX object files")
 
     add_library(dex-obj
-        OBJECT
+            OBJECT
     )
+    target_link_libraries(dex-obj PRIVATE spdlog::spdlog)
 
     set_target_properties(dex-obj
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE 1
+            PROPERTIES
+            POSITION_INDEPENDENT_CODE 1
     )
 
     add_subdirectory(lib/parser/Dex)
@@ -111,22 +107,23 @@ if (DEX)
 endif ()
 
 message(STATUS "Generating Shuriken shared library")
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(shuriken SHARED
-    ${LIB_MODULES}
+        ${LIB_MODULES}
 )
 
 message(STATUS "Linking libraries into Shuriken library")
 
-target_link_libraries(shuriken
-    PUBLIC
-    spdlog
+target_link_libraries(shuriken PRIVATE spdlog::spdlog)
+target_include_directories(shuriken
+        PUBLIC
+        "${CMAKE_SOURCE_DIR}/shuriken/include/"
 )
-
 #############################################################
 include(CTest)
 
 set(DEX_FILES_FOLDER
-    "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/"
+        "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/"
 )
 
 enable_testing()
