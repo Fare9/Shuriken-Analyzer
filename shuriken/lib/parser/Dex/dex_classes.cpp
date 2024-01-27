@@ -145,6 +145,8 @@ ClassDataItem::it_encoded_method ClassDataItem::get_virtual_methods() {
     return make_range(virtual_methods.begin(), virtual_methods.end());
 }
 
+
+
 void ClassDef::parse_class_def(common::ShurikenStream& stream,
                                DexStrings& strings,
                                DexTypes& types,
@@ -219,6 +221,8 @@ ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() {
 DVMClass * ClassDef::get_class_idx() {
     return class_idx;
 }
+
+
 
 shuriken::dex::TYPES::access_flags ClassDef::get_access_flags() const {
     return static_cast<

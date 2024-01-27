@@ -101,7 +101,8 @@ void check_header(shuriken::parser::dex::DexHeader& header);
 void check_class(shuriken::parser::dex::DexClasses& classes);
 
 int main() {
-    std::string test_file = std::string(DEX_FILES_FOLDER) + "DexParserTest.dex";
+    std::string test_file = DEX_FILES_FOLDER \
+                                "DexParserTest.dex";
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser =
             shuriken::parser::parse_dex(test_file);

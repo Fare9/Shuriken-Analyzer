@@ -149,5 +149,14 @@ namespace shuriken {
             p->parse_dex(file);
             return std::move(p);
         }
+
+        dex::Parser* parse_dex(const char *file_path) {
+            std::ifstream ifs(file_path);
+            common::ShurikenStream file(ifs);
+
+            Parser *p = new Parser();
+            p->parse_dex(file);
+            return p;
+        }
     }
 }
