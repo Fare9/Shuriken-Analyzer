@@ -122,9 +122,17 @@ target_include_directories(shuriken
 #############################################################
 include(CTest)
 
-set(DEX_FILES_FOLDER
-        "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/"
-)
+if (DEX_TESTS AND JAVAC_BINARY STREQUAL "" AND D8_BINARY STREQUAL "")
+    message(STATUS "Test option used but not compilers for DEX provided, using precompiled DEX")
+    set(DEX_FILES_FOLDER
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/compiled/")
+else ()
+    message(STATUS "Test option used and compilers path provided, compiling DEX files")
+    set(DEX_FILES_FOLDER
+        "${CMAKE_CURRENT_BINARY_DIR}/tests/code/java/")
+    set(COMPILE_DEX_FILES ON)
+endif ()
 
-enable_testing()
+message(STATUS "Path to DEX Folder: ${DEX_FILES_FOLDER}")
 add_subdirectory(tests)
+enable_testing()

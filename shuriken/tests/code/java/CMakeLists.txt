@@ -1,4 +1,4 @@
-if(DEX AND DEX_TESTS)
+if(DEX AND DEX_TESTS AND COMPILE_DEX_FILES)
     message(STATUS "Compiling DEX files")
 
     if(JAVAC_BINARY STREQUAL "")
