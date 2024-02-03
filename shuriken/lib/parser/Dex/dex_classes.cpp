@@ -39,7 +39,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         access_flags = stream.read_uleb128();
         //! create the static field
         static_fields[static_field] =
-                std::make_unique<EncodedField>(fields.get_field_by_id(static_field),
+                std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(static_field)),
                                                                           static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
 
     }
@@ -48,7 +48,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         instance_field += stream.read_uleb128();
         access_flags = stream.read_uleb128();
         instance_fields[instance_field] =
-                std::make_unique<EncodedField>(fields.get_field_by_id(instance_field),
+                std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(instance_field)),
                                                static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
     }
 
@@ -58,7 +58,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         // for the code item
         code_offset = stream.read_uleb128();
         direct_methods[direct_method] =
-                std::make_unique<EncodedMethod>(methods.get_method_by_id(direct_method),
+                std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(direct_method)),
                                                 static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
         direct_methods[direct_method]->parse_encoded_method(stream, code_offset, types);
     }
@@ -67,7 +67,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         virtual_method += stream.read_uleb128();
         access_flags = stream.read_uleb128();
         code_offset = stream.read_uleb128();
-        virtual_methods[virtual_method] = std::make_unique<EncodedMethod>(methods.get_method_by_id(virtual_method),
+        virtual_methods[virtual_method] = std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(virtual_method)),
                                                                           static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
         virtual_methods[virtual_method]->parse_encoded_method(stream, code_offset, types);
     }
@@ -75,6 +75,74 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
     my_logger->debug("Finished parsing a class data item");
 
     stream.seekg(current_offset, std::ios_base::beg);
+}
+
+std::size_t ClassDataItem::get_number_of_static_fields() const {
+    return static_fields.size();
+}
+
+std::size_t ClassDataItem::get_number_of_instance_fields() const {
+    return instance_fields.size();
+}
+
+std::size_t ClassDataItem::get_number_of_direct_methods() const {
+    return direct_methods.size();
+}
+
+std::size_t ClassDataItem::get_number_of_virtual_methods() const {
+    return virtual_methods.size();
+}
+
+EncodedField* ClassDataItem::get_static_field_by_id(std::uint32_t id) {
+    auto it = static_fields.find(id);
+
+    if (it == static_fields.end())
+        throw std::runtime_error("Error id value given incorrect");
+
+    return it->second.get();
+}
+
+EncodedField* ClassDataItem::get_instance_field_by_id(std::uint32_t id) {
+    auto it = instance_fields.find(id);
+
+    if (it == instance_fields.end())
+        throw std::runtime_error("Error id value given incorrect");
+
+    return it->second.get();
+}
+
+EncodedMethod* ClassDataItem::get_direct_method_by_id(std::uint32_t id) {
+    auto it = direct_methods.find(id);
+
+    if (it == direct_methods.end())
+        throw std::runtime_error("Error id value given incorrect");
+
+    return it->second.get();
+}
+
+EncodedMethod* ClassDataItem::get_virtual_method_by_id(std::uint32_t id) {
+    auto it = virtual_methods.find(id);
+
+    if (it == virtual_methods.end())
+        throw std::runtime_error("Error id value given incorrect");
+
+    return it->second.get();
+}
+
+ClassDataItem::it_encoded_fields ClassDataItem::get_static_fields() {
+    return make_range(static_fields.begin(), static_fields.end());
+}
+
+ClassDataItem::it_encoded_fields ClassDataItem::get_instance_fields() {
+    return make_range(instance_fields.begin(), instance_fields.end());
+}
+
+ClassDataItem::it_encoded_method ClassDataItem::get_direct_methods() {
+    return make_range(direct_methods.begin(), direct_methods.end());
+}
+
+ClassDataItem::it_encoded_method ClassDataItem::get_virtual_methods() {
+    return make_range(virtual_methods.begin(), virtual_methods.end());
 }
 
 void ClassDef::parse_class_def(common::ShurikenStream& stream,
@@ -140,6 +208,52 @@ void ClassDef::parse_class_def(common::ShurikenStream& stream,
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
+const ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() const {
+    return classdefstruct;
+}
+
+ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() {
+    return classdefstruct;
+}
+
+DVMClass * ClassDef::get_class_idx() {
+    return class_idx;
+}
+
+shuriken::dex::TYPES::access_flags ClassDef::get_access_flags() const {
+    return static_cast<
+            shuriken::dex::TYPES::access_flags
+            >(classdefstruct.access_flags);
+}
+
+DVMClass * ClassDef::get_superclass() {
+    return superclass_idx;
+}
+
+std::string_view ClassDef::get_source_file() {
+    return source_file;
+}
+
+ClassDef::it_interfaces_list ClassDef::get_interfaces() {
+    return make_range(interfaces.begin(), interfaces.end());
+}
+
+const ClassDataItem& ClassDef::get_class_data_item() const {
+    return class_data_item;
+}
+
+ClassDataItem& ClassDef::get_class_data_item() {
+    return class_data_item;
+}
+
+const EncodedArray& ClassDef::get_static_values() const {
+    return static_values;
+}
+
+EncodedArray& ClassDef::get_static_values() {
+    return static_values;
+}
+
 void DexClasses::parse_classes(common::ShurikenStream& stream,
                                std::uint32_t number_of_classes,
                                std::uint32_t offset,
@@ -169,4 +283,8 @@ void DexClasses::parse_classes(common::ShurikenStream& stream,
     my_logger->info("Finished parsing classes");
 
     stream.seekg(current_offset, std::ios_base::beg);
+}
+
+DexClasses::it_class_defs DexClasses::get_classdefs() {
+    return make_range(class_defs.begin(), class_defs.end());
 }

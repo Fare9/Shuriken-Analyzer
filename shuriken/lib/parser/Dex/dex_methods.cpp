@@ -8,6 +8,9 @@
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
+using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
+using it_methods = shuriken::iterator_range<method_ids_t::iterator>;
+using it_const_methods = shuriken::iterator_range<const method_ids_t::iterator>;
 
 std::string MethodID::pretty_method()  {
     if (!pretty_name.empty())
@@ -77,4 +80,22 @@ void DexMethods::to_xml(std::ofstream& fos) {
         fos << "\t</method>\n";
     }
     fos << "</DexMethods>\n";
+}
+
+it_methods DexMethods::get_methods()  {
+    return make_range(method_ids.begin(), method_ids.end());
+}
+
+it_const_methods DexMethods::get_methods_const() {
+    return make_range(method_ids.begin(), method_ids.end());
+}
+
+size_t DexMethods::get_number_of_methods() const {
+    return method_ids.size();
+}
+
+MethodID* DexMethods::get_method_by_id(std::uint32_t id) {
+    if (id >= method_ids.size())
+        throw std::runtime_error("Error method id out of bound");
+    return method_ids.at(id).get();
 }

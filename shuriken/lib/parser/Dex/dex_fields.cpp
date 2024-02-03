@@ -10,6 +10,42 @@
 
 using namespace shuriken::parser::dex;
 
+FieldID::FieldID(DVMType* class_, DVMType* type_, std::string_view name_) :
+class_(class_), type_(type_), name_(name_) {}
+
+const DVMType* FieldID::field_class() const {
+    return class_;
+}
+
+DVMType* FieldID::field_class() {
+    return class_;
+}
+
+const DVMType* FieldID::field_type() const {
+    return type_;
+}
+
+DVMType* FieldID::field_type() {
+    return type_;
+}
+
+const std::string_view FieldID::field_name() const {
+    return name_;
+}
+
+std::string_view FieldID::field_name() {
+    return name_;
+}
+
+std::string& FieldID::pretty_field() {
+    if (!pretty_name.empty())
+        return pretty_name;
+    pretty_name = class_->print_type() + "->" +
+                  std::string(name_) + " " +
+                  type_->print_type();
+    return pretty_name;
+}
+
 void DexFields::parse_fields(
         common::ShurikenStream& stream,
         DexTypes& types,
@@ -41,6 +77,31 @@ void DexFields::parse_fields(
 
     my_logger->info("Finished parsing of fields");
     stream.seekg(current_offset, std::ios_base::beg);
+}
+
+DexFields::it_field_ids DexFields::get_fields() {
+    return make_range(fields.begin(), fields.end());
+}
+
+DexFields::it_const_field_ids DexFields::get_fields_const() {
+    return make_range(fields.begin(), fields.end());
+}
+
+FieldID* DexFields::get_field_by_id(std::uint32_t id) {
+    if (id >= fields.size())
+        throw std::runtime_error("Error field id is out of bound");
+    return fields[id].get();
+}
+
+std::int64_t DexFields::get_id_by_field(FieldID* field) {
+    auto it = std::ranges::find_if(fields, [&](std::unique_ptr<FieldID>& f) {
+        return *field == *f;
+    });
+
+    if (it == fields.end())
+        return -1;
+
+    return std::distance(fields.begin(), it);
 }
 
 void DexFields::to_xml(std::ofstream& fos) {

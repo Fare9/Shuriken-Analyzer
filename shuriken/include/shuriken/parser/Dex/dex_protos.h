@@ -73,40 +73,22 @@ namespace shuriken {
                         DexTypes& types,
                         std::string_view shorty_idx,
                         std::uint32_t return_type_idx,
-                        std::uint32_t parameters_off) :
-                        shorty_idx(shorty_idx),
-                        return_type(types.get_type_by_id(return_type_idx))
-                {
-                    parse_parameters(stream, types, parameters_off);
-                }
-
+                        std::uint32_t parameters_off);
                 /// @brief Get the shorty_idx with a string version of the prototype
                 /// @return string view of shorty idx
-                std::string_view get_shorty_idx() const {
-                    return shorty_idx;
-                }
+                std::string_view get_shorty_idx() const;
 
                 /// @brief Get a constant reference to the return type
                 /// @return constant reference to return type
-                const DVMType* get_return_type() const
-                {
-                    return return_type;
-                }
+                const DVMType* get_return_type() const;
 
                 /// @brief Get a reference to the return type
                 /// @return reference to return type
-                DVMType* get_return_type()
-                {
-                    return return_type;
-                }
+                DVMType* get_return_type();
 
-                it_params get_parameters() {
-                    return make_range(parameters.begin(), parameters.end());
-                }
+                it_params get_parameters();
 
-                it_const_params get_parameters_const(){
-                    return make_range(parameters.begin(), parameters.end());
-                }
+                it_const_params get_parameters_const();
             };
 
             inline bool operator==(const ProtoID& lhs, const ProtoID& rhs) {
@@ -146,35 +128,15 @@ namespace shuriken {
                                   DexStrings& strings,
                                   DexTypes& types);
 
-                it_protos get_protos() {
-                    return make_range(protos.begin(), protos.end());
-                }
+                it_protos get_protos();
 
-                it_const_protos get_protos_const() {
-                    return make_range(protos.begin(), protos.end());
-                }
+                it_const_protos get_protos_const();
 
-                ProtoID* get_proto_by_id(std::uint32_t id) {
-                    if (id >= protos.size())
-                        throw std::runtime_error("Error proto id given is out of bound");
-                    return protos[id].get();
-                }
+                ProtoID* get_proto_by_id(std::uint32_t id);
 
-                std::int64_t get_id_by_proto(ProtoID* proto) {
-                    auto it = std::ranges::find_if(protos,
-                                                   [&](const std::unique_ptr<ProtoID>& p) {
-                       return *proto == *p;
-                    });
+                std::int64_t get_id_by_proto(ProtoID* proto);
 
-                    if (it == protos.end())
-                        return -1;
-
-                    return std::distance(protos.begin(), it);
-                }
-
-                size_t get_number_of_protos() const {
-                    return protos.size();
-                }
+                size_t get_number_of_protos() const;
 
                 void to_xml(std::ofstream &xml_file);
             };

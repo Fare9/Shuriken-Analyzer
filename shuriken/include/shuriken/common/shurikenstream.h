@@ -19,7 +19,7 @@ namespace shuriken {
             std::ifstream& input_file;
 
             /// @brief size of the file
-            std::size_t file_size;
+            std::int64_t file_size;
 
             /// @brief Initialize private data
             void initialize();
@@ -29,27 +29,20 @@ namespace shuriken {
             const std::int32_t MAX_ANSII_STR_SIZE = 256;
 
             /// @brief Constructor of ShurikenStream
-            ShurikenStream(std::ifstream& input_file) :
-                input_file(input_file), file_size(0) {
-                assert(input_file.is_open() && "Input file must be open");
-
-                initialize();
-            }
+            ShurikenStream(std::ifstream& input_file);
 
             ~ShurikenStream() = default;
 
             /// @brief Get the current file size
             /// @return size of opened file
-            std::size_t get_file_size() const {
-                return file_size;
-            }
+            std::size_t get_file_size() const;
 
             /// @brief Read data from the file to a buffer
             /// @tparam T type of buffer where to read the data
             /// @param buffer parameter of a buffer where to read the data from the file
             /// @param read_size size to read from the file
             template <typename T>
-            void read_data(T& buffer, ssize_t read_size) {
+            void read_data(T& buffer, size_t read_size) {
                 if (read_size < 0) {
                     throw std::runtime_error("read_size cannot be lower than 0");
                 }
@@ -63,26 +56,17 @@ namespace shuriken {
 
             /// @brief Retrieve the pointer of the current position in the file
             /// @return current position in the file
-            std::streampos tellg() const {
-                return input_file.tellg();
-            }
+            std::streampos tellg() const;
 
             /// @brief Move the pointer inside the file
             /// @param off offset where to move the pointer in the stream file
             /// @param dir direction where to move the pointer in the file
-            void seekg(std::streamoff off, std::ios_base::seekdir dir) {
-                input_file.seekg(off, dir);
-            }
+            void seekg(std::streamoff off, std::ios_base::seekdir dir);
 
             /// @brief Move the pointer inside the file, throw exception if offset is out of bound
             /// @param off offset where to move the pointer in the stream file
             /// @param dir direction where to move the pointer in the file
-            void seekg_safe(std::streamoff off, std::ios_base::seekdir dir) {
-                if (off >= file_size) {
-                    throw std::runtime_error("offset provided is out of bound");
-                }
-                input_file.seekg(off, dir);
-            }
+            void seekg_safe(std::streamoff off, std::ios_base::seekdir dir);
 
             /// @brief Read a number in uleb128 format.
             /// @return uint64_t with the number

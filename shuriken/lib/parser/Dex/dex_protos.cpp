@@ -9,6 +9,12 @@
 
 using namespace shuriken::parser::dex;
 
+
+// -- ProtoID
+using parameters_type_t = std::vector<DVMType*>;
+using it_params = shuriken::iterator_range<parameters_type_t::iterator>;
+using it_const_params = shuriken::iterator_range<const parameters_type_t::iterator>;
+
 void ProtoID::parse_parameters(
         common::ShurikenStream& stream,
         DexTypes& types,
@@ -28,7 +34,7 @@ void ProtoID::parse_parameters(
     // read the number of parameters
     stream.read_data<std::uint32_t>(n_parameters, sizeof(std::uint32_t));
 
-    for (auto I = 0; I < n_parameters; ++I) {
+    for (std::uint32_t I = 0; I < n_parameters; ++I) {
         stream.read_data<std::uint16_t>(type_id, sizeof(std::uint16_t));
         parameters.push_back(types.get_type_by_id(type_id));
     }
@@ -37,6 +43,45 @@ void ProtoID::parse_parameters(
 
     stream.seekg(current_offset, std::ios_base::beg);
 }
+
+ProtoID::ProtoID(
+        shuriken::common::ShurikenStream& stream,
+        DexTypes& types,
+        std::string_view shorty_idx,
+        std::uint32_t return_type_idx,
+        std::uint32_t parameters_off)
+        : shorty_idx(shorty_idx), return_type(types.get_type_by_id(return_type_idx))
+{
+    parse_parameters(stream, types, parameters_off);
+}
+
+std::string_view ProtoID::get_shorty_idx() const {
+    return shorty_idx;
+}
+
+const DVMType* ProtoID::get_return_type() const
+{
+    return return_type;
+}
+
+DVMType* ProtoID::get_return_type()
+{
+    return return_type;
+}
+
+it_params ProtoID::get_parameters() {
+    return make_range(parameters.begin(), parameters.end());
+}
+
+it_const_params ProtoID::get_parameters_const(){
+    return make_range(parameters.begin(), parameters.end());
+}
+
+
+// -- DexProtos
+using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
+using it_protos = shuriken::iterator_range<protos_id_t::iterator>;
+using it_const_protos = shuriken::iterator_range<const protos_id_t::iterator>;
 
 void DexProtos::parse_protos(common::ShurikenStream& stream,
                              std::uint32_t number_of_protos,
@@ -96,4 +141,35 @@ void DexProtos::to_xml(std::ofstream &xml_file) {
     }
 
     xml_file << "</protos>\n";
+}
+
+
+it_protos DexProtos::get_protos() {
+    return make_range(protos.begin(), protos.end());
+}
+
+it_const_protos DexProtos::get_protos_const() {
+    return make_range(protos.begin(), protos.end());
+}
+
+ProtoID* DexProtos::get_proto_by_id(std::uint32_t id) {
+    if (id >= protos.size())
+        throw std::runtime_error("Error proto id given is out of bound");
+    return protos[id].get();
+}
+
+std::int64_t DexProtos::get_id_by_proto(ProtoID* proto) {
+    auto it = std::ranges::find_if(protos,
+                                    [&](const std::unique_ptr<ProtoID>& p) {
+        return *proto == *p;
+    });
+
+    if (it == protos.end())
+        return -1;
+
+    return std::distance(protos.begin(), it);
+}
+
+size_t DexProtos::get_number_of_protos() const {
+    return protos.size();
 }

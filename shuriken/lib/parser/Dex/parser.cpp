@@ -68,3 +68,86 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
 
     my_logger->info("Finished parsing dex file");
 }
+
+DexHeader& Parser::get_header() {
+    return header_;
+}
+
+const DexHeader& Parser::get_header() const {
+    return header_;
+}
+
+DexMapList& Parser::get_maplist() {
+    return maplist_;
+}
+
+const DexMapList& Parser::get_maplist() const {
+    return maplist_;
+}
+
+DexStrings& Parser::get_strings() {
+    return strings_;
+}
+
+const DexStrings& Parser::get_strings() const {
+    return strings_;
+}
+
+DexTypes& Parser::get_types() {
+    return types_;
+}
+
+const DexTypes& Parser::get_types() const {
+    return types_;
+}
+
+DexProtos& Parser::get_protos() {
+    return protos_;
+}
+
+const DexProtos& Parser::get_protos() const {
+    return protos_;
+}
+
+DexFields& Parser::get_fields() {
+    return fields_;
+}
+
+const DexFields& Parser::get_fields() const {
+    return fields_;
+}
+
+DexMethods& Parser::get_methods() {
+    return methods_;
+}
+
+const DexMethods& Parser::get_methods() const {
+    return methods_;
+}
+
+DexClasses& Parser::get_classes() {
+    return classes_;
+}
+
+const DexClasses& Parser::get_classes() const {
+    return classes_;
+}
+
+namespace shuriken {
+    namespace parser {
+        std::unique_ptr<dex::Parser> parse_dex(common::ShurikenStream &file) {
+            auto p = std::make_unique<dex::Parser>();
+            p->parse_dex(file);
+            return std::move(p);
+        }
+
+        std::unique_ptr<dex::Parser> parse_dex(const std::string& file_path) {
+            std::ifstream ifs(file_path);
+            common::ShurikenStream file(ifs);
+
+            auto p = std::make_unique<dex::Parser>();
+            p->parse_dex(file);
+            return std::move(p);
+        }
+    }
+}

@@ -98,13 +98,9 @@ namespace shuriken {
                 /// @param map_off offset to the map_list
                 void parse_map_list(common::ShurikenStream& stream, std::uint32_t map_off);
 
-                it_map_data  get_map_items() {
-                    return make_range(items.begin(), items.end());
-                }
+                it_map_data  get_map_items();
 
-                it_const_map_data get_map_items_const() {
-                    return make_range(items.begin(), items.end());
-                }
+                it_const_map_data get_map_items_const();
             };
 
         }

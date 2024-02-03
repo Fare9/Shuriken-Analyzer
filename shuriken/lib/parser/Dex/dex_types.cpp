@@ -9,6 +9,8 @@
 
 using namespace shuriken::parser::dex;
 
+// --DexTypes
+
 std::unique_ptr<DVMType> DexTypes::parse_type(std::string_view name) {
     switch (name.at(0)) {
 
@@ -86,4 +88,132 @@ void DexTypes::to_xml(std::ofstream &fos) {
     }
 
     fos << "</DexTypes>\n";
+}
+
+const DVMType* DexTypes::get_type_by_id_const(std::uint32_t id) const {
+    if (id >= ordered_types.size()) {
+        throw std::runtime_error("Error id for type provided is incorrect");
+    }
+
+    return ordered_types.at(id).get();
+}
+
+
+DVMType* DexTypes::get_type_by_id(std::uint32_t id) {
+    if (id >= ordered_types.size()) {
+        throw std::runtime_error("Error id for type provided is incorrect");
+    }
+
+    return ordered_types.at(id).get();
+}
+
+std::int64_t DexTypes::get_id_by_type(DVMType * type) {
+    auto it = std::ranges::find_if(ordered_types,
+                                    [&](const std::unique_ptr<DVMType>& t) {
+        return *type == *t;
+    });
+
+    if (it == ordered_types.end())
+        return -1;
+
+    return std::distance(ordered_types.begin(), it);
+}
+
+// --DVMType
+DVMType::DVMType(type_e type, std::string_view raw_type)
+        : type(type), raw_type(raw_type)
+{}
+
+type_e DVMType::get_type() const {
+    return type;
+}
+
+std::string_view DVMType::get_raw_type() const {
+    return raw_type;
+}
+
+
+// --DVMFundamental
+DVMFundamental::DVMFundamental(fundamental_e fundamental, std::string_view raw_name)
+    : DVMType(type_e::FUNDAMENTAL, raw_name), fundamental(fundamental) {
+    if (!fundamental_s.contains(fundamental)) {
+        throw std::runtime_error("Error fundamental value provided doesn't exist");
+    }
+    name = std::string_view(fundamental_s.at(fundamental));
+}
+
+std::string DVMFundamental::print_type() {
+    return std::string(name);
+}
+
+std::string_view DVMFundamental::get_name() const {
+    return name;
+}
+
+fundamental_e DVMFundamental::get_fundamental_type() const {
+    return fundamental;
+}
+
+// --DVMClass
+
+DVMClass::DVMClass(std::string_view raw_name) :
+        DVMType(type_e::CLASS, raw_name) {
+    if (raw_name.empty() || raw_name.length() == 1)
+        std::runtime_error("Incorrect length for DVMClass");
+    if (!raw_name.starts_with('L') || !raw_name.ends_with(';'))
+        std::runtime_error("Incorrect class name");
+
+    class_name = raw_name.substr(1, raw_name.length()-2);
+    std::replace(class_name.begin(), class_name.end(), '/', '.');
+
+    class_name_v = std::string_view (class_name);
+}
+
+std::string DVMClass::print_type() {
+    return class_name;
+}
+
+std::string_view DVMClass::get_class_name() const {
+    return class_name_v;
+}
+
+// --DVMArray
+
+DVMArray::DVMArray(size_t depth,
+            std::unique_ptr<DVMType>& array_type,
+            std::string_view raw_name) :
+        DVMType(type_e::ARRAY, raw_name),
+        depth(depth), array_type(std::move(array_type)) {
+    array_name = this->array_type->print_type();
+    for (size_t I = 0; I < depth; ++I) array_name += "[]";
+    array_name_v = std::string_view(array_name);
+}
+
+std::string DVMArray::print_type() {
+    return array_name;
+}
+
+std::string_view DVMArray::get_array_string() const {
+    return array_name_v;
+}
+
+size_t DVMArray::get_array_depth() const {
+    return depth;
+}
+
+const DVMType* DVMArray::get_array_base_type() const {
+    return array_type.get();
+}
+
+// --Unknown
+
+Unknown::Unknown(std::string_view raw) :
+        DVMType(type_e::UNKNOWN, raw)
+{
+
+}
+
+std::string Unknown::print_type()
+{
+    return "Unknown";
 }

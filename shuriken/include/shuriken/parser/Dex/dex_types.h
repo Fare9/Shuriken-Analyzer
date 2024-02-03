@@ -67,24 +67,18 @@ namespace shuriken {
                 /// @brief Constructor of DVMType
                 /// @param type the type to overload
                 /// @param raw_type string with the type in raw
-                DVMType(type_e type, std::string_view raw_type)
-                        : type(type), raw_type(raw_type)
-                {}
+                DVMType(type_e type, std::string_view raw_type);
 
                 /// @brief Destructor of DVMType
                 virtual ~DVMType() = default;
 
                 /// @brief Virtual method to return the type
                 /// @return type of the variable
-                virtual type_e get_type() const {
-                    return type;
-                }
+                virtual type_e get_type() const;
 
                 /// @brief Get the raw type as a string_view
                 /// @return raw type
-                virtual std::string_view get_raw_type() const {
-                    return raw_type;
-                }
+                virtual std::string_view get_raw_type() const;
 
                 /// @brief Get a beautified representation of the type
                 /// @return beautified representation of the type
@@ -113,32 +107,19 @@ namespace shuriken {
                 /// @brief Constructor for fundamental DexTypes, these are int, bool, char...
                 /// @param fundamental the type of fundamental for the object (only one will exist for fundamental)
                 /// @param raw_name string raw name for the fundamental type from the string table
-                DVMFundamental(fundamental_e fundamental, std::string_view raw_name) :
-                        DVMType(type_e::FUNDAMENTAL, raw_name),
-                        fundamental(fundamental) {
-                    if (!fundamental_s.contains(fundamental)) {
-                        throw std::runtime_error("Error fundamental value provided doesn't exist");
-                    }
-                    name = std::string_view(fundamental_s.at(fundamental));
-                }
+                DVMFundamental(fundamental_e fundamental, std::string_view raw_name);
 
                 ~DVMFundamental() = default;
 
-                std::string print_type() override {
-                    return std::string(name);
-                }
+                std::string print_type() override;
 
                 /// @brief Get the name of the fundamental type as a string
                 /// @return string_view with the name of the fundamental type
-                std::string_view get_name() const {
-                    return name;
-                }
+                std::string_view get_name() const;
 
                 /// @brief Get the enum with the fundamental type.
                 /// @return value from enum `fundamental_e`
-                fundamental_e get_fundamental_type() const {
-                    return fundamental;
-                }
+                fundamental_e get_fundamental_type() const;
 
             };
 
@@ -152,28 +133,13 @@ namespace shuriken {
             public:
                 /// @brief Defines a class from Dalvik, here we will store it in canonical name
                 /// @param raw_name name in format "Lclass/name;"
-                DVMClass(std::string_view raw_name) :
-                        DVMType(type_e::CLASS, raw_name) {
-                    if (raw_name.empty() || raw_name.length() == 1)
-                        std::runtime_error("Incorrect length for DVMClass");
-                    if (!raw_name.starts_with('L') || !raw_name.ends_with(';'))
-                        std::runtime_error("Incorrect class name");
-
-                    class_name = raw_name.substr(1, raw_name.length()-2);
-                    std::replace(class_name.begin(), class_name.end(), '/', '.');
-
-                    class_name_v = std::string_view (class_name);
-                }
+                DVMClass(std::string_view raw_name);
 
                 ~DVMClass() = default;
 
-                std::string print_type() override {
-                    return class_name;
-                }
+                std::string print_type() override;
 
-                std::string_view get_class_name() const {
-                    return class_name_v;
-                }
+                std::string_view get_class_name() const;
             };
 
             class DVMArray : public DVMType {
@@ -193,38 +159,24 @@ namespace shuriken {
                 /// @param raw_name raw string of the array
                 DVMArray(size_t depth,
                          std::unique_ptr<DVMType>& array_type,
-                         std::string_view raw_name) :
-                        DVMType(type_e::ARRAY, raw_name),
-                        depth(depth), array_type(std::move(array_type)) {
-                    array_name = this->array_type->print_type();
-                    for (size_t I = 0; I < depth; ++I) array_name += "[]";
-                    array_name_v = std::string_view(array_name);
-                }
+                         std::string_view raw_name);
 
                 ~DVMArray() = default;
 
-                std::string print_type() override {
-                    return array_name;
-                }
+                std::string print_type() override;
 
                 /// @brief get a string_view representation of an array string
                 /// @return string_view of array
-                std::string_view get_array_string() const {
-                    return array_name_v;
-                }
+                std::string_view get_array_string() const;
 
                 /// @brief Get the depth of the array
                 /// @return dimension of the array
-                size_t get_array_depth() const {
-                    return depth;
-                }
+                size_t get_array_depth() const;
 
                 /// @brief Get the base type of the array as a pointer
                 /// to DVMType
                 /// @return constant pointer to DVMType
-                const DVMType* get_array_base_type() const {
-                    return array_type.get();
-                }
+                const DVMType* get_array_base_type() const;
             };
 
             class Unknown : public DVMType {
@@ -232,18 +184,13 @@ namespace shuriken {
                 /// @brief Constructor of unknown type
                 /// @param type type to be stored in parent class
                 /// @param raw raw
-                Unknown(std::string_view raw) :
-                        DVMType(type_e::UNKNOWN, raw)
-                {}
+                Unknown(std::string_view raw);
 
                 ~Unknown() = default;
 
                 /// @brief Get Unknown type as a string
                 /// @return UNKNOWN value as string
-                std::string print_type() override
-                {
-                    return "Unknown";
-                }
+                std::string print_type() override;
             };
 
             class DexTypes {
@@ -275,39 +222,17 @@ namespace shuriken {
                 /// @brief Get a constant pointer to a DVMType by id
                 /// @param id order of the type
                 /// @return constant pointer to a DVMType
-                const DVMType* get_type_by_id_const(std::uint32_t id) const {
-                    if (id >= ordered_types.size()) {
-                        throw std::runtime_error("Error id for type provided is incorrect");
-                    }
-
-                    return ordered_types.at(id).get();
-                }
+                const DVMType* get_type_by_id_const(std::uint32_t id) const;
 
                 /// @brief Get a pointer to a DVMType by id
                 /// @param id order of the type
                 /// @return pointer to a DVMTypeLjava/lang/Object;
-                DVMType* get_type_by_id(std::uint32_t id) {
-                    if (id >= ordered_types.size()) {
-                        throw std::runtime_error("Error id for type provided is incorrect");
-                    }
-
-                    return ordered_types.at(id).get();
-                }
+                DVMType* get_type_by_id(std::uint32_t id);
 
                 /// @brief Get the ID from the given type as parameter
                 /// @param type type to look for the id
                 /// @return ID from the given type
-                std::int64_t get_id_by_type(DVMType * type) {
-                    auto it = std::ranges::find_if(ordered_types,
-                                                   [&](const std::unique_ptr<DVMType>& t) {
-                        return *type == *t;
-                    });
-
-                    if (it == ordered_types.end())
-                        return -1;
-
-                    return std::distance(ordered_types.begin(), it);
-                }
+                std::int64_t get_id_by_type(DVMType * type);
 
                 /// @brief Dump the content of the DexTypes to an XML file
                 /// @param fos XML file where to dump the content

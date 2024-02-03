@@ -37,3 +37,11 @@ void DexMapList::parse_map_list(common::ShurikenStream& stream, std::uint32_t ma
     my_logger->info("Finished parsing map_list");
     stream.seekg(current_offset, std::ios_base::beg);
 }
+
+DexMapList::it_map_data DexMapList::get_map_items() {
+    return make_range(items.begin(), items.end());
+}
+
+DexMapList::it_const_map_data DexMapList::get_map_items_const() {
+    return make_range(items.begin(), items.end());
+}

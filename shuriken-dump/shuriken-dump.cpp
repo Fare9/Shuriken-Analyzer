@@ -61,7 +61,7 @@ main(int argc, char ** argv) {
         if (headers) print_header(header);
         if (show_classes) print_classes(parsed_dex->get_classes());
     } catch (std::runtime_error& re) {
-
+        fmt::println("Exception: {}", re.what());
     }
 
 }
@@ -140,13 +140,13 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
         if (fields) {
             fmt::print("\tStatic Fields:\n");
             for (size_t j = 0, e = class_data_item.get_number_of_static_fields(); j < e; j++) {
-                auto field = class_data_item.get_static_field_by_id(j);
+                auto field = class_data_item.get_static_field_by_id(static_cast<uint32_t>(j));
                 print_field(field, j);
             }
 
             fmt::print("\tInstance Fields:\n");
             for (size_t j = 0, e = class_data_item.get_number_of_instance_fields(); j < e; j++) {
-                auto field = class_data_item.get_instance_field_by_id(j);
+                auto field = class_data_item.get_instance_field_by_id(static_cast<uint32_t>(j));
                 print_field(field, j);
             }
         }
@@ -154,13 +154,13 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
         if (methods) {
             fmt::print("\tDirect Methods:\n");
             for (size_t j = 0, e = class_data_item.get_number_of_direct_methods(); j < e; j++) {
-                auto method = class_data_item.get_direct_method_by_id(j);
+                auto method = class_data_item.get_direct_method_by_id(static_cast<uint32_t>(j));
                 print_method(method, j);
             }
 
             fmt::print("\tVirtual Methods:\n");
             for (size_t j = 0, e = class_data_item.get_number_of_virtual_methods(); j < e; j++) {
-                auto method = class_data_item.get_virtual_method_by_id(j);
+                auto method = class_data_item.get_virtual_method_by_id(static_cast<uint32_t>(j));
                 print_method(method, j);
             }
         }

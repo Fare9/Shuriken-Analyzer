@@ -56,69 +56,37 @@ namespace shuriken {
                 /// @param stream stream from where to retrieve the dex data
                 void parse_dex(common::ShurikenStream& stream);
 
-                DexHeader& get_header() {
-                    return header_;
-                }
+                DexHeader& get_header();
 
-                const DexHeader& get_header() const {
-                    return header_;
-                }
+                const DexHeader& get_header() const;
 
-                DexMapList& get_maplist() {
-                    return maplist_;
-                }
+                DexMapList& get_maplist();
 
-                const DexMapList& get_maplist() const {
-                    return maplist_;
-                }
+                const DexMapList& get_maplist() const;
 
-                DexStrings& get_strings() {
-                    return strings_;
-                }
+                DexStrings& get_strings();
 
-                const DexStrings& get_strings() const {
-                    return strings_;
-                }
+                const DexStrings& get_strings() const;
 
-                DexTypes& get_types() {
-                    return types_;
-                }
+                DexTypes& get_types();
 
-                const DexTypes& get_types() const {
-                    return types_;
-                }
+                const DexTypes& get_types() const;
 
-                DexProtos& get_protos() {
-                    return protos_;
-                }
+                DexProtos& get_protos();
 
-                const DexProtos& get_protos() const {
-                    return protos_;
-                }
+                const DexProtos& get_protos() const;
 
-                DexFields& get_fields() {
-                    return fields_;
-                }
+                DexFields& get_fields();
 
-                const DexFields& get_fields() const {
-                    return fields_;
-                }
+                const DexFields& get_fields() const;
 
-                DexMethods& get_methods() {
-                    return methods_;
-                }
+                DexMethods& get_methods();
 
-                const DexMethods& get_methods() const {
-                    return methods_;
-                }
+                const DexMethods& get_methods() const;
 
-                DexClasses& get_classes() {
-                    return classes_;
-                }
+                DexClasses& get_classes();
 
-                const DexClasses& get_classes() const {
-                    return classes_;
-                }
+                const DexClasses& get_classes() const;
             };
 
         }

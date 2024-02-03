@@ -31,46 +31,27 @@ namespace shuriken {
                 std::string pretty_name;
             public:
                 /// @brief Constructor of FieldID
-                FieldID(DVMType* class_, DVMType* type_, std::string_view name_) :
-                    class_(class_), type_(type_), name_(name_) {}
+                FieldID(DVMType* class_, DVMType* type_, std::string_view name_);
+
                 /// @brief Destructor of FieldID, default one
                 ~FieldID() = default;
 
-                const DVMType* field_class() const {
-                    return class_;
-                }
+                const DVMType* field_class() const;
 
-                DVMType* field_class() {
-                    return class_;
-                }
+                DVMType* field_class();
 
-                const DVMType* field_type() const {
-                    return type_;
-                }
+                const DVMType* field_type() const;
 
-                DVMType* field_type() {
-                    return type_;
-                }
+                DVMType* field_type();
 
-                const std::string_view field_name() const {
-                    return name_;
-                }
+                const std::string_view field_name() const;
 
-                std::string_view field_name() {
-                    return name_;
-                }
+                std::string_view field_name();
 
                 /// @brief Return a formatted version of the field including the
                 /// class, the name and its type.
                 /// @return prettyfied version of the field
-                std::string& pretty_field() {
-                    if (!pretty_name.empty())
-                        return pretty_name;
-                    pretty_name = class_->print_type() + "->" +
-                            std::string(name_) + " " +
-                            type_->print_type();
-                    return pretty_name;
-                }
+                std::string& pretty_field();
             };
 
             inline bool operator==(const FieldID& lhs, const FieldID& rhs) {
@@ -113,38 +94,21 @@ namespace shuriken {
 
                 /// @brief Get an iterator for the fields
                 /// @return fields iterator
-                it_field_ids get_fields() {
-                    return make_range(fields.begin(), fields.end());
-                }
+                it_field_ids get_fields();
 
                 /// @brief Get a constant iterator for the fields
                 /// @return constant iterator for the fields
-                it_const_field_ids get_fields_const() {
-                    return make_range(fields.begin(), fields.end());
-                }
+                it_const_field_ids get_fields_const();
 
                 /// @brief Get a pointer to a field given its id
                 /// @param id id from the FieldID
                 /// @return pointer to a FieldID
-                FieldID* get_field_by_id(std::uint32_t id) {
-                    if (id >= fields.size())
-                        throw std::runtime_error("Error field id is out of bound");
-                    return fields[id].get();
-                }
+                FieldID* get_field_by_id(std::uint32_t id);
 
                 /// @brief Get an ID given a field
                 /// @param field the field to look for
                 /// @return an id of the field or -1
-                std::int64_t get_id_by_field(FieldID* field) {
-                    auto it = std::ranges::find_if(fields, [&](std::unique_ptr<FieldID>& f) {
-                       return *field == *f;
-                    });
-
-                    if (it == fields.end())
-                        return -1;
-
-                    return std::distance(fields.begin(), it);
-                }
+                std::int64_t get_id_by_field(FieldID* field);
 
                 /// @brief Print the fields into an XML format.
                 /// @param fos file where to dump it

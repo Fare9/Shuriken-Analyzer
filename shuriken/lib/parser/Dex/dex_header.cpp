@@ -11,6 +11,10 @@ using namespace shuriken::parser::dex;
 
 #define ERROR_MESSAGE(field) "Error '" #field "' > 'file size'"
 
+DexHeader::DexHeader(DexHeader& header) {
+    memcpy(&dexheader, &header.dexheader, sizeof(dexheader_t));
+}
+
 void DexHeader::parse_header(common::ShurikenStream& stream) {
     auto my_logger = shuriken::logger();
 
@@ -88,4 +92,16 @@ void DexHeader::to_xml(std::ofstream &fos)
 void DexHeader::dump(std::ofstream &fos) {
     fos.seekp(0, std::ofstream::beg);
     fos.write(reinterpret_cast<const char*>(&dexheader), sizeof(dexheader_t));
+}
+
+const DexHeader::dexheader_t& DexHeader::get_dex_header_const() const {
+    return dexheader;
+}
+
+DexHeader::dexheader_t& DexHeader::get_dex_header() {
+    return dexheader;
+}
+
+std::uint64_t DexHeader::get_dex_header_size() const {
+    return sizeof(dexheader_t);
 }
