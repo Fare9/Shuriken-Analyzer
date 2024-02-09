@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <cassert>
+#include <cstdint>
 
 namespace shuriken {
     namespace common {

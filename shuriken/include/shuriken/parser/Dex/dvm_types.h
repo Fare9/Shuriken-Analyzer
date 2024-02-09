@@ -9,6 +9,7 @@
 #define SHURIKENLIB_DVM_TYPES_H
 
 #include <iostream>
+#include <cstdint>
 
 namespace shuriken {
     namespace dex {
