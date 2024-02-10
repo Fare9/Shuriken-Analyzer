@@ -1,0 +1,13 @@
+BasedOnStyle: LLVM
+
+CommentPragmas: '^ ?(RUN|CHECK|PRAGMA)'
+
+IndentWidth: 4
+ColumnLimit: 135
+PointerAlignment: Left
+
+IncludeCategories:
+  - Regex:           '(<|")windows.h.*'
+    Priority:        -1
+  - Regex:           '.*'
+    Priority:        4
