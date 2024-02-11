@@ -52,6 +52,13 @@ namespace shuriken {
                 NONE_SWITCH
             };
 
+            class InstructionUtils {
+            public:
+                /// @brief Get the operation type from the given opcode
+                /// @return operation type
+                static DexOpcodes::operation_type get_operation_type_from_opcode(DexOpcodes::opcodes opcode);
+            };
+
             /// @brief Base type for all the instructions
             /// it implements all of the virtual functions
             /// and it contains the basic variables all instructions
@@ -468,7 +475,7 @@ namespace shuriken {
                 std::uint8_t vAA;
                 /// @brief literal value
                 std::int16_t nBBBB;
-            private:
+            public:
                 Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index);
 
                 Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);

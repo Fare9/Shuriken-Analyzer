@@ -192,6 +192,12 @@ namespace {
     }
 };
 
+DexOpcodes::operation_type InstructionUtils::get_operation_type_from_opcode(DexOpcodes::opcodes opcode) {
+    if (opcodes_instruction_operation.find(opcode) == opcodes_instruction_operation.end())
+        return DexOpcodes::operation_type::NONE_OPCODE;
+    return opcodes_instruction_operation.at(opcode);
+}
+
 Instruction::Instruction(std::vector<uint8_t> &bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type)
         : instruction_type(instruction_type), length(0), op(0), op_codes({}) {
 }
