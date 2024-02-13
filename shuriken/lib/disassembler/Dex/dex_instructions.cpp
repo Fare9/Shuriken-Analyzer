@@ -198,11 +198,11 @@ DexOpcodes::operation_type InstructionUtils::get_operation_type_from_opcode(DexO
     return opcodes_instruction_operation.at(opcode);
 }
 
-Instruction::Instruction(std::vector<uint8_t> &bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type)
+Instruction::Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type)
         : instruction_type(instruction_type), length(0), op(0), op_codes({}) {
 }
 
-Instruction::Instruction(std::vector<uint8_t> &bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type, std::uint32_t length)
+Instruction::Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type, std::uint32_t length)
         : instruction_type(instruction_type), length(length), op(0), op_codes({bytecode.begin() + index, bytecode.begin() + index + length}) {
 }
 
@@ -267,11 +267,11 @@ bool Instruction::may_throw() const {
     return false;
 }
 
-Instruction00x::Instruction00x(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction00x::Instruction00x(std::span<uint8_t> bytecode, std::size_t index)
         : Instruction00x(bytecode, index, nullptr) {
 }
 
-Instruction00x::Instruction00x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction00x::Instruction00x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION00X) {
 }
 
@@ -285,11 +285,11 @@ void Instruction00x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction10x::Instruction10x(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index) :
         Instruction10x(bytecode, index, nullptr) {
 }
 
-Instruction10x::Instruction10x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10X, 2) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Instruction10x high byte should be 0", 2);
@@ -306,11 +306,11 @@ void Instruction10x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction12x::Instruction12x(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index) :
     Instruction12x(bytecode, index, nullptr) {
 }
 
-Instruction12x::Instruction12x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION12X, 2) {
     op = op_codes[0];
     vA = (op_codes[1] & 0x0F);
@@ -348,11 +348,11 @@ void Instruction12x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction11n::Instruction11n(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index) :
         Instruction11n(bytecode, index, nullptr) {
 }
 
-Instruction11n::Instruction11n(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION11N, 2) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -391,11 +391,11 @@ void Instruction11n::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction11x::Instruction11x(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index) :
     Instruction11x(bytecode, index, nullptr) {
 }
 
-Instruction11x::Instruction11x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
         : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION11X, 2) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -423,11 +423,11 @@ void Instruction11x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction10t::Instruction10t(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index) :
     Instruction10t(bytecode, index, nullptr) {
 }
 
-Instruction10t::Instruction10t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10T, 2) {
     op = op_codes[0];
     nAA = static_cast<std::int8_t>(op_codes[1]);
@@ -454,11 +454,11 @@ void Instruction10t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction20t::Instruction20t(std::vector<uint8_t> &bytecode, std::size_t index) :
+Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index) :
         Instruction20t(bytecode, index, nullptr) {
 }
 
-Instruction20t::Instruction20t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10T, 4) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction20t padding must be 0", 4);
@@ -487,11 +487,11 @@ void Instruction20t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction20bc::Instruction20bc(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction20bc::Instruction20bc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction20bc(bytecode, index, nullptr) {
 }
 
-Instruction20bc::Instruction20bc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction20bc::Instruction20bc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION20BC, 4) {
     op = op_codes[0];
     nAA = op_codes[1];
@@ -528,11 +528,11 @@ void Instruction20bc::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction22x::Instruction22x(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22x::Instruction22x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22x(bytecode, index, nullptr) {
 }
 
-Instruction22x::Instruction22x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22x::Instruction22x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22X, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -569,11 +569,11 @@ void Instruction22x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction21t::Instruction21t(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction21t::Instruction21t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21t(bytecode, index, nullptr) {
 }
 
-Instruction21t::Instruction21t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21t::Instruction21t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21T, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -613,11 +613,11 @@ void Instruction21t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction21s::Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction21s::Instruction21s(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21s(bytecode, index, nullptr) {
 }
 
-Instruction21s::Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21s::Instruction21s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21S, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -654,11 +654,11 @@ void Instruction21s::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction21h::Instruction21h(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21h(bytecode, index, nullptr) {
 }
 
-Instruction21h::Instruction21h(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21H, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -704,11 +704,11 @@ void Instruction21h::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction21c::Instruction21c(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction21c::Instruction21c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21c(bytecode, index, nullptr) {
 }
 
-Instruction21c::Instruction21c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
+Instruction21c::Instruction21c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21C, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -777,11 +777,11 @@ void Instruction21c::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction23x::Instruction23x(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction23x::Instruction23x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction23x(bytecode, index, nullptr) {
 }
 
-Instruction23x::Instruction23x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction23x::Instruction23x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION23X, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -828,11 +828,11 @@ void Instruction23x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction22b::Instruction22b(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22b::Instruction22b(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22b(bytecode, index, nullptr) {
 }
 
-Instruction22b::Instruction22b(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22b::Instruction22b(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22B, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -879,11 +879,11 @@ void Instruction22b::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction22t::Instruction22t(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22t::Instruction22t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22t(bytecode, index, nullptr) {
 }
 
-Instruction22t::Instruction22t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22t::Instruction22t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22T, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -934,11 +934,11 @@ void Instruction22t::print_instruction(std::ostream &os) {
 }
 
 
-Instruction22s::Instruction22s(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22s::Instruction22s(std::span<uint8_t> bytecode, std::size_t index)
  : Instruction22s(bytecode, index, nullptr) {
 }
 
-Instruction22s::Instruction22s(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22s::Instruction22s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22S, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -985,11 +985,11 @@ void Instruction22s::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction22c::Instruction22c(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22c::Instruction22c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22c(bytecode, index, nullptr) {
 }
 
-Instruction22c::Instruction22c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
+Instruction22c::Instruction22c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22C, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -1057,11 +1057,11 @@ void Instruction22c::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction22cs::Instruction22cs(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction22cs::Instruction22cs(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22cs(bytecode, index, nullptr) {
 }
 
-Instruction22cs::Instruction22cs(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
+Instruction22cs::Instruction22cs(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22CS, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -1126,11 +1126,11 @@ void Instruction22cs::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction30t::Instruction30t(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction30t::Instruction30t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction30t(bytecode, index, nullptr) {
 }
 
-Instruction30t::Instruction30t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction30t::Instruction30t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION30T, 6) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction30t padding must be 0", 6);
@@ -1162,11 +1162,11 @@ void Instruction30t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction32x::Instruction32x(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction32x::Instruction32x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction32x(bytecode, index, nullptr) {
 }
 
-Instruction32x::Instruction32x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction32x::Instruction32x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION32X, 6) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction32x padding must be 0", 6);
@@ -1205,11 +1205,11 @@ void Instruction32x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction31i::Instruction31i(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction31i::Instruction31i(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31i(bytecode, index, nullptr) {
 }
 
-Instruction31i::Instruction31i(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31i::Instruction31i(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31I, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1265,11 +1265,11 @@ void Instruction31i::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction31t::Instruction31t(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction31t::Instruction31t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31t(bytecode, index, nullptr) {
 }
 
-Instruction31t::Instruction31t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31t::Instruction31t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31T, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1335,11 +1335,11 @@ void Instruction31t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction31c::Instruction31c(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction31c::Instruction31c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31c(bytecode, index, nullptr) {
 }
 
-Instruction31c::Instruction31c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31c::Instruction31c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31C, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1385,11 +1385,11 @@ void Instruction31c::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction35c::Instruction35c(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction35c(bytecode, index, nullptr) {
 }
 
-Instruction35c::Instruction35c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION35C, 6) {
     /// for reading the registers
     std::uint8_t reg[5];
@@ -1468,11 +1468,11 @@ void Instruction35c::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction3rc::Instruction3rc(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction3rc(bytecode, index, nullptr) {
 }
 
-Instruction3rc::Instruction3rc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION3RC, 6) {
     std::uint16_t vCCCC;
     op = op_codes[0];
@@ -1538,11 +1538,11 @@ void Instruction3rc::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction45cc::Instruction45cc(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction45cc::Instruction45cc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction45cc(bytecode, index, nullptr) {
 }
 
-Instruction45cc::Instruction45cc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction45cc::Instruction45cc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION45CC, 8) {
     std::uint8_t regC, regD, regE, regF, regG;
 
@@ -1628,11 +1628,11 @@ void Instruction45cc::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction4rcc::Instruction4rcc(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction4rcc::Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction4rcc(bytecode, index, nullptr) {
 }
 
-Instruction4rcc::Instruction4rcc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction4rcc::Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION4RCC, 8) {
     std::uint16_t vCCCC;
 
@@ -1703,11 +1703,11 @@ void Instruction4rcc::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction51l::Instruction51l(std::vector<uint8_t> &bytecode, std::size_t index)
+Instruction51l::Instruction51l(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction51l(bytecode, index, nullptr) {
 }
 
-Instruction51l::Instruction51l(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction51l::Instruction51l(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION51L, 10) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1765,11 +1765,11 @@ void Instruction51l::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-PackedSwitch::PackedSwitch(std::vector<uint8_t> &bytecode, std::size_t index)
+PackedSwitch::PackedSwitch(std::span<uint8_t> bytecode, std::size_t index)
     : PackedSwitch(bytecode, index, nullptr) {
 }
 
-PackedSwitch::PackedSwitch(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+PackedSwitch::PackedSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_PACKEDSWITCH, 8) {
     std::int32_t aux;
 
@@ -1824,11 +1824,11 @@ void PackedSwitch::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-SparseSwitch::SparseSwitch(std::vector<uint8_t> &bytecode, std::size_t index)
+SparseSwitch::SparseSwitch(std::span<uint8_t> bytecode, std::size_t index)
     : SparseSwitch(bytecode, index, nullptr) {
 }
 
-SparseSwitch::SparseSwitch(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+SparseSwitch::SparseSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_SPARSESWITCH, 4) {
     std::int32_t aux_key, aux_target;
 
@@ -1891,11 +1891,11 @@ void SparseSwitch::print_instruction(std::ostream &os) {
 }
 
 
-FillArrayData::FillArrayData(std::vector<uint8_t> &bytecode, std::size_t index)
+FillArrayData::FillArrayData(std::span<uint8_t> bytecode, std::size_t index)
     : FillArrayData(bytecode, index, nullptr) {
 }
 
-FillArrayData::FillArrayData(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+FillArrayData::FillArrayData(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_FILLARRAYDATA, 8) {
     std::uint8_t aux;
 
@@ -1946,7 +1946,7 @@ void FillArrayData::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-DalvikIncorrectInstruction::DalvikIncorrectInstruction(std::vector<uint8_t> &bytecode, std::size_t index, std::uint32_t length)
+DalvikIncorrectInstruction::DalvikIncorrectInstruction(std::span<uint8_t> bytecode, std::size_t index, std::uint32_t length)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_DALVIKINCORRECT, length) {
 }
 

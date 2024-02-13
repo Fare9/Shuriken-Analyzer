@@ -55,14 +55,16 @@ namespace shuriken {
                 exceptions_data_t exception_information;
                 /// @brief store the instructions from the method
                 instructions_t instructions;
+                /// @brief store raw pointers to return reference to the instructions
+                std::vector<Instruction*> instructions_raw;
             public:
                 /// @brief Constructor of disassembled method.
                 /// @param n_of_registers number of registers used in the method
                 /// @param exceptions structure of the exceptions
                 /// @param instructions vector of instructions of the method
                 DisassembledMethod(std::uint16_t n_of_registers,
-                                   exceptions_data_t&& exceptions,
-                                   instructions_t&& instructions);
+                                   exceptions_data_t& exceptions,
+                                   instructions_t& instructions);
 
                 ~DisassembledMethod() = default;
 
@@ -85,6 +87,12 @@ namespace shuriken {
                 /// @brief Get the iterator to the instructions from the method
                 /// @return iterator of the instructions
                 it_instructions get_instructions();
+
+                /// @brief Get a constant access to a part of the instructions from the method
+                /// @param init first index from the instructions
+                /// @param end last index from the instructions
+                /// @return constant reference to instructions
+                std::span<Instruction*> get_ref_to_instructions(size_t init, size_t end);
             };
         }
     }

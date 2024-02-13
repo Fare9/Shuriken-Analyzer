@@ -85,7 +85,7 @@ namespace shuriken {
                 /// @param bytecode bytes of the instruction
                 /// @param index index of the instruction in the buffer of bytes
                 /// @param instruction_type type of instruction
-                Instruction(std::vector<uint8_t> &bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type);
+                Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type);
 
                 /// @brief Constructor of the Instruction, here is applied
                 /// the parsing of the opcodes
@@ -93,7 +93,7 @@ namespace shuriken {
                 /// @param index index of the instruction in the buffer of bytes
                 /// @param instruction_type type of instruction
                 /// @param length length of the instruction in bytes
-                Instruction(std::vector<uint8_t> &bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type, std::uint32_t length);
+                Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type, std::uint32_t length);
 
                 /// @brief Destructor of the instruction
                 virtual ~Instruction() = default;
@@ -151,12 +151,12 @@ namespace shuriken {
             /// no instruction represents this, it's not either a nop
             class Instruction00x : public Instruction {
             public:
-                Instruction00x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction00x(std::span<uint8_t> bytecode, std::size_t index);
 
                 /// @brief Constructor of Instruction00x this instruction does nothing
                 /// @param bytecode bytecode with the opcodes
                 /// @param index
-                Instruction00x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction00x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Return a string with the representation of the instruction
                 /// @return string with instruction
@@ -171,9 +171,9 @@ namespace shuriken {
             /// a nop, it has a length of 2
             class Instruction10x : public Instruction {
             public:
-                Instruction10x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction10x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction10x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction10x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Return a string with the representation of the instruction
                 /// @return string with instruction
@@ -194,9 +194,9 @@ namespace shuriken {
                 /// @brief source register
                 std::uint8_t vB;
             public:
-                Instruction12x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction12x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction12x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction12x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index of the destination register
                 /// @return index of destination register
@@ -233,9 +233,9 @@ namespace shuriken {
                 /// @brief Literal value of instruction
                 std::int8_t nB;
             public:
-                Instruction11n(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction11n(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction11n(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction11n(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index of the destination register
                 /// @return index of destination register
@@ -270,9 +270,9 @@ namespace shuriken {
                 /// @brief  destination of move
                 std::uint8_t vAA;
             public:
-                Instruction11x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction11x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction11x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction11x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get destination register index of the operation
                 /// @return index of register
@@ -298,9 +298,9 @@ namespace shuriken {
                 /// @brief Offset where to jump with unconditional jump
                 std::int8_t nAA;
             public:
-                Instruction10t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction10t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction10t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction10t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get offset of the jump
                 /// @return offset of jump instruction
@@ -326,9 +326,9 @@ namespace shuriken {
                 /// @brief Offset where to jump
                 std::int16_t nAAAA;
             public:
-                Instruction20t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction20t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction20t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction20t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the offset where to jump with an unconditional jump
                 /// @return offset of the jump
@@ -356,9 +356,9 @@ namespace shuriken {
                 /// @brief index into appropiate table
                 std::uint16_t nBBBB;
             public:
-                Instruction20bc(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction20bc(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction20bc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction20bc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index of the type of error
                 /// @return index of error
@@ -396,9 +396,9 @@ namespace shuriken {
                 /// @brief source register (16 bits)
                 std::uint16_t vBBBB;
             public:
-                Instruction22x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction22x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get index of the register of destination
                 /// @return index of destination register
@@ -436,9 +436,9 @@ namespace shuriken {
                 /// @brief Offset where to jump if-zero
                 std::int16_t nBBBB;
             public:
-                Instruction21t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction21t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction21t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction21t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the register used for the check in the jump
                 /// @return register checked
@@ -476,9 +476,9 @@ namespace shuriken {
                 /// @brief literal value
                 std::int16_t nBBBB;
             public:
-                Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction21s(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction21s(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction21s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index of the destination register
                 /// @return index of destination register
@@ -515,9 +515,9 @@ namespace shuriken {
                 /// @brief source value
                 std::int64_t nBBBB;
             public:
-                Instruction21h(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction21h(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction21h(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction21h(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index of the destination register
                 /// @return index of destination register
@@ -555,9 +555,9 @@ namespace shuriken {
                 /// @brief Kind depending on the value
                 kind_type_t source_id;
             public:
-                Instruction21c(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction21c(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction21c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
+                Instruction21c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
 
                 /// @brief Get the index of the register for destination
                 /// @return index of register
@@ -606,9 +606,9 @@ namespace shuriken {
                 /// @brief second source register or pair (8 bits).
                 std::uint8_t vCC;
             public:
-                Instruction23x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction23x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction23x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction23x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the register for the destination
                 /// @return destination register
@@ -656,9 +656,9 @@ namespace shuriken {
                 /// @brief Second operand (8 bits)
                 std::int8_t nCC;
             public:
-                Instruction22b(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22b(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22b(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction22b(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the index value of the destination register
                 /// @return register index
@@ -704,9 +704,9 @@ namespace shuriken {
                 /// @brief Offset where to jump
                 std::int16_t nCCCC;
             public:
-                Instruction22t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction22t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the first operand of the check
                 /// @return index of register
@@ -754,9 +754,9 @@ namespace shuriken {
                 /// @brief second operand (16 bits)
                 std::int16_t nCCCC;
             public:
-                Instruction22s(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22s(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22s(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction22s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the destination of the operation
                 /// @return index of the destination register
@@ -807,9 +807,9 @@ namespace shuriken {
                 /// @brief last value as a kind type
                 kind_type_t checked_id;
             public:
-                Instruction22c(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22c(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
+                Instruction22c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
 
                 /// @brief Get the destination operand for the instruction
                 /// @return index of the register for the destination
@@ -866,9 +866,9 @@ namespace shuriken {
                 /// @brief field value as a kind variable
                 kind_type_t field;
             public:
-                Instruction22cs(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction22cs(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction22cs(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
+                Instruction22cs(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser);
 
                 /// @brief Get the index of the first register used in the instruction
                 /// @return value of register A it can be source or destination
@@ -918,9 +918,9 @@ namespace shuriken {
                 /// @brief offset where to jump in the instruction (32 bits)
                 std::int32_t nAAAAAAAA;
             public:
-                Instruction30t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction30t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction30t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction30t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the offset of the jump
                 /// @return offset of unconditional jump
@@ -948,9 +948,9 @@ namespace shuriken {
                 /// @brief Source register (16 bits)
                 std::uint16_t vBBBB;
             public:
-                Instruction32x(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction32x(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction32x(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction32x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the destination operand of the instruction
                 /// @return index of register destination
@@ -987,9 +987,9 @@ namespace shuriken {
                 /// @brief source value (32 bits)
                 std::uint32_t nBBBBBBBB;
             public:
-                Instruction31i(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction31i(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction31i(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction31i(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the destination operand of the instruction
                 /// @return index of destination register
@@ -1036,9 +1036,9 @@ namespace shuriken {
                 /// @brief pointer to one of the types of switch
                 switch_type_t switch_instruction;
             public:
-                Instruction31t(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction31t(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction31t(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction31t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief get the register used as reference for switch/array
                 /// @return index of register for reference
@@ -1094,9 +1094,9 @@ namespace shuriken {
                 /// @brief String value from the instruction
                 std::string_view string_value;
             public:
-                Instruction31c(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction31c(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction31c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction31c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the destination register for the string
                 /// @return index of destination register
@@ -1142,9 +1142,9 @@ namespace shuriken {
                 /// @brief vector with registers (4 bits each)
                 std::vector<std::uint8_t> registers;
             public:
-                Instruction35c(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction35c(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction35c(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction35c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the number of registers from the instruction
                 /// @return array_size value
@@ -1201,9 +1201,9 @@ namespace shuriken {
                 /// one first argument register of 16 bits
                 std::vector<std::uint16_t> registers;
             public:
-                Instruction3rc(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction3rc(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction3rc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get number of registers
                 /// @return number of registers
@@ -1258,9 +1258,9 @@ namespace shuriken {
                 /// @brief value of the prototype
                 kind_type_t prototype_value;
             public:
-                Instruction45cc(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction45cc(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction45cc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction45cc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the number of registers from the instruction
                 /// @return number of registers
@@ -1315,9 +1315,9 @@ namespace shuriken {
                 /// @brief value of the prototype
                 kind_type_t prototype_value;
             public:
-                Instruction4rcc(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction4rcc(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 /// @brief Get the number of registers from the instruction
                 /// @return number of registers
@@ -1361,9 +1361,9 @@ namespace shuriken {
                 /// @brief wide value (64 bits)
                 std::int64_t nBBBBBBBBBBBBBBBB;
             public:
-                Instruction51l(std::vector<uint8_t> &bytecode, std::size_t index);
+                Instruction51l(std::span<uint8_t> bytecode, std::size_t index);
 
-                Instruction51l(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                Instruction51l(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 std::uint8_t get_first_register() const;
 
@@ -1395,9 +1395,9 @@ namespace shuriken {
                 /// @brief targets where the program can jump
                 std::vector<std::int32_t> targets;
             public:
-                PackedSwitch(std::vector<uint8_t> &bytecode, std::size_t index);
+                PackedSwitch(std::span<uint8_t> bytecode, std::size_t index);
 
-                PackedSwitch(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                PackedSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 std::uint16_t get_number_of_targets() const;
 
@@ -1424,9 +1424,9 @@ namespace shuriken {
                 /// @brief keys checked and targets
                 std::vector<std::pair<std::int32_t, std::int32_t>> keys_targets;
             public:
-                SparseSwitch(std::vector<uint8_t> &bytecode, std::size_t index);
+                SparseSwitch(std::span<uint8_t> bytecode, std::size_t index);
 
-                SparseSwitch(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                SparseSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 std::uint16_t get_size_of_targets() const;
 
@@ -1448,9 +1448,9 @@ namespace shuriken {
                 std::uint32_t size;
                 std::vector<std::uint8_t> data;
             public:
-                FillArrayData(std::vector<uint8_t> &bytecode, std::size_t index);
+                FillArrayData(std::span<uint8_t> bytecode, std::size_t index);
 
-                FillArrayData(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
+                FillArrayData(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser);
 
                 std::uint16_t get_element_width() const;
 
@@ -1472,7 +1472,7 @@ namespace shuriken {
             /// previous instruction
             class DalvikIncorrectInstruction : public Instruction {
             public:
-                DalvikIncorrectInstruction(std::vector<uint8_t> &bytecode, std::size_t index, std::uint32_t length);
+                DalvikIncorrectInstruction(std::span<uint8_t> bytecode, std::size_t index, std::uint32_t length);
 
                 /// @brief Return a string with the representation of the instruction
                 /// @return string with instruction

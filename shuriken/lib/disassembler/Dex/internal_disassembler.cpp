@@ -4,7 +4,7 @@
 //
 // @file disassembler.cpp
 
-#include "shuriken/disassembler/Dex/disassembler.h"
+#include "shuriken/disassembler/Dex/internal_disassembler.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::disassembler::dex;
@@ -12,7 +12,7 @@ using namespace shuriken::disassembler::dex;
 namespace {
     /// @brief definition of a generator function for
     /// generating the different instructions
-    typedef std::unique_ptr<Instruction> (*generator_func)(std::vector<uint8_t> &, std::size_t, shuriken::parser::dex::Parser *);
+    typedef std::unique_ptr<Instruction> (*generator_func)(std::span<uint8_t>, std::size_t, shuriken::parser::dex::Parser *);
 
     /// @brief Template that will generate all the instructions
     /// getter user in the disassembler
@@ -23,7 +23,7 @@ namespace {
     /// @return unique pointer with a new instruction
     template <class T>
     std::unique_ptr<Instruction>
-    get_instruction(std::vector<uint8_t> &bytecode, std::size_t index, shuriken::parser::dex::Parser *parser) {
+    get_instruction(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser) {
         return std::make_unique<T>(bytecode, index, parser);
     }
 
@@ -320,9 +320,13 @@ namespace {
     };
 }
 
+Disassembler::Disassembler(parser::dex::Parser * parser)
+    : parser(parser) {
+}
+
 std::unique_ptr<Instruction> Disassembler::disassemble_instruction(
         std::uint32_t opcode,
-        std::vector<uint8_t> & bytecode,
+        std::span<uint8_t> bytecode,
         std::size_t index) {
     auto op = static_cast<DexOpcodes::opcodes>(opcode);
 

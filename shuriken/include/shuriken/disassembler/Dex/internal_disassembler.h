@@ -7,8 +7,8 @@
 // are disassembled one by one, information from the parser
 // is needed.
 
-#ifndef SHURIKENPROJECT_DISASSEMBLER_H
-#define SHURIKENPROJECT_DISASSEMBLER_H
+#ifndef SHURIKENPROJECT_INTERNAL_DISASSEMBLER_H
+#define SHURIKENPROJECT_INTERNAL_DISASSEMBLER_H
 
 #include "shuriken/parser/Dex/parser.h"
 #include "shuriken/disassembler/Dex/disassembled_method.h"
@@ -38,7 +38,7 @@ namespace shuriken {
                 /// @return unique pointer to the disassembled Instruction
                 std::unique_ptr<Instruction> disassemble_instruction(
                         std::uint32_t opcode,
-                        std::vector<uint8_t> & bytecode,
+                        std::span<uint8_t> bytecode,
                         std::size_t index
                 );
 
@@ -87,4 +87,4 @@ namespace shuriken {
     }
 }
 
-#endif //SHURIKENPROJECT_DISASSEMBLER_H
+#endif //SHURIKENPROJECT_INTERNAL_DISASSEMBLER_H
