@@ -55,7 +55,7 @@ void DexDisassembler::disassemble_encoded_method(shuriken::parser::dex::EncodedM
     auto exceptions_data = internal_disassembler->determine_exception(method);
     auto instructions = linear_sweep.disassembly(code_item_struct->get_bytecode());
 
-    disassembled_methods[method->getMethodID()->pretty_method()] = std::make_unique<DisassembledMethod>(
+    disassembled_methods[method->getMethodID()->dalvik_name_format()] = std::make_unique<DisassembledMethod>(
             method->getMethodID(), code_item_struct->get_registers_size(), exceptions_data, instructions);
 }
 

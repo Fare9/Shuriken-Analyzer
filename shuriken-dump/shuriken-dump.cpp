@@ -208,9 +208,9 @@ void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
     }
     if (disassembly) {
         fmt::println("Disassembled method:");
-        auto disassembled_method = disassembler->get_disassembled_method(method_id->pretty_method());
+        auto disassembled_method = disassembler->get_disassembled_method(method_id->dalvik_name_format());
         if (disassembled_method == nullptr)
-            throw std::runtime_error("The method " + method_id->pretty_method() + " was not correctly disassembled");
+            throw std::runtime_error("The method " + method_id->demangle() + " was not correctly disassembled");
         fmt::print("{}\n", disassembled_method->print_method());
     }
 }

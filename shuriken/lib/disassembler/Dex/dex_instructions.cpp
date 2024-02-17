@@ -176,7 +176,7 @@ namespace {
             instruction_str += " // field@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::MethodID*>(source_id)) {
             auto method = std::get<shuriken::parser::dex::MethodID*>(source_id);
-            instruction_str += method->pretty_method();
+            instruction_str += method->dalvik_name_format();
             instruction_str += " // method@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::ProtoID*>(source_id)) {
             auto proto = std::get<shuriken::parser::dex::ProtoID*>(source_id);
