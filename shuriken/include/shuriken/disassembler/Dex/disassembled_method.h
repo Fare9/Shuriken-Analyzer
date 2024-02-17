@@ -48,6 +48,8 @@ namespace shuriken {
             /// the instructions
             class DisassembledMethod {
             private:
+                /// @brief MethodID with the name of the method
+                shuriken::parser::dex::MethodID* method_id;
                 /// @brief Number of registers from the method
                 std::uint16_t n_of_registers;
                 /// @brief vector with all the exception information
@@ -57,12 +59,15 @@ namespace shuriken {
                 instructions_t instructions;
                 /// @brief store raw pointers to return reference to the instructions
                 std::vector<Instruction*> instructions_raw;
+                /// @brief representation of the method in string format
+                std::string method_string;
             public:
                 /// @brief Constructor of disassembled method.
                 /// @param n_of_registers number of registers used in the method
                 /// @param exceptions structure of the exceptions
                 /// @param instructions vector of instructions of the method
-                DisassembledMethod(std::uint16_t n_of_registers,
+                DisassembledMethod(shuriken::parser::dex::MethodID* method_id,
+                                   std::uint16_t n_of_registers,
                                    exceptions_data_t& exceptions,
                                    instructions_t& instructions);
 
@@ -93,6 +98,10 @@ namespace shuriken {
                 /// @param end last index from the instructions
                 /// @return constant reference to instructions
                 std::span<Instruction*> get_ref_to_instructions(size_t init, size_t end);
+
+                /// @brief Get a disassembled representation of the method in string format
+                /// @return disassembled method string
+                std::string_view print_method();
             };
         }
     }

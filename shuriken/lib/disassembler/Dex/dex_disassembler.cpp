@@ -56,7 +56,7 @@ void DexDisassembler::disassemble_encoded_method(shuriken::parser::dex::EncodedM
     auto instructions = linear_sweep.disassembly(code_item_struct->get_bytecode());
 
     disassembled_methods[method->getMethodID()->pretty_method()] = std::make_unique<DisassembledMethod>(
-            code_item_struct->get_registers_size(), exceptions_data, instructions);
+            method->getMethodID(), code_item_struct->get_registers_size(), exceptions_data, instructions);
 }
 
 std::vector<std::unique_ptr<Instruction>> DexDisassembler::disassembly_buffer(std::span<std::uint8_t> buffer) {

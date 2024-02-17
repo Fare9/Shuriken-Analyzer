@@ -165,27 +165,29 @@ namespace {
         std::string instruction_str = "";
 
         if (std::holds_alternative<std::monostate>(source_id)) {
-            instruction_str += "UNKNOWN@" + std::to_string(iBBBB);
+            instruction_str += " // UNKNOWN@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::DVMType*>(source_id)) {
             auto type = std::get<shuriken::parser::dex::DVMType*>(source_id);
             instruction_str += type->get_raw_type();
-            instruction_str += "// type@" + std::to_string(iBBBB);
+            instruction_str += " // type@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::FieldID*>(source_id)) {
             auto field = std::get<shuriken::parser::dex::FieldID*>(source_id);
             instruction_str += field->pretty_field();
-            instruction_str += "// field@" + std::to_string(iBBBB);
+            instruction_str += " // field@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::MethodID*>(source_id)) {
             auto method = std::get<shuriken::parser::dex::MethodID*>(source_id);
             instruction_str += method->pretty_method();
-            instruction_str += "// method@" + std::to_string(iBBBB);
+            instruction_str += " // method@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<shuriken::parser::dex::ProtoID*>(source_id)) {
             auto proto = std::get<shuriken::parser::dex::ProtoID*>(source_id);
             instruction_str += proto->get_shorty_idx();
-            instruction_str += "// proto@" + std::to_string(iBBBB);
+            instruction_str += " // proto@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<std::string_view>(source_id)) {
             auto str = std::get<std::string_view>(source_id);
+            instruction_str += "\"";
             instruction_str += str;
-            instruction_str += "// string@" + std::to_string(iBBBB);
+            instruction_str += "\"";
+            instruction_str += " // string@" + std::to_string(iBBBB);
         }
 
         return instruction_str;
@@ -643,7 +645,7 @@ DexOpcodes::operand_type Instruction21s::get_source_type() const {
 std::string_view Instruction21s::print_instruction() {
     if (instruction_str.empty()) {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
-        instruction_str += " ";
+        instruction_str += " v";
         instruction_str += std::to_string(vAA);
         instruction_str += ", " + std::to_string(nBBBB);
     }
@@ -1456,7 +1458,7 @@ std::string_view Instruction35c::print_instruction() {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
         instruction_str += " {";
         for (auto reg : registers)
-            instruction_str += " v" + std::to_string(reg) + ", ";
+            instruction_str += "v" + std::to_string(reg) + ", ";
         if (!registers.empty())
             instruction_str = instruction_str.substr(0, instruction_str.size()-2);
         instruction_str += "}, " + get_kind_type_as_string(type_value, type_index);
@@ -1526,7 +1528,7 @@ std::string_view Instruction3rc::print_instruction() {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
         instruction_str += " {";
         for (auto reg: registers)
-            instruction_str += " v" + std::to_string(reg) + ", ";
+            instruction_str += "v" + std::to_string(reg) + ", ";
         if (!registers.empty())
             instruction_str = instruction_str.substr(0, instruction_str.size() - 2);
         instruction_str += "}, " + get_kind_type_as_string(index_value, index);

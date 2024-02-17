@@ -7,6 +7,7 @@
 #include <shuriken/parser/shuriken_parsers.h>
 #include <shuriken/parser/Dex/parser.h>
 #include <shuriken/common/Dex/dvm_types.h>
+#include <shuriken/disassembler/Dex/dex_disassembler.h>
 #include <fmt/core.h>
 
 
@@ -17,6 +18,7 @@ void show_help(std::string& prog_name) {
     fmt::println("\t-f: show fields from classes (it needs -c)");
     fmt::println("\t-m: show methods from classes (it needs -c)");
     fmt::println("\t-b: show bytecode from methods (it needs -m)");
+    fmt::println("\t-D: show the disassembled code from methods (it needs -m)");
 }
 
 void print_header(shuriken::parser::dex::DexHeader&);
@@ -30,6 +32,9 @@ bool show_classes = false;
 bool methods = false;
 bool fields = false;
 bool code = false;
+bool disassembly = false;
+
+std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
 
 int
 main(int argc, char ** argv) {
@@ -51,11 +56,17 @@ main(int argc, char ** argv) {
             fields = true;
         else if (s == "-b")
             code = true;
+        else if (s == "-D")
+            disassembly = true;
     }
 
     try {
         auto parsed_dex = shuriken::parser::parse_dex(args[1]);
 
+        if (disassembly) {
+            disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+            disassembler->disassembly_dex();
+        }
         auto& header = parsed_dex->get_header();
 
         if (headers) print_header(header);
@@ -194,6 +205,13 @@ void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
     fmt::print("\t\t\tCode size:      {}\n", code_item_struct->get_instructions_size());
     if (code) {
         print_code(code_item_struct->get_bytecode());
+    }
+    if (disassembly) {
+        fmt::println("Disassembled method:");
+        auto disassembled_method = disassembler->get_disassembled_method(method_id->pretty_method());
+        if (disassembled_method == nullptr)
+            throw std::runtime_error("The method " + method_id->pretty_method() + " was not correctly disassembled");
+        fmt::print("{}\n", disassembled_method->print_method());
     }
 }
 
