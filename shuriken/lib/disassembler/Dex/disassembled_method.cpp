@@ -56,8 +56,8 @@ std::span<Instruction*> DisassembledMethod::get_ref_to_instructions(size_t init,
 std::string_view DisassembledMethod::print_method() {
     if (method_string.empty()) {
         std::stringstream output;
-        output << method_id->dalvik_name_format() + "\n";
-        output << "\t.registers " << std::to_string(n_of_registers) << "\n";
+        output << method_id->dalvik_name_format() << '\n';
+        output << "\t.registers " << std::to_string(n_of_registers) << '\n';
         int id = 0;
         for (auto & instr : instructions) {
             /// check the information for showing exception

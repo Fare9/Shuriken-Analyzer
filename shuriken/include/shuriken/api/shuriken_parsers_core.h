@@ -23,48 +23,16 @@
 
 extern "C" {
 
-typedef void* hDexParser;
+typedef void* hDexContext;
 
 /// C - DEX part of the CORE API from ShurikenLib
 
-SHURIKENCOREAPI hDexParser parse_dex(const char* filePath);
-SHURIKENCOREAPI void destroy_dex(hDexParser parser);
+SHURIKENCOREAPI hDexContext parse_dex(const char* filePath);
+SHURIKENCOREAPI void destroy_dex(hDexContext context);
 
-#pragma pack(1)
-/// @brief Structure with the definition of the DEX header
-/// all these values are later used for parsing the other
-/// headers from DEX
-typedef struct h_dex_header_t
-{
-    uint8_t magic[8];          //! magic bytes from dex, different values are possible
-    int32_t checksum;          //! checksum to see if file is correct
-    uint8_t signature[20];     //! signature of dex
-    uint32_t file_size;        //! current file size
-    uint32_t header_size;      //! size of this header
-    uint32_t endian_tag;       //! type of endianess of the file
-    uint32_t link_size;        //! data for statically linked files
-    uint32_t link_off;         //!
-    uint32_t map_off;          //!
-    uint32_t string_ids_size;  //! number of DexStrings
-    uint32_t string_ids_off;   //! offset of the DexStrings
-    uint32_t type_ids_size;    //! number of DexTypes
-    uint32_t type_ids_off;     //! offset of the DexTypes
-    uint32_t proto_ids_size;   //! number of prototypes
-    uint32_t proto_ids_off;    //! offset of the prototypes
-    uint32_t field_ids_size;   //! number of fields
-    uint32_t field_ids_off;    //! offset of the fields
-    uint32_t method_ids_size;  //! number of methods
-    uint32_t method_ids_off;   //! offset of the methods
-    uint32_t class_defs_size;  //! number of class definitions
-    uint32_t class_defs_off;   //! offset of the class definitions
-    uint32_t data_size;        //! data area, containing all the support data for the tables listed above
-    uint32_t data_off;         //!
-} h_dex_header_t;
-#pragma pack()
+SHURIKENCOREAPI size_t get_number_of_strings(hDexContext context);
+SHURIKENCOREAPI const char* get_string_by_id(hDexContext context, size_t i);
 
-SHURIKENCOREAPI h_dex_header_t * get_dex_header(hDexParser parser);
-SHURIKENCOREAPI size_t get_number_of_strings(hDexParser parser);
-SHURIKENCOREAPI const char* get_string_by_id(hDexParser parser, size_t i);
 
 /// @brief DexTypes of the DVM we have by default fundamental,
 /// classes and array DexTypes
@@ -87,85 +55,77 @@ enum hfundamental_e
     INT,
     LONG,
     SHORT,
-    VOID
+    VOID,
+    NONE = 99
 };
 
-// Structure for the fundamental type
-typedef struct hdvmfundamental_t {
-    enum hfundamental_e fundamental;
+/// @brief Structure which keeps information from a field
+/// this can be accessed from the class data
+typedef struct hdvmfield_t_ {
+    /// @brief Name of the field
     const char *name;
-} hdvmfundamental_t;
+    /// @brief Type of the field
+    htype_e type;
+    /// @brief In case `type` == FUNDAMENTAL
+    /// in case of ARRAY if the base type is
+    /// a fundamental value, it contains that value
+    hfundamental_e fundamental_value;
+    /// @brief String value of the type
+    const char * type_value;
+    /// @brief access flags from the field
+    uint16_t access_flags;
+} hdvmfield_t;
 
-// Structure for the class type
-typedef struct hdvmclass_t {
-    const char *class_name;
-} hdvmclass_t;
-
-// Structure for the array type
-typedef struct hdvmarray_t {
-    const char *array_name;
-    size_t depth;
-    struct hdvmtype_t *array_type;  // Note: Forward declaration
-} hdvmarray_t;
-
-// Structure for the high-level type
-typedef struct hdvmtype_t {
-    enum htype_e type;
-    const char *raw_type;
-
-    union {
-        hdvmfundamental_t fundamental;
-        hdvmclass_t class_type;
-        hdvmarray_t array_type;
-    };
-} hdvmtype_t;
-
-
-typedef struct hdvmmethod_t {
-
-    /// @brief Class which method belongs to
-    const char *belonging_class;
-    /// @brief Prototype of the current method
-    const char *protoId;
-    /// @brief Name of the method
-    const char *name;
-    /// @brief Pretty name of the method with the prototype
-    const char *pretty_name;
-
+/// @brief Structure which keeps information from a method
+/// this can be accessed from the class data
+typedef struct hdvmmethod_t_ {
+    /// @brief name of the method
+    const char * method_name;
+    /// @brief prototype of the method
+    const char * prototype;
+    /// @brief access flags
+    uint16_t access_flags;
+    /// @brief number of registers
+    uint32_t code_size;
+    /// @brief pointer to a code buffer
+    uint8_t * code;
+    /// @brief Full Dalvik name
+    const char * dalvik_name;
+    /// @brief Demangled name
+    const char * demangled_name;
 } hdvmmethod_t;
 
-
-typedef struct {
+/// @brief Structure representing the classes in the DEX file
+typedef struct hdvmclass_t {
+    /// @brief name of the class
     const char* class_name;
+    /// @brief name of the super class
     const char* super_class;
+    /// @brief name of the source file (if exists)
     const char* source_file;
+    /// @brief access flags from the class
     uint16_t access_flags;
-    uint32_t interfaces_off;
-    uint32_t annotations_off;
-    uint32_t class_data_off;
-    uint32_t static_values_off;
-    uint16_t static_fields_size;
-    uint16_t instance_fields_size;
+    /// @brief number of direct methods
     uint16_t direct_methods_size;
+    /// @brief array of direct methods
+    hdvmmethod_t *direct_methods;
+    /// @brief number of virtual methods
     uint16_t virtual_methods_size;
-    hdvmmethod_t **direct_methods;
-} hdex_class_t;
+    /// @brief array of virtual methods
+    hdvmmethod_t *virtual_methods;
+    /// @brief number of instance fields
+    uint16_t instance_fields_size;
+    /// @brief instance fields
+    hdvmfield_t *instance_fields;
+    /// @brief number of static fields
+    uint16_t static_fields_size;
+    /// @brief static fields
+    hdvmfield_t *static_fields;
+} hdvmclass_t;
 
-SHURIKENCOREAPI size_t get_number_of_types(hDexParser parser);
-SHURIKENCOREAPI hdvmtype_t* get_type_by_id(hDexParser parser, size_t i);
-SHURIKENCOREAPI void destroy_type(hdvmtype_t *dvmtype);
-SHURIKENCOREAPI size_t get_number_of_methods(hDexParser parser);
-SHURIKENCOREAPI size_t get_number_of_classes(hDexParser parser);
-SHURIKENCOREAPI hdvmmethod_t* get_methods_list(hDexParser parser);
-SHURIKENCOREAPI hdex_class_t* get_classes(hDexParser parser);
+SHURIKENCOREAPI uint16_t get_number_of_classes(hDexContext context);
 
-
-
- 
-
-
-
-
+SHURIKENCOREAPI hdvmclass_t * get_class_by_id(hDexContext context, uint16_t i);
 
 };
 

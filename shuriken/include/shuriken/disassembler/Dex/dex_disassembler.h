@@ -34,7 +34,7 @@ namespace shuriken {
                 /// @brief Pointer to the parser where information about the structure is stored
                 parser::dex::Parser * parser;
                 /// @brief Storage for the Disassembled Methods
-                std::unordered_map<std::string,
+                std::unordered_map<std::string_view,
                     std::unique_ptr<DisassembledMethod>> disassembled_methods;
                 /// @brief Linear sweep disassembler
                 LinearSweepDisassembler linear_sweep;
@@ -58,6 +58,13 @@ namespace shuriken {
                 /// @param method class->name_method(description) of the method to retrieve
                 /// @return a DisassembledMethod object with the instructions
                 DisassembledMethod* get_disassembled_method(std::string method);
+
+                /// @brief Obtain a DisassembledMethod object the disassembler keeps
+                /// all of them in a map.
+                /// @param method class->name_method(description) of the method to retrieve
+                /// @return a DisassembledMethod object with the instructions
+                DisassembledMethod* get_disassembled_method(std::string_view method);
+
 
                 /// @brief This is the most important function from the
                 /// disassembler, this function takes the given parser

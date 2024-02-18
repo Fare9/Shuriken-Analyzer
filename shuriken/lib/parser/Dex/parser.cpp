@@ -154,7 +154,7 @@ namespace shuriken {
             std::ifstream ifs(file_path);
             common::ShurikenStream file(ifs);
 
-            Parser *p = new Parser();
+            auto *p = new Parser();
             p->parse_dex(file);
             return p;
         }

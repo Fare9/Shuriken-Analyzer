@@ -25,6 +25,12 @@ DisassembledMethod* DexDisassembler::get_disassembled_method(std::string method)
     return disassembled_methods[method].get();
 }
 
+DisassembledMethod* DexDisassembler::get_disassembled_method(std::string_view method) {
+    if (disassembled_methods.find(method) == disassembled_methods.end())
+        return nullptr;
+    return disassembled_methods[method].get();
+}
+
 void DexDisassembler::disassembly_dex() {
     auto log = logger();
 
