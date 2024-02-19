@@ -7,9 +7,11 @@
 
 #include "dex-files-folder.inc"
 #include "shuriken/api/shuriken_parsers_core.h"
+#include "../../include/shuriken/api/shuriken_parsers_core.h"
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 
 const char *file = DEX_FILES_FOLDER \
                     "DexParserTest.dex";
@@ -49,6 +51,69 @@ const char *strs[] = {" and ",
                      "toString",
                      "~~D8{\"backend\":\"dex\",\"compilation-mode\":\"debug\",\"has-checksums\":false,\"min-api\":1,\"version\":\"3.3.20-dev+aosp5\"}"};
 
+
+struct method_struct {
+    const char *dalvik_name;
+    uint16_t access_flags;
+};
+
+struct field_struct {
+    const char *name;
+    const char *type;
+    uint16_t access_flags;
+};
+
+struct class_struct {
+    const char *name;
+    const char *super_class_name;
+    uint16_t access_flags;
+};
+
+struct class_struct classes[] = {
+        {
+            .name = "DexParserTest",
+            .super_class_name = "java.lang.Object",
+            .access_flags = 1
+        },
+};
+
+struct method_struct direct_methods[] = {
+        {
+            .dalvik_name = "LDexParserTest;-><init>()V",
+            .access_flags = 1
+        },
+        {
+            .dalvik_name = "LDexParserTest;->calculateSum(II)I",
+            .access_flags = 2
+        },
+        {
+            .dalvik_name = "LDexParserTest;->main([Ljava/lang/String;)V",
+            .access_flags = 9
+        },
+        {
+            .dalvik_name = "LDexParserTest;->printMessage()V",
+            .access_flags = 2
+        }
+};
+
+struct method_struct virtual_methods[] = {};
+
+struct field_struct instance_fields[] = {
+        {
+            .name = "field1",
+            .type = "I",
+            .access_flags = 2
+        },
+        {
+            .name = "field2",
+            .type = "Ljava/lang/String;",
+            .access_flags = 2
+        }
+};
+
+struct field_struct static_fields[] = {};
+
+
 void check_strings(hDexContext parser);
 void check_classes_list(hDexContext parser);
                             
@@ -76,6 +141,53 @@ void check_classes_list(hDexContext parser) {
     uint16_t i;
     for (i=0; i < nr_of_classes; ++i) {
         auto class_ = get_class_by_id(parser, i);
-        printf( "class name: %s - super class name %s - source file %s", class_->class_name, class_->super_class, class_->source_file );
+        printf( "class name: %s - super class name %s - source file %s - access flags %u\n", class_->class_name, class_->super_class, class_->source_file, class_->access_flags);
+
+        assert(strcmp(classes[i].name, class_->class_name) == 0 &&
+                "Error, class name is not correct");
+        assert(strcmp(classes[i].super_class_name, class_->super_class) == 0 &&
+               "Error, class super class name is not correct");
+        assert(classes[i].access_flags == class_->access_flags &&
+                "Error, class access flags are not correct");
+
+        printf("Direct methods:\n");
+        for (uint32_t j = 0; j < class_->direct_methods_size; j++) {
+            assert(strcmp(direct_methods[j].dalvik_name, class_->direct_methods[j].dalvik_name) == 0 &&
+                   "Error, method name is not correct");
+            assert(direct_methods[j].access_flags == class_->direct_methods[j].access_flags &&
+                    "Error, method access flag are not correct");
+            printf("Dalvik name %s - access flags %u\n", class_->direct_methods[j].dalvik_name, class_->direct_methods[j].access_flags);
+        }
+
+        printf("Virtual methods:\n");
+        for (uint32_t j = 0; j < class_->virtual_methods_size; j++) {
+            assert(strcmp(virtual_methods[j].dalvik_name, class_->virtual_methods[j].dalvik_name) == 0 &&
+                   "Error, method name is not correct");
+            assert(virtual_methods[j].access_flags == class_->virtual_methods[j].access_flags &&
+                   "Error, method access flag are not correct");
+            printf("Dalvik name %s - access flags %u\n", class_->virtual_methods[j].dalvik_name, class_->virtual_methods[j].access_flags);
+        }
+
+        printf("Instance fields:\n");
+        for (uint32_t j = 0; j < class_->instance_fields_size; j++) {
+            assert(strcmp(instance_fields[j].name, class_->instance_fields[j].name) == 0 &&
+                    "Error, field name is not correct");
+            assert(strcmp(instance_fields[j].type, class_->instance_fields[j].type_value) == 0 &&
+                   "Error, field type is not correct");
+            assert(instance_fields[j].access_flags == class_->instance_fields[j].access_flags &&
+                    "Error, field access flags are not correct");
+            printf("Field name %s - field type %s - access flags %u\n", class_->instance_fields[j].name, class_->instance_fields[j].type_value, class_->instance_fields[j].access_flags);
+        }
+
+        printf("Static fields:\n");
+        for (uint32_t j = 0; j < class_->static_fields_size; j++) {
+            assert(strcmp(static_fields[j].name, class_->static_fields[j].name) == 0 &&
+                   "Error, field name is not correct");
+            assert(strcmp(static_fields[j].type, class_->static_fields[j].type_value) == 0 &&
+                   "Error, field type is not correct");
+            assert(static_fields[j].access_flags == class_->static_fields[j].access_flags &&
+                   "Error, field access flags are not correct");
+            printf("Field name %s - field type %s - access flags %u\n", class_->static_fields[j].name, class_->static_fields[j].type_value, class_->static_fields[j].access_flags);
+        }
     }
 }
