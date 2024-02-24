@@ -4,7 +4,7 @@
 //
 // @file dvm_types.cpp
 
-#include "shuriken/parser/Dex/dvm_types.h"
+#include "shuriken/common/Dex/dvm_types.h"
 #include <unordered_map>
 
 using namespace shuriken::dex;

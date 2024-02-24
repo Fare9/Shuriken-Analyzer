@@ -70,6 +70,41 @@ namespace shuriken {
                 VALUE_NULL = 0x1E,          //! None
                 VALUE_BOOLEAN = 0x1F        //! None
             };
+
+            /// @brief References used in the xrefs of the classes
+            /// to store the type of references
+            enum ref_type {
+                REF_NEW_INSTANCE = 0x22,    // new instance of a class
+                REF_CLASS_USAGE = 0x1c,     // class is used somewhere
+                INVOKE_VIRTUAL  = 0x6e,     // call of a method from a class
+                INVOKE_SUPER    = 0x6f,     // call of constructor of super class
+                INVOKE_DIRECT   = 0x70,     // call a method from a class
+                INVOKE_STATIC = 0x71,       // call a static method from a class
+                INVOKE_INTERFACE = 0x72,    // call an interface method
+                // same with ranges
+                INVOKE_VIRTUAL_RANGE = 0x74,
+                INVOKE_SUPER_RANGE = 0x75,
+                INVOKE_DIRECT_RANGE = 0x76,
+                INVOKE_STATIC_RANGE = 0x77,
+                INVOKE_INTERFACE_RANGE = 0x78
+            };
+
+            /// @brief Identify the kind of argument inside of a Dalvik instruction
+            enum kind {
+                METH = 0,          //! method reference
+                STRING = 1,        //! string index
+                FIELD = 2,         //! field reference
+                TYPE = 3,          //! type reference
+                PROTO = 9,         //! prototype reference
+                METH_PROTO = 10,   //! method reference and proto reference
+                CALL_SITE = 11,    //! call site item
+                VARIES = 4,        //!
+                INLINE_METHOD = 5, //! inlined method
+                VTABLE_OFFSET = 6, //! static linked
+                FIELD_OFFSET = 7,  //! offset of a field (not reference)
+                RAW_STRING = 8,    //!
+                NONE_KIND = 99,    //!
+            };
         }
 
         class Utils {

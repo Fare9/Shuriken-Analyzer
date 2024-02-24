@@ -12,23 +12,54 @@ using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
 using it_methods = shuriken::iterator_range<method_ids_t::iterator>;
 using it_const_methods = shuriken::iterator_range<const method_ids_t::iterator>;
 
-std::string MethodID::pretty_method()  {
-    if (!pretty_name.empty())
-        return pretty_name;
+const DVMType* MethodID::get_class() const {
+    return class_;
+}
 
-    pretty_name = protoId->get_return_type()->print_type();
-    pretty_name += " " + class_->print_type() + "->";
-    pretty_name += std::string(name) + "(";
+DVMType* MethodID::get_class() {
+    return class_;
+}
+
+const ProtoID* MethodID::get_prototype() const {
+    return protoId;
+}
+
+ProtoID* MethodID::get_prototype() {
+    return protoId;
+}
+
+std::string_view MethodID::get_method_name() {
+    return name;
+}
+
+std::string MethodID::demangle()  {
+    if (!demangled_name.empty())
+        return demangled_name;
+
+    demangled_name = protoId->get_return_type()->print_type();
+    demangled_name += " " + class_->print_type() + "->";
+    demangled_name += std::string(name) + "(";
 
     for (const auto & p : protoId->get_parameters_const()) {
-        pretty_name += p->print_type() + ",";
+        demangled_name += p->print_type() + ",";
     }
 
-    if (pretty_name.ends_with(','))
-        pretty_name.pop_back();
+    if (demangled_name.ends_with(','))
+        demangled_name.pop_back();
 
-    pretty_name += ")";
-    return pretty_name;
+    demangled_name += ")";
+    return demangled_name;
+}
+
+std::string MethodID::dalvik_name_format() {
+    if (!dalvik_name.empty())
+        return dalvik_name;
+    dalvik_name = class_->get_raw_type();
+    dalvik_name += "->" + std::string(name) + "(";
+    for (const auto proto : protoId->get_parameters())
+        dalvik_name += proto->get_raw_type();
+    dalvik_name += ")" + std::string(protoId->get_return_type()->get_raw_type());
+    return dalvik_name;
 }
 
 void DexMethods::parse_methods(

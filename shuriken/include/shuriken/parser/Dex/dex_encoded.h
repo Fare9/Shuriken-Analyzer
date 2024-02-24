@@ -15,7 +15,7 @@
 #include "shuriken/parser/Dex/dex_strings.h"
 #include "shuriken/parser/Dex/dex_fields.h"
 #include "shuriken/parser/Dex/dex_methods.h"
-#include "shuriken/parser/Dex/dvm_types.h"
+#include "shuriken/common/Dex/dvm_types.h"
 
 #include <iostream>
 #include <vector>

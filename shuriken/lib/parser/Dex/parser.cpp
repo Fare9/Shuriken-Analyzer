@@ -6,7 +6,7 @@
 
 #include "shuriken/parser/Dex/parser.h"
 
-#include "shuriken/parser/Dex/dvm_types.h"
+#include "shuriken/common/Dex/dvm_types.h"
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;

@@ -27,7 +27,9 @@ namespace shuriken {
                 /// @brief Name of the method
                 std::string_view name;
                 /// @brief Pretty name of the method with the prototype
-                std::string pretty_name;
+                std::string demangled_name;
+                /// @brief Name in the dalvik format
+                std::string dalvik_name;
             public:
                 /// @brief Constructor of the MethodID
                 /// @param class_ class of the method
@@ -40,28 +42,19 @@ namespace shuriken {
                 /// @brief Destructor of MethodID, default constructor
                 ~MethodID() = default;
 
-                const DVMType* get_class() const {
-                    return class_;
-                }
+                const DVMType* get_class() const;
 
-                DVMType* get_class() {
-                    return class_;
-                }
+                DVMType* get_class();
 
-                const ProtoID* get_prototype() const {
-                    return protoId;
-                }
+                const ProtoID* get_prototype() const;
 
-                ProtoID* get_prototype() {
-                    return protoId;
-                }
+                ProtoID* get_prototype();
 
-                std::string_view get_method_name() {
-                    return name;
-                }
+                std::string_view get_method_name();
 
-                std::string pretty_method();
+                std::string demangle();
 
+                std::string dalvik_name_format();
             };
 
             class DexMethods {
