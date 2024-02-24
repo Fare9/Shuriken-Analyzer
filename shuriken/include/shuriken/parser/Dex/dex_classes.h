@@ -25,10 +25,10 @@ namespace shuriken {
         namespace dex {
             class ClassDataItem {
             public:
-                using encoded_fields_t = std::unordered_map<std::uint64_t, std::unique_ptr<EncodedField>>;
+                using encoded_fields_t = std::vector<std::unique_ptr<EncodedField>>;
                 using it_encoded_fields = iterator_range<encoded_fields_t::iterator>;
 
-                using encoded_methods_t = std::unordered_map<std::uint64_t, std::unique_ptr<EncodedMethod>>;
+                using encoded_methods_t = std::vector<std::unique_ptr<EncodedMethod>>;
                 using it_encoded_method = iterator_range<encoded_methods_t::iterator>;
             private:
                 /// @brief Static fields from the class

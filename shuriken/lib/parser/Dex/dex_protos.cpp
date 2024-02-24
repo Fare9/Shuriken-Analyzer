@@ -69,6 +69,18 @@ DVMType* ProtoID::get_return_type()
     return return_type;
 }
 
+std::string_view ProtoID::get_dalvik_prototype() {
+    if (prototypes_dalvik_representation.empty()) {
+        prototypes_dalvik_representation = "(";
+        for (auto parameter : parameters) {
+            prototypes_dalvik_representation += parameter->get_raw_type();
+        }
+        prototypes_dalvik_representation += ")";
+        prototypes_dalvik_representation += return_type->get_raw_type();
+    }
+    return prototypes_dalvik_representation;
+}
+
 it_params ProtoID::get_parameters() {
     return make_range(parameters.begin(), parameters.end());
 }

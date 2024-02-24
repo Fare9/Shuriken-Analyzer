@@ -61,6 +61,8 @@ namespace shuriken {
                 std::vector<Instruction*> instructions_raw;
                 /// @brief representation of the method in string format
                 std::string method_string;
+                /// @brief Access flags from the instruction for the representation
+                shuriken::dex::TYPES::access_flags access_flags;
             public:
                 /// @brief Constructor of disassembled method.
                 /// @param n_of_registers number of registers used in the method
@@ -69,9 +71,12 @@ namespace shuriken {
                 DisassembledMethod(shuriken::parser::dex::MethodID* method_id,
                                    std::uint16_t n_of_registers,
                                    exceptions_data_t& exceptions,
-                                   instructions_t& instructions);
+                                   instructions_t& instructions,
+                                   shuriken::dex::TYPES::access_flags access_flags);
 
                 ~DisassembledMethod() = default;
+
+                shuriken::parser::dex::MethodID* get_method_id();
 
                 /// @brief Get the number of registers
                 /// @return number of registers
@@ -100,8 +105,9 @@ namespace shuriken {
                 std::span<Instruction*> get_ref_to_instructions(size_t init, size_t end);
 
                 /// @brief Get a disassembled representation of the method in string format
+                /// @param print_address print the address from each instruction
                 /// @return disassembled method string
-                std::string_view print_method();
+                std::string_view print_method(bool print_address = true);
             };
         }
     }

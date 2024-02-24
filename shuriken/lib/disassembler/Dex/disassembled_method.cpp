@@ -7,21 +7,28 @@
 #include "shuriken/disassembler/Dex/disassembled_method.h"
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 
 using namespace shuriken::disassembler::dex;
 
 DisassembledMethod::DisassembledMethod(shuriken::parser::dex::MethodID* method_id,
                                        std::uint16_t n_of_registers,
                                        exceptions_data_t& exceptions,
-                                       instructions_t& instructions) :
+                                       instructions_t& instructions,
+                                       shuriken::dex::TYPES::access_flags access_flags) :
                                        method_id(method_id),
                                        n_of_registers(n_of_registers),
                                        exception_information(std::move(exceptions)),
-                                       instructions(std::move(instructions)) {
+                                       instructions(std::move(instructions)),
+                                       access_flags(access_flags) {
     instructions_raw.reserve(this->instructions.size());
     for (const auto & instr : instructions) {
         instructions_raw.emplace_back(instr.get());
     }
+}
+
+shuriken::parser::dex::MethodID* DisassembledMethod::get_method_id() {
+    return method_id;
 }
 
 std::uint16_t DisassembledMethod::get_number_of_registers() const {
@@ -53,24 +60,51 @@ std::span<Instruction*> DisassembledMethod::get_ref_to_instructions(size_t init,
     return block;
 }
 
-std::string_view DisassembledMethod::print_method() {
+std::string_view DisassembledMethod::print_method(bool print_address) {
     if (method_string.empty()) {
         std::stringstream output;
+        std::string access_flags_str = shuriken::dex::Utils::get_types_as_string(access_flags);
+        std::transform(access_flags_str.begin(),
+                       access_flags_str.end(),
+                       access_flags_str.begin(),
+                       [](unsigned char c) {
+            if (c == '|')
+                return (int)' ';
+            else
+                return tolower(c);
+        });
+        output << ".method " << access_flags_str << " ";
         output << method_id->dalvik_name_format() << '\n';
-        output << "\t.registers " << std::to_string(n_of_registers) << '\n';
+        output << ".registers " << std::to_string(n_of_registers) << '\n';
         int id = 0;
         for (auto & instr : instructions) {
             /// check the information for showing exception
             for (const auto & exception : exception_information) {
+                /// avoid printing future try-catch handlers
+                if (id < exception.try_value_start_addr)
+                    continue;
+
                 if (id == exception.try_value_start_addr)
-                    output << ".try:\n";
-                for (const auto & catch_data : exception.handler) {
-                    if (id == catch_data.handler_start_addr)
-                        output << ".catch:\n";
+                    output << ".try_start_" << (exception.try_value_start_addr/2) << "\n";
+                if (id == exception.try_value_end_addr) {
+                    output << ".try_end_" << (exception.try_value_end_addr/2) << "\n";
+                    for (const auto &catch_data: exception.handler) {
+                            output << ".catch " << catch_data.handler_type->get_raw_type();
+                            output << " {.try_start_" << (exception.try_value_start_addr/2) << " .. ";
+                            output << ".try_end_" << (exception.try_value_end_addr/2) << "}";
+                            output << " :catch_" << (catch_data.handler_start_addr/2) << "\n";
+                    }
+                }
+
+                for (const auto &catch_data: exception.handler) {
+                    if (catch_data.handler_start_addr == id) {
+                        output << ":catch_" << (catch_data.handler_start_addr/2) << '\n';
+                    }
                 }
             }
-
-            output << std::hex << std::setw(8) << std::setfill('0') << id << '\t';
+            if (print_address)
+                output << std::hex << std::setw(8) << std::setfill('0') << id;
+            output << ' ';
             /// now print the instruction
             instr->print_instruction(output);
             id += instr->get_instruction_length();

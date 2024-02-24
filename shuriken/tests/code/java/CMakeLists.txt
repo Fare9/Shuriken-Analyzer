@@ -20,6 +20,7 @@ if(DEX AND DEX_TESTS AND COMPILE_DEX_FILES)
             _loop
             _null
             _pi
+            _switch
             DexParserTest
     )
 

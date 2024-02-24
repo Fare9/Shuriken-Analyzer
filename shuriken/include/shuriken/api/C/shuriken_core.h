@@ -9,7 +9,15 @@
 #define SHURIKENLIB_SHURIKEN_PARSERS_CORE_H
 
 #ifdef __cplusplus
+#if defined(_WIN32) || defined(__WIN32__)
+#ifdef SHURIKENLIB_EXPORTS
+        #define SHURIKENCOREAPI __declspec(dllexport)
+    #else
+        #define SHURIKENCOREAPI __declspec(dllimport)
+    #endif
+#else
 #define SHURIKENCOREAPI extern "C"
+#endif
 #include <cstdint>
 #include <cstddef>
 #include <cstdlib>
@@ -26,6 +34,8 @@ extern "C" {
 typedef void* hDexContext;
 
 /// C - DEX part of the CORE API from ShurikenLib
+
+///--------------------------- Parser API ---------------------------
 
 /// @brief DexTypes of the DVM we have by default fundamental,
 /// classes and array DexTypes
@@ -49,7 +59,33 @@ enum hfundamental_e
     LONG,
     SHORT,
     VOID,
-    NONE = 99
+    FUNDAMENTAL_NONE = 99
+};
+
+/// @brief access flags from the Dalvik Virtual Machine
+enum access_flags_e
+{
+    ACCESS_FLAGS_NONE = 0x0,            //! No access flags
+    ACC_PUBLIC = 0x1,                   //! public type
+    ACC_PRIVATE = 0x2,                  //! private type
+    ACC_PROTECTED = 0x4,                //! protected type
+    ACC_STATIC = 0x8,                   //! static (global) type
+    ACC_FINAL = 0x10,                   //! final type (constant)
+    ACC_SYNCHRONIZED = 0x20,            //! synchronized
+    ACC_VOLATILE = 0x40,                //! Java volatile
+    ACC_BRIDGE = 0x40,                  //!
+    ACC_TRANSIENT = 0x80,               //!
+    ACC_VARARGS = 0x80,                 //!
+    ACC_NATIVE = 0x100,                 //! native type
+    ACC_INTERFACE = 0x200,              //! interface type
+    ACC_ABSTRACT = 0x400,               //! abstract type
+    ACC_STRICT = 0x800,                 //!
+    ACC_SYNTHETIC = 0x1000,             //!
+    ACC_ANNOTATION = 0x2000,            //!
+    ACC_ENUM = 0x4000,                  //! enum type
+    UNUSED = 0x8000,                    //!
+    ACC_CONSTRUCTOR = 0x10000,          //! constructor type
+    ACC_DECLARED_SYNCHRONIZED = 0x20000 //!
 };
 
 /// @brief Structure which keeps information from a field
@@ -149,11 +185,123 @@ SHURIKENCOREAPI uint16_t get_number_of_classes(hDexContext context);
 /// @return class from the DEX file
 SHURIKENCOREAPI hdvmclass_t * get_class_by_id(hDexContext context, uint16_t i);
 
+/// @brief Get a class structure given a class name
+/// @param context DEX from where to retrieve the class
+/// @param class_name name of the class to retrieve
+/// @return class from the DEX file
+SHURIKENCOREAPI hdvmclass_t * get_class_by_name(hDexContext context, const char *class_name);
+
 /// @brief Get a method structure given a full dalvik name.
+/// @param context DEX from where to retrieve the method
 /// @param method_name LclassName;->methodName(parameters)RetType
 /// @return pointer to hdvmmethod_t, null if the method does not exist
 SHURIKENCOREAPI hdvmmethod_t * get_method_by_name(hDexContext context, const char *method_name);
 
+
+///--------------------------- Disassembler API ---------------------------
+
+/// @brief Instruction types from the Dalvik Virtual Machine
+enum dexinsttype_e
+{
+    DEX_INSTRUCTION00X,
+    DEX_INSTRUCTION10X,
+    DEX_INSTRUCTION12X,
+    DEX_INSTRUCTION11N,
+    DEX_INSTRUCTION11X,
+    DEX_INSTRUCTION10T,
+    DEX_INSTRUCTION20T,
+    DEX_INSTRUCTION20BC,
+    DEX_INSTRUCTION22X,
+    DEX_INSTRUCTION21T,
+    DEX_INSTRUCTION21S,
+    DEX_INSTRUCTION21H,
+    DEX_INSTRUCTION21C,
+    DEX_INSTRUCTION23X,
+    DEX_INSTRUCTION22B,
+    DEX_INSTRUCTION22T,
+    DEX_INSTRUCTION22S,
+    DEX_INSTRUCTION22C,
+    DEX_INSTRUCTION22CS,
+    DEX_INSTRUCTION30T,
+    DEX_INSTRUCTION32X,
+    DEX_INSTRUCTION31I,
+    DEX_INSTRUCTION31T,
+    DEX_INSTRUCTION31C,
+    DEX_INSTRUCTION35C,
+    DEX_INSTRUCTION3RC,
+    DEX_INSTRUCTION45CC,
+    DEX_INSTRUCTION4RCC,
+    DEX_INSTRUCTION51L,
+    DEX_PACKEDSWITCH,
+    DEX_SPARSESWITCH,
+    DEX_FILLARRAYDATA,
+    DEX_DALVIKINCORRECT,
+    DEX_NONE_OP = 99,
+};
+
+/// @brief Structure for an instruction in the dalvik virtual machine
+typedef struct hdvminstruction_t_ {
+    /// @brief Instruction type enum
+    dexinsttype_e instruction_type;
+    /// @brief length of the instruction
+    uint32_t instruction_length;
+    /// @brief idx of the instruction
+    uint64_t address;
+    /// @brief opcode of the instruction
+    uint32_t op;
+    /// @brief Disassembly of the instruction
+    const char * disassembly;
+} hdvminstruction_t;
+
+/// @brief Structure that keeps information about a handler
+typedef struct dvmhandler_data_t_ {
+    /// @brief type of handled exception
+    const char * handler_type;
+    /// @brief start address of the handler
+    uint64_t handler_start_addr;
+} dvmhandler_data_t;
+
+/// @brief Structure with the information from the exceptions
+/// in the code
+typedef struct dvmexceptions_data_t_ {
+    /// @brief start address from the try
+    uint64_t try_value_start_addr;
+    /// @brief last address from the try
+    uint64_t try_value_end_addr;
+    /// @brief number of handlers associated with the try
+    size_t n_of_handlers;
+    /// @brief pointer to an array of dvmhandler_data_t
+    dvmhandler_data_t * handler;
+} dvmexceptions_data_t;
+
+/// @brief Structure that represents a disassembled method from
+/// the dalvik file
+typedef struct dvmdisassembled_method_t_ {
+    /// @brief pointer to the method
+    hdvmmethod_t * method_id;
+    /// @brief number of registers
+    uint16_t n_of_registers;
+    /// @brief number of exception information structures
+    size_t n_of_exceptions;
+    /// @brief all the exceptions from the method
+    dvmexceptions_data_t * exception_information;
+    /// @brief number of instructions from the method
+    size_t n_of_instructions;
+    /// @brief array of all the instructions from the method
+    hdvminstruction_t * instructions;
+    /// @brief Full disassembled method
+    const char * method_string;
+} dvmdisassembled_method_t;
+
+/// @brief Disassemble a DEX file and generate an internal DexDisassembler
+/// @param context DEX to disassemble the methods
+SHURIKENCOREAPI void disassemble_dex(hDexContext context);
+
+/// @brief Get a method structure given a full dalvik name.
+/// @param context DEX from where to retrieve the method
+/// @param method_name LclassName;->methodName(parameters)RetType
+/// @return pointer to a disassembled method
+SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const char *method_name);
 
 };
 

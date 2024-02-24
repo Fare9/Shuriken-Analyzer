@@ -6,7 +6,7 @@
 // @brief Test for the Core API in C of the project
 
 #include "dex-files-folder.inc"
-#include "shuriken/api/shuriken_parsers_core.h"
+#include "shuriken/api/C/shuriken_core.h"
 #include "../../include/shuriken/api/C/shuriken_core.h"
 #include <assert.h>
 #include <string.h>
