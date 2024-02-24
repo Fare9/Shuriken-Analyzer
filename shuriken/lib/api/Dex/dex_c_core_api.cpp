@@ -6,10 +6,10 @@
 // @brief Implements the necessary functions for the DEX part of
 // the core api to work
 
-#include "shuriken/api/shuriken_parsers_core.h"
+#include "shuriken/api/C/shuriken_core.h"
 #include "shuriken/parser/shuriken_parsers.h"
 
-#include <vector>
+#include <unordered_map>
 
 namespace {
 
@@ -25,9 +25,12 @@ namespace {
         /// @brief classes created from DEX information
         hdvmclass_t * classes;
         /// @brief all the methods from the DEX (to access all the methods)
-        std::vector<hdvmmethod_t*> methods;
+        std::unordered_map<std::string_view, hdvmmethod_t*> methods;
     } dex_opaque_struct_t;
 
+    /// @brief From an EncodedMethod fills the data of a method structure
+    /// @param encoded_method method from the internal library
+    /// @param method structure for the C core API to fill data
     void fill_dex_method(shuriken::parser::dex::EncodedMethod * encoded_method, hdvmmethod_t * method) {
         const auto method_id = encoded_method -> getMethodID();
 
@@ -40,6 +43,9 @@ namespace {
         method -> demangled_name = encoded_method -> getMethodID() -> demangle().data();
     }
 
+    /// @brief From an EncodedField fills the data of a field structure
+    /// @param encoded_field field from the internal library
+    /// @param field structure for the C core API to fill data
     void fill_dex_field(shuriken::parser::dex::EncodedField * encoded_field, hdvmfield_t * field) {
         auto field_id = encoded_field -> get_field();
         auto field_type = field_id->field_type();
@@ -70,6 +76,9 @@ namespace {
         }
     }
 
+    /// @brief Fill an opaque structure with the parsed data
+    /// @param parser DEX parser with the data to include in the structure
+    /// @param opaque_struct structure that we will fill with parser data
     void fill_dex_opaque_struct(shuriken::parser::dex::Parser * parser, dex_opaque_struct_t * opaque_struct) {
         if (parser == nullptr || opaque_struct == nullptr)
             return;
@@ -102,12 +111,14 @@ namespace {
             new_class -> virtual_methods = (hdvmmethod_t * ) malloc(new_class -> virtual_methods_size * sizeof(hdvmmethod_t));
             for (size_t j = 0; j < new_class -> virtual_methods_size; j++) {
                 fill_dex_method(class_data_item.get_virtual_method_by_id(j), &new_class->virtual_methods[j]);
-                opaque_struct->methods.push_back(&new_class->virtual_methods[j]);
+                opaque_struct->methods[class_data_item.get_virtual_method_by_id(j)->getMethodID()->dalvik_name_format()]
+                    = &new_class->virtual_methods[j];
             }
             new_class -> direct_methods = (hdvmmethod_t * ) malloc(new_class -> direct_methods_size * sizeof(hdvmmethod_t));
             for (size_t j = 0; j < new_class -> direct_methods_size; j++) {
                 fill_dex_method(class_data_item.get_direct_method_by_id(j), &new_class->direct_methods[j]);
-                opaque_struct->methods.push_back(&new_class->direct_methods[j]);
+                opaque_struct->methods[class_data_item.get_direct_method_by_id(j)->getMethodID()->dalvik_name_format()]
+                        = &new_class->direct_methods[j];
             }
             /// fill the fields
             new_class -> instance_fields = (hdvmfield_t * ) malloc(new_class -> instance_fields_size * sizeof(hdvmfield_t));
@@ -201,6 +212,13 @@ uint16_t get_number_of_classes(hDexContext context) {
 
 hdvmclass_t * get_class_by_id(hDexContext context, uint16_t i) {
     auto * opaque_struct = reinterpret_cast < dex_opaque_struct_t * > (context);
-    if (!opaque_struct || opaque_struct -> tag != TAG || i >= opaque_struct->number_of_classes) return 0;
+    if (!opaque_struct || opaque_struct -> tag != TAG || i >= opaque_struct->number_of_classes) return nullptr;
     return &opaque_struct->classes[i];
+}
+
+hdvmmethod_t * get_method_by_name(hDexContext context, const char *method_name) {
+    auto * opaque_struct = reinterpret_cast < dex_opaque_struct_t * > (context);
+    std::string_view m_name{method_name};
+    if (!opaque_struct || opaque_struct -> tag != TAG || opaque_struct->methods.contains(m_name)) return nullptr;
+    return opaque_struct->methods.at(m_name);
 }

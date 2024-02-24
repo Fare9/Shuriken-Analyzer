@@ -27,29 +27,6 @@ typedef void* hDexContext;
 
 /// C - DEX part of the CORE API from ShurikenLib
 
-/// @brief main method from the DEX Core API
-/// it parses the DEX file and it retrieves a context object
-/// @param filePath path to the DEX file to analyze
-/// @return context object to obtain information from the DEX file
-SHURIKENCOREAPI hDexContext parse_dex(const char* filePath);
-
-/// @brief Since the context object use dynamic memory this method
-/// will properly destroy the object.
-/// @param context object to destroys
-SHURIKENCOREAPI void destroy_dex(hDexContext context);
-
-/// @brief Get the number of strings from the DEX file
-/// @param context from the DEX file
-/// @return number of strings
-SHURIKENCOREAPI size_t get_number_of_strings(hDexContext context);
-
-/// @brief get one of the strings by the id
-/// @param context from where to retrieve the string
-/// @param i id of the string to retrieve
-/// @return string from the id
-SHURIKENCOREAPI const char* get_string_by_id(hDexContext context, size_t i);
-
-
 /// @brief DexTypes of the DVM we have by default fundamental,
 /// classes and array DexTypes
 enum htype_e
@@ -139,6 +116,28 @@ typedef struct hdvmclass_t {
     hdvmfield_t *static_fields;
 } hdvmclass_t;
 
+/// @brief main method from the DEX Core API
+/// it parses the DEX file and it retrieves a context object
+/// @param filePath path to the DEX file to analyze
+/// @return context object to obtain information from the DEX file
+SHURIKENCOREAPI hDexContext parse_dex(const char* filePath);
+
+/// @brief Since the context object use dynamic memory this method
+/// will properly destroy the object.
+/// @param context object to destroys
+SHURIKENCOREAPI void destroy_dex(hDexContext context);
+
+/// @brief Get the number of strings from the DEX file
+/// @param context from the DEX file
+/// @return number of strings
+SHURIKENCOREAPI size_t get_number_of_strings(hDexContext context);
+
+/// @brief get one of the strings by the id
+/// @param context from where to retrieve the string
+/// @param i id of the string to retrieve
+/// @return string from the id
+SHURIKENCOREAPI const char* get_string_by_id(hDexContext context, size_t i);
+
 /// @brief Get the number of classes from the DEX file
 /// @param context dex from where to retrieve the number of classes
 /// @return number of classes
@@ -149,6 +148,12 @@ SHURIKENCOREAPI uint16_t get_number_of_classes(hDexContext context);
 /// @param i id of the class to retrieve
 /// @return class from the DEX file
 SHURIKENCOREAPI hdvmclass_t * get_class_by_id(hDexContext context, uint16_t i);
+
+/// @brief Get a method structure given a full dalvik name.
+/// @param method_name LclassName;->methodName(parameters)RetType
+/// @return pointer to hdvmmethod_t, null if the method does not exist
+SHURIKENCOREAPI hdvmmethod_t * get_method_by_name(hDexContext context, const char *method_name);
+
 
 };
 
