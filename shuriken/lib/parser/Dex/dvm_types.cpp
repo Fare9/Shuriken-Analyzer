@@ -4,6 +4,7 @@
 //
 // @file dvm_types.cpp
 
+#include "shuriken/shuriken_cpp_core.h"
 #include "shuriken/common/Dex/dvm_types.h"
 #include <unordered_map>
 
@@ -32,6 +33,12 @@ static const std::unordered_map<access_flags, std::string> flagStrings = {
         {ACC_CONSTRUCTOR, "CONSTRUCTOR"},
         {ACC_DECLARED_SYNCHRONIZED, "DECLARED_SYNCHRONIZED"}
 };
+
+namespace shurikenapi::utils {
+SHURIKENLIB_API std::string get_types_as_string(shurikenapi::access_flags ac) {
+    return Utils::get_types_as_string(static_cast<TYPES::access_flags>(ac));
+}
+}
 
 std::string Utils::get_types_as_string(TYPES::access_flags ac) {
     std::string ac_str = "";
