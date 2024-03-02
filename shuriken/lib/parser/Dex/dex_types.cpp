@@ -4,12 +4,52 @@
 //
 // @file DexTypes.cpp
 
+#include "shuriken/shuriken_cpp_core.h"
 #include "shuriken/parser/Dex/dex_types.h"
 #include "shuriken/common/logger.h"
-
+#include <unordered_map>
+#include <string>
 using namespace shuriken::parser::dex;
 
 // --DexTypes
+
+static const std::unordered_map<type_e, std::string> type_eStrings = {
+        {FUNDAMENTAL, "FUNDAMENTAL"},
+        {CLASS, "CLASS"},
+        {ARRAY, "ARRAY"},
+        {UNKNOWN, "UNKNOWN"}
+};
+namespace shurikenapi::utils {
+
+SHURIKENLIB_API std::string DexType2String(shurikenapi::DexType dexType) {
+    auto res = type_eStrings.find(static_cast<type_e>(dexType));
+    if (res == type_eStrings.end())
+        return "Unknown";
+
+    return res->second;
+}
+
+SHURIKENLIB_API std::string DexType2String(const shurikenapi::IDexTypeInfo& dexType) {
+    auto res = type_eStrings.find(static_cast<type_e>(dexType.getType()));
+    if (res == type_eStrings.end())
+        return "Unknown";
+
+    if (dexType.getType() == shurikenapi::DexType::kFundamental) {
+        return res->second + " - " + DexValue2String(*dexType.getFundamentalValue());
+    }
+
+    return res->second;
+}
+
+SHURIKENLIB_API std::string DexValue2String(shurikenapi::FundamentalValue value) {
+    auto res = fundamental_s.find(static_cast<fundamental_e>(value));
+    if (res == fundamental_s.end())
+        return "Unknown";
+
+    return res->second;
+}
+
+}
 
 std::unique_ptr<DVMType> DexTypes::parse_type(std::string_view name) {
     switch (name.at(0)) {

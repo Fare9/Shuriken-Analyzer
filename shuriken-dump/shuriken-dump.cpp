@@ -2,6 +2,7 @@
 // Created by fare9 on 30/12/23.
 //
 
+#include <shuriken/shuriken_cpp_core.h>
 #include <chrono>
 #include <fmt/core.h>
 #include <functional>
@@ -31,11 +32,11 @@ void show_help(std::string &prog_name) {
 
 void parse_dex(std::string& dex_file);
 void parse_apk(std::string& apk_file);
-void print_header(shuriken::parser::dex::DexHeader &);
-void print_classes(shuriken::parser::dex::DexClasses &);
-void print_method(shuriken::parser::dex::EncodedMethod *, size_t);
-void print_field(shuriken::parser::dex::EncodedField *, size_t);
-void print_code(std::span<std::uint8_t>);
+void print_header(const shurikenapi::DexHeader& header);
+void print_classes(const shurikenapi::IClassManager& classManager);
+void print_field(const shurikenapi::IClassField&, size_t index);
+void print_method(const shurikenapi::IClassMethod& method, size_t index);
+void print_code(std::span<std::uint8_t> bytecode);
 
 bool headers = false;
 bool show_classes = false;
@@ -54,6 +55,8 @@ std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler_own =
 shuriken::disassembler::dex::DexDisassembler * disassembler = nullptr;
 std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis_own = nullptr;
 shuriken::analysis::dex::Analysis * analysis = nullptr;
+// std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
+// std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
 
 int main(int argc, char **argv) {
     std::vector<std::string> args{argv, argv + argc};
@@ -89,6 +92,36 @@ int main(int argc, char **argv) {
             parse_dex(args[1]);
         } else if (args[1].ends_with(".apk")) {
             parse_apk(args[1]);
+        std::unique_ptr<shurikenapi::IDex> parsed_dex = shurikenapi::parse_dex(args[1]);
+        if (!parsed_dex) {
+            fmt::println("Failed to parse dex");
+            return -1;
+        }
+
+        if (headers) print_header(parsed_dex->getHeader());
+        if (show_classes) print_classes(parsed_dex->getClassManager());
+        /*
+        if (disassembly) {
+            disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+            disassembler->disassembly_dex();
+        }
+
+        if (blocks || xrefs) {
+            if (disassembler == nullptr) {
+                disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+                disassembler->disassembly_dex();
+            }
+            dex_analysis = std::make_unique<shuriken::analysis::dex::Analysis>(parsed_dex.get(),
+                                                                               disassembler.get(),
+                                                                               xrefs ? true : false);
+            dex_analysis->create_xrefs();
+        }
+        */
+        if (!no_print) {
+            auto &header = parsed_dex->getHeader();
+
+            if (headers) print_header(header);
+            if (show_classes) print_classes(parsed_dex->getClassManager());
         }
     } catch (std::runtime_error &re) {
         fmt::println("Exception: {}", re.what());
@@ -171,8 +204,7 @@ void parse_apk(std::string& apk_file) {
 
 }
 
-void print_header(shuriken::parser::dex::DexHeader &header) {
-    auto &dex_header = header.get_dex_header();
+void print_header(const shurikenapi::DexHeader& dex_header) {
     fmt::println("Dex Header:");
     fmt::print(" Magic:");
     for (auto b: dex_header.magic) {
@@ -208,66 +240,48 @@ void print_header(shuriken::parser::dex::DexHeader &header) {
     fmt::print(" Data ids size:         {}\n", dex_header.data_size);
 }
 
-void print_classes(shuriken::parser::dex::DexClasses &classes) {
+
+
+void print_classes(const shurikenapi::IClassManager& classManager) {
+    auto classes = classManager.getAllClasses();
     size_t I = 0;
-    for (auto &class_def: classes.get_classdefs()) {
-        fmt::print("Class #{} data:\n", I++);
+    for (const auto& c : classes) {
+        fmt::print("Class #{} data:\n", I);
 
-        const auto class_idx = class_def.get_class_idx();
-        const auto super_class = class_def.get_superclass();
-        std::string_view source_file = class_def.get_source_file();
-        auto access_flags = class_def.get_access_flags();
+        fmt::print("\tClass name:            {}\n", c.get().getName());
+        fmt::print("\tSuper class:           {}\n", c.get().getSuperClassName());
+        fmt::print("\tSource file:           {}\n", c.get().getSourceFileName());
+        fmt::print("\tAccess flags:          0x{:X} ({})\n", static_cast<std::uint32_t>(c.get().getAccessFlags()), 
+                        shurikenapi::utils::DexFlags2String(c.get().getAccessFlags()));
 
-        fmt::print(" Class name:            {}\n", class_idx->get_class_name());
-        fmt::print(" Super class:           {}\n", super_class->get_class_name());
-        if (!source_file.empty())
-            fmt::print(" Source file:           {}\n", source_file);
-        fmt::print(" Access flags:          0x{:X} ({})\n", static_cast<std::uint32_t>(access_flags),
-                   shuriken::dex::Utils::get_types_as_string(access_flags));
-
-        auto &class_def_struct = class_def.get_class_def_struct();
-        fmt::print(" Super class idx:       {}\n", class_def_struct.superclass_idx);
-        fmt::print(" Interfacess off:       0x{:X}\n", class_def_struct.interfaces_off);
-        fmt::print(" Annotations off:       0x{:X}\n", class_def_struct.annotations_off);
-        fmt::print(" Class data off:        0x{:X}\n", class_def_struct.class_data_off);
-        fmt::print(" Static values off:     0x{:X}\n", class_def_struct.static_values_off);
-
-        auto &class_data_item = class_def.get_class_data_item();
-
-        fmt::print(" Static fields size:    {}\n", class_data_item.get_number_of_static_fields());
-        fmt::print(" Instance fields size:  {}\n", class_data_item.get_number_of_instance_fields());
-        fmt::print(" Direct methods size:   {}\n", class_data_item.get_number_of_direct_methods());
-        fmt::print(" Virtual methods size:  {}\n", class_data_item.get_number_of_virtual_methods());
-
-
-        if (fields) {
-            fmt::print(" Static Fields:\n");
-            for (size_t j = 0, e = class_data_item.get_number_of_static_fields(); j < e; j++) {
-                auto field = class_data_item.get_static_field_by_id(static_cast<uint32_t>(j));
-                print_field(field, j);
-            }
-
-            fmt::print(" Instance Fields:\n");
-            for (size_t j = 0, e = class_data_item.get_number_of_instance_fields(); j < e; j++) {
-                auto field = class_data_item.get_instance_field_by_id(static_cast<uint32_t>(j));
-                print_field(field, j);
-            }
+        fmt::print("\tStatic Fields:\n");
+        int staticIdx = 0;
+        for (const auto& f : c.get().getStaticFields()) {
+             const shurikenapi::IClassField& field = f.get();
+            print_field(field, staticIdx++);
+        }
+        fmt::print("\tInstance Fields:\n");
+        int instanceIdx = 0;
+        for (const auto& f : c.get().getInstanceFields()) {
+            const shurikenapi::IClassField& field = f.get();
+            print_field(field, instanceIdx++);
         }
 
-        if (methods) {
-            fmt::print(" Direct Methods:\n");
-            for (size_t j = 0, e = class_data_item.get_number_of_direct_methods(); j < e; j++) {
-                auto method = class_data_item.get_direct_method_by_id(static_cast<uint32_t>(j));
-                print_method(method, j);
-            }
-
-            fmt::print(" Virtual Methods:\n");
-            for (size_t j = 0, e = class_data_item.get_number_of_virtual_methods(); j < e; j++) {
-                auto method = class_data_item.get_virtual_method_by_id(static_cast<uint32_t>(j));
-                print_method(method, j);
-            }
+        fmt::print("\tDirect Methods:\n");
+        int directIdx = 0;
+        for (auto& m : c.get().getDirectMethods()) {
+            const shurikenapi::IClassMethod& method = m.get();
+            print_method(method, directIdx++);
         }
 
+        fmt::print("\tVirtual Methods:\n");
+        int virtualIdx = 0;
+        for (auto& m : c.get().getVirtualMethods()) {
+            const shurikenapi::IClassMethod& method = m.get();
+            print_method(method, virtualIdx++);
+        }
+
+        /*
         if (xrefs) {
             fmt::print(" XREFs\n");
             auto class_analysis = analysis->get_class_analysis(class_idx->get_class_name().data());
@@ -283,16 +297,21 @@ void print_classes(shuriken::parser::dex::DexClasses &classes) {
                 fmt::print("   - {}:{}\n", xref.first->get_full_name(), xref.second);
             }
         }
+        */
 
     }
 }
 
-void print_field(shuriken::parser::dex::EncodedField *field, size_t j) {
-    fmt::print("  Field #{}\n", j);
-    fmt::print("   Name:            {}\n", field->get_field()->field_name());
-    fmt::print("   Type:            {}\n", field->get_field()->field_type()->get_raw_type());
-    fmt::print("   Access Flags:    {} ({})\n", static_cast<std::uint32_t>(field->get_flags()),
-               shuriken::dex::Utils::get_types_as_string(field->get_flags()));
+void print_field(const shurikenapi::IClassField& field, size_t j) {
+    fmt::print("\t\tField #{}\n", j);
+    fmt::print("\t\t\tName:            {}\n", field.getName());
+    fmt::print("\t\t\tType:            {}\n", shurikenapi::utils::DexType2String(field.getFieldType().getType()));
+    auto dexValue = field.getFieldType().getFundamentalValue();
+    if (dexValue.has_value())
+        fmt::print("\t\t\tValue:           {}\n", shurikenapi::utils::DexValue2String(*dexValue));
+    fmt::print("\t\t\tAccess Flags:    {} ({})\n", static_cast<std::uint32_t>(field.getAccessFlags()),
+            shurikenapi::utils::DexFlags2String(field.getAccessFlags()));
+    /*
     if (xrefs) {
         fmt::print("   XRefs:\n");
         auto field_analysis = analysis->get_field_analysis(field);
@@ -312,32 +331,25 @@ void print_field(shuriken::parser::dex::EncodedField *field, size_t j) {
                        std::get<std::uint64_t>(xref));
         }
     }
+    */
 }
 
-void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
-    fmt::print("  Method #{}\n", j);
-    auto method_id = method->getMethodID();
-    fmt::print("   Method name:    {}\n", method_id->get_method_name());
-    fmt::print("   Prototype:      (");
-    for (auto p: method_id->get_prototype()->get_parameters()) {
-        fmt::print("{}", p->get_raw_type());
+void print_method(const shurikenapi::IClassMethod& method, size_t j) {
+    fmt::print("\t\tMethod #{}\n", j);
+
+    fmt::print("\t\t\tMethod name:              {}\n", method.getName());
+    fmt::print("\t\t\tMethod demangled name:    {}\n", method.getDemangledName());
+    fmt::print("\t\t\tPrototype:                {}\n", method.getPrototype().getString());
+    fmt::print("\t\t\t  ReturnType:        {}\n", shurikenapi::utils::DexType2String(method.getPrototype().getReturnType()));
+    size_t parameterIdx = 0;
+    for (const auto& p : method.getPrototype().getParameters()) {
+        fmt::print("\t\t\t  Parameter #{}:      {}\n", parameterIdx++, shurikenapi::utils::DexType2String(p.get()));
     }
-    fmt::print("){}\n", method_id->get_prototype()->get_return_type()->get_raw_type());
-    fmt::print("   Access Flags:   0x{:X} ({})\n", static_cast<std::uint32_t>(method->get_flags()),
-               shuriken::dex::Utils::get_types_as_string(method->get_flags()));
-    auto code_item_struct = method->get_code_item();
-    if (code_item_struct) {
-        fmt::print("   Code:           {}\n", "-");
-        fmt::print("   Registers:      {}\n", code_item_struct->get_registers_size());
-        fmt::print("   Ins:            {}\n", code_item_struct->get_incomings_args());
-        fmt::print("   Outs:           {}\n", code_item_struct->get_outgoing_args());
-        fmt::print("   Code size:      {}\n", code_item_struct->get_instructions_size());
-    } else {
-        fmt::print("   Code:           {}\n", "<None>");
-    }
-    if (code) {
-        print_code(code_item_struct->get_bytecode());
-    }
+    fmt::print("\t\t\tAccess Flags:   0x{:X} ({})\n", static_cast<std::uint32_t>(method.getFlags()),
+               shurikenapi::utils::DexFlags2String(method.getFlags()));
+    fmt::print("\t\t\tCode size:      {}\n", method.getByteCode().size());
+    print_code(method.getByteCode());
+    /*
     if (disassembly) {
         fmt::println("Disassembled method:");
         auto disassembled_method = disassembler->get_disassembled_method(method_id->dalvik_name_format());
@@ -376,6 +388,7 @@ void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
 
         }
     }
+    */
 }
 
 void print_code(std::span<std::uint8_t> bytecode) {

@@ -119,6 +119,7 @@ if (DEX)
     target_include_directories(dex-obj
             BEFORE
             PUBLIC ${SHURIKEN_INCLUDE_PATH}
+            PUBLIC "${CMAKE_SOURCE_DIR}/shuriken/include/shuriken/api/CPP"
     )
 
     list(APPEND LIB_MODULES
@@ -127,7 +128,7 @@ if (DEX)
 endif ()
 
 message(STATUS "Generating Shuriken shared library")
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+add_definitions("-DSHURIKENLIB_EXPORTS")
 add_library(shuriken SHARED
         ${LIB_MODULES}
 )
@@ -138,8 +139,8 @@ target_link_libraries(shuriken PRIVATE spdlog::spdlog)
 target_link_libraries(shuriken PRIVATE zip)
 
 target_include_directories(shuriken
-        PUBLIC
-        "${CMAKE_SOURCE_DIR}/shuriken/include/"
+        PUBLIC "${CMAKE_SOURCE_DIR}/shuriken/include/"
+        PUBLIC "${CMAKE_SOURCE_DIR}/shuriken/include/shuriken/api/CPP"
 )
 
 
