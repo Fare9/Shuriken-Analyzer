@@ -98,6 +98,10 @@ const DVMType* DexTypes::get_type_by_id_const(std::uint32_t id) const {
     return ordered_types.at(id).get();
 }
 
+size_t DexTypes::get_number_of_types() const {
+    return ordered_types.size();
+}
+
 
 DVMType* DexTypes::get_type_by_id(std::uint32_t id) {
     if (id >= ordered_types.size()) {

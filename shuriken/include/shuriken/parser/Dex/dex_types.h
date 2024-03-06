@@ -224,6 +224,10 @@ namespace shuriken {
                 /// @return constant pointer to a DVMType
                 const DVMType* get_type_by_id_const(std::uint32_t id) const;
 
+                /// @brief Get the number of types from the vector
+                /// @brief number of types
+                size_t get_number_of_types() const;
+
                 /// @brief Get a pointer to a DVMType by id
                 /// @param id order of the type
                 /// @return pointer to a DVMTypeLjava/lang/Object;

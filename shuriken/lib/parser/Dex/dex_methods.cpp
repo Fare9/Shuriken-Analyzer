@@ -32,7 +32,7 @@ std::string_view MethodID::get_method_name() {
     return name;
 }
 
-std::string MethodID::demangle()  {
+std::string_view MethodID::demangle()  {
     if (!demangled_name.empty())
         return demangled_name;
 
@@ -51,7 +51,7 @@ std::string MethodID::demangle()  {
     return demangled_name;
 }
 
-std::string MethodID::dalvik_name_format() {
+std::string_view MethodID::dalvik_name_format() {
     if (!dalvik_name.empty())
         return dalvik_name;
     dalvik_name = class_->get_raw_type();

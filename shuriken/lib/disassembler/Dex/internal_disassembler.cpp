@@ -578,7 +578,7 @@ std::vector<exception_data_t> Disassembler::determine_exception(parser::dex::Enc
 
             z.try_value_start_addr = try_value->start_addr * 2;
             z.try_value_end_addr = (try_value->start_addr * 2) +
-                                   (try_value->insn_count * 2) - 1;
+                                   (try_value->insn_count * 2);
 
             for (auto &catch_type_pair : handler_catch->get_handle_pairs())
                 z.handler.push_back({catch_type_pair.type, catch_type_pair.idx * 2});

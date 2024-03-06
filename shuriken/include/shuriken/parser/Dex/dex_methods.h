@@ -52,9 +52,9 @@ namespace shuriken {
 
                 std::string_view get_method_name();
 
-                std::string demangle();
+                std::string_view demangle();
 
-                std::string dalvik_name_format();
+                std::string_view dalvik_name_format();
             };
 
             class DexMethods {

@@ -445,9 +445,16 @@ DexOpcodes::operand_type Instruction10t::get_operand_type() const {
 
 std::string_view Instruction10t::print_instruction() {
     if (instruction_str.empty()) {
-        instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
-        instruction_str += " ";
-        instruction_str += std::to_string((nAA*2) + static_cast<std::int64_t>(address));
+        std::stringstream str;
+        str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
+        str << "0x" << std::hex << ((nAA*2) + static_cast<std::int64_t>(address));
+        str << " // ";
+        if (nAA > 0)
+            str << "+";
+        else if (nAA < 0)
+            str << "-";
+        str << "0x" << std::hex << std::to_string(nAA);
+        instruction_str = str.str();
     }
     return instruction_str;
 }
@@ -461,7 +468,7 @@ Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index) :
 }
 
 Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
-    : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10T, 4) {
+    : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION20T, 4) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction20t padding must be 0", 4);
     op = op_codes[0];
@@ -478,9 +485,16 @@ DexOpcodes::operand_type Instruction20t::get_operand_type() const {
 
 std::string_view Instruction20t::print_instruction() {
     if (instruction_str.empty()) {
-        instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
-        instruction_str += " ";
-        instruction_str += std::to_string((nAAAA*2) + static_cast<std::int64_t>(address));
+        std::stringstream str;
+        str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
+        str << "0x" << std::hex << ((nAAAA*2) + static_cast<std::int64_t>(address));
+        str << " // ";
+        if (nAAAA > 0)
+            str << "+";
+        else if (nAAAA < 0)
+            str << "-";
+        str << "0x" << std::hex << std::to_string(nAAAA);
+        instruction_str = str.str();
     }
     return instruction_str;
 }
@@ -1154,8 +1168,16 @@ DexOpcodes::operand_type Instruction30t::get_offset_type() const {
 
 std::string_view Instruction30t::print_instruction() {
     if (instruction_str.empty()) {
-        instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
-        instruction_str += std::to_string((nAAAAAAAA*2) + static_cast<std::int64_t>(address));
+        std::stringstream str;
+        str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
+        str << "0x" << std::hex << ((nAAAAAAAA*2) + static_cast<std::int64_t>(address));
+        str << " // ";
+        if (nAAAAAAAA > 0)
+            str << "+";
+        else if (nAAAAAAAA < 0)
+            str << "-";
+        str << "0x" << std::hex << nAAAAAAAA;
+        instruction_str = str.str();
     }
     return instruction_str;
 }

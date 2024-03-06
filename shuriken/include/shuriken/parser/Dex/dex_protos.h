@@ -58,6 +58,9 @@ namespace shuriken {
                 DVMType* return_type = nullptr;
                 /// @brief Vector with all the parameter types
                 parameters_type_t parameters;
+                /// @brief string representation of the parameters + return type
+                /// e.g. (II)I
+                std::string prototypes_dalvik_representation;
                 /// @brief Parse the parameters from the stream
                 /// each parameter will contain one type id
                 /// @param stream stream where to read the information
@@ -81,6 +84,10 @@ namespace shuriken {
                 /// @brief Get a constant reference to the return type
                 /// @return constant reference to return type
                 const DVMType* get_return_type() const;
+
+                /// @brief Get a dalvik representation of the prototype
+                /// @return dalvik representation of prototype
+                std::string_view get_dalvik_prototype();
 
                 /// @brief Get a reference to the return type
                 /// @return reference to return type

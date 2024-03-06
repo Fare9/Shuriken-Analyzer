@@ -38,18 +38,16 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         //! now read the access flags
         access_flags = stream.read_uleb128();
         //! create the static field
-        static_fields[static_field] =
-                std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(static_field)),
-                                                                          static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
+        static_fields.push_back(std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(static_field)),
+                                                               static_cast<shuriken::dex::TYPES::access_flags>(access_flags)));
 
     }
 
     for (I = 0; I < instance_fields_size; ++I) {
         instance_field += stream.read_uleb128();
         access_flags = stream.read_uleb128();
-        instance_fields[instance_field] =
-                std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(instance_field)),
-                                               static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
+        instance_fields.push_back(std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(instance_field)),
+                                                                 static_cast<shuriken::dex::TYPES::access_flags>(access_flags)));
     }
 
     for (I = 0; I < direct_methods_size; ++I) {
@@ -57,19 +55,18 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         access_flags = stream.read_uleb128();
         // for the code item
         code_offset = stream.read_uleb128();
-        direct_methods[direct_method] =
-                std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(direct_method)),
-                                                static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
-        direct_methods[direct_method]->parse_encoded_method(stream, code_offset, types);
+        direct_methods.push_back(std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(direct_method)),
+                                                                 static_cast<shuriken::dex::TYPES::access_flags>(access_flags)));
+        direct_methods.back()->parse_encoded_method(stream, code_offset, types);
     }
 
     for (I = 0; I < virtual_methods_size; ++I) {
         virtual_method += stream.read_uleb128();
         access_flags = stream.read_uleb128();
         code_offset = stream.read_uleb128();
-        virtual_methods[virtual_method] = std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(virtual_method)),
-                                                                          static_cast<shuriken::dex::TYPES::access_flags>(access_flags));
-        virtual_methods[virtual_method]->parse_encoded_method(stream, code_offset, types);
+        virtual_methods.push_back(std::make_unique<EncodedMethod>(methods.get_method_by_id(static_cast<uint32_t>(virtual_method)),
+                                                                  static_cast<shuriken::dex::TYPES::access_flags>(access_flags)));
+        virtual_methods.back()->parse_encoded_method(stream, code_offset, types);
     }
 
     my_logger->debug("Finished parsing a class data item");
@@ -94,39 +91,28 @@ std::size_t ClassDataItem::get_number_of_virtual_methods() const {
 }
 
 EncodedField* ClassDataItem::get_static_field_by_id(std::uint32_t id) {
-    auto it = static_fields.find(id);
-
-    if (it == static_fields.end())
+    if (id >= static_fields.size())
         throw std::runtime_error("Error id value given incorrect");
 
-    return it->second.get();
+    return static_fields[id].get();
 }
 
 EncodedField* ClassDataItem::get_instance_field_by_id(std::uint32_t id) {
-    auto it = instance_fields.find(id);
-
-    if (it == instance_fields.end())
+    if (id >= instance_fields.size())
         throw std::runtime_error("Error id value given incorrect");
-
-    return it->second.get();
+    return instance_fields[id].get();
 }
 
 EncodedMethod* ClassDataItem::get_direct_method_by_id(std::uint32_t id) {
-    auto it = direct_methods.find(id);
-
-    if (it == direct_methods.end())
+    if (id >= direct_methods.size())
         throw std::runtime_error("Error id value given incorrect");
-
-    return it->second.get();
+    return direct_methods[id].get();
 }
 
 EncodedMethod* ClassDataItem::get_virtual_method_by_id(std::uint32_t id) {
-    auto it = virtual_methods.find(id);
-
-    if (it == virtual_methods.end())
+    if (id >= virtual_methods.size())
         throw std::runtime_error("Error id value given incorrect");
-
-    return it->second.get();
+    return virtual_methods[id].get();
 }
 
 ClassDataItem::it_encoded_fields ClassDataItem::get_static_fields() {
@@ -144,6 +130,8 @@ ClassDataItem::it_encoded_method ClassDataItem::get_direct_methods() {
 ClassDataItem::it_encoded_method ClassDataItem::get_virtual_methods() {
     return make_range(virtual_methods.begin(), virtual_methods.end());
 }
+
+
 
 void ClassDef::parse_class_def(common::ShurikenStream& stream,
                                DexStrings& strings,
@@ -219,6 +207,8 @@ ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() {
 DVMClass * ClassDef::get_class_idx() {
     return class_idx;
 }
+
+
 
 shuriken::dex::TYPES::access_flags ClassDef::get_access_flags() const {
     return static_cast<

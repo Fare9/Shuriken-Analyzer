@@ -25,6 +25,12 @@ DisassembledMethod* DexDisassembler::get_disassembled_method(std::string method)
     return disassembled_methods[method].get();
 }
 
+DisassembledMethod* DexDisassembler::get_disassembled_method(std::string_view method) {
+    if (disassembled_methods.find(method) == disassembled_methods.end())
+        return nullptr;
+    return disassembled_methods[method].get();
+}
+
 void DexDisassembler::disassembly_dex() {
     auto log = logger();
 
@@ -36,11 +42,11 @@ void DexDisassembler::disassembly_dex() {
         auto& class_data_item = class_def->get_class_data_item();
         /// first disassemble the direct methods
         for (auto & method : class_data_item.get_direct_methods()) {
-            disassemble_encoded_method(method.second.get());
+            disassemble_encoded_method(method.get());
         }
         /// now the virtual methods
         for (auto & method : class_data_item.get_virtual_methods()) {
-            disassemble_encoded_method(method.second.get());
+            disassemble_encoded_method(method.get());
         }
     }
 
@@ -56,7 +62,7 @@ void DexDisassembler::disassemble_encoded_method(shuriken::parser::dex::EncodedM
     auto instructions = linear_sweep.disassembly(code_item_struct->get_bytecode());
 
     disassembled_methods[method->getMethodID()->dalvik_name_format()] = std::make_unique<DisassembledMethod>(
-            method->getMethodID(), code_item_struct->get_registers_size(), exceptions_data, instructions);
+            method->getMethodID(), code_item_struct->get_registers_size(), exceptions_data, instructions, method->get_flags());
 }
 
 std::vector<std::unique_ptr<Instruction>> DexDisassembler::disassembly_buffer(std::span<std::uint8_t> buffer) {

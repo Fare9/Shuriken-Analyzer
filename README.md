@@ -1,7 +1,11 @@
 # Shuriken-Analyzer
 
-<img src="Imgs/Logo 5cm/Logo-5cm-redes-blanco.png"
+<p align="center">
+  <img src="Imgs/Logo 5cm/Logo-5cm-redes-blanco.png"
 alt="Shuriken Logo White"/>
+</p>
+
+
 
 Welcome to the repository of Shuriken Analyzer, a library intended for bytecode analysis!
 Shuriken is an evolution from [Kunai-Static-analyzer](https://github.com/Fare9/KUNAI-static-analyzer) project, 
