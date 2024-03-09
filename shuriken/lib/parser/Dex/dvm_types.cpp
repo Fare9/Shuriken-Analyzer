@@ -35,9 +35,11 @@ static const std::unordered_map<access_flags, std::string> flagStrings = {
 };
 
 namespace shurikenapi::utils {
-SHURIKENLIB_API std::string get_types_as_string(shurikenapi::access_flags ac) {
+
+SHURIKENLIB_API std::string DexFlags2String(shurikenapi::AccessFlags ac) {
     return Utils::get_types_as_string(static_cast<TYPES::access_flags>(ac));
 }
+
 }
 
 std::string Utils::get_types_as_string(TYPES::access_flags ac) {

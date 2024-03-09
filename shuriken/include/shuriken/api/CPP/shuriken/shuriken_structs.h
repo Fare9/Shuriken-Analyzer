@@ -4,8 +4,12 @@
 #include <cstdint>
 #include <span>
 #include <string>
+#include <vector>
 
 namespace shurikenapi {
+
+    enum class FundamentalValue { kBoolean, kByte, kChar, kDouble, kFloat, kInt, kLong, kShort, kvoid, kNone = 99 };
+    enum class DexType { kFundamental, kClass, kArray, kUnknown };
 
 #pragma pack(1)
     struct DexHeader {
@@ -34,7 +38,7 @@ namespace shurikenapi {
         std::uint32_t data_off;        //!
     };
 
-    enum access_flags {
+    enum AccessFlags {
         NONE = 0x0,                         //! No access flags
         ACC_PUBLIC = 0x1,                   //! public type
         ACC_PRIVATE = 0x2,                  //! private type
@@ -56,38 +60,6 @@ namespace shurikenapi {
         UNUSED = 0x8000,                    //!
         ACC_CONSTRUCTOR = 0x10000,          //! constructor type
         ACC_DECLARED_SYNCHRONIZED = 0x20000 //!
-    };
-
-    struct ClassDef {
-        std::string class_name;
-        std::string super_class;
-        std::string source_file;
-        access_flags flags;
-    };
-
-    struct ClassMethod {
-        std::string name;
-        std::string prototype;
-        access_flags flags;
-        size_t code_size;
-        std::span<uint8_t> code;
-        std::string dalvik_name;
-        std::string demangled_name;
-        bool isVirtual;
-        bool isDirect;
-    };
-
-    enum class FundamentalValue { kBoolean, kByte, kChar, kDouble, kFloat, kInt, kLong, kShort, kvoid, kNone = 99 };
-    enum class DexType { kFundamental, kClass, kArray, kUnknown };
-
-    struct ClassField {
-        std::string name;
-        access_flags flags;
-        std::string type_value;
-        FundamentalValue fundamental_value;
-        DexType fundamental_type;
-        bool isStatic;
-        bool isInstance;
     };
 
 #pragma pack()
