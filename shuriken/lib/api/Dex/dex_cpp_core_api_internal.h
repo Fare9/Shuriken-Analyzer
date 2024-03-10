@@ -8,6 +8,9 @@
 #include <memory>
 #include <string>
 
+/*
+Implementation classes of the C++ public API.
+*/
 namespace shurikenapi {
     namespace details {
 
@@ -20,7 +23,6 @@ namespace shurikenapi {
                 }
                 return std::nullopt;
             };
-
             void setFundamentalValue(FundamentalValue value) { m_value = value; };
             void setType(DexType type) {
                 m_dexType = type;
@@ -34,22 +36,14 @@ namespace shurikenapi {
             std::optional<std::variant<FundamentalValue>> m_value = std::nullopt;
         };
 
-        class Prototype : public IPrototype {
+        class ShurikenPrototype : public IPrototype {
           public:
-            std::vector<std::reference_wrapper<const IDexTypeInfo>> getParameters() const override {
-                std::vector<std::reference_wrapper<const IDexTypeInfo>> parameterRefs;
-                for (const auto& entry : m_parameters) {
-                    parameterRefs.push_back(std::cref(*entry));
-                }
-                return parameterRefs;
-            }
-            const IDexTypeInfo& getReturnType() const override { return *m_returnType; };
-            const std::string& getString() const override { return m_string; };
+            explicit ShurikenPrototype(const std::string& string, std::unique_ptr<IDexTypeInfo> returnType,
+                                       std::vector<std::unique_ptr<IDexTypeInfo>> parameters);
 
-            // --internal
-            void setReturnType(std::unique_ptr<IDexTypeInfo> returnType) { m_returnType = std::move(returnType); };
-            void addParameter(std::unique_ptr<IDexTypeInfo> returnType) { m_parameters.push_back(std::move(returnType)); };
-            void setString(const std::string& name) { m_string = name; };
+            std::vector<std::reference_wrapper<const IDexTypeInfo>> getParameters() const override;
+            const IDexTypeInfo& getReturnType() const override;
+            const std::string& getString() const override;
 
           private:
             std::unique_ptr<IDexTypeInfo> m_returnType;
@@ -57,87 +51,56 @@ namespace shurikenapi {
             std::string m_string;
         };
 
-        class ClassMethod : public IClassMethod {
+        class ShurikenClassMethod : public IClassMethod {
           public:
-            const std::string& getName() const override { return m_name; };
-            const std::string& getDemangledName() const override { return m_demangledName; };
-            const IPrototype& getPrototype() const override { return *m_prototype; };
-            AccessFlags getFlags() const override { return m_flags; };
-            std::span<uint8_t> getByteCode() const override { return m_byteCode; };
-
-            void setName(const std::string& name) { m_name = name; };
-            void setFlags(AccessFlags flags) { m_flags = flags; };
-            void setPrototype(std::unique_ptr<Prototype> proto) { m_prototype = std::move(proto); };
-            void setByteCode(std::span<uint8_t> code) { m_byteCode = code; };
-            void setDemangledName(const std::string& name) { m_demangledName = name; };
+            explicit ShurikenClassMethod(const std::string& name, const std::string& demangledName,
+                                         std::unique_ptr<IPrototype> prototype, shurikenapi::AccessFlags flags,
+                                         std::span<uint8_t> byteCode);
+            const std::string& getName() const override;
+            const std::string& getDemangledName() const override;
+            const IPrototype& getPrototype() const override;
+            AccessFlags getFlags() const override;
+            std::span<uint8_t> getByteCode() const override;
 
           private:
             std::string m_name;
             std::string m_demangledName;
-            std::unique_ptr<Prototype> m_prototype;
+            std::unique_ptr<IPrototype> m_prototype;
             AccessFlags m_flags;
             std::span<uint8_t> m_byteCode;
         };
 
-        class ClassField : public IClassField {
+        class ShurikenClassField : public IClassField {
           public:
-            const std::string& getName() const override { return m_name; };
-            AccessFlags getAccessFlags() const override { return m_accessFlags; };
-            const IDexTypeInfo& getFieldType() const override { return *m_fieldType; };
-
-            void setName(const std::string& name) { m_name = name; };
-            void setAccessFlags(AccessFlags flags) { m_accessFlags = flags; };
-            void setFieldType(std::unique_ptr<IDexTypeInfo> fieldType) { m_fieldType = std::move(fieldType); };
+            explicit ShurikenClassField(const std::string& name, shurikenapi::AccessFlags flags,
+                                        std::unique_ptr<IDexTypeInfo> fieldType);
+            const std::string& getName() const override;
+            AccessFlags getAccessFlags() const override;
+            const IDexTypeInfo& getFieldType() const override;
 
           private:
             std::string m_name;
             AccessFlags m_accessFlags;
             std::unique_ptr<IDexTypeInfo> m_fieldType;
         };
-        class DexClass : public IDexClass {
+        class ShurikenDexClass : public IDexClass {
           public:
-            const std::string& getName() const override { return m_name; };
-            const std::string& getSuperClassName() const override { return m_superClassName; }
-            const std::string& getSourceFileName() const override { return m_sourceFileName; }
-            AccessFlags getAccessFlags() const override { return m_accessFlags; };
-            std::vector<std::reference_wrapper<const IClassField>> getStaticFields() const override {
-                std::vector<std::reference_wrapper<const IClassField>> fieldRefs;
-                for (const auto& entry : m_staticFields) {
-                    fieldRefs.push_back(std::cref(*entry));
-                }
-                return fieldRefs;
-            }
-            std::vector<std::reference_wrapper<const IClassField>> getInstanceFields() const override {
-                std::vector<std::reference_wrapper<const IClassField>> fieldRefs;
-                for (const auto& entry : m_instanceFields) {
-                    fieldRefs.push_back(std::cref(*entry));
-                }
-                return fieldRefs;
-            }
-            std::vector<std::reference_wrapper<const IClassMethod>> getDirectMethods() const override {
-                std::vector<std::reference_wrapper<const IClassMethod>> methodRefs;
-                for (const auto& entry : m_directMethods) {
-                    methodRefs.push_back(std::cref(*entry));
-                }
-                return methodRefs;
-            }
-            std::vector<std::reference_wrapper<const IClassMethod>> getVirtualMethods() const override {
-                std::vector<std::reference_wrapper<const IClassMethod>> methodRefs;
-                for (const auto& entry : m_virtualMethods) {
-                    methodRefs.push_back(std::cref(*entry));
-                }
-                return methodRefs;
-            }
+            explicit ShurikenDexClass(const std::string& className, const std::string& superName, const std::string& sourceName,
+                                      shurikenapi::AccessFlags accessFlags);
+            const std::string& getName() const override;
+            const std::string& getSuperClassName() const override;
+            const std::string& getSourceFileName() const override;
+            AccessFlags getAccessFlags() const override;
+            std::vector<std::reference_wrapper<const IClassField>> getStaticFields() const override;
+            std::vector<std::reference_wrapper<const IClassField>> getInstanceFields() const override;
+            std::vector<std::reference_wrapper<const IClassMethod>> getDirectMethods() const override;
+            std::vector<std::reference_wrapper<const IClassMethod>> getVirtualMethods() const override;
 
             // --Internal
-            void setName(const std::string& name) { m_name = name; };
-            void setSuperClassName(const std::string& name) { m_superClassName = name; };
-            void setSourceFileName(const std::string& name) { m_sourceFileName = name; };
-            void setAccessFlags(AccessFlags flags) { m_accessFlags = flags; };
-            void addStaticField(std::unique_ptr<IClassField> entry) { m_staticFields.push_back(std::move(entry)); };
-            void addInstanceField(std::unique_ptr<IClassField> entry) { m_instanceFields.push_back(std::move(entry)); };
-            void addDirectMethod(std::unique_ptr<IClassMethod> entry) { m_directMethods.push_back(std::move(entry)); };
-            void addVirtualMethod(std::unique_ptr<IClassMethod> entry) { m_virtualMethods.push_back(std::move(entry)); };
+            void addStaticField(std::unique_ptr<IClassField> entry);
+            void addInstanceField(std::unique_ptr<IClassField> entry);
+            void addDirectMethod(std::unique_ptr<IClassMethod> entry);
+            void addVirtualMethod(std::unique_ptr<IClassMethod> entry);
 
           private:
             std::string m_name;
@@ -153,6 +116,8 @@ namespace shurikenapi {
         class ShurikenClassManager : public IClassManager {
           public:
             std::vector<std::reference_wrapper<const IDexClass>> getAllClasses() const override;
+
+            // --Internal
             void addClass(std::unique_ptr<IDexClass> entry);
 
           private:
@@ -165,8 +130,11 @@ namespace shurikenapi {
             const DexHeader& getHeader() const override;
             const IClassManager& getClassManager() const override;
 
+            void processFields(shuriken::parser::dex::ClassDataItem& classDataItem, details::ShurikenDexClass& classEntry);
+            std::unique_ptr<IClassMethod> processMethods(shuriken::parser::dex::EncodedMethod* data);
+
           private:
-            void createFieldEntry(shuriken::parser::dex::EncodedField* data, details::ClassField* fieldEntry);
+            std::unique_ptr<details::ShurikenClassField> createFieldEntry(shuriken::parser::dex::EncodedField* data);
             std::unique_ptr<IDexTypeInfo> createTypeInfo(shuriken::parser::dex::DVMType* rawType);
 
             std::unique_ptr<shuriken::parser::dex::Parser> m_parser;

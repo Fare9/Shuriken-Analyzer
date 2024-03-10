@@ -1,3 +1,4 @@
+// Shuriken C++ Public API
 #ifndef SHURIKEN_CPP_CORE_H
 #define SHURIKEN_CPP_CORE_H
 
@@ -20,6 +21,11 @@
 
 namespace shurikenapi {
 
+    class IDex;
+    /// @brief The main api function to parse a dex file.
+    SHURIKENLIB_API std::unique_ptr<IDex> parse_dex(const std::string& filePath);
+
+    /// @brief This class holds the information about a type in the dex file.
     class IDexTypeInfo {
       public:
         virtual ~IDexTypeInfo() = default;
@@ -28,6 +34,7 @@ namespace shurikenapi {
         virtual std::optional<FundamentalValue> getFundamentalValue() const = 0;
     };
 
+    /// @brief This class holds the information about a method's prototype.
     class IPrototype {
       public:
         virtual ~IPrototype() = default;
@@ -37,6 +44,7 @@ namespace shurikenapi {
         virtual const std::string& getString() const = 0;
     };
 
+    /// @brief This class holds the information about a method in a class.
     class IClassMethod {
       public:
         virtual ~IClassMethod() = default;
@@ -48,6 +56,7 @@ namespace shurikenapi {
         virtual std::span<uint8_t> getByteCode() const = 0;
     };
 
+    /// @brief This class holds the information about a field in a class.
     class IClassField {
       public:
         virtual ~IClassField() = default;
@@ -56,6 +65,8 @@ namespace shurikenapi {
         virtual AccessFlags getAccessFlags() const = 0;
         virtual const IDexTypeInfo& getFieldType() const = 0;
     };
+
+    /// @brief This class interface is responsible for holding all the information about an individual class in the dex file.
     class IDexClass {
       public:
         virtual ~IDexClass() = default;
@@ -69,6 +80,8 @@ namespace shurikenapi {
         virtual std::vector<std::reference_wrapper<const IClassMethod>> getDirectMethods() const = 0;
         virtual std::vector<std::reference_wrapper<const IClassMethod>> getVirtualMethods() const = 0;
     };
+
+    /// @brief The class manager is responsible for holding all the classes in the dex file.
     class IClassManager {
       public:
         virtual ~IClassManager() = default;
@@ -76,6 +89,7 @@ namespace shurikenapi {
         virtual std::vector<std::reference_wrapper<const IDexClass>> getAllClasses() const = 0;
     };
 
+    /// @brief This is the main object that holds all the information about a parsed dex file.
     class IDex {
       public:
         virtual ~IDex() = default;
@@ -83,8 +97,6 @@ namespace shurikenapi {
         virtual const DexHeader& getHeader() const = 0;
         virtual const IClassManager& getClassManager() const = 0;
     };
-
-    SHURIKENLIB_API std::unique_ptr<IDex> parse_dex(const std::string& filePath);
 
     namespace utils {
         SHURIKENLIB_API std::string DexFlags2String(shurikenapi::AccessFlags ac);

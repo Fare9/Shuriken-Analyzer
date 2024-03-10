@@ -3,9 +3,6 @@
 
 #include <cstdint>
 #include <span>
-#include <string>
-#include <vector>
-
 namespace shurikenapi {
 
     enum class FundamentalValue { kBoolean, kByte, kChar, kDouble, kFloat, kInt, kLong, kShort, kvoid, kNone = 99 };
