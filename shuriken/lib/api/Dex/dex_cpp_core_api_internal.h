@@ -4,6 +4,7 @@
 #include "shuriken/shuriken_cpp_core.h"
 
 #include "dex_cpp_core_api_internal.h"
+#include "shuriken/disassembler/Dex/dex_disassembler.h"
 #include "shuriken/parser/shuriken_parsers.h"
 #include <memory>
 #include <string>
@@ -124,7 +125,7 @@ namespace shurikenapi {
             std::vector<std::unique_ptr<IDexClass>> m_classes;
         };
 
-        class ShurikenDex : public IDex {
+        class ShurikenDex : public IDex, public IDisassembler{
           public:
             ShurikenDex(const std::string& filePath);
             const DexHeader& getHeader() const override;
@@ -132,12 +133,22 @@ namespace shurikenapi {
 
             void processFields(shuriken::parser::dex::ClassDataItem& classDataItem, details::ShurikenDexClass& classEntry);
             std::unique_ptr<IClassMethod> processMethods(shuriken::parser::dex::EncodedMethod* data);
+            const IDisassembler& getDisassembler() const override {
+              return static_cast<const IDisassembler&>(*this);
+            }
+
+            void sayHello() const override {
+              std::cout << "Hello from Disassembler" << std::endl;
+            }
 
           private:
             std::unique_ptr<details::ShurikenClassField> createFieldEntry(shuriken::parser::dex::EncodedField* data);
             std::unique_ptr<IDexTypeInfo> createTypeInfo(shuriken::parser::dex::DVMType* rawType);
 
+            // The order of these 2 is important.
+            std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> m_disassembler;
             std::unique_ptr<shuriken::parser::dex::Parser> m_parser;
+
             ShurikenClassManager m_classManager;
             DexHeader m_header;
         };

@@ -6,6 +6,10 @@ namespace shurikenapi {
 
         ShurikenDex::ShurikenDex(const std::string& filePath) : m_parser{shuriken::parser::parse_dex(filePath)} {
 
+            // on ShurikenDex destruction the disassembler will destruct first and discard the parser pointer,
+            // afterwards ShurikenDex will destruct and free ownership of the parser pointer
+            m_disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(m_parser.get());
+            
             // --Add Header
             memcpy(&m_header, &m_parser->get_header().get_dex_header(), sizeof(DexHeader));
 
