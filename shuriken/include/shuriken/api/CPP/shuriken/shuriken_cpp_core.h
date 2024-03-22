@@ -25,6 +25,13 @@ namespace shurikenapi {
     /// @brief The main api function to parse a dex file.
     SHURIKENLIB_API std::unique_ptr<IDex> parse_dex(const std::string& filePath);
 
+    class IDisassembler {
+      public:
+        virtual ~IDisassembler() = default;
+        IDisassembler& operator=(IDisassembler&&) = delete;
+        virtual void sayHello() const = 0;
+    };
+
     /// @brief This class holds the information about a type in the dex file.
     class IDexTypeInfo {
       public:
@@ -96,6 +103,7 @@ namespace shurikenapi {
         IDex& operator=(IDex&&) = delete;
         virtual const DexHeader& getHeader() const = 0;
         virtual const IClassManager& getClassManager() const = 0;
+        virtual const IDisassembler& getDisassembler() const = 0;
     };
 
     namespace utils {

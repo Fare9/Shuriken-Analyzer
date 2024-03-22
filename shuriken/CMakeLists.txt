@@ -45,7 +45,7 @@ set(JAVAC_BINARY "" CACHE FILEPATH "Path to javac binary for compiling java file
 set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
-
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib/api/Dex")
 
 # include the externals
 add_subdirectory(external)
