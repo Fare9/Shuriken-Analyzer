@@ -121,6 +121,8 @@ target_include_directories(shuriken
         PUBLIC
         "${CMAKE_SOURCE_DIR}/shuriken/include/"
 )
+
+
 #############################################################
 include(CTest)
 
@@ -138,3 +140,44 @@ endif ()
 message(STATUS "Path to DEX Folder: ${DEX_FILES_FOLDER}")
 add_subdirectory(tests)
 enable_testing()
+
+# Assuming this variable points to your project's include directory
+set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+# Check for operating system and set install paths accordingly
+set(include_install_path "/usr/local/include") # Default path
+set(library_install_path "/usr/local/bin") # Default path
+
+
+if(APPLE)
+    find_program(HOMEBREW_FOUND brew)
+    if(HOMEBREW_FOUND)
+        execute_process(COMMAND brew --prefix
+                        OUTPUT_VARIABLE HOMEBREW_PREFIX
+                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+        set(include_install_path "${HOMEBREW_PREFIX}/include")
+        set(library_install_path "${HOMEBREW_PREFIX}/lib")
+    endif()
+elseif(UNIX AND NOT APPLE) # Explicitly differentiate UNIX from APPLE
+    # Linux specific paths (already set as default)
+endif()
+
+set_target_properties(shuriken PROPERTIES
+    INSTALL_NAME_DIR "${library_install_path}"
+    BUILD_WITH_INSTALL_RPATH TRUE
+)
+
+# Install the Shuriken library's binary
+install(TARGETS shuriken
+        LIBRARY DESTINATION ${library_install_path}
+)
+
+# Install the Shuriken library's header files
+install(DIRECTORY ${SHURIKEN_INCLUDE_PATH}/
+        DESTINATION ${include_install_path}
+        FILES_MATCHING PATTERN "*.h*"
+)
+
+# Optional: if you have public headers in other directories added by subdirectories,
+# you should install them as well using additional install(DIRECTORY ...) commands.
+
