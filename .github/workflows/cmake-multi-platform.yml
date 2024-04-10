@@ -74,3 +74,16 @@ jobs:
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON
     - name: Build with cmake
       run: cmake --build build/ -j
+    - name: Install with cmake
+      run: sudo cmake --install build/
+    - name: Test shuriken-dump output
+      run: |
+        output=$(shuriken-dump)
+        expected="USAGE: shuriken-dump <file_to_analyze> [-h] [-c] [-f] [-m] [-b]\n\t-h: show file header\n\t-c: show classes from file\n\t-f: show fields from classes (it needs -c)\n\t-m: show methods from classes (it needs -c)\n\t-b: show bytecode from methods (it needs -m)\n\t-D: show the disassembled code from methods (it needs -m)"
+        if [ "$output" = "$expected" ]; then
+          echo "shuriken-dump is working correctly."
+        else
+          echo "Unexpected output from shuriken-dump."
+          echo "Received: $output"
+          exit 1
+        fi
