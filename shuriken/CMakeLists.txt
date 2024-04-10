@@ -145,8 +145,8 @@ enable_testing()
 set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Check for operating system and set install paths accordingly
-set(include_install_path "/usr/local/include") # Default path
-set(library_install_path "/usr/local/lib") # Default path
+set(include_install_path "/usr/include") # Default path
+set(library_install_path "/usr/lib") # Default path
 
 
 if(APPLE)
