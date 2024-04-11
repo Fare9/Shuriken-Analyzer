@@ -74,3 +74,17 @@ jobs:
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON
     - name: Build with cmake
       run: cmake --build build/ -j
+    - name: Install with cmake
+      run: sudo cmake --install build/
+    - name: Verify shuriken-dump exit code
+      run: |
+        set +e # Prevent the script from exiting immediately on error
+        shuriken-dump
+        exit_code=$?
+        set -e # Re-enable immediate script exit on error
+        if [ $exit_code -eq 255 ]; then
+          echo "shuriken-dump exited with the expected exit code."
+        else
+          echo "Unexpected exit code from shuriken-dump: $exit_code"
+          exit 1
+        fi
