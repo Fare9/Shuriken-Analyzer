@@ -44,14 +44,12 @@ namespace shuriken {
 
                 DVMType* field_type();
 
-                const std::string_view field_name() const;
-
-                std::string_view field_name();
+                std::string_view field_name() const;
 
                 /// @brief Return a formatted version of the field including the
                 /// class, the name and its type.
                 /// @return prettyfied version of the field
-                std::string& pretty_field();
+                std::string_view pretty_field();
             };
 
             inline bool operator==(const FieldID& lhs, const FieldID& rhs) {

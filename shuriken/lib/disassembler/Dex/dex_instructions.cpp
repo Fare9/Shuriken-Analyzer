@@ -687,6 +687,8 @@ Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index, s
         case DexOpcodes::opcodes::OP_CONST_WIDE_HIGH16:
             nBBBB = nBBBB << 48;
             break;
+        default:
+            throw std::runtime_error("Instruction21h: Error, not supported opcode");
     }
 }
 
@@ -751,6 +753,8 @@ Instruction21c::Instruction21c(std::span<uint8_t> bytecode, std::size_t index, s
         case shuriken::dex::TYPES::PROTO:
             source_id = parser->get_protos().get_proto_by_id(iBBBB);
             break;
+        default:
+            throw std::runtime_error("Instruction21c: error, kind instruction not supported");
     }
 }
 
@@ -1021,6 +1025,8 @@ Instruction22c::Instruction22c(std::span<uint8_t> bytecode, std::size_t index, s
         case shuriken::dex::TYPES::FIELD:
             checked_id = parser->get_fields().get_field_by_id(iCCCC);
             break;
+        default:
+            throw std::runtime_error("Instruction22c: error, kind instruction not supported");
     }
 }
 
@@ -1090,6 +1096,8 @@ Instruction22cs::Instruction22cs(std::span<uint8_t> bytecode, std::size_t index,
         case shuriken::dex::TYPES::kind::FIELD:
             field = parser->get_fields().get_field_by_id(iCCCC);
             break;
+        default:
+            throw std::runtime_error("Instruction22cs: error, kind instruction not supported");
     }
 }
 
@@ -1443,6 +1451,8 @@ Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index, s
         case shuriken::dex::TYPES::kind::METH:
             type_value = parser->get_methods().get_method_by_id(type_index);
             break;
+        default:
+            throw std::runtime_error("Instruction35c: error, kind instruction not supported");
     }
 }
 
@@ -1517,6 +1527,8 @@ Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, s
         case shuriken::dex::TYPES::METH:
             index_value = parser->get_methods().get_method_by_id(index);
             break;
+        default:
+            throw std::runtime_error("Instruction3rc: error, kind instruction not supported");
     }
 }
 

@@ -29,6 +29,8 @@ namespace shuriken {
             public:
                 Disassembler(parser::dex::Parser * parser);
 
+                Disassembler() = default;
+
                 ~Disassembler() = default;
 
                 /// @brief Get an instruction object from the op

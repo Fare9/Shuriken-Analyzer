@@ -96,7 +96,9 @@ if (DEX)
 
     add_subdirectory(lib/parser/Dex)
     add_subdirectory(lib/disassembler/Dex)
+    add_subdirectory(lib/analysis/Dex)
     add_subdirectory(lib/api/Dex)
+
 
     target_include_directories(dex-obj
             BEFORE

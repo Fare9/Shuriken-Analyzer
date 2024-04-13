@@ -29,15 +29,11 @@ DVMType* FieldID::field_type() {
     return type_;
 }
 
-const std::string_view FieldID::field_name() const {
+std::string_view FieldID::field_name() const {
     return name_;
 }
 
-std::string_view FieldID::field_name() {
-    return name_;
-}
-
-std::string& FieldID::pretty_field() {
+std::string_view FieldID::pretty_field() {
     if (!pretty_name.empty())
         return pretty_name;
     pretty_name = class_->print_type() + "->" +
