@@ -19,6 +19,8 @@
 namespace shuriken {
     namespace parser {
         namespace dex {
+            class EncodedField;
+
             class FieldID {
             private:
                 /// @brief Class to which the field belongs
@@ -29,6 +31,8 @@ namespace shuriken {
                 std::string_view name_;
                 /// @brief Pretty name
                 std::string pretty_name;
+                /// @brief for analysis of instructions
+                EncodedField * encoded_field;
             public:
                 /// @brief Constructor of FieldID
                 FieldID(DVMType* class_, DVMType* type_, std::string_view name_);
@@ -50,6 +54,10 @@ namespace shuriken {
                 /// class, the name and its type.
                 /// @return prettyfied version of the field
                 std::string_view pretty_field();
+
+                void set_encoded_field(EncodedField * field);
+
+                EncodedField * get_encoded_field();
             };
 
             inline bool operator==(const FieldID& lhs, const FieldID& rhs) {

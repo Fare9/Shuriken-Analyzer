@@ -42,6 +42,14 @@ std::string_view FieldID::pretty_field() {
     return pretty_name;
 }
 
+void FieldID::set_encoded_field(EncodedField * field) {
+  this->encoded_field = field;
+}
+
+EncodedField * FieldID::get_encoded_field() {
+  return this->encoded_field;
+}
+
 void DexFields::parse_fields(
         common::ShurikenStream& stream,
         DexTypes& types,

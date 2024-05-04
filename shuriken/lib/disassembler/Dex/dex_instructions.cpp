@@ -1473,15 +1473,15 @@ std::uint16_t Instruction35c::get_type_idx() const {
     return type_index;
 }
 
-DexOpcodes::operand_type Instruction35c::get_array_type() const {
+DexOpcodes::operand_type Instruction35c::get_value_type() const {
     return DexOpcodes::KIND;
 }
 
-shuriken::dex::TYPES::kind Instruction35c::get_array_kind() const {
+shuriken::dex::TYPES::kind Instruction35c::get_value_kind() const {
     return get_kind();
 }
 
-kind_type_t Instruction35c::get_array_value() const {
+kind_type_t Instruction35c::get_value() const {
     return type_value;
 }
 
@@ -1548,7 +1548,7 @@ DexOpcodes::operand_type Instruction3rc::get_index_type() const {
     return DexOpcodes::KIND;
 }
 
-shuriken::dex::TYPES::kind Instruction3rc::get_array_kind() const {
+shuriken::dex::TYPES::kind Instruction3rc::get_value_kind() const {
     return get_kind();
 }
 

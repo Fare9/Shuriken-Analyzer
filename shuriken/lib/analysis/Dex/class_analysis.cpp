@@ -20,7 +20,7 @@ ClassAnalysis::ClassAnalysis(ExternalClass * class_def) :
     class_def(class_def), is_external(true) {
 }
 
-void ClassAnalysis::add_method(MethodAnalysis *method_analysis) {
+void ClassAnalysis::add_method(MethodAnalysis* method_analysis) {
     auto method_key = method_analysis->get_full_name();
 
     methods[method_key] = method_analysis;
@@ -77,6 +77,10 @@ shuriken::parser::dex::ClassDef::it_interfaces_list ClassAnalysis::implements() 
     return get_classdef()->get_interfaces();
 }
 
+shuriken::iterator_range<ClassAnalysis::id_method_iterator_t> ClassAnalysis::get_methods() {
+    return make_range(methods.begin(), methods.end());
+}
+
 MethodAnalysis *ClassAnalysis::get_method_analysis(
         std::variant<shuriken::parser::dex::EncodedMethod *, ExternalMethod *> method) {
 
@@ -88,6 +92,10 @@ MethodAnalysis *ClassAnalysis::get_method_analysis(
         method_name = std::get<shuriken::parser::dex::EncodedMethod *>(method)->getMethodID()->dalvik_name_format();
 
     return methods[method_name];
+}
+
+shuriken::iterator_range<ClassAnalysis::id_field_iterator_t> ClassAnalysis::get_fields() {
+  return make_range(fields.begin(), fields.end());
 }
 
 FieldAnalysis *ClassAnalysis::get_field_analysis(shuriken::parser::dex::EncodedField *field) {
@@ -156,9 +164,9 @@ void ClassAnalysis::add_xref_from(shuriken::dex::TYPES::ref_type ref_kind,
 }
 
 void ClassAnalysis::add_xref_new_instance(MethodAnalysis *methodobj, std::uint64_t offset) {
-    xrefnewinstance.push_back(std::make_pair(methodobj, offset));
+    xrefnewinstance.emplace_back(methodobj, offset);
 }
 
 void ClassAnalysis::add_xref_const_class(MethodAnalysis *methodobj, std::uint64_t offset) {
-    xrefconstclass.push_back(std::make_pair(methodobj, offset));
+    xrefconstclass.emplace_back(methodobj, offset);
 }

@@ -65,6 +65,11 @@ namespace shuriken {
                 /// @return a DisassembledMethod object with the instructions
                 DisassembledMethod* get_disassembled_method(std::string_view method);
 
+                /// @brief Obtain a reference to all the disassembled methods
+                /// @return reference to map with all the disassembled methods
+                std::unordered_map<std::string_view,
+                                   std::unique_ptr<DisassembledMethod>>&
+                    get_disassembled_methods();
 
                 /// @brief This is the most important function from the
                 /// disassembler, this function takes the given parser

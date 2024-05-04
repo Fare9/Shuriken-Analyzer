@@ -12,6 +12,14 @@ FieldAnalysis::FieldAnalysis(parser::dex::EncodedField* field)
     : field(field), name(field->get_field()->field_name()) {
 }
 
+shuriken::parser::dex::EncodedField * FieldAnalysis::get_encoded_field() {
+  return field;
+}
+
+std::string_view FieldAnalysis::get_name() {
+  return name;
+}
+
 shuriken::iterator_range<class_method_idx_iterator_t> FieldAnalysis::get_xrefread() {
     return make_range(xrefread.begin(), xrefread.end());
 }

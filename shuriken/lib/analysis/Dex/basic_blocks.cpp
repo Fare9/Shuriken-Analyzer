@@ -181,12 +181,12 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
         // delete from predecessors of sucessor
         predecessors_[suc].erase(node);
         // remove the edge
-        std::remove(edges_.begin(), edges_.end(), std::make_pair(node, suc));
+        std::ranges::remove(edges_, std::make_pair(node, suc));
 
         for (auto pred : predecessors_[node])
         {
             // delete the edge from predecessor to the node
-            std::remove(edges_.begin(), edges_.end(), std::make_pair(pred, node));
+            std::ranges::remove(edges_, std::make_pair(pred, node));
             // delete from successors[pred] the node
             successors_[pred].erase(node);
         }
@@ -198,7 +198,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             // add the predecessor of sucesspr
             predecessors_[suc]
                     .insert(pred);
-            // add the sucessor of pred
+            // add the successor of pred
             successors_[pred].insert(suc);
         }
     }
@@ -209,14 +209,14 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
         // delete from successors of pred
         successors_[pred].erase(node);
         // remove the edge
-        remove(edges_.begin(), edges_.end(), std::make_pair(pred, node));
+        std::ranges::remove(edges_, std::make_pair(pred, node));
 
         // now disconnect the node from the successors
         for (auto suc : successors_[node])
         {
             // remove the edges node->suc
-            std::remove(edges_.begin(), edges_.end(), std::make_pair(node, suc));
-            // remove the node as predecessor of this sucessor
+            std::ranges::remove(edges_, std::make_pair(node, suc));
+            // remove the node as predecessor of this successor
             predecessors_[suc].erase(node);
         }
 
@@ -240,7 +240,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             // delete from successors of pred
             successors_[pred].erase(node);
             // remove the edge
-            std::remove(edges_.begin(), edges_.end(), std::make_pair(pred, node));
+            std::ranges::remove(edges_, std::make_pair(pred, node));
         }
 
         if (successors_[node].size() == 1)
@@ -250,7 +250,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             // delete from predecessors of sucessor
             predecessors_[suc].erase(node);
             // remove the edge
-            std::remove(edges_.begin(), edges_.end(), std::make_pair(node, suc));
+            std::ranges::remove(edges_, std::make_pair(node, suc));
         }
 
         if (pred != nullptr && suc != nullptr)
@@ -268,7 +268,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
     successors_.erase(node);
 
     // finally delete from vector
-    std::remove(nodes_.begin(), nodes_.end(), node);
+    std::ranges::remove(nodes_, node);
 }
 
 DVMBasicBlock *BasicBlocks::get_basic_block_by_idx(std::uint64_t idx) {

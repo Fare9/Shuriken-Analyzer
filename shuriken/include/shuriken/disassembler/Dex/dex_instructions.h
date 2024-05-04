@@ -1162,17 +1162,17 @@ namespace shuriken {
                 /// @return value with the type index
                 std::uint16_t get_type_idx() const;
 
-                /// @brief Get the type of the array
+                /// @brief Get the type of the value
                 /// @return return KIND type
-                DexOpcodes::operand_type get_array_type() const;
+                DexOpcodes::operand_type get_value_type() const;
 
-                /// @brief To get the type of the array
+                /// @brief To get the type of the value
                 /// @return type of the array
-                shuriken::dex::TYPES::kind get_array_kind() const;
+                shuriken::dex::TYPES::kind get_value_kind() const;
 
-                /// @brief Get the kind value stored for the array
+                /// @brief Get the kind value stored
                 /// @return kind_type_t of array type
-                kind_type_t get_array_value() const;
+                kind_type_t get_value() const;
 
                 /// @brief Return a string with the representation of the instruction
                 /// @return string with instruction
@@ -1223,7 +1223,7 @@ namespace shuriken {
 
                 /// @brief To get the type of the array
                 /// @return type of the array
-                shuriken::dex::TYPES::kind get_array_kind() const;
+                shuriken::dex::TYPES::kind get_value_kind() const;
 
                 /// @brief Get the registers from the instruction
                 /// @return constant reference to the registers

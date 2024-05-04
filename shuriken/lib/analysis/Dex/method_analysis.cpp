@@ -8,6 +8,8 @@
 #include "shuriken/disassembler/Dex/internal_disassembler.h"
 #include "shuriken/common/logger.h"
 
+#include <iomanip>
+
 using namespace shuriken::analysis::dex;
 
 MethodAnalysis::MethodAnalysis(shuriken::parser::dex::EncodedMethod * encoded_method,
@@ -43,10 +45,10 @@ shuriken::disassembler::dex::DisassembledMethod * MethodAnalysis::get_disassembl
 bool MethodAnalysis::is_android_api() const {
     if (!is_external) return false;
 
-    auto class_name = this->get_class_name();
+    auto class_name_view = this->get_class_name();
 
     auto it = std::find_if(known_apis.begin(), known_apis.end(), [&](std::string_view api) -> bool {
-        return api.compare(class_name);
+        return api.compare(class_name_view);
     });
 
     if (it == known_apis.end()) return false;
