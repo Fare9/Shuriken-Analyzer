@@ -223,7 +223,7 @@ std::uint16_t EncodedValue::convert_data_to_char() {
 
 EncodedField::EncodedField(FieldID * field_idx, shuriken::dex::TYPES::access_flags flags)
         : field_idx(field_idx), flags(flags) {
-  field_idx->set_encoded_field(this);
+  this->field_idx->set_encoded_field(this);
 }
 
 const FieldID* EncodedField::get_field() const {

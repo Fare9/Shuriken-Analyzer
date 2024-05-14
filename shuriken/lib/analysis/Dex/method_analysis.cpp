@@ -221,8 +221,8 @@ void MethodAnalysis::create_basic_blocks() {
         /// update the end pointer
         end = ins->get_address();
     }
-
-    auto & last_instr = *(disassembled->get_instructions().begin() + disassembled->get_number_of_instructions());
+    
+    auto & last_instr = disassembled->get_instructions_container().back();
     auto out_range = last_instr->get_address() + last_instr->get_instruction_length();
 
     /// add the jump targets
