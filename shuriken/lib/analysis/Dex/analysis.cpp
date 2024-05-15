@@ -455,8 +455,8 @@ Analysis::_get_class_or_create_external(std::string_view class_name) {
     external_classes[class_name] = std::make_unique<ExternalClass>(class_name);
     classes[class_name] =
         std::make_unique<ClassAnalysis>(external_classes[class_name].get());
-    cls = classes[class_name].get();
   }
+  cls = classes[class_name].get();
   return cls;
 }
 
@@ -472,22 +472,27 @@ MethodAnalysis *Analysis::_resolve_method(std::string_view full_name) {
   std::string_view method_name = tokens[1];
   std::string_view prototype = tokens[2];
 
-  if (classes.find(class_name) == classes.end()) {
-    external_classes[class_name] = std::make_unique<ExternalClass>(class_name);
-    // add the external class
-    classes[class_name] =
-        std::make_unique<ClassAnalysis>(external_classes[class_name].get());
+  class_name = class_name.substr(1, class_name.size() - 2);
+
+  std::string className(class_name.substr(0, class_name.size()));
+
+  // Replace '/' with '.'
+  for (char & c : className) {
+    if (c == '/') {
+      c = '.';
+    }
   }
 
+  auto classAnalysis = _get_class_or_create_external(className);
+
   external_methods[full_name] = std::make_unique<ExternalMethod>(
-      class_name, method_name, prototype,
+      className, method_name, prototype,
       shuriken::dex::TYPES::access_flags::ACC_PUBLIC);
   auto meth_analysis =
       std::make_unique<MethodAnalysis>(external_methods[full_name].get());
-  auto meth_analysis_p_ = meth_analysis.get();
   // add to all the collections we have
   methods[full_name] = std::move(meth_analysis);
-  classes[class_name]->add_method(meth_analysis_p_);
+  classAnalysis->add_method(methods[full_name].get());
   return methods[full_name].get();
 }
 
