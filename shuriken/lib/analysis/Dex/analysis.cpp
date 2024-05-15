@@ -472,21 +472,25 @@ MethodAnalysis *Analysis::_resolve_method(std::string_view full_name) {
   std::string_view method_name = tokens[1];
   std::string_view prototype = tokens[2];
 
-  class_name = class_name.substr(1, class_name.size() - 2);
-
-  std::string className(class_name.substr(0, class_name.size()));
-
-  // Replace '/' with '.'
-  for (char & c : className) {
-    if (c == '/') {
-      c = '.';
+  std::string aux = std::string(class_name);
+  if (external_classes_names.contains(aux))
+    class_name = external_classes_names[aux];
+  else {
+    std::string className(class_name.substr(1, class_name.size()-2));
+    // Replace '/' with '.'
+    for (char &c : className) {
+      if (c == '/') {
+        c = '.';
+      }
     }
+    external_classes_names[aux] = className;
+    class_name = external_classes_names[aux];
   }
 
-  auto classAnalysis = _get_class_or_create_external(className);
+  auto classAnalysis = _get_class_or_create_external(class_name);
 
   external_methods[full_name] = std::make_unique<ExternalMethod>(
-      className, method_name, prototype,
+      class_name, method_name, prototype,
       shuriken::dex::TYPES::access_flags::ACC_PUBLIC);
   auto meth_analysis =
       std::make_unique<MethodAnalysis>(external_methods[full_name].get());

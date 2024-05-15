@@ -16,6 +16,7 @@ namespace shuriken::analysis::dex {
 
 class Analysis {
 private:
+  std::unordered_map<std::string, std::string> external_classes_names;
   /// @brief all the dex parsers from the analysis
   std::vector<parser::dex::Parser *> parsers;
 
