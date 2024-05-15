@@ -53,7 +53,13 @@ private:
   /// It might be quite slow as all instructions are parsed.
   /// @param current_class class to create the xrefs.
   void _create_xrefs(parser::dex::ClassDef *current_class);
+
+  /// @brief Helper function to analyze the xrefs from an encoded method
   void _analyze_encoded_method(parser::dex::EncodedMethod* method, std::string_view current_class_name);
+
+  /// @brief Helper function to get a ClassAnalysis, or in case it doesn't exist
+  /// create it as an external class
+  ClassAnalysis* _get_class_or_create_external(std::string_view class_name);
 
   /// @brief Get a method by its hash, return the MethodAnalysis object
   /// in case it doesn't exists, create an ExternalMethod
@@ -69,6 +75,23 @@ public:
   /// to the analysis class.
   /// @param parser parser to extract the information
   void add(parser::dex::Parser *parser);
+
+private:
+
+  /// @brief Helper function to add every ClassDef from a Parser object.
+  void _add_classdef(parser::dex::ClassDef* class_def_item,
+                     std::unordered_map<std::string_view,
+                                        std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+                         &all_methods_instructions);
+
+  /// @brief Helper function to add an EncodedMethod from a ClassDef.
+  void _add_encoded_method(parser::dex::EncodedMethod* encoded_method,
+                           ClassAnalysis * new_class,
+                           std::unordered_map<std::string_view,
+                                              std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+                               &all_methods_instructions);
+
+public:
 
   /// @brief Create class, method, string and field cross references
   /// if you are using multiple DEX files, this function must

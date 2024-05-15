@@ -10,38 +10,38 @@
 #include <regex>
 
 using namespace shuriken::analysis::dex;
+using namespace shuriken::disassembler::dex;
 
 namespace {
-  std::vector<std::string_view> split(std::string_view s) {
-    std::vector<std::string_view> tokens;
-    size_t delimiter_pos = s.find("->");
-    if (delimiter_pos != std::string_view::npos) {
-      tokens.push_back(s.substr(0, delimiter_pos)); // Class name
-      size_t method_start_pos = delimiter_pos + 2;  // Skip the "->"
-      size_t open_paren_pos = s.find('(', method_start_pos);
-      if (open_paren_pos != std::string_view::npos) {
-        tokens.push_back(s.substr(
-            method_start_pos, open_paren_pos - method_start_pos)); // Method name
-        tokens.push_back(s.substr(open_paren_pos));                // Prototype
-      } else {
-        // Handle invalid input (no '(' found)
-        tokens.push_back(
-            s.substr(method_start_pos)); // Method name (if it exists)
-        // No prototype found
-        tokens.emplace_back("");
-      }
+std::vector<std::string_view> split(std::string_view s) {
+  std::vector<std::string_view> tokens;
+  size_t delimiter_pos = s.find("->");
+  if (delimiter_pos != std::string_view::npos) {
+    tokens.push_back(s.substr(0, delimiter_pos)); // Class name
+    size_t method_start_pos = delimiter_pos + 2;  // Skip the "->"
+    size_t open_paren_pos = s.find('(', method_start_pos);
+    if (open_paren_pos != std::string_view::npos) {
+      tokens.push_back(s.substr(
+          method_start_pos, open_paren_pos - method_start_pos)); // Method name
+      tokens.push_back(s.substr(open_paren_pos));                // Prototype
     } else {
-      // Handle invalid input (no '->' found)
-      // Consider the whole input as class name
-      tokens.push_back(s);
-      // Method name and prototype not found
-      tokens.push_back("");
-      tokens.push_back("");
+      // Handle invalid input (no '(' found)
+      tokens.push_back(
+          s.substr(method_start_pos)); // Method name (if it exists)
+      // No prototype found
+      tokens.emplace_back("");
     }
-    return tokens;
+  } else {
+    // Handle invalid input (no '->' found)
+    // Consider the whole input as class name
+    tokens.push_back(s);
+    // Method name and prototype not found
+    tokens.push_back("");
+    tokens.push_back("");
   }
+  return tokens;
 }
-
+} // namespace
 
 Analysis::Analysis(parser::dex::Parser *parser,
                    disassembler::dex::DexDisassembler *disassembler,
@@ -66,43 +66,67 @@ void Analysis::add(parser::dex::Parser *parser) {
   auto &all_methods_instructions = disassembler->get_disassembled_methods();
 
   for (auto &class_def_item : it_classes) {
-    auto name = class_def_item->get_class_idx()->get_class_name();
-    classes[name] = std::make_unique<ClassAnalysis>(class_def_item.get());
-    auto &new_class = classes[name];
-
-    // get the class data item to retrieve the methods
-    auto &class_data_item = class_def_item->get_class_data_item();
-
-    logger->debug("Adding to the class {} direct and {} virtual methods",
-                  class_data_item.get_number_of_direct_methods(),
-                  class_data_item.get_number_of_static_fields());
-
-    // first use the virtual methods
-    for (auto &encoded_method : class_data_item.get_virtual_methods()) {
-      auto method_id = encoded_method->getMethodID();
-      /// now create a method analysis
-      auto method_name = method_id->dalvik_name_format();
-      auto& disassembled = all_methods_instructions[method_name];
-      methods[method_name] = std::make_unique<MethodAnalysis>(
-          encoded_method.get(), disassembled.get());
-      auto new_method = methods[method_name].get();
-
-      new_class->add_method(new_method);
-    }
-
-    // then the direct methods
-    for (auto &encoded_method : class_data_item.get_direct_methods()) {
-      auto method_id = encoded_method->getMethodID();
-      /// now create a method analysis
-      auto method_name = method_id->dalvik_name_format();
-      methods[method_name] = std::make_unique<MethodAnalysis>(
-          encoded_method.get(), all_methods_instructions[method_name].get());
-      auto new_method = methods[method_name].get();
-
-      new_class->add_method(new_method);
-    }
+    if (class_def_item != nullptr)
+      _add_classdef(class_def_item.get(), all_methods_instructions);
+    else
+      logger->warn("Error, found a class_def_item with null");
   }
   logger->info("Analysis: correctly added parser to analysis object");
+}
+
+void Analysis::_add_classdef(
+    parser::dex::ClassDef *class_def_item,
+    std::unordered_map<
+        std::string_view,
+        std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+        &all_methods_instructions) {
+  auto logger = shuriken::logger();
+
+  auto name = class_def_item->get_class_idx()->get_class_name();
+  classes[name] = std::make_unique<ClassAnalysis>(class_def_item);
+  auto &new_class = classes[name];
+
+  // get the class data item to retrieve the methods
+  auto &class_data_item = class_def_item->get_class_data_item();
+
+  logger->debug("Adding to the class {} direct and {} virtual methods",
+                class_data_item.get_number_of_direct_methods(),
+                class_data_item.get_number_of_static_fields());
+
+  // first use the virtual methods
+  for (auto &encoded_method : class_data_item.get_virtual_methods()) {
+    if (encoded_method != nullptr)
+      _add_encoded_method(encoded_method.get(), new_class.get(),
+                          all_methods_instructions);
+    else
+      logger->warn("Found an encoded_method equals to null");
+  }
+
+  // then the direct methods
+  for (auto &encoded_method : class_data_item.get_direct_methods()) {
+    if (encoded_method != nullptr)
+      _add_encoded_method(encoded_method.get(), new_class.get(),
+                          all_methods_instructions);
+    else
+      logger->warn("Found an encoded_method equals to null");
+  }
+}
+
+void Analysis::_add_encoded_method(
+    parser::dex::EncodedMethod *encoded_method, ClassAnalysis *new_class,
+    std::unordered_map<
+        std::string_view,
+        std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+        &all_methods_instructions) {
+  auto method_id = encoded_method->getMethodID();
+  /// now create a method analysis
+  auto method_name = method_id->dalvik_name_format();
+  auto &disassembled = all_methods_instructions[method_name];
+  methods[method_name] =
+      std::make_unique<MethodAnalysis>(encoded_method, disassembled.get());
+  auto new_method = methods[method_name].get();
+
+  new_class->add_method(new_method);
 }
 
 void Analysis::create_xrefs() {
@@ -178,12 +202,12 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
        current_method_analysis->get_disassembled_method()->get_instructions()) {
     auto off = instr->get_address();
     auto instruction = instr.get();
-    auto op_value = static_cast<disassembler::dex::DexOpcodes::opcodes>(
-        instr->get_instruction_opcode());
+    auto op_value =
+        static_cast<DexOpcodes::opcodes>(instr->get_instruction_opcode());
 
     // check for: `const-class` and `new-instance` instructions
-    if (op_value == disassembler::dex::DexOpcodes::opcodes::OP_CONST_CLASS ||
-        op_value == disassembler::dex::DexOpcodes::opcodes::OP_NEW_INSTANCE) {
+    if (op_value == DexOpcodes::opcodes::OP_CONST_CLASS ||
+        op_value == DexOpcodes::opcodes::OP_NEW_INSTANCE) {
       auto const_class_new_instance =
           reinterpret_cast<disassembler::dex::Instruction21c *>(instruction);
 
@@ -205,17 +229,10 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
       if (cls_name == current_class_name)
         continue;
 
-      // if the name of the class is not already in the classes,
-      // probably we are treating with an external class
-      if (classes.find(cls_name) == classes.end()) {
-        external_classes[cls_name] = std::make_unique<ExternalClass>(cls_name);
-        classes[cls_name] =
-            std::make_unique<ClassAnalysis>(external_classes[cls_name].get());
-      }
+      auto oth_cls = _get_class_or_create_external(cls_name);
 
-      auto oth_cls = classes[cls_name].get();
-
-      if (oth_cls == nullptr) continue;
+      if (oth_cls == nullptr)
+        continue;
 
       /// add the cross references
       class_analysis_working_on->add_xref_to(
@@ -226,7 +243,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
           class_analysis_working_on, current_method_analysis, off);
 
       /// Check if const-class
-      if (op_value == disassembler::dex::DexOpcodes::opcodes::OP_CONST_CLASS) {
+      if (op_value == DexOpcodes::opcodes::OP_CONST_CLASS) {
         current_method_analysis->add_xrefconstclass(oth_cls, off);
         oth_cls->add_xref_const_class(current_method_analysis, off);
       } else {
@@ -236,10 +253,8 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
     }
 
     /// Check for instructions invoke-*
-    else if (disassembler::dex::DexOpcodes::opcodes::OP_INVOKE_VIRTUAL <=
-                 op_value &&
-             op_value <=
-                 disassembler::dex::DexOpcodes::opcodes::OP_INVOKE_INTERFACE) {
+    else if (DexOpcodes::opcodes::OP_INVOKE_VIRTUAL <= op_value &&
+             op_value <= DexOpcodes::opcodes::OP_INVOKE_INTERFACE) {
       auto invoke_ =
           reinterpret_cast<disassembler::dex::Instruction35c *>(instruction);
 
@@ -257,12 +272,13 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
 
       /// information of method and class called
       auto oth_method = _resolve_method(invoked_method->dalvik_name_format());
-      auto oth_cls = classes[reinterpret_cast<parser::dex::DVMClass *>(
-                                 invoked_method->get_class())
-                                 ->get_class_name()]
-                         .get();
+      auto cls_name =
+          reinterpret_cast<parser::dex::DVMClass *>(invoked_method->get_class())
+              ->get_class_name();
+      auto oth_cls = _get_class_or_create_external(cls_name);
 
-      if (oth_cls == nullptr) continue; // an external class?
+      if (oth_cls == nullptr)
+        continue; // an external class?
 
       class_analysis_working_on->add_method_xref_to(current_method_analysis,
                                                     oth_cls, oth_method, off);
@@ -278,10 +294,8 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
     }
 
     /// Check for instructions like: invoke-xxx/range
-    else if (disassembler::dex::DexOpcodes::opcodes::OP_INVOKE_VIRTUAL_RANGE <=
-                 op_value &&
-             op_value <= disassembler::dex::DexOpcodes::opcodes::
-                             OP_INVOKE_INTERFACE_RANGE) {
+    else if (DexOpcodes::opcodes::OP_INVOKE_VIRTUAL_RANGE <= op_value &&
+             op_value <= DexOpcodes::opcodes::OP_INVOKE_INTERFACE_RANGE) {
       auto invoke_xxx_range =
           reinterpret_cast<disassembler::dex::Instruction3rc *>(instruction);
 
@@ -293,12 +307,13 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
           invoke_xxx_range->get_index_value());
       /// information of method and class called
       auto oth_method = _resolve_method(method_id->dalvik_name_format());
-      auto oth_cls = classes[reinterpret_cast<parser::dex::DVMClass *>(
-                                 method_id->get_class())
-                                 ->get_class_name()]
-                         .get();
+      auto cls_name =
+          reinterpret_cast<parser::dex::DVMClass *>(method_id->get_class())
+              ->get_class_name();
+      auto oth_cls = _get_class_or_create_external(cls_name);
 
-      if (oth_cls == nullptr) continue;
+      if (oth_cls == nullptr)
+        continue;
 
       class_analysis_working_on->add_method_xref_to(current_method_analysis,
                                                     oth_cls, oth_method, off);
@@ -314,8 +329,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
     }
 
     /// Now check for string usage
-    else if (op_value ==
-             disassembler::dex::DexOpcodes::opcodes::OP_CONST_STRING) {
+    else if (op_value == DexOpcodes::opcodes::OP_CONST_STRING) {
       auto const_string =
           reinterpret_cast<disassembler::dex::Instruction21c *>(instruction);
 
@@ -334,9 +348,8 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
     /// check now for field usage, we first
     /// analyze those from OP_IGET to OP_IPUT_SHORT
     /// then those from OP_SGET to OP_SPUT_SHORT
-    else if (disassembler::dex::DexOpcodes::opcodes::OP_IGET <= op_value &&
-             op_value <=
-                 disassembler::dex::DexOpcodes::opcodes::OP_IPUT_SHORT) {
+    else if (DexOpcodes::opcodes::OP_IGET <= op_value &&
+             op_value <= DexOpcodes::opcodes::OP_IPUT_SHORT) {
       auto op_i =
           reinterpret_cast<disassembler::dex::Instruction22c *>(instruction);
 
@@ -350,7 +363,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
           disassembler::dex::InstructionUtils::get_operation_type_from_opcode(
               op_value);
 
-      if (operation == disassembler::dex::DexOpcodes::FIELD_READ_DVM_OPCODE) {
+      if (operation == DexOpcodes::FIELD_READ_DVM_OPCODE) {
         auto field_item = checked_field->get_encoded_field();
 
         classes[current_class_name]->add_field_xref_read(
@@ -363,8 +376,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
             classes[current_class_name]->get_field_analysis(field_item);
         current_method_analysis->add_xrefread(class_analysis_working_on,
                                               field_analysis, off);
-      } else if (operation ==
-                 disassembler::dex::DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
+      } else if (operation == DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
         // retrieve the encoded field from the FieldID
         auto field_item = checked_field->get_encoded_field();
 
@@ -381,9 +393,8 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
       }
     }
 
-    else if (disassembler::dex::DexOpcodes::opcodes::OP_SGET <= op_value &&
-             op_value <=
-                 disassembler::dex::DexOpcodes::opcodes::OP_SPUT_SHORT) {
+    else if (DexOpcodes::opcodes::OP_SGET <= op_value &&
+             op_value <= DexOpcodes::opcodes::OP_SPUT_SHORT) {
       auto op_s =
           reinterpret_cast<disassembler::dex::Instruction21c *>(instruction);
 
@@ -397,7 +408,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
           disassembler::dex::InstructionUtils::get_operation_type_from_opcode(
               op_value);
 
-      if (operation == disassembler::dex::DexOpcodes::FIELD_READ_DVM_OPCODE) {
+      if (operation == DexOpcodes::FIELD_READ_DVM_OPCODE) {
         auto field_item = checked_field->get_encoded_field();
 
         if (field_item == nullptr) // probably an external field
@@ -413,8 +424,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
             classes[current_class_name]->get_field_analysis(field_item);
         current_method_analysis->add_xrefread(class_analysis_working_on,
                                               field_analysis, off);
-      } else if (operation ==
-                 disassembler::dex::DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
+      } else if (operation == DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
         // retrieve the encoded field from the FieldID
         auto field_item = checked_field->get_encoded_field();
 
@@ -434,6 +444,20 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
       }
     }
   }
+}
+
+ClassAnalysis *
+Analysis::_get_class_or_create_external(std::string_view class_name) {
+  ClassAnalysis *cls = nullptr;
+  // if the name of the class is not already in the classes,
+  // probably we are retrieving an external class
+  if (classes.find(class_name) == classes.end()) {
+    external_classes[class_name] = std::make_unique<ExternalClass>(class_name);
+    classes[class_name] =
+        std::make_unique<ClassAnalysis>(external_classes[class_name].get());
+    cls = classes[class_name].get();
+  }
+  return cls;
 }
 
 MethodAnalysis *Analysis::_resolve_method(std::string_view full_name) {
@@ -468,7 +492,8 @@ MethodAnalysis *Analysis::_resolve_method(std::string_view full_name) {
 }
 
 ClassAnalysis *Analysis::get_class_analysis(std::string_view class_name) {
-  if (classes.contains(class_name)) return classes[class_name].get();
+  if (classes.contains(class_name))
+    return classes[class_name].get();
   return nullptr;
 }
 
@@ -477,7 +502,7 @@ Analysis::get_classes() {
   return classes;
 }
 
-std::unordered_map<std::string_view , std::unique_ptr<ExternalClass>> &
+std::unordered_map<std::string_view, std::unique_ptr<ExternalClass>> &
 Analysis::get_external_classes() {
   return external_classes;
 }
@@ -489,21 +514,26 @@ MethodAnalysis *Analysis::get_method(
     auto m = std::get<parser::dex::EncodedMethod *>(method);
     name = m->getMethodID()->dalvik_name_format();
   } else {
-    auto m = std::get<ExternalMethod*>(method);
+    auto m = std::get<ExternalMethod *>(method);
     name = m->pretty_method_name();
   }
 
-  if (methods.contains(name)) return methods[name].get();
+  if (methods.contains(name))
+    return methods[name].get();
   return nullptr;
 }
 
-MethodAnalysis *Analysis::get_method_analysis_by_name(std::string_view dalvik_name) {
-  if (methods.contains(dalvik_name)) return methods[dalvik_name].get();
+MethodAnalysis *
+Analysis::get_method_analysis_by_name(std::string_view dalvik_name) {
+  if (methods.contains(dalvik_name))
+    return methods[dalvik_name].get();
   return nullptr;
 }
 
-shuriken::parser::dex::MethodID *Analysis::get_method_id_by_name(std::string_view dalvik_name) {
-  if (methods.contains(dalvik_name)) return methods[dalvik_name]->get_encoded_method()->getMethodID();
+shuriken::parser::dex::MethodID *
+Analysis::get_method_id_by_name(std::string_view dalvik_name) {
+  if (methods.contains(dalvik_name))
+    return methods[dalvik_name]->get_encoded_method()->getMethodID();
   return nullptr;
 }
 
@@ -518,11 +548,15 @@ Analysis::get_external_methods() {
 }
 
 FieldAnalysis *Analysis::get_field_analysis(parser::dex::EncodedField *field) {
-  auto f_it = std::ranges::find_if(all_fields, [&](FieldAnalysis * field_analysis) -> bool {
-    field_analysis->get_encoded_field()->get_field()->pretty_field() == field->get_field()->pretty_field();
-  });
+  auto f_it = std::ranges::find_if(
+      all_fields, [&](FieldAnalysis *field_analysis) -> bool {
+        return field_analysis->get_encoded_field()
+                   ->get_field()
+                   ->pretty_field() == field->get_field()->pretty_field();
+      });
 
-  if (f_it == all_fields.end()) return nullptr;
+  if (f_it == all_fields.end())
+    return nullptr;
   return *f_it;
 }
 
@@ -530,8 +564,7 @@ std::vector<FieldAnalysis *> &Analysis::get_fields() {
   if (!all_fields.empty())
     return all_fields;
 
-  for (const auto &c : classes)
-  {
+  for (const auto &c : classes) {
     for (const auto &f : c.second->get_fields())
       all_fields.push_back(f.second.get());
   }
@@ -544,8 +577,9 @@ Analysis::get_string_analysis() {
   return strings;
 }
 
-std::vector<ClassAnalysis *> Analysis::find_classes(const std::string& name, bool no_external) {
-  std::vector<ClassAnalysis*> cls_analyses;
+std::vector<ClassAnalysis *> Analysis::find_classes(const std::string &name,
+                                                    bool no_external) {
+  std::vector<ClassAnalysis *> cls_analyses;
 
   std::vector<ClassAnalysis *> found_classes;
   std::regex const class_name_regex(name);
@@ -560,17 +594,15 @@ std::vector<ClassAnalysis *> Analysis::find_classes(const std::string& name, boo
   return found_classes;
 }
 
-std::vector<MethodAnalysis *> Analysis::find_methods(const std::string& class_name,
-                                           const std::string& method_name,
-                                           const std::string& descriptor,
-                                           const std::string& accessflags,
-                                           bool no_external) {
+std::vector<MethodAnalysis *>
+Analysis::find_methods(const std::string &class_name,
+                       const std::string &method_name,
+                       const std::string &descriptor,
+                       const std::string &accessflags, bool no_external) {
   std::vector<MethodAnalysis *> methods_vector;
 
-  std::regex class_name_regex(class_name),
-      method_name_regex(method_name),
-      descriptor_regex(descriptor),
-      accessflags_regex(accessflags);
+  std::regex class_name_regex(class_name), method_name_regex(method_name),
+      descriptor_regex(descriptor), accessflags_regex(accessflags);
 
   for (const auto &m : methods) {
     const auto &method = m.second;
@@ -578,7 +610,8 @@ std::vector<MethodAnalysis *> Analysis::find_methods(const std::string& class_na
     if (no_external && method->external())
       continue;
 
-    auto access_flags = shuriken::dex::Utils::get_types_as_string(method->get_access_flags());
+    auto access_flags =
+        shuriken::dex::Utils::get_types_as_string(method->get_access_flags());
 
     if (std::regex_search(method->get_class_name().data(), class_name_regex) &&
         std::regex_search(method->get_name().data(), method_name_regex) &&
@@ -593,8 +626,7 @@ std::vector<StringAnalysis *> Analysis::find_strings(const std::string &str) {
   std::vector<StringAnalysis *> strings_list;
   std::regex const str_reg(str);
 
-  for (const auto &s : strings)
-  {
+  for (const auto &s : strings) {
     if (std::regex_search(s.first.data(), str_reg))
       strings_list.push_back(s.second.get());
   }
@@ -602,14 +634,11 @@ std::vector<StringAnalysis *> Analysis::find_strings(const std::string &str) {
   return strings_list;
 }
 
-std::vector<FieldAnalysis *> Analysis::find_fields(const std::string& class_name,
-                                         const std::string& field_name,
-                                         const std::string& field_type,
-                                         const std::string& accessflags) {
-  std::regex class_name_regex(class_name),
-      field_name_regex(field_name),
-      field_type_regex(field_type),
-      accessflags_regex(accessflags);
+std::vector<FieldAnalysis *> Analysis::find_fields(
+    const std::string &class_name, const std::string &field_name,
+    const std::string &field_type, const std::string &accessflags) {
+  std::regex class_name_regex(class_name), field_name_regex(field_name),
+      field_type_regex(field_type), accessflags_regex(accessflags);
 
   std::vector<FieldAnalysis *> fields_list;
 
@@ -618,10 +647,16 @@ std::vector<FieldAnalysis *> Analysis::find_fields(const std::string& class_name
       continue;
 
     for (const auto &f : c.second->get_fields()) {
-      std::string access_flags_str = shuriken::dex::Utils::get_types_as_string(f.second->get_encoded_field()->get_flags());
+      std::string access_flags_str = shuriken::dex::Utils::get_types_as_string(
+          f.second->get_encoded_field()->get_flags());
 
       if (std::regex_search(f.second->get_name().data(), field_name_regex) &&
-          std::regex_search(f.second->get_encoded_field()->get_field()->field_type()->get_raw_type().data(),field_type_regex) &&
+          std::regex_search(f.second->get_encoded_field()
+                                ->get_field()
+                                ->field_type()
+                                ->get_raw_type()
+                                .data(),
+                            field_type_regex) &&
           std::regex_search(access_flags_str, accessflags_regex))
         fields_list.push_back(f.second.get());
     }
