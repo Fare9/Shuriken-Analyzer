@@ -21,10 +21,6 @@ DisassembledMethod::DisassembledMethod(shuriken::parser::dex::MethodID* method_i
                                        exception_information(std::move(exceptions)),
                                        instructions(std::move(instructions)),
                                        access_flags(access_flags) {
-    instructions_raw.reserve(this->instructions.size());
-    for (const auto & instr : instructions) {
-        instructions_raw.emplace_back(instr.get());
-    }
 }
 
 shuriken::parser::dex::MethodID* DisassembledMethod::get_method_id() {
@@ -49,6 +45,16 @@ it_exceptions_data DisassembledMethod::get_exceptions() {
 
 it_instructions DisassembledMethod::get_instructions() {
     return make_range(instructions.begin(), instructions.end());
+}
+
+const std::vector<Instruction*> &DisassembledMethod::get_instructions_container() {
+  if (instructions_raw.empty()) {
+    instructions_raw.reserve(this->instructions.size());
+    for (const auto & instr : this->instructions) {
+      instructions_raw.emplace_back(instr.get());
+    }
+  }
+  return instructions_raw;
 }
 
 std::span<Instruction*> DisassembledMethod::get_ref_to_instructions(size_t init, size_t end) {

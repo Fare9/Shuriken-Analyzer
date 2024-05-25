@@ -1,13 +1,13 @@
 if(DEX AND DEX_TESTS)
     configure_file(
-            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.in
-            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.inc
+            dex-files-folder.in
+            dex-files-folder.inc
     )
 
     # First Test Executable
     message(STATUS "Compiling test parse-test-dex")
     add_executable(test-code-with-exceptions
-            ${CMAKE_CURRENT_SOURCE_DIR}/test-code-with-exceptions.cpp
+            test-code-with-exceptions.cpp
     )
 
     target_include_directories(test-code-with-exceptions
@@ -27,7 +27,7 @@ if(DEX AND DEX_TESTS)
     # Second Test Executable
     message(STATUS "Compiling test parse-test-dex")
     add_executable(test-code-with-switch
-            ${CMAKE_CURRENT_SOURCE_DIR}/test-code-with-switch.cpp
+            test-code-with-switch.cpp
     )
 
     target_include_directories(test-code-with-switch

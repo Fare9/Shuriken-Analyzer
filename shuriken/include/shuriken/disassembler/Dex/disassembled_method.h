@@ -98,6 +98,9 @@ namespace shuriken {
                 /// @return iterator of the instructions
                 it_instructions get_instructions();
 
+                /// @return const container to the instructions
+                const std::vector<Instruction*> &get_instructions_container();
+
                 /// @brief Get a constant access to a part of the instructions from the method
                 /// @param init first index from the instructions
                 /// @param end last index from the instructions

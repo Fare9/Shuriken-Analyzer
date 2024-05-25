@@ -31,6 +31,12 @@ DisassembledMethod* DexDisassembler::get_disassembled_method(std::string_view me
     return disassembled_methods[method].get();
 }
 
+std::unordered_map<std::string_view,
+                   std::unique_ptr<DisassembledMethod>>&
+DexDisassembler::get_disassembled_methods() {
+  return disassembled_methods;
+}
+
 void DexDisassembler::disassembly_dex() {
     auto log = logger();
 

@@ -29,21 +29,25 @@ DVMType* FieldID::field_type() {
     return type_;
 }
 
-const std::string_view FieldID::field_name() const {
+std::string_view FieldID::field_name() const {
     return name_;
 }
 
-std::string_view FieldID::field_name() {
-    return name_;
-}
-
-std::string& FieldID::pretty_field() {
+std::string_view FieldID::pretty_field() {
     if (!pretty_name.empty())
         return pretty_name;
     pretty_name = class_->print_type() + "->" +
                   std::string(name_) + " " +
                   type_->print_type();
     return pretty_name;
+}
+
+void FieldID::set_encoded_field(EncodedField * field) {
+  this->encoded_field = field;
+}
+
+EncodedField * FieldID::get_encoded_field() {
+  return this->encoded_field;
 }
 
 void DexFields::parse_fields(
