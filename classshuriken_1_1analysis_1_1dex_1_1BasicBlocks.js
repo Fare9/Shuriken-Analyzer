@@ -1,0 +1,36 @@
+var classshuriken_1_1analysis_1_1dex_1_1BasicBlocks =
+[
+    [ "connected_blocks_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac1b50348b7e212fee915ba4afaf6ac16", null ],
+    [ "edges_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ab3d35818400446513926efaba65edebc", null ],
+    [ "edgesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ab21180e6ebe68f837c1cc1aa37d35302", null ],
+    [ "nodesetiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#adff98d64673c60fb8045f18ab2580cfb", null ],
+    [ "nodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac5717ee5c0d262a780abf9ec6a9e3dd3", null ],
+    [ "reverseedgesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a08521e92f326ec068d4a24a09669a632", null ],
+    [ "reversenodesetiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3f8a5bdbe1d1e0653a1ee4b6ee6fb7ce", null ],
+    [ "reversenodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a934ddcea34bf42eedb45f66ed7dc7b32", null ],
+    [ "node_type_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fe", [
+      [ "JOIN_NODE", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fea5ba1f096971d2dc5e7988da04a138dd0", null ],
+      [ "BRANCH_NODE", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81feae80a903ca07e970a7d2cbbac0d7bc8d0", null ],
+      [ "REGULAR_NODE", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81feab3a758b46ec93b058b706b38e527a168", null ]
+    ] ],
+    [ "BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae047df804e0a5df940c54234d8eacf85", null ],
+    [ "BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9a1e8d30007952873d31008d76df6a0a", null ],
+    [ "~BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac9b0c53be6efc9edd80238424457f723", null ],
+    [ "add_edge", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3e3187e3832e6c06134ac8d2bd3ad0f4", null ],
+    [ "add_node", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#adc9bb44d41657b2d7984aa2eecfae942", null ],
+    [ "add_predecessor", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aec050265a65e32e2e59a4033a8d34701", null ],
+    [ "add_sucessor", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a75d04a3a82bd79b84a6dec27823bded1", null ],
+    [ "edges", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad7266ed802d54ec93f45944c2cd860da", null ],
+    [ "get_basic_block_by_idx", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad1aad05d653dd47b87c605f390036fe4", null ],
+    [ "get_node_type", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a4c43c660bffa5e5bb7a93760e2d9290d", null ],
+    [ "get_number_of_basic_blocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a47e817dcd3fc76007805c71d362fd406", null ],
+    [ "nodes", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a0e407f062321a5fe7774f0445b038a09", null ],
+    [ "operator=", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3e38cb0f5bbede604209e3cde00c1a8d", null ],
+    [ "predecessors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3ed1000154cdd22a2def4fc1406c49d3", null ],
+    [ "remove_node", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3eb68b08dbfd1301e90b2185cfd68f49", null ],
+    [ "reverse_edges", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a0c0146bf285c3c0664d002b4e74f01eb", null ],
+    [ "reverse_nodes", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9d8fa85abc7d064ce303ae5862670d03", null ],
+    [ "reverse_predecessors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aedcc3c4279291d734dc4b52976888b5b", null ],
+    [ "reverse_successors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae95f95307dc7de5099529124ee96e564", null ],
+    [ "successors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673", null ]
+];

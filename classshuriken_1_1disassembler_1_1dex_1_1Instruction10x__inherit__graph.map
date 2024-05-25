@@ -1,0 +1,5 @@
+<map id="shuriken::disassembler::dex::Instruction10x" name="shuriken::disassembler::dex::Instruction10x">
+<area shape="rect" id="Node000001" title="Instruction for wasting cycles. It represents a nop, it has a length of 2." alt="" coords="5,94,159,135"/>
+<area shape="rect" id="Node000002" href="$classshuriken_1_1disassembler_1_1dex_1_1Instruction.html" title="Base type for all the instructions it implements all of the virtual functions and it contains the bas..." alt="" coords="5,5,159,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,62,85,94,79,94,79,62"/>
+</map>

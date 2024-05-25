@@ -1,0 +1,38 @@
+<map id="shuriken/include/shuriken/parser/Dex/dex_methods.h" name="shuriken/include/shuriken/parser/Dex/dex_methods.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="393,5,571,46"/>
+<area shape="rect" id="Node000002" href="$dex__encoded_8h.html" title=" " alt="" coords="517,94,695,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="524,53,579,91,576,96,521,57"/>
+<area shape="rect" id="Node000007" href="$parser_8h.html" title=" " alt="" coords="356,279,525,320"/>
+<area shape="poly" id="edge23_Node000001_Node000007" title=" " alt="" coords="457,59,417,115,399,148,386,183,382,203,386,222,401,252,422,277,418,280,397,255,381,224,376,203,381,182,394,146,413,112,453,56"/>
+<area shape="rect" id="Node000003" href="$dex__analysis_8h.html" title=" " alt="" coords="578,575,764,616"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="623,148,647,216,656,257,659,298,659,397,664,496,671,574,666,575,658,497,654,397,654,298,650,257,642,217,618,150"/>
+<area shape="rect" id="Node000005" href="$external__class_8h.html" title=" " alt="" coords="694,271,862,327"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="640,144,677,181,757,269,753,273,673,185,636,147"/>
+<area shape="rect" id="Node000006" href="$dex__classes_8h.html" title=" " alt="" coords="395,183,569,223"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="567,146,511,184,508,180,564,142"/>
+<area shape="poly" id="edge22_Node000002_Node000007" title=" " alt="" coords="608,151,600,188,583,225,566,243,546,258,504,281,501,276,543,254,562,239,578,222,595,187,602,150"/>
+<area shape="rect" id="Node000004" href="$analysis_8h.html" title=" " alt="" coords="452,863,621,904"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="665,631,638,717,618,768,593,817,557,865,553,861,589,814,613,766,633,715,660,629"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="765,343,681,575,676,573,760,341"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="470,239,451,280,447,277,465,237"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="508,324,544,346,576,373,602,409,615,442,625,476,640,518,665,573,660,575,635,520,620,478,610,443,597,412,572,377,540,350,505,329"/>
+<area shape="rect" id="Node000008" href="$dex__disassembler_8h.html" title=" " alt="" coords="333,775,580,815"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="491,326,514,347,532,374,550,430,556,489,551,548,539,606,522,659,503,707,470,775,465,773,499,705,517,658,534,604,546,547,550,489,545,431,527,376,510,351,487,330"/>
+<area shape="rect" id="Node000009" href="$dex__instructions_8h.html" title=" " alt="" coords="281,375,517,416"/>
+<area shape="poly" id="edge11_Node000007_Node000009" title=" " alt="" coords="428,335,410,376,405,374,423,333"/>
+<area shape="rect" id="Node000011" href="$internal__disassembler_8h.html" title=" " alt="" coords="197,567,372,623"/>
+<area shape="poly" id="edge20_Node000007_Node000011" title=" " alt="" coords="343,324,302,345,285,359,271,376,259,399,253,424,252,476,262,526,275,566,270,568,257,527,247,477,248,423,254,398,266,374,281,355,299,340,340,319"/>
+<area shape="rect" id="Node000013" href="$shuriken__parsers_8h.html" title=" " alt="" coords="5,375,180,416"/>
+<area shape="poly" id="edge21_Node000007_Node000013" title=" " alt="" coords="354,327,166,377,165,372,352,321"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="487,825,520,861,516,865,483,829"/>
+<area shape="rect" id="Node000010" href="$disassembled__method_8h.html" title=" " alt="" coords="305,464,517,519"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="406,431,410,463,405,463,401,431"/>
+<area shape="poly" id="edge19_Node000009_Node000011" title=" " alt="" coords="337,426,313,443,295,465,285,490,280,517,282,567,277,567,275,516,279,488,290,462,309,439,333,421"/>
+<area shape="poly" id="edge13_Node000010_Node000003" title=" " alt="" coords="496,523,622,572,620,577,494,528"/>
+<area shape="poly" id="edge14_Node000010_Node000008" title=" " alt="" coords="420,534,456,774,451,775,415,535"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="367,532,320,569,317,565,364,527"/>
+<area shape="poly" id="edge16_Node000011_Node000008" title=" " alt="" coords="339,630,382,669,422,724,450,773,445,776,418,727,379,673,336,634"/>
+<area shape="rect" id="Node000012" href="$linear__sweep__disassembler_8h.html" title=" " alt="" coords="200,671,369,727"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="287,639,287,670,282,670,282,639"/>
+<area shape="poly" id="edge18_Node000012_Node000008" title=" " alt="" coords="349,732,422,772,419,776,346,737"/>
+</map>

@@ -1,0 +1,26 @@
+var structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t =
+[
+    [ "checksum", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a27e098764f8679528bd39dd3361df1ca", null ],
+    [ "class_defs_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#afe2690341a55420b4c30bdf7cd7ab2ba", null ],
+    [ "class_defs_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#ae5ac4260f4ffd011e20a403ad3d152af", null ],
+    [ "data_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a1e01eabd584e81b691fbe2621bed2eae", null ],
+    [ "data_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a7ca5171f813775dbe1b7ba97835e180e", null ],
+    [ "endian_tag", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a9e6af3496e6987cf1e5d2798cc74ef7b", null ],
+    [ "field_ids_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#ae89a4ff63ab77b818ef2b832652f3cec", null ],
+    [ "field_ids_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a01e728ca9dace382353ba9c7618c4de3", null ],
+    [ "file_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a458901711c8ded7929758990d9b9e25a", null ],
+    [ "header_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#ab9bd669801a5a9ed9d6ed4730b88f86e", null ],
+    [ "link_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#acfda010eb1f887e15ec1198b83ba97cd", null ],
+    [ "link_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a61bc0269574a2089f719766602c2ef89", null ],
+    [ "magic", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#aaa1a17cff5eed3acd3547700ca8f4dc2", null ],
+    [ "map_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#aea76f69a2c7d9d320e9fee509eeb60f6", null ],
+    [ "method_ids_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#aa5014f8c56246429580ec2aa7ab670ef", null ],
+    [ "method_ids_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a1536ff4a11d2f9b7a20bb2f95d6f0604", null ],
+    [ "proto_ids_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a8d04baeb35e21e99e96abe1e356bb7f0", null ],
+    [ "proto_ids_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a5d7f3dbce10be9afd083ed0f7e056fb8", null ],
+    [ "signature", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#ae6d83f7a571cc29f5825324a8ba0469e", null ],
+    [ "string_ids_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a201a1a9c156c9cc8b23eafb8db57f91b", null ],
+    [ "string_ids_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b", null ],
+    [ "type_ids_off", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#aab8b0019de67ee1a8ff57d4fcd2305db", null ],
+    [ "type_ids_size", "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a8961b83d91dae0186eca785be47cd731", null ]
+];

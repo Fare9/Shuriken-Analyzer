@@ -1,0 +1,11 @@
+<map id="dvmdisassembled_method_t_" name="dvmdisassembled_method_t_">
+<area shape="rect" id="Node000001" title="Structure that represents a disassembled method from the dalvik file." alt="" coords="125,183,320,208"/>
+<area shape="rect" id="Node000002" href="$structhdvmmethod__t__.html" title="Structure which keeps information from a method this can be accessed from the class data." alt="" coords="5,94,120,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,125,155,156,200,180,198,185,153,161,96,130"/>
+<area shape="rect" id="Node000003" href="$structdvmexceptions__data__t__.html" title="Structure with the information from the exceptions in the code." alt="" coords="143,94,302,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,135,225,182,220,182,220,135"/>
+<area shape="rect" id="Node000004" href="$structdvmhandler__data__t__.html" title="Structure that keeps information about a handler." alt="" coords="153,5,292,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="225,47,225,94,220,94,220,47"/>
+<area shape="rect" id="Node000005" href="$structhdvminstruction__t__.html" title="Structure for an instruction in the dalvik virtual machine." alt="" coords="326,94,458,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="381,135,359,161,334,175,307,185,305,180,331,170,355,157,377,132"/>
+</map>

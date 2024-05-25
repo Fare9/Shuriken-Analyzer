@@ -1,0 +1,5 @@
+<map id="shuriken::parser::dex::DVMType::get_type" name="shuriken::parser::dex::DVMType::get_type">
+<area shape="rect" id="Node000001" title="Virtual method to return the type." alt="" coords="192,5,331,46"/>
+<area shape="rect" id="Node000002" href="$namespaceshuriken_1_1parser_1_1dex.html#a37c617f6ca870b39e54996575eeb6c25" title="Operator == for comparison between two DVMTypes." alt="" coords="5,5,144,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,28,144,28,144,23,176,23"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="shuriken::analysis::dex::MethodAnalysis" name="shuriken::analysis::dex::MethodAnalysis">
+<area shape="rect" id="Node000001" title="Specification of the method analysis, a method contains instructions, exceptions data,..." alt="" coords="7,288,153,328"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="6,184,154,225"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,240,83,287,77,287,77,240"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="24,95,136,121"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,136,83,183,77,183,77,136"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,155,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="83,61,83,95,77,95,77,61"/>
+</map>

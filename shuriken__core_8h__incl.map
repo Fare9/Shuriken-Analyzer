@@ -1,0 +1,11 @@
+<map id="shuriken/include/shuriken/api/C/shuriken_core.h" name="shuriken/include/shuriken/api/C/shuriken_core.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="94,5,262,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,79,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,49,77,88,74,84,143,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="102,94,166,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,48,150,82,146,79,165,45"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,94,257,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,45,211,79,206,82,187,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="282,94,344,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="213,44,280,83,277,88,210,49"/>
+</map>

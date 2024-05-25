@@ -1,0 +1,11 @@
+<map id="shuriken::disassembler::dex::Instruction31i" name="shuriken::disassembler::dex::Instruction31i">
+<area shape="rect" id="Node000001" title="Instructions between a register and a literal value of 32 bits. Example: const vAA,..." alt="" coords="65,274,219,315"/>
+<area shape="rect" id="Node000002" href="$classshuriken_1_1disassembler_1_1dex_1_1Instruction.html" title="Base type for all the instructions it implements all of the virtual functions and it contains the bas..." alt="" coords="65,184,219,225"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,240,145,274,139,274,139,240"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,95,164,121"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,134,113,159,129,182,125,185,109,161,94,136"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="187,95,265,121"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="207,134,161,185,157,182,203,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="164,5,288,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="229,61,229,95,223,95,223,61"/>
+</map>

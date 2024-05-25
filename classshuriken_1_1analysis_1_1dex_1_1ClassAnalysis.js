@@ -1,0 +1,26 @@
+var classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis =
+[
+    [ "ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a88da8904d94b7f84e34d2ab9da6723a1", null ],
+    [ "ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a8f9d1af1567a27c2e87f6fe655091c32", null ],
+    [ "add_field_xref_read", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a345664e8e0074af46be4a1297a62c105", null ],
+    [ "add_field_xref_write", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae0b758ad4f92fba7f98e9bd6393740b2", null ],
+    [ "add_method", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a30cd2e3d337eedbcff744300d1cf8e52", null ],
+    [ "add_method_xref_from", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a87c7b484d7145108681ef814d49978c6", null ],
+    [ "add_method_xref_to", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ac97523355472f0cd4b14ba355fcf0bce", null ],
+    [ "add_xref_const_class", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a81a5baf8bd30e203c9e9754acdb38147", null ],
+    [ "add_xref_from", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae8d45a513c5beb9106d0ff1cb4d0c371", null ],
+    [ "add_xref_new_instance", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a5035edc21e57adff5c00d7d52e54170b", null ],
+    [ "add_xref_to", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ac56a0d2183eb023175edb39bf67679b2", null ],
+    [ "extends", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae9403292a83d3383bda280173b90889a", null ],
+    [ "get_classdef", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ad13bbf0c051b0bdcdb969342356eb499", null ],
+    [ "get_externalclass", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#acd86698195fb12d273da6d9112a43989", null ],
+    [ "get_field_analysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a5ed80733cca1cedd99138790ade196fa", null ],
+    [ "get_fields", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a5c88c0b10e1d984f8e72fdc12a085676", null ],
+    [ "get_method_analysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#aba5240424af636c0dc54dfed82d46cca", null ],
+    [ "get_methods", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a10e0b551a415209db406b81fb4d7a5f4", null ],
+    [ "get_nb_fields", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a4e8e69f3bfd5fc362fde7bea820a2d95", null ],
+    [ "get_nb_methods", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#aa6bd125368d08eedba5065346c1c42dd", null ],
+    [ "implements", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ac1f4265fe743a35540e8df8e86f675f5", null ],
+    [ "is_class_external", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#aeb5fff33c261951875f7dd47f898fd0c", null ],
+    [ "name", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ac5bc2a1fb49d0771d0637e4aba354798", null ]
+];

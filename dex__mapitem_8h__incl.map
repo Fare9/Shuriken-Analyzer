@@ -1,0 +1,17 @@
+<map id="shuriken/include/shuriken/parser/Dex/dex_mapitem.h" name="shuriken/include/shuriken/parser/Dex/dex_mapitem.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="260,5,438,46"/>
+<area shape="rect" id="Node000002" href="$shurikenstream_8h.html" title=" " alt="" coords="14,102,241,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="299,49,173,98,171,93,297,44"/>
+<area shape="rect" id="Node000006" href="$iterator__range_8h.html" title=" " alt="" coords="265,94,433,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="351,47,351,78,346,78,346,47"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="458,102,568,127"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="387,44,478,92,475,96,385,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,183,71,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,130,65,174,61,170,112,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="95,183,160,208"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="130,128,130,167,125,167,125,128"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="184,183,244,208"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="142,126,191,170,188,174,139,130"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="323,183,374,208"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="351,135,351,167,346,167,346,135"/>
+</map>

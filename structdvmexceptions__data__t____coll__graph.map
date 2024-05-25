@@ -1,0 +1,5 @@
+<map id="dvmexceptions_data_t_" name="dvmexceptions_data_t_">
+<area shape="rect" id="Node000001" title="Structure with the information from the exceptions in the code." alt="" coords="5,94,164,120"/>
+<area shape="rect" id="Node000002" href="$structdvmhandler__data__t__.html" title="Structure that keeps information about a handler." alt="" coords="15,5,154,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,47,87,94,82,94,82,47"/>
+</map>
