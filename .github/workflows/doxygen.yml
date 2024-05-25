@@ -19,10 +19,8 @@ jobs:
       - name: Set up Doxygen
         uses: mattnotmitt/doxygen-action@v1.1.0
         with:
-          doxygen-version: 'latest'
-
-      - name: Generate Doxygen documentation
-        run: doxygen .github/doxygen/Doxyfile
+          doxyfile-path: '.github/doxygen/Doxyfile'
+          working-directory: "." # default is .
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
