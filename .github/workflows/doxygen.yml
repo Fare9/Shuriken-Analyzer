@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main  # Replace with your default branch
-      - 33-generate-the-documentation-with-doxygen
 
 jobs:
   generate-docs:
