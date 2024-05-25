@@ -1,0 +1,68 @@
+# Doxyfile 1.9.3
+
+# Project-related settings
+PROJECT_NAME           = "Shuriken-Analyzer"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "Library for bytecode analysis"
+PROJECT_LOGO           = ""
+OUTPUT_DIRECTORY       = "./"
+INPUT                  = "shuriken/include"
+FILE_PATTERNS          = *.h *.cpp
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = "*.md"
+
+# General configuration options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = NO
+
+# Build-related configuration options
+BUILTIN_STL_SUPPORT    = YES
+INLINE_SOURCES         = NO
+REFERENCES_LINK_SOURCE = YES
+STRIP_CODE_COMMENTS    = NO
+
+# HTML output configuration options
+GENERATE_HTML          = YES
+HTML_OUTPUT            = "html"
+HTML_DYNAMIC_SECTIONS  = YES
+DISABLE_INDEX          = NO
+GENERATE_TREEVIEW      = YES
+
+# LaTeX output configuration options
+GENERATE_LATEX         = NO
+LATEX_OUTPUT           = "latex"
+
+# Input filter options
+INPUT_ENCODING         = UTF-8
+
+# Source browser configuration options
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+# Preprocessor options
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+
+# Dot configuration options
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 0
+CLASS_DIAGRAMS         = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+
+# Extra options
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+
+# Project description
+PROJECT_BRIEF = "Welcome to the automatically generated documentation from Shuriken-Analyzer project.\
+In this documentation you will find the description of each function and of its parameters."

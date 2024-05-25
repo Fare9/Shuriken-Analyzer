@@ -1,0 +1,31 @@
+# .github/workflows/doxygen.yml
+
+name: Generate and Publish Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch
+      - 33-generate-the-documentation-with-doxygen
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Doxygen
+        uses: mattnotmitt/setup-doxygen@v1
+        with:
+          doxygen-version: 'latest'
+
+      - name: Generate Doxygen documentation
+        run: doxygen .github/doxygen/Doxyfile
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html
