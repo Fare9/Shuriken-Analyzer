@@ -1,0 +1,30 @@
+# .github/workflows/doxygen.yml
+
+name: Generate and Publish Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@v1.1.0
+        with:
+          doxyfile-path: '.github/doxygen/Doxyfile'
+          working-directory: "." # default is .
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Default Doxyfile build documentation to html directory.
+          # Change the directory if changes in Doxyfile
+          publish_dir: ./html
