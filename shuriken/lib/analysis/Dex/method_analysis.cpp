@@ -161,7 +161,7 @@ void MethodAnalysis::create_basic_blocks() {
     auto log = logger();
 
     /// utilities to create the basic blocks
-    std::vector<std::int64_t> entry_points;
+    std::set<std::int64_t> entry_points;
     std::unordered_map<std::uint64_t, std::vector<std::int64_t>> target_jumps;
     shuriken::disassembler::dex::Disassembler internal_disassembler;
 
@@ -174,15 +174,14 @@ void MethodAnalysis::create_basic_blocks() {
         auto operation = shuriken::disassembler::dex::InstructionUtils::get_operation_type_from_opcode(
                 static_cast<shuriken::disassembler::dex::DexOpcodes::opcodes>(instruction->get_instruction_opcode()));
 
-        if (operation == shuriken::disassembler::dex::DexOpcodes::CONDITIONAL_BRANCH_DVM_OPCODE
-            || operation == shuriken::disassembler::dex::DexOpcodes::UNCONDITIONAL_BRANCH_DVM_OPCODE
-            || operation == shuriken::disassembler::dex::DexOpcodes::MULTI_BRANCH_DVM_OPCODE) {
+        if (operation == shuriken::disassembler::dex::DexOpcodes::CONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::UNCONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::MULTI_BRANCH_DVM_OPCODE) {
             auto idx = instruction->get_address();
             auto ins = instruction.get();
 
             auto v = internal_disassembler.determine_next(ins, idx);
             target_jumps[idx] = std::move(v);
-            entry_points.insert(entry_points.end(), target_jumps[idx].begin(), target_jumps[idx].end());
+            for (auto x: target_jumps[idx])
+                entry_points.insert(x);
         }
     }
 
@@ -191,7 +190,7 @@ void MethodAnalysis::create_basic_blocks() {
         /// entry point of try values can start in the middle
         /// of a block
         for (const auto &handler: except.handler) {
-            entry_points.push_back(handler.handler_start_addr);
+            entry_points.insert(handler.handler_start_addr);
         }
     }
 
@@ -202,28 +201,28 @@ void MethodAnalysis::create_basic_blocks() {
         auto idx = instruction->get_address();
         auto ins = instruction.get();
 
-
-        if (std::find(entry_points.begin(), entry_points.end(), idx) != entry_points.end() &&
-            start != end) {
+        if (entry_points.find(idx) != entry_points.end()) {
             prev = current;
             current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
 
             // always insert the first block
             if (start == 0)
                 basic_blocks.add_node(current);
+
+            start = end + current->get_terminator()->get_instruction_length();
+
             if (prev != nullptr) {
                 /// if last instruction is not a terminator
                 /// we must create an edge because it comes
                 /// from a fallthrough block
-                if (!prev->get_terminator())
+                auto next = internal_disassembler.determine_next(prev->get_terminator(), prev->get_last_address());
+                if (next.size() == 1 && next[0] == start)// it's a fallthrough
                     basic_blocks.add_edge(prev, current);
                 /// in other case, just add the node, and later
                 /// will be added the edge
                 else
                     basic_blocks.add_node(current);
             }
-
-            start = end+current->get_terminator()->get_instruction_length();
         }
         /// update the end pointer
         end = ins->get_address();
@@ -232,10 +231,11 @@ void MethodAnalysis::create_basic_blocks() {
     if (current == nullptr) {
         current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
         basic_blocks.add_node(current);
-    } else if (start != end){
+    } else if (start != end) {
         prev = current;
         current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
-        if (!prev->get_terminator())
+        auto next = internal_disassembler.determine_next(prev->get_terminator(), prev->get_last_address());
+        if (next.size() == 1 && next[0] == start)// it's a fallthrough
             basic_blocks.add_edge(prev, current);
         else
             basic_blocks.add_node(current);

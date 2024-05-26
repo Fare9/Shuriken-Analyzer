@@ -232,8 +232,9 @@ void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
     }
     if (blocks) {
         auto method_analysis = dex_analysis->get_method_analysis_by_name(method->getMethodID()->dalvik_name_format());
-        if (method_analysis)
+        if (method_analysis) {
             fmt::print("\n{}\n", method_analysis->toString());
+        }
     }
 }
 

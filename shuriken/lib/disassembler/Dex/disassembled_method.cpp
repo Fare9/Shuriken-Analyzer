@@ -60,7 +60,7 @@ std::span<Instruction *> DisassembledMethod::get_ref_to_instructions(size_t init
 
     if (end > instructions_raw.back()->get_address())
         throw std::runtime_error{"Error, last index out of bounds"};
-    if (init >= end)
+    if (init > end)
         throw std::runtime_error{"Error, init must be lower to end"};
 
     auto first = instructions_raw.end();
@@ -69,7 +69,6 @@ std::span<Instruction *> DisassembledMethod::get_ref_to_instructions(size_t init
     for (auto it = instructions_raw.begin(); it != instructions_raw.end(); ++it) {
         if ((*it)->get_address() == init) {
             first = it;
-            continue;
         }
         if ((*it)->get_address() == end) {
             second = it;

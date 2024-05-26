@@ -39,7 +39,7 @@ std::uint64_t DVMBasicBlock::get_first_address() const {
 std::uint64_t DVMBasicBlock::get_last_address() const {
     if (instructions_.empty())
         throw std::runtime_error("Error, basic block does not contain any instruction");
-    return instructions_.back()->get_address();
+    return instructions_.back()->get_address() + instructions_.back()->get_instruction_length();
 }
 
 std::string_view DVMBasicBlock::get_name() {
@@ -282,7 +282,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
 
 DVMBasicBlock *BasicBlocks::get_basic_block_by_idx(std::uint64_t idx) {
     auto it = std::find_if(nodes_.begin(), nodes_.end(), [&](DVMBasicBlock *bb) -> bool {
-        return bb->get_first_address() >= idx && bb->get_last_address() <= idx;
+        return idx >= bb->get_first_address() && idx < bb->get_last_address();
     });
 
     if (it == nodes_.end()) return nullptr;
@@ -293,7 +293,16 @@ std::string BasicBlocks::toString() {
     if (basic_blocks_string.empty()) {
         std::stringstream ss;
         for (DVMBasicBlock* dvmBasicBlock : nodes_) {
-            ss << dvmBasicBlock->toString() << '\n';
+            ss << dvmBasicBlock->toString();
+            ss << "Predecessors: ";
+            for (DVMBasicBlock * pred : predecessors_[dvmBasicBlock]) {
+                ss << pred->get_name() << " ";
+            }
+            ss << "\nSuccessors: ";
+            for (DVMBasicBlock * succ : successors_[dvmBasicBlock]) {
+                ss << succ->get_name() << " ";
+            }
+            ss << "\n\n";
         }
         basic_blocks_string = ss.str();
     }
