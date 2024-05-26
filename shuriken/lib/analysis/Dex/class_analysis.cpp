@@ -5,28 +5,26 @@
 // @file class_analysis.cpp
 
 #include "shuriken/analysis/Dex/dex_analysis.h"
-#include "shuriken/disassembler/Dex/internal_disassembler.h"
 #include "shuriken/common/logger.h"
+#include "shuriken/disassembler/Dex/internal_disassembler.h"
 
 using namespace shuriken::analysis::dex;
 
 std::string_view java_lang_object = "Ljava/lang/Object;";
 
-ClassAnalysis::ClassAnalysis(shuriken::parser::dex::ClassDef * class_def) :
-    class_def(class_def), is_external(false) {
+ClassAnalysis::ClassAnalysis(shuriken::parser::dex::ClassDef *class_def) : class_def(class_def), is_external(false) {
 }
 
-ClassAnalysis::ClassAnalysis(ExternalClass * class_def) :
-    class_def(class_def), is_external(true) {
+ClassAnalysis::ClassAnalysis(ExternalClass *class_def) : class_def(class_def), is_external(true) {
 }
 
-void ClassAnalysis::add_method(MethodAnalysis* method_analysis) {
+void ClassAnalysis::add_method(MethodAnalysis *method_analysis) {
     auto method_key = method_analysis->get_full_name();
 
-    methods[method_key] = method_analysis;
+    methods.insert({method_key, method_analysis});
 
     if (is_external)
-        std::get<ExternalClass*>(class_def)
+        std::get<ExternalClass *>(class_def)
                 ->add_external_method(method_analysis->get_external_method());
 }
 
@@ -38,12 +36,12 @@ size_t ClassAnalysis::get_nb_fields() const {
     return fields.size();
 }
 
-shuriken::parser::dex::ClassDef * ClassAnalysis::get_classdef() {
+shuriken::parser::dex::ClassDef *ClassAnalysis::get_classdef() {
     return std::get<shuriken::parser::dex::ClassDef *>(class_def);
 }
 
-ExternalClass * ClassAnalysis::get_externalclass() {
-    return std::get<ExternalClass*>(class_def);
+ExternalClass *ClassAnalysis::get_externalclass() {
+    return std::get<ExternalClass *>(class_def);
 }
 
 bool ClassAnalysis::is_class_external() const {
@@ -86,8 +84,8 @@ MethodAnalysis *ClassAnalysis::get_method_analysis(
 
     std::string_view method_name;
 
-    if (std::holds_alternative<ExternalMethod*>(method))
-        method_name = std::get<ExternalMethod*>(method)->pretty_method_name();
+    if (std::holds_alternative<ExternalMethod *>(method))
+        method_name = std::get<ExternalMethod *>(method)->pretty_method_name();
     else
         method_name = std::get<shuriken::parser::dex::EncodedMethod *>(method)->getMethodID()->dalvik_name_format();
 
@@ -95,7 +93,7 @@ MethodAnalysis *ClassAnalysis::get_method_analysis(
 }
 
 shuriken::iterator_range<ClassAnalysis::id_field_iterator_t> ClassAnalysis::get_fields() {
-  return make_range(fields.begin(), fields.end());
+    return make_range(fields.begin(), fields.end());
 }
 
 FieldAnalysis *ClassAnalysis::get_field_analysis(shuriken::parser::dex::EncodedField *field) {
@@ -108,29 +106,29 @@ FieldAnalysis *ClassAnalysis::get_field_analysis(shuriken::parser::dex::EncodedF
 }
 
 void ClassAnalysis::add_field_xref_read(MethodAnalysis *method,
-                         ClassAnalysis *classobj,
-                         shuriken::parser::dex::EncodedField *field,
-                         std::uint64_t off) {
+                                        ClassAnalysis *classobj,
+                                        shuriken::parser::dex::EncodedField *field,
+                                        std::uint64_t off) {
     std::string_view name = field->get_field()->pretty_field();
     if (fields.find(name) == fields.end())
-        fields[name] = std::make_unique<FieldAnalysis>(field);
+        fields.insert({name, std::make_unique<FieldAnalysis>(field)});
     fields[name]->add_xrefread(classobj, method, off);
 }
 
 void ClassAnalysis::add_field_xref_write(MethodAnalysis *method,
-                          ClassAnalysis *classobj,
-                          shuriken::parser::dex::EncodedField *field,
-                          std::uint64_t off) {
+                                         ClassAnalysis *classobj,
+                                         shuriken::parser::dex::EncodedField *field,
+                                         std::uint64_t off) {
     std::string_view name = field->get_field()->pretty_field();
     if (fields.find(name) == fields.end())
-        fields[name] = std::make_unique<FieldAnalysis>(field);
+        fields.insert({name, std::make_unique<FieldAnalysis>(field)});
     fields[name]->add_xrefwrite(classobj, method, off);
 }
 
 void ClassAnalysis::add_method_xref_to(MethodAnalysis *method1,
-                        ClassAnalysis *classobj,
-                        MethodAnalysis *method2,
-                        std::uint64_t off) {
+                                       ClassAnalysis *classobj,
+                                       MethodAnalysis *method2,
+                                       std::uint64_t off) {
     auto method_key = method1->get_full_name();
 
     if (methods.find(method_key) == methods.end())
@@ -139,9 +137,9 @@ void ClassAnalysis::add_method_xref_to(MethodAnalysis *method1,
 }
 
 void ClassAnalysis::add_method_xref_from(MethodAnalysis *method1,
-                          ClassAnalysis *classobj,
-                          MethodAnalysis *method2,
-                          std::uint64_t off) {
+                                         ClassAnalysis *classobj,
+                                         MethodAnalysis *method2,
+                                         std::uint64_t off) {
     auto method_key = method1->get_full_name();
 
     if (methods.find(method_key) == methods.end())
@@ -150,16 +148,16 @@ void ClassAnalysis::add_method_xref_from(MethodAnalysis *method1,
 }
 
 void ClassAnalysis::add_xref_to(shuriken::dex::TYPES::ref_type ref_kind,
-                 ClassAnalysis *classobj,
-                 MethodAnalysis *methodobj,
-                 std::uint64_t offset) {
+                                ClassAnalysis *classobj,
+                                MethodAnalysis *methodobj,
+                                std::uint64_t offset) {
     xrefto[classobj].insert(std::make_tuple(ref_kind, methodobj, offset));
 }
 
 void ClassAnalysis::add_xref_from(shuriken::dex::TYPES::ref_type ref_kind,
-                   ClassAnalysis *classobj,
-                   MethodAnalysis *methodobj,
-                   std::uint64_t offset) {
+                                  ClassAnalysis *classobj,
+                                  MethodAnalysis *methodobj,
+                                  std::uint64_t offset) {
     xrefsfrom[classobj].insert(std::make_tuple(ref_kind, methodobj, offset));
 }
 

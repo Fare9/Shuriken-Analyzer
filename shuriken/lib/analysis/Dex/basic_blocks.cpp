@@ -5,6 +5,8 @@
 // @file dex_analysis.cpp
 
 #include "shuriken/analysis/Dex/dex_analysis.h"
+#include <iomanip>
+#include <sstream>
 
 using namespace shuriken::analysis::dex;
 
@@ -74,6 +76,25 @@ void DVMBasicBlock::set_handler_type(shuriken::parser::dex::DVMType *handler) {
     this->handler_type = handler;
 }
 
+std::string DVMBasicBlock::toString() {
+    if (block_string.empty()) {
+        std::stringstream ss;
+        ss << get_name().data() << '\n';
+        if (is_try_block())
+            ss << ".try_block" << '\n';
+        else if (is_catch_block())
+            ss << ".catch_block" << '\n';
+        for (disassembler::dex::Instruction *insn: instructions_) {
+            ss << std::hex << std::setw(8)
+               << std::setfill('0')
+               << insn->get_address()
+               << ' ' << insn->print_instruction() << '\n';
+        }
+        block_string = ss.str();
+    }
+    return block_string;
+}
+
 
 shuriken::iterator_range<BasicBlocks::nodesiterator_t> BasicBlocks::nodes() {
     return make_range(nodes_.begin(), nodes_.end());
@@ -141,14 +162,12 @@ void BasicBlocks::add_edge(DVMBasicBlock *src, DVMBasicBlock *dst) {
     // now insert the edge
     auto edge_pair = std::make_pair(src, dst);
     /// check if edge already exists
-    auto it = std::find_if(edges_.begin(), edges_.end(), [&](std::pair<DVMBasicBlock *, DVMBasicBlock *> &edge)
-    {
+    auto it = std::find_if(edges_.begin(), edges_.end(), [&](std::pair<DVMBasicBlock *, DVMBasicBlock *> &edge) {
         return (edge_pair.first == edge.first) && (edge_pair.second == edge.second);
     });
 
     /// if not, add it
-    if (it == edges_.end())
-    {
+    if (it == edges_.end()) {
         edges_.push_back(edge_pair);
         /// now add the successors and predecessors
         add_sucessor(src, dst);
@@ -167,14 +186,14 @@ BasicBlocks::node_type_t BasicBlocks::get_node_type(DVMBasicBlock *node) {
 
 void BasicBlocks::remove_node(DVMBasicBlock *node) {
     // with this we provide RAII
-    std::unique_ptr<DVMBasicBlock> const node_ (node);
+    std::unique_ptr<DVMBasicBlock> const node_(node);
 
     if (std::find(nodes_.begin(), nodes_.end(), node) == nodes_.end())
         throw std::runtime_error("remove_mode: given node does not exist in graph");
 
     auto node_type = get_node_type(node);
 
-    if (node_type == JOIN_NODE) // len(predecessors) > 1
+    if (node_type == JOIN_NODE)// len(predecessors) > 1
     {
         auto suc = *successors_[node].begin();
 
@@ -183,16 +202,14 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
         // remove the edge
         std::ranges::remove(edges_, std::make_pair(node, suc));
 
-        for (auto pred : predecessors_[node])
-        {
+        for (auto pred: predecessors_[node]) {
             // delete the edge from predecessor to the node
             std::ranges::remove(edges_, std::make_pair(pred, node));
             // delete from successors[pred] the node
             successors_[pred].erase(node);
         }
 
-        for (auto pred : predecessors_[node])
-        {
+        for (auto pred: predecessors_[node]) {
             // now add new one with successor
             edges_.emplace_back(pred, suc);
             // add the predecessor of sucesspr
@@ -201,8 +218,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             // add the successor of pred
             successors_[pred].insert(suc);
         }
-    }
-    else if (node_type == BRANCH_NODE) // len(successors) > 1
+    } else if (node_type == BRANCH_NODE)// len(successors) > 1
     {
         auto pred = *predecessors_[node].begin();
 
@@ -212,16 +228,14 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
         std::ranges::remove(edges_, std::make_pair(pred, node));
 
         // now disconnect the node from the successors
-        for (auto suc : successors_[node])
-        {
+        for (auto suc: successors_[node]) {
             // remove the edges node->suc
             std::ranges::remove(edges_, std::make_pair(node, suc));
             // remove the node as predecessor of this successor
             predecessors_[suc].erase(node);
         }
 
-        for (auto suc : successors_[node])
-        {
+        for (auto suc: successors_[node]) {
             // add the edges
             edges_.emplace_back(pred, suc);
             // add the predecessor of sucesspr
@@ -229,12 +243,9 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             // add the sucessor of pred
             successors_[pred].insert(suc);
         }
-    }
-    else
-    {
+    } else {
         DVMBasicBlock *pred, *suc;
-        if (predecessors_[node].size() == 1)
-        {
+        if (predecessors_[node].size() == 1) {
             pred = *predecessors_[node].begin();
 
             // delete from successors of pred
@@ -243,8 +254,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             std::ranges::remove(edges_, std::make_pair(pred, node));
         }
 
-        if (successors_[node].size() == 1)
-        {
+        if (successors_[node].size() == 1) {
             auto suc = *successors_[node].begin();
 
             // delete from predecessors of sucessor
@@ -253,8 +263,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
             std::ranges::remove(edges_, std::make_pair(node, suc));
         }
 
-        if (pred != nullptr && suc != nullptr)
-        {
+        if (pred != nullptr && suc != nullptr) {
             edges_.emplace_back(pred, suc);
             // add sucessor to pred
             successors_[pred].insert(suc);
@@ -272,7 +281,7 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
 }
 
 DVMBasicBlock *BasicBlocks::get_basic_block_by_idx(std::uint64_t idx) {
-    auto it = std::find_if(nodes_.begin(), nodes_.end(), [&](DVMBasicBlock* bb)-> bool {
+    auto it = std::find_if(nodes_.begin(), nodes_.end(), [&](DVMBasicBlock *bb) -> bool {
         return bb->get_first_address() >= idx && bb->get_last_address() <= idx;
     });
 
@@ -280,4 +289,13 @@ DVMBasicBlock *BasicBlocks::get_basic_block_by_idx(std::uint64_t idx) {
     return *it;
 }
 
-
+std::string BasicBlocks::toString() {
+    if (basic_blocks_string.empty()) {
+        std::stringstream ss;
+        for (DVMBasicBlock* dvmBasicBlock : nodes_) {
+            ss << dvmBasicBlock->toString() << '\n';
+        }
+        basic_blocks_string = ss.str();
+    }
+    return basic_blocks_string;
+}

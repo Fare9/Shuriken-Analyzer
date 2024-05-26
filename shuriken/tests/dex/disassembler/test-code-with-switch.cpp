@@ -6,16 +6,16 @@
 // @brief Test for the disassembler, test code with switch statement
 
 #include "dex-files-folder.inc"
-#include "shuriken/parser/shuriken_parsers.h"
-#include "shuriken/parser/Dex/parser.h"
 #include "shuriken/disassembler/Dex/dex_disassembler.h"
+#include "shuriken/parser/Dex/parser.h"
+#include "shuriken/parser/shuriken_parsers.h"
 
-#include <iostream>
 #include <cassert>
-#include <unordered_map>
-#include <string>
-#include <fstream>
 #include <cstring>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 
 std::unordered_map<std::string, std::string_view> disassembled_methods = {
         {"Lcom/dexbox/_switch;->performAction(I)V", ".method public static Lcom/dexbox/_switch;->performAction(I)V\n"
@@ -88,14 +88,12 @@ std::unordered_map<std::string, std::string_view> disassembled_methods = {
                                                     "0000010c return-void\n"
                                                     "0000010e nop\n"
                                                     "00000110 packed-switch-payload (size)15 (first/last key)1[0x7e,0x76,0x6e,0x66,0x5e,0x56,0x4e,0x46,0x3e,0x36,0x2e,0x26,0x1e,0x15,0xc]\n"
-                                                    ".end method"}
-};
+                                                    ".end method"}};
 
-int
-main() {
+int main() {
 
-    std::string test_file = DEX_FILES_FOLDER \
-                                "_switch.dex";
+    std::string test_file = DEX_FILES_FOLDER
+            "_switch.dex";
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser = nullptr;
     std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> dex_disassembler = nullptr;
@@ -104,7 +102,7 @@ main() {
     dex_disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(dex_parser.get());
     dex_disassembler->disassembly_dex();
 
-    for (auto disassembled_method : disassembled_methods) {
+    for (auto disassembled_method: disassembled_methods) {
         auto method = dex_disassembler->get_disassembled_method(disassembled_method.first);
         std::cout << disassembled_method.first << " check\n";
         assert(strcmp(disassembled_method.second.data(), method->print_method(true).data()) == 0 && "Error, the method has not been properly disassembled");

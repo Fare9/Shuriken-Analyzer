@@ -10,8 +10,8 @@
 #ifndef SHURIKENLIB_DEX_INSTRUCTION_H
 #define SHURIKENLIB_DEX_INSTRUCTION_H
 
-#include <unordered_map>
 #include <iostream>
+#include <unordered_map>
 
 namespace shuriken {
     namespace disassembler {
@@ -23,15 +23,14 @@ namespace shuriken {
                 /// instructions
                 enum class opcodes {
 #define OPCODE(ID, VAL) \
-                    ID = VAL,
+    ID = VAL,
 #include "shuriken/disassembler/Dex/definitions/dvm_types.def"
                 };
 
                 /// @brief Type of dex instruction, this can be used to check
                 /// what kind of instruction is the current one, in order to avoid
                 /// using dynamic casting
-                enum class dexinsttype
-                {
+                enum class dexinsttype {
                     DEX_INSTRUCTION00X,
                     DEX_INSTRUCTION10X,
                     DEX_INSTRUCTION12X,
@@ -70,29 +69,29 @@ namespace shuriken {
 
                 /// @brief Type of operands for the opcodes
                 enum operand_type {
-                    REGISTER = 0, //! register operand
-                    LITERAL = 1,  //! literal value
-                    RAW = 2,      //! raw value
-                    OFFSET = 3,   //! offset value
-                    KIND = 0x100, //! used together with others
+                    REGISTER = 0,//! register operand
+                    LITERAL = 1, //! literal value
+                    RAW = 2,     //! raw value
+                    OFFSET = 3,  //! offset value
+                    KIND = 0x100,//! used together with others
                 };
 
                 /// @brief Identify different type of operations
                 /// from instructions like branching, break, write
                 /// or read.
                 enum operation_type {
-                    CONDITIONAL_BRANCH_DVM_OPCODE = 0, //! conditional branch instructions ["throw", "throw.", "if."]
-                    UNCONDITIONAL_BRANCH_DVM_OPCODE,   //! unconditional branch instructions ["goto", "goto."]
-                    RET_BRANCH_DVM_OPCODE,             //! return instructions ["return", "return."]
-                    MULTI_BRANCH_DVM_OPCODE,           //! multi branching (switch) ["packed-switch$", "sparse-switch$"]
-                    CALL_DVM_OPCODE,                   //! call an external or internal method ["invoke", "invoke."]
-                    DATA_MOVEMENT_DVM_OPCODE,          //! move data instruction ["move", "move."]
-                    FIELD_READ_DVM_OPCODE,             //! read a field instruction [".get"]
-                    FIELD_WRITE_DVM_OPCODE,            //! write a field instruction [".put"]
-                    NONE_OPCODE = 99                   //!
+                    CONDITIONAL_BRANCH_DVM_OPCODE = 0,//! conditional branch instructions ["throw", "throw.", "if."]
+                    UNCONDITIONAL_BRANCH_DVM_OPCODE,  //! unconditional branch instructions ["goto", "goto."]
+                    RET_BRANCH_DVM_OPCODE,            //! return instructions ["return", "return."]
+                    MULTI_BRANCH_DVM_OPCODE,          //! multi branching (switch) ["packed-switch$", "sparse-switch$"]
+                    CALL_DVM_OPCODE,                  //! call an external or internal method ["invoke", "invoke."]
+                    DATA_MOVEMENT_DVM_OPCODE,         //! move data instruction ["move", "move."]
+                    FIELD_READ_DVM_OPCODE,            //! read a field instruction [".get"]
+                    FIELD_WRITE_DVM_OPCODE,           //! write a field instruction [".put"]
+                    NONE_OPCODE = 99                  //!
                 };
             };
-        }
-    }
-}
-#endif //SHURIKENLIB_DEX_INSTRUCTION_H
+        }// namespace dex
+    }    // namespace disassembler
+}// namespace shuriken
+#endif//SHURIKENLIB_DEX_INSTRUCTION_H

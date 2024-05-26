@@ -12,7 +12,6 @@
 #include "shuriken/common/Dex/dvm_types.h"
 
 
-
 namespace shuriken::analysis::dex {
     class ExternalMethod {
     private:
@@ -29,6 +28,7 @@ namespace shuriken::analysis::dex {
         std::string pretty_name;
 
         shuriken::dex::TYPES::access_flags access_flags = shuriken::dex::TYPES::NONE;
+
     public:
         ExternalMethod(std::string_view class_idx, std::string_view name_idx, std::string_view proto_idx,
                        shuriken::dex::TYPES::access_flags access_flags);
@@ -57,7 +57,7 @@ namespace shuriken::analysis::dex {
         /// @return NONE access flags
         shuriken::dex::TYPES::access_flags get_access_flags() const;
     };
-}
+}// namespace shuriken::analysis::dex
 
 
-#endif //SHURIKENPROJECT_EXTERNAL_METHOD_H
+#endif//SHURIKENPROJECT_EXTERNAL_METHOD_H

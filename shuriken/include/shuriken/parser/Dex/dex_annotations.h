@@ -44,8 +44,7 @@ namespace shuriken {
             };
 
             /// @brief Class with all the annotations
-            class AnnotationDirectoryItem
-            {
+            class AnnotationDirectoryItem {
             public:
                 using field_annotations_id_t = std::unordered_map<std::uint32_t, FieldAnnotation>;
                 using method_annotations_id_t = std::unordered_map<std::uint32_t, MethodAnnotation>;
@@ -73,7 +72,7 @@ namespace shuriken {
 
                 /// @brief Parse the annotation directory item
                 /// @param stream stream with the DEX file
-                void parse_annotation_directory_item(common::ShurikenStream& stream);
+                void parse_annotation_directory_item(common::ShurikenStream &stream);
 
                 it_field_annotations get_field_annotations();
 
@@ -81,14 +80,14 @@ namespace shuriken {
 
                 it_parameter_annotations get_parameter_annotations();
 
-                FieldAnnotation& get_field_annotation_by_id(std::uint32_t field_id);
+                FieldAnnotation &get_field_annotation_by_id(std::uint32_t field_id);
 
-                MethodAnnotation& get_method_annotation_by_id(std::uint32_t method_id);
+                MethodAnnotation &get_method_annotation_by_id(std::uint32_t method_id);
 
-                ParameterAnnotation& get_parameter_annotation_by_id(std::uint32_t method_id);
+                ParameterAnnotation &get_parameter_annotation_by_id(std::uint32_t method_id);
             };
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace parser
+}// namespace shuriken
 
-#endif //SHURIKENLIB_DEX_ANNOTATIONS_H
+#endif//SHURIKENLIB_DEX_ANNOTATIONS_H

@@ -11,27 +11,27 @@
 #ifdef __cplusplus
 #if defined(_WIN32) || defined(__WIN32__)
 #ifdef SHURIKENLIB_EXPORTS
-        #define SHURIKENCOREAPI __declspec(dllexport)
-    #else
-        #define SHURIKENCOREAPI __declspec(dllimport)
-    #endif
+#define SHURIKENCOREAPI __declspec(dllexport)
+#else
+#define SHURIKENCOREAPI __declspec(dllimport)
+#endif
 #else
 #define SHURIKENCOREAPI extern "C"
 #endif
-#include <cstdint>
 #include <cstddef>
+#include <cstdint>
 #include <cstdlib>
 #else
 #define SHURIKENCOREAPI
 #include <stdbool.h>
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdlib.h>
 #endif
 
 extern "C" {
 
-typedef void* hDexContext;
+typedef void *hDexContext;
 
 /// C - DEX part of the CORE API from ShurikenLib
 
@@ -39,17 +39,15 @@ typedef void* hDexContext;
 
 /// @brief DexTypes of the DVM we have by default fundamental,
 /// classes and array DexTypes
-enum htype_e
-{
-    FUNDAMENTAL,    //! fundamental type (int, float...)
-    CLASS,          //! user defined class
-    ARRAY,          //! an array type
-    UNKNOWN         //! maybe wrong?
+enum htype_e {
+    FUNDAMENTAL,//! fundamental type (int, float...)
+    CLASS,      //! user defined class
+    ARRAY,      //! an array type
+    UNKNOWN     //! maybe wrong?
 };
 
 /// @brief enum with the fundamental DexTypes
-enum hfundamental_e
-{
+enum hfundamental_e {
     BOOLEAN,
     BYTE,
     CHAR,
@@ -63,29 +61,28 @@ enum hfundamental_e
 };
 
 /// @brief access flags from the Dalvik Virtual Machine
-enum access_flags_e
-{
-    ACCESS_FLAGS_NONE = 0x0,            //! No access flags
-    ACC_PUBLIC = 0x1,                   //! public type
-    ACC_PRIVATE = 0x2,                  //! private type
-    ACC_PROTECTED = 0x4,                //! protected type
-    ACC_STATIC = 0x8,                   //! static (global) type
-    ACC_FINAL = 0x10,                   //! final type (constant)
-    ACC_SYNCHRONIZED = 0x20,            //! synchronized
-    ACC_VOLATILE = 0x40,                //! Java volatile
-    ACC_BRIDGE = 0x40,                  //!
-    ACC_TRANSIENT = 0x80,               //!
-    ACC_VARARGS = 0x80,                 //!
-    ACC_NATIVE = 0x100,                 //! native type
-    ACC_INTERFACE = 0x200,              //! interface type
-    ACC_ABSTRACT = 0x400,               //! abstract type
-    ACC_STRICT = 0x800,                 //!
-    ACC_SYNTHETIC = 0x1000,             //!
-    ACC_ANNOTATION = 0x2000,            //!
-    ACC_ENUM = 0x4000,                  //! enum type
-    UNUSED = 0x8000,                    //!
-    ACC_CONSTRUCTOR = 0x10000,          //! constructor type
-    ACC_DECLARED_SYNCHRONIZED = 0x20000 //!
+enum access_flags_e {
+    ACCESS_FLAGS_NONE = 0x0,           //! No access flags
+    ACC_PUBLIC = 0x1,                  //! public type
+    ACC_PRIVATE = 0x2,                 //! private type
+    ACC_PROTECTED = 0x4,               //! protected type
+    ACC_STATIC = 0x8,                  //! static (global) type
+    ACC_FINAL = 0x10,                  //! final type (constant)
+    ACC_SYNCHRONIZED = 0x20,           //! synchronized
+    ACC_VOLATILE = 0x40,               //! Java volatile
+    ACC_BRIDGE = 0x40,                 //!
+    ACC_TRANSIENT = 0x80,              //!
+    ACC_VARARGS = 0x80,                //!
+    ACC_NATIVE = 0x100,                //! native type
+    ACC_INTERFACE = 0x200,             //! interface type
+    ACC_ABSTRACT = 0x400,              //! abstract type
+    ACC_STRICT = 0x800,                //!
+    ACC_SYNTHETIC = 0x1000,            //!
+    ACC_ANNOTATION = 0x2000,           //!
+    ACC_ENUM = 0x4000,                 //! enum type
+    UNUSED = 0x8000,                   //!
+    ACC_CONSTRUCTOR = 0x10000,         //! constructor type
+    ACC_DECLARED_SYNCHRONIZED = 0x20000//!
 };
 
 /// @brief Structure which keeps information from a field
@@ -100,7 +97,7 @@ typedef struct hdvmfield_t_ {
     /// a fundamental value, it contains that value
     hfundamental_e fundamental_value;
     /// @brief String value of the type
-    const char * type_value;
+    const char *type_value;
     /// @brief access flags from the field
     uint16_t access_flags;
 } hdvmfield_t;
@@ -109,29 +106,29 @@ typedef struct hdvmfield_t_ {
 /// this can be accessed from the class data
 typedef struct hdvmmethod_t_ {
     /// @brief name of the method
-    const char * method_name;
+    const char *method_name;
     /// @brief prototype of the method
-    const char * prototype;
+    const char *prototype;
     /// @brief access flags
     uint16_t access_flags;
     /// @brief number of registers
     uint32_t code_size;
     /// @brief pointer to a code buffer
-    uint8_t * code;
+    uint8_t *code;
     /// @brief Full Dalvik name
-    const char * dalvik_name;
+    const char *dalvik_name;
     /// @brief Demangled name
-    const char * demangled_name;
+    const char *demangled_name;
 } hdvmmethod_t;
 
 /// @brief Structure representing the classes in the DEX file
 typedef struct hdvmclass_t {
     /// @brief name of the class
-    const char* class_name;
+    const char *class_name;
     /// @brief name of the super class
-    const char* super_class;
+    const char *super_class;
     /// @brief name of the source file (if exists)
-    const char* source_file;
+    const char *source_file;
     /// @brief access flags from the class
     uint16_t access_flags;
     /// @brief number of direct methods
@@ -156,7 +153,7 @@ typedef struct hdvmclass_t {
 /// it parses the DEX file and it retrieves a context object
 /// @param filePath path to the DEX file to analyze
 /// @return context object to obtain information from the DEX file
-SHURIKENCOREAPI hDexContext parse_dex(const char* filePath);
+SHURIKENCOREAPI hDexContext parse_dex(const char *filePath);
 
 /// @brief Since the context object use dynamic memory this method
 /// will properly destroy the object.
@@ -172,7 +169,7 @@ SHURIKENCOREAPI size_t get_number_of_strings(hDexContext context);
 /// @param context from where to retrieve the string
 /// @param i id of the string to retrieve
 /// @return string from the id
-SHURIKENCOREAPI const char* get_string_by_id(hDexContext context, size_t i);
+SHURIKENCOREAPI const char *get_string_by_id(hDexContext context, size_t i);
 
 /// @brief Get the number of classes from the DEX file
 /// @param context dex from where to retrieve the number of classes
@@ -183,26 +180,25 @@ SHURIKENCOREAPI uint16_t get_number_of_classes(hDexContext context);
 /// @param context DEX from where to retrieve the class
 /// @param i id of the class to retrieve
 /// @return class from the DEX file
-SHURIKENCOREAPI hdvmclass_t * get_class_by_id(hDexContext context, uint16_t i);
+SHURIKENCOREAPI hdvmclass_t *get_class_by_id(hDexContext context, uint16_t i);
 
 /// @brief Get a class structure given a class name
 /// @param context DEX from where to retrieve the class
 /// @param class_name name of the class to retrieve
 /// @return class from the DEX file
-SHURIKENCOREAPI hdvmclass_t * get_class_by_name(hDexContext context, const char *class_name);
+SHURIKENCOREAPI hdvmclass_t *get_class_by_name(hDexContext context, const char *class_name);
 
 /// @brief Get a method structure given a full dalvik name.
 /// @param context DEX from where to retrieve the method
 /// @param method_name LclassName;->methodName(parameters)RetType
 /// @return pointer to hdvmmethod_t, null if the method does not exist
-SHURIKENCOREAPI hdvmmethod_t * get_method_by_name(hDexContext context, const char *method_name);
+SHURIKENCOREAPI hdvmmethod_t *get_method_by_name(hDexContext context, const char *method_name);
 
 
 ///--------------------------- Disassembler API ---------------------------
 
 /// @brief Instruction types from the Dalvik Virtual Machine
-enum dexinsttype_e
-{
+enum dexinsttype_e {
     DEX_INSTRUCTION00X,
     DEX_INSTRUCTION10X,
     DEX_INSTRUCTION12X,
@@ -250,13 +246,13 @@ typedef struct hdvminstruction_t_ {
     /// @brief opcode of the instruction
     uint32_t op;
     /// @brief Disassembly of the instruction
-    const char * disassembly;
+    const char *disassembly;
 } hdvminstruction_t;
 
 /// @brief Structure that keeps information about a handler
 typedef struct dvmhandler_data_t_ {
     /// @brief type of handled exception
-    const char * handler_type;
+    const char *handler_type;
     /// @brief start address of the handler
     uint64_t handler_start_addr;
 } dvmhandler_data_t;
@@ -271,26 +267,26 @@ typedef struct dvmexceptions_data_t_ {
     /// @brief number of handlers associated with the try
     size_t n_of_handlers;
     /// @brief pointer to an array of dvmhandler_data_t
-    dvmhandler_data_t * handler;
+    dvmhandler_data_t *handler;
 } dvmexceptions_data_t;
 
 /// @brief Structure that represents a disassembled method from
 /// the dalvik file
 typedef struct dvmdisassembled_method_t_ {
     /// @brief pointer to the method
-    hdvmmethod_t * method_id;
+    hdvmmethod_t *method_id;
     /// @brief number of registers
     uint16_t n_of_registers;
     /// @brief number of exception information structures
     size_t n_of_exceptions;
     /// @brief all the exceptions from the method
-    dvmexceptions_data_t * exception_information;
+    dvmexceptions_data_t *exception_information;
     /// @brief number of instructions from the method
     size_t n_of_instructions;
     /// @brief array of all the instructions from the method
-    hdvminstruction_t * instructions;
+    hdvminstruction_t *instructions;
     /// @brief Full disassembled method
-    const char * method_string;
+    const char *method_string;
 } dvmdisassembled_method_t;
 
 /// @brief Disassemble a DEX file and generate an internal DexDisassembler
@@ -302,7 +298,6 @@ SHURIKENCOREAPI void disassemble_dex(hDexContext context);
 /// @param method_name LclassName;->methodName(parameters)RetType
 /// @return pointer to a disassembled method
 SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const char *method_name);
-
 };
 
-#endif //SHURIKENLIB_SHURIKEN_PARSERS_CORE_H
+#endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H

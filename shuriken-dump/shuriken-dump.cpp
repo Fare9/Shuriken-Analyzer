@@ -8,8 +8,9 @@
 #include <shuriken/parser/Dex/parser.h>
 #include <shuriken/common/Dex/dvm_types.h>
 #include <shuriken/disassembler/Dex/dex_disassembler.h>
+#include <shuriken/analysis/Dex/analysis.h>
 #include <fmt/core.h>
-
+#include <functional>
 
 void show_help(std::string& prog_name) {
     fmt::println("USAGE: {} <file_to_analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
@@ -19,6 +20,7 @@ void show_help(std::string& prog_name) {
     fmt::println("\t-m: show methods from classes (it needs -c)");
     fmt::println("\t-b: show bytecode from methods (it needs -m)");
     fmt::println("\t-D: show the disassembled code from methods (it needs -m)");
+    fmt::println("\t-B: show the methods as basic blocks (it needs -m)");
 }
 
 void print_header(shuriken::parser::dex::DexHeader&);
@@ -33,8 +35,10 @@ bool methods = false;
 bool fields = false;
 bool code = false;
 bool disassembly = false;
+bool blocks = false;
 
 std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
+std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
 
 int
 main(int argc, char ** argv) {
@@ -45,19 +49,20 @@ main(int argc, char ** argv) {
         return -1;
     }
 
-    for (auto & s : args) {
-        if (s == "-h")
-            headers = true;
-        else if (s == "-c")
-            show_classes = true;
-        else if (s == "-m")
-            methods = true;
-        else if (s == "-f")
-            fields = true;
-        else if (s == "-b")
-            code = true;
-        else if (s == "-D")
-            disassembly = true;
+    std::unordered_map<std::string, std::function<void()>> options {
+            {"-h", [&](){ headers = true; }},
+            {"-c", [&](){ show_classes = true; }},
+            {"-m", [&](){ methods = true; }},
+            {"-f", [&](){ fields = true; }},
+            {"-b", [&](){ code = true; }},
+            {"-D", [&](){ disassembly = true; }},
+            {"-B", [&](){ blocks = true; }},
+    };
+
+    for (const auto& s : args) {
+        if (auto it = options.find(s); it != options.end()) {
+            it->second();
+        }
     }
 
     try {
@@ -67,6 +72,18 @@ main(int argc, char ** argv) {
             disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
             disassembler->disassembly_dex();
         }
+
+        if (blocks) {
+            if (disassembler == nullptr) {
+                disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+                disassembler->disassembly_dex();
+            }
+            dex_analysis = std::make_unique<shuriken::analysis::dex::Analysis>(parsed_dex.get(),
+                                                                                      disassembler.get(),
+                                                                                      false);
+            dex_analysis->create_xrefs();
+        }
+
         auto& header = parsed_dex->get_header();
 
         if (headers) print_header(header);
@@ -212,6 +229,11 @@ void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
         if (disassembled_method == nullptr)
             throw std::runtime_error("The method " + std::string(method_id->demangle()) + " was not correctly disassembled");
         fmt::print("{}\n", disassembled_method->print_method());
+    }
+    if (blocks) {
+        auto method_analysis = dex_analysis->get_method_analysis_by_name(method->getMethodID()->dalvik_name_format());
+        if (method_analysis)
+            fmt::print("\n{}\n", method_analysis->toString());
     }
 }
 

@@ -36,22 +36,21 @@ EncodedArray::it_const_encoded_value EncodedArray::get_encoded_values_const() {
 
 // AnnotationElement
 AnnotationElement::AnnotationElement(std::string_view name,
-                                std::unique_ptr < EncodedValue > value) :
-        name(name), value(std::move(value)) {
+                                     std::unique_ptr<EncodedValue> value) : name(name), value(std::move(value)) {
 }
 
 std::string_view AnnotationElement::get_name() const {
     return name;
 }
 
-EncodedValue * AnnotationElement::get_value() {
+EncodedValue *AnnotationElement::get_value() {
     return value.get();
 }
 
 
-void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream & stream,
-                                                 DexTypes & types,
-                                                 DexStrings & strings) {
+void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream &stream,
+                                                 DexTypes &types,
+                                                 DexStrings &strings) {
     std::unique_ptr<AnnotationElement> annotation;
     std::unique_ptr<EncodedValue> value;
     std::uint64_t name_idx;
@@ -71,10 +70,9 @@ void EncodedAnnotation::parse_encoded_annotation(common::ShurikenStream & stream
         // add the anotation to the vector
         annotations.push_back(std::move(annotation));
     }
-
 }
 
-DVMType * EncodedAnnotation::get_annotation_type() {
+DVMType *EncodedAnnotation::get_annotation_type() {
     return type;
 }
 
@@ -90,19 +88,19 @@ EncodedAnnotation::it_const_annotation_elements EncodedAnnotation::get_annotatio
     return make_range(annotations.begin(), annotations.end());
 }
 
-AnnotationElement * EncodedAnnotation::get_annotation_by_pos(std::uint32_t pos) {
+AnnotationElement *EncodedAnnotation::get_annotation_by_pos(std::uint32_t pos) {
     if (pos >= annotations.size())
         throw std::runtime_error("Error pos annotation out of bound");
     return annotations[pos].get();
 }
 
-void EncodedValue::parse_encoded_value(common::ShurikenStream & stream,
-                                       DexTypes & types,
-                                       DexStrings & strings) {
+void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
+                                       DexTypes &types,
+                                       DexStrings &strings) {
     auto read_from_stream = [&](size_t size) {
         std::uint8_t aux;
-        auto& value_data = std::get<std::vector<std::uint8_t>>(value);
-        for(size_t I = 0; I <= size; ++I) {
+        auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+        for (size_t I = 0; I <= size; ++I) {
             stream.read_data<std::uint8_t>(aux, sizeof(std::uint8_t));
             value_data.push_back(aux);
         }
@@ -126,20 +124,17 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream & stream,
         case shuriken::dex::TYPES::value_format::VALUE_TYPE:
         case shuriken::dex::TYPES::value_format::VALUE_FIELD:
         case shuriken::dex::TYPES::value_format::VALUE_METHOD:
-        case shuriken::dex::TYPES::value_format::VALUE_ENUM:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_ENUM: {
             read_from_stream(size);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_ARRAY:
-        {
-            auto& array = std::get<std::unique_ptr < EncodedArray >>(value);
+        case shuriken::dex::TYPES::value_format::VALUE_ARRAY: {
+            auto &array = std::get<std::unique_ptr<EncodedArray>>(value);
             array = std::make_unique<EncodedArray>();
             array->parse_encoded_array(stream, types, strings);
         }
-        case shuriken::dex::TYPES::value_format::VALUE_ANNOTATION:
-        {
-            auto& annotation = std::get<std::unique_ptr < EncodedAnnotation >>(value);
+        case shuriken::dex::TYPES::value_format::VALUE_ANNOTATION: {
+            auto &annotation = std::get<std::unique_ptr<EncodedAnnotation>>(value);
             annotation = std::make_unique<EncodedAnnotation>();
             annotation->parse_encoded_annotation(stream, types, strings);
         }
@@ -156,81 +151,81 @@ EncodedValue::it_data_buffer EncodedValue::get_data_buffer() {
     if (format == shuriken::dex::TYPES::value_format::VALUE_ARRAY ||
         format == shuriken::dex::TYPES::value_format::VALUE_ANNOTATION)
         throw std::runtime_error("Error value does not contain a data buffer");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
     return make_range(value_data.begin(), value_data.end());
 }
 
-EncodedArray * EncodedValue::get_array_data() {
+EncodedArray *EncodedValue::get_array_data() {
     if (format == shuriken::dex::TYPES::value_format::VALUE_ARRAY)
-        return std::get < std::unique_ptr < EncodedArray >> (value).get();
+        return std::get<std::unique_ptr<EncodedArray>>(value).get();
     return nullptr;
 }
 
-EncodedAnnotation * EncodedValue::get_annotation_data() {
+EncodedAnnotation *EncodedValue::get_annotation_data() {
     if (format == shuriken::dex::TYPES::value_format::VALUE_ANNOTATION)
-        return std::get < std::unique_ptr < EncodedAnnotation >> (value).get();
+        return std::get<std::unique_ptr<EncodedAnnotation>>(value).get();
     return nullptr;
 }
 
 std::int32_t EncodedValue::convert_data_to_int() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_INT)
         throw std::runtime_error("Error encoded value is not an int type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < std::int32_t * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<std::int32_t *>(value_data.data()));
 }
 
 std::int64_t EncodedValue::convert_data_to_long() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_LONG)
         throw std::runtime_error("Error encoded value is not a long type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < std::int64_t * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<std::int64_t *>(value_data.data()));
 }
 
 std::uint8_t EncodedValue::convert_data_to_byte() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_BYTE)
         throw std::runtime_error("Error encoded value is not a byte type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < std::uint8_t * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<std::uint8_t *>(value_data.data()));
 }
 
 std::int16_t EncodedValue::convert_data_to_short() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_SHORT)
         throw std::runtime_error("Error encoded value is not a short type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < std::int16_t * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<std::int16_t *>(value_data.data()));
 }
 
 double EncodedValue::convert_data_to_double() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_DOUBLE)
         throw std::runtime_error("Error encoded value is not a double type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < double * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<double *>(value_data.data()));
 }
 
 float EncodedValue::convert_data_to_float() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_FLOAT)
         throw std::runtime_error("Error encoded value is not a float type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < float * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<float *>(value_data.data()));
 }
 
 std::uint16_t EncodedValue::convert_data_to_char() {
     if (format != shuriken::dex::TYPES::value_format::VALUE_CHAR)
         throw std::runtime_error("Error encoded value is not a char type");
-    auto & value_data = std::get < std::vector < std::uint8_t >> (value);
-    return * (reinterpret_cast < std::uint16_t * > (value_data.data()));
+    auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+    return *(reinterpret_cast<std::uint16_t *>(value_data.data()));
 }
 
-EncodedField::EncodedField(FieldID * field_idx, shuriken::dex::TYPES::access_flags flags)
-        : field_idx(field_idx), flags(flags) {
-  this->field_idx->set_encoded_field(this);
+EncodedField::EncodedField(FieldID *field_idx, shuriken::dex::TYPES::access_flags flags)
+    : field_idx(field_idx), flags(flags) {
+    this->field_idx->set_encoded_field(this);
 }
 
-const FieldID* EncodedField::get_field() const {
+const FieldID *EncodedField::get_field() const {
     return field_idx;
 }
 
-FieldID* EncodedField::get_field() {
+FieldID *EncodedField::get_field() {
     return field_idx;
 }
 
@@ -238,20 +233,20 @@ shuriken::dex::TYPES::access_flags EncodedField::get_flags() {
     return flags;
 }
 
-void EncodedField::set_initial_value(EncodedArray* initial_value) {
+void EncodedField::set_initial_value(EncodedArray *initial_value) {
     this->initial_value = initial_value;
 }
 
-const EncodedArray* EncodedField::get_initial_value() const {
+const EncodedArray *EncodedField::get_initial_value() const {
     return initial_value;
 }
 
-EncodedArray* EncodedField::get_initial_value() {
+EncodedArray *EncodedField::get_initial_value() {
     return initial_value;
 }
 
-void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& stream,
-                                                      DexTypes& types) {
+void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream &stream,
+                                                      DexTypes &types) {
     std::uint64_t type_idx, addr;
 
     /// the offset of the EncodedCatchHandler
@@ -263,10 +258,8 @@ void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& st
         type_idx = stream.read_uleb128();
         addr = stream.read_uleb128();
 
-        handlers.push_back({
-            .type = types.get_type_by_id(static_cast<uint32_t>(type_idx)),
-            .idx = addr
-        });
+        handlers.push_back({.type = types.get_type_by_id(static_cast<uint32_t>(type_idx)),
+                            .idx = addr});
     }
 
     // A size of 0 means that there is a catch-all but no explicitly typed catches
@@ -277,7 +270,7 @@ void EncodedCatchHandler::parse_encoded_catch_handler(common::ShurikenStream& st
 }
 
 bool EncodedCatchHandler::has_explicit_typed_catches() const {
-    if (size >= 0) return true; // user should check size of handlers
+    if (size >= 0) return true;// user should check size of handlers
     return false;
 }
 
@@ -297,8 +290,8 @@ EncodedCatchHandler::it_handler_pairs EncodedCatchHandler::get_handle_pairs() {
     return make_range(handlers.begin(), handlers.end());
 }
 
-void CodeItemStruct::parse_code_item_struct(common::ShurikenStream& stream,
-                                            DexTypes& types) {
+void CodeItemStruct::parse_code_item_struct(common::ShurikenStream &stream,
+                                            DexTypes &types) {
     // instructions are read in chunks of 16 bits
     std::uint8_t instruction[2];
     size_t I;
@@ -310,7 +303,7 @@ void CodeItemStruct::parse_code_item_struct(common::ShurikenStream& stream,
     // now we can work with the values
 
     // first read the instructions for the CodeItem
-    instructions_raw.reserve(code_item.insns_size*2);
+    instructions_raw.reserve(code_item.insns_size * 2);
 
     for (I = 0; I < code_item.insns_size; ++I) {
         // read the instruction
@@ -319,8 +312,8 @@ void CodeItemStruct::parse_code_item_struct(common::ShurikenStream& stream,
         instructions_raw.push_back(instruction[1]);
     }
 
-    if ((code_item.tries_size > 0) && // padding present in case tries_size > 0
-        (code_item.insns_size % 2)) {   // and instructions size is odd
+    if ((code_item.tries_size > 0) &&// padding present in case tries_size > 0
+        (code_item.insns_size % 2)) {// and instructions size is odd
 
         // padding advance 2 bytes
         stream.seekg(sizeof(std::uint16_t), std::ios_base::cur);
@@ -391,17 +384,15 @@ CodeItemStruct::it_encoded_catch_handlers CodeItemStruct::get_encoded_catch_hand
     return make_range(encoded_catch_handlers.begin(), encoded_catch_handlers.end());
 }
 
-EncodedMethod::EncodedMethod(MethodID* method_id, shuriken::dex::TYPES::access_flags access_flags)
-: method_id(method_id), access_flags(access_flags)
-{}
+EncodedMethod::EncodedMethod(MethodID *method_id, shuriken::dex::TYPES::access_flags access_flags)
+    : method_id(method_id), access_flags(access_flags) {}
 
-void EncodedMethod::parse_encoded_method(common::ShurikenStream& stream,
+void EncodedMethod::parse_encoded_method(common::ShurikenStream &stream,
                                          std::uint64_t code_off,
-                                         DexTypes& types) {
+                                         DexTypes &types) {
     auto current_offset = stream.tellg();
 
-    if (code_off > 0)
-    {
+    if (code_off > 0) {
         stream.seekg(code_off, std::ios_base::beg);
         // parse the code item
         code_item = std::make_unique<CodeItemStruct>();
@@ -412,11 +403,11 @@ void EncodedMethod::parse_encoded_method(common::ShurikenStream& stream,
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-const MethodID* EncodedMethod::getMethodID() const {
+const MethodID *EncodedMethod::getMethodID() const {
     return method_id;
 }
 
-MethodID* EncodedMethod::getMethodID() {
+MethodID *EncodedMethod::getMethodID() {
     return method_id;
 }
 
@@ -424,10 +415,10 @@ shuriken::dex::TYPES::access_flags EncodedMethod::get_flags() {
     return access_flags;
 }
 
-const CodeItemStruct* EncodedMethod::get_code_item() const {
+const CodeItemStruct *EncodedMethod::get_code_item() const {
     return code_item.get();
 }
 
-CodeItemStruct* EncodedMethod::get_code_item() {
+CodeItemStruct *EncodedMethod::get_code_item() {
     return code_item.get();
 }

@@ -7,8 +7,7 @@
 
 using namespace shuriken::common;
 
-ShurikenStream::ShurikenStream(std::ifstream& input_file) :
-input_file(input_file), file_size(0) {
+ShurikenStream::ShurikenStream(std::ifstream &input_file) : input_file(input_file), file_size(0) {
     assert(input_file.is_open() && "Input file must be open");
 
     initialize();
@@ -47,14 +46,12 @@ void ShurikenStream::seekg_safe(std::streamoff off, std::ios_base::seekdir dir) 
     input_file.seekg(off, dir);
 }
 
-std::uint64_t ShurikenStream::read_uleb128()
-{
+std::uint64_t ShurikenStream::read_uleb128() {
     std::uint64_t value = 0;
     unsigned shift = 0;
     std::int8_t byte_read;
 
-    do
-    {
+    do {
         read_data<std::int8_t>(byte_read, sizeof(std::int8_t));
         value |= static_cast<std::uint64_t>(byte_read & 0x7f) << shift;
         shift += 7;
@@ -63,14 +60,12 @@ std::uint64_t ShurikenStream::read_uleb128()
     return value;
 }
 
-std::int64_t ShurikenStream::read_sleb128()
-{
+std::int64_t ShurikenStream::read_sleb128() {
     std::int64_t value = 0;
     unsigned shift = 0;
     std::int8_t byte_read;
 
-    do
-    {
+    do {
         read_data<std::int8_t>(byte_read, sizeof(std::int8_t));
         value |= static_cast<std::uint64_t>(byte_read & 0x7f) << shift;
         shift += 7;
@@ -97,8 +92,7 @@ std::string ShurikenStream::read_ansii_string(std::int64_t offset) {
 
     utf16_size = read_uleb128();
 
-    while (utf16_size-- > 0)
-    {
+    while (utf16_size-- > 0) {
         input_file.read(reinterpret_cast<char *>(&character), int8_s);
         new_str += static_cast<char>(character);
     }

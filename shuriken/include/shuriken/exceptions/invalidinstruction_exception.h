@@ -19,29 +19,26 @@ namespace exceptions {
         std::string _msg;
         /// @brief Instruction size for disassembler
         std::uint32_t _inst_size;
-    public:
 
+    public:
         /// @brief Constructor of exception
         /// @param msg message to show to the user
         /// @param inst_Size size of the instruction to skip that size
         InvalidInstructionException(const std::string &msg, std::uint32_t inst_size)
-                : _msg(msg), _inst_size(inst_size)
-        {}
+            : _msg(msg), _inst_size(inst_size) {}
 
         /// @brief Return error message
         /// @return error message in a c string style
-        virtual const char* what() const noexcept override
-        {
+        virtual const char *what() const noexcept override {
             return _msg.c_str();
         }
 
         /// @brief get the size of an incorrectly disassembled instruction
         /// @return size of an instruction
-        std::uint32_t size() const
-        {
+        std::uint32_t size() const {
             return _inst_size;
         }
     };
-}
+}// namespace exceptions
 
-#endif //SHURIKENLIB_INVALIDINSTRUCTION_EXCEPTION_H
+#endif//SHURIKENLIB_INVALIDINSTRUCTION_EXCEPTION_H

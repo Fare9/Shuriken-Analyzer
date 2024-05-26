@@ -11,11 +11,11 @@ using namespace shuriken::parser::dex;
 
 #define ERROR_MESSAGE(field) "Error '" #field "' > 'file size'"
 
-DexHeader::DexHeader(DexHeader& header) {
+DexHeader::DexHeader(DexHeader &header) {
     memcpy(&dexheader, &header.dexheader, sizeof(dexheader_t));
 }
 
-void DexHeader::parse_header(common::ShurikenStream& stream) {
+void DexHeader::parse_header(common::ShurikenStream &stream) {
     auto my_logger = shuriken::logger();
 
     my_logger->info("Start parsing header");
@@ -52,8 +52,7 @@ void DexHeader::parse_header(common::ShurikenStream& stream) {
     my_logger->info("Finished parsing header");
 }
 
-void DexHeader::to_xml(std::ofstream &fos)
-{
+void DexHeader::to_xml(std::ofstream &fos) {
     size_t i;
 
     fos << std::hex;
@@ -91,14 +90,14 @@ void DexHeader::to_xml(std::ofstream &fos)
 
 void DexHeader::dump(std::ofstream &fos) {
     fos.seekp(0, std::ofstream::beg);
-    fos.write(reinterpret_cast<const char*>(&dexheader), sizeof(dexheader_t));
+    fos.write(reinterpret_cast<const char *>(&dexheader), sizeof(dexheader_t));
 }
 
-const DexHeader::dexheader_t& DexHeader::get_dex_header_const() const {
+const DexHeader::dexheader_t &DexHeader::get_dex_header_const() const {
     return dexheader;
 }
 
-DexHeader::dexheader_t& DexHeader::get_dex_header() {
+DexHeader::dexheader_t &DexHeader::get_dex_header() {
     return dexheader;
 }
 

@@ -9,11 +9,11 @@
 #define SHURIKENLIB_DEX_STRINGS_H
 
 #include "shuriken/common/shurikenstream.h"
-#include <vector>
-#include <string>
-#include <ranges>
 #include <algorithm>
+#include <ranges>
+#include <string>
 #include <string_view>
+#include <vector>
 
 namespace shuriken {
     namespace parser {
@@ -28,7 +28,8 @@ namespace shuriken {
                 /// @brief Vector with all the DexStrings from the dex file
                 dex_strings_t dex_strings;
                 /// @brief View of the previous DexStrings for quickly accessing them
-                dex_strings_view_t  dex_strings_view;
+                dex_strings_view_t dex_strings_view;
+
             public:
                 /// @brief Constructor of the class, default one
                 DexStrings() = default;
@@ -39,7 +40,7 @@ namespace shuriken {
                 /// @param shuriken_stream stream with the dex file
                 /// @param strings_offset offset in the file where DexStrings are
                 /// @param n_of_strings number of DexStrings to read
-                void parse_strings(common::ShurikenStream& shuriken_stream,
+                void parse_strings(common::ShurikenStream &shuriken_stream,
                                    std::uint32_t strings_offset,
                                    std::uint32_t n_of_strings);
 
@@ -66,8 +67,8 @@ namespace shuriken {
                 void dump_binary(std::ofstream &fos, std::int64_t offset);
             };
 
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace parser
+}// namespace shuriken
 
-#endif //SHURIKENLIB_DEX_STRINGS_H
+#endif//SHURIKENLIB_DEX_STRINGS_H

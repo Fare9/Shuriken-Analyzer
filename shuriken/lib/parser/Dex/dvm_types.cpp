@@ -30,13 +30,12 @@ static const std::unordered_map<access_flags, std::string> flagStrings = {
         {ACC_ENUM, "ENUM"},
         {UNUSED, "UNUSED"},
         {ACC_CONSTRUCTOR, "CONSTRUCTOR"},
-        {ACC_DECLARED_SYNCHRONIZED, "DECLARED_SYNCHRONIZED"}
-};
+        {ACC_DECLARED_SYNCHRONIZED, "DECLARED_SYNCHRONIZED"}};
 
 std::string Utils::get_types_as_string(TYPES::access_flags ac) {
     std::string ac_str = "";
-    for (auto& [key, value] : flagStrings) {
-        if ( (key & ac) == key) {
+    for (auto &[key, value]: flagStrings) {
+        if ((key & ac) == key) {
             ac_str += value + "|";
         }
     }

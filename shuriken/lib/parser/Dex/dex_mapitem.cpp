@@ -11,8 +11,7 @@
 using namespace shuriken::parser::dex;
 
 
-
-void DexMapList::parse_map_list(common::ShurikenStream& stream, std::uint32_t map_off) {
+void DexMapList::parse_map_list(common::ShurikenStream &stream, std::uint32_t map_off) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 
@@ -27,8 +26,7 @@ void DexMapList::parse_map_list(common::ShurikenStream& stream, std::uint32_t ma
     // first read the size
     stream.read_data<std::uint32_t>(size, sizeof(std::uint32_t));
 
-    for (size_t I = 0; I < size; ++I)
-    {
+    for (size_t I = 0; I < size; ++I) {
         stream.read_data<map_item>(item, sizeof(map_item));
 
         items[item.type] = {item.type, item.unused, item.size, item.offset};

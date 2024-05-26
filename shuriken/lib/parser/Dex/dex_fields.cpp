@@ -10,22 +10,21 @@
 
 using namespace shuriken::parser::dex;
 
-FieldID::FieldID(DVMType* class_, DVMType* type_, std::string_view name_) :
-class_(class_), type_(type_), name_(name_) {}
+FieldID::FieldID(DVMType *class_, DVMType *type_, std::string_view name_) : class_(class_), type_(type_), name_(name_) {}
 
-const DVMType* FieldID::field_class() const {
+const DVMType *FieldID::field_class() const {
     return class_;
 }
 
-DVMType* FieldID::field_class() {
+DVMType *FieldID::field_class() {
     return class_;
 }
 
-const DVMType* FieldID::field_type() const {
+const DVMType *FieldID::field_type() const {
     return type_;
 }
 
-DVMType* FieldID::field_type() {
+DVMType *FieldID::field_type() {
     return type_;
 }
 
@@ -42,18 +41,18 @@ std::string_view FieldID::pretty_field() {
     return pretty_name;
 }
 
-void FieldID::set_encoded_field(EncodedField * field) {
-  this->encoded_field = field;
+void FieldID::set_encoded_field(EncodedField *field) {
+    this->encoded_field = field;
 }
 
-EncodedField * FieldID::get_encoded_field() {
-  return this->encoded_field;
+EncodedField *FieldID::get_encoded_field() {
+    return this->encoded_field;
 }
 
 void DexFields::parse_fields(
-        common::ShurikenStream& stream,
-        DexTypes& types,
-        DexStrings& strings,
+        common::ShurikenStream &stream,
+        DexTypes &types,
+        DexStrings &strings,
         std::uint32_t fields_offset,
         std::uint32_t n_of_fields) {
     auto current_offset = stream.tellg();
@@ -74,8 +73,7 @@ void DexFields::parse_fields(
         field_id = std::make_unique<FieldID>(
                 types.get_type_by_id(class_idx),
                 types.get_type_by_id(type_idx),
-                strings.get_string_by_id(name_idx)
-                );
+                strings.get_string_by_id(name_idx));
         fields.push_back(std::move(field_id));
     }
 
@@ -91,14 +89,14 @@ DexFields::it_const_field_ids DexFields::get_fields_const() {
     return make_range(fields.begin(), fields.end());
 }
 
-FieldID* DexFields::get_field_by_id(std::uint32_t id) {
+FieldID *DexFields::get_field_by_id(std::uint32_t id) {
     if (id >= fields.size())
         throw std::runtime_error("Error field id is out of bound");
     return fields[id].get();
 }
 
-std::int64_t DexFields::get_id_by_field(FieldID* field) {
-    auto it = std::ranges::find_if(fields, [&](std::unique_ptr<FieldID>& f) {
+std::int64_t DexFields::get_id_by_field(FieldID *field) {
+    auto it = std::ranges::find_if(fields, [&](std::unique_ptr<FieldID> &f) {
         return *field == *f;
     });
 
@@ -108,10 +106,9 @@ std::int64_t DexFields::get_id_by_field(FieldID* field) {
     return std::distance(fields.begin(), it);
 }
 
-void DexFields::to_xml(std::ofstream& fos) {
+void DexFields::to_xml(std::ofstream &fos) {
     fos << "<fields>\n";
-    for (const auto &field : fields)
-    {
+    for (const auto &field: fields) {
         fos << "\t<field>\n";
         fos << "\t\t<type>" << field->field_type()->print_type() << "</type>\n";
         fos << "\t\t<name>" << field->field_name() << "</name>\n";
