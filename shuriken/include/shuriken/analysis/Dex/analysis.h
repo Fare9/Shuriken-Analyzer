@@ -16,25 +16,24 @@ namespace shuriken::analysis::dex {
 
     class Analysis {
     private:
-        std::unordered_map<std::string, std::string> external_classes_names;
         /// @brief all the dex parsers from the analysis
         std::vector<parser::dex::Parser *> parsers;
 
         /// @brief list of class analysis by classes' names
-        std::unordered_map<std::string_view, std::unique_ptr<ClassAnalysis>> class_analyses;
+        std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>> class_analyses;
 
         /// @brief list of external classes by classes' names
-        std::unordered_map<std::string_view, std::unique_ptr<ExternalClass>>
+        std::unordered_map<std::string, std::unique_ptr<ExternalClass>>
                 external_classes;
 
         /// @brief analysis of strings by the string value
-        std::unordered_map<std::string_view, std::unique_ptr<StringAnalysis>> string_analyses;
+        std::unordered_map<std::string, std::unique_ptr<StringAnalysis>> string_analyses;
 
         /// @brief analysis of methods by the dalvik name of the method
-        std::unordered_map<std::string_view, std::unique_ptr<MethodAnalysis>> method_analyses;
+        std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>> method_analyses;
 
         /// @brief external methods by dalvik name of the method
-        std::unordered_map<std::string_view, std::unique_ptr<ExternalMethod>>
+        std::unordered_map<std::string, std::unique_ptr<ExternalMethod>>
                 external_methods;
 
         std::vector<FieldAnalysis *> field_analyses;
@@ -56,17 +55,17 @@ namespace shuriken::analysis::dex {
         void _create_xrefs(parser::dex::ClassDef *current_class);
 
         /// @brief Helper function to analyze the xrefs from an encoded method
-        void _analyze_encoded_method(parser::dex::EncodedMethod *method, std::string_view current_class_name);
+        void _analyze_encoded_method(parser::dex::EncodedMethod *method, std::string& current_class_name);
 
         /// @brief Helper function to get a ClassAnalysis, or in case it doesn't exist
         /// create it as an external class
-        ClassAnalysis *_get_class_or_create_external(std::string_view class_name);
+        ClassAnalysis *_get_class_or_create_external(std::string class_name);
 
         /// @brief Get a method by its hash, return the MethodAnalysis object
         /// in case it doesn't exists, create an ExternalMethod
         /// @param dalvik_format full method name
         /// @return a MethodAnalysis pointer
-        MethodAnalysis *_resolve_method(std::string_view full_name);
+        MethodAnalysis *_resolve_method(std::string full_name);
 
     public:
         Analysis(parser::dex::Parser *parser,
@@ -103,16 +102,16 @@ namespace shuriken::analysis::dex {
         /// @brief Get a ClassAnalysis object by the class name
         /// @param class_name name of the class to retrieve
         /// @return pointer to ClassAnalysis*
-        ClassAnalysis *get_class_analysis(std::string_view class_name);
+        ClassAnalysis *get_class_analysis(std::string class_name);
 
         /// @brief Get a reference to the classes
         /// @return reference to map with classes
-        std::unordered_map<std::string_view, std::unique_ptr<ClassAnalysis>> &
+        std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>> &
         get_classes();
 
         /// @brief Get a reference to external classes
         /// @return reference to external classes
-        std::unordered_map<std::string_view, std::unique_ptr<ExternalClass>> &
+        std::unordered_map<std::string, std::unique_ptr<ExternalClass>> &
         get_external_classes();
 
         /// @brief Get a MethodAnalysis pointer given an Encoded or External Method
@@ -126,23 +125,23 @@ namespace shuriken::analysis::dex {
         /// @param method_name name of the method
         /// @param method_descriptor prototype descriptor of the method
         /// @return pointer to MethodAnalysis or nullptr
-        MethodAnalysis *get_method_analysis_by_name(std::string_view dalvik_name);
+        MethodAnalysis *get_method_analysis_by_name(std::string dalvik_name);
 
         /// @brief Obtain a MethodID by different values
         /// @param class_name class name of the method
         /// @param method_name name of the method
         /// @param method_descriptor prototype descriptor of the method
         /// @return pointer to MethodID or nullptr
-        parser::dex::MethodID *get_method_id_by_name(std::string_view dalvik_name);
+        parser::dex::MethodID *get_method_id_by_name(std::string dalvik_name);
 
         /// @brief Return a reference to the method analysis
         /// @return reference to map woth MethodAnalysis
-        std::unordered_map<std::string_view, std::unique_ptr<MethodAnalysis>> &
+        std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>> &
         get_methods();
 
         /// @brief Return a reference to the ExternalMethods
         /// @return reference to map with ExternalMethod
-        std::unordered_map<std::string_view, std::unique_ptr<ExternalMethod>> &
+        std::unordered_map<std::string, std::unique_ptr<ExternalMethod>> &
         get_external_methods();
 
         /// @brief Get a field given an encoded field
@@ -156,7 +155,7 @@ namespace shuriken::analysis::dex {
 
         /// @brief Get a reference to the StringAnalysis map
         /// @return reference to StringAnalysis map
-        std::unordered_map<std::string_view, std::unique_ptr<StringAnalysis>> &
+        std::unordered_map<std::string, std::unique_ptr<StringAnalysis>> &
         get_string_analysis();
 
         /// @brief Find classes by name with regular expression,
