@@ -1,5 +1,11 @@
 var NAVTREEINDEX2 =
 {
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a74ea7ef87bedc08e175ea2daf4007468":[0,0,1,3,0,5,1],
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a74ea7ef87bedc08e175ea2daf4007468":[1,0,1,3,0,5,1],
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a763fa45d86bc91028da1233850905591":[0,0,1,3,0,5,6],
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a763fa45d86bc91028da1233850905591":[1,0,1,3,0,5,6],
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a952723bfad8de00862a7a114ecce2b0f":[0,0,1,3,0,5,0],
+"classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#a952723bfad8de00862a7a114ecce2b0f":[1,0,1,3,0,5,0],
 "classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#aa075d80ebb9a758b241a5789d4c7e77c":[0,0,1,3,0,5,7],
 "classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#aa075d80ebb9a758b241a5789d4c7e77c":[1,0,1,3,0,5,7],
 "classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html#aa9f6181d810b1f956c393ca9e64011a3":[0,0,1,3,0,5,5],
@@ -243,11 +249,5 @@ var NAVTREEINDEX2 =
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction21h.html#ab60cbc1a83420e68ddfab98014072f2e":[0,0,1,3,0,18,0],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction21h.html#ab60cbc1a83420e68ddfab98014072f2e":[1,0,1,3,0,18,0],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction21h.html#ae9d42399c52dfb87b056c58095d2a677":[0,0,1,3,0,18,3],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21h.html#ae9d42399c52dfb87b056c58095d2a677":[1,0,1,3,0,18,3],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html":[0,0,1,3,0,19],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html":[1,0,1,3,0,19],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html#a061948c8e1591cb339b43303ad030d4c":[0,0,1,3,0,19,3],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html#a061948c8e1591cb339b43303ad030d4c":[1,0,1,3,0,19,3],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html#a067de802f66f41f35aad95561c9209d5":[0,0,1,3,0,19,7],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction21s.html#a067de802f66f41f35aad95561c9209d5":[1,0,1,3,0,19,7]
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction21h.html#ae9d42399c52dfb87b056c58095d2a677":[1,0,1,3,0,18,3]
 };

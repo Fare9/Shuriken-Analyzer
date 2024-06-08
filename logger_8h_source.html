@@ -109,8 +109,8 @@ $(function(){initNavTree('logger_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef SHURIKENLIB_LOGGER_H</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define SHURIKENLIB_LOGGER_H</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;spdlog/spdlog.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;spdlog/spdlog.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceshuriken.html">shuriken</a> {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
@@ -118,9 +118,9 @@ $(function(){initNavTree('logger_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    /// Shuriken</span></div>
 <div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b">   17</a></span><span class="comment"></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b">logger_output_t</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">   18</a></span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">TO_CONSOLE</a> = 0, <span class="comment">/// stdout</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">   19</a></span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">TO_STDERR</a>,      <span class="comment">/// stderr</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">TO_FILE</a>         <span class="comment">/// given file</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">   18</a></span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">TO_CONSOLE</a> = 0,<span class="comment">/// stdout</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">   19</a></span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">TO_STDERR</a>,     <span class="comment">/// stderr</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_enumvalue" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">TO_FILE</a>        <span class="comment">/// given file</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">   21</a></span>    };</div>
 </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
@@ -134,10 +134,10 @@ $(function(){initNavTree('logger_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">    /// will be different depending on the type of logging</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    /// required.</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">    /// @return logger shared object</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">   33</a></span><span class="comment"></span>    spdlog::logger* <a class="code hl_function" href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">logger</a>();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">   33</a></span><span class="comment"></span>    spdlog::logger *<a class="code hl_function" href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">logger</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}<span class="comment">// namespace shuriken</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif </span><span class="comment">//SHURIKENLIB_LOGGER_H</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span><span class="comment">//SHURIKENLIB_LOGGER_H</span></div>
 <div class="ttc" id="anamespaceshuriken_html"><div class="ttname"><a href="namespaceshuriken.html">shuriken</a></div><div class="ttdef"><b>Definition</b> <a href="analysis_8h_source.html#l00015">analysis.h:15</a></div></div>
 <div class="ttc" id="anamespaceshuriken_html_a384205b44b16d248417a2ecbe4bd8ff5"><div class="ttname"><a href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">shuriken::logger</a></div><div class="ttdeci">spdlog::logger * logger()</div><div class="ttdoc">Method to retrieve a logger object, this object will be different depending on the type of logging re...</div></div>
 <div class="ttc" id="anamespaceshuriken_html_a4efb9ef98f13ecd6e10482c674fca7c4"><div class="ttname"><a href="namespaceshuriken.html#a4efb9ef98f13ecd6e10482c674fca7c4">shuriken::LOG_TO_STDOUT</a></div><div class="ttdeci">void LOG_TO_STDOUT()</div></div>

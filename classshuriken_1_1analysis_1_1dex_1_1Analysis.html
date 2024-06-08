@@ -116,39 +116,39 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf6d2c610cfaf83285bfa82ca4657d47" id="r_acf6d2c610cfaf83285bfa82ca4657d47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf6d2c610cfaf83285bfa82ca4657d47">create_xrefs</a> ()</td></tr>
 <tr class="memdesc:acf6d2c610cfaf83285bfa82ca4657d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create class, method, string and field cross references if you are using multiple DEX files, this function must be called when all DEX files are added. If you call the function after every DEX file, it will only work for the first time. ADD ALL DEX FIRST.  <br /></td></tr>
 <tr class="separator:acf6d2c610cfaf83285bfa82ca4657d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a913dd334e9745c9344f146a27385a6a7" id="r_a913dd334e9745c9344f146a27385a6a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a913dd334e9745c9344f146a27385a6a7">get_class_analysis</a> (std::string_view class_name)</td></tr>
-<tr class="memdesc:a913dd334e9745c9344f146a27385a6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html" title="Specification of the class analysis, this class contains fields, strings, methods....">ClassAnalysis</a> object by the class name.  <br /></td></tr>
-<tr class="separator:a913dd334e9745c9344f146a27385a6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdf5c3b1d6c4dd3be12d8a6842e7eeb" id="r_a2bdf5c3b1d6c4dd3be12d8a6842e7eeb"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bdf5c3b1d6c4dd3be12d8a6842e7eeb">get_classes</a> ()</td></tr>
-<tr class="memdesc:a2bdf5c3b1d6c4dd3be12d8a6842e7eeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the classes.  <br /></td></tr>
-<tr class="separator:a2bdf5c3b1d6c4dd3be12d8a6842e7eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ca3605a5d768fbd67064b53ca080c97" id="r_a7ca3605a5d768fbd67064b53ca080c97"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html">ExternalClass</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ca3605a5d768fbd67064b53ca080c97">get_external_classes</a> ()</td></tr>
-<tr class="memdesc:a7ca3605a5d768fbd67064b53ca080c97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to external classes.  <br /></td></tr>
-<tr class="separator:a7ca3605a5d768fbd67064b53ca080c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ee65561c90cd294ee5e6d4b4d98cc0" id="r_aa4ee65561c90cd294ee5e6d4b4d98cc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4ee65561c90cd294ee5e6d4b4d98cc0">get_class_analysis</a> (std::string class_name)</td></tr>
+<tr class="memdesc:aa4ee65561c90cd294ee5e6d4b4d98cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html" title="Specification of the class analysis, this class contains fields, strings, methods....">ClassAnalysis</a> object by the class name.  <br /></td></tr>
+<tr class="separator:aa4ee65561c90cd294ee5e6d4b4d98cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68bcee5ba3d13684733ed609096e883a" id="r_a68bcee5ba3d13684733ed609096e883a"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68bcee5ba3d13684733ed609096e883a">get_classes</a> ()</td></tr>
+<tr class="memdesc:a68bcee5ba3d13684733ed609096e883a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the classes.  <br /></td></tr>
+<tr class="separator:a68bcee5ba3d13684733ed609096e883a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fe02c39681196c438c4fc5c1e157bcb" id="r_a8fe02c39681196c438c4fc5c1e157bcb"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html">ExternalClass</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fe02c39681196c438c4fc5c1e157bcb">get_external_classes</a> ()</td></tr>
+<tr class="memdesc:a8fe02c39681196c438c4fc5c1e157bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to external classes.  <br /></td></tr>
+<tr class="separator:a8fe02c39681196c438c4fc5c1e157bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9439952ade7d8c46e36f0f02a9dba86" id="r_ad9439952ade7d8c46e36f0f02a9dba86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9439952ade7d8c46e36f0f02a9dba86">get_method</a> (std::variant&lt; <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedMethod.html">parser::dex::EncodedMethod</a> *, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a> * &gt; method)</td></tr>
 <tr class="memdesc:ad9439952ade7d8c46e36f0f02a9dba86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html" title="Specification of the method analysis, a method contains instructions, exceptions data,...">MethodAnalysis</a> pointer given an Encoded or External Method.  <br /></td></tr>
 <tr class="separator:ad9439952ade7d8c46e36f0f02a9dba86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f7f75982ad23c987fc2c5f8100a58d" id="r_ad6f7f75982ad23c987fc2c5f8100a58d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6f7f75982ad23c987fc2c5f8100a58d">get_method_analysis_by_name</a> (std::string_view dalvik_name)</td></tr>
-<tr class="memdesc:ad6f7f75982ad23c987fc2c5f8100a58d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a method anaylsis by different values.  <br /></td></tr>
-<tr class="separator:ad6f7f75982ad23c987fc2c5f8100a58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0a59cd39d43cc65bac5f9e029fd035c" id="r_ac0a59cd39d43cc65bac5f9e029fd035c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">parser::dex::MethodID</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0a59cd39d43cc65bac5f9e029fd035c">get_method_id_by_name</a> (std::string_view dalvik_name)</td></tr>
-<tr class="memdesc:ac0a59cd39d43cc65bac5f9e029fd035c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a MethodID by different values.  <br /></td></tr>
-<tr class="separator:ac0a59cd39d43cc65bac5f9e029fd035c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf1ac7e3f96d54eba6afa85522e7cb5a" id="r_aaf1ac7e3f96d54eba6afa85522e7cb5a"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf1ac7e3f96d54eba6afa85522e7cb5a">get_methods</a> ()</td></tr>
-<tr class="memdesc:aaf1ac7e3f96d54eba6afa85522e7cb5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the method analysis.  <br /></td></tr>
-<tr class="separator:aaf1ac7e3f96d54eba6afa85522e7cb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9baca090e6eced2636f04a7bd59d70" id="r_a7b9baca090e6eced2636f04a7bd59d70"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b9baca090e6eced2636f04a7bd59d70">get_external_methods</a> ()</td></tr>
-<tr class="memdesc:a7b9baca090e6eced2636f04a7bd59d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the ExternalMethods.  <br /></td></tr>
-<tr class="separator:a7b9baca090e6eced2636f04a7bd59d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a929af8de033d81a68750505418ba81a2" id="r_a929af8de033d81a68750505418ba81a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a929af8de033d81a68750505418ba81a2">get_method_analysis_by_name</a> (std::string dalvik_name)</td></tr>
+<tr class="memdesc:a929af8de033d81a68750505418ba81a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a method anaylsis by different values.  <br /></td></tr>
+<tr class="separator:a929af8de033d81a68750505418ba81a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab484beb426f9572609195c859b79eac9" id="r_ab484beb426f9572609195c859b79eac9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">parser::dex::MethodID</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab484beb426f9572609195c859b79eac9">get_method_id_by_name</a> (std::string dalvik_name)</td></tr>
+<tr class="memdesc:ab484beb426f9572609195c859b79eac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a MethodID by different values.  <br /></td></tr>
+<tr class="separator:ab484beb426f9572609195c859b79eac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453d293f2a8d8a0ecff083b75a0e6aca" id="r_a453d293f2a8d8a0ecff083b75a0e6aca"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a453d293f2a8d8a0ecff083b75a0e6aca">get_methods</a> ()</td></tr>
+<tr class="memdesc:a453d293f2a8d8a0ecff083b75a0e6aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the method analysis.  <br /></td></tr>
+<tr class="separator:a453d293f2a8d8a0ecff083b75a0e6aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020687bb5247619613c2938b3ded720d" id="r_a020687bb5247619613c2938b3ded720d"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a020687bb5247619613c2938b3ded720d">get_external_methods</a> ()</td></tr>
+<tr class="memdesc:a020687bb5247619613c2938b3ded720d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the ExternalMethods.  <br /></td></tr>
+<tr class="separator:a020687bb5247619613c2938b3ded720d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a877cef708d04c055e1bcd595cbe92cbe" id="r_a877cef708d04c055e1bcd595cbe92cbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a877cef708d04c055e1bcd595cbe92cbe">get_field_analysis</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">parser::dex::EncodedField</a> *field)</td></tr>
 <tr class="memdesc:a877cef708d04c055e1bcd595cbe92cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a field given an encoded field.  <br /></td></tr>
 <tr class="separator:a877cef708d04c055e1bcd595cbe92cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08fde6f1744109563f33df6221dbe22c" id="r_a08fde6f1744109563f33df6221dbe22c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08fde6f1744109563f33df6221dbe22c">get_fields</a> ()</td></tr>
 <tr class="memdesc:a08fde6f1744109563f33df6221dbe22c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all the fields from all the classes.  <br /></td></tr>
 <tr class="separator:a08fde6f1744109563f33df6221dbe22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f4e071224c1257be4ca944cef24277a" id="r_a5f4e071224c1257be4ca944cef24277a"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f4e071224c1257be4ca944cef24277a">get_string_analysis</a> ()</td></tr>
-<tr class="memdesc:a5f4e071224c1257be4ca944cef24277a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html" title="specification of a string analysis">StringAnalysis</a> map.  <br /></td></tr>
-<tr class="separator:a5f4e071224c1257be4ca944cef24277a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f4879b52e54819e78022f274f4a9134" id="r_a1f4879b52e54819e78022f274f4a9134"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f4879b52e54819e78022f274f4a9134">get_string_analysis</a> ()</td></tr>
+<tr class="memdesc:a1f4879b52e54819e78022f274f4a9134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html" title="specification of a string analysis">StringAnalysis</a> map.  <br /></td></tr>
+<tr class="separator:a1f4879b52e54819e78022f274f4a9134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2502d6ae68520ff680443144053778b4" id="r_a2502d6ae68520ff680443144053778b4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2502d6ae68520ff680443144053778b4">find_classes</a> (const std::string &amp;name, bool no_external)</td></tr>
 <tr class="memdesc:a2502d6ae68520ff680443144053778b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find classes by name with regular expression, the method returns a list of <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html" title="Specification of the class analysis, this class contains fields, strings, methods....">ClassAnalysis</a> object that match the regex.  <br /></td></tr>
 <tr class="separator:a2502d6ae68520ff680443144053778b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -386,8 +386,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a913dd334e9745c9344f146a27385a6a7" name="a913dd334e9745c9344f146a27385a6a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a913dd334e9745c9344f146a27385a6a7">&#9670;&#160;</a></span>get_class_analysis()</h2>
+<a id="aa4ee65561c90cd294ee5e6d4b4d98cc0" name="aa4ee65561c90cd294ee5e6d4b4d98cc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ee65561c90cd294ee5e6d4b4d98cc0">&#9670;&#160;</a></span>get_class_analysis()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +395,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> * shuriken::analysis::dex::Analysis::get_class_analysis </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>class_name</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -412,14 +412,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2bdf5c3b1d6c4dd3be12d8a6842e7eeb" name="a2bdf5c3b1d6c4dd3be12d8a6842e7eeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bdf5c3b1d6c4dd3be12d8a6842e7eeb">&#9670;&#160;</a></span>get_classes()</h2>
+<a id="a68bcee5ba3d13684733ed609096e883a" name="a68bcee5ba3d13684733ed609096e883a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68bcee5ba3d13684733ed609096e883a">&#9670;&#160;</a></span>get_classes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_classes </td>
+          <td class="memname">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_classes </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -432,14 +432,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7ca3605a5d768fbd67064b53ca080c97" name="a7ca3605a5d768fbd67064b53ca080c97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ca3605a5d768fbd67064b53ca080c97">&#9670;&#160;</a></span>get_external_classes()</h2>
+<a id="a8fe02c39681196c438c4fc5c1e157bcb" name="a8fe02c39681196c438c4fc5c1e157bcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fe02c39681196c438c4fc5c1e157bcb">&#9670;&#160;</a></span>get_external_classes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html">ExternalClass</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_external_classes </td>
+          <td class="memname">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html">ExternalClass</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_external_classes </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -452,14 +452,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7b9baca090e6eced2636f04a7bd59d70" name="a7b9baca090e6eced2636f04a7bd59d70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b9baca090e6eced2636f04a7bd59d70">&#9670;&#160;</a></span>get_external_methods()</h2>
+<a id="a020687bb5247619613c2938b3ded720d" name="a020687bb5247619613c2938b3ded720d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020687bb5247619613c2938b3ded720d">&#9670;&#160;</a></span>get_external_methods()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_external_methods </td>
+          <td class="memname">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_external_methods </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -544,8 +544,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad6f7f75982ad23c987fc2c5f8100a58d" name="ad6f7f75982ad23c987fc2c5f8100a58d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6f7f75982ad23c987fc2c5f8100a58d">&#9670;&#160;</a></span>get_method_analysis_by_name()</h2>
+<a id="a929af8de033d81a68750505418ba81a2" name="a929af8de033d81a68750505418ba81a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a929af8de033d81a68750505418ba81a2">&#9670;&#160;</a></span>get_method_analysis_by_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -553,7 +553,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> * shuriken::analysis::dex::Analysis::get_method_analysis_by_name </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>dalvik_name</em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>dalvik_name</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -572,8 +572,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac0a59cd39d43cc65bac5f9e029fd035c" name="ac0a59cd39d43cc65bac5f9e029fd035c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0a59cd39d43cc65bac5f9e029fd035c">&#9670;&#160;</a></span>get_method_id_by_name()</h2>
+<a id="ab484beb426f9572609195c859b79eac9" name="ab484beb426f9572609195c859b79eac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab484beb426f9572609195c859b79eac9">&#9670;&#160;</a></span>get_method_id_by_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,7 +581,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">parser::dex::MethodID</a> * shuriken::analysis::dex::Analysis::get_method_id_by_name </td>
           <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>dalvik_name</em></span></td><td>)</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>dalvik_name</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -600,14 +600,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaf1ac7e3f96d54eba6afa85522e7cb5a" name="aaf1ac7e3f96d54eba6afa85522e7cb5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf1ac7e3f96d54eba6afa85522e7cb5a">&#9670;&#160;</a></span>get_methods()</h2>
+<a id="a453d293f2a8d8a0ecff083b75a0e6aca" name="a453d293f2a8d8a0ecff083b75a0e6aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453d293f2a8d8a0ecff083b75a0e6aca">&#9670;&#160;</a></span>get_methods()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_methods </td>
+          <td class="memname">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_methods </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -620,14 +620,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5f4e071224c1257be4ca944cef24277a" name="a5f4e071224c1257be4ca944cef24277a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f4e071224c1257be4ca944cef24277a">&#9670;&#160;</a></span>get_string_analysis()</h2>
+<a id="a1f4879b52e54819e78022f274f4a9134" name="a1f4879b52e54819e78022f274f4a9134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4879b52e54819e78022f274f4a9134">&#9670;&#160;</a></span>get_string_analysis()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_string_analysis </td>
+          <td class="memname">std::unordered_map&lt; std::string, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a> &gt; &gt; &amp; shuriken::analysis::dex::Analysis::get_string_analysis </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

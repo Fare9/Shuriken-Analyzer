@@ -155,6 +155,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa29ee2381bfa76f71b36b8c9e10e0c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af47f894d3ccc0473d1377fd0dde53dea" id="r_af47f894d3ccc0473d1377fd0dde53dea"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af47f894d3ccc0473d1377fd0dde53dea">get_full_name</a> () const</td></tr>
 <tr class="separator:af47f894d3ccc0473d1377fd0dde53dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dea2ea4d9802e2b85a83b84cae15676" id="r_a6dea2ea4d9802e2b85a83b84cae15676"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dea2ea4d9802e2b85a83b84cae15676">toString</a> ()</td></tr>
+<tr class="separator:a6dea2ea4d9802e2b85a83b84cae15676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86e0c5f1bad901b04182aa4cd3be43de" id="r_a86e0c5f1bad901b04182aa4cd3be43de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">shuriken::disassembler::dex::Instruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86e0c5f1bad901b04182aa4cd3be43de">get_instruction_by_addr</a> (std::uint64_t addr)</td></tr>
 <tr class="memdesc:a86e0c5f1bad901b04182aa4cd3be43de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to an instruction by a given address.  <br /></td></tr>
 <tr class="separator:a86e0c5f1bad901b04182aa4cd3be43de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,16 +179,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abf596d7b705b5b428ca7684a7b896a76" id="r_abf596d7b705b5b428ca7684a7b896a76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt; <a class="el" href="namespaceshuriken_1_1analysis_1_1dex.html#ad806b09b9907989170d490d26ca43af7">class_idx_iterator_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf596d7b705b5b428ca7684a7b896a76">get_xrefconstclass</a> ()</td></tr>
 <tr class="separator:abf596d7b705b5b428ca7684a7b896a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaab6115b6a1643e1df63a576eed1c7d" id="r_acaab6115b6a1643e1df63a576eed1c7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acaab6115b6a1643e1df63a576eed1c7d">add_xrefread</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *f, std::uint64_t offset)</td></tr>
+<tr class="memdesc:acaab6115b6a1643e1df63a576eed1c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new cross-reference where a field is read in the method.  <br /></td></tr>
 <tr class="separator:acaab6115b6a1643e1df63a576eed1c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c764ef46ad756b47907f5cae79effd0" id="r_a6c764ef46ad756b47907f5cae79effd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c764ef46ad756b47907f5cae79effd0">add_xrefwrite</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *f, std::uint64_t offset)</td></tr>
+<tr class="memdesc:a6c764ef46ad756b47907f5cae79effd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new cross-reference where a field is written in the method.  <br /></td></tr>
 <tr class="separator:a6c764ef46ad756b47907f5cae79effd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64c64d0d9c02be80855e0283e3ebd9b" id="r_ad64c64d0d9c02be80855e0283e3ebd9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad64c64d0d9c02be80855e0283e3ebd9b">add_xrefto</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *m, std::uint64_t offset)</td></tr>
+<tr class="memdesc:ad64c64d0d9c02be80855e0283e3ebd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new cross-reference of a method called from this method.  <br /></td></tr>
 <tr class="separator:ad64c64d0d9c02be80855e0283e3ebd9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1369520bac2e3c10bd9e77b195f52c9" id="r_ab1369520bac2e3c10bd9e77b195f52c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1369520bac2e3c10bd9e77b195f52c9">add_xreffrom</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *m, std::uint64_t offset)</td></tr>
+<tr class="memdesc:ab1369520bac2e3c10bd9e77b195f52c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new cross-reference of a method that calls this method.  <br /></td></tr>
 <tr class="separator:ab1369520bac2e3c10bd9e77b195f52c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b7d4a4f152697024d54d93de3117ed0" id="r_a7b7d4a4f152697024d54d93de3117ed0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b7d4a4f152697024d54d93de3117ed0">add_xrefnewinstance</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, std::uint64_t offset)</td></tr>
+<tr class="memdesc:a7b7d4a4f152697024d54d93de3117ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross-reference of a new object instance in this method.  <br /></td></tr>
 <tr class="separator:a7b7d4a4f152697024d54d93de3117ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88d353f3ac6fd95a358f9bf5558ee445" id="r_a88d353f3ac6fd95a358f9bf5558ee445"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88d353f3ac6fd95a358f9bf5558ee445">add_xrefconstclass</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *c, std::uint64_t offset)</td></tr>
+<tr class="memdesc:a88d353f3ac6fd95a358f9bf5558ee445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross-reference of a const class used in this method.  <br /></td></tr>
 <tr class="separator:a88d353f3ac6fd95a358f9bf5558ee445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -198,7 +206,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Specification of the method analysis, a method contains instructions, exceptions data, and so on... </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00311">311</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00321">321</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac57556fcf2f5ccfe1db8aaf60863e9e5" name="ac57556fcf2f5ccfe1db8aaf60863e9e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac57556fcf2f5ccfe1db8aaf60863e9e5">&#9670;&#160;</a></span>MethodAnalysis() <span class="overload">[1/2]</span></h2>
@@ -258,6 +266,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a cross-reference of a const class used in this method. </p>
+
 </div>
 </div>
 <a id="ab1369520bac2e3c10bd9e77b195f52c9" name="ab1369520bac2e3c10bd9e77b195f52c9"></a>
@@ -284,6 +294,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a new cross-reference of a method that calls this method. </p>
+
 </div>
 </div>
 <a id="a7b7d4a4f152697024d54d93de3117ed0" name="a7b7d4a4f152697024d54d93de3117ed0"></a>
@@ -304,6 +316,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a cross-reference of a new object instance in this method. </p>
 
 </div>
 </div>
@@ -331,6 +345,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a new cross-reference where a field is read in the method. </p>
+
 </div>
 </div>
 <a id="ad64c64d0d9c02be80855e0283e3ebd9b" name="ad64c64d0d9c02be80855e0283e3ebd9b"></a>
@@ -357,6 +373,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a new cross-reference of a method called from this method. </p>
+
 </div>
 </div>
 <a id="a6c764ef46ad756b47907f5cae79effd0" name="a6c764ef46ad756b47907f5cae79effd0"></a>
@@ -382,6 +400,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a new cross-reference where a field is written in the method. </p>
 
 </div>
 </div>
@@ -764,6 +784,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6dea2ea4d9802e2b85a83b84cae15676" name="a6dea2ea4d9802e2b85a83b84cae15676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dea2ea4d9802e2b85a83b84cae15676">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string shuriken::analysis::dex::MethodAnalysis::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a4618569f9aa7e4a99705f5989eb6b5ed" name="a4618569f9aa7e4a99705f5989eb6b5ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4618569f9aa7e4a99705f5989eb6b5ed">&#9670;&#160;</a></span>known_apis</h2>
@@ -777,15 +814,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">              <span class="stringliteral">&quot;Landroid/&quot;</span>, <span class="stringliteral">&quot;Lcom/android/internal/util&quot;</span>, <span class="stringliteral">&quot;Ldalvik/&quot;</span>, <span class="stringliteral">&quot;Ljava/&quot;</span>, <span class="stringliteral">&quot;Ljavax/&quot;</span>, <span class="stringliteral">&quot;Lorg/apache/&quot;</span>,</div>
-<div class="line">              <span class="stringliteral">&quot;Lorg/json/&quot;</span>, <span class="stringliteral">&quot;Lorg/w3c/dom/&quot;</span>, <span class="stringliteral">&quot;Lorg/xml/sax&quot;</span>, <span class="stringliteral">&quot;Lorg/xmlpull/v1/&quot;</span>, <span class="stringliteral">&quot;Ljunit/&quot;</span>, <span class="stringliteral">&quot;Landroidx/&quot;</span>}</div>
+<div class="line">                <span class="stringliteral">&quot;Landroid/&quot;</span>, <span class="stringliteral">&quot;Lcom/android/internal/util&quot;</span>, <span class="stringliteral">&quot;Ldalvik/&quot;</span>, <span class="stringliteral">&quot;Ljava/&quot;</span>, <span class="stringliteral">&quot;Ljavax/&quot;</span>, <span class="stringliteral">&quot;Lorg/apache/&quot;</span>,</div>
+<div class="line">                <span class="stringliteral">&quot;Lorg/json/&quot;</span>, <span class="stringliteral">&quot;Lorg/w3c/dom/&quot;</span>, <span class="stringliteral">&quot;Lorg/xml/sax&quot;</span>, <span class="stringliteral">&quot;Lorg/xmlpull/v1/&quot;</span>, <span class="stringliteral">&quot;Ljunit/&quot;</span>, <span class="stringliteral">&quot;Landroidx/&quot;</span>}</div>
 </div><!-- fragment -->
 <p>vector of known apis of Android </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00314">314</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  314</span>                                                {</div>
-<div class="line"><span class="lineno">  315</span>              <span class="stringliteral">&quot;Landroid/&quot;</span>, <span class="stringliteral">&quot;Lcom/android/internal/util&quot;</span>, <span class="stringliteral">&quot;Ldalvik/&quot;</span>, <span class="stringliteral">&quot;Ljava/&quot;</span>, <span class="stringliteral">&quot;Ljavax/&quot;</span>, <span class="stringliteral">&quot;Lorg/apache/&quot;</span>,</div>
-<div class="line"><span class="lineno">  316</span>              <span class="stringliteral">&quot;Lorg/json/&quot;</span>, <span class="stringliteral">&quot;Lorg/w3c/dom/&quot;</span>, <span class="stringliteral">&quot;Lorg/xml/sax&quot;</span>, <span class="stringliteral">&quot;Lorg/xmlpull/v1/&quot;</span>, <span class="stringliteral">&quot;Ljunit/&quot;</span>, <span class="stringliteral">&quot;Landroidx/&quot;</span>};</div>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00324">324</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  324</span>                                                  {</div>
+<div class="line"><span class="lineno">  325</span>                <span class="stringliteral">&quot;Landroid/&quot;</span>, <span class="stringliteral">&quot;Lcom/android/internal/util&quot;</span>, <span class="stringliteral">&quot;Ldalvik/&quot;</span>, <span class="stringliteral">&quot;Ljava/&quot;</span>, <span class="stringliteral">&quot;Ljavax/&quot;</span>, <span class="stringliteral">&quot;Lorg/apache/&quot;</span>,</div>
+<div class="line"><span class="lineno">  326</span>                <span class="stringliteral">&quot;Lorg/json/&quot;</span>, <span class="stringliteral">&quot;Lorg/w3c/dom/&quot;</span>, <span class="stringliteral">&quot;Lorg/xml/sax&quot;</span>, <span class="stringliteral">&quot;Lorg/xmlpull/v1/&quot;</span>, <span class="stringliteral">&quot;Ljunit/&quot;</span>, <span class="stringliteral">&quot;Landroidx/&quot;</span>};</div>
 </div><!-- fragment -->
 </div>
 </div>

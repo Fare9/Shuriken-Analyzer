@@ -45,5 +45,5 @@ var searchData=
   ['successors_42',['successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673',1,'shuriken::analysis::dex::BasicBlocks']]],
   ['super_5fclass_43',['super_class',['../structhdvmclass__t.html#a08f3a328d31ab53ba65e47527ce2525f',1,'hdvmclass_t']]],
   ['superclass_5fidx_44',['superclass_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#ab0a7913f949fc89c4c422d59e579720a',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
-  ['switch_5ftype_5ft_45',['switch_type_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#a55968267f1024f223466ec2748c97609',1,'shuriken::disassembler::dex']]]
+  ['switch_5ftype_5ft_45',['switch_type_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#ad11fa5f5d94a9b96759b57bb526b1853',1,'shuriken::disassembler::dex']]]
 ];

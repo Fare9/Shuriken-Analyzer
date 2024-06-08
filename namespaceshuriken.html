@@ -176,9 +176,9 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00017">17</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   17</span>                         {</div>
-<div class="line"><span class="lineno">   18</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">TO_CONSOLE</a> = 0, <span class="comment">/// stdout</span></div>
-<div class="line"><span class="lineno">   19</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">TO_STDERR</a>,      <span class="comment">/// stderr</span></div>
-<div class="line"><span class="lineno">   20</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">TO_FILE</a>         <span class="comment">/// given file</span></div>
+<div class="line"><span class="lineno">   18</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">TO_CONSOLE</a> = 0,<span class="comment">/// stdout</span></div>
+<div class="line"><span class="lineno">   19</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">TO_STDERR</a>,     <span class="comment">/// stderr</span></div>
+<div class="line"><span class="lineno">   20</span>        <a class="code hl_enumvalue" href="#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">TO_FILE</a>        <span class="comment">/// given file</span></div>
 <div class="line"><span class="lineno">   21</span>    };</div>
 <div class="ttc" id="anamespaceshuriken_html_aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd"><div class="ttname"><a href="#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">shuriken::TO_CONSOLE</a></div><div class="ttdeci">@ TO_CONSOLE</div><div class="ttdef"><b>Definition</b> <a href="logger_8h_source.html#l00018">logger.h:18</a></div></div>
 <div class="ttc" id="anamespaceshuriken_html_aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef"><div class="ttname"><a href="#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">shuriken::TO_FILE</a></div><div class="ttdeci">@ TO_FILE</div><div class="ttdoc">stderr</div><div class="ttdef"><b>Definition</b> <a href="logger_8h_source.html#l00021">logger.h:20</a></div></div>
@@ -275,10 +275,10 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iterator__range_8h_source.html#l00047">47</a> of file <a class="el" href="iterator__range_8h_source.html">iterator_range.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                        {</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classshuriken_1_1iterator__range.html">iterator_range&lt;T&gt;</a>(std::move(p.first), std::move(p.second));</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="iterator__range_8h_source.html#l00049">49</a> of file <a class="el" href="iterator__range_8h_source.html">iterator_range.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>                                                  {</div>
+<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classshuriken_1_1iterator__range.html">iterator_range&lt;T&gt;</a>(std::move(p.first), std::move(p.second));</div>
+<div class="line"><span class="lineno">   51</span>    }</div>
 <div class="ttc" id="aclassshuriken_1_1iterator__range_html"><div class="ttname"><a href="classshuriken_1_1iterator__range.html">shuriken::iterator_range</a></div><div class="ttdef"><b>Definition</b> <a href="iterator__range_8h_source.html#l00020">iterator_range.h:20</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -306,10 +306,10 @@ template&lt;class T &gt; </div>
 <p>Convenience function for iterating over sub-ranges.</p>
 <p>This provides a bit of syntactic sugar to make using sub-ranges in for loops a bit easier. Analogous to std::make_pair(). </p>
 
-<p class="definition">Definition at line <a class="el" href="iterator__range_8h_source.html#l00043">43</a> of file <a class="el" href="iterator__range_8h_source.html">iterator_range.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>                                                              {</div>
-<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classshuriken_1_1iterator__range.html">iterator_range&lt;T&gt;</a>(std::move(x), std::move(y));</div>
-<div class="line"><span class="lineno">   45</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="iterator__range_8h_source.html#l00044">44</a> of file <a class="el" href="iterator__range_8h_source.html">iterator_range.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   44</span>                                           {</div>
+<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classshuriken_1_1iterator__range.html">iterator_range&lt;T&gt;</a>(std::move(x), std::move(y));</div>
+<div class="line"><span class="lineno">   46</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,9 +1,9 @@
 <map id="shuriken/include/shuriken/disassembler/Dex/dex_opcodes.h" name="shuriken/include/shuriken/disassembler/Dex/dex_opcodes.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="66,5,284,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,116,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,48,88,101,85,97,150,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="140,109,211,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,46,178,94,173,94,173,46"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="236,94,387,150"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,44,261,83,258,87,202,49"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="47,5,265,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,77,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,48,69,101,66,97,130,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="101,109,211,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="158,46,158,94,153,94,153,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="235,94,386,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="189,44,254,84,252,88,187,49"/>
 </map>

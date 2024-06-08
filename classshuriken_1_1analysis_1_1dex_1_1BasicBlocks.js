@@ -1,13 +1,13 @@
 var classshuriken_1_1analysis_1_1dex_1_1BasicBlocks =
 [
-    [ "connected_blocks_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac1b50348b7e212fee915ba4afaf6ac16", null ],
-    [ "edges_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ab3d35818400446513926efaba65edebc", null ],
+    [ "connected_blocks_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a48cf6414d6e33e72608d4099526570a6", null ],
+    [ "edges_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ab0afe4aa8df6e061a91112697b684ad3", null ],
     [ "edgesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ab21180e6ebe68f837c1cc1aa37d35302", null ],
     [ "nodesetiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#adff98d64673c60fb8045f18ab2580cfb", null ],
-    [ "nodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac5717ee5c0d262a780abf9ec6a9e3dd3", null ],
+    [ "nodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a1c96688f73bca10bfe26e4ca13975fa7", null ],
     [ "reverseedgesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a08521e92f326ec068d4a24a09669a632", null ],
     [ "reversenodesetiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3f8a5bdbe1d1e0653a1ee4b6ee6fb7ce", null ],
-    [ "reversenodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a934ddcea34bf42eedb45f66ed7dc7b32", null ],
+    [ "reversenodesiterator_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac20176465122d1aeb43df968ade6e487", null ],
     [ "node_type_t", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fe", [
       [ "JOIN_NODE", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fea5ba1f096971d2dc5e7988da04a138dd0", null ],
       [ "BRANCH_NODE", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81feae80a903ca07e970a7d2cbbac0d7bc8d0", null ],
@@ -32,5 +32,6 @@ var classshuriken_1_1analysis_1_1dex_1_1BasicBlocks =
     [ "reverse_nodes", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9d8fa85abc7d064ce303ae5862670d03", null ],
     [ "reverse_predecessors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aedcc3c4279291d734dc4b52976888b5b", null ],
     [ "reverse_successors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae95f95307dc7de5099529124ee96e564", null ],
-    [ "successors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673", null ]
+    [ "successors", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673", null ],
+    [ "toString", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aa6c4a754b4111ed4e22e8d2725352de0", null ]
 ];

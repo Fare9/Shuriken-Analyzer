@@ -1,5 +1,11 @@
 var NAVTREEINDEX10 =
 {
+"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a650af5940042116462a20537a45782f6":[1,0,1,4,0,8,0,1],
+"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a817986bfb0807a521bbbeebe6d272b0a":[0,0,1,4,0,8,0,0],
+"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a817986bfb0807a521bbbeebe6d272b0a":[1,0,1,4,0,8,0,0],
+"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html":[0,0,1,4,0,22],
+"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html":[1,0,1,4,0,22],
+"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#a923f576d82cac582ca50a12e17b2f80b":[0,0,1,4,0,22,0],
 "structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#a923f576d82cac582ca50a12e17b2f80b":[1,0,1,4,0,22,0],
 "structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#ac779c711dc3a90cb5a7d5912ecdc5370":[0,0,1,4,0,22,1],
 "structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#ac779c711dc3a90cb5a7d5912ecdc5370":[1,0,1,4,0,22,1],

@@ -1,5 +1,11 @@
 var NAVTREEINDEX9 =
 {
+"shuriken__core_8h.html#a2798a862b13c21181a8804a3c3f811e2":[2,0,0,0,0,1,0,0,9],
+"shuriken__core_8h.html#a2e7b337a62e39243e884328a0588bc4b":[2,0,0,0,0,1,0,0,11],
+"shuriken__core_8h.html#a368195fdcdfa12be96aaaabb2c981f42":[2,0,0,0,0,1,0,0,13],
+"shuriken__core_8h.html#a3e80241080a825089764c63eb67216f8":[2,0,0,0,0,1,0,0,26],
+"shuriken__core_8h.html#a475aba3a7efe80d9eae9083346cc8965":[2,0,0,0,0,1,0,0,20],
+"shuriken__core_8h.html#a68362aab482c9b72707a5e62ebc53d8d":[2,0,0,0,0,1,0,0,27],
 "shuriken__core_8h.html#a68f230416ae6406d36231f5b039fae8a":[2,0,0,0,0,1,0,0,19],
 "shuriken__core_8h.html#a68f230416ae6406d36231f5b039fae8aa11f58475fa1ddbb0690d5c4b04456e93":[2,0,0,0,0,1,0,0,19,0],
 "shuriken__core_8h.html#a68f230416ae6406d36231f5b039fae8aa1e029fbf0c881b85d80fc8e89b753688":[2,0,0,0,0,1,0,0,19,2],
@@ -243,11 +249,5 @@ var NAVTREEINDEX9 =
 "structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a03d6e2dd1e4006ab047c8e7c37fc890b":[1,0,1,4,0,8,0,2],
 "structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a1cffb2cbfbee370da36deb110626bde0":[0,0,1,4,0,8,0,3],
 "structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a1cffb2cbfbee370da36deb110626bde0":[1,0,1,4,0,8,0,3],
-"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a650af5940042116462a20537a45782f6":[0,0,1,4,0,8,0,1],
-"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a650af5940042116462a20537a45782f6":[1,0,1,4,0,8,0,1],
-"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a817986bfb0807a521bbbeebe6d272b0a":[0,0,1,4,0,8,0,0],
-"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a817986bfb0807a521bbbeebe6d272b0a":[1,0,1,4,0,8,0,0],
-"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html":[0,0,1,4,0,22],
-"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html":[1,0,1,4,0,22],
-"structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#a923f576d82cac582ca50a12e17b2f80b":[0,0,1,4,0,22,0]
+"structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a650af5940042116462a20537a45782f6":[0,0,1,4,0,8,0,1]
 };

@@ -1,5 +1,11 @@
 var NAVTREEINDEX4 =
 {
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a04c80df4f1043879b2a00ac62e5ea576":[0,0,1,3,0,31,10],
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a04c80df4f1043879b2a00ac62e5ea576":[1,0,1,3,0,31,10],
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a4997434e228231e5661320955c931176":[0,0,1,3,0,31,2],
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a4997434e228231e5661320955c931176":[1,0,1,3,0,31,2],
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a52700bff5ca6bad85ac7ecf678e63a4d":[0,0,1,3,0,31,0],
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a52700bff5ca6bad85ac7ecf678e63a4d":[1,0,1,3,0,31,0],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a5604f9eaa258ad462efa0974880da6c5":[0,0,1,3,0,31,1],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a5604f9eaa258ad462efa0974880da6c5":[1,0,1,3,0,31,1],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction31t.html#a5fbb9d36e3bfacbbefa16ec91de7f2a5":[0,0,1,3,0,31,7],
@@ -243,11 +249,5 @@ var NAVTREEINDEX4 =
 "classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html":[0,0,1,4,0,2],
 "classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html":[1,0,1,4,0,2],
 "classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a139721f0103a1522c71649da731c2103":[0,0,1,4,0,2,5],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a139721f0103a1522c71649da731c2103":[1,0,1,4,0,2,5],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a1858637717a4ff659a2ab64d964c8326":[0,0,1,4,0,2,17],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a1858637717a4ff659a2ab64d964c8326":[1,0,1,4,0,2,17],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a32d31b76c731fbbcc7af736c23a4c378":[0,0,1,4,0,2,7],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a32d31b76c731fbbcc7af736c23a4c378":[1,0,1,4,0,2,7],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a4ef491d4923e94189e6aea3bf371515a":[0,0,1,4,0,2,2],
-"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a4ef491d4923e94189e6aea3bf371515a":[1,0,1,4,0,2,2]
+"classshuriken_1_1parser_1_1dex_1_1ClassDataItem.html#a139721f0103a1522c71649da731c2103":[1,0,1,4,0,2,5]
 };

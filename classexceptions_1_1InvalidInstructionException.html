@@ -187,8 +187,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="invalidinstruction__exception_8h_source.html#l00027">27</a> of file <a class="el" href="invalidinstruction__exception_8h_source.html">invalidinstruction_exception.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>                : _msg(msg), _inst_size(inst_size)</div>
-<div class="line"><span class="lineno">   29</span>        {}</div>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>            : _msg(msg), _inst_size(inst_size) {}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -219,10 +218,10 @@ Public Member Functions</h2></td></tr>
 <p>get the size of an incorrectly disassembled instruction </p>
 <dl class="section return"><dt>Returns</dt><dd>size of an instruction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="invalidinstruction__exception_8h_source.html#l00040">40</a> of file <a class="el" href="invalidinstruction__exception_8h_source.html">invalidinstruction_exception.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>        {</div>
-<div class="line"><span class="lineno">   42</span>            <span class="keywordflow">return</span> _inst_size;</div>
-<div class="line"><span class="lineno">   43</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="invalidinstruction__exception_8h_source.html#l00038">38</a> of file <a class="el" href="invalidinstruction__exception_8h_source.html">invalidinstruction_exception.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   38</span>                                 {</div>
+<div class="line"><span class="lineno">   39</span>            <span class="keywordflow">return</span> _inst_size;</div>
+<div class="line"><span class="lineno">   40</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -252,10 +251,10 @@ Public Member Functions</h2></td></tr>
 <p>Return error message. </p>
 <dl class="section return"><dt>Returns</dt><dd>error message in a c string style </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="invalidinstruction__exception_8h_source.html#l00033">33</a> of file <a class="el" href="invalidinstruction__exception_8h_source.html">invalidinstruction_exception.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>        {</div>
-<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">return</span> _msg.c_str();</div>
-<div class="line"><span class="lineno">   36</span>        }</div>
+<p class="definition">Definition at line <a class="el" href="invalidinstruction__exception_8h_source.html#l00032">32</a> of file <a class="el" href="invalidinstruction__exception_8h_source.html">invalidinstruction_exception.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>                                                           {</div>
+<div class="line"><span class="lineno">   33</span>            <span class="keywordflow">return</span> _msg.c_str();</div>
+<div class="line"><span class="lineno">   34</span>        }</div>
 </div><!-- fragment -->
 </div>
 </div>

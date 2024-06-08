@@ -48,8 +48,8 @@ var namespaceshuriken_1_1disassembler_1_1dex =
     [ "instructions_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a33deeeb17d0e527c21182fb01b8758a2", null ],
     [ "it_exceptions_data", "namespaceshuriken_1_1disassembler_1_1dex.html#af081a1ad496e9dbd0e3b6f0b0a7bbdb8", null ],
     [ "it_instructions", "namespaceshuriken_1_1disassembler_1_1dex.html#aff0d37a7350b8ed6590120e996347427", null ],
-    [ "kind_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a607285146eaaeef1fb4405df3ab34766", null ],
-    [ "switch_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a55968267f1024f223466ec2748c97609", null ],
+    [ "kind_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#aaa3d9dd854e1c89f48098d60945cdbc1", null ],
+    [ "switch_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#ad11fa5f5d94a9b96759b57bb526b1853", null ],
     [ "disassembly_algorithm_t", "namespaceshuriken_1_1disassembler_1_1dex.html#ab31302cf7e9f36fb749b0aa3bf212a5d", [
       [ "LINEAR_SWEEP_DISASSEMBLER", "namespaceshuriken_1_1disassembler_1_1dex.html#ab31302cf7e9f36fb749b0aa3bf212a5dae109739955a35eb41bebdb9487a7e81b", null ]
     ] ],

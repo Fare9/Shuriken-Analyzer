@@ -8,7 +8,7 @@ var searchData=
   ['node_5ftype_5ft_5',['node_type_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fe',1,'shuriken::analysis::dex::BasicBlocks']]],
   ['nodes_6',['nodes',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a0e407f062321a5fe7774f0445b038a09',1,'shuriken::analysis::dex::BasicBlocks']]],
   ['nodesetiterator_5ft_7',['nodesetiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#adff98d64673c60fb8045f18ab2580cfb',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['nodesiterator_5ft_8',['nodesiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac5717ee5c0d262a780abf9ec6a9e3dd3',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['nodesiterator_5ft_8',['nodesiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a1c96688f73bca10bfe26e4ca13975fa7',1,'shuriken::analysis::dex::BasicBlocks']]],
   ['none_9',['NONE',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae3b5dca787a2792d0be4a274d049bd5ca2a833f612a8152bb6eb52cfabc9eda03',1,'shuriken::dex::TYPES']]],
   ['none_5fkind_10',['NONE_KIND',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38a0b184d440994dd9a53b722701e2d7a90',1,'shuriken::dex::TYPES']]],
   ['none_5fopcode_11',['NONE_OPCODE',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030a012a4dcf19cb93f4d9681ec275a05d99',1,'shuriken::disassembler::dex::DexOpcodes']]],

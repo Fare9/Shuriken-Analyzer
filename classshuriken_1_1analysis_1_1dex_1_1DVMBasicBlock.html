@@ -112,8 +112,8 @@ $(function(){initNavTree('classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a8efe53aa71483a7f495f2d32819c7bbd" id="r_a8efe53aa71483a7f495f2d32819c7bbd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">read_instructions_t</a> = std::span&lt;<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">disassembler::dex::Instruction</a>*&gt;</td></tr>
-<tr class="separator:a8efe53aa71483a7f495f2d32819c7bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac023667857161df10e7a367fb9acf97e" id="r_ac023667857161df10e7a367fb9acf97e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a> = std::span&lt;<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">disassembler::dex::Instruction</a> *&gt;</td></tr>
+<tr class="separator:ac023667857161df10e7a367fb9acf97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57e3194c29e379f49d4c64e3fecdc329" id="r_a57e3194c29e379f49d4c64e3fecdc329"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57e3194c29e379f49d4c64e3fecdc329">read_instructions_iterator_t</a> = read_instructions_t::iterator</td></tr>
 <tr class="separator:a57e3194c29e379f49d4c64e3fecdc329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c8ee6a108b0d673ef80a7762eeba527" id="r_a3c8ee6a108b0d673ef80a7762eeba527"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c8ee6a108b0d673ef80a7762eeba527">read_instructions_reverse_iterator_t</a> = read_instructions_t::reverse_iterator</td></tr>
@@ -127,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad6bd2cb64f727c6bedf96fa0f5a31eb6" id="r_ad6bd2cb64f727c6bedf96fa0f5a31eb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt; <a class="el" href="#a3c8ee6a108b0d673ef80a7762eeba527">read_instructions_reverse_iterator_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6bd2cb64f727c6bedf96fa0f5a31eb6">reverse_instructions</a> ()</td></tr>
 <tr class="memdesc:ad6bd2cb64f727c6bedf96fa0f5a31eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a range to go through the instructions in backward order.  <br /></td></tr>
 <tr class="separator:ad6bd2cb64f727c6bedf96fa0f5a31eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac32389bb42cc409f6afbffad8187c8b7" id="r_ac32389bb42cc409f6afbffad8187c8b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac32389bb42cc409f6afbffad8187c8b7">DVMBasicBlock</a> (<a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">read_instructions_t</a> instructions_)</td></tr>
+<tr class="memitem:ac32389bb42cc409f6afbffad8187c8b7" id="r_ac32389bb42cc409f6afbffad8187c8b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac32389bb42cc409f6afbffad8187c8b7">DVMBasicBlock</a> (<a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a> instructions_)</td></tr>
 <tr class="separator:ac32389bb42cc409f6afbffad8187c8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70564a46a3d5812b4a8b862c1c0768c2" id="r_a70564a46a3d5812b4a8b862c1c0768c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70564a46a3d5812b4a8b862c1c0768c2">DVMBasicBlock</a> (const <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> &amp;temp_obj)=delete</td></tr>
 <tr class="memdesc:a70564a46a3d5812b4a8b862c1c0768c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">avoid any kind of copy constructor  <br /></td></tr>
@@ -137,7 +137,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a47139cc9760b346b4a4c56bbedf654d2" id="r_a47139cc9760b346b4a4c56bbedf654d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47139cc9760b346b4a4c56bbedf654d2">get_nb_instructions</a> () const</td></tr>
 <tr class="memdesc:a47139cc9760b346b4a4c56bbedf654d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of instructions from the instructions vector.  <br /></td></tr>
 <tr class="separator:a47139cc9760b346b4a4c56bbedf654d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8816fd0f36d6ebc4c88fbc3a1964d4c3" id="r_a8816fd0f36d6ebc4c88fbc3a1964d4c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">read_instructions_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8816fd0f36d6ebc4c88fbc3a1964d4c3">get_instructions</a> ()</td></tr>
+<tr class="memitem:a8816fd0f36d6ebc4c88fbc3a1964d4c3" id="r_a8816fd0f36d6ebc4c88fbc3a1964d4c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8816fd0f36d6ebc4c88fbc3a1964d4c3">get_instructions</a> ()</td></tr>
 <tr class="memdesc:a8816fd0f36d6ebc4c88fbc3a1964d4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the vector of instructions.  <br /></td></tr>
 <tr class="separator:a8816fd0f36d6ebc4c88fbc3a1964d4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11cb3b7ff25b7d671b1733975d93b9a9" id="r_a11cb3b7ff25b7d671b1733975d93b9a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">disassembler::dex::Instruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11cb3b7ff25b7d671b1733975d93b9a9">get_terminator</a> ()</td></tr>
@@ -170,11 +170,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afed7396cfd3746b7621a4c7d0e7a4feb" id="r_afed7396cfd3746b7621a4c7d0e7a4feb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afed7396cfd3746b7621a4c7d0e7a4feb">set_handler_type</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">parser::dex::DVMType</a> *handler)</td></tr>
 <tr class="memdesc:afed7396cfd3746b7621a4c7d0e7a4feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a handler type.  <br /></td></tr>
 <tr class="separator:afed7396cfd3746b7621a4c7d0e7a4feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe4a090c1c3a385b5aebf7da55ffc22" id="r_afbe4a090c1c3a385b5aebf7da55ffc22"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbe4a090c1c3a385b5aebf7da55ffc22">toString</a> ()</td></tr>
+<tr class="separator:afbe4a090c1c3a385b5aebf7da55ffc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to represent a basic block in a dalvik method, basic blocks contains instructions and some metadata about the block. </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00041">41</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00040">40</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a57e3194c29e379f49d4c64e3fecdc329" name="a57e3194c29e379f49d4c64e3fecdc329"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57e3194c29e379f49d4c64e3fecdc329">&#9670;&#160;</a></span>read_instructions_iterator_t</h2>
@@ -208,14 +210,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8efe53aa71483a7f495f2d32819c7bbd" name="a8efe53aa71483a7f495f2d32819c7bbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8efe53aa71483a7f495f2d32819c7bbd">&#9670;&#160;</a></span>read_instructions_t</h2>
+<a id="ac023667857161df10e7a367fb9acf97e" name="ac023667857161df10e7a367fb9acf97e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac023667857161df10e7a367fb9acf97e">&#9670;&#160;</a></span>read_instructions_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">shuriken::analysis::dex::DVMBasicBlock::read_instructions_t</a> = std::span&lt;<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">disassembler::dex::Instruction</a>*&gt;</td>
+          <td class="memname">using <a class="el" href="#ac023667857161df10e7a367fb9acf97e">shuriken::analysis::dex::DVMBasicBlock::read_instructions_t</a> = std::span&lt;<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">disassembler::dex::Instruction</a> *&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,7 +236,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">shuriken::analysis::dex::DVMBasicBlock::DVMBasicBlock </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">read_instructions_t</a></td>          <td class="paramname"><span class="paramname"><em>instructions_</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a></td>          <td class="paramname"><span class="paramname"><em>instructions_</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -317,7 +319,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a8efe53aa71483a7f495f2d32819c7bbd">read_instructions_t</a> shuriken::analysis::dex::DVMBasicBlock::get_instructions </td>
+          <td class="memname"><a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a> shuriken::analysis::dex::DVMBasicBlock::get_instructions </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -587,6 +589,23 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="afbe4a090c1c3a385b5aebf7da55ffc22" name="afbe4a090c1c3a385b5aebf7da55ffc22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe4a090c1c3a385b5aebf7da55ffc22">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string shuriken::analysis::dex::DVMBasicBlock::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
