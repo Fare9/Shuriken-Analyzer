@@ -16,7 +16,7 @@ namespace shuriken {
             class LinearSweepDisassembler {
             private:
                 /// @brief Internal disassembler to decode every instruction
-                Disassembler * internal_disassembler;
+                Disassembler *internal_disassembler;
 
                 /// @brief If there's any switch in code, we will assign to some instructions
                 /// the PackedSwitch or the SparswSwitch value
@@ -26,16 +26,17 @@ namespace shuriken {
                 void assign_switch_if_any(
                         std::vector<std::unique_ptr<Instruction>> &instructions,
                         std::unordered_map<std::uint64_t, Instruction *> &cache_instructions);
+
             public:
                 LinearSweepDisassembler() = default;
 
                 /// @brief Set the internal disassembler to decode the instructions
                 /// @param disassembler disassembler for instruction decoding
-                void set_disassembler(Disassembler * disassembler);
+                void set_disassembler(Disassembler *disassembler);
 
                 std::vector<std::unique_ptr<Instruction>> disassembly(std::span<std::uint8_t> buffer_bytes);
             };
-        }
-    }
-}
-#endif //SHURIKENPROJECT_LINEAR_SWEEP_DISASSEMBLER_H
+        }// namespace dex
+    }    // namespace disassembler
+}// namespace shuriken
+#endif//SHURIKENPROJECT_LINEAR_SWEEP_DISASSEMBLER_H

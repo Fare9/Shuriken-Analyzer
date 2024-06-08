@@ -7,17 +7,17 @@
 #ifndef SHURIKENLIB_LOGGER_H
 #define SHURIKENLIB_LOGGER_H
 
-#include <iostream>
 #include "spdlog/spdlog.h"
+#include <iostream>
 
 namespace shuriken {
 
     /// @brief Output where to drop the logging from
     /// Shuriken
     enum logger_output_t {
-        TO_CONSOLE = 0, /// stdout
-        TO_STDERR,      /// stderr
-        TO_FILE         /// given file
+        TO_CONSOLE = 0,/// stdout
+        TO_STDERR,     /// stderr
+        TO_FILE        /// given file
     };
 
     void LOG_TO_STDERR();
@@ -30,7 +30,7 @@ namespace shuriken {
     /// will be different depending on the type of logging
     /// required.
     /// @return logger shared object
-    spdlog::logger* logger();
-}
+    spdlog::logger *logger();
+}// namespace shuriken
 
-#endif //SHURIKENLIB_LOGGER_H
+#endif//SHURIKENLIB_LOGGER_H

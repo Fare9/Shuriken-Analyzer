@@ -8,10 +8,10 @@
 #ifndef SHURIKEN_ANALYZER_FIELDS_H
 #define SHURIKEN_ANALYZER_FIELDS_H
 
-#include "shuriken/parser/Dex/dex_types.h"
-#include "shuriken/parser/Dex/dex_strings.h"
-#include "shuriken/common/shurikenstream.h"
 #include "shuriken/common/iterator_range.h"
+#include "shuriken/common/shurikenstream.h"
+#include "shuriken/parser/Dex/dex_strings.h"
+#include "shuriken/parser/Dex/dex_types.h"
 
 #include <memory>
 #include <vector>
@@ -24,29 +24,30 @@ namespace shuriken {
             class FieldID {
             private:
                 /// @brief Class to which the field belongs
-                DVMType* class_;
+                DVMType *class_;
                 /// @brief Field type
-                DVMType* type_;
+                DVMType *type_;
                 /// @brief Field name
                 std::string_view name_;
                 /// @brief Pretty name
                 std::string pretty_name;
                 /// @brief for analysis of instructions
-                EncodedField * encoded_field;
+                EncodedField *encoded_field;
+
             public:
                 /// @brief Constructor of FieldID
-                FieldID(DVMType* class_, DVMType* type_, std::string_view name_);
+                FieldID(DVMType *class_, DVMType *type_, std::string_view name_);
 
                 /// @brief Destructor of FieldID, default one
                 ~FieldID() = default;
 
-                const DVMType* field_class() const;
+                const DVMType *field_class() const;
 
-                DVMType* field_class();
+                DVMType *field_class();
 
-                const DVMType* field_type() const;
+                const DVMType *field_type() const;
 
-                DVMType* field_type();
+                DVMType *field_type();
 
                 std::string_view field_name() const;
 
@@ -55,12 +56,12 @@ namespace shuriken {
                 /// @return prettyfied version of the field
                 std::string_view pretty_field();
 
-                void set_encoded_field(EncodedField * field);
+                void set_encoded_field(EncodedField *field);
 
-                EncodedField * get_encoded_field();
+                EncodedField *get_encoded_field();
             };
 
-            inline bool operator==(const FieldID& lhs, const FieldID& rhs) {
+            inline bool operator==(const FieldID &lhs, const FieldID &rhs) {
                 if (*(lhs.field_class()) == *(rhs.field_class()) &&
                     *(lhs.field_type()) == *(rhs.field_type()) &&
                     lhs.field_name() == rhs.field_name())
@@ -68,7 +69,7 @@ namespace shuriken {
                 return false;
             }
 
-            inline bool operator!=(const FieldID& lhs, const FieldID& rhs) {
+            inline bool operator!=(const FieldID &lhs, const FieldID &rhs) {
                 return !(lhs == rhs);
             }
 
@@ -77,9 +78,11 @@ namespace shuriken {
                 using field_ids_t = std::vector<std::unique_ptr<FieldID>>;
                 using it_field_ids = iterator_range<field_ids_t::iterator>;
                 using it_const_field_ids = iterator_range<const field_ids_t::iterator>;
+
             private:
                 /// @brief List of FieldIDs
                 field_ids_t fields;
+
             public:
                 /// @brief Default constructor for fields
                 DexFields() = default;
@@ -92,9 +95,9 @@ namespace shuriken {
                 /// @param types types to retrieve information
                 /// @param strings strings to retrieve information
                 void parse_fields(
-                        common::ShurikenStream& stream,
-                        DexTypes& types,
-                        DexStrings& strings,
+                        common::ShurikenStream &stream,
+                        DexTypes &types,
+                        DexStrings &strings,
                         std::uint32_t fields_offset,
                         std::uint32_t n_of_fields);
 
@@ -109,20 +112,20 @@ namespace shuriken {
                 /// @brief Get a pointer to a field given its id
                 /// @param id id from the FieldID
                 /// @return pointer to a FieldID
-                FieldID* get_field_by_id(std::uint32_t id);
+                FieldID *get_field_by_id(std::uint32_t id);
 
                 /// @brief Get an ID given a field
                 /// @param field the field to look for
                 /// @return an id of the field or -1
-                std::int64_t get_id_by_field(FieldID* field);
+                std::int64_t get_id_by_field(FieldID *field);
 
                 /// @brief Print the fields into an XML format.
                 /// @param fos file where to dump it
-                void to_xml(std::ofstream& fos);
+                void to_xml(std::ofstream &fos);
             };
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace parser
+}// namespace shuriken
 
 
-#endif //SHURIKEN_ANALYZER_FIELDS_H
+#endif//SHURIKEN_ANALYZER_FIELDS_H

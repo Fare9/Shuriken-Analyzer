@@ -9,17 +9,17 @@
 
 using namespace shuriken::parser::dex;
 
-void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
-                                          DexFields& fields,
-                                          DexMethods& methods,
-                                          DexTypes& types) {
+void ClassDataItem::parse_class_data_item(common::ShurikenStream &stream,
+                                          DexFields &fields,
+                                          DexMethods &methods,
+                                          DexTypes &types) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
 
     std::uint64_t I;
     // IDs for the different variables
     std::uint64_t static_field = 0, instance_field = 0, direct_method = 0, virtual_method = 0;
-    std::uint64_t access_flags; // access flags of the variables
+    std::uint64_t access_flags;// access flags of the variables
     std::uint64_t code_offset; // offset for parsing
 
     my_logger->debug("Started parsing a class data item");
@@ -40,7 +40,6 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream& stream,
         //! create the static field
         static_fields.push_back(std::make_unique<EncodedField>(fields.get_field_by_id(static_cast<uint32_t>(static_field)),
                                                                static_cast<shuriken::dex::TYPES::access_flags>(access_flags)));
-
     }
 
     for (I = 0; I < instance_fields_size; ++I) {
@@ -90,26 +89,26 @@ std::size_t ClassDataItem::get_number_of_virtual_methods() const {
     return virtual_methods.size();
 }
 
-EncodedField* ClassDataItem::get_static_field_by_id(std::uint32_t id) {
+EncodedField *ClassDataItem::get_static_field_by_id(std::uint32_t id) {
     if (id >= static_fields.size())
         throw std::runtime_error("Error id value given incorrect");
 
     return static_fields[id].get();
 }
 
-EncodedField* ClassDataItem::get_instance_field_by_id(std::uint32_t id) {
+EncodedField *ClassDataItem::get_instance_field_by_id(std::uint32_t id) {
     if (id >= instance_fields.size())
         throw std::runtime_error("Error id value given incorrect");
     return instance_fields[id].get();
 }
 
-EncodedMethod* ClassDataItem::get_direct_method_by_id(std::uint32_t id) {
+EncodedMethod *ClassDataItem::get_direct_method_by_id(std::uint32_t id) {
     if (id >= direct_methods.size())
         throw std::runtime_error("Error id value given incorrect");
     return direct_methods[id].get();
 }
 
-EncodedMethod* ClassDataItem::get_virtual_method_by_id(std::uint32_t id) {
+EncodedMethod *ClassDataItem::get_virtual_method_by_id(std::uint32_t id) {
     if (id >= virtual_methods.size())
         throw std::runtime_error("Error id value given incorrect");
     return virtual_methods[id].get();
@@ -132,12 +131,11 @@ ClassDataItem::it_encoded_method ClassDataItem::get_virtual_methods() {
 }
 
 
-
-void ClassDef::parse_class_def(common::ShurikenStream& stream,
-                               DexStrings& strings,
-                               DexTypes& types,
-                               DexFields& fields,
-                               DexMethods& methods) {
+void ClassDef::parse_class_def(common::ShurikenStream &stream,
+                               DexStrings &strings,
+                               DexTypes &types,
+                               DexFields &fields,
+                               DexMethods &methods) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
     size_t I;
@@ -149,11 +147,11 @@ void ClassDef::parse_class_def(common::ShurikenStream& stream,
     // first read the classdefstruct_t
     stream.read_data<classdefstruct_t>(classdefstruct, sizeof(classdefstruct_t));
     // assign the class idx to the current class
-    class_idx = reinterpret_cast<DVMClass*>(types.get_type_by_id(classdefstruct.class_idx));
+    class_idx = reinterpret_cast<DVMClass *>(types.get_type_by_id(classdefstruct.class_idx));
 
     // assign the super class
     if (classdefstruct.superclass_idx != shuriken::dex::NO_INDEX)
-        superclass_idx = reinterpret_cast<DVMClass*>(types.get_type_by_id(classdefstruct.superclass_idx));
+        superclass_idx = reinterpret_cast<DVMClass *>(types.get_type_by_id(classdefstruct.superclass_idx));
 
     // assign the source file
     if (classdefstruct.source_file_idx != shuriken::dex::NO_INDEX)
@@ -168,7 +166,7 @@ void ClassDef::parse_class_def(common::ShurikenStream& stream,
         for (I = 0; I < size; ++I) {
             stream.read_data<std::uint16_t>(idx, sizeof(std::uint16_t));
             interfaces.push_back(
-                    reinterpret_cast<DVMClass*>(types.get_type_by_id(idx)));
+                    reinterpret_cast<DVMClass *>(types.get_type_by_id(idx)));
         }
     }
 
@@ -196,27 +194,25 @@ void ClassDef::parse_class_def(common::ShurikenStream& stream,
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
-const ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() const {
+const ClassDef::classdefstruct_t &ClassDef::get_class_def_struct() const {
     return classdefstruct;
 }
 
-ClassDef::classdefstruct_t& ClassDef::get_class_def_struct() {
+ClassDef::classdefstruct_t &ClassDef::get_class_def_struct() {
     return classdefstruct;
 }
 
-DVMClass * ClassDef::get_class_idx() {
+DVMClass *ClassDef::get_class_idx() {
     return class_idx;
 }
 
 
-
 shuriken::dex::TYPES::access_flags ClassDef::get_access_flags() const {
     return static_cast<
-            shuriken::dex::TYPES::access_flags
-            >(classdefstruct.access_flags);
+            shuriken::dex::TYPES::access_flags>(classdefstruct.access_flags);
 }
 
-DVMClass * ClassDef::get_superclass() {
+DVMClass *ClassDef::get_superclass() {
     return superclass_idx;
 }
 
@@ -228,29 +224,29 @@ ClassDef::it_interfaces_list ClassDef::get_interfaces() {
     return make_range(interfaces.begin(), interfaces.end());
 }
 
-const ClassDataItem& ClassDef::get_class_data_item() const {
+const ClassDataItem &ClassDef::get_class_data_item() const {
     return class_data_item;
 }
 
-ClassDataItem& ClassDef::get_class_data_item() {
+ClassDataItem &ClassDef::get_class_data_item() {
     return class_data_item;
 }
 
-const EncodedArray& ClassDef::get_static_values() const {
+const EncodedArray &ClassDef::get_static_values() const {
     return static_values;
 }
 
-EncodedArray& ClassDef::get_static_values() {
+EncodedArray &ClassDef::get_static_values() {
     return static_values;
 }
 
-void DexClasses::parse_classes(common::ShurikenStream& stream,
+void DexClasses::parse_classes(common::ShurikenStream &stream,
                                std::uint32_t number_of_classes,
                                std::uint32_t offset,
-                               DexStrings& strings,
-                               DexTypes& types,
-                               DexFields& fields,
-                               DexMethods& methods) {
+                               DexStrings &strings,
+                               DexTypes &types,
+                               DexFields &fields,
+                               DexMethods &methods) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
     std::unique_ptr<ClassDef> classdef;

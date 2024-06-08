@@ -8,8 +8,8 @@
 #ifndef SHURIKENPROJECT_DISASSEMBLED_METHOD_H
 #define SHURIKENPROJECT_DISASSEMBLED_METHOD_H
 
-#include "shuriken/parser/Dex/dex_types.h"
 #include "shuriken/disassembler/Dex/dex_instructions.h"
+#include "shuriken/parser/Dex/dex_types.h"
 
 #include <vector>
 
@@ -19,19 +19,17 @@ namespace shuriken {
             /// @brief Information for the handler
             /// of exceptions, handler type, the
             /// start address of it and basic blocks
-            typedef struct _handler_data
-            {
-                parser::dex::DVMType*                handler_type;
-                std::uint64_t           handler_start_addr;
+            typedef struct _handler_data {
+                parser::dex::DVMType *handler_type;
+                std::uint64_t handler_start_addr;
             } handler_data_t;
 
             /// @brief Information for the exceptions in the
             /// code
-            typedef struct _exception_data
-            {
-                std::uint64_t               try_value_start_addr;
-                std::uint64_t               try_value_end_addr;
-                std::vector<handler_data_t>   handler;
+            typedef struct _exception_data {
+                std::uint64_t try_value_start_addr;
+                std::uint64_t try_value_end_addr;
+                std::vector<handler_data_t> handler;
             } exception_data_t;
 
             using instructions_t = std::vector<std::unique_ptr<
@@ -49,7 +47,7 @@ namespace shuriken {
             class DisassembledMethod {
             private:
                 /// @brief MethodID with the name of the method
-                shuriken::parser::dex::MethodID* method_id;
+                shuriken::parser::dex::MethodID *method_id;
                 /// @brief Number of registers from the method
                 std::uint16_t n_of_registers;
                 /// @brief vector with all the exception information
@@ -58,25 +56,26 @@ namespace shuriken {
                 /// @brief store the instructions from the method
                 instructions_t instructions;
                 /// @brief store raw pointers to return reference to the instructions
-                std::vector<Instruction*> instructions_raw;
+                std::vector<Instruction *> instructions_raw;
                 /// @brief representation of the method in string format
                 std::string method_string;
                 /// @brief Access flags from the instruction for the representation
                 shuriken::dex::TYPES::access_flags access_flags;
+
             public:
                 /// @brief Constructor of disassembled method.
                 /// @param n_of_registers number of registers used in the method
                 /// @param exceptions structure of the exceptions
                 /// @param instructions vector of instructions of the method
-                DisassembledMethod(shuriken::parser::dex::MethodID* method_id,
+                DisassembledMethod(shuriken::parser::dex::MethodID *method_id,
                                    std::uint16_t n_of_registers,
-                                   exceptions_data_t& exceptions,
-                                   instructions_t& instructions,
+                                   exceptions_data_t &exceptions,
+                                   instructions_t &instructions,
                                    shuriken::dex::TYPES::access_flags access_flags);
 
                 ~DisassembledMethod() = default;
 
-                shuriken::parser::dex::MethodID* get_method_id();
+                shuriken::parser::dex::MethodID *get_method_id();
 
                 /// @brief Get the number of registers
                 /// @return number of registers
@@ -99,21 +98,21 @@ namespace shuriken {
                 it_instructions get_instructions();
 
                 /// @return const container to the instructions
-                const std::vector<Instruction*> &get_instructions_container();
+                const std::vector<Instruction *> &get_instructions_container();
 
                 /// @brief Get a constant access to a part of the instructions from the method
                 /// @param init first index from the instructions
                 /// @param end last index from the instructions
                 /// @return constant reference to instructions
-                std::span<Instruction*> get_ref_to_instructions(size_t init, size_t end);
+                std::span<Instruction *> get_ref_to_instructions(size_t init, size_t end);
 
                 /// @brief Get a disassembled representation of the method in string format
                 /// @param print_address print the address from each instruction
                 /// @return disassembled method string
                 std::string_view print_method(bool print_address = true);
             };
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace disassembler
+}// namespace shuriken
 
-#endif //SHURIKENPROJECT_DISASSEMBLED_METHOD_H
+#endif//SHURIKENPROJECT_DISASSEMBLED_METHOD_H

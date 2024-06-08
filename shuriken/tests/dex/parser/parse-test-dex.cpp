@@ -9,9 +9,9 @@
 
 #include "dex-files-folder.inc"
 #include "shuriken/parser/shuriken_parsers.h"
-#include <vector>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 int main() {
 
@@ -30,8 +30,8 @@ int main() {
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser = nullptr;
 
-    for (const auto& path : paths) {
-        auto name = path.substr(path.find_last_of("/")+1);
+    for (const auto &path: paths) {
+        auto name = path.substr(path.find_last_of("/") + 1);
         std::cerr << "Parsing file: " << name << "\n";
         dex_parser = shuriken::parser::parse_dex(path);
         std::cerr << "Parsed file: " << name << "\n";
@@ -39,4 +39,3 @@ int main() {
 
     return 0;
 }
-

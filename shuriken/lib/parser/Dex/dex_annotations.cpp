@@ -9,7 +9,7 @@
 
 using namespace shuriken::parser::dex;
 
-void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenStream& stream) {
+void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenStream &stream) {
     auto current_offset = stream.tellg();
     auto my_logger = shuriken::logger();
 
@@ -63,19 +63,19 @@ AnnotationDirectoryItem::it_parameter_annotations AnnotationDirectoryItem::get_p
     return make_range(parameter_annotations_by_id.begin(), parameter_annotations_by_id.end());
 }
 
-FieldAnnotation& AnnotationDirectoryItem::get_field_annotation_by_id(std::uint32_t field_id) {
+FieldAnnotation &AnnotationDirectoryItem::get_field_annotation_by_id(std::uint32_t field_id) {
     if (!field_annotations_by_id.contains(field_id))
         throw std::runtime_error("Error field_id provided has no annotation");
     return field_annotations_by_id[field_id];
 }
 
-MethodAnnotation& AnnotationDirectoryItem::get_method_annotation_by_id(std::uint32_t method_id) {
+MethodAnnotation &AnnotationDirectoryItem::get_method_annotation_by_id(std::uint32_t method_id) {
     if (!method_annotations_by_id.contains(method_id))
         throw std::runtime_error("Error method_id provided has no annotation");
     return method_annotations_by_id[method_id];
 }
 
-ParameterAnnotation& AnnotationDirectoryItem::get_parameter_annotation_by_id(std::uint32_t method_id) {
+ParameterAnnotation &AnnotationDirectoryItem::get_parameter_annotation_by_id(std::uint32_t method_id) {
     if (!parameter_annotations_by_id.contains(method_id))
         throw std::runtime_error("Error method_id provided has no annotation");
     return parameter_annotations_by_id[method_id];

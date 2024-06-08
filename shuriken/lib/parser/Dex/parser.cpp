@@ -11,7 +11,7 @@
 
 using namespace shuriken::parser::dex;
 
-void Parser::parse_dex(common::ShurikenStream& stream) {
+void Parser::parse_dex(common::ShurikenStream &stream) {
     std::uint8_t magic[4];
     auto my_logger = shuriken::logger();
     my_logger->info("Start parsing dex file");
@@ -30,7 +30,7 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
     // parsing of header
     header_.parse_header(stream);
 
-    const auto & dex_header = header_.get_dex_header_const();
+    const auto &dex_header = header_.get_dex_header_const();
 
     // parsing of the rest of the fields
     maplist_.parse_map_list(stream,
@@ -69,67 +69,67 @@ void Parser::parse_dex(common::ShurikenStream& stream) {
     my_logger->info("Finished parsing dex file");
 }
 
-DexHeader& Parser::get_header() {
+DexHeader &Parser::get_header() {
     return header_;
 }
 
-const DexHeader& Parser::get_header() const {
+const DexHeader &Parser::get_header() const {
     return header_;
 }
 
-DexMapList& Parser::get_maplist() {
+DexMapList &Parser::get_maplist() {
     return maplist_;
 }
 
-const DexMapList& Parser::get_maplist() const {
+const DexMapList &Parser::get_maplist() const {
     return maplist_;
 }
 
-DexStrings& Parser::get_strings() {
+DexStrings &Parser::get_strings() {
     return strings_;
 }
 
-const DexStrings& Parser::get_strings() const {
+const DexStrings &Parser::get_strings() const {
     return strings_;
 }
 
-DexTypes& Parser::get_types() {
+DexTypes &Parser::get_types() {
     return types_;
 }
 
-const DexTypes& Parser::get_types() const {
+const DexTypes &Parser::get_types() const {
     return types_;
 }
 
-DexProtos& Parser::get_protos() {
+DexProtos &Parser::get_protos() {
     return protos_;
 }
 
-const DexProtos& Parser::get_protos() const {
+const DexProtos &Parser::get_protos() const {
     return protos_;
 }
 
-DexFields& Parser::get_fields() {
+DexFields &Parser::get_fields() {
     return fields_;
 }
 
-const DexFields& Parser::get_fields() const {
+const DexFields &Parser::get_fields() const {
     return fields_;
 }
 
-DexMethods& Parser::get_methods() {
+DexMethods &Parser::get_methods() {
     return methods_;
 }
 
-const DexMethods& Parser::get_methods() const {
+const DexMethods &Parser::get_methods() const {
     return methods_;
 }
 
-DexClasses& Parser::get_classes() {
+DexClasses &Parser::get_classes() {
     return classes_;
 }
 
-const DexClasses& Parser::get_classes() const {
+const DexClasses &Parser::get_classes() const {
     return classes_;
 }
 
@@ -141,7 +141,7 @@ namespace shuriken {
             return std::move(p);
         }
 
-        std::unique_ptr<dex::Parser> parse_dex(const std::string& file_path) {
+        std::unique_ptr<dex::Parser> parse_dex(const std::string &file_path) {
             std::ifstream ifs(file_path);
             common::ShurikenStream file(ifs);
 
@@ -150,7 +150,7 @@ namespace shuriken {
             return std::move(p);
         }
 
-        dex::Parser* parse_dex(const char *file_path) {
+        dex::Parser *parse_dex(const char *file_path) {
             std::ifstream ifs(file_path);
             common::ShurikenStream file(ifs);
 
@@ -158,5 +158,5 @@ namespace shuriken {
             p->parse_dex(file);
             return p;
         }
-    }
-}
+    }// namespace parser
+}// namespace shuriken

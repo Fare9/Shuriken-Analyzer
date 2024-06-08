@@ -34,14 +34,14 @@ std::unique_ptr<DVMType> DexTypes::parse_type(std::string_view name) {
             return std::make_unique<DVMFundamental>(fundamental_e::VOID, name);
         case 'L':
             return std::make_unique<DVMClass>(name);
-        case '[':
-        {
+        case '[': {
             size_t depth = 0;
-            for (const auto &c : name) {
+            for (const auto &c: name) {
                 if (c == '[') depth++;
-                else break;
+                else
+                    break;
             }
-            std::string_view aux(name.begin()+depth, name.end());
+            std::string_view aux(name.begin() + depth, name.end());
             std::unique_ptr<DVMType> aux_type = parse_type(aux);
             return std::make_unique<DVMArray>(depth, aux_type, name);
         }
@@ -50,8 +50,8 @@ std::unique_ptr<DVMType> DexTypes::parse_type(std::string_view name) {
     }
 }
 
-void DexTypes::parse_types(common::ShurikenStream& shurikenStream,
-                           DexStrings& strings_,
+void DexTypes::parse_types(common::ShurikenStream &shurikenStream,
+                           DexStrings &strings_,
                            std::uint32_t offset_types,
                            std::uint32_t n_of_types) {
     auto my_logger = shuriken::logger();
@@ -79,8 +79,7 @@ void DexTypes::parse_types(common::ShurikenStream& shurikenStream,
 void DexTypes::to_xml(std::ofstream &fos) {
     fos << "<DexTypes>\n";
 
-    for (size_t I = 0; I < ordered_types.size(); ++I)
-    {
+    for (size_t I = 0; I < ordered_types.size(); ++I) {
         fos << "\t<type>\n";
         fos << "\t\t<id>" << I << "</id>\n";
         fos << "\t\t<value>" << ordered_types[I]->print_type() << "</value>\n";
@@ -90,7 +89,7 @@ void DexTypes::to_xml(std::ofstream &fos) {
     fos << "</DexTypes>\n";
 }
 
-const DVMType* DexTypes::get_type_by_id_const(std::uint32_t id) const {
+const DVMType *DexTypes::get_type_by_id_const(std::uint32_t id) const {
     if (id >= ordered_types.size()) {
         throw std::runtime_error("Error id for type provided is incorrect");
     }
@@ -103,7 +102,7 @@ size_t DexTypes::get_number_of_types() const {
 }
 
 
-DVMType* DexTypes::get_type_by_id(std::uint32_t id) {
+DVMType *DexTypes::get_type_by_id(std::uint32_t id) {
     if (id >= ordered_types.size()) {
         throw std::runtime_error("Error id for type provided is incorrect");
     }
@@ -111,11 +110,11 @@ DVMType* DexTypes::get_type_by_id(std::uint32_t id) {
     return ordered_types.at(id).get();
 }
 
-std::int64_t DexTypes::get_id_by_type(DVMType * type) {
+std::int64_t DexTypes::get_id_by_type(DVMType *type) {
     auto it = std::ranges::find_if(ordered_types,
-                                    [&](const std::unique_ptr<DVMType>& t) {
-        return *type == *t;
-    });
+                                   [&](const std::unique_ptr<DVMType> &t) {
+                                       return *type == *t;
+                                   });
 
     if (it == ordered_types.end())
         return -1;
@@ -125,8 +124,7 @@ std::int64_t DexTypes::get_id_by_type(DVMType * type) {
 
 // --DVMType
 DVMType::DVMType(type_e type, std::string_view raw_type)
-        : type(type), raw_type(raw_type)
-{}
+    : type(type), raw_type(raw_type) {}
 
 type_e DVMType::get_type() const {
     return type;
@@ -160,17 +158,16 @@ fundamental_e DVMFundamental::get_fundamental_type() const {
 
 // --DVMClass
 
-DVMClass::DVMClass(std::string_view raw_name) :
-        DVMType(type_e::CLASS, raw_name) {
+DVMClass::DVMClass(std::string_view raw_name) : DVMType(type_e::CLASS, raw_name) {
     if (raw_name.empty() || raw_name.length() == 1)
         std::runtime_error("Incorrect length for DVMClass");
     if (!raw_name.starts_with('L') || !raw_name.ends_with(';'))
         std::runtime_error("Incorrect class name");
 
-    class_name = raw_name.substr(1, raw_name.length()-2);
+    class_name = raw_name.substr(1, raw_name.length() - 2);
     std::replace(class_name.begin(), class_name.end(), '/', '.');
 
-    class_name_v = std::string_view (class_name);
+    class_name_v = std::string_view(class_name);
 }
 
 std::string DVMClass::print_type() {
@@ -184,10 +181,9 @@ std::string_view DVMClass::get_class_name() const {
 // --DVMArray
 
 DVMArray::DVMArray(size_t depth,
-            std::unique_ptr<DVMType>& array_type,
-            std::string_view raw_name) :
-        DVMType(type_e::ARRAY, raw_name),
-        depth(depth), array_type(std::move(array_type)) {
+                   std::unique_ptr<DVMType> &array_type,
+                   std::string_view raw_name) : DVMType(type_e::ARRAY, raw_name),
+                                                depth(depth), array_type(std::move(array_type)) {
     array_name = this->array_type->print_type();
     for (size_t I = 0; I < depth; ++I) array_name += "[]";
     array_name_v = std::string_view(array_name);
@@ -205,19 +201,15 @@ size_t DVMArray::get_array_depth() const {
     return depth;
 }
 
-const DVMType* DVMArray::get_array_base_type() const {
+const DVMType *DVMArray::get_array_base_type() const {
     return array_type.get();
 }
 
 // --Unknown
 
-Unknown::Unknown(std::string_view raw) :
-        DVMType(type_e::UNKNOWN, raw)
-{
-
+Unknown::Unknown(std::string_view raw) : DVMType(type_e::UNKNOWN, raw) {
 }
 
-std::string Unknown::print_type()
-{
+std::string Unknown::print_type() {
     return "Unknown";
 }

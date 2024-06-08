@@ -9,9 +9,9 @@
 #ifndef SHURIKENPROJECT_DEX_DISASSEMBLER_H
 #define SHURIKENPROJECT_DEX_DISASSEMBLER_H
 
+#include "shuriken/disassembler/Dex/disassembled_method.h"
 #include "shuriken/disassembler/Dex/internal_disassembler.h"
 #include "shuriken/disassembler/Dex/linear_sweep_disassembler.h"
-#include "shuriken/disassembler/Dex/disassembled_method.h"
 
 #include "shuriken/parser/Dex/parser.h"
 
@@ -32,21 +32,22 @@ namespace shuriken {
                 /// @brief Internal disassembler to provide to the different algorithms
                 std::unique_ptr<Disassembler> internal_disassembler;
                 /// @brief Pointer to the parser where information about the structure is stored
-                parser::dex::Parser * parser;
+                parser::dex::Parser *parser;
                 /// @brief Storage for the Disassembled Methods
                 std::unordered_map<std::string_view,
-                    std::unique_ptr<DisassembledMethod>> disassembled_methods;
+                                   std::unique_ptr<DisassembledMethod>>
+                        disassembled_methods;
                 /// @brief Linear sweep disassembler
                 LinearSweepDisassembler linear_sweep;
 
-                void disassemble_encoded_method(shuriken::parser::dex::EncodedMethod* method);
+                void disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method);
 
             public:
                 /// @brief Constructor of the DexDisassembler, this should be called
                 /// only if the parsing was correct
                 /// @param parser parser for the internal disassembler, this is used
                 /// in some of the instructions
-                DexDisassembler(parser::dex::Parser * parser);
+                DexDisassembler(parser::dex::Parser *parser);
 
                 /// @brief Set the disassembly algorithm to use in the next calls to
                 /// the different disassembly methods.
@@ -57,19 +58,19 @@ namespace shuriken {
                 /// all of them in a map.
                 /// @param method class->name_method(description) of the method to retrieve
                 /// @return a DisassembledMethod object with the instructions
-                DisassembledMethod* get_disassembled_method(std::string method);
+                DisassembledMethod *get_disassembled_method(std::string method);
 
                 /// @brief Obtain a DisassembledMethod object the disassembler keeps
                 /// all of them in a map.
                 /// @param method class->name_method(description) of the method to retrieve
                 /// @return a DisassembledMethod object with the instructions
-                DisassembledMethod* get_disassembled_method(std::string_view method);
+                DisassembledMethod *get_disassembled_method(std::string_view method);
 
                 /// @brief Obtain a reference to all the disassembled methods
                 /// @return reference to map with all the disassembled methods
                 std::unordered_map<std::string_view,
-                                   std::unique_ptr<DisassembledMethod>>&
-                    get_disassembled_methods();
+                                   std::unique_ptr<DisassembledMethod>> &
+                get_disassembled_methods();
 
                 /// @brief This is the most important function from the
                 /// disassembler, this function takes the given parser
@@ -82,9 +83,9 @@ namespace shuriken {
                 /// @param buffer buffer with possible bytecode for dalvik
                 /// @return vector with disassembled instructions
                 std::vector<std::unique_ptr<Instruction>>
-                        disassembly_buffer(std::span<std::uint8_t> buffer);
+                disassembly_buffer(std::span<std::uint8_t> buffer);
             };
-        }
-    }
-}
-#endif //SHURIKENPROJECT_DEX_DISASSEMBLER_H
+        }// namespace dex
+    }    // namespace disassembler
+}// namespace shuriken
+#endif//SHURIKENPROJECT_DEX_DISASSEMBLER_H

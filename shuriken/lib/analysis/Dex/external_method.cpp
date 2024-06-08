@@ -9,7 +9,7 @@
 using namespace shuriken::analysis::dex;
 
 ExternalMethod::ExternalMethod(std::string_view class_idx, std::string_view name_idx, std::string_view proto_idx,
-    shuriken::dex::TYPES::access_flags access_flags)
+                               shuriken::dex::TYPES::access_flags access_flags)
     : class_idx(class_idx), name_idx(name_idx), proto_idx(proto_idx), access_flags(access_flags) {
 }
 

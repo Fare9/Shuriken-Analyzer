@@ -8,29 +8,30 @@
 #ifndef SHURIKENLIB_SHURIKENSTREAM_H
 #define SHURIKENLIB_SHURIKENSTREAM_H
 
-#include <fstream>
 #include <cassert>
 #include <cstdint>
+#include <fstream>
 
 namespace shuriken {
     namespace common {
         class ShurikenStream {
         private:
             /// @brief stream of file
-            std::ifstream& input_file;
+            std::ifstream &input_file;
 
             /// @brief size of the file
             std::int64_t file_size;
 
             /// @brief Initialize private data
             void initialize();
+
         public:
             /// @brief Maximum size for ansii DexStrings, used for reading
             /// DexStrings in Dalvik
             const std::int32_t MAX_ANSII_STR_SIZE = 256;
 
             /// @brief Constructor of ShurikenStream
-            ShurikenStream(std::ifstream& input_file);
+            ShurikenStream(std::ifstream &input_file);
 
             ~ShurikenStream() = default;
 
@@ -42,13 +43,13 @@ namespace shuriken {
             /// @tparam T type of buffer where to read the data
             /// @param buffer parameter of a buffer where to read the data from the file
             /// @param read_size size to read from the file
-            template <typename T>
-            void read_data(T& buffer, size_t read_size) {
+            template<typename T>
+            void read_data(T &buffer, size_t read_size) {
                 if (read_size < 0) {
                     throw std::runtime_error("read_size cannot be lower than 0");
                 }
 
-                input_file.read(reinterpret_cast<char*>(&buffer), read_size);
+                input_file.read(reinterpret_cast<char *>(&buffer), read_size);
 
                 if (!input_file) {
                     throw std::runtime_error("error reading data from input file");
@@ -88,7 +89,7 @@ namespace shuriken {
             /// @return string read
             std::string read_dex_string(std::int64_t offset);
         };
-    }
-} // namespace SHURIKEN
+    }// namespace common
+}// namespace shuriken
 
-#endif // SHURIKENLIB_SHURIKENSTREAM_H
+#endif// SHURIKENLIB_SHURIKENSTREAM_H

@@ -11,13 +11,13 @@ using namespace shuriken::parser::dex;
 
 
 // -- ProtoID
-using parameters_type_t = std::vector<DVMType*>;
+using parameters_type_t = std::vector<DVMType *>;
 using it_params = shuriken::iterator_range<parameters_type_t::iterator>;
 using it_const_params = shuriken::iterator_range<const parameters_type_t::iterator>;
 
 void ProtoID::parse_parameters(
-        common::ShurikenStream& stream,
-        DexTypes& types,
+        common::ShurikenStream &stream,
+        DexTypes &types,
         std::uint32_t parameters_off) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
@@ -45,13 +45,12 @@ void ProtoID::parse_parameters(
 }
 
 ProtoID::ProtoID(
-        shuriken::common::ShurikenStream& stream,
-        DexTypes& types,
+        shuriken::common::ShurikenStream &stream,
+        DexTypes &types,
         std::string_view shorty_idx,
         std::uint32_t return_type_idx,
         std::uint32_t parameters_off)
-        : shorty_idx(shorty_idx), return_type(types.get_type_by_id(return_type_idx))
-{
+    : shorty_idx(shorty_idx), return_type(types.get_type_by_id(return_type_idx)) {
     parse_parameters(stream, types, parameters_off);
 }
 
@@ -59,20 +58,18 @@ std::string_view ProtoID::get_shorty_idx() const {
     return shorty_idx;
 }
 
-const DVMType* ProtoID::get_return_type() const
-{
+const DVMType *ProtoID::get_return_type() const {
     return return_type;
 }
 
-DVMType* ProtoID::get_return_type()
-{
+DVMType *ProtoID::get_return_type() {
     return return_type;
 }
 
 std::string_view ProtoID::get_dalvik_prototype() {
     if (prototypes_dalvik_representation.empty()) {
         prototypes_dalvik_representation = "(";
-        for (auto parameter : parameters) {
+        for (auto parameter: parameters) {
             prototypes_dalvik_representation += parameter->get_raw_type();
         }
         prototypes_dalvik_representation += ")";
@@ -85,7 +82,7 @@ it_params ProtoID::get_parameters() {
     return make_range(parameters.begin(), parameters.end());
 }
 
-it_const_params ProtoID::get_parameters_const(){
+it_const_params ProtoID::get_parameters_const() {
     return make_range(parameters.begin(), parameters.end());
 }
 
@@ -95,18 +92,18 @@ using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
 using it_protos = shuriken::iterator_range<protos_id_t::iterator>;
 using it_const_protos = shuriken::iterator_range<const protos_id_t::iterator>;
 
-void DexProtos::parse_protos(common::ShurikenStream& stream,
+void DexProtos::parse_protos(common::ShurikenStream &stream,
                              std::uint32_t number_of_protos,
                              std::uint32_t offset,
-                             DexStrings& strings,
-                             DexTypes& types) {
+                             DexStrings &strings,
+                             DexTypes &types) {
     auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 
     std::unique_ptr<ProtoID> proto = nullptr;
-    std::uint32_t shorty_idx = 0, //! id for prototype string
-    return_type_idx = 0,      //! id for type of return
-    parameters_off = 0;       //! offset of parameters
+    std::uint32_t shorty_idx = 0,//! id for prototype string
+            return_type_idx = 0, //! id for type of return
+            parameters_off = 0;  //! offset of parameters
 
     my_logger->info("Started parsing of protos");
 
@@ -130,13 +127,11 @@ void DexProtos::parse_protos(common::ShurikenStream& stream,
 void DexProtos::to_xml(std::ofstream &xml_file) {
     xml_file << "<protos>\n";
 
-    for (const auto &protoid : protos)
-    {
+    for (const auto &protoid: protos) {
         xml_file << "\t<proto>\n";
 
         xml_file << "\t\t<parameters>\n";
-        for (auto param : protoid->get_parameters())
-        {
+        for (auto param: protoid->get_parameters()) {
             xml_file << "\t\t\t<parameter>\n";
             xml_file << "\t\t\t\t<type>" << param->print_type() << "</type>\n";
             xml_file << "\t\t\t\t<raw>" << param->print_type() << "</raw>\n";
@@ -164,17 +159,17 @@ it_const_protos DexProtos::get_protos_const() {
     return make_range(protos.begin(), protos.end());
 }
 
-ProtoID* DexProtos::get_proto_by_id(std::uint32_t id) {
+ProtoID *DexProtos::get_proto_by_id(std::uint32_t id) {
     if (id >= protos.size())
         throw std::runtime_error("Error proto id given is out of bound");
     return protos[id].get();
 }
 
-std::int64_t DexProtos::get_id_by_proto(ProtoID* proto) {
+std::int64_t DexProtos::get_id_by_proto(ProtoID *proto) {
     auto it = std::ranges::find_if(protos,
-                                    [&](const std::unique_ptr<ProtoID>& p) {
-        return *proto == *p;
-    });
+                                   [&](const std::unique_ptr<ProtoID> &p) {
+                                       return *proto == *p;
+                                   });
 
     if (it == protos.end())
         return -1;

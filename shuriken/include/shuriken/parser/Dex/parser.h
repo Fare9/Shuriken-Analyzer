@@ -11,17 +11,17 @@
 
 #include "shuriken/common/shurikenstream.h"
 
+#include "shuriken/parser/Dex/dex_fields.h"
 #include "shuriken/parser/Dex/dex_header.h"
 #include "shuriken/parser/Dex/dex_mapitem.h"
+#include "shuriken/parser/Dex/dex_methods.h"
+#include "shuriken/parser/Dex/dex_protos.h"
 #include "shuriken/parser/Dex/dex_strings.h"
 #include "shuriken/parser/Dex/dex_types.h"
-#include "shuriken/parser/Dex/dex_protos.h"
-#include "shuriken/parser/Dex/dex_fields.h"
-#include "shuriken/parser/Dex/dex_methods.h"
 
 #include "shuriken/parser/Dex/dex_annotations.h"
-#include "shuriken/parser/Dex/dex_encoded.h"
 #include "shuriken/parser/Dex/dex_classes.h"
+#include "shuriken/parser/Dex/dex_encoded.h"
 
 namespace shuriken {
     namespace parser {
@@ -54,43 +54,43 @@ namespace shuriken {
 
                 /// @brief parse the dex file from the stream
                 /// @param stream stream from where to retrieve the dex data
-                void parse_dex(common::ShurikenStream& stream);
+                void parse_dex(common::ShurikenStream &stream);
 
-                DexHeader& get_header();
+                DexHeader &get_header();
 
-                const DexHeader& get_header() const;
+                const DexHeader &get_header() const;
 
-                DexMapList& get_maplist();
+                DexMapList &get_maplist();
 
-                const DexMapList& get_maplist() const;
+                const DexMapList &get_maplist() const;
 
-                DexStrings& get_strings();
+                DexStrings &get_strings();
 
-                const DexStrings& get_strings() const;
+                const DexStrings &get_strings() const;
 
-                DexTypes& get_types();
+                DexTypes &get_types();
 
-                const DexTypes& get_types() const;
+                const DexTypes &get_types() const;
 
-                DexProtos& get_protos();
+                DexProtos &get_protos();
 
-                const DexProtos& get_protos() const;
+                const DexProtos &get_protos() const;
 
-                DexFields& get_fields();
+                DexFields &get_fields();
 
-                const DexFields& get_fields() const;
+                const DexFields &get_fields() const;
 
-                DexMethods& get_methods();
+                DexMethods &get_methods();
 
-                const DexMethods& get_methods() const;
+                const DexMethods &get_methods() const;
 
-                DexClasses& get_classes();
+                DexClasses &get_classes();
 
-                const DexClasses& get_classes() const;
+                const DexClasses &get_classes() const;
             };
 
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace parser
+}// namespace shuriken
 
-#endif //SHURIKENLIB_PARSER_H
+#endif//SHURIKENLIB_PARSER_H

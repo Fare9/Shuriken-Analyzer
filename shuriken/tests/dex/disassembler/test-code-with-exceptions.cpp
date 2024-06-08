@@ -6,16 +6,16 @@
 // @brief Test for the disassembler, test code with exceptions
 
 #include "dex-files-folder.inc"
-#include "shuriken/parser/shuriken_parsers.h"
-#include "shuriken/parser/Dex/parser.h"
 #include "shuriken/disassembler/Dex/dex_disassembler.h"
+#include "shuriken/parser/Dex/parser.h"
+#include "shuriken/parser/shuriken_parsers.h"
 
-#include <iostream>
 #include <cassert>
-#include <unordered_map>
-#include <string>
-#include <fstream>
 #include <cstring>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 
 std::unordered_map<std::string, std::string_view> disassembled_methods = {
         {"Lcom/dexbox/_exception;->test_nest()V", ".method private static Lcom/dexbox/_exception;->test_nest()V\n"
@@ -80,14 +80,12 @@ std::unordered_map<std::string, std::string_view> disassembled_methods = {
                                                    "00000040 sget-object v2, java.lang.System->out java.io.PrintStream // field@0\n"
                                                    "00000044 invoke-virtual {v2, v0}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V // method@4\n"
                                                    "0000004a throw v1\n"
-                                                   ".end method"}
-};
+                                                   ".end method"}};
 
-int
-main() {
+int main() {
 
-    std::string test_file = DEX_FILES_FOLDER \
-                                "_exception.dex";
+    std::string test_file = DEX_FILES_FOLDER
+            "_exception.dex";
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser = nullptr;
     std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> dex_disassembler = nullptr;
@@ -96,7 +94,7 @@ main() {
     dex_disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(dex_parser.get());
     dex_disassembler->disassembly_dex();
 
-    for (auto disassembled_method : disassembled_methods) {
+    for (auto disassembled_method: disassembled_methods) {
         auto method = dex_disassembler->get_disassembled_method(disassembled_method.first);
         std::cout << disassembled_method.first << " check\n";
         assert(strcmp(disassembled_method.second.data(), method->print_method(true).data()) == 0 && "Error, the method has not been properly disassembled");

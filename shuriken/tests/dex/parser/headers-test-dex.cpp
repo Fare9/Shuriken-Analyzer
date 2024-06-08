@@ -7,8 +7,8 @@
 // values are correct
 
 #include "dex-files-folder.inc"
-#include "shuriken/parser/shuriken_parsers.h"
 #include "shuriken/parser/Dex/parser.h"
+#include "shuriken/parser/shuriken_parsers.h"
 
 #include <cassert>
 
@@ -55,60 +55,48 @@ std::string_view super_class_name = "Ljava/lang/Object;";
 std::uint32_t ACCESS_FLAGS = 0x0001;
 
 struct field_data fields[2] = {
-        {.name="field1",
-                .flags=0x0002,
-                .type="I"},
-        {.name="field2",
-                .flags=0x0002,
-                .type="Ljava/lang/String;"}
-};
+        {.name = "field1",
+         .flags = 0x0002,
+         .type = "I"},
+        {.name = "field2",
+         .flags = 0x0002,
+         .type = "Ljava/lang/String;"}};
 
 struct method_data methods[4] = {
-        {
-            .name="<init>",
-            .type="V", // provided as a shorty_idx
-            .flags=0x10001,
-            .registers=2,
-            .insns_size=12*2
-        },
-        {
-                .name="calculateSum",
-                .type="III", // provided as a shorty_idx
-                .flags=0x0002,
-                .registers=7,
-                .insns_size=47*2
-        },
-        {
-                .name="main",
-                .type="VL", // provided as a shorty_idx
-                .flags=0x0009,
-                .registers=3,
-                .insns_size=16*2
-        },
-        {
-                .name="printMessage",
-                .type="V", // provided as a shorty_idx
-                .flags=0x0002,
-                .registers=4,
-                .insns_size=60*2
-        }
-};
+        {.name = "<init>",
+         .type = "V",// provided as a shorty_idx
+         .flags = 0x10001,
+         .registers = 2,
+         .insns_size = 12 * 2},
+        {.name = "calculateSum",
+         .type = "III",// provided as a shorty_idx
+         .flags = 0x0002,
+         .registers = 7,
+         .insns_size = 47 * 2},
+        {.name = "main",
+         .type = "VL",// provided as a shorty_idx
+         .flags = 0x0009,
+         .registers = 3,
+         .insns_size = 16 * 2},
+        {.name = "printMessage",
+         .type = "V",// provided as a shorty_idx
+         .flags = 0x0002,
+         .registers = 4,
+         .insns_size = 60 * 2}};
 
 
-
-
-void check_header(shuriken::parser::dex::DexHeader& header);
-void check_class(shuriken::parser::dex::DexClasses& classes);
+void check_header(shuriken::parser::dex::DexHeader &header);
+void check_class(shuriken::parser::dex::DexClasses &classes);
 
 int main() {
-    std::string test_file = DEX_FILES_FOLDER \
-                                "DexParserTest.dex";
+    std::string test_file = DEX_FILES_FOLDER
+            "DexParserTest.dex";
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser =
             shuriken::parser::parse_dex(test_file);
 
-    auto& header = dex_parser->get_header();
-    auto& classes = dex_parser->get_classes();
+    auto &header = dex_parser->get_header();
+    auto &classes = dex_parser->get_classes();
 
 
     check_header(header);
@@ -118,13 +106,13 @@ int main() {
 }
 
 
-void check_header(shuriken::parser::dex::DexHeader& header) {
-    auto& dex_header = header.get_dex_header_const();
+void check_header(shuriken::parser::dex::DexHeader &header) {
+    auto &dex_header = header.get_dex_header_const();
 
-    assert(memcmp(static_cast<const void*>(magic),
-                  static_cast<const void*>(dex_header.magic),
+    assert(memcmp(static_cast<const void *>(magic),
+                  static_cast<const void *>(dex_header.magic),
                   sizeof(magic)) == 0 &&
-            "Error header magic is incorrect");
+           "Error header magic is incorrect");
     assert(checksum == dex_header.checksum && "Error checksum incorrect");
     assert(file_size == dex_header.file_size && "Error file_size incorrect");
     assert(header_size == dex_header.header_size && "Error header_size incorrect");
@@ -145,9 +133,9 @@ void check_header(shuriken::parser::dex::DexHeader& header) {
 }
 
 
-void check_class(shuriken::parser::dex::DexClasses& classes) {
+void check_class(shuriken::parser::dex::DexClasses &classes) {
 
-    for (const auto& c : classes.get_classdefs()) {
+    for (const auto &c: classes.get_classdefs()) {
         const auto class_def = c.get();
 
         const auto class_idx = class_def->get_class_idx();
@@ -159,7 +147,7 @@ void check_class(shuriken::parser::dex::DexClasses& classes) {
         assert(super_class->get_raw_type() == super_class_name && "Error super_class_name is not correct");
         assert(ACCESS_FLAGS == static_cast<std::uint32_t>(access_flags) && "Error access flags are not correct");
 
-        auto& class_data_item = class_def->get_class_data_item();
+        auto &class_data_item = class_def->get_class_data_item();
 
         for (size_t i = 0, e = class_data_item.get_number_of_instance_fields(); i < e; i++) {
             auto field = class_data_item.get_instance_field_by_id(i);
@@ -168,7 +156,7 @@ void check_class(shuriken::parser::dex::DexClasses& classes) {
             assert(fields[i].type == field->get_field()->field_type()->get_raw_type() && "Error field type is not correct");
         }
 
-        for (size_t i= 0, e = class_data_item.get_number_of_direct_methods(); i < e; i++) {
+        for (size_t i = 0, e = class_data_item.get_number_of_direct_methods(); i < e; i++) {
             auto method = class_data_item.get_direct_method_by_id(i);
             assert(methods[i].name == method->getMethodID()->get_method_name() && "Error method name not correct");
             assert(methods[i].type == method->getMethodID()->get_prototype()->get_shorty_idx() && "Error method prototype not correct");

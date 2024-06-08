@@ -13,12 +13,12 @@
 #ifndef SHURIKENLIB_DEX_CLASSES_H
 #define SHURIKENLIB_DEX_CLASSES_H
 
-#include "shuriken/parser/Dex/dex_encoded.h"
 #include "shuriken/parser/Dex/dex_annotations.h"
+#include "shuriken/parser/Dex/dex_encoded.h"
 
 #include <iostream>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 namespace shuriken {
     namespace parser {
@@ -30,6 +30,7 @@ namespace shuriken {
 
                 using encoded_methods_t = std::vector<std::unique_ptr<EncodedMethod>>;
                 using it_encoded_method = iterator_range<encoded_methods_t::iterator>;
+
             private:
                 /// @brief Static fields from the class
                 encoded_fields_t static_fields;
@@ -42,6 +43,7 @@ namespace shuriken {
 
                 /// @brief Virtual methods from the class
                 encoded_methods_t virtual_methods;
+
             public:
                 /// @brief Constructor of ClassDataItem
                 ClassDataItem() = default;
@@ -53,10 +55,10 @@ namespace shuriken {
                 /// @param fields fields of the DEX file
                 /// @param methods methods of the DEX file
                 /// @param types types of the DEX file
-                void parse_class_data_item(common::ShurikenStream& stream,
-                                           DexFields& fields,
-                                           DexMethods& methods,
-                                           DexTypes& types);
+                void parse_class_data_item(common::ShurikenStream &stream,
+                                           DexFields &fields,
+                                           DexMethods &methods,
+                                           DexTypes &types);
 
                 /// @brief Get the number of the static fields
                 /// @return size of static fields
@@ -77,22 +79,22 @@ namespace shuriken {
                 /// @brief Get a pointer to static field by the id of the FieldID
                 /// @param id id of the FieldID
                 /// @return pointer to static encodedfield
-                EncodedField* get_static_field_by_id(std::uint32_t id);
+                EncodedField *get_static_field_by_id(std::uint32_t id);
 
                 /// @brief Get an instance field by the id of the FieldID
                 /// @param id id of the FieldID
                 /// @return pointer to instance encodedfield
-                EncodedField* get_instance_field_by_id(std::uint32_t id);
+                EncodedField *get_instance_field_by_id(std::uint32_t id);
 
                 /// @brief Get a direct method by the id of the MethodID
                 /// @param id id of the MethodID
                 /// @return pointer to direct encodedmethod
-                EncodedMethod* get_direct_method_by_id(std::uint32_t id);
+                EncodedMethod *get_direct_method_by_id(std::uint32_t id);
 
                 /// @brief Get a virtual method by the id of the MethodID
                 /// @param id id of the MethodID
                 /// @return pointer to virtual encodedmethod
-                EncodedMethod* get_virtual_method_by_id(std::uint32_t id);
+                EncodedMethod *get_virtual_method_by_id(std::uint32_t id);
 
                 /// @brief Get all the static fields from the class
                 /// @return iterator to static fields
@@ -115,28 +117,27 @@ namespace shuriken {
             public:
 #pragma pack(1)
                 /// @brief Definition of offsets and IDs
-                struct classdefstruct_t
-                {
-                    std::uint32_t class_idx;            //! idx for the current class
-                    std::uint32_t access_flags;         //! flags for this class
-                    std::uint32_t superclass_idx;       //! parent class id
-                    std::uint32_t interfaces_off;       //! interfaces implemented by class
-                    std::uint32_t source_file_idx;      //! idx to a string with source file
-                    std::uint32_t annotations_off;      //! debugging information and other data
-                    std::uint32_t class_data_off;       //! offset to class data item
-                    std::uint32_t static_values_off;    //! offset to static values
+                struct classdefstruct_t {
+                    std::uint32_t class_idx;        //! idx for the current class
+                    std::uint32_t access_flags;     //! flags for this class
+                    std::uint32_t superclass_idx;   //! parent class id
+                    std::uint32_t interfaces_off;   //! interfaces implemented by class
+                    std::uint32_t source_file_idx;  //! idx to a string with source file
+                    std::uint32_t annotations_off;  //! debugging information and other data
+                    std::uint32_t class_data_off;   //! offset to class data item
+                    std::uint32_t static_values_off;//! offset to static values
                 };
 #pragma pack()
-                using interfaces_list_t = std::vector<DVMClass*>;
+                using interfaces_list_t = std::vector<DVMClass *>;
                 using it_interfaces_list = iterator_range<interfaces_list_t::iterator>;
 
             private:
                 /// @brief Structure with the definition of the class
                 classdefstruct_t classdefstruct;
                 /// @brief DVMClass for the current class
-                DVMClass* class_idx;
+                DVMClass *class_idx;
                 /// @brief DVMClass for the parent/super class
-                DVMClass* superclass_idx;
+                DVMClass *superclass_idx;
                 /// @brief String with the source file
                 std::string_view source_file;
                 /// @brief vector with the interfaces implemented
@@ -147,6 +148,7 @@ namespace shuriken {
                 ClassDataItem class_data_item;
                 /// @brief Array of initial values for static fields.
                 EncodedArray static_values;
+
             public:
                 /// @brief Constructor of ClassDef
                 ClassDef() = default;
@@ -160,34 +162,34 @@ namespace shuriken {
                 /// @param types types of the DEX file
                 /// @param fields fields of the DEX file
                 /// @param methods methods of the DEX file
-                void parse_class_def(common::ShurikenStream& stream,
-                                     DexStrings& strings,
-                                     DexTypes& types,
-                                     DexFields& fields,
-                                     DexMethods& methods);
+                void parse_class_def(common::ShurikenStream &stream,
+                                     DexStrings &strings,
+                                     DexTypes &types,
+                                     DexFields &fields,
+                                     DexMethods &methods);
 
                 /// @brief Get a constant reference to the classdefstruct_t
                 /// of the class, this structure contains information about
                 /// the class
                 /// @return constant reference to classdefstruct_t structure
-                const classdefstruct_t& get_class_def_struct() const;
+                const classdefstruct_t &get_class_def_struct() const;
 
                 /// @brief Get a reference to the classdefstruct_t
                 /// of the class, this structure contains information about
                 /// the class
                 /// @return reference to classdefstruct_t structure
-                classdefstruct_t& get_class_def_struct();
+                classdefstruct_t &get_class_def_struct();
 
                 /// @brief Get a pointer to the DVMClass of the current class
                 /// @return pointer to DVMClass of current class
-                DVMClass * get_class_idx();
+                DVMClass *get_class_idx();
 
                 shuriken::dex::TYPES::access_flags get_access_flags() const;
 
                 /// @brief Get a pointer to the DVMClass of
                 /// the super class of the current one
                 /// @return pointer to DVMClass of the super class
-                DVMClass * get_superclass();
+                DVMClass *get_superclass();
 
                 /// @brief Get a string_view to the string with the source file
                 /// @return string_view to source file string
@@ -199,19 +201,19 @@ namespace shuriken {
 
                 /// @brief Get a constant reference to the class data item
                 /// @return constant reference to the class data item
-                const ClassDataItem& get_class_data_item() const;
+                const ClassDataItem &get_class_data_item() const;
 
                 /// @brief Get a reference to the class data item
                 /// @return reference to the class data item
-                ClassDataItem& get_class_data_item();
+                ClassDataItem &get_class_data_item();
 
                 /// @brief Return a constant reference to the encoded array
                 /// @return static values as encoded array
-                const EncodedArray& get_static_values() const;
+                const EncodedArray &get_static_values() const;
 
                 /// @brief Return a reference to the encoded array
                 /// @return static values as encoded array
-                EncodedArray& get_static_values();
+                EncodedArray &get_static_values();
             };
 
             /// @brief All classes from the DEX files
@@ -219,10 +221,12 @@ namespace shuriken {
             public:
                 using class_defs_t = std::vector<std::unique_ptr<ClassDef>>;
                 using it_class_defs = iterator_range<class_defs_t::iterator>;
+
             private:
                 /// @brief All the class_defs from the DEX, one
                 /// for each class
                 class_defs_t class_defs;
+
             public:
                 /// @brief Constructor from DexClasses
                 DexClasses() = default;
@@ -236,20 +240,20 @@ namespace shuriken {
                 /// @param types types from the DEX file
                 /// @param fields fields from the DEX file
                 /// @param methods methods from the DEX file
-                void parse_classes(common::ShurikenStream& stream,
+                void parse_classes(common::ShurikenStream &stream,
                                    std::uint32_t number_of_classes,
                                    std::uint32_t offset,
-                                   DexStrings& strings,
-                                   DexTypes& types,
-                                   DexFields& fields,
-                                   DexMethods& methods);
+                                   DexStrings &strings,
+                                   DexTypes &types,
+                                   DexFields &fields,
+                                   DexMethods &methods);
 
                 /// @brief Get an iterator to the classdefs objects
                 /// @return class def objects from the DEX file
                 it_class_defs get_classdefs();
             };
-        }
-    }
-}
+        }// namespace dex
+    }    // namespace parser
+}// namespace shuriken
 
-#endif //SHURIKENLIB_DEX_CLASSES_H
+#endif//SHURIKENLIB_DEX_CLASSES_H

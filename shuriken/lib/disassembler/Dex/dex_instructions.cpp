@@ -16,149 +16,149 @@ namespace {
 
     /// @brief Names for each one of the previously
     /// defined opcodes from the DVM.
-    static const  std::unordered_map<DexOpcodes::opcodes, std::string>
-            opcode_names {
+    static const std::unordered_map<DexOpcodes::opcodes, std::string>
+            opcode_names{
 #define INST_NAME(OP, NAME) \
-                    {OP, NAME},
+    {OP, NAME},
 #include "shuriken/disassembler/Dex/definitions/dvm_inst_names.def"
-};
+            };
 
     /// @brief Map of the opcodes with the Kind of argument
     /// inside of the operation
     static const std::unordered_map<DexOpcodes::opcodes, shuriken::dex::TYPES::kind>
-            opcodes_instruction_kind {
+            opcodes_instruction_kind{
 #define INST_KIND(OP, VAL) {OP, VAL},
 #include "shuriken/disassembler/Dex/definitions/dvm_inst_kind.def"
-        };
+            };
 
     /// @brief Map of the opcodes with the type of the operation
     /// from the instruction
     static const std::unordered_map<DexOpcodes::opcodes, DexOpcodes::operation_type>
-            opcodes_instruction_operation {
+            opcodes_instruction_operation{
 #define INST_OP(OP, VAL) {OP, VAL},
 #include "shuriken/disassembler/Dex/definitions/dvm_inst_operation.def"
-        };
+            };
 
     /// @brief Opcodes that has some kind of side effect
-    const std::vector<DexOpcodes::opcodes> side_effects_opcodes {
-        DexOpcodes::opcodes::OP_RETURN_VOID,
-        DexOpcodes::opcodes::OP_RETURN,
-        DexOpcodes::opcodes::OP_RETURN_WIDE,
-        DexOpcodes::opcodes::OP_RETURN_OBJECT,
-        DexOpcodes::opcodes::OP_MONITOR_ENTER,
-        DexOpcodes::opcodes::OP_MONITOR_EXIT,
-        DexOpcodes::opcodes::OP_FILL_ARRAY_DATA,
-        DexOpcodes::opcodes::OP_THROW,
-        DexOpcodes::opcodes::OP_GOTO,
-        DexOpcodes::opcodes::OP_SPARSE_SWITCH,
-        DexOpcodes::opcodes::OP_PACKED_SWITCH,
-        DexOpcodes::opcodes::OP_IF_EQ,
-        DexOpcodes::opcodes::OP_IF_NE,
-        DexOpcodes::opcodes::OP_IF_LT,
-        DexOpcodes::opcodes::OP_IF_GE,
-        DexOpcodes::opcodes::OP_IF_GT,
-        DexOpcodes::opcodes::OP_IF_LE,
-        DexOpcodes::opcodes::OP_IF_EQZ,
-        DexOpcodes::opcodes::OP_IF_NEZ,
-        DexOpcodes::opcodes::OP_IF_LTZ,
-        DexOpcodes::opcodes::OP_IF_GEZ,
-        DexOpcodes::opcodes::OP_IF_GTZ,
-        DexOpcodes::opcodes::OP_IF_LEZ,
-        DexOpcodes::opcodes::OP_APUT,
-        DexOpcodes::opcodes::OP_APUT_WIDE,
-        DexOpcodes::opcodes::OP_APUT_OBJECT,
-        DexOpcodes::opcodes::OP_APUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_APUT_BYTE,
-        DexOpcodes::opcodes::OP_APUT_CHAR,
-        DexOpcodes::opcodes::OP_APUT_SHORT,
-        DexOpcodes::opcodes::OP_IPUT,
-        DexOpcodes::opcodes::OP_IPUT_WIDE,
-        DexOpcodes::opcodes::OP_IPUT_OBJECT,
-        DexOpcodes::opcodes::OP_IPUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_IPUT_BYTE,
-        DexOpcodes::opcodes::OP_IPUT_CHAR,
-        DexOpcodes::opcodes::OP_IPUT_SHORT,
-        DexOpcodes::opcodes::OP_SPUT,
-        DexOpcodes::opcodes::OP_SPUT_WIDE,
-        DexOpcodes::opcodes::OP_SPUT_OBJECT,
-        DexOpcodes::opcodes::OP_SPUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_SPUT_BYTE,
-        DexOpcodes::opcodes::OP_SPUT_CHAR,
-        DexOpcodes::opcodes::OP_SPUT_SHORT,
-        DexOpcodes::opcodes::OP_INVOKE_VIRTUAL,
-        DexOpcodes::opcodes::OP_INVOKE_SUPER,
-        DexOpcodes::opcodes::OP_INVOKE_DIRECT,
-        DexOpcodes::opcodes::OP_INVOKE_STATIC,
-        DexOpcodes::opcodes::OP_INVOKE_INTERFACE,
+    const std::vector<DexOpcodes::opcodes> side_effects_opcodes{
+            DexOpcodes::opcodes::OP_RETURN_VOID,
+            DexOpcodes::opcodes::OP_RETURN,
+            DexOpcodes::opcodes::OP_RETURN_WIDE,
+            DexOpcodes::opcodes::OP_RETURN_OBJECT,
+            DexOpcodes::opcodes::OP_MONITOR_ENTER,
+            DexOpcodes::opcodes::OP_MONITOR_EXIT,
+            DexOpcodes::opcodes::OP_FILL_ARRAY_DATA,
+            DexOpcodes::opcodes::OP_THROW,
+            DexOpcodes::opcodes::OP_GOTO,
+            DexOpcodes::opcodes::OP_SPARSE_SWITCH,
+            DexOpcodes::opcodes::OP_PACKED_SWITCH,
+            DexOpcodes::opcodes::OP_IF_EQ,
+            DexOpcodes::opcodes::OP_IF_NE,
+            DexOpcodes::opcodes::OP_IF_LT,
+            DexOpcodes::opcodes::OP_IF_GE,
+            DexOpcodes::opcodes::OP_IF_GT,
+            DexOpcodes::opcodes::OP_IF_LE,
+            DexOpcodes::opcodes::OP_IF_EQZ,
+            DexOpcodes::opcodes::OP_IF_NEZ,
+            DexOpcodes::opcodes::OP_IF_LTZ,
+            DexOpcodes::opcodes::OP_IF_GEZ,
+            DexOpcodes::opcodes::OP_IF_GTZ,
+            DexOpcodes::opcodes::OP_IF_LEZ,
+            DexOpcodes::opcodes::OP_APUT,
+            DexOpcodes::opcodes::OP_APUT_WIDE,
+            DexOpcodes::opcodes::OP_APUT_OBJECT,
+            DexOpcodes::opcodes::OP_APUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_APUT_BYTE,
+            DexOpcodes::opcodes::OP_APUT_CHAR,
+            DexOpcodes::opcodes::OP_APUT_SHORT,
+            DexOpcodes::opcodes::OP_IPUT,
+            DexOpcodes::opcodes::OP_IPUT_WIDE,
+            DexOpcodes::opcodes::OP_IPUT_OBJECT,
+            DexOpcodes::opcodes::OP_IPUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_IPUT_BYTE,
+            DexOpcodes::opcodes::OP_IPUT_CHAR,
+            DexOpcodes::opcodes::OP_IPUT_SHORT,
+            DexOpcodes::opcodes::OP_SPUT,
+            DexOpcodes::opcodes::OP_SPUT_WIDE,
+            DexOpcodes::opcodes::OP_SPUT_OBJECT,
+            DexOpcodes::opcodes::OP_SPUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_SPUT_BYTE,
+            DexOpcodes::opcodes::OP_SPUT_CHAR,
+            DexOpcodes::opcodes::OP_SPUT_SHORT,
+            DexOpcodes::opcodes::OP_INVOKE_VIRTUAL,
+            DexOpcodes::opcodes::OP_INVOKE_SUPER,
+            DexOpcodes::opcodes::OP_INVOKE_DIRECT,
+            DexOpcodes::opcodes::OP_INVOKE_STATIC,
+            DexOpcodes::opcodes::OP_INVOKE_INTERFACE,
     };
 
     /// @brief Opcodes that may throw an exception
-    const std::vector<DexOpcodes::opcodes> may_throw_opcodes {
-        DexOpcodes::opcodes::OP_CONST_STRING,
-        DexOpcodes::opcodes::OP_CONST_CLASS,
-        DexOpcodes::opcodes::OP_MONITOR_ENTER,
-        DexOpcodes::opcodes::OP_MONITOR_EXIT,
-        DexOpcodes::opcodes::OP_CHECK_CAST,
-        DexOpcodes::opcodes::OP_INSTANCE_OF,
-        DexOpcodes::opcodes::OP_ARRAY_LENGTH,
-        DexOpcodes::opcodes::OP_NEW_INSTANCE,
-        DexOpcodes::opcodes::OP_NEW_ARRAY,
-        DexOpcodes::opcodes::OP_FILLED_NEW_ARRAY,
-        DexOpcodes::opcodes::OP_AGET,
-        DexOpcodes::opcodes::OP_AGET_WIDE,
-        DexOpcodes::opcodes::OP_AGET_OBJECT,
-        DexOpcodes::opcodes::OP_AGET_BOOLEAN,
-        DexOpcodes::opcodes::OP_AGET_BYTE,
-        DexOpcodes::opcodes::OP_AGET_CHAR,
-        DexOpcodes::opcodes::OP_AGET_SHORT,
-        DexOpcodes::opcodes::OP_APUT,
-        DexOpcodes::opcodes::OP_APUT_WIDE,
-        DexOpcodes::opcodes::OP_APUT_OBJECT,
-        DexOpcodes::opcodes::OP_APUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_APUT_BYTE,
-        DexOpcodes::opcodes::OP_APUT_CHAR,
-        DexOpcodes::opcodes::OP_APUT_SHORT,
-        DexOpcodes::opcodes::OP_IGET,
-        DexOpcodes::opcodes::OP_IGET_WIDE,
-        DexOpcodes::opcodes::OP_IGET_OBJECT,
-        DexOpcodes::opcodes::OP_IGET_BOOLEAN,
-        DexOpcodes::opcodes::OP_IGET_BYTE,
-        DexOpcodes::opcodes::OP_IGET_CHAR,
-        DexOpcodes::opcodes::OP_IGET_SHORT,
-        DexOpcodes::opcodes::OP_IPUT,
-        DexOpcodes::opcodes::OP_IPUT_WIDE,
-        DexOpcodes::opcodes::OP_IPUT_OBJECT,
-        DexOpcodes::opcodes::OP_IPUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_IPUT_BYTE,
-        DexOpcodes::opcodes::OP_IPUT_CHAR,
-        DexOpcodes::opcodes::OP_IPUT_SHORT,
-        DexOpcodes::opcodes::OP_SGET,
-        DexOpcodes::opcodes::OP_SGET_WIDE,
-        DexOpcodes::opcodes::OP_SGET_OBJECT,
-        DexOpcodes::opcodes::OP_SGET_BOOLEAN,
-        DexOpcodes::opcodes::OP_SGET_BYTE,
-        DexOpcodes::opcodes::OP_SGET_CHAR,
-        DexOpcodes::opcodes::OP_SGET_SHORT,
-        DexOpcodes::opcodes::OP_SPUT,
-        DexOpcodes::opcodes::OP_SPUT_WIDE,
-        DexOpcodes::opcodes::OP_SPUT_OBJECT,
-        DexOpcodes::opcodes::OP_SPUT_BOOLEAN,
-        DexOpcodes::opcodes::OP_SPUT_BYTE,
-        DexOpcodes::opcodes::OP_SPUT_CHAR,
-        DexOpcodes::opcodes::OP_SPUT_SHORT,
-        DexOpcodes::opcodes::OP_INVOKE_VIRTUAL,
-        DexOpcodes::opcodes::OP_INVOKE_SUPER,
-        DexOpcodes::opcodes::OP_INVOKE_DIRECT,
-        DexOpcodes::opcodes::OP_INVOKE_STATIC,
-        DexOpcodes::opcodes::OP_INVOKE_INTERFACE,
-        DexOpcodes::opcodes::OP_DIV_INT,
-        DexOpcodes::opcodes::OP_REM_INT,
-        DexOpcodes::opcodes::OP_DIV_LONG,
-        DexOpcodes::opcodes::OP_REM_LONG,
-        DexOpcodes::opcodes::OP_DIV_INT_LIT16,
-        DexOpcodes::opcodes::OP_REM_INT_LIT16,
-        DexOpcodes::opcodes::OP_DIV_INT_LIT8,
-        DexOpcodes::opcodes::OP_REM_INT_LIT8,
+    const std::vector<DexOpcodes::opcodes> may_throw_opcodes{
+            DexOpcodes::opcodes::OP_CONST_STRING,
+            DexOpcodes::opcodes::OP_CONST_CLASS,
+            DexOpcodes::opcodes::OP_MONITOR_ENTER,
+            DexOpcodes::opcodes::OP_MONITOR_EXIT,
+            DexOpcodes::opcodes::OP_CHECK_CAST,
+            DexOpcodes::opcodes::OP_INSTANCE_OF,
+            DexOpcodes::opcodes::OP_ARRAY_LENGTH,
+            DexOpcodes::opcodes::OP_NEW_INSTANCE,
+            DexOpcodes::opcodes::OP_NEW_ARRAY,
+            DexOpcodes::opcodes::OP_FILLED_NEW_ARRAY,
+            DexOpcodes::opcodes::OP_AGET,
+            DexOpcodes::opcodes::OP_AGET_WIDE,
+            DexOpcodes::opcodes::OP_AGET_OBJECT,
+            DexOpcodes::opcodes::OP_AGET_BOOLEAN,
+            DexOpcodes::opcodes::OP_AGET_BYTE,
+            DexOpcodes::opcodes::OP_AGET_CHAR,
+            DexOpcodes::opcodes::OP_AGET_SHORT,
+            DexOpcodes::opcodes::OP_APUT,
+            DexOpcodes::opcodes::OP_APUT_WIDE,
+            DexOpcodes::opcodes::OP_APUT_OBJECT,
+            DexOpcodes::opcodes::OP_APUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_APUT_BYTE,
+            DexOpcodes::opcodes::OP_APUT_CHAR,
+            DexOpcodes::opcodes::OP_APUT_SHORT,
+            DexOpcodes::opcodes::OP_IGET,
+            DexOpcodes::opcodes::OP_IGET_WIDE,
+            DexOpcodes::opcodes::OP_IGET_OBJECT,
+            DexOpcodes::opcodes::OP_IGET_BOOLEAN,
+            DexOpcodes::opcodes::OP_IGET_BYTE,
+            DexOpcodes::opcodes::OP_IGET_CHAR,
+            DexOpcodes::opcodes::OP_IGET_SHORT,
+            DexOpcodes::opcodes::OP_IPUT,
+            DexOpcodes::opcodes::OP_IPUT_WIDE,
+            DexOpcodes::opcodes::OP_IPUT_OBJECT,
+            DexOpcodes::opcodes::OP_IPUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_IPUT_BYTE,
+            DexOpcodes::opcodes::OP_IPUT_CHAR,
+            DexOpcodes::opcodes::OP_IPUT_SHORT,
+            DexOpcodes::opcodes::OP_SGET,
+            DexOpcodes::opcodes::OP_SGET_WIDE,
+            DexOpcodes::opcodes::OP_SGET_OBJECT,
+            DexOpcodes::opcodes::OP_SGET_BOOLEAN,
+            DexOpcodes::opcodes::OP_SGET_BYTE,
+            DexOpcodes::opcodes::OP_SGET_CHAR,
+            DexOpcodes::opcodes::OP_SGET_SHORT,
+            DexOpcodes::opcodes::OP_SPUT,
+            DexOpcodes::opcodes::OP_SPUT_WIDE,
+            DexOpcodes::opcodes::OP_SPUT_OBJECT,
+            DexOpcodes::opcodes::OP_SPUT_BOOLEAN,
+            DexOpcodes::opcodes::OP_SPUT_BYTE,
+            DexOpcodes::opcodes::OP_SPUT_CHAR,
+            DexOpcodes::opcodes::OP_SPUT_SHORT,
+            DexOpcodes::opcodes::OP_INVOKE_VIRTUAL,
+            DexOpcodes::opcodes::OP_INVOKE_SUPER,
+            DexOpcodes::opcodes::OP_INVOKE_DIRECT,
+            DexOpcodes::opcodes::OP_INVOKE_STATIC,
+            DexOpcodes::opcodes::OP_INVOKE_INTERFACE,
+            DexOpcodes::opcodes::OP_DIV_INT,
+            DexOpcodes::opcodes::OP_REM_INT,
+            DexOpcodes::opcodes::OP_DIV_LONG,
+            DexOpcodes::opcodes::OP_REM_LONG,
+            DexOpcodes::opcodes::OP_DIV_INT_LIT16,
+            DexOpcodes::opcodes::OP_REM_INT_LIT16,
+            DexOpcodes::opcodes::OP_DIV_INT_LIT8,
+            DexOpcodes::opcodes::OP_REM_INT_LIT8,
     };
 
     std::string get_kind_type_as_string(kind_type_t source_id, std::uint16_t iBBBB) {
@@ -166,20 +166,20 @@ namespace {
 
         if (std::holds_alternative<std::monostate>(source_id)) {
             instruction_str += " // UNKNOWN@" + std::to_string(iBBBB);
-        } else if (std::holds_alternative<shuriken::parser::dex::DVMType*>(source_id)) {
-            auto type = std::get<shuriken::parser::dex::DVMType*>(source_id);
+        } else if (std::holds_alternative<shuriken::parser::dex::DVMType *>(source_id)) {
+            auto type = std::get<shuriken::parser::dex::DVMType *>(source_id);
             instruction_str += type->get_raw_type();
             instruction_str += " // type@" + std::to_string(iBBBB);
-        } else if (std::holds_alternative<shuriken::parser::dex::FieldID*>(source_id)) {
-            auto field = std::get<shuriken::parser::dex::FieldID*>(source_id);
+        } else if (std::holds_alternative<shuriken::parser::dex::FieldID *>(source_id)) {
+            auto field = std::get<shuriken::parser::dex::FieldID *>(source_id);
             instruction_str += field->pretty_field();
             instruction_str += " // field@" + std::to_string(iBBBB);
-        } else if (std::holds_alternative<shuriken::parser::dex::MethodID*>(source_id)) {
-            auto method = std::get<shuriken::parser::dex::MethodID*>(source_id);
+        } else if (std::holds_alternative<shuriken::parser::dex::MethodID *>(source_id)) {
+            auto method = std::get<shuriken::parser::dex::MethodID *>(source_id);
             instruction_str += method->dalvik_name_format();
             instruction_str += " // method@" + std::to_string(iBBBB);
-        } else if (std::holds_alternative<shuriken::parser::dex::ProtoID*>(source_id)) {
-            auto proto = std::get<shuriken::parser::dex::ProtoID*>(source_id);
+        } else if (std::holds_alternative<shuriken::parser::dex::ProtoID *>(source_id)) {
+            auto proto = std::get<shuriken::parser::dex::ProtoID *>(source_id);
             instruction_str += proto->get_shorty_idx();
             instruction_str += " // proto@" + std::to_string(iBBBB);
         } else if (std::holds_alternative<std::string_view>(source_id)) {
@@ -192,7 +192,7 @@ namespace {
 
         return instruction_str;
     }
-};
+};// namespace
 
 DexOpcodes::operation_type InstructionUtils::get_operation_type_from_opcode(DexOpcodes::opcodes opcode) {
     if (opcodes_instruction_operation.find(opcode) == opcodes_instruction_operation.end())
@@ -201,11 +201,11 @@ DexOpcodes::operation_type InstructionUtils::get_operation_type_from_opcode(DexO
 }
 
 Instruction::Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type)
-        : instruction_type(instruction_type), length(0), op(0), op_codes({}) {
+    : instruction_type(instruction_type), length(0), op(0), op_codes({}) {
 }
 
 Instruction::Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type, std::uint32_t length)
-        : instruction_type(instruction_type), length(length), op(0), op_codes({bytecode.begin() + index, bytecode.begin() + index + length}) {
+    : instruction_type(instruction_type), length(length), op(0), op_codes({bytecode.begin() + index, bytecode.begin() + index + length}) {
 }
 
 shuriken::dex::TYPES::kind Instruction::get_kind() const {
@@ -255,25 +255,23 @@ bool Instruction::is_terminator() {
 
 bool Instruction::has_side_effects() const {
     const auto dex_op = static_cast<DexOpcodes::opcodes>(op);
-    if (std::find(side_effects_opcodes.begin(), side_effects_opcodes.end(), dex_op)
-            != side_effects_opcodes.end())
+    if (std::find(side_effects_opcodes.begin(), side_effects_opcodes.end(), dex_op) != side_effects_opcodes.end())
         return true;
     return false;
 }
 
 bool Instruction::may_throw() const {
     const auto dex_op = static_cast<DexOpcodes::opcodes>(op);
-    if (std::find(may_throw_opcodes.begin(), may_throw_opcodes.end(), dex_op)
-        != may_throw_opcodes.end())
+    if (std::find(may_throw_opcodes.begin(), may_throw_opcodes.end(), dex_op) != may_throw_opcodes.end())
         return true;
     return false;
 }
 
 Instruction00x::Instruction00x(std::span<uint8_t> bytecode, std::size_t index)
-        : Instruction00x(bytecode, index, nullptr) {
+    : Instruction00x(bytecode, index, nullptr) {
 }
 
-Instruction00x::Instruction00x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction00x::Instruction00x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION00X) {
 }
 
@@ -287,11 +285,10 @@ void Instruction00x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index) :
-        Instruction10x(bytecode, index, nullptr) {
+Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index) : Instruction10x(bytecode, index, nullptr) {
 }
 
-Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction10x::Instruction10x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10X, 2) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Instruction10x high byte should be 0", 2);
@@ -308,11 +305,10 @@ void Instruction10x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index) :
-    Instruction12x(bytecode, index, nullptr) {
+Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index) : Instruction12x(bytecode, index, nullptr) {
 }
 
-Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction12x::Instruction12x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION12X, 2) {
     op = op_codes[0];
     vA = (op_codes[1] & 0x0F);
@@ -350,11 +346,10 @@ void Instruction12x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index) :
-        Instruction11n(bytecode, index, nullptr) {
+Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index) : Instruction11n(bytecode, index, nullptr) {
 }
 
-Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction11n::Instruction11n(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION11N, 2) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -393,12 +388,11 @@ void Instruction11n::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index) :
-    Instruction11x(bytecode, index, nullptr) {
+Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index) : Instruction11x(bytecode, index, nullptr) {
 }
 
-Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
-        : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION11X, 2) {
+Instruction11x::Instruction11x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
+    : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION11X, 2) {
     op = op_codes[0];
     vAA = op_codes[1];
 }
@@ -425,11 +419,10 @@ void Instruction11x::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index) :
-    Instruction10t(bytecode, index, nullptr) {
+Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index) : Instruction10t(bytecode, index, nullptr) {
 }
 
-Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction10t::Instruction10t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION10T, 2) {
     op = op_codes[0];
     nAA = static_cast<std::int8_t>(op_codes[1]);
@@ -447,7 +440,7 @@ std::string_view Instruction10t::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream str;
         str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
-        str << "0x" << std::hex << ((nAA*2) + static_cast<std::int64_t>(address));
+        str << "0x" << std::hex << ((nAA * 2) + static_cast<std::int64_t>(address));
         str << " // ";
         if (nAA > 0)
             str << "+";
@@ -463,11 +456,10 @@ void Instruction10t::print_instruction(std::ostream &os) {
     os << print_instruction();
 }
 
-Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index) :
-        Instruction20t(bytecode, index, nullptr) {
+Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index) : Instruction20t(bytecode, index, nullptr) {
 }
 
-Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction20t::Instruction20t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION20T, 4) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction20t padding must be 0", 4);
@@ -487,7 +479,7 @@ std::string_view Instruction20t::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream str;
         str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
-        str << "0x" << std::hex << ((nAAAA*2) + static_cast<std::int64_t>(address));
+        str << "0x" << std::hex << ((nAAAA * 2) + static_cast<std::int64_t>(address));
         str << " // ";
         if (nAAAA > 0)
             str << "+";
@@ -507,7 +499,7 @@ Instruction20bc::Instruction20bc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction20bc(bytecode, index, nullptr) {
 }
 
-Instruction20bc::Instruction20bc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction20bc::Instruction20bc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION20BC, 4) {
     op = op_codes[0];
     nAA = op_codes[1];
@@ -548,7 +540,7 @@ Instruction22x::Instruction22x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22x(bytecode, index, nullptr) {
 }
 
-Instruction22x::Instruction22x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22x::Instruction22x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22X, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -589,7 +581,7 @@ Instruction21t::Instruction21t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21t(bytecode, index, nullptr) {
 }
 
-Instruction21t::Instruction21t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21t::Instruction21t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21T, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -633,7 +625,7 @@ Instruction21s::Instruction21s(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21s(bytecode, index, nullptr) {
 }
 
-Instruction21s::Instruction21s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21s::Instruction21s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21S, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -674,7 +666,7 @@ Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction21h(bytecode, index, nullptr) {
 }
 
-Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction21h::Instruction21h(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION21H, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -801,7 +793,7 @@ Instruction23x::Instruction23x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction23x(bytecode, index, nullptr) {
 }
 
-Instruction23x::Instruction23x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction23x::Instruction23x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION23X, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -852,7 +844,7 @@ Instruction22b::Instruction22b(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22b(bytecode, index, nullptr) {
 }
 
-Instruction22b::Instruction22b(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22b::Instruction22b(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22B, 4) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -903,7 +895,7 @@ Instruction22t::Instruction22t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction22t(bytecode, index, nullptr) {
 }
 
-Instruction22t::Instruction22t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22t::Instruction22t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22T, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -955,10 +947,10 @@ void Instruction22t::print_instruction(std::ostream &os) {
 
 
 Instruction22s::Instruction22s(std::span<uint8_t> bytecode, std::size_t index)
- : Instruction22s(bytecode, index, nullptr) {
+    : Instruction22s(bytecode, index, nullptr) {
 }
 
-Instruction22s::Instruction22s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction22s::Instruction22s(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION22S, 4) {
     op = op_codes[0];
     vA = op_codes[1] & 0x0F;
@@ -1154,7 +1146,7 @@ Instruction30t::Instruction30t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction30t(bytecode, index, nullptr) {
 }
 
-Instruction30t::Instruction30t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction30t::Instruction30t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION30T, 6) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction30t padding must be 0", 6);
@@ -1178,7 +1170,7 @@ std::string_view Instruction30t::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream str;
         str << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " ";
-        str << "0x" << std::hex << ((nAAAAAAAA*2) + static_cast<std::int64_t>(address));
+        str << "0x" << std::hex << ((nAAAAAAAA * 2) + static_cast<std::int64_t>(address));
         str << " // ";
         if (nAAAAAAAA > 0)
             str << "+";
@@ -1198,7 +1190,7 @@ Instruction32x::Instruction32x(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction32x(bytecode, index, nullptr) {
 }
 
-Instruction32x::Instruction32x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction32x::Instruction32x(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION32X, 6) {
     if (op_codes[1] != 0)
         throw exceptions::InvalidInstructionException("Error reading Instruction32x padding must be 0", 6);
@@ -1241,7 +1233,7 @@ Instruction31i::Instruction31i(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31i(bytecode, index, nullptr) {
 }
 
-Instruction31i::Instruction31i(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31i::Instruction31i(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31I, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1261,8 +1253,7 @@ std::uint32_t Instruction31i::get_source() const {
 }
 
 float Instruction31i::get_source_float() const {
-    union
-    {
+    union {
         float f;
         std::uint32_t i;
     } conv;
@@ -1278,8 +1269,7 @@ DexOpcodes::operand_type Instruction31i::get_source_type() const {
 
 std::string_view Instruction31i::print_instruction() {
     if (instruction_str.empty()) {
-        union
-        {
+        union {
             float f;
             std::uint32_t i;
         } conv;
@@ -1301,15 +1291,14 @@ Instruction31t::Instruction31t(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31t(bytecode, index, nullptr) {
 }
 
-Instruction31t::Instruction31t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31t::Instruction31t(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31T, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
     nBBBBBBBB = *(reinterpret_cast<std::int32_t *>(&op_codes[2]));
     switch_instruction = std::monostate{};
 
-    switch (static_cast<DexOpcodes::opcodes>(op))
-    {
+    switch (static_cast<DexOpcodes::opcodes>(op)) {
         case DexOpcodes::opcodes::OP_PACKED_SWITCH:
             type_of_switch = PACKED_SWITCH;
             break;
@@ -1346,7 +1335,7 @@ switch_type_t Instruction31t::get_switch() const {
     return switch_instruction;
 }
 
-void Instruction31t::set_packed_switch(PackedSwitch* packed_switch) {
+void Instruction31t::set_packed_switch(PackedSwitch *packed_switch) {
     this->switch_instruction = packed_switch;
 }
 
@@ -1371,7 +1360,7 @@ Instruction31c::Instruction31c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction31c(bytecode, index, nullptr) {
 }
 
-Instruction31c::Instruction31c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction31c::Instruction31c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION31C, 6) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1421,7 +1410,7 @@ Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction35c(bytecode, index, nullptr) {
 }
 
-Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction35c::Instruction35c(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION35C, 6) {
     /// for reading the registers
     std::uint8_t reg[5];
@@ -1461,7 +1450,7 @@ std::uint8_t Instruction35c::get_number_of_registers() const {
 }
 
 std::span<std::uint8_t> Instruction35c::get_registers() {
-    std::span regs {registers};
+    std::span regs{registers};
     return regs;
 }
 
@@ -1489,10 +1478,10 @@ std::string_view Instruction35c::print_instruction() {
     if (instruction_str.empty()) {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
         instruction_str += " {";
-        for (auto reg : registers)
+        for (auto reg: registers)
             instruction_str += "v" + std::to_string(reg) + ", ";
         if (!registers.empty())
-            instruction_str = instruction_str.substr(0, instruction_str.size()-2);
+            instruction_str = instruction_str.substr(0, instruction_str.size() - 2);
         instruction_str += "}, " + get_kind_type_as_string(type_value, type_index);
     }
     return instruction_str;
@@ -1506,7 +1495,7 @@ Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction3rc(bytecode, index, nullptr) {
 }
 
-Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION3RC, 6) {
     std::uint16_t vCCCC;
     op = op_codes[0];
@@ -1553,7 +1542,7 @@ shuriken::dex::TYPES::kind Instruction3rc::get_value_kind() const {
 }
 
 std::span<std::uint16_t> Instruction3rc::get_registers() {
-    std::span<std::uint16_t > regs{registers};
+    std::span<std::uint16_t> regs{registers};
     return regs;
 }
 
@@ -1578,7 +1567,7 @@ Instruction45cc::Instruction45cc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction45cc(bytecode, index, nullptr) {
 }
 
-Instruction45cc::Instruction45cc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction45cc::Instruction45cc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION45CC, 8) {
     std::uint8_t regC, regD, regE, regF, regG;
 
@@ -1649,10 +1638,10 @@ std::string_view Instruction45cc::print_instruction() {
     if (instruction_str.empty()) {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
         instruction_str = " {";
-        for(const auto reg : registers)
+        for (const auto reg: registers)
             instruction_str += "v" + std::to_string(reg) + ", ";
         if (!registers.empty())
-            instruction_str = instruction_str.substr(0, instruction_str.size()-2);
+            instruction_str = instruction_str.substr(0, instruction_str.size() - 2);
         instruction_str += "}, ";
         instruction_str += "meth@" + std::to_string(method_reference) + ", ";
         instruction_str += "proto@" + std::to_string(prototype_reference);
@@ -1668,7 +1657,7 @@ Instruction4rcc::Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction4rcc(bytecode, index, nullptr) {
 }
 
-Instruction4rcc::Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction4rcc::Instruction4rcc(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION4RCC, 8) {
     std::uint16_t vCCCC;
 
@@ -1724,10 +1713,10 @@ std::string_view Instruction4rcc::print_instruction() {
     if (instruction_str.empty()) {
         instruction_str = opcode_names.at(static_cast<DexOpcodes::opcodes>(op));
         instruction_str = " {";
-        for(const auto reg : registers)
+        for (const auto reg: registers)
             instruction_str += "v" + std::to_string(reg) + ", ";
         if (!registers.empty())
-            instruction_str = instruction_str.substr(0, instruction_str.size()-2);
+            instruction_str = instruction_str.substr(0, instruction_str.size() - 2);
         instruction_str += "}, ";
         instruction_str += "meth@" + std::to_string(method_reference) + ", ";
         instruction_str += "proto@" + std::to_string(prototype_reference);
@@ -1743,7 +1732,7 @@ Instruction51l::Instruction51l(std::span<uint8_t> bytecode, std::size_t index)
     : Instruction51l(bytecode, index, nullptr) {
 }
 
-Instruction51l::Instruction51l(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+Instruction51l::Instruction51l(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_INSTRUCTION51L, 10) {
     op = op_codes[0];
     vAA = op_codes[1];
@@ -1763,8 +1752,7 @@ std::int64_t Instruction51l::get_wide_value() const {
 }
 
 double Instruction51l::get_wide_value_as_double() const {
-    union
-    {
+    union {
         double d;
         std::uint64_t j;
     } conv;
@@ -1781,8 +1769,7 @@ DexOpcodes::operand_type Instruction51l::get_wide_value_type() const {
 std::string_view Instruction51l::print_instruction() {
     if (instruction_str.empty()) {
         /// https://android.googlesource.com/platform/art/+/master/dexdump/dexdump.cc#1212
-        union
-        {
+        union {
             double d;
             std::uint64_t j;
         } conv;
@@ -1805,7 +1792,7 @@ PackedSwitch::PackedSwitch(std::span<uint8_t> bytecode, std::size_t index)
     : PackedSwitch(bytecode, index, nullptr) {
 }
 
-PackedSwitch::PackedSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+PackedSwitch::PackedSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_PACKEDSWITCH, 8) {
     std::int32_t aux;
 
@@ -1845,8 +1832,8 @@ std::string_view PackedSwitch::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream data;
         data << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) + " (size)" +
-                  std::to_string(size) + " (first/last key)" + std::to_string(first_key) + "[";
-        for (const auto target : targets)
+                        std::to_string(size) + " (first/last key)" + std::to_string(first_key) + "[";
+        for (const auto target: targets)
             data << "0x" << std::hex << target << ",";
         if (size > 0)
             data.seekp(-1, data.cur);
@@ -1864,7 +1851,7 @@ SparseSwitch::SparseSwitch(std::span<uint8_t> bytecode, std::size_t index)
     : SparseSwitch(bytecode, index, nullptr) {
 }
 
-SparseSwitch::SparseSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+SparseSwitch::SparseSwitch(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_SPARSESWITCH, 4) {
     std::int32_t aux_key, aux_target;
 
@@ -1901,7 +1888,7 @@ std::string_view SparseSwitch::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream output;
         output << opcode_names.at(static_cast<DexOpcodes::opcodes>(op)) << " (size)" << size << "[";
-        for (const auto& key_target : keys_targets) {
+        for (const auto &key_target: keys_targets) {
             auto key = std::get<0>(key_target);
             auto target = std::get<1>(key_target);
             if (key < 0)
@@ -1931,7 +1918,7 @@ FillArrayData::FillArrayData(std::span<uint8_t> bytecode, std::size_t index)
     : FillArrayData(bytecode, index, nullptr) {
 }
 
-FillArrayData::FillArrayData(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser * parser)
+FillArrayData::FillArrayData(std::span<uint8_t> bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)
     : Instruction(bytecode, index, DexOpcodes::dexinsttype::DEX_FILLARRAYDATA, 8) {
     std::uint8_t aux;
 
@@ -1968,7 +1955,7 @@ std::string_view FillArrayData::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream output;
         output << "(width)" << element_width << " (size)" << size << " [";
-        for (auto byte : data)
+        for (auto byte: data)
             output << "0x" << std::hex << static_cast<std::uint32_t>(byte) << ",";
         if (size > 0)
             output.seekp(-1, std::stringstream::cur);
@@ -1990,7 +1977,7 @@ std::string_view DalvikIncorrectInstruction::print_instruction() {
     if (instruction_str.empty()) {
         std::stringstream stream;
         stream << "DalvikInvalidInstruction [length: " << length << "][Opcodes: ";
-        for (const auto val : op_codes)
+        for (const auto val: op_codes)
             stream << std::hex << val << " ";
         stream.seekp(-1, std::stringstream::cur);
         stream << "]";

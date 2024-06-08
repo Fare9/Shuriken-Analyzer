@@ -16,19 +16,19 @@ namespace {
             b = x & 0x7fU;
             if (x >>= 7)
                 b |= 0x80U;
-            fos.write(reinterpret_cast<const char*>(&b), sizeof(uint8_t));
-        } while(x);
+            fos.write(reinterpret_cast<const char *>(&b), sizeof(uint8_t));
+        } while (x);
     }
-}
+}// namespace
 
-void DexStrings::parse_strings(common::ShurikenStream& shuriken_stream,
+void DexStrings::parse_strings(common::ShurikenStream &shuriken_stream,
                                std::uint32_t strings_offset,
                                std::uint32_t n_of_strings) {
     auto my_logger = shuriken::logger();
     my_logger->info("Start parsing strings");
 
     auto current_offset = shuriken_stream.tellg();
-    std::uint32_t str_offset; // we will read offsets
+    std::uint32_t str_offset;// we will read offsets
 
     // move pointer to the given offset
     shuriken_stream.seekg_safe(strings_offset, std::ios_base::beg);
@@ -43,7 +43,7 @@ void DexStrings::parse_strings(common::ShurikenStream& shuriken_stream,
         dex_strings.emplace_back(shuriken_stream.read_dex_string(str_offset));
     }
     // create a string_view version of the DexStrings
-    for (auto & str : dex_strings) {
+    for (auto &str: dex_strings) {
         dex_strings_view.emplace_back(str);
     }
 
@@ -68,14 +68,13 @@ void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
 
     fos.seekp(offset);
 
-    for (const auto & s : dex_strings) {
+    for (const auto &s: dex_strings) {
         ::write_uleb128(fos, s.size());
         fos.write(s.c_str(), s.size());
     }
 
     fos.seekp(current_offset);
 }
-
 
 
 std::string_view DexStrings::get_string_by_id(std::uint32_t str_id) const {
@@ -106,5 +105,5 @@ std::uint32_t DexStrings::add_string(std::string str) {
     // if it doesn´t exist, add it and return the id
     dex_strings.push_back(str);
     dex_strings_view.push_back(dex_strings.back());
-    return static_cast<std::uint32_t>(dex_strings.size()-1);
+    return static_cast<std::uint32_t>(dex_strings.size() - 1);
 }
