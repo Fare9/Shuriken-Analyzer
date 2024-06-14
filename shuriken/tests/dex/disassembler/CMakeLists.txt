@@ -42,4 +42,25 @@ if(DEX AND DEX_TESTS)
 
     add_test(NAME test-code-with-switch
             COMMAND test-code-with-switch)
+
+    
+    # Third test, loops
+    message(STATUS "Compiling test test-code-with-loops")
+    add_executable(test-code-with-loops
+            test-code-with-loops.cpp
+    )
+
+    target_include_directories(test-code-with-loops
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH}
+    )
+
+    # Add dependency on shuriken library
+    add_dependencies(test-code-with-loops shuriken)
+
+    target_link_libraries(test-code-with-loops shuriken)
+
+    add_test(NAME test-code-with-loops
+            COMMAND test-code-with-loops)
+
 endif()
