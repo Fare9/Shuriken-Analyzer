@@ -16,6 +16,7 @@
 #include "shuriken/parser/Dex/parser.h"
 
 #include <set>
+#include <span>
 
 
 namespace shuriken::analysis::dex {
@@ -52,6 +53,7 @@ namespace shuriken::analysis::dex {
         /// @brief Name of the block composed by first and last address
         std::string name;
 
+        /// @brief String that stores a whole block representation
         std::string block_string;
 
     public:

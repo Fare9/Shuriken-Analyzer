@@ -34,6 +34,15 @@ EncodedArray::it_const_encoded_value EncodedArray::get_encoded_values_const() {
     return make_range(values.begin(), values.end());
 }
 
+EncodedArray::encoded_values_s_t &EncodedArray::get_encoded_values_vector() {
+    if (values_s.empty() || values_s.size() != values.size()) {
+        values_s.clear();
+        for (const auto &entry : values)
+            values_s.push_back(std::cref(*entry));
+    }
+    return values_s;
+}
+
 // AnnotationElement
 AnnotationElement::AnnotationElement(std::string_view name,
                                      std::unique_ptr<EncodedValue> value) : name(name), value(std::move(value)) {
@@ -86,6 +95,15 @@ EncodedAnnotation::it_annotation_elements EncodedAnnotation::get_annotations() {
 
 EncodedAnnotation::it_const_annotation_elements EncodedAnnotation::get_annotations_const() {
     return make_range(annotations.begin(), annotations.end());
+}
+
+EncodedAnnotation::annotation_elements_s_t &EncodedAnnotation::get_annotations_vector() {
+    if (annotations_s.empty() || annotations_s.size() != annotations.size()) {
+        annotations_s.clear();
+        for (const auto & entry : annotations)
+            annotations_s.push_back(std::cref(*entry));
+    }
+    return annotations_s;
 }
 
 AnnotationElement *EncodedAnnotation::get_annotation_by_pos(std::uint32_t pos) {
@@ -382,6 +400,15 @@ std::uint64_t CodeItemStruct::get_encoded_catch_handler_offset() {
 
 CodeItemStruct::it_encoded_catch_handlers CodeItemStruct::get_encoded_catch_handlers() {
     return make_range(encoded_catch_handlers.begin(), encoded_catch_handlers.end());
+}
+
+CodeItemStruct::encoded_catch_handlers_s_t CodeItemStruct::get_encoded_catch_handlers_vector() {
+    if (encoded_catch_handlers_s.empty() || encoded_catch_handlers.size() != encoded_catch_handlers_s.size()) {
+        encoded_catch_handlers_s.clear();
+        for (const auto & entry : encoded_catch_handlers)
+            encoded_catch_handlers_s.push_back(std::cref(*entry));
+    }
+    return encoded_catch_handlers_s;
 }
 
 EncodedMethod::EncodedMethod(MethodID *method_id, shuriken::dex::TYPES::access_flags access_flags)

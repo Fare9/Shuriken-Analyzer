@@ -150,6 +150,15 @@ void DexProtos::to_xml(std::ofstream &xml_file) {
     xml_file << "</protos>\n";
 }
 
+DexProtos::protos_id_s_t &DexProtos::get_all_protos() {
+    if (protos_cache_s.empty() || protos.size() != protos_cache_s.size()) {
+        protos_cache_s.clear();
+        for (const auto &entry: protos)
+            protos_cache_s.push_back(std::cref(*entry));
+    }
+
+    return protos_cache_s;
+}
 
 it_protos DexProtos::get_protos() {
     return make_range(protos.begin(), protos.end());

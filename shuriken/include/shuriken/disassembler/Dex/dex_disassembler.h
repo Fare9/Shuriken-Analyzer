@@ -17,75 +17,81 @@
 
 #include <unordered_map>
 
-namespace shuriken {
-    namespace disassembler {
-        namespace dex {
+namespace shuriken::disassembler::dex {
 
-            enum class disassembly_algorithm_t {
-                LINEAR_SWEEP_DISASSEMBLER
-            };
+    enum class disassembly_algorithm_t {
+        LINEAR_SWEEP_DISASSEMBLER
+    };
 
-            class DexDisassembler {
-            private:
-                /// @brief Disassembly algorithm to use by default linear sweep is used
-                disassembly_algorithm_t disassembly_algorithm = disassembly_algorithm_t::LINEAR_SWEEP_DISASSEMBLER;
-                /// @brief Internal disassembler to provide to the different algorithms
-                std::unique_ptr<Disassembler> internal_disassembler;
-                /// @brief Pointer to the parser where information about the structure is stored
-                parser::dex::Parser *parser;
-                /// @brief Storage for the Disassembled Methods
-                std::unordered_map<std::string_view,
-                                   std::unique_ptr<DisassembledMethod>>
-                        disassembled_methods;
-                /// @brief Linear sweep disassembler
-                LinearSweepDisassembler linear_sweep;
+    class DexDisassembler {
+    public:
+        using disassembled_methods_t = std::unordered_map<std::string_view,
+                                                         std::unique_ptr<DisassembledMethod>>;
+        using disassembled_methods_s_t = std::unordered_map<std::string_view,
+                                                        std::reference_wrapper<const DisassembledMethod>>;
 
-                void disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method);
+    private:
+        /// @brief Disassembly algorithm to use by default linear sweep is used
+        disassembly_algorithm_t disassembly_algorithm = disassembly_algorithm_t::LINEAR_SWEEP_DISASSEMBLER;
+        /// @brief Internal disassembler to provide to the different algorithms
+        std::unique_ptr<Disassembler> internal_disassembler;
+        /// @brief Pointer to the parser where information about the structure is stored
+        parser::dex::Parser *parser;
+        /// @brief Storage for the Disassembled Methods
+        disassembled_methods_t
+                disassembled_methods;
+        disassembled_methods_s_t
+                disassembled_methods_s;
+        /// @brief Linear sweep disassembler
+        LinearSweepDisassembler linear_sweep;
 
-            public:
-                /// @brief Constructor of the DexDisassembler, this should be called
-                /// only if the parsing was correct
-                /// @param parser parser for the internal disassembler, this is used
-                /// in some of the instructions
-                DexDisassembler(parser::dex::Parser *parser);
+        void disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method);
 
-                /// @brief Set the disassembly algorithm to use in the next calls to
-                /// the different disassembly methods.
-                /// @param algorithm new algorithm to use
-                void set_disassembly_algorithm(disassembly_algorithm_t algorithm);
+    public:
+        /// @brief Constructor of the DexDisassembler, this should be called
+        /// only if the parsing was correct
+        /// @param parser parser for the internal disassembler, this is used
+        /// in some of the instructions
+        DexDisassembler(parser::dex::Parser *parser);
 
-                /// @brief Obtain a DisassembledMethod object the disassembler keeps
-                /// all of them in a map.
-                /// @param method class->name_method(description) of the method to retrieve
-                /// @return a DisassembledMethod object with the instructions
-                DisassembledMethod *get_disassembled_method(std::string method);
+        /// @brief Set the disassembly algorithm to use in the next calls to
+        /// the different disassembly methods.
+        /// @param algorithm new algorithm to use
+        void set_disassembly_algorithm(disassembly_algorithm_t algorithm);
 
-                /// @brief Obtain a DisassembledMethod object the disassembler keeps
-                /// all of them in a map.
-                /// @param method class->name_method(description) of the method to retrieve
-                /// @return a DisassembledMethod object with the instructions
-                DisassembledMethod *get_disassembled_method(std::string_view method);
+        /// @brief Obtain a DisassembledMethod object the disassembler keeps
+        /// all of them in a map.
+        /// @param method class->name_method(description) of the method to retrieve
+        /// @return a DisassembledMethod object with the instructions
+        DisassembledMethod *get_disassembled_method(std::string method);
 
-                /// @brief Obtain a reference to all the disassembled methods
-                /// @return reference to map with all the disassembled methods
-                std::unordered_map<std::string_view,
-                                   std::unique_ptr<DisassembledMethod>> &
-                get_disassembled_methods();
+        /// @brief Obtain a DisassembledMethod object the disassembler keeps
+        /// all of them in a map.
+        /// @param method class->name_method(description) of the method to retrieve
+        /// @return a DisassembledMethod object with the instructions
+        DisassembledMethod *get_disassembled_method(std::string_view method);
 
-                /// @brief This is the most important function from the
-                /// disassembler, this function takes the given parser
-                /// object and calls one of the internal disassemblers
-                /// for retrieving all the instructions from the DEX file
-                void disassembly_dex();
+        /// @brief Obtain a reference to all the disassembled methods
+        /// @return reference to map with all the disassembled methods
+        disassembled_methods_s_t &
+        get_disassembled_methods();
 
-                /// @brief Disassembly a buffer of bytes, take the buffer
-                /// of bytes as dalvik instructions
-                /// @param buffer buffer with possible bytecode for dalvik
-                /// @return vector with disassembled instructions
-                std::vector<std::unique_ptr<Instruction>>
-                disassembly_buffer(std::span<std::uint8_t> buffer);
-            };
-        }// namespace dex
-    }    // namespace disassembler
-}// namespace shuriken
+        disassembled_methods_t &
+        get_disassembled_methods_ownership();
+
+        /// @brief This is the most important function from the
+        /// disassembler, this function takes the given parser
+        /// object and calls one of the internal disassemblers
+        /// for retrieving all the instructions from the DEX file
+        void disassembly_dex();
+
+        /// @brief Disassembly a buffer of bytes, take the buffer
+        /// of bytes as dalvik instructions
+        /// @param buffer buffer with possible bytecode for dalvik
+        /// @return vector with disassembled instructions
+        std::vector<std::unique_ptr<Instruction>>
+        disassembly_buffer(std::span<std::uint8_t> buffer);
+    };
+} // namespace shuriken::disassembler::dex
+
 #endif//SHURIKENPROJECT_DEX_DISASSEMBLER_H

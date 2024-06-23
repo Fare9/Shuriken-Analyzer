@@ -119,6 +119,15 @@ it_const_methods DexMethods::get_methods_const() {
     return make_range(method_ids.begin(), method_ids.end());
 }
 
+DexMethods::method_ids_s_t & DexMethods::get_methods_vector() {
+    if (method_ids_s.empty() || method_ids.size() != method_ids_s.size()) {
+        method_ids_s.clear();
+        for (const auto &entry : method_ids)
+            method_ids_s.push_back(std::cref(*entry));
+    }
+    return method_ids_s;
+}
+
 size_t DexMethods::get_number_of_methods() const {
     return method_ids.size();
 }

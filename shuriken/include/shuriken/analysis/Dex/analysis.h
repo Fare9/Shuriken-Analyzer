@@ -14,27 +14,49 @@
 
 namespace shuriken::analysis::dex {
 
+    using namespace shuriken::disassembler::dex;
+
     class Analysis {
+    public:
+        using class_analyses_t = std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>>;
+        using class_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const ClassAnalysis>>;
+
+        using external_classes_t = std::unordered_map<std::string, std::unique_ptr<ExternalClass>>;
+        using external_classes_s_t = std::unordered_map<std::string, std::reference_wrapper<const ExternalClass>>;
+
+        using method_analyses_t = std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>>;
+        using method_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const MethodAnalysis>>;
+
+        using external_methods_t = std::unordered_map<std::string, std::unique_ptr<ExternalMethod>>;
+        using external_methods_s_t = std::unordered_map<std::string, std::reference_wrapper<const ExternalMethod>>;
+
+        using string_analyses_t = std::unordered_map<std::string, std::unique_ptr<StringAnalysis>>;
+        using string_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const StringAnalysis>>;
+
+
     private:
         /// @brief all the dex parsers from the analysis
         std::vector<parser::dex::Parser *> parsers;
 
         /// @brief list of class analysis by classes' names
-        std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>> class_analyses;
+        class_analyses_t class_analyses;
+        class_analyses_s_t class_analyses_s;
 
         /// @brief list of external classes by classes' names
-        std::unordered_map<std::string, std::unique_ptr<ExternalClass>>
-                external_classes;
+        external_classes_t external_classes;
+        external_classes_s_t external_classes_s;
 
         /// @brief analysis of strings by the string value
-        std::unordered_map<std::string, std::unique_ptr<StringAnalysis>> string_analyses;
+        string_analyses_t string_analyses;
+        string_analyses_s_t string_analyses_s;
 
         /// @brief analysis of methods by the dalvik name of the method
-        std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>> method_analyses;
+        method_analyses_t method_analyses;
+        method_analyses_s_t method_analyses_s;
 
         /// @brief external methods by dalvik name of the method
-        std::unordered_map<std::string, std::unique_ptr<ExternalMethod>>
-                external_methods;
+        external_methods_t external_methods;
+        external_methods_s_t external_methods_s;
 
         std::vector<FieldAnalysis *> field_analyses;
 
@@ -55,7 +77,7 @@ namespace shuriken::analysis::dex {
         void _create_xrefs(parser::dex::ClassDef *current_class);
 
         /// @brief Helper function to analyze the xrefs from an encoded method
-        void _analyze_encoded_method(parser::dex::EncodedMethod *method, std::string& current_class_name);
+        void _analyze_encoded_method(parser::dex::EncodedMethod *method, std::string &current_class_name);
 
         /// @brief Helper function to get a ClassAnalysis, or in case it doesn't exist
         /// create it as an external class
@@ -79,15 +101,13 @@ namespace shuriken::analysis::dex {
     private:
         /// @brief Helper function to add every ClassDef from a Parser object.
         void _add_classdef(parser::dex::ClassDef *class_def_item,
-                           std::unordered_map<std::string_view,
-                                              std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+                           DexDisassembler::disassembled_methods_t
                                    &all_methods_instructions);
 
         /// @brief Helper function to add an EncodedMethod from a ClassDef.
         void _add_encoded_method(parser::dex::EncodedMethod *encoded_method,
                                  ClassAnalysis *new_class,
-                                 std::unordered_map<std::string_view,
-                                                    std::unique_ptr<shuriken::disassembler::dex::DisassembledMethod>>
+                                 DexDisassembler::disassembled_methods_t
                                          &all_methods_instructions);
 
     public:
@@ -106,12 +126,12 @@ namespace shuriken::analysis::dex {
 
         /// @brief Get a reference to the classes
         /// @return reference to map with classes
-        std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>> &
+        class_analyses_s_t &
         get_classes();
 
         /// @brief Get a reference to external classes
         /// @return reference to external classes
-        std::unordered_map<std::string, std::unique_ptr<ExternalClass>> &
+        external_classes_s_t &
         get_external_classes();
 
         /// @brief Get a MethodAnalysis pointer given an Encoded or External Method
@@ -136,12 +156,12 @@ namespace shuriken::analysis::dex {
 
         /// @brief Return a reference to the method analysis
         /// @return reference to map woth MethodAnalysis
-        std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>> &
+        method_analyses_s_t &
         get_methods();
 
         /// @brief Return a reference to the ExternalMethods
         /// @return reference to map with ExternalMethod
-        std::unordered_map<std::string, std::unique_ptr<ExternalMethod>> &
+        external_methods_s_t &
         get_external_methods();
 
         /// @brief Get a field given an encoded field
@@ -155,7 +175,7 @@ namespace shuriken::analysis::dex {
 
         /// @brief Get a reference to the StringAnalysis map
         /// @return reference to StringAnalysis map
-        std::unordered_map<std::string, std::unique_ptr<StringAnalysis>> &
+        string_analyses_s_t &
         get_string_analysis();
 
         /// @brief Find classes by name with regular expression,
