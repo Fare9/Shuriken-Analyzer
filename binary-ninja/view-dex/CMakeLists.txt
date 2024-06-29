@@ -3,8 +3,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 project(view-dex)
 
 # --Binary Ninja API Setup-------------------------------------------
-set (BINJA-API-STABLE-3.5 "59e569906828e91e4884670c2bba448702f5a31d")
-set (BINJA_API-VERSION ${BINJA-API-STABLE-3.5})
+set (BINJA-API-STABLE-3.5      "59e569906828e91e4884670c2bba448702f5a31d")
+set (BINJA-API-STABLE-4.0.4958 "b7c8e9bfbae0eec8d7be47cd42f61c14542cc28c")
+set (BINJA_API-VERSION ${BINJA-API-STABLE-4.0.4958})
 message(STATUS "Using Binary API: ${BINJA_API-VERSION}")
 FetchContent_Declare(
         binja-api
