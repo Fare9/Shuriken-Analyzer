@@ -109,6 +109,6 @@ namespace shuriken::disassembler::dex {
         /// @return disassembled method string
         std::string_view print_method(bool print_address = true);
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENPROJECT_DISASSEMBLED_METHOD_H

@@ -91,12 +91,12 @@ DexFields::field_ids_s_t &DexFields::get_all_fields() {
 }
 
 DexFields::it_field_ids DexFields::get_fields() {
-    auto & aux = get_all_fields();
+    auto &aux = get_all_fields();
     return make_range(aux.begin(), aux.end());
 }
 
 DexFields::it_const_field_ids DexFields::get_fields_const() {
-    auto & aux = get_all_fields();
+    auto &aux = get_all_fields();
     return make_range(aux.begin(), aux.end());
 }
 

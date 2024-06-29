@@ -88,6 +88,6 @@ namespace shuriken::common {
         /// @return string read
         std::string read_dex_string(std::int64_t offset);
     };
-} // namespace shuriken::common
+}// namespace shuriken::common
 
 #endif// SHURIKENLIB_SHURIKENSTREAM_H

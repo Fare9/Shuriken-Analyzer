@@ -102,7 +102,7 @@ namespace shuriken::parser::dex {
         it_const_methods get_methods_const();
 
         /// @return vector with constant references from the MethodIDs
-        method_ids_s_t & get_methods_vector();
+        method_ids_s_t &get_methods_vector();
 
         /// @brief Get the number of methods from the DEX file
         /// @return number of methods
@@ -116,6 +116,6 @@ namespace shuriken::parser::dex {
         /// @brief Dump the content of the methods as XML
         void to_xml(std::ofstream &fos);
     };
-} // namespace shuriken::parser::dex
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKENLIB_DEX_METHODS_H

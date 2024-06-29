@@ -1509,6 +1509,6 @@ namespace shuriken::disassembler::dex {
         /// @param os stream where to print the instruction
         void print_instruction(std::ostream &os) override;
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENLIB_DALVIK_INSTRUCTIONS_H

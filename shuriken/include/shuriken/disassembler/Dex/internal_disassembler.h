@@ -83,6 +83,6 @@ namespace shuriken::disassembler::dex {
         /// @return exception data in a vector
         std::vector<exception_data_t> determine_exception(parser::dex::EncodedMethod *method);
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENPROJECT_INTERNAL_DISASSEMBLER_H

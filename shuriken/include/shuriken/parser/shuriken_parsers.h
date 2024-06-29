@@ -18,6 +18,6 @@ namespace shuriken::parser {
     std::unique_ptr<dex::Parser> parse_dex(common::ShurikenStream &file);
     std::unique_ptr<dex::Parser> parse_dex(const std::string &file_path);
     dex::Parser *parse_dex(const char *file_path);
-} // namespace shuriken::parser
+}// namespace shuriken::parser
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_H

@@ -495,7 +495,7 @@ Analysis::class_analyses_s_t &
 Analysis::get_classes() {
     if (class_analyses_s.empty() || class_analyses_s.size() != class_analyses.size()) {
         class_analyses_s.clear();
-        for (const auto & entry : class_analyses)
+        for (const auto &entry: class_analyses)
             class_analyses_s.insert({entry.first, std::cref(*entry.second)});
     }
     return class_analyses_s;
@@ -504,7 +504,7 @@ Analysis::get_classes() {
 Analysis::external_classes_s_t &
 Analysis::get_external_classes() {
     if (external_classes_s.empty() || external_classes_s.size() != external_classes.size()) {
-        for (const auto & entry : external_classes)
+        for (const auto &entry: external_classes)
             external_classes_s.insert({entry.first, std::cref(*entry.second)});
     }
     return external_classes_s;
@@ -543,7 +543,7 @@ Analysis::get_method_id_by_name(std::string dalvik_name) {
 Analysis::method_analyses_s_t &
 Analysis::get_methods() {
     if (method_analyses_s.empty() || method_analyses.size() != method_analyses_s.size()) {
-        for (const auto &entry : method_analyses) {
+        for (const auto &entry: method_analyses) {
             method_analyses_s.insert({entry.first, std::cref(*entry.second)});
         }
     }
@@ -553,7 +553,7 @@ Analysis::get_methods() {
 Analysis::external_methods_s_t &
 Analysis::get_external_methods() {
     if (external_methods_s.empty() || external_methods_s.size() != external_methods.size()) {
-        for (const auto &entry : external_methods)
+        for (const auto &entry: external_methods)
             external_methods_s.insert({entry.first, std::cref(*entry.second)});
     }
     return external_methods_s;
@@ -587,7 +587,7 @@ std::vector<FieldAnalysis *> &Analysis::get_fields() {
 Analysis::string_analyses_s_t &
 Analysis::get_string_analysis() {
     if (string_analyses_s.empty() || string_analyses_s.size() != string_analyses.size()) {
-        for (const auto & entry : string_analyses)
+        for (const auto &entry: string_analyses)
             string_analyses_s.insert({entry.first, std::cref(*entry.second)});
     }
     return string_analyses_s;

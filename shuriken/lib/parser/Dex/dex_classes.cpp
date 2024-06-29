@@ -121,7 +121,7 @@ ClassDataItem::it_encoded_fields ClassDataItem::get_static_fields() {
 ClassDataItem::encoded_fields_s_t &ClassDataItem::get_static_fields_vector() {
     if (static_fields_s.empty() || static_fields_s.size() != static_fields.size()) {
         static_fields_s.clear();
-        for (const auto & entry : static_fields)
+        for (const auto &entry: static_fields)
             static_fields_s.push_back(std::cref(*entry));
     }
     return static_fields_s;
@@ -131,10 +131,10 @@ ClassDataItem::it_encoded_fields ClassDataItem::get_instance_fields() {
     return make_range(instance_fields.begin(), instance_fields.end());
 }
 
-ClassDataItem::encoded_fields_s_t & ClassDataItem::get_instance_fields_vector() {
+ClassDataItem::encoded_fields_s_t &ClassDataItem::get_instance_fields_vector() {
     if (instance_fields_s.empty() || instance_fields.size() != instance_fields_s.size()) {
         instance_fields_s.clear();
-        for (const auto & entry : instance_fields)
+        for (const auto &entry: instance_fields)
             instance_fields_s.push_back(std::cref(*entry));
     }
     return instance_fields_s;
@@ -144,10 +144,10 @@ ClassDataItem::it_encoded_method ClassDataItem::get_direct_methods() {
     return make_range(direct_methods.begin(), direct_methods.end());
 }
 
-ClassDataItem::encoded_methods_s_t & ClassDataItem::get_direct_methods_vector() {
+ClassDataItem::encoded_methods_s_t &ClassDataItem::get_direct_methods_vector() {
     if (direct_methods_s.empty() || direct_methods_s.size() != direct_methods.size()) {
         direct_methods_s.clear();
-        for (const auto & entry : direct_methods)
+        for (const auto &entry: direct_methods)
             direct_methods_s.push_back(std::cref(*entry));
     }
     return direct_methods_s;
@@ -160,7 +160,7 @@ ClassDataItem::it_encoded_method ClassDataItem::get_virtual_methods() {
 ClassDataItem::encoded_methods_s_t &ClassDataItem::get_virtual_methods_s() {
     if (virtual_methods_s.empty() || virtual_methods_s.size() != virtual_methods.size()) {
         virtual_methods_s.clear();
-        for (const auto & entry : virtual_methods)
+        for (const auto &entry: virtual_methods)
             virtual_methods_s.push_back(std::cref(*entry));
     }
     return virtual_methods_s;
@@ -307,14 +307,14 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
 }
 
 DexClasses::it_class_defs DexClasses::get_classdefs() {
-    auto & aux = get_classdefs_vector();
+    auto &aux = get_classdefs_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 DexClasses::class_defs_s_t &DexClasses::get_classdefs_vector() {
     if (class_defs_s.empty() || class_defs_s.size() != class_defs.size()) {
         class_defs_s.clear();
-        for (const auto & entry : class_defs)
+        for (const auto &entry: class_defs)
             class_defs_s.push_back(std::ref(*entry));
     }
     return class_defs_s;

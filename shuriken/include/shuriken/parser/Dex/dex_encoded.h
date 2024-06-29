@@ -450,6 +450,6 @@ namespace shuriken::parser::dex {
         /// @return reference to code item
         CodeItemStruct *get_code_item();
     };
-} // namespace shuriken::parser::dex
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKENLIB_DEX_ENCODED_H

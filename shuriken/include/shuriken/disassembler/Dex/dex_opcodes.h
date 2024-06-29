@@ -21,7 +21,7 @@ namespace shuriken::disassembler::dex {
         /// instructions
         enum class opcodes {
 #define OPCODE(ID, VAL) \
-ID = VAL,
+    ID = VAL,
 #include "shuriken/disassembler/Dex/definitions/dvm_types.def"
         };
 
@@ -89,6 +89,6 @@ ID = VAL,
             NONE_OPCODE = 99                  //!
         };
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENLIB_DEX_INSTRUCTION_H

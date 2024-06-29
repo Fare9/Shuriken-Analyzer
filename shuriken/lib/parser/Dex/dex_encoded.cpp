@@ -27,19 +27,19 @@ size_t EncodedArray::get_encodedarray_size() const {
 }
 
 EncodedArray::it_encoded_value EncodedArray::get_encoded_values() {
-    auto & aux = get_encoded_values_vector();
+    auto &aux = get_encoded_values_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 EncodedArray::it_const_encoded_value EncodedArray::get_encoded_values_const() {
-    auto & aux = get_encoded_values_vector();
+    auto &aux = get_encoded_values_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 EncodedArray::encoded_values_s_t &EncodedArray::get_encoded_values_vector() {
     if (values_s.empty() || values_s.size() != values.size()) {
         values_s.clear();
-        for (const auto &entry : values)
+        for (const auto &entry: values)
             values_s.push_back(std::ref(*entry));
     }
     return values_s;
@@ -92,19 +92,19 @@ size_t EncodedAnnotation::get_number_of_annotations() const {
 }
 
 EncodedAnnotation::it_annotation_elements EncodedAnnotation::get_annotations() {
-    auto & aux = get_annotations_vector();
+    auto &aux = get_annotations_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 EncodedAnnotation::it_const_annotation_elements EncodedAnnotation::get_annotations_const() {
-    auto & aux = get_annotations_vector();
+    auto &aux = get_annotations_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 EncodedAnnotation::annotation_elements_s_t &EncodedAnnotation::get_annotations_vector() {
     if (annotations_s.empty() || annotations_s.size() != annotations.size()) {
         annotations_s.clear();
-        for (const auto & entry : annotations)
+        for (const auto &entry: annotations)
             annotations_s.push_back(std::ref(*entry));
     }
     return annotations_s;
@@ -403,14 +403,14 @@ std::uint64_t CodeItemStruct::get_encoded_catch_handler_offset() {
 }
 
 CodeItemStruct::it_encoded_catch_handlers CodeItemStruct::get_encoded_catch_handlers() {
-    auto & aux = get_encoded_catch_handlers_vector();
+    auto &aux = get_encoded_catch_handlers_vector();
     return make_range(aux.begin(), aux.end());
 }
 
 CodeItemStruct::encoded_catch_handlers_s_t &CodeItemStruct::get_encoded_catch_handlers_vector() {
     if (encoded_catch_handlers_s.empty() || encoded_catch_handlers.size() != encoded_catch_handlers_s.size()) {
         encoded_catch_handlers_s.clear();
-        for (const auto & entry : encoded_catch_handlers)
+        for (const auto &entry: encoded_catch_handlers)
             encoded_catch_handlers_s.push_back(std::ref(*entry));
     }
     return encoded_catch_handlers_s;

@@ -84,6 +84,6 @@ namespace shuriken::parser::dex {
 
         ParameterAnnotation &get_parameter_annotation_by_id(std::uint32_t method_id);
     };
-} // namespace shuriken::parser::dex
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKENLIB_DEX_ANNOTATIONS_H

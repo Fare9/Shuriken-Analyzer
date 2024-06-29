@@ -26,9 +26,9 @@ namespace shuriken::disassembler::dex {
     class DexDisassembler {
     public:
         using disassembled_methods_t = std::unordered_map<std::string_view,
-                                                         std::unique_ptr<DisassembledMethod>>;
+                                                          std::unique_ptr<DisassembledMethod>>;
         using disassembled_methods_s_t = std::unordered_map<std::string_view,
-                                                        std::reference_wrapper<const DisassembledMethod>>;
+                                                            std::reference_wrapper<const DisassembledMethod>>;
 
     private:
         /// @brief Disassembly algorithm to use by default linear sweep is used
@@ -92,6 +92,6 @@ namespace shuriken::disassembler::dex {
         std::vector<std::unique_ptr<Instruction>>
         disassembly_buffer(std::span<std::uint8_t> buffer);
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENPROJECT_DEX_DISASSEMBLER_H

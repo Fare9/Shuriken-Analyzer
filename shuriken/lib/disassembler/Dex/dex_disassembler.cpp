@@ -34,7 +34,7 @@ DisassembledMethod *DexDisassembler::get_disassembled_method(std::string_view me
 DexDisassembler::disassembled_methods_s_t &
 DexDisassembler::get_disassembled_methods() {
     if (disassembled_methods_s.empty() || disassembled_methods_s.size() != disassembled_methods.size()) {
-        for (const auto & entry : disassembled_methods)
+        for (const auto &entry: disassembled_methods)
             disassembled_methods_s.insert({entry.first, std::cref(*entry.second)});
     }
     return disassembled_methods_s;

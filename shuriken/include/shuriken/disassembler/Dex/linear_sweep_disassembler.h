@@ -34,6 +34,6 @@ namespace shuriken::disassembler::dex {
 
         std::vector<std::unique_ptr<Instruction>> disassembly(std::span<std::uint8_t> buffer_bytes);
     };
-} // namespace shuriken::disassembler::dex
+}// namespace shuriken::disassembler::dex
 
 #endif//SHURIKENPROJECT_LINEAR_SWEEP_DISASSEMBLER_H

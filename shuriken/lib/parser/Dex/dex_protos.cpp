@@ -157,12 +157,12 @@ DexProtos::protos_id_s_t &DexProtos::get_all_protos() {
 }
 
 DexProtos::it_protos DexProtos::get_protos() {
-    auto & aux = get_all_protos();
+    auto &aux = get_all_protos();
     return make_range(aux.begin(), aux.end());
 }
 
 DexProtos::it_const_protos DexProtos::get_protos_const() {
-    auto & aux = get_all_protos();
+    auto &aux = get_all_protos();
     return make_range(aux.begin(), aux.end());
 }
 

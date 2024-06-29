@@ -87,6 +87,6 @@ namespace shuriken::parser::dex {
         const DexClasses &get_classes() const;
     };
 
-} // namespace shuriken::parser::dex
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKENLIB_PARSER_H

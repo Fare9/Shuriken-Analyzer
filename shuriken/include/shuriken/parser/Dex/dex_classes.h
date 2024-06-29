@@ -242,6 +242,7 @@ namespace shuriken::parser::dex {
         class_defs_t class_defs;
 
         class_defs_s_t class_defs_s;
+
     public:
         /// @brief Constructor from DexClasses
         DexClasses() = default;
@@ -269,6 +270,6 @@ namespace shuriken::parser::dex {
 
         class_defs_s_t &get_classdefs_vector();
     };
-} // namespace shuriken::parser::dex
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKENLIB_DEX_CLASSES_H
