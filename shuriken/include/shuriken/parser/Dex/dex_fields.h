@@ -84,9 +84,9 @@ namespace shuriken::parser::dex {
     class DexFields {
     public:
         using field_ids_t = std::vector<std::unique_ptr<FieldID>>;
-        using field_ids_s_t = std::vector<std::reference_wrapper<const FieldID>>;
-        using it_field_ids = iterator_range<field_ids_t::iterator>;
-        using it_const_field_ids = iterator_range<const field_ids_t::iterator>;
+        using field_ids_s_t = std::vector<std::reference_wrapper<FieldID>>;
+        using it_field_ids = iterator_range<field_ids_s_t::iterator>;
+        using it_const_field_ids = iterator_range<const field_ids_s_t::iterator>;
 
     private:
         /// @brief List of FieldIDs

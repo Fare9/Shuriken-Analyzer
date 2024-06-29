@@ -89,11 +89,11 @@ void DexTypes::to_xml(std::ofstream &fos) {
     fos << "</DexTypes>\n";
 }
 
-DexTypes::dvmtypes_t &DexTypes::get_dvm_types() {
+DexTypes::dvmtypes_s_t &DexTypes::get_dvm_types() {
     if (ordered_types_cache_s.empty() || ordered_types.size() != ordered_types_cache_s.size()) {
         ordered_types_cache_s.clear();
         for (const auto &entry: ordered_types)
-            ordered_types_cache_s.push_back(std::cref(*entry));
+            ordered_types_cache_s.push_back(std::ref(*entry));
     }
     return ordered_types_cache_s;
 }

@@ -8,9 +8,6 @@
 #include "shuriken/common/logger.h"
 
 using namespace shuriken::parser::dex;
-using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
-using it_methods = shuriken::iterator_range<method_ids_t::iterator>;
-using it_const_methods = shuriken::iterator_range<const method_ids_t::iterator>;
 
 const DVMType *MethodID::get_class() const {
     return class_;
@@ -111,19 +108,21 @@ void DexMethods::to_xml(std::ofstream &fos) {
     fos << "</DexMethods>\n";
 }
 
-it_methods DexMethods::get_methods() {
-    return make_range(method_ids.begin(), method_ids.end());
+DexMethods::it_methods DexMethods::get_methods() {
+    auto & aux = get_methods_vector();
+    return make_range(aux.begin(), aux.end());
 }
 
-it_const_methods DexMethods::get_methods_const() {
-    return make_range(method_ids.begin(), method_ids.end());
+DexMethods::it_const_methods DexMethods::get_methods_const() {
+    auto & aux = get_methods_vector();
+    return make_range(aux.begin(), aux.end());
 }
 
 DexMethods::method_ids_s_t & DexMethods::get_methods_vector() {
     if (method_ids_s.empty() || method_ids.size() != method_ids_s.size()) {
         method_ids_s.clear();
         for (const auto &entry : method_ids)
-            method_ids_s.push_back(std::cref(*entry));
+            method_ids_s.push_back(std::ref(*entry));
     }
     return method_ids_s;
 }

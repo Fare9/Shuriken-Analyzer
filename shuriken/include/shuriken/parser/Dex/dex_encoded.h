@@ -31,10 +31,10 @@ namespace shuriken::parser::dex {
     class EncodedArray {
     public:
         using encoded_values_t = std::vector<std::unique_ptr<EncodedValue>>;
-        using encoded_values_s_t = std::vector<std::reference_wrapper<const EncodedValue>>;
-        using it_encoded_value = iterator_range<encoded_values_t::iterator>;
+        using encoded_values_s_t = std::vector<std::reference_wrapper<EncodedValue>>;
+        using it_encoded_value = iterator_range<encoded_values_s_t::iterator>;
         using it_const_encoded_value = iterator_range<
-                const encoded_values_t::iterator>;
+                const encoded_values_s_t::iterator>;
 
     private:
         /// @brief encoded values of the array
@@ -95,10 +95,10 @@ namespace shuriken::parser::dex {
     class EncodedAnnotation {
     public:
         using annotation_elements_t = std::vector<std::unique_ptr<AnnotationElement>>;
-        using annotation_elements_s_t = std::vector<std::reference_wrapper<const AnnotationElement>>;
-        using it_annotation_elements = iterator_range<annotation_elements_t::iterator>;
+        using annotation_elements_s_t = std::vector<std::reference_wrapper<AnnotationElement>>;
+        using it_annotation_elements = iterator_range<annotation_elements_s_t::iterator>;
         using it_const_annotation_elements = iterator_range<
-                const annotation_elements_t::iterator>;
+                const annotation_elements_s_t::iterator>;
 
     private:
         /// @brief Type of the annotation
@@ -332,8 +332,8 @@ namespace shuriken::parser::dex {
         using it_try_items = iterator_range<try_items_t::iterator>;
 
         using encoded_catch_handlers_t = std::vector<std::unique_ptr<EncodedCatchHandler>>;
-        using encoded_catch_handlers_s_t = std::vector<std::reference_wrapper<const EncodedCatchHandler>>;
-        using it_encoded_catch_handlers = iterator_range<encoded_catch_handlers_t::iterator>;
+        using encoded_catch_handlers_s_t = std::vector<std::reference_wrapper<EncodedCatchHandler>>;
+        using it_encoded_catch_handlers = iterator_range<encoded_catch_handlers_s_t::iterator>;
 
     private:
         /// @brief Information of code item
@@ -403,7 +403,7 @@ namespace shuriken::parser::dex {
 
         it_encoded_catch_handlers get_encoded_catch_handlers();
 
-        encoded_catch_handlers_s_t get_encoded_catch_handlers_vector();
+        encoded_catch_handlers_s_t &get_encoded_catch_handlers_vector();
     };
 
     class EncodedMethod {

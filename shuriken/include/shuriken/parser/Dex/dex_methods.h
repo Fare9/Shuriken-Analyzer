@@ -62,9 +62,9 @@ namespace shuriken::parser::dex {
     class DexMethods {
     public:
         using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
-        using method_ids_s_t = std::vector<std::reference_wrapper<const MethodID>>;
-        using it_methods = iterator_range<method_ids_t::iterator>;
-        using it_const_methods = iterator_range<const method_ids_t::iterator>;
+        using method_ids_s_t = std::vector<std::reference_wrapper<MethodID>>;
+        using it_methods = iterator_range<method_ids_s_t::iterator>;
+        using it_const_methods = iterator_range<const method_ids_s_t::iterator>;
 
     private:
         /// @brief List of methods from the DEX file

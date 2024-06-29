@@ -135,19 +135,19 @@ void check_header(shuriken::parser::dex::DexHeader &header) {
 
 void check_class(shuriken::parser::dex::DexClasses &classes) {
 
-    for (const auto &c: classes.get_classdefs()) {
-        const auto class_def = c.get();
+    for (auto &c: classes.get_classdefs()) {
+        auto & class_def = c.get();
 
-        const auto class_idx = class_def->get_class_idx();
-        const auto super_class = class_def->get_superclass();
-        std::string_view source_file = class_def->get_source_file();
-        auto access_flags = class_def->get_access_flags();
+        const auto class_idx = class_def.get_class_idx();
+        const auto super_class = class_def.get_superclass();
+        std::string_view source_file = class_def.get_source_file();
+        auto access_flags = class_def.get_access_flags();
 
         assert(class_idx->get_raw_type() == class_descriptor && "Error class_descriptor is not correct");
         assert(super_class->get_raw_type() == super_class_name && "Error super_class_name is not correct");
         assert(ACCESS_FLAGS == static_cast<std::uint32_t>(access_flags) && "Error access flags are not correct");
 
-        auto &class_data_item = class_def->get_class_data_item();
+        auto &class_data_item = class_def.get_class_data_item();
 
         for (size_t i = 0, e = class_data_item.get_number_of_instance_fields(); i < e; i++) {
             auto field = class_data_item.get_instance_field_by_id(i);

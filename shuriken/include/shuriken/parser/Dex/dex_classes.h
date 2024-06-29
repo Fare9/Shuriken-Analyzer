@@ -233,8 +233,8 @@ namespace shuriken::parser::dex {
     class DexClasses {
     public:
         using class_defs_t = std::vector<std::unique_ptr<ClassDef>>;
-        using class_defs_s_t = std::vector<std::reference_wrapper<const ClassDef>>;
-        using it_class_defs = iterator_range<class_defs_t::iterator>;
+        using class_defs_s_t = std::vector<std::reference_wrapper<ClassDef>>;
+        using it_class_defs = iterator_range<class_defs_s_t::iterator>;
 
     private:
         /// @brief All the class_defs from the DEX, one

@@ -136,12 +136,12 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
     for (auto& c : classes.get_classdefs()) {
         fmt::print("Class #{} data:\n", I);
 
-        const auto class_def = c.get();
+        auto & class_def = c.get();
 
-        const auto class_idx = class_def->get_class_idx();
-        const auto super_class = class_def->get_superclass();
-        std::string_view source_file = class_def->get_source_file();
-        auto access_flags = class_def->get_access_flags();
+        const auto class_idx = class_def.get_class_idx();
+        const auto super_class = class_def.get_superclass();
+        std::string_view source_file = class_def.get_source_file();
+        auto access_flags = class_def.get_access_flags();
 
         fmt::print("\tClass name:            {}\n", class_idx->get_class_name());
         fmt::print("\tSuper class:           {}\n", super_class->get_class_name());
@@ -150,14 +150,14 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
         fmt::print("\tAccess flags:          0x{:X} ({})\n", static_cast<std::uint32_t>(access_flags),
                    shuriken::dex::Utils::get_types_as_string(access_flags));
 
-        auto& class_def_struct = class_def->get_class_def_struct();
+        auto& class_def_struct = class_def.get_class_def_struct();
         fmt::print("\tSuper class idx:       {}\n", class_def_struct.superclass_idx);
         fmt::print("\tInterfacess off:       0x{:X}\n", class_def_struct.interfaces_off);
         fmt::print("\tAnnotations off:       0x{:X}\n", class_def_struct.annotations_off);
         fmt::print("\tClass data off:        0x{:X}\n", class_def_struct.class_data_off);
         fmt::print("\tStatic values off:     0x{:X}\n", class_def_struct.static_values_off);
 
-        auto& class_data_item = class_def->get_class_data_item();
+        auto& class_data_item = class_def.get_class_data_item();
 
         fmt::print("\tStatic fields size:    {}\n", class_data_item.get_number_of_static_fields());
         fmt::print("\tInstance fields size:  {}\n", class_data_item.get_number_of_instance_fields());

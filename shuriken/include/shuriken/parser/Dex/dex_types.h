@@ -195,13 +195,13 @@ namespace shuriken::parser::dex {
     class DexTypes {
     public:
         /// @brief Safe reference to the DVMTypes
-        using dvmtypes_t = std::vector<std::reference_wrapper<const DVMType>>;
+        using dvmtypes_s_t = std::vector<std::reference_wrapper<DVMType>>;
 
     private:
         /// @brief DexTypes from the Dalvik Virtual Machine
         std::vector<std::unique_ptr<DVMType>> ordered_types;
         /// @brief Cache of a reference wrapper from the previous type
-        dvmtypes_t ordered_types_cache_s;
+        dvmtypes_s_t ordered_types_cache_s;
 
         /// @brief Parse the provided string and return a new DVMType
         /// @param name type to parse
@@ -225,7 +225,7 @@ namespace shuriken::parser::dex {
                          std::uint32_t n_of_types);
 
         /// @return A vector with reference to the dvm types
-        dvmtypes_t &get_dvm_types();
+        dvmtypes_s_t &get_dvm_types();
 
         /// @brief Get a constant pointer to a DVMType by id
         /// @param id order of the type

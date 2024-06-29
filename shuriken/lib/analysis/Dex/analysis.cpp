@@ -66,26 +66,23 @@ void Analysis::add(parser::dex::Parser *parser) {
     auto &all_methods_instructions = disassembler->get_disassembled_methods_ownership();
 
     for (auto &class_def_item: it_classes) {
-        if (class_def_item != nullptr)
-            _add_classdef(class_def_item.get(), all_methods_instructions);
-        else
-            logger->warn("Error, found a class_def_item with null");
+        _add_classdef(class_def_item.get(), all_methods_instructions);
     }
     logger->info("Analysis: correctly added parser to analysis object");
 }
 
 void Analysis::_add_classdef(
-        parser::dex::ClassDef *class_def_item,
+        parser::dex::ClassDef &class_def_item,
         DexDisassembler::disassembled_methods_t
                 &all_methods_instructions) {
     auto logger = shuriken::logger();
 
-    auto name = std::string(class_def_item->get_class_idx()->get_class_name());
-    class_analyses.insert({name, std::make_unique<ClassAnalysis>(class_def_item)});
+    auto name = std::string(class_def_item.get_class_idx()->get_class_name());
+    class_analyses.insert({name, std::make_unique<ClassAnalysis>(&class_def_item)});
     auto &new_class = class_analyses[name];
 
     // get the class data item to retrieve the methods
-    auto &class_data_item = class_def_item->get_class_data_item();
+    auto &class_data_item = class_def_item.get_class_data_item();
 
     logger->debug("Adding to the class {} direct and {} virtual methods",
                   class_data_item.get_number_of_direct_methods(),
@@ -162,11 +159,11 @@ void Analysis::create_xrefs() {
     logger->info("Cross-references correctly created");
 }
 
-void Analysis::_create_xrefs(parser::dex::ClassDef *current_class) {
+void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
 
     /// take thename of the analyzed class
-    auto current_class_name = std::string(current_class->get_class_idx()->get_class_name());
-    auto &class_data_item = current_class->get_class_data_item();
+    auto current_class_name = std::string(current_class.get_class_idx()->get_class_name());
+    auto &class_data_item = current_class.get_class_data_item();
 
     /// get the virtual methods
     auto it_virtual_methods = class_data_item.get_virtual_methods();

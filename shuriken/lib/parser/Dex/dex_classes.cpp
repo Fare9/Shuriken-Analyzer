@@ -307,14 +307,15 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
 }
 
 DexClasses::it_class_defs DexClasses::get_classdefs() {
-    return make_range(class_defs.begin(), class_defs.end());
+    auto & aux = get_classdefs_vector();
+    return make_range(aux.begin(), aux.end());
 }
 
 DexClasses::class_defs_s_t &DexClasses::get_classdefs_vector() {
     if (class_defs_s.empty() || class_defs_s.size() != class_defs.size()) {
         class_defs_s.clear();
         for (const auto & entry : class_defs)
-            class_defs_s.push_back(std::cref(*entry));
+            class_defs_s.push_back(std::ref(*entry));
     }
     return class_defs_s;
 }

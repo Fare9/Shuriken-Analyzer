@@ -74,7 +74,7 @@ namespace shuriken::analysis::dex {
         /// All the information is stored in the Analysis objects.
         /// It might be quite slow as all instructions are parsed.
         /// @param current_class class to create the xrefs.
-        void _create_xrefs(parser::dex::ClassDef *current_class);
+        void _create_xrefs(parser::dex::ClassDef &current_class);
 
         /// @brief Helper function to analyze the xrefs from an encoded method
         void _analyze_encoded_method(parser::dex::EncodedMethod *method, std::string &current_class_name);
@@ -100,7 +100,7 @@ namespace shuriken::analysis::dex {
 
     private:
         /// @brief Helper function to add every ClassDef from a Parser object.
-        void _add_classdef(parser::dex::ClassDef *class_def_item,
+        void _add_classdef(parser::dex::ClassDef &class_def_item,
                            DexDisassembler::disassembled_methods_t
                                    &all_methods_instructions);
 
