@@ -305,6 +305,7 @@ namespace shuriken {
                     std::uint16_t tries_size;           //! number of TryItem, can be 0
                     std::uint32_t debug_info_off;       //! offset to debug_info_item
                     std::uint32_t insns_size;           //! size of instruction list
+                    std::uint64_t code_location;        //! location of the code
                 };
 
                 using try_items_t = std::vector<TryItem>;
@@ -367,6 +368,8 @@ namespace shuriken {
                 /// will not allow the modification and it provides quick access.
                 /// @return span to the bytecode
                 std::span<std::uint8_t> get_bytecode();
+
+                std::uint64_t get_bytecode_location() const;
 
                 /// @brief Get an iterator to the try items
                 /// @return try items from the method

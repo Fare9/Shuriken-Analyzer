@@ -5,7 +5,7 @@
 #include <span>
 namespace shurikenapi {
 
-    enum class FundamentalValue { kBoolean, kByte, kChar, kDouble, kFloat, kInt, kLong, kShort, kvoid, kNone = 99 };
+    enum class FundamentalValue { kBoolean, kByte, kChar, kDouble, kFloat, kInt, kLong, kShort, kVoid, kNone = 99 };
     enum class DexType { kFundamental, kClass, kArray, kUnknown };
 
 #pragma pack(1)
