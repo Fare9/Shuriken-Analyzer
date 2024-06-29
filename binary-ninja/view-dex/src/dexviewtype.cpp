@@ -48,6 +48,8 @@ Ref<Settings> DEXViewType::GetLoadSettingsForData(BinaryView* data) {
     }
 
     Ref<Settings> settings = GetDefaultLoadSettingsForData(viewRef);
+    
+    settings->UpdateProperty("analysis.linearSweep", "enabled", false);
 
     // specify default load settings that can be overridden
     std::vector<std::string> overrides = {"loader.architecture", "loader.imageBase", "loader.platform"};

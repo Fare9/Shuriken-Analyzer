@@ -2,7 +2,7 @@
 
 #include "binaryninjaapi.h"
 #include <cstdint>
-
+#include <shuriken/shuriken_cpp_core.h>
 
 namespace BinaryNinja {
 
@@ -42,6 +42,9 @@ class DEXView : public BinaryView {
 
     void buildStructures();
     void buildFunctions();
+    Ref<Function> buildMethod(const shurikenapi::IClassMethod& method);
+
+    Ref<Type> getFundamental(const shurikenapi::FundamentalValue& value);
 };
 
 } // namespace BinaryNinja

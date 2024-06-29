@@ -2,7 +2,8 @@
 
 namespace BinaryNinja {
 
-DEXView::DEXView(BinaryView* data, bool parseOnly) : BinaryView("DEX", data->GetFile(), data), m_parseOnly(parseOnly) {
+DEXView::DEXView(BinaryView* data, bool parseOnly)
+    : BinaryView("DEX", data->GetFile(), data), m_parseOnly(parseOnly) {
     CreateLogger("BinaryView");
     m_logger = CreateLogger("BinaryView.DEXView");
     m_backedByDatabase = data->GetFile()->IsBackedByDatabase("DEX");
@@ -25,7 +26,9 @@ bool DEXView::Init() {
     SetDefaultArchitecture(m_arch);
     SetDefaultPlatform(m_platform);
 
-    AddAutoSegment(m_imageBase, GetParentView()->GetLength(), rawFileOffset, GetParentView()->GetLength(), SegmentReadable);
+    // TODO: correct create memory segments
+    AddAutoSegment(m_imageBase, GetParentView()->GetLength(), rawFileOffset, GetParentView()->GetLength(),
+                   SegmentReadable);
     AddAutoSegment(fieldDataSegmentAddress, fieldDataSegmentSize, 0, 0x100, SegmentWritable);
     AddAutoSection("code", 0, dexCodeSegmentSize, ReadOnlyDataSectionSemantics);
     AddAutoSection("fields", fieldDataSegmentAddress, fieldDataSegmentSize, ReadWriteDataSectionSemantics);
@@ -36,25 +39,116 @@ bool DEXView::Init() {
     return true;
 }
 
-void DEXView::buildFunctions() {
+// TODO: move to platform plugin
+Ref<Type> DEXView::getFundamental(const shurikenapi::FundamentalValue& value) {
+    switch (value) {
+    case shurikenapi::FundamentalValue::kBoolean:
+        return Type::BoolType();
+    case shurikenapi::FundamentalValue::kByte:
+        return Type::IntegerType(1, false);
+    case shurikenapi::FundamentalValue::kChar:
+        return Type::IntegerType(1, true);
+    case shurikenapi::FundamentalValue::kDouble:
+        return Type::FloatType(8);
+    case shurikenapi::FundamentalValue::kFloat:
+        return Type::FloatType(4);
+    case shurikenapi::FundamentalValue::kInt:
+        return GetTypeByName(QualifiedName("int"));
+        //return Type::IntegerType(4, true);
+    case shurikenapi::FundamentalValue::kLong:
+        return Type::IntegerType(8, true);
+    case shurikenapi::FundamentalValue::kShort:
+        return Type::IntegerType(2, true);
+    case shurikenapi::FundamentalValue::kVoid:
+        return Type::VoidType();
+    default:
+        m_logger->LogWarn("Unknown fundamental value: %d", value);
+        return Type::VoidType();
+    }
+}
+
+int tmp = 0;
+Ref<Function> DEXView::buildMethod(const shurikenapi::IClassMethod& method) {
+
+    int funcOffset = method.getCodeLocation();
+    m_logger->LogInfo("---------------");
+    m_logger->LogInfo("Building method: %s at %016llx", method.getDalvikName().c_str(), funcOffset);
+
+    // Get method prototype
+    auto& prototype = method.getPrototype();
+    auto& returnType = prototype.getReturnType();
+    if (returnType.getType() != shurikenapi::DexType::kFundamental) {
+        m_logger->LogError("Unsupported return type for method: %s", method.getDalvikName().c_str());
+        return Ref<Function>();
+    }
+        
+    // Create function object with calling convention
+    Ref<Function> func = CreateUserFunction(m_platform, funcOffset);
+    func->SetCallingConvention(m_platform->GetDefaultCallingConvention());
+
+    // Create parameters
+    std::vector<FunctionParameter> parameters;
+    for (const auto& p : prototype.getParameters()) {
+        if (p.get().getType() != shurikenapi::DexType::kFundamental) {
+            m_logger->LogError("Unsupported parameter type for method: %s", method.getDalvikName().c_str());
+            return Ref<Function>();
+        }
+        Ref<Type> paramType = getFundamental(p.get().getFundamentalValue().value());
+        m_logger->LogInfo("ParameterType: %d", p.get().getFundamentalValue().value());
+        parameters.push_back(FunctionParameter("", paramType));
+    }
     
-/*
-    std::unique_ptr<DataReader> shurikenReader = std::make_unique<DataReader>(GetParentView());
-    shurikenapi::parse_dex(shurikenReader.get());
-*/
+    // Set function type
+    m_logger->LogInfo("ReturnType: %d", returnType.getFundamentalValue().value());
+    Ref<Type> funcType = Type::FunctionType(Type::IntegerType(4, true), m_platform->GetDefaultCallingConvention(), parameters);
+    func->SetUserType(funcType);
 
-    /* Sample Add Function
-    auto cc = m_platform->GetDefaultCallingConvention();
-    auto functionPointer = Type::PointerType(m_platform->GetArchitecture(), Type::FunctionType(Type::VoidType(), cc, {}));
+    // Define the function
+    DefineUserSymbol(new Symbol(FunctionSymbol, method.getDalvikName(), funcOffset, NoBinding));
 
-    auto exampleFunctionType = Type::FunctionType(Type::VoidType(), cc, {FunctionParameter("", functionPointer)});
-    auto funcType = Type::PointerType(m_platform->GetArchitecture(), exampleFunctionType);
-    DefineAutoSymbolAndVariableOrFunction(GetDefaultPlatform(), new Symbol(FunctionSymbol, "func01", 0x200, NoBinding), funcType);
-    */
+
+    m_logger->LogInfo("Building method: %s - OK", method.getDalvikName().c_str());
+
+    return func;
+}
+
+void DEXView::buildFunctions() {
+
+    // TODO: move to platform plugin
+    DefineType("boolean", QualifiedName("boolean"),  Type::BoolType());
+    DefineType("byte", QualifiedName("byte"),  Type::IntegerType(1, false));
+    DefineType("char", QualifiedName("char"),  Type::IntegerType(1, true));
+    DefineType("double", QualifiedName("double"),  Type::FloatType(8));
+    DefineType("float", QualifiedName("float"),  Type::FloatType(4));
+    DefineType("int", QualifiedName("int"),  Type::IntegerType(4, true));
+    DefineType("long", QualifiedName("long"),  Type::IntegerType(8, true)); 
+    DefineType("short", QualifiedName("short"),  Type::IntegerType(2, true));
+    DefineType("void", QualifiedName("void"),  Type::VoidType());
+
+    std::unique_ptr<shurikenapi::IDex> parsedDex = nullptr;
+    try {
+        parsedDex = shurikenapi::parse_dex(GetFile()->GetOriginalFilename());
+    } catch (std::runtime_error& re) {
+        m_logger->LogError("DEXView::buildFunctions() failed to parse symbols:", re.what());
+    }
+
+    auto classes = parsedDex->getClassManager().getAllClasses();
+    int tmp = 0;
+    for (const auto& c : classes) {
+        m_logger->LogInfo("Class: %s", c.get().getName());
+        auto component = CreateComponentWithName(c.get().getName());
+        for (auto& m : c.get().getDirectMethods()) {
+            Ref<Function> func = buildMethod(m.get());
+            if (func) {
+                component->AddFunction(func);
+            }
+        }
+    }
 }
 
 void DEXView::buildStructures() {
 
+    // TODO: move to platform plugin
     StructureBuilder dexHeaderBuilder;
     dexHeaderBuilder.AddMember(Type::ArrayType(Type::IntegerType(1, true), 8), "magic");
     dexHeaderBuilder.AddMember(Type::IntegerType(4, false), "checksum");
@@ -83,7 +177,8 @@ void DEXView::buildStructures() {
 
     Ref<Type> dexHeaderType = Type::StructureType(dexHeaderStruct);
     QualifiedName dexHeaderName = std::string("DEX_Header");
-    QualifiedName dexHeaderTypeName = DefineType(Type::GenerateAutoTypeId("dex", dexHeaderName), dexHeaderName, dexHeaderType);
+    QualifiedName dexHeaderTypeName =
+        DefineType(Type::GenerateAutoTypeId("dex", dexHeaderName), dexHeaderName, dexHeaderType);
     DefineDataVariable(m_imageBase, Type::NamedType(this, dexHeaderTypeName));
     DefineAutoSymbol(new Symbol(DataSymbol, "__dex_header", m_imageBase, NoBinding));
 }
