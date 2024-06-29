@@ -12,7 +12,7 @@ project(
 )
 
 add_subdirectory(shuriken/)
-add_subdirectory(shuriken-dump/)
+#add_subdirectory(shuriken-dump/)
 if (BUILD_BINJA_PLUGIN)
         add_subdirectory(binary-ninja/)
 endif (BUILD_BINJA_PLUGIN)
