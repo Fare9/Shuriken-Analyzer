@@ -57,6 +57,7 @@ namespace shurikenapi {
         virtual ~IClassMethod() = default;
         IClassMethod& operator=(IClassMethod&&) = delete;
         virtual const std::string& getName() const = 0;
+        virtual const std::string& getDalvikName() const = 0;
         virtual const std::string& getDemangledName() const = 0;
         virtual const IPrototype& getPrototype() const = 0;
         virtual AccessFlags getFlags() const = 0;

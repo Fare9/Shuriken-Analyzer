@@ -4,14 +4,18 @@ namespace shurikenapi {
 
     namespace details {
 
-        ShurikenClassMethod::ShurikenClassMethod(const std::string& name, const std::string& demangledName,
+        ShurikenClassMethod::ShurikenClassMethod(const std::string& name, const std::string& dalvikName, const std::string& demangledName,
                                                  std::unique_ptr<IPrototype> prototype, shurikenapi::AccessFlags flags,
                                                  std::span<uint8_t> byteCode)
-            : m_name{std::move(name)}, m_demangledName{std::move(demangledName)}, m_prototype{std::move(prototype)}, m_flags{flags},
+            : m_name{std::move(name)}, m_dalvikName{std::move(dalvikName)}, m_demangledName{std::move(demangledName)}, m_prototype{std::move(prototype)}, m_flags{flags},
               m_byteCode{byteCode} {}
 
         const std::string& ShurikenClassMethod::getName() const {
             return m_name;
+        };
+
+        const std::string& ShurikenClassMethod::getDalvikName() const {
+            return m_dalvikName;
         };
 
         const std::string& ShurikenClassMethod::getDemangledName() const {
