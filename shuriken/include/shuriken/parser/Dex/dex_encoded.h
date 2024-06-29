@@ -327,6 +327,7 @@ namespace shuriken::parser::dex {
             std::uint16_t tries_size;    //! number of TryItem, can be 0
             std::uint32_t debug_info_off;//! offset to debug_info_item
             std::uint32_t insns_size;    //! size of instruction list
+            std::uint64_t code_location;        //! location of the code
         };
 
         using try_items_t = std::vector<TryItem>;
@@ -388,6 +389,8 @@ namespace shuriken::parser::dex {
         /// @brief Get size of the dalvik instructions (number of opcodes)
         /// @return size of dalvik instructions
         std::uint16_t get_instructions_size() const;
+
+        std::uint64_t get_bytecode_location() const;
 
         /// @brief Get a constant access to the instructions in raw, an std::span
         /// will not allow the modification and it provides quick access.

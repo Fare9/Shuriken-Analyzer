@@ -87,9 +87,10 @@ namespace shurikenapi {
             // --Set Flags and ByteCode
             shurikenapi::AccessFlags flags{static_cast<shurikenapi::AccessFlags>(data->get_flags())};
             std::span<uint8_t> byteCode{data->get_code_item()->get_bytecode()};
+            std::uint64_t codeLocation = data->get_code_item()->get_bytecode_location();
 
             return std::make_unique<details::ShurikenClassMethod>(std::move(name), std::move(dalvikName), std::move(demangledName), std::move(prototypeEntry),
-                                                                  flags, byteCode);
+                                                                  flags, byteCode, codeLocation);
         }
 
         std::unique_ptr<IDexTypeInfo> ShurikenDex::createTypeInfo(shuriken::parser::dex::DVMType* rawType) {
