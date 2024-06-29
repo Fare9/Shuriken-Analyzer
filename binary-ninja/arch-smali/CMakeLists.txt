@@ -6,7 +6,8 @@ include_directories(./inc)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(${PROJECT_NAME} SHARED  src/plugin.cpp)
+add_library(${PROJECT_NAME} SHARED  src/plugin.cpp
+                                    src/arch-smali.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE binaryninjaapi)
 
