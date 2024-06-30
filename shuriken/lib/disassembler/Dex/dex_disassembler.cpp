@@ -53,14 +53,14 @@ void DexDisassembler::disassembly_dex() {
     auto &classes = parser->get_classes();
 
     for (auto &class_def: classes.get_classdefs()) {
-        auto &class_data_item = class_def.get().get_class_data_item();
+        auto &class_data_item = class_def.get_class_data_item();
         /// first disassemble the direct methods
         for (auto &method: class_data_item.get_direct_methods()) {
-            disassemble_encoded_method(method.get());
+            disassemble_encoded_method(&method);
         }
         /// now the virtual methods
         for (auto &method: class_data_item.get_virtual_methods()) {
-            disassemble_encoded_method(method.get());
+            disassemble_encoded_method(&method);
         }
     }
 

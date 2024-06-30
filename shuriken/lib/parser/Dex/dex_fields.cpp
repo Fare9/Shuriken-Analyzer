@@ -92,12 +92,12 @@ DexFields::field_ids_s_t &DexFields::get_all_fields() {
 
 DexFields::it_field_ids DexFields::get_fields() {
     auto &aux = get_all_fields();
-    return make_range(aux.begin(), aux.end());
+    return deref_iterator_range(aux);
 }
 
 DexFields::it_const_field_ids DexFields::get_fields_const() {
-    auto &aux = get_all_fields();
-    return make_range(aux.begin(), aux.end());
+    const auto &aux = get_all_fields();
+    return deref_iterator_range(aux);
 }
 
 FieldID *DexFields::get_field_by_id(std::uint32_t id) {

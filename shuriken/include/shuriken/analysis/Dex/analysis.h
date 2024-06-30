@@ -19,19 +19,19 @@ namespace shuriken::analysis::dex {
     class Analysis {
     public:
         using class_analyses_t = std::unordered_map<std::string, std::unique_ptr<ClassAnalysis>>;
-        using class_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const ClassAnalysis>>;
+        using class_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<ClassAnalysis>>;
 
         using external_classes_t = std::unordered_map<std::string, std::unique_ptr<ExternalClass>>;
-        using external_classes_s_t = std::unordered_map<std::string, std::reference_wrapper<const ExternalClass>>;
+        using external_classes_s_t = std::unordered_map<std::string, std::reference_wrapper<ExternalClass>>;
 
         using method_analyses_t = std::unordered_map<std::string, std::unique_ptr<MethodAnalysis>>;
-        using method_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const MethodAnalysis>>;
+        using method_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<MethodAnalysis>>;
 
         using external_methods_t = std::unordered_map<std::string, std::unique_ptr<ExternalMethod>>;
-        using external_methods_s_t = std::unordered_map<std::string, std::reference_wrapper<const ExternalMethod>>;
+        using external_methods_s_t = std::unordered_map<std::string, std::reference_wrapper<ExternalMethod>>;
 
         using string_analyses_t = std::unordered_map<std::string, std::unique_ptr<StringAnalysis>>;
-        using string_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<const StringAnalysis>>;
+        using string_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<StringAnalysis>>;
 
 
     private:

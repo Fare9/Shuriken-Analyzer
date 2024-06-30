@@ -5,6 +5,7 @@
 // @file class_analysis.cpp
 
 #include "shuriken/analysis/Dex/dex_analysis.h"
+#include "shuriken/common/iterator_range.h"
 #include "shuriken/common/logger.h"
 #include "shuriken/disassembler/Dex/internal_disassembler.h"
 
@@ -167,4 +168,20 @@ void ClassAnalysis::add_xref_new_instance(MethodAnalysis *methodobj, std::uint64
 
 void ClassAnalysis::add_xref_const_class(MethodAnalysis *methodobj, std::uint64_t offset) {
     xrefconstclass.emplace_back(methodobj, offset);
+}
+
+shuriken::iterator_range<classxref_t::iterator> ClassAnalysis::get_xrefto() {
+    return make_range(xrefto.begin(), xrefto.end());
+}
+
+shuriken::iterator_range<classxref_t::iterator> ClassAnalysis::get_xrefsfrom() {
+    return make_range(xrefsfrom.begin(), xrefsfrom.end());
+}
+
+shuriken::iterator_range<std::vector<std::pair<MethodAnalysis *, std::uint64_t>>::iterator> ClassAnalysis::get_xrefnewinstance() {
+    return make_range(xrefnewinstance.begin(), xrefnewinstance.end());
+}
+
+shuriken::iterator_range<std::vector<std::pair<MethodAnalysis *, std::uint64_t>>::iterator> ClassAnalysis::get_xrefconstclass() {
+    return make_range(xrefconstclass.begin(), xrefconstclass.end());
 }

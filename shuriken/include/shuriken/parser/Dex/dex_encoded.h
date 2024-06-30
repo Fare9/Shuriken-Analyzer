@@ -11,6 +11,7 @@
 #define SHURIKENLIB_DEX_ENCODED_H
 
 #include "shuriken/common/Dex/dvm_types.h"
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/common/iterator_range.h"
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/parser/Dex/dex_fields.h"
@@ -32,9 +33,9 @@ namespace shuriken::parser::dex {
     public:
         using encoded_values_t = std::vector<std::unique_ptr<EncodedValue>>;
         using encoded_values_s_t = std::vector<std::reference_wrapper<EncodedValue>>;
-        using it_encoded_value = iterator_range<encoded_values_s_t::iterator>;
-        using it_const_encoded_value = iterator_range<
-                const encoded_values_s_t::iterator>;
+        using it_encoded_value = deref_iterator_range<encoded_values_s_t>;
+        using it_const_encoded_value = deref_iterator_range<
+                const encoded_values_s_t>;
 
     private:
         /// @brief encoded values of the array
@@ -96,9 +97,9 @@ namespace shuriken::parser::dex {
     public:
         using annotation_elements_t = std::vector<std::unique_ptr<AnnotationElement>>;
         using annotation_elements_s_t = std::vector<std::reference_wrapper<AnnotationElement>>;
-        using it_annotation_elements = iterator_range<annotation_elements_s_t::iterator>;
-        using it_const_annotation_elements = iterator_range<
-                const annotation_elements_s_t::iterator>;
+        using it_annotation_elements = deref_iterator_range<annotation_elements_s_t>;
+        using it_const_annotation_elements = deref_iterator_range<
+                const annotation_elements_s_t>;
 
     private:
         /// @brief Type of the annotation
@@ -333,7 +334,7 @@ namespace shuriken::parser::dex {
 
         using encoded_catch_handlers_t = std::vector<std::unique_ptr<EncodedCatchHandler>>;
         using encoded_catch_handlers_s_t = std::vector<std::reference_wrapper<EncodedCatchHandler>>;
-        using it_encoded_catch_handlers = iterator_range<encoded_catch_handlers_s_t::iterator>;
+        using it_encoded_catch_handlers = deref_iterator_range<encoded_catch_handlers_s_t>;
 
     private:
         /// @brief Information of code item

@@ -8,6 +8,7 @@
 #ifndef SHURIKEN_ANALYZER_FIELDS_H
 #define SHURIKEN_ANALYZER_FIELDS_H
 
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/common/iterator_range.h"
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/parser/Dex/dex_strings.h"
@@ -85,8 +86,8 @@ namespace shuriken::parser::dex {
     public:
         using field_ids_t = std::vector<std::unique_ptr<FieldID>>;
         using field_ids_s_t = std::vector<std::reference_wrapper<FieldID>>;
-        using it_field_ids = iterator_range<field_ids_s_t::iterator>;
-        using it_const_field_ids = iterator_range<const field_ids_s_t::iterator>;
+        using it_field_ids = deref_iterator_range<field_ids_s_t>;
+        using it_const_field_ids = deref_iterator_range<const field_ids_s_t>;
 
     private:
         /// @brief List of FieldIDs

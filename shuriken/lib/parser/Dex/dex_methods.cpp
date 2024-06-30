@@ -110,12 +110,12 @@ void DexMethods::to_xml(std::ofstream &fos) {
 
 DexMethods::it_methods DexMethods::get_methods() {
     auto &aux = get_methods_vector();
-    return make_range(aux.begin(), aux.end());
+    return deref_iterator_range(aux);
 }
 
 DexMethods::it_const_methods DexMethods::get_methods_const() {
-    auto &aux = get_methods_vector();
-    return make_range(aux.begin(), aux.end());
+    const auto &aux = get_methods_vector();
+    return deref_iterator_range(aux);
 }
 
 DexMethods::method_ids_s_t &DexMethods::get_methods_vector() {

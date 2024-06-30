@@ -2,17 +2,17 @@
 // Created by fare9 on 30/12/23.
 //
 
-#include <iostream>
-#include <vector>
-#include <shuriken/parser/shuriken_parsers.h>
-#include <shuriken/parser/Dex/parser.h>
-#include <shuriken/common/Dex/dvm_types.h>
-#include <shuriken/disassembler/Dex/dex_disassembler.h>
-#include <shuriken/analysis/Dex/analysis.h>
 #include <fmt/core.h>
 #include <functional>
+#include <iostream>
+#include <shuriken/analysis/Dex/analysis.h>
+#include <shuriken/common/Dex/dvm_types.h>
+#include <shuriken/disassembler/Dex/dex_disassembler.h>
+#include <shuriken/parser/Dex/parser.h>
+#include <shuriken/parser/shuriken_parsers.h>
+#include <vector>
 
-void show_help(std::string& prog_name) {
+void show_help(std::string &prog_name) {
     fmt::println("USAGE: {} <file_to_analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
     fmt::println("\t-h: show file header");
     fmt::println("\t-c: show classes from file");
@@ -23,10 +23,10 @@ void show_help(std::string& prog_name) {
     fmt::println("\t-B: show the methods as basic blocks (it needs -m)");
 }
 
-void print_header(shuriken::parser::dex::DexHeader&);
-void print_classes(shuriken::parser::dex::DexClasses&);
-void print_method(shuriken::parser::dex::EncodedMethod*, size_t);
-void print_field(shuriken::parser::dex::EncodedField*, size_t);
+void print_header(shuriken::parser::dex::DexHeader &);
+void print_classes(shuriken::parser::dex::DexClasses &);
+void print_method(shuriken::parser::dex::EncodedMethod *, size_t);
+void print_field(shuriken::parser::dex::EncodedField *, size_t);
 void print_code(std::span<std::uint8_t>);
 
 bool headers = false;
@@ -40,26 +40,25 @@ bool blocks = false;
 std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
 std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
 
-int
-main(int argc, char ** argv) {
-    std::vector<std::string> args {argv, argv + argc};
+int main(int argc, char **argv) {
+    std::vector<std::string> args{argv, argv + argc};
 
     if (args.size() == 1) {
         show_help(args[0]);
         return -1;
     }
 
-    std::unordered_map<std::string, std::function<void()>> options {
-            {"-h", [&](){ headers = true; }},
-            {"-c", [&](){ show_classes = true; }},
-            {"-m", [&](){ methods = true; }},
-            {"-f", [&](){ fields = true; }},
-            {"-b", [&](){ code = true; }},
-            {"-D", [&](){ disassembly = true; }},
-            {"-B", [&](){ blocks = true; }},
+    std::unordered_map<std::string, std::function<void()>> options{
+            {"-h", [&]() { headers = true; }},
+            {"-c", [&]() { show_classes = true; }},
+            {"-m", [&]() { methods = true; }},
+            {"-f", [&]() { fields = true; }},
+            {"-b", [&]() { code = true; }},
+            {"-D", [&]() { disassembly = true; }},
+            {"-B", [&]() { blocks = true; }},
     };
 
-    for (const auto& s : args) {
+    for (const auto &s: args) {
         if (auto it = options.find(s); it != options.end()) {
             it->second();
         }
@@ -79,26 +78,25 @@ main(int argc, char ** argv) {
                 disassembler->disassembly_dex();
             }
             dex_analysis = std::make_unique<shuriken::analysis::dex::Analysis>(parsed_dex.get(),
-                                                                                      disassembler.get(),
-                                                                                      false);
+                                                                               disassembler.get(),
+                                                                               false);
             dex_analysis->create_xrefs();
         }
 
-        auto& header = parsed_dex->get_header();
+        auto &header = parsed_dex->get_header();
 
         if (headers) print_header(header);
         if (show_classes) print_classes(parsed_dex->get_classes());
-    } catch (std::runtime_error& re) {
+    } catch (std::runtime_error &re) {
         fmt::println("Exception: {}", re.what());
     }
-
 }
 
-void print_header(shuriken::parser::dex::DexHeader& header) {
-    auto& dex_header = header.get_dex_header();
+void print_header(shuriken::parser::dex::DexHeader &header) {
+    auto &dex_header = header.get_dex_header();
     fmt::println("Dex Header:");
     fmt::print("\tMagic:");
-    for (auto b : dex_header.magic) {
+    for (auto b: dex_header.magic) {
         if (isprint(b))
             fmt::print(" {:02X} ({:c})", b, b);
         else
@@ -106,7 +104,7 @@ void print_header(shuriken::parser::dex::DexHeader& header) {
     }
     fmt::println("\n\tChecksum:              0x{:X}", static_cast<std::uint32_t>(dex_header.checksum));
     fmt::print("\tSignature:");
-    for (auto b : dex_header.signature) {
+    for (auto b: dex_header.signature) {
         fmt::print(" {:02X}", b);
     }
     fmt::print("\n\tFile Size:             {}\n", dex_header.file_size);
@@ -131,12 +129,10 @@ void print_header(shuriken::parser::dex::DexHeader& header) {
     fmt::print("\tData ids size:         {}\n", dex_header.data_size);
 }
 
-void print_classes(shuriken::parser::dex::DexClasses& classes) {
+void print_classes(shuriken::parser::dex::DexClasses &classes) {
     size_t I = 0;
-    for (auto& c : classes.get_classdefs()) {
+    for (auto &class_def: classes.get_classdefs()) {
         fmt::print("Class #{} data:\n", I);
-
-        auto & class_def = c.get();
 
         const auto class_idx = class_def.get_class_idx();
         const auto super_class = class_def.get_superclass();
@@ -150,14 +146,14 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
         fmt::print("\tAccess flags:          0x{:X} ({})\n", static_cast<std::uint32_t>(access_flags),
                    shuriken::dex::Utils::get_types_as_string(access_flags));
 
-        auto& class_def_struct = class_def.get_class_def_struct();
+        auto &class_def_struct = class_def.get_class_def_struct();
         fmt::print("\tSuper class idx:       {}\n", class_def_struct.superclass_idx);
         fmt::print("\tInterfacess off:       0x{:X}\n", class_def_struct.interfaces_off);
         fmt::print("\tAnnotations off:       0x{:X}\n", class_def_struct.annotations_off);
         fmt::print("\tClass data off:        0x{:X}\n", class_def_struct.class_data_off);
         fmt::print("\tStatic values off:     0x{:X}\n", class_def_struct.static_values_off);
 
-        auto& class_data_item = class_def.get_class_data_item();
+        auto &class_data_item = class_def.get_class_data_item();
 
         fmt::print("\tStatic fields size:    {}\n", class_data_item.get_number_of_static_fields());
         fmt::print("\tInstance fields size:  {}\n", class_data_item.get_number_of_instance_fields());
@@ -195,21 +191,20 @@ void print_classes(shuriken::parser::dex::DexClasses& classes) {
     }
 }
 
-void print_field(shuriken::parser::dex::EncodedField* field, size_t j) {
+void print_field(shuriken::parser::dex::EncodedField *field, size_t j) {
     fmt::print("\t\tField #{}\n", j);
     fmt::print("\t\t\tName:            {}\n", field->get_field()->field_name());
     fmt::print("\t\t\tType:            {}\n", field->get_field()->field_type()->get_raw_type());
     fmt::print("\t\t\tAccess Flags:    {} ({})\n", static_cast<std::uint32_t>(field->get_flags()),
                shuriken::dex::Utils::get_types_as_string(field->get_flags()));
-
 }
 
-void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
+void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
     fmt::print("\t\tMethod #{}\n", j);
     auto method_id = method->getMethodID();
     fmt::print("\t\t\tMethod name:    {}\n", method_id->get_method_name());
     fmt::print("\t\t\tPrototype:      (");
-    for (auto p : method_id->get_prototype()->get_parameters()) {
+    for (auto p: method_id->get_prototype()->get_parameters()) {
         fmt::print("{}", p->get_raw_type());
     }
     fmt::print("){}\n", method_id->get_prototype()->get_return_type()->get_raw_type());
@@ -241,7 +236,7 @@ void print_method(shuriken::parser::dex::EncodedMethod* method, size_t j) {
 void print_code(std::span<std::uint8_t> bytecode) {
     fmt::print("\t\t\tCode: ");
     size_t j = 0;
-    for (auto b : bytecode) {
+    for (auto b: bytecode) {
         fmt::print("{:02X} ", b);
         if (j++ == 8) {
             j = 0;

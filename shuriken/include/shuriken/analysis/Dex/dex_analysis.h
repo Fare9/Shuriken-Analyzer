@@ -15,6 +15,7 @@
 #include "shuriken/parser/Dex/dex_encoded.h"
 #include "shuriken/parser/Dex/parser.h"
 
+
 #include <set>
 #include <span>
 
@@ -617,6 +618,14 @@ namespace shuriken::analysis::dex {
         void add_xref_new_instance(MethodAnalysis *methodobj, std::uint64_t offset);
 
         void add_xref_const_class(MethodAnalysis *methodobj, std::uint64_t offset);
+
+        iterator_range<classxref_t::iterator> get_xrefto();
+
+        iterator_range<classxref_t::iterator> get_xrefsfrom();
+
+        iterator_range<std::vector<std::pair<MethodAnalysis *, std::uint64_t>>::iterator> get_xrefnewinstance();
+
+        iterator_range<std::vector<std::pair<MethodAnalysis *, std::uint64_t>>::iterator> get_xrefconstclass();
     };
 }// namespace shuriken::analysis::dex
 

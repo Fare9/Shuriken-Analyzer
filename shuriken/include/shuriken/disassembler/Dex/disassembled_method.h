@@ -32,7 +32,8 @@ namespace shuriken::disassembler::dex {
 
     using instructions_t = std::vector<std::unique_ptr<
             Instruction>>;
-    using it_instructions = iterator_range<instructions_t::iterator>;
+    using instructions_raw_t = std::vector<Instruction *>;
+    using it_instructions = iterator_range<instructions_raw_t::iterator>;
 
     using exceptions_data_t = std::vector<exception_data_t>;
     using it_exceptions_data = iterator_range<exceptions_data_t::iterator>;
@@ -54,7 +55,7 @@ namespace shuriken::disassembler::dex {
         /// @brief store the instructions from the method
         instructions_t instructions;
         /// @brief store raw pointers to return reference to the instructions
-        std::vector<Instruction *> instructions_raw;
+        instructions_raw_t instructions_raw;
         /// @brief representation of the method in string format
         std::string method_string;
         /// @brief Access flags from the instruction for the representation
@@ -96,7 +97,7 @@ namespace shuriken::disassembler::dex {
         it_instructions get_instructions();
 
         /// @return const container to the instructions
-        const std::vector<Instruction *> &get_instructions_container();
+        const instructions_raw_t &get_instructions_container();
 
         /// @brief Get a constant access to a part of the instructions from the method
         /// @param init first index from the instructions

@@ -87,8 +87,8 @@ namespace {
                 (hdvminstruction_t *) malloc(method_core_api->n_of_instructions * (sizeof(hdvminstruction_t)));
 
         i = 0;
-        for (const auto &instruction: disassembled_method->get_instructions()) {
-            fill_dex_instruction(instruction.get(), &method_core_api->instructions[i++]);
+        for (auto instruction: disassembled_method->get_instructions()) {
+            fill_dex_instruction(instruction, &method_core_api->instructions[i++]);
         }
 
         // initialize the exception information

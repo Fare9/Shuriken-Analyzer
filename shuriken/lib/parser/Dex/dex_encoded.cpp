@@ -28,12 +28,12 @@ size_t EncodedArray::get_encodedarray_size() const {
 
 EncodedArray::it_encoded_value EncodedArray::get_encoded_values() {
     auto &aux = get_encoded_values_vector();
-    return make_range(aux.begin(), aux.end());
+    return deref_iterator_range(aux);
 }
 
 EncodedArray::it_const_encoded_value EncodedArray::get_encoded_values_const() {
-    auto &aux = get_encoded_values_vector();
-    return make_range(aux.begin(), aux.end());
+    const auto &aux = get_encoded_values_vector();
+    return deref_iterator_range(aux);
 }
 
 EncodedArray::encoded_values_s_t &EncodedArray::get_encoded_values_vector() {
@@ -93,12 +93,12 @@ size_t EncodedAnnotation::get_number_of_annotations() const {
 
 EncodedAnnotation::it_annotation_elements EncodedAnnotation::get_annotations() {
     auto &aux = get_annotations_vector();
-    return make_range(aux.begin(), aux.end());
+    return deref_iterator_range(aux);
 }
 
 EncodedAnnotation::it_const_annotation_elements EncodedAnnotation::get_annotations_const() {
-    auto &aux = get_annotations_vector();
-    return make_range(aux.begin(), aux.end());
+    const auto &aux = get_annotations_vector();
+    return deref_iterator_range(aux);
 }
 
 EncodedAnnotation::annotation_elements_s_t &EncodedAnnotation::get_annotations_vector() {
@@ -404,7 +404,7 @@ std::uint64_t CodeItemStruct::get_encoded_catch_handler_offset() {
 
 CodeItemStruct::it_encoded_catch_handlers CodeItemStruct::get_encoded_catch_handlers() {
     auto &aux = get_encoded_catch_handlers_vector();
-    return make_range(aux.begin(), aux.end());
+    return deref_iterator_range(aux);
 }
 
 CodeItemStruct::encoded_catch_handlers_s_t &CodeItemStruct::get_encoded_catch_handlers_vector() {

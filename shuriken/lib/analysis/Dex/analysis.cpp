@@ -66,7 +66,7 @@ void Analysis::add(parser::dex::Parser *parser) {
     auto &all_methods_instructions = disassembler->get_disassembled_methods_ownership();
 
     for (auto &class_def_item: it_classes) {
-        _add_classdef(class_def_item.get(), all_methods_instructions);
+        _add_classdef(class_def_item, all_methods_instructions);
     }
     logger->info("Analysis: correctly added parser to analysis object");
 }
@@ -90,20 +90,14 @@ void Analysis::_add_classdef(
 
     // first use the virtual methods
     for (auto &encoded_method: class_data_item.get_virtual_methods()) {
-        if (encoded_method != nullptr)
-            _add_encoded_method(encoded_method.get(), new_class.get(),
-                                all_methods_instructions);
-        else
-            logger->warn("Found an encoded_method equals to null");
+        _add_encoded_method(&encoded_method, new_class.get(),
+                            all_methods_instructions);
     }
 
     // then the direct methods
     for (auto &encoded_method: class_data_item.get_direct_methods()) {
-        if (encoded_method != nullptr)
-            _add_encoded_method(encoded_method.get(), new_class.get(),
-                                all_methods_instructions);
-        else
-            logger->warn("Found an encoded_method equals to null");
+        _add_encoded_method(&encoded_method, new_class.get(),
+                            all_methods_instructions);
     }
 }
 
@@ -153,7 +147,7 @@ void Analysis::create_xrefs() {
             static size_t j = 0;
             logger->debug("Analyzing class number {}", j++);
 
-            _create_xrefs(class_def_item.get());
+            _create_xrefs(class_def_item);
         }
     }
     logger->info("Cross-references correctly created");
@@ -169,14 +163,14 @@ void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
     auto it_virtual_methods = class_data_item.get_virtual_methods();
 
     for (auto &virtual_method: it_virtual_methods) {
-        _analyze_encoded_method(virtual_method.get(), current_class_name);
+        _analyze_encoded_method(&virtual_method, current_class_name);
     }
 
     /// get the direc methods
     auto it_direct_methods = class_data_item.get_direct_methods();
 
     for (auto &direct_method: it_direct_methods) {
-        _analyze_encoded_method(direct_method.get(), current_class_name);
+        _analyze_encoded_method(&direct_method, current_class_name);
     }
 }
 
@@ -190,10 +184,10 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
 
     auto class_analysis_working_on = class_analyses[current_class_name].get();
 
-    for (auto &instr:
+    for (auto instr:
          current_method_analysis->get_disassembled_method()->get_instructions()) {
         auto off = instr->get_address();
-        auto instruction = instr.get();
+        auto instruction = instr;
         auto op_value =
                 static_cast<DexOpcodes::opcodes>(instr->get_instruction_opcode());
 
@@ -496,7 +490,7 @@ Analysis::get_classes() {
     if (class_analyses_s.empty() || class_analyses_s.size() != class_analyses.size()) {
         class_analyses_s.clear();
         for (const auto &entry: class_analyses)
-            class_analyses_s.insert({entry.first, std::cref(*entry.second)});
+            class_analyses_s.insert({entry.first, std::ref(*entry.second)});
     }
     return class_analyses_s;
 }
@@ -505,7 +499,7 @@ Analysis::external_classes_s_t &
 Analysis::get_external_classes() {
     if (external_classes_s.empty() || external_classes_s.size() != external_classes.size()) {
         for (const auto &entry: external_classes)
-            external_classes_s.insert({entry.first, std::cref(*entry.second)});
+            external_classes_s.insert({entry.first, std::ref(*entry.second)});
     }
     return external_classes_s;
 }
@@ -544,7 +538,7 @@ Analysis::method_analyses_s_t &
 Analysis::get_methods() {
     if (method_analyses_s.empty() || method_analyses.size() != method_analyses_s.size()) {
         for (const auto &entry: method_analyses) {
-            method_analyses_s.insert({entry.first, std::cref(*entry.second)});
+            method_analyses_s.insert({entry.first, std::ref(*entry.second)});
         }
     }
     return method_analyses_s;
@@ -554,7 +548,7 @@ Analysis::external_methods_s_t &
 Analysis::get_external_methods() {
     if (external_methods_s.empty() || external_methods_s.size() != external_methods.size()) {
         for (const auto &entry: external_methods)
-            external_methods_s.insert({entry.first, std::cref(*entry.second)});
+            external_methods_s.insert({entry.first, std::ref(*entry.second)});
     }
     return external_methods_s;
 }
@@ -588,7 +582,7 @@ Analysis::string_analyses_s_t &
 Analysis::get_string_analysis() {
     if (string_analyses_s.empty() || string_analyses_s.size() != string_analyses.size()) {
         for (const auto &entry: string_analyses)
-            string_analyses_s.insert({entry.first, std::cref(*entry.second)});
+            string_analyses_s.insert({entry.first, std::ref(*entry.second)});
     }
     return string_analyses_s;
 }

@@ -35,6 +35,7 @@
 #ifndef SHURIKEN_ANALYZER_PROTOS_H
 #define SHURIKEN_ANALYZER_PROTOS_H
 
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/common/iterator_range.h"
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/parser/Dex/dex_types.h"
@@ -113,8 +114,8 @@ namespace shuriken::parser::dex {
     public:
         using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
         using protos_id_s_t = std::vector<std::reference_wrapper<ProtoID>>;
-        using it_protos = iterator_range<protos_id_s_t::iterator>;
-        using it_const_protos = iterator_range<const protos_id_s_t::iterator>;
+        using it_protos = deref_iterator_range<protos_id_s_t>;
+        using it_const_protos = deref_iterator_range<const protos_id_s_t>;
 
     private:
         /// @brief Prototypes that are part of the DEX file
@@ -128,10 +129,6 @@ namespace shuriken::parser::dex {
 
         /// @brief Destructor of DexProtos, default destructor
         ~DexProtos() = default;
-
-        iterator_range<protos_id_s_t::iterator> example() {
-            return make_range(protos_cache_s.begin(), protos_cache_s.end());
-        }
 
         /// @brief Parse all the ProtoIDs from the file
         /// @param stream stream with dex file

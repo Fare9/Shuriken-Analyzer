@@ -8,6 +8,7 @@
 #ifndef SHURIKENLIB_DEX_METHODS_H
 #define SHURIKENLIB_DEX_METHODS_H
 
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/parser/Dex/dex_protos.h"
 #include "shuriken/parser/Dex/dex_strings.h"
 #include "shuriken/parser/Dex/dex_types.h"
@@ -63,8 +64,8 @@ namespace shuriken::parser::dex {
     public:
         using method_ids_t = std::vector<std::unique_ptr<MethodID>>;
         using method_ids_s_t = std::vector<std::reference_wrapper<MethodID>>;
-        using it_methods = iterator_range<method_ids_s_t::iterator>;
-        using it_const_methods = iterator_range<const method_ids_s_t::iterator>;
+        using it_methods = deref_iterator_range<method_ids_s_t>;
+        using it_const_methods = deref_iterator_range<const method_ids_s_t>;
 
     private:
         /// @brief List of methods from the DEX file

@@ -135,9 +135,7 @@ void check_header(shuriken::parser::dex::DexHeader &header) {
 
 void check_class(shuriken::parser::dex::DexClasses &classes) {
 
-    for (auto &c: classes.get_classdefs()) {
-        auto & class_def = c.get();
-
+    for (auto &class_def: classes.get_classdefs()) {
         const auto class_idx = class_def.get_class_idx();
         const auto super_class = class_def.get_superclass();
         std::string_view source_file = class_def.get_source_file();

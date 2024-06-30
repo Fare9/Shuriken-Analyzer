@@ -13,6 +13,7 @@
 #ifndef SHURIKENLIB_DEX_CLASSES_H
 #define SHURIKENLIB_DEX_CLASSES_H
 
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/parser/Dex/dex_annotations.h"
 #include "shuriken/parser/Dex/dex_encoded.h"
 
@@ -24,12 +25,12 @@ namespace shuriken::parser::dex {
     class ClassDataItem {
     public:
         using encoded_fields_t = std::vector<std::unique_ptr<EncodedField>>;
-        using encoded_fields_s_t = std::vector<std::reference_wrapper<const EncodedField>>;
-        using it_encoded_fields = iterator_range<encoded_fields_t::iterator>;
+        using encoded_fields_s_t = std::vector<std::reference_wrapper<EncodedField>>;
+        using it_encoded_fields = deref_iterator_range<encoded_fields_s_t>;
 
         using encoded_methods_t = std::vector<std::unique_ptr<EncodedMethod>>;
-        using encoded_methods_s_t = std::vector<std::reference_wrapper<const EncodedMethod>>;
-        using it_encoded_method = iterator_range<encoded_methods_t::iterator>;
+        using encoded_methods_s_t = std::vector<std::reference_wrapper<EncodedMethod>>;
+        using it_encoded_method = deref_iterator_range<encoded_methods_s_t>;
 
     private:
         /// @brief Static fields from the class
@@ -234,7 +235,7 @@ namespace shuriken::parser::dex {
     public:
         using class_defs_t = std::vector<std::unique_ptr<ClassDef>>;
         using class_defs_s_t = std::vector<std::reference_wrapper<ClassDef>>;
-        using it_class_defs = iterator_range<class_defs_s_t::iterator>;
+        using it_class_defs = deref_iterator_range<class_defs_s_t>;
 
     private:
         /// @brief All the class_defs from the DEX, one
