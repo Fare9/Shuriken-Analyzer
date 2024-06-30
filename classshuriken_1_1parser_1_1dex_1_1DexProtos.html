@@ -111,10 +111,12 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexProtos.html','');
 Public Types</h2></td></tr>
 <tr class="memitem:a13894b20efe1b8361a218ece0ad5e2ea" id="r_a13894b20efe1b8361a218ece0ad5e2ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13894b20efe1b8361a218ece0ad5e2ea">protos_id_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ProtoID.html">ProtoID</a>&gt;&gt;</td></tr>
 <tr class="separator:a13894b20efe1b8361a218ece0ad5e2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa80612b5edd90ee5a94d7d6231ed0a4d" id="r_aa80612b5edd90ee5a94d7d6231ed0a4d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa80612b5edd90ee5a94d7d6231ed0a4d">it_protos</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;protos_id_t::iterator&gt;</td></tr>
-<tr class="separator:aa80612b5edd90ee5a94d7d6231ed0a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec4420e1f70ebeb59f04bcd0647b269" id="r_a2ec4420e1f70ebeb59f04bcd0647b269"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ec4420e1f70ebeb59f04bcd0647b269">it_const_protos</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const protos_id_t::iterator&gt;</td></tr>
-<tr class="separator:a2ec4420e1f70ebeb59f04bcd0647b269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ce9123b685b39842f3f0ef7195ac3b" id="r_ae8ce9123b685b39842f3f0ef7195ac3b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ProtoID.html">ProtoID</a>&gt;&gt;</td></tr>
+<tr class="separator:ae8ce9123b685b39842f3f0ef7195ac3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f879d27f4a6f3a54e1650c3c8bd40c" id="r_a08f879d27f4a6f3a54e1650c3c8bd40c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08f879d27f4a6f3a54e1650c3c8bd40c">it_protos</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a>&gt;</td></tr>
+<tr class="separator:a08f879d27f4a6f3a54e1650c3c8bd40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d464c5d11005353d2afdbb117e1017d" id="r_a2d464c5d11005353d2afdbb117e1017d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d464c5d11005353d2afdbb117e1017d">it_const_protos</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a>&gt;</td></tr>
+<tr class="separator:a2d464c5d11005353d2afdbb117e1017d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,9 +129,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acec7428dd150f1728951773d6e3de38f" id="r_acec7428dd150f1728951773d6e3de38f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acec7428dd150f1728951773d6e3de38f">parse_protos</a> (<a class="el" href="classshuriken_1_1common_1_1ShurikenStream.html">common::ShurikenStream</a> &amp;stream, std::uint32_t number_of_protos, std::uint32_t offset, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexStrings.html">DexStrings</a> &amp;strings, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexTypes.html">DexTypes</a> &amp;types)</td></tr>
 <tr class="memdesc:acec7428dd150f1728951773d6e3de38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse all the ProtoIDs from the file.  <br /></td></tr>
 <tr class="separator:acec7428dd150f1728951773d6e3de38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb376e7ff01aa6ff32f94a05ab2f58f4" id="r_adb376e7ff01aa6ff32f94a05ab2f58f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa80612b5edd90ee5a94d7d6231ed0a4d">it_protos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb376e7ff01aa6ff32f94a05ab2f58f4">get_protos</a> ()</td></tr>
+<tr class="memitem:ae106d4a2fc04d6c9a4d51f3c2b211081" id="r_ae106d4a2fc04d6c9a4d51f3c2b211081"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae106d4a2fc04d6c9a4d51f3c2b211081">get_all_protos</a> ()</td></tr>
+<tr class="separator:ae106d4a2fc04d6c9a4d51f3c2b211081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb376e7ff01aa6ff32f94a05ab2f58f4" id="r_adb376e7ff01aa6ff32f94a05ab2f58f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a08f879d27f4a6f3a54e1650c3c8bd40c">it_protos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb376e7ff01aa6ff32f94a05ab2f58f4">get_protos</a> ()</td></tr>
 <tr class="separator:adb376e7ff01aa6ff32f94a05ab2f58f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c785af2f73eef948967dbdb03cf1ee6" id="r_a0c785af2f73eef948967dbdb03cf1ee6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a2ec4420e1f70ebeb59f04bcd0647b269">it_const_protos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c785af2f73eef948967dbdb03cf1ee6">get_protos_const</a> ()</td></tr>
+<tr class="memitem:a0c785af2f73eef948967dbdb03cf1ee6" id="r_a0c785af2f73eef948967dbdb03cf1ee6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a2d464c5d11005353d2afdbb117e1017d">it_const_protos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c785af2f73eef948967dbdb03cf1ee6">get_protos_const</a> ()</td></tr>
 <tr class="separator:a0c785af2f73eef948967dbdb03cf1ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84eb92f110560a11707b3e36faf6b5a4" id="r_a84eb92f110560a11707b3e36faf6b5a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1ProtoID.html">ProtoID</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84eb92f110560a11707b3e36faf6b5a4">get_proto_by_id</a> (std::uint32_t id)</td></tr>
 <tr class="separator:a84eb92f110560a11707b3e36faf6b5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,37 +146,53 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00112">112</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00113">113</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a2ec4420e1f70ebeb59f04bcd0647b269" name="a2ec4420e1f70ebeb59f04bcd0647b269"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ec4420e1f70ebeb59f04bcd0647b269">&#9670;&#160;</a></span>it_const_protos</h2>
+<a id="a2d464c5d11005353d2afdbb117e1017d" name="a2d464c5d11005353d2afdbb117e1017d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d464c5d11005353d2afdbb117e1017d">&#9670;&#160;</a></span>it_const_protos</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a2ec4420e1f70ebeb59f04bcd0647b269">shuriken::parser::dex::DexProtos::it_const_protos</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const protos_id_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#a2d464c5d11005353d2afdbb117e1017d">shuriken::parser::dex::DexProtos::it_const_protos</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00118">118</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
+
+</div>
+</div>
+<a id="a08f879d27f4a6f3a54e1650c3c8bd40c" name="a08f879d27f4a6f3a54e1650c3c8bd40c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08f879d27f4a6f3a54e1650c3c8bd40c">&#9670;&#160;</a></span>it_protos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a08f879d27f4a6f3a54e1650c3c8bd40c">shuriken::parser::dex::DexProtos::it_protos</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00117">117</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8ce9123b685b39842f3f0ef7195ac3b" name="ae8ce9123b685b39842f3f0ef7195ac3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ce9123b685b39842f3f0ef7195ac3b">&#9670;&#160;</a></span>protos_id_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">shuriken::parser::dex::DexProtos::protos_id_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ProtoID.html">ProtoID</a>&gt;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00116">116</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
-
-</div>
-</div>
-<a id="aa80612b5edd90ee5a94d7d6231ed0a4d" name="aa80612b5edd90ee5a94d7d6231ed0a4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa80612b5edd90ee5a94d7d6231ed0a4d">&#9670;&#160;</a></span>it_protos</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#aa80612b5edd90ee5a94d7d6231ed0a4d">shuriken::parser::dex::DexProtos::it_protos</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;protos_id_t::iterator&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00115">115</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
 
 </div>
 </div>
@@ -188,7 +208,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00114">114</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__protos_8h_source.html#l00115">115</a> of file <a class="el" href="dex__protos_8h_source.html">dex_protos.h</a>.</p>
 
 </div>
 </div>
@@ -248,6 +268,23 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae106d4a2fc04d6c9a4d51f3c2b211081" name="ae106d4a2fc04d6c9a4d51f3c2b211081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae106d4a2fc04d6c9a4d51f3c2b211081">&#9670;&#160;</a></span>get_all_protos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae8ce9123b685b39842f3f0ef7195ac3b">protos_id_s_t</a> &amp; shuriken::parser::dex::DexProtos::get_all_protos </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6e169c3613b3e9e7a7ce0af3e90adc7b" name="a6e169c3613b3e9e7a7ce0af3e90adc7b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e169c3613b3e9e7a7ce0af3e90adc7b">&#9670;&#160;</a></span>get_id_by_proto()</h2>
 
@@ -306,7 +343,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa80612b5edd90ee5a94d7d6231ed0a4d">it_protos</a> shuriken::parser::dex::DexProtos::get_protos </td>
+          <td class="memname"><a class="el" href="#a08f879d27f4a6f3a54e1650c3c8bd40c">it_protos</a> shuriken::parser::dex::DexProtos::get_protos </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -323,7 +360,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a2ec4420e1f70ebeb59f04bcd0647b269">it_const_protos</a> shuriken::parser::dex::DexProtos::get_protos_const </td>
+          <td class="memname"><a class="el" href="#a2d464c5d11005353d2afdbb117e1017d">it_const_protos</a> shuriken::parser::dex::DexProtos::get_protos_const </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

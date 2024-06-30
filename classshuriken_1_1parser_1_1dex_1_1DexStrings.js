@@ -7,6 +7,7 @@ var classshuriken_1_1parser_1_1dex_1_1DexStrings =
     [ "get_id_by_string", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#a51b7be8e34f1244e8cb269587121bd10", null ],
     [ "get_number_of_strings", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#af5429f89b4c09332844e7b0f1b196b48", null ],
     [ "get_string_by_id", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#aa37ccc71b5e4830970e554747fb4f8c8", null ],
+    [ "get_strings", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#abe1b9e7ac63a9d7312a63ce0510b4c00", null ],
     [ "parse_strings", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#aff8cb52a5cc8d59fdd0a339dbc4bf680", null ],
     [ "to_xml", "classshuriken_1_1parser_1_1dex_1_1DexStrings.html#afeab3be9d93dbf389813ba485ecce1e0", null ]
 ];

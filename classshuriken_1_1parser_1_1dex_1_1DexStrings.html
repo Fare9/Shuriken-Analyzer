@@ -126,6 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a51b7be8e34f1244e8cb269587121bd10" id="r_a51b7be8e34f1244e8cb269587121bd10"><td class="memItemLeft" align="right" valign="top">std::int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51b7be8e34f1244e8cb269587121bd10">get_id_by_string</a> (std::string_view str) const</td></tr>
 <tr class="memdesc:a51b7be8e34f1244e8cb269587121bd10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the id from an string_view.  <br /></td></tr>
 <tr class="separator:a51b7be8e34f1244e8cb269587121bd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe1b9e7ac63a9d7312a63ce0510b4c00" id="r_abe1b9e7ac63a9d7312a63ce0510b4c00"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe1b9e7ac63a9d7312a63ce0510b4c00">get_strings</a> () const</td></tr>
+<tr class="memdesc:abe1b9e7ac63a9d7312a63ce0510b4c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant reference to the list of strings.  <br /></td></tr>
+<tr class="separator:abe1b9e7ac63a9d7312a63ce0510b4c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd06edc4ef141b8f4e0fe165bc1a98c5" id="r_acd06edc4ef141b8f4e0fe165bc1a98c5"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd06edc4ef141b8f4e0fe165bc1a98c5">add_string</a> (std::string str)</td></tr>
 <tr class="separator:acd06edc4ef141b8f4e0fe165bc1a98c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeab3be9d93dbf389813ba485ecce1e0" id="r_afeab3be9d93dbf389813ba485ecce1e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afeab3be9d93dbf389813ba485ecce1e0">to_xml</a> (std::ofstream &amp;fos)</td></tr>
@@ -136,7 +139,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__strings_8h_source.html#l00026">26</a> of file <a class="el" href="dex__strings_8h_source.html">dex_strings.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__strings_8h_source.html#l00025">25</a> of file <a class="el" href="dex__strings_8h_source.html">dex_strings.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a46b120c246bf6d956d8553b76fbd9937" name="a46b120c246bf6d956d8553b76fbd9937"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46b120c246bf6d956d8553b76fbd9937">&#9670;&#160;</a></span>DexStrings()</h2>
@@ -300,6 +303,26 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a read-only version of the string </dd></dl>
+
+</div>
+</div>
+<a id="abe1b9e7ac63a9d7312a63ce0510b4c00" name="abe1b9e7ac63a9d7312a63ce0510b4c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe1b9e7ac63a9d7312a63ce0510b4c00">&#9670;&#160;</a></span>get_strings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; std::string_view &gt; shuriken::parser::dex::DexStrings::get_strings </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a constant reference to the list of strings. </p>
+<dl class="section return"><dt>Returns</dt><dd>constant reference to the list of strings </dd></dl>
 
 </div>
 </div>

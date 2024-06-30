@@ -111,10 +111,12 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexMethods.html','')
 Public Types</h2></td></tr>
 <tr class="memitem:afdab9af936c8756a0389386f621eea08" id="r_afdab9af936c8756a0389386f621eea08"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdab9af936c8756a0389386f621eea08">method_ids_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">MethodID</a>&gt;&gt;</td></tr>
 <tr class="separator:afdab9af936c8756a0389386f621eea08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefcf954571748de66314255fb91670b0" id="r_aefcf954571748de66314255fb91670b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefcf954571748de66314255fb91670b0">it_methods</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;method_ids_t::iterator&gt;</td></tr>
-<tr class="separator:aefcf954571748de66314255fb91670b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a477b6e87e1f4bef4017d7402105621e0" id="r_a477b6e87e1f4bef4017d7402105621e0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a477b6e87e1f4bef4017d7402105621e0">it_const_methods</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const method_ids_t::iterator&gt;</td></tr>
-<tr class="separator:a477b6e87e1f4bef4017d7402105621e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753e6712b785daa5d9d365268b5fc63b" id="r_a753e6712b785daa5d9d365268b5fc63b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">MethodID</a>&gt;&gt;</td></tr>
+<tr class="separator:a753e6712b785daa5d9d365268b5fc63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62d02eb84f9b86500e51e85be1aa455" id="r_aa62d02eb84f9b86500e51e85be1aa455"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa62d02eb84f9b86500e51e85be1aa455">it_methods</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a>&gt;</td></tr>
+<tr class="separator:aa62d02eb84f9b86500e51e85be1aa455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f5c03c43b62188fd7be5aed19c7e21" id="r_a01f5c03c43b62188fd7be5aed19c7e21"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01f5c03c43b62188fd7be5aed19c7e21">it_const_methods</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a>&gt;</td></tr>
+<tr class="separator:a01f5c03c43b62188fd7be5aed19c7e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,12 +129,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38dbbef1fc523ff73809f484faf9e41d" id="r_a38dbbef1fc523ff73809f484faf9e41d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38dbbef1fc523ff73809f484faf9e41d">parse_methods</a> (<a class="el" href="classshuriken_1_1common_1_1ShurikenStream.html">common::ShurikenStream</a> &amp;stream, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexTypes.html">DexTypes</a> &amp;types, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexProtos.html">DexProtos</a> &amp;protos, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexStrings.html">DexStrings</a> &amp;strings, std::uint32_t methods_offset, std::uint32_t methods_size)</td></tr>
 <tr class="memdesc:a38dbbef1fc523ff73809f484faf9e41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse all the method ids objects.  <br /></td></tr>
 <tr class="separator:a38dbbef1fc523ff73809f484faf9e41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63d41253e889dc81e82af443acd3dcd1" id="r_a63d41253e889dc81e82af443acd3dcd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aefcf954571748de66314255fb91670b0">it_methods</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63d41253e889dc81e82af443acd3dcd1">get_methods</a> ()</td></tr>
+<tr class="memitem:a63d41253e889dc81e82af443acd3dcd1" id="r_a63d41253e889dc81e82af443acd3dcd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa62d02eb84f9b86500e51e85be1aa455">it_methods</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63d41253e889dc81e82af443acd3dcd1">get_methods</a> ()</td></tr>
 <tr class="memdesc:a63d41253e889dc81e82af443acd3dcd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an iterator for going through the methods from the DEX file.  <br /></td></tr>
 <tr class="separator:a63d41253e889dc81e82af443acd3dcd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78827a5921b0dc4078c9c280f1692b40" id="r_a78827a5921b0dc4078c9c280f1692b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a477b6e87e1f4bef4017d7402105621e0">it_const_methods</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78827a5921b0dc4078c9c280f1692b40">get_methods_const</a> ()</td></tr>
+<tr class="memitem:a78827a5921b0dc4078c9c280f1692b40" id="r_a78827a5921b0dc4078c9c280f1692b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a01f5c03c43b62188fd7be5aed19c7e21">it_const_methods</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78827a5921b0dc4078c9c280f1692b40">get_methods_const</a> ()</td></tr>
 <tr class="memdesc:a78827a5921b0dc4078c9c280f1692b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant iterator for going through the methods from the DEX file.  <br /></td></tr>
 <tr class="separator:a78827a5921b0dc4078c9c280f1692b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbef20aafdf5172cd0a41a2f7d32bb3" id="r_a0bbef20aafdf5172cd0a41a2f7d32bb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bbef20aafdf5172cd0a41a2f7d32bb3">get_methods_vector</a> ()</td></tr>
+<tr class="separator:a0bbef20aafdf5172cd0a41a2f7d32bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad105b5090fda3e55fdbf44d46e7f12f4" id="r_ad105b5090fda3e55fdbf44d46e7f12f4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad105b5090fda3e55fdbf44d46e7f12f4">get_number_of_methods</a> () const</td></tr>
 <tr class="memdesc:ad105b5090fda3e55fdbf44d46e7f12f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of methods from the DEX file.  <br /></td></tr>
 <tr class="separator:ad105b5090fda3e55fdbf44d46e7f12f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,37 +149,53 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00059">59</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a477b6e87e1f4bef4017d7402105621e0" name="a477b6e87e1f4bef4017d7402105621e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a477b6e87e1f4bef4017d7402105621e0">&#9670;&#160;</a></span>it_const_methods</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a477b6e87e1f4bef4017d7402105621e0">shuriken::parser::dex::DexMethods::it_const_methods</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const method_ids_t::iterator&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 <p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00063">63</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
-
-</div>
-</div>
-<a id="aefcf954571748de66314255fb91670b0" name="aefcf954571748de66314255fb91670b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefcf954571748de66314255fb91670b0">&#9670;&#160;</a></span>it_methods</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a01f5c03c43b62188fd7be5aed19c7e21" name="a01f5c03c43b62188fd7be5aed19c7e21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f5c03c43b62188fd7be5aed19c7e21">&#9670;&#160;</a></span>it_const_methods</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#aefcf954571748de66314255fb91670b0">shuriken::parser::dex::DexMethods::it_methods</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;method_ids_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#a01f5c03c43b62188fd7be5aed19c7e21">shuriken::parser::dex::DexMethods::it_const_methods</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00062">62</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00068">68</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
+
+</div>
+</div>
+<a id="aa62d02eb84f9b86500e51e85be1aa455" name="aa62d02eb84f9b86500e51e85be1aa455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa62d02eb84f9b86500e51e85be1aa455">&#9670;&#160;</a></span>it_methods</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aa62d02eb84f9b86500e51e85be1aa455">shuriken::parser::dex::DexMethods::it_methods</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00067">67</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
+
+</div>
+</div>
+<a id="a753e6712b785daa5d9d365268b5fc63b" name="a753e6712b785daa5d9d365268b5fc63b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753e6712b785daa5d9d365268b5fc63b">&#9670;&#160;</a></span>method_ids_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">shuriken::parser::dex::DexMethods::method_ids_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1MethodID.html">MethodID</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00066">66</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
 
 </div>
 </div>
@@ -191,7 +211,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00061">61</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__methods_8h_source.html#l00065">65</a> of file <a class="el" href="dex__methods_8h_source.html">dex_methods.h</a>.</p>
 
 </div>
 </div>
@@ -284,7 +304,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aefcf954571748de66314255fb91670b0">it_methods</a> shuriken::parser::dex::DexMethods::get_methods </td>
+          <td class="memname"><a class="el" href="#aa62d02eb84f9b86500e51e85be1aa455">it_methods</a> shuriken::parser::dex::DexMethods::get_methods </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -304,7 +324,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a477b6e87e1f4bef4017d7402105621e0">it_const_methods</a> shuriken::parser::dex::DexMethods::get_methods_const </td>
+          <td class="memname"><a class="el" href="#a01f5c03c43b62188fd7be5aed19c7e21">it_const_methods</a> shuriken::parser::dex::DexMethods::get_methods_const </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -314,6 +334,24 @@ Public Member Functions</h2></td></tr>
 
 <p>Get a constant iterator for going through the methods from the DEX file. </p>
 <dl class="section return"><dt>Returns</dt><dd>constant iterator with the methods </dd></dl>
+
+</div>
+</div>
+<a id="a0bbef20aafdf5172cd0a41a2f7d32bb3" name="a0bbef20aafdf5172cd0a41a2f7d32bb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bbef20aafdf5172cd0a41a2f7d32bb3">&#9670;&#160;</a></span>get_methods_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a753e6712b785daa5d9d365268b5fc63b">method_ids_s_t</a> &amp; shuriken::parser::dex::DexMethods::get_methods_vector </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>vector with constant references from the MethodIDs </dd></dl>
 
 </div>
 </div>

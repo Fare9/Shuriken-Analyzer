@@ -114,10 +114,12 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1EncodedAnnotation.ht
 Public Types</h2></td></tr>
 <tr class="memitem:a1b5bc0f35d1eac39bebfa3caa81b3db6" id="r_a1b5bc0f35d1eac39bebfa3caa81b3db6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b5bc0f35d1eac39bebfa3caa81b3db6">annotation_elements_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html">AnnotationElement</a>&gt;&gt;</td></tr>
 <tr class="separator:a1b5bc0f35d1eac39bebfa3caa81b3db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54834e4212af182817fdd0f4c29208c5" id="r_a54834e4212af182817fdd0f4c29208c5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54834e4212af182817fdd0f4c29208c5">it_annotation_elements</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;annotation_elements_t::iterator&gt;</td></tr>
-<tr class="separator:a54834e4212af182817fdd0f4c29208c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae294916c159dcea261b22cd9422fa098" id="r_ae294916c159dcea261b22cd9422fa098"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae294916c159dcea261b22cd9422fa098">it_const_annotation_elements</a></td></tr>
-<tr class="separator:ae294916c159dcea261b22cd9422fa098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5760177a54ff2ea34f6efe3a2cbd2fd4" id="r_a5760177a54ff2ea34f6efe3a2cbd2fd4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html">AnnotationElement</a>&gt;&gt;</td></tr>
+<tr class="separator:a5760177a54ff2ea34f6efe3a2cbd2fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aedd9f36a955a21936c95af78808af0" id="r_a0aedd9f36a955a21936c95af78808af0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0aedd9f36a955a21936c95af78808af0">it_annotation_elements</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a>&gt;</td></tr>
+<tr class="separator:a0aedd9f36a955a21936c95af78808af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6113064a301006c8ecd5db4913d619" id="r_aad6113064a301006c8ecd5db4913d619"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad6113064a301006c8ecd5db4913d619">it_const_annotation_elements</a></td></tr>
+<tr class="separator:aad6113064a301006c8ecd5db4913d619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -136,10 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3a890f62446edc6cf6ff7fb85c2520b" id="r_ab3a890f62446edc6cf6ff7fb85c2520b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3a890f62446edc6cf6ff7fb85c2520b">get_number_of_annotations</a> () const</td></tr>
 <tr class="memdesc:ab3a890f62446edc6cf6ff7fb85c2520b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of annotations.  <br /></td></tr>
 <tr class="separator:ab3a890f62446edc6cf6ff7fb85c2520b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59373727968d0ad167257bd586888531" id="r_a59373727968d0ad167257bd586888531"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a54834e4212af182817fdd0f4c29208c5">it_annotation_elements</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59373727968d0ad167257bd586888531">get_annotations</a> ()</td></tr>
+<tr class="memitem:a59373727968d0ad167257bd586888531" id="r_a59373727968d0ad167257bd586888531"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a0aedd9f36a955a21936c95af78808af0">it_annotation_elements</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59373727968d0ad167257bd586888531">get_annotations</a> ()</td></tr>
 <tr class="separator:a59373727968d0ad167257bd586888531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a720d71cdc59a13a41a74a7f09a471589" id="r_a720d71cdc59a13a41a74a7f09a471589"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ae294916c159dcea261b22cd9422fa098">it_const_annotation_elements</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a720d71cdc59a13a41a74a7f09a471589">get_annotations_const</a> ()</td></tr>
+<tr class="memitem:a720d71cdc59a13a41a74a7f09a471589" id="r_a720d71cdc59a13a41a74a7f09a471589"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aad6113064a301006c8ecd5db4913d619">it_const_annotation_elements</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a720d71cdc59a13a41a74a7f09a471589">get_annotations_const</a> ()</td></tr>
 <tr class="separator:a720d71cdc59a13a41a74a7f09a471589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ac008cc3de3eeb69c1b816873e5ad9" id="r_ab6ac008cc3de3eeb69c1b816873e5ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6ac008cc3de3eeb69c1b816873e5ad9">get_annotations_vector</a> ()</td></tr>
+<tr class="separator:ab6ac008cc3de3eeb69c1b816873e5ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fc992f3ad2e0fa39191b9c0a61f9191" id="r_a1fc992f3ad2e0fa39191b9c0a61f9191"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html">AnnotationElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fc992f3ad2e0fa39191b9c0a61f9191">get_annotation_by_pos</a> (std::uint32_t pos)</td></tr>
 <tr class="memdesc:a1fc992f3ad2e0fa39191b9c0a61f9191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an annotation element by position.  <br /></td></tr>
 <tr class="separator:a1fc992f3ad2e0fa39191b9c0a61f9191"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,8 +151,24 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to parse and create a vector of Annotations. </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00092">92</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00096">96</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a5760177a54ff2ea34f6efe3a2cbd2fd4" name="a5760177a54ff2ea34f6efe3a2cbd2fd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">&#9670;&#160;</a></span>annotation_elements_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">shuriken::parser::dex::EncodedAnnotation::annotation_elements_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html">AnnotationElement</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00099">99</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+
+</div>
+</div>
 <a id="a1b5bc0f35d1eac39bebfa3caa81b3db6" name="a1b5bc0f35d1eac39bebfa3caa81b3db6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1b5bc0f35d1eac39bebfa3caa81b3db6">&#9670;&#160;</a></span>annotation_elements_t</h2>
 
@@ -161,41 +181,42 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00094">94</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00098">98</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
-<a id="a54834e4212af182817fdd0f4c29208c5" name="a54834e4212af182817fdd0f4c29208c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54834e4212af182817fdd0f4c29208c5">&#9670;&#160;</a></span>it_annotation_elements</h2>
+<a id="a0aedd9f36a955a21936c95af78808af0" name="a0aedd9f36a955a21936c95af78808af0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aedd9f36a955a21936c95af78808af0">&#9670;&#160;</a></span>it_annotation_elements</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a54834e4212af182817fdd0f4c29208c5">shuriken::parser::dex::EncodedAnnotation::it_annotation_elements</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;annotation_elements_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#a0aedd9f36a955a21936c95af78808af0">shuriken::parser::dex::EncodedAnnotation::it_annotation_elements</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00095">95</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00100">100</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
-<a id="ae294916c159dcea261b22cd9422fa098" name="ae294916c159dcea261b22cd9422fa098"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae294916c159dcea261b22cd9422fa098">&#9670;&#160;</a></span>it_const_annotation_elements</h2>
+<a id="aad6113064a301006c8ecd5db4913d619" name="aad6113064a301006c8ecd5db4913d619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6113064a301006c8ecd5db4913d619">&#9670;&#160;</a></span>it_const_annotation_elements</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ae294916c159dcea261b22cd9422fa098">shuriken::parser::dex::EncodedAnnotation::it_const_annotation_elements</a></td>
+          <td class="memname">using <a class="el" href="#aad6113064a301006c8ecd5db4913d619">shuriken::parser::dex::EncodedAnnotation::it_const_annotation_elements</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"> iterator_range&lt;</div>
-<div class="line">                        <span class="keyword">const</span> annotation_elements_t::iterator&gt;</div>
+<b>Initial value:</b><div class="fragment"><div class="line"> deref_iterator_range&lt;</div>
+<div class="line">                <span class="keyword">const</span> <a class="code hl_typedef" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a>&gt;</div>
+<div class="ttc" id="aclassshuriken_1_1parser_1_1dex_1_1EncodedAnnotation_html_a5760177a54ff2ea34f6efe3a2cbd2fd4"><div class="ttname"><a href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">shuriken::parser::dex::EncodedAnnotation::annotation_elements_s_t</a></div><div class="ttdeci">std::vector&lt; std::reference_wrapper&lt; AnnotationElement &gt; &gt; annotation_elements_s_t</div><div class="ttdef"><b>Definition</b> <a href="dex__encoded_8h_source.html#l00099">dex_encoded.h:99</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00096">96</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00101">101</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
@@ -308,7 +329,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a54834e4212af182817fdd0f4c29208c5">it_annotation_elements</a> shuriken::parser::dex::EncodedAnnotation::get_annotations </td>
+          <td class="memname"><a class="el" href="#a0aedd9f36a955a21936c95af78808af0">it_annotation_elements</a> shuriken::parser::dex::EncodedAnnotation::get_annotations </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -325,7 +346,24 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ae294916c159dcea261b22cd9422fa098">it_const_annotation_elements</a> shuriken::parser::dex::EncodedAnnotation::get_annotations_const </td>
+          <td class="memname"><a class="el" href="#aad6113064a301006c8ecd5db4913d619">it_const_annotation_elements</a> shuriken::parser::dex::EncodedAnnotation::get_annotations_const </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6ac008cc3de3eeb69c1b816873e5ad9" name="ab6ac008cc3de3eeb69c1b816873e5ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6ac008cc3de3eeb69c1b816873e5ad9">&#9670;&#160;</a></span>get_annotations_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5760177a54ff2ea34f6efe3a2cbd2fd4">annotation_elements_s_t</a> &amp; shuriken::parser::dex::EncodedAnnotation::get_annotations_vector </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

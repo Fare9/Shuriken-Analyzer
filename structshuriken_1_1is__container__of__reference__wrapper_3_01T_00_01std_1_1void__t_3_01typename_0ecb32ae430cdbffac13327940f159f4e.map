@@ -1,0 +1,7 @@
+<map id="shuriken::is_container_of_reference_wrapper&lt; T, std::void_t&lt; typename T::value_type &gt; &gt;" name="shuriken::is_container_of_reference_wrapper&lt; T, std::void_t&lt; typename T::value_type &gt; &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,168,179,238"/>
+<area shape="rect" id="Node000002" href="$structshuriken_1_1is__reference__wrapper.html" title=" " alt="" coords="6,79,178,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,135,95,167,89,167,89,135"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="40,5,144,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
+</map>

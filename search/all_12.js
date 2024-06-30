@@ -39,11 +39,13 @@ var searchData=
   ['static_5ffields_5fsize_36',['static_fields_size',['../structhdvmclass__t.html#a189943af8e85420de3762799889eb052',1,'hdvmclass_t']]],
   ['static_5fvalues_5foff_37',['static_values_off',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#a347c02086de4de1e8fb013e9f50509f2',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
   ['string_38',['STRING',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38af54a0a815c4762a13df80fdaed992a2d',1,'shuriken::dex::TYPES']]],
-  ['string_5fids_5foff_39',['string_ids_off',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a201a1a9c156c9cc8b23eafb8db57f91b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
-  ['string_5fids_5fsize_40',['string_ids_size',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
-  ['stringanalysis_41',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html',1,'shuriken::analysis::dex::StringAnalysis'],['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a25ebb765cfb397251317f3f55a0d0f9d',1,'shuriken::analysis::dex::StringAnalysis::StringAnalysis()']]],
-  ['successors_42',['successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['super_5fclass_43',['super_class',['../structhdvmclass__t.html#a08f3a328d31ab53ba65e47527ce2525f',1,'hdvmclass_t']]],
-  ['superclass_5fidx_44',['superclass_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#ab0a7913f949fc89c4c422d59e579720a',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
-  ['switch_5ftype_5ft_45',['switch_type_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#ad11fa5f5d94a9b96759b57bb526b1853',1,'shuriken::disassembler::dex']]]
+  ['string_5fanalyses_5fs_5ft_39',['string_analyses_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#abd1e8235eefb7c9f95dd947601d0c0e9',1,'shuriken::analysis::dex::Analysis']]],
+  ['string_5fanalyses_5ft_40',['string_analyses_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a18c95aea4c50fe0d2b6b584036ce43c1',1,'shuriken::analysis::dex::Analysis']]],
+  ['string_5fids_5foff_41',['string_ids_off',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a201a1a9c156c9cc8b23eafb8db57f91b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
+  ['string_5fids_5fsize_42',['string_ids_size',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
+  ['stringanalysis_43',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html',1,'shuriken::analysis::dex::StringAnalysis'],['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a25ebb765cfb397251317f3f55a0d0f9d',1,'shuriken::analysis::dex::StringAnalysis::StringAnalysis()']]],
+  ['successors_44',['successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['super_5fclass_45',['super_class',['../structhdvmclass__t.html#a08f3a328d31ab53ba65e47527ce2525f',1,'hdvmclass_t']]],
+  ['superclass_5fidx_46',['superclass_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#ab0a7913f949fc89c4c422d59e579720a',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
+  ['switch_5ftype_5ft_47',['switch_type_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#af0a94ce8dc6687a91f87be239a8fb9c6',1,'shuriken::disassembler::dex']]]
 ];

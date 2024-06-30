@@ -35,8 +35,8 @@ var dex__instructions_8h =
     [ "shuriken::disassembler::dex::SparseSwitch", "classshuriken_1_1disassembler_1_1dex_1_1SparseSwitch.html", "classshuriken_1_1disassembler_1_1dex_1_1SparseSwitch" ],
     [ "shuriken::disassembler::dex::FillArrayData", "classshuriken_1_1disassembler_1_1dex_1_1FillArrayData.html", "classshuriken_1_1disassembler_1_1dex_1_1FillArrayData" ],
     [ "shuriken::disassembler::dex::DalvikIncorrectInstruction", "classshuriken_1_1disassembler_1_1dex_1_1DalvikIncorrectInstruction.html", "classshuriken_1_1disassembler_1_1dex_1_1DalvikIncorrectInstruction" ],
-    [ "kind_type_t", "dex__instructions_8h.html#aaa3d9dd854e1c89f48098d60945cdbc1", null ],
-    [ "switch_type_t", "dex__instructions_8h.html#ad11fa5f5d94a9b96759b57bb526b1853", null ],
+    [ "kind_type_t", "dex__instructions_8h.html#a1a88edf19ebe7ad0da96a08600f3792c", null ],
+    [ "switch_type_t", "dex__instructions_8h.html#af0a94ce8dc6687a91f87be239a8fb9c6", null ],
     [ "type_of_switch_t", "dex__instructions_8h.html#a2df0c8546972a4f644d33cce47604360", [
       [ "PACKED_SWITCH", "dex__instructions_8h.html#a2df0c8546972a4f644d33cce47604360a522c40d4a5508af2ef4ef38def592d13", null ],
       [ "SPARSE_SWITCH", "dex__instructions_8h.html#a2df0c8546972a4f644d33cce47604360a374d3c64481b127a83c49db6820edd1e", null ],

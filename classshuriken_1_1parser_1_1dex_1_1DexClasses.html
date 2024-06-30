@@ -114,8 +114,10 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexClasses.html','')
 Public Types</h2></td></tr>
 <tr class="memitem:a189ca617706845d7ae26ebe48551cd93" id="r_a189ca617706845d7ae26ebe48551cd93"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a189ca617706845d7ae26ebe48551cd93">class_defs_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ClassDef.html">ClassDef</a>&gt;&gt;</td></tr>
 <tr class="separator:a189ca617706845d7ae26ebe48551cd93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29db20fbf97abcb9572ba7598ee84545" id="r_a29db20fbf97abcb9572ba7598ee84545"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29db20fbf97abcb9572ba7598ee84545">it_class_defs</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;class_defs_t::iterator&gt;</td></tr>
-<tr class="separator:a29db20fbf97abcb9572ba7598ee84545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9273d8238ff9cb912bac5daf23e1610b" id="r_a9273d8238ff9cb912bac5daf23e1610b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">class_defs_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ClassDef.html">ClassDef</a>&gt;&gt;</td></tr>
+<tr class="separator:a9273d8238ff9cb912bac5daf23e1610b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1bfa8ed710f1354f6f64d32d083698" id="r_aaa1bfa8ed710f1354f6f64d32d083698"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1bfa8ed710f1354f6f64d32d083698">it_class_defs</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">class_defs_s_t</a>&gt;</td></tr>
+<tr class="separator:aaa1bfa8ed710f1354f6f64d32d083698"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -128,15 +130,33 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad923428c7ea93259dbb9b035f2b2363b" id="r_ad923428c7ea93259dbb9b035f2b2363b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad923428c7ea93259dbb9b035f2b2363b">parse_classes</a> (<a class="el" href="classshuriken_1_1common_1_1ShurikenStream.html">common::ShurikenStream</a> &amp;stream, std::uint32_t number_of_classes, std::uint32_t offset, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexStrings.html">DexStrings</a> &amp;strings, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexTypes.html">DexTypes</a> &amp;types, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexFields.html">DexFields</a> &amp;fields, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexMethods.html">DexMethods</a> &amp;methods)</td></tr>
 <tr class="memdesc:ad923428c7ea93259dbb9b035f2b2363b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse all the classes from the DEX files.  <br /></td></tr>
 <tr class="separator:ad923428c7ea93259dbb9b035f2b2363b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b8a81ebc10781d5059fae4c4f57a96" id="r_ac0b8a81ebc10781d5059fae4c4f57a96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a29db20fbf97abcb9572ba7598ee84545">it_class_defs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0b8a81ebc10781d5059fae4c4f57a96">get_classdefs</a> ()</td></tr>
+<tr class="memitem:ac0b8a81ebc10781d5059fae4c4f57a96" id="r_ac0b8a81ebc10781d5059fae4c4f57a96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aaa1bfa8ed710f1354f6f64d32d083698">it_class_defs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0b8a81ebc10781d5059fae4c4f57a96">get_classdefs</a> ()</td></tr>
 <tr class="memdesc:ac0b8a81ebc10781d5059fae4c4f57a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an iterator to the classdefs objects.  <br /></td></tr>
 <tr class="separator:ac0b8a81ebc10781d5059fae4c4f57a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0a63602581900835758df77db4c8ec" id="r_abb0a63602581900835758df77db4c8ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">class_defs_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb0a63602581900835758df77db4c8ec">get_classdefs_vector</a> ()</td></tr>
+<tr class="separator:abb0a63602581900835758df77db4c8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>All classes from the DEX files. </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00220">220</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00234">234</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a9273d8238ff9cb912bac5daf23e1610b" name="a9273d8238ff9cb912bac5daf23e1610b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9273d8238ff9cb912bac5daf23e1610b">&#9670;&#160;</a></span>class_defs_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">shuriken::parser::dex::DexClasses::class_defs_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1ClassDef.html">ClassDef</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00237">237</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
+
+</div>
+</div>
 <a id="a189ca617706845d7ae26ebe48551cd93" name="a189ca617706845d7ae26ebe48551cd93"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a189ca617706845d7ae26ebe48551cd93">&#9670;&#160;</a></span>class_defs_t</h2>
 
@@ -149,23 +169,23 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00222">222</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00236">236</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
 
 </div>
 </div>
-<a id="a29db20fbf97abcb9572ba7598ee84545" name="a29db20fbf97abcb9572ba7598ee84545"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29db20fbf97abcb9572ba7598ee84545">&#9670;&#160;</a></span>it_class_defs</h2>
+<a id="aaa1bfa8ed710f1354f6f64d32d083698" name="aaa1bfa8ed710f1354f6f64d32d083698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1bfa8ed710f1354f6f64d32d083698">&#9670;&#160;</a></span>it_class_defs</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a29db20fbf97abcb9572ba7598ee84545">shuriken::parser::dex::DexClasses::it_class_defs</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;class_defs_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#aaa1bfa8ed710f1354f6f64d32d083698">shuriken::parser::dex::DexClasses::it_class_defs</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">class_defs_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00223">223</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__classes_8h_source.html#l00238">238</a> of file <a class="el" href="dex__classes_8h_source.html">dex_classes.h</a>.</p>
 
 </div>
 </div>
@@ -232,7 +252,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a29db20fbf97abcb9572ba7598ee84545">it_class_defs</a> shuriken::parser::dex::DexClasses::get_classdefs </td>
+          <td class="memname"><a class="el" href="#aaa1bfa8ed710f1354f6f64d32d083698">it_class_defs</a> shuriken::parser::dex::DexClasses::get_classdefs </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -242,6 +262,23 @@ Public Member Functions</h2></td></tr>
 
 <p>Get an iterator to the classdefs objects. </p>
 <dl class="section return"><dt>Returns</dt><dd>class def objects from the DEX file </dd></dl>
+
+</div>
+</div>
+<a id="abb0a63602581900835758df77db4c8ec" name="abb0a63602581900835758df77db4c8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0a63602581900835758df77db4c8ec">&#9670;&#160;</a></span>get_classdefs_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a9273d8238ff9cb912bac5daf23e1610b">class_defs_s_t</a> &amp; shuriken::parser::dex::DexClasses::get_classdefs_vector </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

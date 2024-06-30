@@ -125,8 +125,10 @@ Public Types</h2></td></tr>
 <tr class="separator:a023858af0210a809524d38056674b7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a538c7bb63f7d0c007e49b8d9ae6574d3" id="r_a538c7bb63f7d0c007e49b8d9ae6574d3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a538c7bb63f7d0c007e49b8d9ae6574d3">encoded_catch_handlers_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedCatchHandler.html">EncodedCatchHandler</a>&gt;&gt;</td></tr>
 <tr class="separator:a538c7bb63f7d0c007e49b8d9ae6574d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbcb598f6173ac590325f62fc6e53f4e" id="r_abbcb598f6173ac590325f62fc6e53f4e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbcb598f6173ac590325f62fc6e53f4e">it_encoded_catch_handlers</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;encoded_catch_handlers_t::iterator&gt;</td></tr>
-<tr class="separator:abbcb598f6173ac590325f62fc6e53f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18f0122255d3c584f329aa3d68a17198" id="r_a18f0122255d3c584f329aa3d68a17198"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18f0122255d3c584f329aa3d68a17198">encoded_catch_handlers_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedCatchHandler.html">EncodedCatchHandler</a>&gt;&gt;</td></tr>
+<tr class="separator:a18f0122255d3c584f329aa3d68a17198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf403470d84cbf9b58c0045c94c30cf8" id="r_acf403470d84cbf9b58c0045c94c30cf8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf403470d84cbf9b58c0045c94c30cf8">it_encoded_catch_handlers</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a18f0122255d3c584f329aa3d68a17198">encoded_catch_handlers_s_t</a>&gt;</td></tr>
+<tr class="separator:acf403470d84cbf9b58c0045c94c30cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -166,14 +168,32 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b8041fb4b16305803a7196e7a4e453e" id="r_a2b8041fb4b16305803a7196e7a4e453e"><td class="memItemLeft" align="right" valign="top">std::uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b8041fb4b16305803a7196e7a4e453e">get_encoded_catch_handler_offset</a> ()</td></tr>
 <tr class="memdesc:a2b8041fb4b16305803a7196e7a4e453e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the offset where encoded catch handler is read.  <br /></td></tr>
 <tr class="separator:a2b8041fb4b16305803a7196e7a4e453e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6139e1286f0db7290621ba93d63e1805" id="r_a6139e1286f0db7290621ba93d63e1805"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#abbcb598f6173ac590325f62fc6e53f4e">it_encoded_catch_handlers</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6139e1286f0db7290621ba93d63e1805">get_encoded_catch_handlers</a> ()</td></tr>
+<tr class="memitem:a6139e1286f0db7290621ba93d63e1805" id="r_a6139e1286f0db7290621ba93d63e1805"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acf403470d84cbf9b58c0045c94c30cf8">it_encoded_catch_handlers</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6139e1286f0db7290621ba93d63e1805">get_encoded_catch_handlers</a> ()</td></tr>
 <tr class="separator:a6139e1286f0db7290621ba93d63e1805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a927fee45ac902fb5febf5c5bbb777c3d" id="r_a927fee45ac902fb5febf5c5bbb777c3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a18f0122255d3c584f329aa3d68a17198">encoded_catch_handlers_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a927fee45ac902fb5febf5c5bbb777c3d">get_encoded_catch_handlers_vector</a> ()</td></tr>
+<tr class="separator:a927fee45ac902fb5febf5c5bbb777c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Save the information of the code from a Method. </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00310">310</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00319">319</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a18f0122255d3c584f329aa3d68a17198" name="a18f0122255d3c584f329aa3d68a17198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f0122255d3c584f329aa3d68a17198">&#9670;&#160;</a></span>encoded_catch_handlers_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a18f0122255d3c584f329aa3d68a17198">shuriken::parser::dex::CodeItemStruct::encoded_catch_handlers_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedCatchHandler.html">EncodedCatchHandler</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00336">336</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+
+</div>
+</div>
 <a id="a538c7bb63f7d0c007e49b8d9ae6574d3" name="a538c7bb63f7d0c007e49b8d9ae6574d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a538c7bb63f7d0c007e49b8d9ae6574d3">&#9670;&#160;</a></span>encoded_catch_handlers_t</h2>
 
@@ -186,23 +206,23 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00326">326</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00335">335</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
-<a id="abbcb598f6173ac590325f62fc6e53f4e" name="abbcb598f6173ac590325f62fc6e53f4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbcb598f6173ac590325f62fc6e53f4e">&#9670;&#160;</a></span>it_encoded_catch_handlers</h2>
+<a id="acf403470d84cbf9b58c0045c94c30cf8" name="acf403470d84cbf9b58c0045c94c30cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf403470d84cbf9b58c0045c94c30cf8">&#9670;&#160;</a></span>it_encoded_catch_handlers</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#abbcb598f6173ac590325f62fc6e53f4e">shuriken::parser::dex::CodeItemStruct::it_encoded_catch_handlers</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;encoded_catch_handlers_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#acf403470d84cbf9b58c0045c94c30cf8">shuriken::parser::dex::CodeItemStruct::it_encoded_catch_handlers</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#a18f0122255d3c584f329aa3d68a17198">encoded_catch_handlers_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00327">327</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00337">337</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
@@ -218,7 +238,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00324">324</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00333">333</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
@@ -234,7 +254,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00323">323</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__encoded_8h_source.html#l00332">332</a> of file <a class="el" href="dex__encoded_8h_source.html">dex_encoded.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +361,24 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#abbcb598f6173ac590325f62fc6e53f4e">it_encoded_catch_handlers</a> shuriken::parser::dex::CodeItemStruct::get_encoded_catch_handlers </td>
+          <td class="memname"><a class="el" href="#acf403470d84cbf9b58c0045c94c30cf8">it_encoded_catch_handlers</a> shuriken::parser::dex::CodeItemStruct::get_encoded_catch_handlers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a927fee45ac902fb5febf5c5bbb777c3d" name="a927fee45ac902fb5febf5c5bbb777c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a927fee45ac902fb5febf5c5bbb777c3d">&#9670;&#160;</a></span>get_encoded_catch_handlers_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a18f0122255d3c584f329aa3d68a17198">encoded_catch_handlers_s_t</a> &amp; shuriken::parser::dex::CodeItemStruct::get_encoded_catch_handlers_vector </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

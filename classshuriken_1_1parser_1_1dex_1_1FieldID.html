@@ -104,15 +104,18 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1FieldID.html',''); i
 </div><!--header-->
 <div class="contents">
 
+<p>Class that represents a Field in Dalvik, Fields are variables that belong to an object. <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a> contains the basic data from that field.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb357676ae78b8cd6d889b3ca6448671" id="r_aeb357676ae78b8cd6d889b3ca6448671"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb357676ae78b8cd6d889b3ca6448671">FieldID</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a> *class_, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a> *type_, std::string_view name_)</td></tr>
-<tr class="memdesc:aeb357676ae78b8cd6d889b3ca6448671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>.  <br /></td></tr>
+<tr class="memdesc:aeb357676ae78b8cd6d889b3ca6448671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a>.  <br /></td></tr>
 <tr class="separator:aeb357676ae78b8cd6d889b3ca6448671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86751f037b78bb0b43d67739f199f8c7" id="r_a86751f037b78bb0b43d67739f199f8c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86751f037b78bb0b43d67739f199f8c7">~FieldID</a> ()=default</td></tr>
-<tr class="memdesc:a86751f037b78bb0b43d67739f199f8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>, default one.  <br /></td></tr>
+<tr class="memdesc:a86751f037b78bb0b43d67739f199f8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a>, default one.  <br /></td></tr>
 <tr class="separator:a86751f037b78bb0b43d67739f199f8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5cd15401a89bd713e7278192f6db5a5" id="r_af5cd15401a89bd713e7278192f6db5a5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5cd15401a89bd713e7278192f6db5a5">field_class</a> () const</td></tr>
 <tr class="separator:af5cd15401a89bd713e7278192f6db5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,13 +131,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4ffcafe7b9bfb8b6170b9d10dc7ebbbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a formatted version of the field including the class, the name and its type.  <br /></td></tr>
 <tr class="separator:a4ffcafe7b9bfb8b6170b9d10dc7ebbbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb188c75f6d107543ce2d1a2a11fa4c6" id="r_abb188c75f6d107543ce2d1a2a11fa4c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb188c75f6d107543ce2d1a2a11fa4c6">set_encoded_field</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">EncodedField</a> *field)</td></tr>
+<tr class="memdesc:abb188c75f6d107543ce2d1a2a11fa4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">To refer to an encoded field, setter of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html" title="encoded field with information about the initial values">EncodedField</a> pointer.  <br /></td></tr>
 <tr class="separator:abb188c75f6d107543ce2d1a2a11fa4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a086b0cdd35a13449def984850d150f3e" id="r_a086b0cdd35a13449def984850d150f3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">EncodedField</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a086b0cdd35a13449def984850d150f3e">get_encoded_field</a> ()</td></tr>
 <tr class="separator:a086b0cdd35a13449def984850d150f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00024">24</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+<div class="textblock"><p>Class that represents a Field in Dalvik, Fields are variables that belong to an object. <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a> contains the basic data from that field. </p>
+
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00026">26</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeb357676ae78b8cd6d889b3ca6448671" name="aeb357676ae78b8cd6d889b3ca6448671"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb357676ae78b8cd6d889b3ca6448671">&#9670;&#160;</a></span>FieldID()</h2>
@@ -160,7 +165,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>. </p>
+<p>Constructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a>. </p>
 
 </div>
 </div>
@@ -187,7 +192,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Destructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>, default one. </p>
+<p>Destructor of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a>, default one. </p>
 
 </div>
 </div>
@@ -206,6 +211,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>pointer to class the field belongs to </dd></dl>
 
 </div>
 </div>
@@ -223,6 +229,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>constant pointer to class the field belongs to </dd></dl>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -252,6 +259,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>name of the field </dd></dl>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
@@ -281,6 +289,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>pointer to the type of the field </dd></dl>
 
 </div>
 </div>
@@ -298,6 +307,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>constant pointer to the type of the field </dd></dl>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -327,6 +337,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>pointer to <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html" title="encoded field with information about the initial values">EncodedField</a> related to <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a> </dd></dl>
 
 </div>
 </div>
@@ -364,6 +375,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>To refer to an encoded field, setter of <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html" title="encoded field with information about the initial values">EncodedField</a> pointer. </p>
 
 </div>
 </div>

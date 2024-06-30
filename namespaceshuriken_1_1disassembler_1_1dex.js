@@ -45,11 +45,12 @@ var namespaceshuriken_1_1disassembler_1_1dex =
     [ "exception_data_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a19246bfcdd152d263131976941c664c5", null ],
     [ "exceptions_data_t", "namespaceshuriken_1_1disassembler_1_1dex.html#ae408a80d8ca50935f6a30d2642fd0b5b", null ],
     [ "handler_data_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a13ab7557f2aa2156327fd75ac355e54d", null ],
-    [ "instructions_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a33deeeb17d0e527c21182fb01b8758a2", null ],
+    [ "instructions_raw_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a9b26545f9bcea5309649ce8d2b9dbd1f", null ],
+    [ "instructions_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a9db1a3b485940e10cc5ab80cfa745d50", null ],
     [ "it_exceptions_data", "namespaceshuriken_1_1disassembler_1_1dex.html#af081a1ad496e9dbd0e3b6f0b0a7bbdb8", null ],
-    [ "it_instructions", "namespaceshuriken_1_1disassembler_1_1dex.html#aff0d37a7350b8ed6590120e996347427", null ],
-    [ "kind_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#aaa3d9dd854e1c89f48098d60945cdbc1", null ],
-    [ "switch_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#ad11fa5f5d94a9b96759b57bb526b1853", null ],
+    [ "it_instructions", "namespaceshuriken_1_1disassembler_1_1dex.html#aa48d8c43bfddf097d787cac531079b48", null ],
+    [ "kind_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#a1a88edf19ebe7ad0da96a08600f3792c", null ],
+    [ "switch_type_t", "namespaceshuriken_1_1disassembler_1_1dex.html#af0a94ce8dc6687a91f87be239a8fb9c6", null ],
     [ "disassembly_algorithm_t", "namespaceshuriken_1_1disassembler_1_1dex.html#ab31302cf7e9f36fb749b0aa3bf212a5d", [
       [ "LINEAR_SWEEP_DISASSEMBLER", "namespaceshuriken_1_1disassembler_1_1dex.html#ab31302cf7e9f36fb749b0aa3bf212a5dae109739955a35eb41bebdb9487a7e81b", null ]
     ] ],

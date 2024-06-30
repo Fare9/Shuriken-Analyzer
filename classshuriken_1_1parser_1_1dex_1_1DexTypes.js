@@ -1,7 +1,9 @@
 var classshuriken_1_1parser_1_1dex_1_1DexTypes =
 [
+    [ "dvmtypes_s_t", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a5c8ee9a2c1703671544ab7e5c2e6995c", null ],
     [ "DexTypes", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a1f5f6b98b55e1425480b86c8affbc016", null ],
     [ "~DexTypes", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a861b00d5281daaa74a4d22c7749598fc", null ],
+    [ "get_dvm_types", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a7cf6c3dee69c3142dd34412e52116f99", null ],
     [ "get_id_by_type", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a90a3daa7373cb6fdd4e06ee0288e36cc", null ],
     [ "get_number_of_types", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#ac2fe09a1262d14ef3893e7309955ede3", null ],
     [ "get_type_by_id", "classshuriken_1_1parser_1_1dex_1_1DexTypes.html#a9ffb64c06a23fc6f29595ab91c4c18e6", null ],

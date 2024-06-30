@@ -12,6 +12,7 @@ var hierarchy =
     [ "shuriken::parser::dex::ClassDef::classdefstruct_t", "structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html", null ],
     [ "shuriken::parser::dex::CodeItemStruct::code_item_struct_t", "structshuriken_1_1parser_1_1dex_1_1CodeItemStruct_1_1code__item__struct__t.html", null ],
     [ "shuriken::parser::dex::CodeItemStruct", "classshuriken_1_1parser_1_1dex_1_1CodeItemStruct.html", null ],
+    [ "shuriken::deref_iterator_range< T >", "structshuriken_1_1deref__iterator__range.html", null ],
     [ "shuriken::parser::dex::DexClasses", "classshuriken_1_1parser_1_1dex_1_1DexClasses.html", null ],
     [ "shuriken::disassembler::dex::DexDisassembler", "classshuriken_1_1disassembler_1_1dex_1_1DexDisassembler.html", null ],
     [ "shuriken::parser::dex::DexFields", "classshuriken_1_1parser_1_1dex_1_1DexFields.html", null ],
@@ -47,6 +48,13 @@ var hierarchy =
     ] ],
     [ "shuriken::analysis::dex::ExternalClass", "classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html", null ],
     [ "shuriken::analysis::dex::ExternalMethod", "classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html", null ],
+    [ "std::false_type", null, [
+      [ "shuriken::is_reference_wrapper< T::value_type >", "structshuriken_1_1is__reference__wrapper.html", [
+        [ "shuriken::is_container_of_reference_wrapper< T, std::void_t< typename T::value_type > >", "structshuriken_1_1is__container__of__reference__wrapper_3_01T_00_01std_1_1void__t_3_01typename_01T_1_1value__type_01_4_01_4.html", null ]
+      ] ],
+      [ "shuriken::is_container_of_reference_wrapper< T, typename >", "structshuriken_1_1is__container__of__reference__wrapper.html", null ],
+      [ "shuriken::is_reference_wrapper< T >", "structshuriken_1_1is__reference__wrapper.html", null ]
+    ] ],
     [ "shuriken::analysis::dex::FieldAnalysis", "classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html", null ],
     [ "shuriken::parser::dex::FieldAnnotation", "structshuriken_1_1parser_1_1dex_1_1FieldAnnotation.html", null ],
     [ "shuriken::parser::dex::FieldID", "classshuriken_1_1parser_1_1dex_1_1FieldID.html", null ],
@@ -90,6 +98,7 @@ var hierarchy =
       [ "shuriken::disassembler::dex::SparseSwitch", "classshuriken_1_1disassembler_1_1dex_1_1SparseSwitch.html", null ]
     ] ],
     [ "shuriken::disassembler::dex::InstructionUtils", "classshuriken_1_1disassembler_1_1dex_1_1InstructionUtils.html", null ],
+    [ "shuriken::deref_iterator_range< T >::iterator", "structshuriken_1_1deref__iterator__range_1_1iterator.html", null ],
     [ "shuriken::iterator_range< IteratorT >", "classshuriken_1_1iterator__range.html", null ],
     [ "shuriken::disassembler::dex::LinearSweepDisassembler", "classshuriken_1_1disassembler_1_1dex_1_1LinearSweepDisassembler.html", null ],
     [ "shuriken::parser::dex::DexMapList::map_item", "structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html", null ],
@@ -101,6 +110,9 @@ var hierarchy =
     [ "shuriken::parser::dex::ProtoID", "classshuriken_1_1parser_1_1dex_1_1ProtoID.html", null ],
     [ "shuriken::common::ShurikenStream", "classshuriken_1_1common_1_1ShurikenStream.html", null ],
     [ "shuriken::analysis::dex::StringAnalysis", "classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html", null ],
+    [ "std::true_type", null, [
+      [ "shuriken::is_reference_wrapper< std::reference_wrapper< U > >", "structshuriken_1_1is__reference__wrapper_3_01std_1_1reference__wrapper_3_01U_01_4_01_4.html", null ]
+    ] ],
     [ "shuriken::parser::dex::TryItem", "structshuriken_1_1parser_1_1dex_1_1TryItem.html", null ],
     [ "shuriken::dex::Utils", "classshuriken_1_1dex_1_1Utils.html", null ]
 ];

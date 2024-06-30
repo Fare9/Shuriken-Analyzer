@@ -138,7 +138,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36f8010d4a409b94dcff06b1b972d081" id="r_a36f8010d4a409b94dcff06b1b972d081"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36f8010d4a409b94dcff06b1b972d081">~DVMClass</a> ()=default</td></tr>
 <tr class="separator:a36f8010d4a409b94dcff06b1b972d081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691ab205c3c2946f88fd1804957659bb" id="r_a691ab205c3c2946f88fd1804957659bb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a691ab205c3c2946f88fd1804957659bb">print_type</a> () override</td></tr>
-<tr class="memdesc:a691ab205c3c2946f88fd1804957659bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a beautified representation of the type.  <br /></td></tr>
 <tr class="separator:a691ab205c3c2946f88fd1804957659bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9ca83d38b86a97875410f936d1a24a3" id="r_ab9ca83d38b86a97875410f936d1a24a3"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9ca83d38b86a97875410f936d1a24a3">get_class_name</a> () const</td></tr>
 <tr class="separator:ab9ca83d38b86a97875410f936d1a24a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,7 +157,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__types_8h_source.html#l00123">123</a> of file <a class="el" href="dex__types_8h_source.html">dex_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__types_8h_source.html#l00121">121</a> of file <a class="el" href="dex__types_8h_source.html">dex_types.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb12beddf5e0e67e16951aba5d145695" name="abb12beddf5e0e67e16951aba5d145695"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb12beddf5e0e67e16951aba5d145695">&#9670;&#160;</a></span>DVMClass()</h2>
@@ -225,6 +224,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>name of the class using bytecode format (e.g. Ljava/lang/String;) </dd></dl>
 
 </div>
 </div>
@@ -250,9 +250,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Get a beautified representation of the type. </p>
-<dl class="section return"><dt>Returns</dt><dd>beautified representation of the type </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>name of the class in Java format (e.g. java.lang.String) </dd></dl>
 
 <p>Implements <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html#ac7b4bf0625f92faf3eb5d7999b2ba65b">shuriken::parser::dex::DVMType</a>.</p>
 

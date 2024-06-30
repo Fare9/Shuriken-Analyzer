@@ -98,6 +98,7 @@ $(function(){initNavTree('classshuriken_1_1disassembler_1_1dex_1_1DexDisassemble
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classshuriken_1_1disassembler_1_1dex_1_1DexDisassembler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">shuriken::disassembler::dex::DexDisassembler Class Reference</div></div>
@@ -106,6 +107,13 @@ $(function(){initNavTree('classshuriken_1_1disassembler_1_1dex_1_1DexDisassemble
 
 <p><code>#include &lt;<a class="el" href="dex__disassembler_8h_source.html">dex_disassembler.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a800c71636687e01c78b0bb0c11f2f4ee" id="r_a800c71636687e01c78b0bb0c11f2f4ee"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a800c71636687e01c78b0bb0c11f2f4ee">disassembled_methods_t</a></td></tr>
+<tr class="separator:a800c71636687e01c78b0bb0c11f2f4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ccdaeed8d19d774f9d3391276f31ba" id="r_ae0ccdaeed8d19d774f9d3391276f31ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0ccdaeed8d19d774f9d3391276f31ba">disassembled_methods_s_t</a></td></tr>
+<tr class="separator:ae0ccdaeed8d19d774f9d3391276f31ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d88430e9f9f5cefb32efbbb3a78cbbd" id="r_a4d88430e9f9f5cefb32efbbb3a78cbbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d88430e9f9f5cefb32efbbb3a78cbbd">DexDisassembler</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1Parser.html">parser::dex::Parser</a> *parser)</td></tr>
@@ -120,9 +128,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7c4bce721a87f1d22674759e47d64c1" id="r_ab7c4bce721a87f1d22674759e47d64c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html">DisassembledMethod</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7c4bce721a87f1d22674759e47d64c1">get_disassembled_method</a> (std::string_view method)</td></tr>
 <tr class="memdesc:ab7c4bce721a87f1d22674759e47d64c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html" title="For storing information about a disassembled method we will keep that information in a class,...">DisassembledMethod</a> object the disassembler keeps all of them in a map.  <br /></td></tr>
 <tr class="separator:ab7c4bce721a87f1d22674759e47d64c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69edb51a49078ee559cea10bc727b855" id="r_a69edb51a49078ee559cea10bc727b855"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html">DisassembledMethod</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69edb51a49078ee559cea10bc727b855">get_disassembled_methods</a> ()</td></tr>
-<tr class="memdesc:a69edb51a49078ee559cea10bc727b855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a reference to all the disassembled methods.  <br /></td></tr>
-<tr class="separator:a69edb51a49078ee559cea10bc727b855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e6e7a094c7043600c8cac76930d6dc1" id="r_a6e6e7a094c7043600c8cac76930d6dc1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ae0ccdaeed8d19d774f9d3391276f31ba">disassembled_methods_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e6e7a094c7043600c8cac76930d6dc1">get_disassembled_methods</a> ()</td></tr>
+<tr class="memdesc:a6e6e7a094c7043600c8cac76930d6dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a reference to all the disassembled methods.  <br /></td></tr>
+<tr class="separator:a6e6e7a094c7043600c8cac76930d6dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf53c8e7435f648196be01db3db5bb4" id="r_aabf53c8e7435f648196be01db3db5bb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a800c71636687e01c78b0bb0c11f2f4ee">disassembled_methods_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf53c8e7435f648196be01db3db5bb4">get_disassembled_methods_ownership</a> ()</td></tr>
+<tr class="separator:aabf53c8e7435f648196be01db3db5bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413c988f4def52937e62dfc4bb2cc57b" id="r_a413c988f4def52937e62dfc4bb2cc57b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a413c988f4def52937e62dfc4bb2cc57b">disassembly_dex</a> ()</td></tr>
 <tr class="memdesc:a413c988f4def52937e62dfc4bb2cc57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the most important function from the disassembler, this function takes the given parser object and calls one of the internal disassemblers for retrieving all the instructions from the DEX file.  <br /></td></tr>
 <tr class="separator:a413c988f4def52937e62dfc4bb2cc57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +142,45 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
+<p class="definition">Definition at line <a class="el" href="dex__disassembler_8h_source.html#l00026">26</a> of file <a class="el" href="dex__disassembler_8h_source.html">dex_disassembler.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ae0ccdaeed8d19d774f9d3391276f31ba" name="ae0ccdaeed8d19d774f9d3391276f31ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ccdaeed8d19d774f9d3391276f31ba">&#9670;&#160;</a></span>disassembled_methods_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ae0ccdaeed8d19d774f9d3391276f31ba">shuriken::disassembler::dex::DexDisassembler::disassembled_methods_s_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> std::unordered_map&lt;std::string_view,</div>
+<div class="line">                                                            std::reference_wrapper&lt;const DisassembledMethod&gt;&gt;</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="dex__disassembler_8h_source.html#l00030">30</a> of file <a class="el" href="dex__disassembler_8h_source.html">dex_disassembler.h</a>.</p>
+
+</div>
+</div>
+<a id="a800c71636687e01c78b0bb0c11f2f4ee" name="a800c71636687e01c78b0bb0c11f2f4ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a800c71636687e01c78b0bb0c11f2f4ee">&#9670;&#160;</a></span>disassembled_methods_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a800c71636687e01c78b0bb0c11f2f4ee">shuriken::disassembler::dex::DexDisassembler::disassembled_methods_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> std::unordered_map&lt;std::string_view,</div>
+<div class="line">                                                          std::unique_ptr&lt;DisassembledMethod&gt;&gt;</div>
+</div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="dex__disassembler_8h_source.html#l00028">28</a> of file <a class="el" href="dex__disassembler_8h_source.html">dex_disassembler.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4d88430e9f9f5cefb32efbbb3a78cbbd" name="a4d88430e9f9f5cefb32efbbb3a78cbbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d88430e9f9f5cefb32efbbb3a78cbbd">&#9670;&#160;</a></span>DexDisassembler()</h2>
 
@@ -257,14 +304,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a69edb51a49078ee559cea10bc727b855" name="a69edb51a49078ee559cea10bc727b855"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69edb51a49078ee559cea10bc727b855">&#9670;&#160;</a></span>get_disassembled_methods()</h2>
+<a id="a6e6e7a094c7043600c8cac76930d6dc1" name="a6e6e7a094c7043600c8cac76930d6dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e6e7a094c7043600c8cac76930d6dc1">&#9670;&#160;</a></span>get_disassembled_methods()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string_view, std::unique_ptr&lt; <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DisassembledMethod.html">DisassembledMethod</a> &gt; &gt; &amp; shuriken::disassembler::dex::DexDisassembler::get_disassembled_methods </td>
+          <td class="memname"><a class="el" href="#ae0ccdaeed8d19d774f9d3391276f31ba">disassembled_methods_s_t</a> &amp; shuriken::disassembler::dex::DexDisassembler::get_disassembled_methods </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -274,6 +321,23 @@ Public Member Functions</h2></td></tr>
 
 <p>Obtain a reference to all the disassembled methods. </p>
 <dl class="section return"><dt>Returns</dt><dd>reference to map with all the disassembled methods </dd></dl>
+
+</div>
+</div>
+<a id="aabf53c8e7435f648196be01db3db5bb4" name="aabf53c8e7435f648196be01db3db5bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf53c8e7435f648196be01db3db5bb4">&#9670;&#160;</a></span>get_disassembled_methods_ownership()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a800c71636687e01c78b0bb0c11f2f4ee">disassembled_methods_t</a> &amp; shuriken::disassembler::dex::DexDisassembler::get_disassembled_methods_ownership </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

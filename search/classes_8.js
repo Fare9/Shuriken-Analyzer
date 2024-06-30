@@ -32,5 +32,11 @@ var searchData=
   ['instruction51l_29',['Instruction51l',['../classshuriken_1_1disassembler_1_1dex_1_1Instruction51l.html',1,'shuriken::disassembler::dex']]],
   ['instructionutils_30',['InstructionUtils',['../classshuriken_1_1disassembler_1_1dex_1_1InstructionUtils.html',1,'shuriken::disassembler::dex']]],
   ['invalidinstructionexception_31',['InvalidInstructionException',['../classexceptions_1_1InvalidInstructionException.html',1,'exceptions']]],
-  ['iterator_5frange_32',['iterator_range',['../classshuriken_1_1iterator__range.html',1,'shuriken']]]
+  ['is_5fcontainer_5fof_5freference_5fwrapper_32',['is_container_of_reference_wrapper',['../structshuriken_1_1is__container__of__reference__wrapper.html',1,'shuriken']]],
+  ['is_5fcontainer_5fof_5freference_5fwrapper_3c_20t_2c_20std_3a_3avoid_5ft_3c_20typename_20t_3a_3avalue_5ftype_20_3e_20_3e_33',['is_container_of_reference_wrapper&lt; T, std::void_t&lt; typename T::value_type &gt; &gt;',['../structshuriken_1_1is__container__of__reference__wrapper_3_01T_00_01std_1_1void__t_3_01typename_01T_1_1value__type_01_4_01_4.html',1,'shuriken']]],
+  ['is_5freference_5fwrapper_34',['is_reference_wrapper',['../structshuriken_1_1is__reference__wrapper.html',1,'shuriken']]],
+  ['is_5freference_5fwrapper_3c_20std_3a_3areference_5fwrapper_3c_20u_20_3e_20_3e_35',['is_reference_wrapper&lt; std::reference_wrapper&lt; U &gt; &gt;',['../structshuriken_1_1is__reference__wrapper_3_01std_1_1reference__wrapper_3_01U_01_4_01_4.html',1,'shuriken']]],
+  ['is_5freference_5fwrapper_3c_20t_3a_3avalue_5ftype_20_3e_36',['is_reference_wrapper&lt; T::value_type &gt;',['../structshuriken_1_1is__reference__wrapper.html',1,'shuriken']]],
+  ['iterator_37',['iterator',['../structshuriken_1_1deref__iterator__range_1_1iterator.html',1,'shuriken::deref_iterator_range']]],
+  ['iterator_5frange_38',['iterator_range',['../classshuriken_1_1iterator__range.html',1,'shuriken']]]
 ];

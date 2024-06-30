@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,100,110,126"/>
+<area shape="rect" id="Node000001" href="$structshuriken_1_1is__reference__wrapper.html" title=" " alt="" coords="158,20,330,61"/>
+<area shape="poly" id="edge39_Node000000_Node000001" title=" " alt="" coords="104,91,157,70,185,59,187,64,159,75,106,96"/>
+<area shape="rect" id="Node000003" href="$structshuriken_1_1is__container__of__reference__wrapper.html" title=" " alt="" coords="167,85,321,141"/>
+<area shape="poly" id="edge41_Node000000_Node000003" title=" " alt="" coords="125,110,167,110,167,115,125,115"/>
+<area shape="rect" id="Node000004" href="$structshuriken_1_1is__reference__wrapper.html" title="is_reference_wrapper returns false for any type" alt="" coords="170,164,318,205"/>
+<area shape="poly" id="edge42_Node000000_Node000004" title=" " alt="" coords="106,129,159,150,187,161,185,166,157,155,104,134"/>
+<area shape="rect" id="Node000002" href="$structshuriken_1_1is__container__of__reference__wrapper_3_01T_00_01std_1_1void__t_3_01typename_01T_1_1value__type_01_4_01_4.html" title=" " alt="" coords="378,5,551,76"/>
+<area shape="poly" id="edge40_Node000001_Node000002" title=" " alt="" coords="345,38,378,38,378,43,345,43"/>
+</map>

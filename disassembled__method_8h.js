@@ -6,7 +6,8 @@ var disassembled__method_8h =
     [ "exception_data_t", "disassembled__method_8h.html#a19246bfcdd152d263131976941c664c5", null ],
     [ "exceptions_data_t", "disassembled__method_8h.html#ae408a80d8ca50935f6a30d2642fd0b5b", null ],
     [ "handler_data_t", "disassembled__method_8h.html#a13ab7557f2aa2156327fd75ac355e54d", null ],
-    [ "instructions_t", "disassembled__method_8h.html#a33deeeb17d0e527c21182fb01b8758a2", null ],
+    [ "instructions_raw_t", "disassembled__method_8h.html#a9b26545f9bcea5309649ce8d2b9dbd1f", null ],
+    [ "instructions_t", "disassembled__method_8h.html#a9db1a3b485940e10cc5ab80cfa745d50", null ],
     [ "it_exceptions_data", "disassembled__method_8h.html#af081a1ad496e9dbd0e3b6f0b0a7bbdb8", null ],
-    [ "it_instructions", "disassembled__method_8h.html#aff0d37a7350b8ed6590120e996347427", null ]
+    [ "it_instructions", "disassembled__method_8h.html#aa48d8c43bfddf097d787cac531079b48", null ]
 ];

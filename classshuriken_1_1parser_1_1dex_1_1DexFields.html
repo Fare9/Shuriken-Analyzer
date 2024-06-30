@@ -111,10 +111,12 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexFields.html','');
 Public Types</h2></td></tr>
 <tr class="memitem:a373eb8ce4849c754c8689cf7f9f532a1" id="r_a373eb8ce4849c754c8689cf7f9f532a1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a373eb8ce4849c754c8689cf7f9f532a1">field_ids_t</a> = std::vector&lt;std::unique_ptr&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>&gt;&gt;</td></tr>
 <tr class="separator:a373eb8ce4849c754c8689cf7f9f532a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99d26fa1f95b290a99d590588d46b972" id="r_a99d26fa1f95b290a99d590588d46b972"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99d26fa1f95b290a99d590588d46b972">it_field_ids</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;field_ids_t::iterator&gt;</td></tr>
-<tr class="separator:a99d26fa1f95b290a99d590588d46b972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6f13f29ffb91941cb2bf7fee834c1b2" id="r_aa6f13f29ffb91941cb2bf7fee834c1b2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6f13f29ffb91941cb2bf7fee834c1b2">it_const_field_ids</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const field_ids_t::iterator&gt;</td></tr>
-<tr class="separator:aa6f13f29ffb91941cb2bf7fee834c1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2e6a199635054799644e3b9df5b173" id="r_acb2e6a199635054799644e3b9df5b173"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>&gt;&gt;</td></tr>
+<tr class="separator:acb2e6a199635054799644e3b9df5b173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad96fd47dce2db4465f1a9fddb5f2674a" id="r_ad96fd47dce2db4465f1a9fddb5f2674a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad96fd47dce2db4465f1a9fddb5f2674a">it_field_ids</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a>&gt;</td></tr>
+<tr class="separator:ad96fd47dce2db4465f1a9fddb5f2674a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ebf0fa1fe899cfc26443deafb3471c" id="r_ac9ebf0fa1fe899cfc26443deafb3471c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9ebf0fa1fe899cfc26443deafb3471c">it_const_field_ids</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a>&gt;</td></tr>
+<tr class="separator:ac9ebf0fa1fe899cfc26443deafb3471c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,10 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acfdded218e3a4c4a242473707d6e47cd" id="r_acfdded218e3a4c4a242473707d6e47cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfdded218e3a4c4a242473707d6e47cd">parse_fields</a> (<a class="el" href="classshuriken_1_1common_1_1ShurikenStream.html">common::ShurikenStream</a> &amp;stream, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexTypes.html">DexTypes</a> &amp;types, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexStrings.html">DexStrings</a> &amp;strings, std::uint32_t fields_offset, std::uint32_t n_of_fields)</td></tr>
 <tr class="memdesc:acfdded218e3a4c4a242473707d6e47cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing all the fields from a dex file.  <br /></td></tr>
 <tr class="separator:acfdded218e3a4c4a242473707d6e47cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a246d9f6c5afb30bfe5ddb7a84d8df807" id="r_a246d9f6c5afb30bfe5ddb7a84d8df807"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a99d26fa1f95b290a99d590588d46b972">it_field_ids</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a246d9f6c5afb30bfe5ddb7a84d8df807">get_fields</a> ()</td></tr>
+<tr class="memitem:a1f61cb41aa7017d5c7c7d6e18f7e0601" id="r_a1f61cb41aa7017d5c7c7d6e18f7e0601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f61cb41aa7017d5c7c7d6e18f7e0601">get_all_fields</a> ()</td></tr>
+<tr class="separator:a1f61cb41aa7017d5c7c7d6e18f7e0601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a246d9f6c5afb30bfe5ddb7a84d8df807" id="r_a246d9f6c5afb30bfe5ddb7a84d8df807"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad96fd47dce2db4465f1a9fddb5f2674a">it_field_ids</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a246d9f6c5afb30bfe5ddb7a84d8df807">get_fields</a> ()</td></tr>
 <tr class="memdesc:a246d9f6c5afb30bfe5ddb7a84d8df807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an iterator for the fields.  <br /></td></tr>
 <tr class="separator:a246d9f6c5afb30bfe5ddb7a84d8df807"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b465b42d63ef2c2ce331c0da61f398c" id="r_a7b465b42d63ef2c2ce331c0da61f398c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa6f13f29ffb91941cb2bf7fee834c1b2">it_const_field_ids</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b465b42d63ef2c2ce331c0da61f398c">get_fields_const</a> ()</td></tr>
+<tr class="memitem:a7b465b42d63ef2c2ce331c0da61f398c" id="r_a7b465b42d63ef2c2ce331c0da61f398c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac9ebf0fa1fe899cfc26443deafb3471c">it_const_field_ids</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b465b42d63ef2c2ce331c0da61f398c">get_fields_const</a> ()</td></tr>
 <tr class="memdesc:a7b465b42d63ef2c2ce331c0da61f398c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant iterator for the fields.  <br /></td></tr>
 <tr class="separator:a7b465b42d63ef2c2ce331c0da61f398c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35347a1540034f34379e38104e1ac641" id="r_a35347a1540034f34379e38104e1ac641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35347a1540034f34379e38104e1ac641">get_field_by_id</a> (std::uint32_t id)</td></tr>
@@ -145,8 +149,24 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00076">76</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00085">85</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="acb2e6a199635054799644e3b9df5b173" name="acb2e6a199635054799644e3b9df5b173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb2e6a199635054799644e3b9df5b173">&#9670;&#160;</a></span>field_ids_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#acb2e6a199635054799644e3b9df5b173">shuriken::parser::dex::DexFields::field_ids_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00088">88</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+
+</div>
+</div>
 <a id="a373eb8ce4849c754c8689cf7f9f532a1" name="a373eb8ce4849c754c8689cf7f9f532a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a373eb8ce4849c754c8689cf7f9f532a1">&#9670;&#160;</a></span>field_ids_t</h2>
 
@@ -159,39 +179,39 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00078">78</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00087">87</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
 
 </div>
 </div>
-<a id="aa6f13f29ffb91941cb2bf7fee834c1b2" name="aa6f13f29ffb91941cb2bf7fee834c1b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6f13f29ffb91941cb2bf7fee834c1b2">&#9670;&#160;</a></span>it_const_field_ids</h2>
+<a id="ac9ebf0fa1fe899cfc26443deafb3471c" name="ac9ebf0fa1fe899cfc26443deafb3471c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ebf0fa1fe899cfc26443deafb3471c">&#9670;&#160;</a></span>it_const_field_ids</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#aa6f13f29ffb91941cb2bf7fee834c1b2">shuriken::parser::dex::DexFields::it_const_field_ids</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;const field_ids_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#ac9ebf0fa1fe899cfc26443deafb3471c">shuriken::parser::dex::DexFields::it_const_field_ids</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;const <a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00080">80</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00090">90</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
 
 </div>
 </div>
-<a id="a99d26fa1f95b290a99d590588d46b972" name="a99d26fa1f95b290a99d590588d46b972"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99d26fa1f95b290a99d590588d46b972">&#9670;&#160;</a></span>it_field_ids</h2>
+<a id="ad96fd47dce2db4465f1a9fddb5f2674a" name="ad96fd47dce2db4465f1a9fddb5f2674a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad96fd47dce2db4465f1a9fddb5f2674a">&#9670;&#160;</a></span>it_field_ids</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#a99d26fa1f95b290a99d590588d46b972">shuriken::parser::dex::DexFields::it_field_ids</a> = <a class="el" href="classshuriken_1_1iterator__range.html">iterator_range</a>&lt;field_ids_t::iterator&gt;</td>
+          <td class="memname">using <a class="el" href="#ad96fd47dce2db4465f1a9fddb5f2674a">shuriken::parser::dex::DexFields::it_field_ids</a> = <a class="el" href="structshuriken_1_1deref__iterator__range.html">deref_iterator_range</a>&lt;<a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00079">79</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__fields_8h_source.html#l00089">89</a> of file <a class="el" href="dex__fields_8h_source.html">dex_fields.h</a>.</p>
 
 </div>
 </div>
@@ -251,6 +271,24 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1f61cb41aa7017d5c7c7d6e18f7e0601" name="a1f61cb41aa7017d5c7c7d6e18f7e0601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f61cb41aa7017d5c7c7d6e18f7e0601">&#9670;&#160;</a></span>get_all_fields()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acb2e6a199635054799644e3b9df5b173">field_ids_s_t</a> &amp; shuriken::parser::dex::DexFields::get_all_fields </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>vector with constant references from the fields </dd></dl>
+
+</div>
+</div>
 <a id="a35347a1540034f34379e38104e1ac641" name="a35347a1540034f34379e38104e1ac641"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35347a1540034f34379e38104e1ac641">&#9670;&#160;</a></span>get_field_by_id()</h2>
 
@@ -269,11 +307,11 @@ Public Member Functions</h2></td></tr>
 <p>Get a pointer to a field given its id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>id from the <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a> </td></tr>
+    <tr><td class="paramname">id</td><td>id from the <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to a <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html">FieldID</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to a <a class="el" href="classshuriken_1_1parser_1_1dex_1_1FieldID.html" title="Class that represents a Field in Dalvik, Fields are variables that belong to an object....">FieldID</a> </dd></dl>
 
 </div>
 </div>
@@ -284,7 +322,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a99d26fa1f95b290a99d590588d46b972">it_field_ids</a> shuriken::parser::dex::DexFields::get_fields </td>
+          <td class="memname"><a class="el" href="#ad96fd47dce2db4465f1a9fddb5f2674a">it_field_ids</a> shuriken::parser::dex::DexFields::get_fields </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -304,7 +342,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa6f13f29ffb91941cb2bf7fee834c1b2">it_const_field_ids</a> shuriken::parser::dex::DexFields::get_fields_const </td>
+          <td class="memname"><a class="el" href="#ac9ebf0fa1fe899cfc26443deafb3471c">it_const_field_ids</a> shuriken::parser::dex::DexFields::get_fields_const </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>

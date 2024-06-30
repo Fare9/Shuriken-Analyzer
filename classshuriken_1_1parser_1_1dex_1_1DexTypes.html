@@ -98,6 +98,7 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexTypes.html',''); 
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classshuriken_1_1parser_1_1dex_1_1DexTypes-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">shuriken::parser::dex::DexTypes Class Reference</div></div>
@@ -106,6 +107,12 @@ $(function(){initNavTree('classshuriken_1_1parser_1_1dex_1_1DexTypes.html',''); 
 
 <p><code>#include &lt;<a class="el" href="dex__types_8h_source.html">dex_types.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a5c8ee9a2c1703671544ab7e5c2e6995c" id="r_a5c8ee9a2c1703671544ab7e5c2e6995c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c8ee9a2c1703671544ab7e5c2e6995c">dvmtypes_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a>&gt;&gt;</td></tr>
+<tr class="memdesc:a5c8ee9a2c1703671544ab7e5c2e6995c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Safe reference to the DVMTypes.  <br /></td></tr>
+<tr class="separator:a5c8ee9a2c1703671544ab7e5c2e6995c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f5f6b98b55e1425480b86c8affbc016" id="r_a1f5f6b98b55e1425480b86c8affbc016"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f5f6b98b55e1425480b86c8affbc016">DexTypes</a> ()=default</td></tr>
@@ -117,6 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a49075de5e1baa4b591e5415ca86e46a6" id="r_a49075de5e1baa4b591e5415ca86e46a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49075de5e1baa4b591e5415ca86e46a6">parse_types</a> (<a class="el" href="classshuriken_1_1common_1_1ShurikenStream.html">common::ShurikenStream</a> &amp;shurikenStream, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexStrings.html">DexStrings</a> &amp;strings_, std::uint32_t offset_types, std::uint32_t n_of_types)</td></tr>
 <tr class="memdesc:a49075de5e1baa4b591e5415ca86e46a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse all the <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DexTypes.html">DexTypes</a> from the DVM.  <br /></td></tr>
 <tr class="separator:a49075de5e1baa4b591e5415ca86e46a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf6c3dee69c3142dd34412e52116f99" id="r_a7cf6c3dee69c3142dd34412e52116f99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a5c8ee9a2c1703671544ab7e5c2e6995c">dvmtypes_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cf6c3dee69c3142dd34412e52116f99">get_dvm_types</a> ()</td></tr>
+<tr class="separator:a7cf6c3dee69c3142dd34412e52116f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a7ddc03d6c8eb69e62036104fb47efa" id="r_a7a7ddc03d6c8eb69e62036104fb47efa"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a7ddc03d6c8eb69e62036104fb47efa">get_type_by_id_const</a> (std::uint32_t id) const</td></tr>
 <tr class="memdesc:a7a7ddc03d6c8eb69e62036104fb47efa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a constant pointer to a <a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a> by id.  <br /></td></tr>
 <tr class="separator:a7a7ddc03d6c8eb69e62036104fb47efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,8 +144,27 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__types_8h_source.html#l00194">194</a> of file <a class="el" href="dex__types_8h_source.html">dex_types.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="dex__types_8h_source.html#l00195">195</a> of file <a class="el" href="dex__types_8h_source.html">dex_types.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a5c8ee9a2c1703671544ab7e5c2e6995c" name="a5c8ee9a2c1703671544ab7e5c2e6995c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8ee9a2c1703671544ab7e5c2e6995c">&#9670;&#160;</a></span>dvmtypes_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a5c8ee9a2c1703671544ab7e5c2e6995c">shuriken::parser::dex::DexTypes::dvmtypes_s_t</a> = std::vector&lt;std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1parser_1_1dex_1_1DVMType.html">DVMType</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Safe reference to the DVMTypes. </p>
+
+<p class="definition">Definition at line <a class="el" href="dex__types_8h_source.html#l00198">198</a> of file <a class="el" href="dex__types_8h_source.html">dex_types.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1f5f6b98b55e1425480b86c8affbc016" name="a1f5f6b98b55e1425480b86c8affbc016"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f5f6b98b55e1425480b86c8affbc016">&#9670;&#160;</a></span>DexTypes()</h2>
 
@@ -192,6 +220,24 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7cf6c3dee69c3142dd34412e52116f99" name="a7cf6c3dee69c3142dd34412e52116f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cf6c3dee69c3142dd34412e52116f99">&#9670;&#160;</a></span>get_dvm_types()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5c8ee9a2c1703671544ab7e5c2e6995c">dvmtypes_s_t</a> &amp; shuriken::parser::dex::DexTypes::get_dvm_types </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A vector with reference to the dvm types </dd></dl>
+
+</div>
+</div>
 <a id="a90a3daa7373cb6fdd4e06ee0288e36cc" name="a90a3daa7373cb6fdd4e06ee0288e36cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a90a3daa7373cb6fdd4e06ee0288e36cc">&#9670;&#160;</a></span>get_id_by_type()</h2>
 
