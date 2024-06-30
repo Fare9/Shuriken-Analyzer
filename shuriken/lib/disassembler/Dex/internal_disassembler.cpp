@@ -548,13 +548,13 @@ std::vector<exception_data_t> Disassembler::determine_exception(parser::dex::Enc
 
     // add the encoded catch handlers to the structure
     for (auto &encoded_catch_handler: code_item->get_encoded_catch_handlers()) {
-        auto it = h_off.find(encoded_catch_handler->get_offset());
+        auto it = h_off.find(encoded_catch_handler.get_offset());
 
         if (it == h_off.end())
             continue;
 
         for (auto &v: it->second)
-            v.second = encoded_catch_handler.get();
+            v.second = &encoded_catch_handler;
     }
 
     // now create the exceptions structure

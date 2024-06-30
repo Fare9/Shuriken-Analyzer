@@ -292,14 +292,14 @@ DVMBasicBlock *BasicBlocks::get_basic_block_by_idx(std::uint64_t idx) {
 std::string BasicBlocks::toString() {
     if (basic_blocks_string.empty()) {
         std::stringstream ss;
-        for (DVMBasicBlock* dvmBasicBlock : nodes_) {
+        for (DVMBasicBlock *dvmBasicBlock: nodes_) {
             ss << dvmBasicBlock->toString();
             ss << "Predecessors: ";
-            for (DVMBasicBlock * pred : predecessors_[dvmBasicBlock]) {
+            for (DVMBasicBlock *pred: predecessors_[dvmBasicBlock]) {
                 ss << pred->get_name() << " ";
             }
             ss << "\nSuccessors: ";
-            for (DVMBasicBlock * succ : successors_[dvmBasicBlock]) {
+            for (DVMBasicBlock *succ: successors_[dvmBasicBlock]) {
                 ss << succ->get_name() << " ";
             }
             ss << "\n\n";

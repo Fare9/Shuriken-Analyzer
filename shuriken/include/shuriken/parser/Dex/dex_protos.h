@@ -35,6 +35,7 @@
 #ifndef SHURIKEN_ANALYZER_PROTOS_H
 #define SHURIKEN_ANALYZER_PROTOS_H
 
+#include "shuriken/common/deref_iterator_range.h"
 #include "shuriken/common/iterator_range.h"
 #include "shuriken/common/shurikenstream.h"
 #include "shuriken/parser/Dex/dex_types.h"
@@ -42,116 +43,119 @@
 #include <string_view>
 #include <vector>
 
-namespace shuriken {
-    namespace parser {
-        namespace dex {
-            class ProtoID {
-            public:
-                using parameters_type_t = std::vector<DVMType *>;
-                using it_params = iterator_range<parameters_type_t::iterator>;
-                using it_const_params = iterator_range<const parameters_type_t::iterator>;
+namespace shuriken::parser::dex {
+    class ProtoID {
+    public:
+        using parameters_type_t = std::vector<DVMType *>;
+        using it_params = iterator_range<parameters_type_t::iterator>;
+        using it_const_params = iterator_range<const parameters_type_t::iterator>;
 
-            private:
-                /// @brief String with proto as a string
-                std::string_view shorty_idx;
-                /// @brief Return type by the prototype
-                DVMType *return_type = nullptr;
-                /// @brief Vector with all the parameter types
-                parameters_type_t parameters;
-                /// @brief string representation of the parameters + return type
-                /// e.g. (II)I
-                std::string prototypes_dalvik_representation;
-                /// @brief Parse the parameters from the stream
-                /// each parameter will contain one type id
-                /// @param stream stream where to read the information
-                /// @param types where to extract the information
-                /// @param parameters_off offset where to read the parameters
-                void parse_parameters(
-                        common::ShurikenStream &stream,
-                        DexTypes &types,
-                        std::uint32_t parameters_off);
+    private:
+        /// @brief String with proto as a string
+        std::string_view shorty_idx;
+        /// @brief Return type by the prototype
+        DVMType *return_type = nullptr;
+        /// @brief Vector with all the parameter types
+        parameters_type_t parameters;
+        /// @brief string representation of the parameters + return type
+        /// e.g. (II)I
+        std::string prototypes_dalvik_representation;
+        /// @brief Parse the parameters from the stream
+        /// each parameter will contain one type id
+        /// @param stream stream where to read the information
+        /// @param types where to extract the information
+        /// @param parameters_off offset where to read the parameters
+        void parse_parameters(
+                common::ShurikenStream &stream,
+                DexTypes &types,
+                std::uint32_t parameters_off);
 
-            public:
-                ProtoID(
-                        common::ShurikenStream &stream,
-                        DexTypes &types,
-                        std::string_view shorty_idx,
-                        std::uint32_t return_type_idx,
-                        std::uint32_t parameters_off);
-                /// @brief Get the shorty_idx with a string version of the prototype
-                /// @return string view of shorty idx
-                std::string_view get_shorty_idx() const;
+    public:
+        ProtoID(
+                common::ShurikenStream &stream,
+                DexTypes &types,
+                std::string_view shorty_idx,
+                std::uint32_t return_type_idx,
+                std::uint32_t parameters_off);
+        /// @brief Get the shorty_idx with a string version of the prototype
+        /// @return string view of shorty idx
+        std::string_view get_shorty_idx() const;
 
-                /// @brief Get a constant reference to the return type
-                /// @return constant reference to return type
-                const DVMType *get_return_type() const;
+        /// @brief Get a constant reference to the return type
+        /// @return constant reference to return type
+        const DVMType *get_return_type() const;
 
-                /// @brief Get a dalvik representation of the prototype
-                /// @return dalvik representation of prototype
-                std::string_view get_dalvik_prototype();
+        /// @brief Get a dalvik representation of the prototype
+        /// @return dalvik representation of prototype
+        std::string_view get_dalvik_prototype();
 
-                /// @brief Get a reference to the return type
-                /// @return reference to return type
-                DVMType *get_return_type();
+        /// @brief Get a reference to the return type
+        /// @return reference to return type
+        DVMType *get_return_type();
 
-                it_params get_parameters();
+        /// @return iterator to the vector of parameters
+        it_params get_parameters();
 
-                it_const_params get_parameters_const();
-            };
+        /// @return constant iterator to the vector of parameters
+        it_const_params get_parameters_const();
+    };
 
-            inline bool operator==(const ProtoID &lhs, const ProtoID &rhs) {
-                if (lhs.get_shorty_idx() == rhs.get_shorty_idx())
-                    return true;
-                return false;
-            }
+    inline bool operator==(const ProtoID &lhs, const ProtoID &rhs) {
+        if (lhs.get_shorty_idx() == rhs.get_shorty_idx())
+            return true;
+        return false;
+    }
 
-            inline bool operator!=(const ProtoID &lhs, const ProtoID &rhs) {
-                return !(lhs == rhs);
-            }
+    inline bool operator!=(const ProtoID &lhs, const ProtoID &rhs) {
+        return !(lhs == rhs);
+    }
 
-            class DexProtos {
-            public:
-                using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
-                using it_protos = iterator_range<protos_id_t::iterator>;
-                using it_const_protos = iterator_range<const protos_id_t::iterator>;
+    class DexProtos {
+    public:
+        using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
+        using protos_id_s_t = std::vector<std::reference_wrapper<ProtoID>>;
+        using it_protos = deref_iterator_range<protos_id_s_t>;
+        using it_const_protos = deref_iterator_range<const protos_id_s_t>;
 
-            private:
-                /// @brief Prototypes that are part of the DEX file
-                protos_id_t protos;
+    private:
+        /// @brief Prototypes that are part of the DEX file
+        protos_id_t protos;
+        /// @brief A cache version of reference wrappers of previous type
+        protos_id_s_t protos_cache_s;
 
-            public:
-                /// @brief Constructor of DexProtos, default constructor
-                DexProtos() = default;
+    public:
+        /// @brief Constructor of DexProtos, default constructor
+        DexProtos() = default;
 
-                /// @brief Destructor of DexProtos, default destructor
-                ~DexProtos() = default;
+        /// @brief Destructor of DexProtos, default destructor
+        ~DexProtos() = default;
 
-                /// @brief Parse all the ProtoIDs from the file
-                /// @param stream stream with dex file
-                /// @param number_of_protos number of protos to read
-                /// @param offset offset where to read the protos
-                /// @param strings object with all the strings from the dex
-                /// @param types object with all the types from the dex
-                void parse_protos(common::ShurikenStream &stream,
-                                  std::uint32_t number_of_protos,
-                                  std::uint32_t offset,
-                                  DexStrings &strings,
-                                  DexTypes &types);
+        /// @brief Parse all the ProtoIDs from the file
+        /// @param stream stream with dex file
+        /// @param number_of_protos number of protos to read
+        /// @param offset offset where to read the protos
+        /// @param strings object with all the strings from the dex
+        /// @param types object with all the types from the dex
+        void parse_protos(common::ShurikenStream &stream,
+                          std::uint32_t number_of_protos,
+                          std::uint32_t offset,
+                          DexStrings &strings,
+                          DexTypes &types);
 
-                it_protos get_protos();
+        protos_id_s_t &get_all_protos();
 
-                it_const_protos get_protos_const();
+        it_protos get_protos();
 
-                ProtoID *get_proto_by_id(std::uint32_t id);
+        it_const_protos get_protos_const();
 
-                std::int64_t get_id_by_proto(ProtoID *proto);
+        ProtoID *get_proto_by_id(std::uint32_t id);
 
-                size_t get_number_of_protos() const;
+        std::int64_t get_id_by_proto(ProtoID *proto);
 
-                void to_xml(std::ofstream &xml_file);
-            };
-        }// namespace dex
-    }    // namespace parser
-}// namespace shuriken
+        size_t get_number_of_protos() const;
+
+        void to_xml(std::ofstream &xml_file);
+    };
+}// namespace shuriken::parser::dex
 
 #endif//SHURIKEN_ANALYZER_PROTOS_H

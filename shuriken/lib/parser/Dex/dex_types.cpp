@@ -89,6 +89,15 @@ void DexTypes::to_xml(std::ofstream &fos) {
     fos << "</DexTypes>\n";
 }
 
+DexTypes::dvmtypes_s_t &DexTypes::get_dvm_types() {
+    if (ordered_types_cache_s.empty() || ordered_types.size() != ordered_types_cache_s.size()) {
+        ordered_types_cache_s.clear();
+        for (const auto &entry: ordered_types)
+            ordered_types_cache_s.push_back(std::ref(*entry));
+    }
+    return ordered_types_cache_s;
+}
+
 const DVMType *DexTypes::get_type_by_id_const(std::uint32_t id) const {
     if (id >= ordered_types.size()) {
         throw std::runtime_error("Error id for type provided is incorrect");

@@ -31,9 +31,17 @@ DisassembledMethod *DexDisassembler::get_disassembled_method(std::string_view me
     return disassembled_methods[method].get();
 }
 
-std::unordered_map<std::string_view,
-                   std::unique_ptr<DisassembledMethod>> &
+DexDisassembler::disassembled_methods_s_t &
 DexDisassembler::get_disassembled_methods() {
+    if (disassembled_methods_s.empty() || disassembled_methods_s.size() != disassembled_methods.size()) {
+        for (const auto &entry: disassembled_methods)
+            disassembled_methods_s.insert({entry.first, std::cref(*entry.second)});
+    }
+    return disassembled_methods_s;
+}
+
+DexDisassembler::disassembled_methods_t &
+DexDisassembler::get_disassembled_methods_ownership() {
     return disassembled_methods;
 }
 
@@ -45,14 +53,14 @@ void DexDisassembler::disassembly_dex() {
     auto &classes = parser->get_classes();
 
     for (auto &class_def: classes.get_classdefs()) {
-        auto &class_data_item = class_def->get_class_data_item();
+        auto &class_data_item = class_def.get_class_data_item();
         /// first disassemble the direct methods
         for (auto &method: class_data_item.get_direct_methods()) {
-            disassemble_encoded_method(method.get());
+            disassemble_encoded_method(&method);
         }
         /// now the virtual methods
         for (auto &method: class_data_item.get_virtual_methods()) {
-            disassemble_encoded_method(method.get());
+            disassemble_encoded_method(&method);
         }
     }
 

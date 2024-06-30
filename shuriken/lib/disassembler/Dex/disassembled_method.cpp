@@ -49,10 +49,10 @@ it_exceptions_data DisassembledMethod::get_exceptions() {
 }
 
 it_instructions DisassembledMethod::get_instructions() {
-    return make_range(instructions.begin(), instructions.end());
+    return make_range(instructions_raw.begin(), instructions_raw.end());
 }
 
-const std::vector<Instruction *> &DisassembledMethod::get_instructions_container() {
+const instructions_raw_t &DisassembledMethod::get_instructions_container() {
     return instructions_raw;
 }
 

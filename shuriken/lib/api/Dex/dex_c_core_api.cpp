@@ -87,8 +87,8 @@ namespace {
                 (hdvminstruction_t *) malloc(method_core_api->n_of_instructions * (sizeof(hdvminstruction_t)));
 
         i = 0;
-        for (const auto &instruction: disassembled_method->get_instructions()) {
-            fill_dex_instruction(instruction.get(), &method_core_api->instructions[i++]);
+        for (auto instruction: disassembled_method->get_instructions()) {
+            fill_dex_instruction(instruction, &method_core_api->instructions[i++]);
         }
 
         // initialize the exception information
@@ -178,18 +178,19 @@ namespace {
 
         auto &classes = parser->get_classes();
 
-        for (auto &class_def: classes.get_classdefs()) {
-            auto class_idx = class_def->get_class_idx();
-            auto super_class = class_def->get_superclass();
-            auto &class_data_item = class_def->get_class_data_item();
+        for (auto &ref_class_def: classes.get_classdefs_vector()) {
+            auto &class_def = ref_class_def.get();
+            auto class_idx = class_def.get_class_idx();
+            auto super_class = class_def.get_superclass();
+            auto &class_data_item = class_def.get_class_data_item();
             auto new_class = &opaque_struct->classes[i++];
 
             new_class->class_name = class_idx->get_class_name().data();
             if (super_class)
                 new_class->super_class = super_class->get_class_name().data();
-            if (!class_def->get_source_file().empty())
-                new_class->source_file = class_def->get_source_file().data();
-            new_class->access_flags = class_def->get_access_flags();
+            if (!class_def.get_source_file().empty())
+                new_class->source_file = class_def.get_source_file().data();
+            new_class->access_flags = class_def.get_access_flags();
             new_class->direct_methods_size = class_data_item.get_number_of_direct_methods();
             new_class->virtual_methods_size = class_data_item.get_number_of_virtual_methods();
             new_class->instance_fields_size = class_data_item.get_number_of_instance_fields();

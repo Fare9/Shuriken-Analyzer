@@ -81,12 +81,23 @@ void DexFields::parse_fields(
     stream.seekg(current_offset, std::ios_base::beg);
 }
 
+DexFields::field_ids_s_t &DexFields::get_all_fields() {
+    if (fields_s.empty() || fields.size() != fields_s.size()) {
+        fields_s.clear();
+        for (const auto &entry: fields)
+            fields_s.push_back(std::ref(*entry));
+    }
+    return fields_s;
+}
+
 DexFields::it_field_ids DexFields::get_fields() {
-    return make_range(fields.begin(), fields.end());
+    auto &aux = get_all_fields();
+    return deref_iterator_range(aux);
 }
 
 DexFields::it_const_field_ids DexFields::get_fields_const() {
-    return make_range(fields.begin(), fields.end());
+    const auto &aux = get_all_fields();
+    return deref_iterator_range(aux);
 }
 
 FieldID *DexFields::get_field_by_id(std::uint32_t id) {

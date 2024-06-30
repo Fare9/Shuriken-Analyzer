@@ -62,7 +62,6 @@ void DexStrings::to_xml(std::ofstream &fos) {
     fos << "</DexStrings>\n";
 }
 
-
 void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
     auto current_offset = fos.tellp();
 
@@ -76,7 +75,6 @@ void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
     fos.seekp(current_offset);
 }
 
-
 std::string_view DexStrings::get_string_by_id(std::uint32_t str_id) const {
     if (str_id >= dex_strings_view.size())
         throw std::runtime_error("Error id of string out of bound");
@@ -87,7 +85,6 @@ size_t DexStrings::get_number_of_strings() const {
     return dex_strings_view.size();
 }
 
-
 std::int64_t DexStrings::get_id_by_string(std::string_view str) const {
     auto it = std::ranges::find(dex_strings_view, str);
 
@@ -95,6 +92,10 @@ std::int64_t DexStrings::get_id_by_string(std::string_view str) const {
         return -1;
 
     return std::distance(dex_strings_view.begin(), it);
+}
+
+const std::vector<std::string_view> DexStrings::get_strings() const {
+    return dex_strings_view;
 }
 
 std::uint32_t DexStrings::add_string(std::string str) {

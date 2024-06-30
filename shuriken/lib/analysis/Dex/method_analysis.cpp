@@ -89,8 +89,8 @@ std::string MethodAnalysis::toString() {
 }
 
 shuriken::disassembler::dex::Instruction *MethodAnalysis::get_instruction_by_addr(std::uint64_t addr) {
-    for (auto &instr: disassembled->get_instructions()) {
-        if (instr->get_address() == addr) return instr.get();
+    for (auto instr: disassembled->get_instructions()) {
+        if (instr->get_address() == addr) return instr;
     }
     return nullptr;
 }
@@ -170,13 +170,13 @@ void MethodAnalysis::create_basic_blocks() {
 
     log->debug("Started creating basic blocks from method {}", get_full_name());
 
-    for (const auto &instruction: disassembled->get_instructions()) {
+    for (auto instruction: disassembled->get_instructions()) {
         auto operation = shuriken::disassembler::dex::InstructionUtils::get_operation_type_from_opcode(
                 static_cast<shuriken::disassembler::dex::DexOpcodes::opcodes>(instruction->get_instruction_opcode()));
 
         if (operation == shuriken::disassembler::dex::DexOpcodes::CONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::UNCONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::MULTI_BRANCH_DVM_OPCODE) {
             auto idx = instruction->get_address();
-            auto ins = instruction.get();
+            auto ins = instruction;
 
             auto v = internal_disassembler.determine_next(ins, idx);
             target_jumps[idx] = std::move(v);
@@ -197,9 +197,9 @@ void MethodAnalysis::create_basic_blocks() {
     std::int64_t start = 0, end = 0;
     DVMBasicBlock *current = nullptr, *prev = nullptr;
 
-    for (const auto &instruction: disassembled->get_instructions()) {
+    for (auto instruction: disassembled->get_instructions()) {
         auto idx = instruction->get_address();
-        auto ins = instruction.get();
+        auto ins = instruction;
 
         if (entry_points.find(idx) != entry_points.end()) {
             prev = current;

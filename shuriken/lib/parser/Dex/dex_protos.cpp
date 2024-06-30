@@ -88,10 +88,6 @@ it_const_params ProtoID::get_parameters_const() {
 
 
 // -- DexProtos
-using protos_id_t = std::vector<std::unique_ptr<ProtoID>>;
-using it_protos = shuriken::iterator_range<protos_id_t::iterator>;
-using it_const_protos = shuriken::iterator_range<const protos_id_t::iterator>;
-
 void DexProtos::parse_protos(common::ShurikenStream &stream,
                              std::uint32_t number_of_protos,
                              std::uint32_t offset,
@@ -150,13 +146,24 @@ void DexProtos::to_xml(std::ofstream &xml_file) {
     xml_file << "</protos>\n";
 }
 
+DexProtos::protos_id_s_t &DexProtos::get_all_protos() {
+    if (protos_cache_s.empty() || protos.size() != protos_cache_s.size()) {
+        protos_cache_s.clear();
+        for (const auto &entry: protos)
+            protos_cache_s.push_back(std::ref(*entry));
+    }
 
-it_protos DexProtos::get_protos() {
-    return make_range(protos.begin(), protos.end());
+    return protos_cache_s;
 }
 
-it_const_protos DexProtos::get_protos_const() {
-    return make_range(protos.begin(), protos.end());
+DexProtos::it_protos DexProtos::get_protos() {
+    auto &aux = get_all_protos();
+    return deref_iterator_range(aux);
+}
+
+DexProtos::it_const_protos DexProtos::get_protos_const() {
+    const auto &aux = get_all_protos();
+    return deref_iterator_range(aux);
 }
 
 ProtoID *DexProtos::get_proto_by_id(std::uint32_t id) {
