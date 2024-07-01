@@ -298,6 +298,105 @@ SHURIKENCOREAPI void disassemble_dex(hDexContext context);
 /// @param method_name LclassName;->methodName(parameters)RetType
 /// @return pointer to a disassembled method
 SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const char *method_name);
+
+///--------------------------- Analysis API ---------------------------
+typedef struct hdvmclassanalysis_t_ hdvmclassanalysis_t;
+
+typedef struct hdvmmethodanalysis_t_ hdvmmethodanalysis_t;
+
+typedef struct hdvmfieldanalysis_t_ hdvmfieldanalysis_t;
+
+/// @brief Xref that contains class, method and instruction address
+typedef struct hdvm_class_method_idx_t_ {
+    /// @brief class of the xref
+    hdvmclassanalysis_t * cls;
+    /// @brief method of the xref
+    hdvmmethodanalysis_t * method;
+    /// @brief idx
+    int64_t idx;
+} hdvm_class_method_idx_t;
+
+/// @brief Xref that contains class, field and instruction address
+typedef struct hdvm_class_field_idx_t_ {
+    /// @brief class of the xref
+    hdvmclassanalysis_t * cls;
+    /// @brief field of the xref
+    hdvmfieldanalysis_t * field;
+    /// @brief idx
+    int64_t idx;
+} hdvm_class_field_idx_t;
+
+/// @brief Xref that contains class and instruction address
+typedef struct hdvm_class_idx_t_ {
+    /// @brief class of the xref
+    hdvmclassanalysis_t * cls;
+    /// @brief idx
+    int64_t idx;
+};
+
+/// @brief Structure that stores information of a basic block
+typedef struct hdvmbasicblock_t_ {
+    /// @brief Number of instructions in the block
+    size_t n_of_instructions;
+    /// @brief Pointer to the instructions in the block
+    hdvminstruction_t *instructions;
+    /// @brief Is it a try block?
+    char try_block;
+    /// @brief Is it a catch block
+    char catch_block;
+    /// @brief String value of the handler type
+    const char *handler_type;
+    /// @brief Name of the basic block
+    const char *name;
+    /// @brief Whole representation of a basic block in string format
+    const char *block_string;
+} hdvmbasicblock_t;
+
+/// @brief Structure to keep all the basic blocks
+typedef struct basic_blocks_t_ {
+    /// @brief Number of basic blocks
+    size_t n_of_blocks;
+    /// @brief pointer to an array of basic blocks
+    hdvmbasicblock_t * blocks;
+} basic_blocks_t;
+
+/// @brief FieldAnalysis structure
+typedef struct hdvmfieldanalysis_t_ {
+    /// @brief Full name of the FieldAnalysis
+    const char *name;
+    /// @brief Number of xrefread
+    size_t n_of_xrefread;
+    /// @brief xrefread
+    hdvm_class_method_idx_t * xrefread;
+    /// @brief Number of xrefwrite
+    size_t n_of_xrefwrite;
+    /// @brief xrefwrite
+    hdvm_class_method_idx_t * xrefwrite;
+} hdvmfieldanalysis_t;
+
+typedef struct hdvmstringanalysis_t_ {
+    /// @brief value of that string
+    const char *value;
+    /// @brief number of xreffrom
+    size_t n_of_xreffrom;
+    /// @brief xreffrom
+    hdvm_class_method_idx_t * xreffrom;
+} hdvmstringanalysis_t;
+
+typedef struct hdvmmethodanalysis_t_ {
+    /// @brief name of the method
+    const char *name;
+    /// @brief descriptor of the method
+    const char *description;
+    /// @brief access flags
+    access_flags_e access_flags;
+    /// @brief class name
+    const char *class_name;
+    /// @brief basic blocks
+    basic_blocks_t basic_blocks;
+    /// @brief 
+} hdvmmethodanalysis_t;
+
 };
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H
