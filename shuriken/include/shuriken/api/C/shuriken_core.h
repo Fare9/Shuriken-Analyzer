@@ -316,6 +316,12 @@ typedef struct hdvm_class_method_idx_t_ {
     int64_t idx;
 } hdvm_class_method_idx_t;
 
+/// @brief xref that contains a method and instruction address
+typedef struct hdvm_method_idx_t_ {
+    hdvmmethodanalysis_t * method;
+    int64_t idx;
+} hdvm_method_idx_t;
+
 /// @brief Xref that contains class, field and instruction address
 typedef struct hdvm_class_field_idx_t_ {
     /// @brief class of the xref
@@ -332,7 +338,7 @@ typedef struct hdvm_class_idx_t_ {
     hdvmclassanalysis_t * cls;
     /// @brief idx
     int64_t idx;
-};
+} hdvm_class_idx_t;
 
 /// @brief Structure that stores information of a basic block
 typedef struct hdvmbasicblock_t_ {
@@ -387,15 +393,83 @@ typedef struct hdvmmethodanalysis_t_ {
     /// @brief name of the method
     const char *name;
     /// @brief descriptor of the method
-    const char *description;
+    const char *descriptor;
     /// @brief access flags
     access_flags_e access_flags;
     /// @brief class name
     const char *class_name;
     /// @brief basic blocks
-    basic_blocks_t basic_blocks;
-    /// @brief 
+    basic_blocks_t * basic_blocks;
+    /// @brief number of field read in method
+    size_t n_of_xrefread;
+    /// @brief xrefs of field read
+    hdvm_class_field_idx_t * xrefread;
+    /// @brief number of field write
+    size_t n_of_xrefwrite;
+    /// @brief xrefs of field write
+    hdvm_class_field_idx_t * xrefwrite;
+    /// @brief number of xrefto
+    size_t n_of_xrefto;
+    /// @brief methods called from the current method
+    hdvm_class_method_idx_t * xrefto;
+    /// @brief number of xreffrom
+    size_t n_of_xreffrom;
+    /// @brief methods that call the current method
+    hdvm_class_method_idx_t * xreffrom;
+    /// @brief Number of xrefnewinstance
+    size_t n_of_xrefnewinstance;
+    /// @brief new instance of the method
+    hdvm_class_idx_t * xrefnewinstance;
+    /// @brief Number of xrefconstclass
+    size_t n_of_xrefconstclass;
+    /// @brief use of const class
+    hdvm_class_idx_t * xrefconstclass;
+    /// @brief cache of method string
+    const char * method_string;
 } hdvmmethodanalysis_t;
+
+typedef struct hdvmclassanalysis_t_ {
+    /// @brief is external class?
+    char is_external;
+    /// @brief Name of the class it extends
+    const char * extends_;
+    /// @brief name of the class
+    const char * name_;
+    /// @brief number of methods
+    size_t n_of_methods;
+    /// @brief pointer to an array of methods
+    hdvmmethodanalysis_t ** methods;
+    /// @brief number of fields
+    size_t n_of_fields;
+    /// @brief pointer to an array of fields
+    hdvmfieldanalysis_t ** fields;
+
+    /// @brief number of xrefnewinstance
+    size_t n_of_xrefnewinstance;
+    /// @brief New instance of this class
+    hdvm_method_idx_t * xrefnewinstance;
+    /// @brief number of const class
+    size_t n_of_xrefconstclass;
+    /// @brief use of const class of this class
+    hdvm_method_idx_t * xrefconstclass;
+} hdvmclassanalysis_t;
+
+/// @brief Create a DEX analysis object inside of context, for obtaining the analysis
+/// user must also call `analyze_classes`.
+/// @param context context from the CORE API
+/// @param create_xrefs boolean to generate or not xrefs (analysis takes longer)
+SHURIKENCOREAPI void create_dex_analysis(hDexContext context, char create_xrefs);
+
+/// @brief Analyze the classes, add fields and methods into the classes, optionally
+/// create the xrefs.
+/// @param context context from the CORE API
+SHURIKENCOREAPI void analyze_classes(hDexContext context);
+
+/// @brief Obtain one hdvmclassanalysis_t given its name.
+/// @param context context from the CORE API
+/// @param class_name name of the class to retrieve
+SHURIKENCOREAPI hdvmclassanalysis_t * get_analyzed_class(hDexContext context, char * class_name);
+
 
 };
 

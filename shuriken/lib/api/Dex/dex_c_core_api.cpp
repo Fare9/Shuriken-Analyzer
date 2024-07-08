@@ -6,12 +6,15 @@
 // @brief Implements the necessary functions for the DEX part of
 // the core api to work
 
+#include "shuriken/analysis/Dex/analysis.h"
 #include "shuriken/api/C/shuriken_core.h"
 #include "shuriken/disassembler/Dex/dex_disassembler.h"
 #include "shuriken/disassembler/Dex/disassembled_method.h"
 #include "shuriken/parser/shuriken_parsers.h"
 
 #include <unordered_map>
+
+using namespace shuriken::analysis::dex;
 
 namespace {
 
@@ -33,6 +36,17 @@ namespace {
         shuriken::disassembler::dex::DexDisassembler *disassembler;
         /// @brief Lazy disassembled methods
         std::unordered_map<std::string_view, dvmdisassembled_method_t *> disassembled_methods;
+
+        /// @brief DEX analysis from shuriken
+        Analysis *analysis;
+        /// @brief to check if create the xrefs or not
+        bool created_xrefs;
+        /// @brief all the class analysis by name
+        std::unordered_map<std::string_view, hdvmclassanalysis_t *> class_analyses;
+        /// @brief all the method analysis by name
+        std::unordered_map<std::string_view, hdvmmethodanalysis_t *> method_analyses;
+        /// @brief all the field analysis by name
+        std::unordered_map<std::string_view, hdvmfieldanalysis_t *> field_analyses;
     } dex_opaque_struct_t;
 
     /// @brief Add the data to an instruction from the core API, from an instruction from shuriken library
@@ -98,21 +112,6 @@ namespace {
         i = 0;
         for (auto &exception_data: disassembled_method->get_exceptions()) {
             fill_dex_exception_information(&exception_data, &method_core_api->exception_information[i++]);
-        }
-    }
-
-    /// @brief Correctly free the memory from a disassembled method
-    /// @param method_core_api method to destroy
-    void destroy_disassembled_method(dvmdisassembled_method_t *method_core_api) {
-        if (method_core_api->n_of_instructions > 0 && method_core_api->instructions != nullptr)
-            free(method_core_api->instructions);
-        if (method_core_api->n_of_exceptions > 0 && method_core_api->exception_information != nullptr) {
-            if (method_core_api->exception_information->n_of_handlers > 0 && method_core_api->exception_information->handler != nullptr) {
-                free(method_core_api->exception_information->handler);
-                method_core_api->exception_information->handler = nullptr;
-            }
-            free(method_core_api->exception_information);
-            method_core_api->exception_information = nullptr;
         }
     }
 
@@ -217,6 +216,183 @@ namespace {
         }
     }
 
+    /// @brief Function to create a disassembled method, this is an internal
+    /// function
+    dvmdisassembled_method_t *return_or_create_disassembled_method_internal(dex_opaque_struct_t *opaque_struct, std::string_view method_name) {
+        // if it was previously created
+        if (opaque_struct->disassembled_methods.contains(method_name)) return opaque_struct->disassembled_methods.at(method_name);
+        auto disassembled_method = opaque_struct->disassembler->get_disassembled_method(method_name);
+        auto *method = (dvmdisassembled_method_t *) malloc(sizeof(dvmdisassembled_method_t));
+        fill_dex_disassembled_method(opaque_struct, disassembled_method, method);
+        // add it to the cache
+        opaque_struct->disassembled_methods[disassembled_method->get_method_id()->dalvik_name_format()] = method;
+        return method;
+    }
+
+    /// @brief Create a basic blocks structure given a method, this structure contains all the nodes from the CFG.
+    /// for the moment, there are no connections between them
+    /// @param opaque_struct opaque structure that contains all the information
+    /// @param methodAnalysis method to obtain all the nodes
+    /// @return structure which contains all the nodes from the CFG
+    basic_blocks_t *create_basic_blocks(dex_opaque_struct_t *opaque_struct, MethodAnalysis *methodAnalysis) {
+        basic_blocks_t *bbs = (basic_blocks_t *) malloc(sizeof(basic_blocks_t));
+
+        // get the number of blocks
+        bbs->n_of_blocks = methodAnalysis->get_basic_blocks().get_number_of_basic_blocks();
+        // allocate memory for the blocks
+        bbs->blocks = (hdvmbasicblock_t *) malloc(bbs->n_of_blocks * sizeof(hdvmbasicblock_t));
+        // get the disassembled instructions of the method to
+        auto instructions_structure =
+                return_or_create_disassembled_method_internal(opaque_struct, methodAnalysis->get_full_name());
+        // now create all the data in the blocks
+        int i = 0;
+        auto nodes = methodAnalysis->get_basic_blocks().nodes();
+        for (auto node: nodes) {
+            bbs->blocks[i].name = node->get_name().data();
+            bbs->blocks[i].try_block = node->is_try_block() ? 1 : 0;
+            bbs->blocks[i].catch_block = node->is_catch_block() ? 1 : 0;
+            if (node->is_catch_block())
+                bbs->blocks[i].handler_type = node->get_handler_type()->get_raw_type().data();
+            bbs->blocks[i].block_string = node->toString().c_str();
+            // For the instructions we will use the disassembled instructions from the disassembler
+            bbs->blocks[i].n_of_instructions = node->get_instructions().size();
+            std::uint64_t first_instr_addr = node->get_first_address();
+            int j = 0;
+            for (j = 0; j < instructions_structure->n_of_instructions; j++) {
+                if (instructions_structure->instructions[j].address == first_instr_addr) {
+                    bbs->blocks[i].instructions = &instructions_structure->instructions[j];
+                    break;
+                }
+            }
+            if (bbs->blocks[i].instructions == nullptr)
+                throw std::runtime_error{"Error, instructions not found in the disassembler."};
+        }
+
+        return bbs;
+    }
+
+    // definitions
+    hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
+                                            FieldAnalysis *fieldAnalysis);
+    hdvmmethodanalysis_t *get_method_analysis(dex_opaque_struct_t *opaque_struct,
+                                              MethodAnalysis *methodAnalysis);
+    hdvmclassanalysis_t *get_class_analysis(dex_opaque_struct_t *opaque_struct,
+                                            ClassAnalysis *classAnalysis);
+
+    /// @brief get or create a hdvmfieldanalysis_t structure given a FieldAnalysis object
+    hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
+                                            FieldAnalysis *fieldAnalysis) {
+        auto full_name = fieldAnalysis->get_encoded_field()->get_field()->pretty_field();
+        if (opaque_struct->field_analyses.contains(full_name))
+            return opaque_struct->field_analyses[full_name];
+        hdvmfieldanalysis_t *f_struct = new hdvmfieldanalysis_t{};
+        f_struct->name = fieldAnalysis->get_name().data();
+        if (opaque_struct->created_xrefs) {
+            size_t i = 0;
+
+            // Create the xrefread
+            auto xrefread = fieldAnalysis->get_xrefread();
+            f_struct->n_of_xrefread = std::distance(xrefread.begin(), xrefread.end());
+            f_struct->xrefread = (hdvm_class_method_idx_t *) malloc(f_struct->n_of_xrefread *
+                                                                    sizeof(hdvm_class_method_idx_t));
+            for (auto &xref: xrefread) {
+                f_struct->xrefread[i].cls = get_class_analysis(opaque_struct,
+                                                               std::get<ClassAnalysis *>(xref));
+                f_struct->xrefread[i].method = get_method_analysis(opaque_struct,
+                                                                   std::get<MethodAnalysis *>(xref));
+                f_struct->xrefread[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+
+            // Create the xrefwrite
+            auto xrefwrite = fieldAnalysis->get_xrefwrite();
+            f_struct->n_of_xrefwrite = std::distance(xrefread.begin(), xrefread.end());
+            f_struct->xrefwrite = (hdvm_class_method_idx_t *) malloc(f_struct->n_of_xrefwrite *
+                                                                     sizeof(hdvm_class_method_idx_t));
+            i = 0;
+            for (auto &xref: xrefwrite) {
+                f_struct->xrefwrite[i].cls = get_class_analysis(opaque_struct,
+                                                                std::get<ClassAnalysis *>(xref));
+                f_struct->xrefwrite[i].method = get_method_analysis(opaque_struct,
+                                                                    std::get<MethodAnalysis *>(xref));
+                f_struct->xrefwrite[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+        }
+        opaque_struct->field_analyses.insert({full_name, f_struct});
+        return f_struct;
+    }
+
+    hdvmmethodanalysis_t *get_method_analysis(dex_opaque_struct_t *opaque_struct,
+                                              MethodAnalysis *methodAnalysis) {
+        auto full_name = methodAnalysis->get_full_name();
+        if (opaque_struct->method_analyses.contains(full_name))
+            return opaque_struct->method_analyses[full_name];
+        hdvmmethodanalysis_t *method = new hdvmmethodanalysis_t{};
+        method->name = methodAnalysis->get_name().data();
+        method->descriptor = methodAnalysis->get_descriptor().data();
+        method->access_flags = static_cast<access_flags_e>(methodAnalysis->get_access_flags());
+        method->class_name = methodAnalysis->get_class_name().data();
+        method->basic_blocks = create_basic_blocks(opaque_struct, methodAnalysis);
+        if (opaque_struct->created_xrefs) {
+            // ToDo create xrefs
+        }
+        opaque_struct->method_analyses.insert({full_name, method});
+        return method;
+    }
+
+    hdvmclassanalysis_t *get_class_analysis(dex_opaque_struct_t *opaque_struct,
+                                            ClassAnalysis *classAnalysis) {
+        auto full_name = classAnalysis->name();
+        if (opaque_struct->class_analyses.contains(full_name))
+            return opaque_struct->class_analyses[full_name];
+        hdvmclassanalysis_t *cls = new hdvmclassanalysis_t{};
+
+        cls->is_external = classAnalysis->is_class_external() ? 1 : 0;
+        if (!classAnalysis->extends().empty())
+            cls->extends_ = classAnalysis->extends().data();
+        cls->name_ = classAnalysis->name().data();
+        // create the methods
+        cls->n_of_methods = classAnalysis->get_nb_methods();
+        cls->methods = (hdvmmethodanalysis_t **) malloc(
+                cls->n_of_methods * sizeof(hdvmmethodanalysis_t *));
+        auto methods = classAnalysis->get_methods();
+        int i = 0;
+        for (auto &method: methods) {
+            cls->methods[i++] = get_method_analysis(opaque_struct, method.second);
+        }
+        // create the fields
+        cls->n_of_fields = classAnalysis->get_nb_fields();
+        cls->fields = (hdvmfieldanalysis_t **) malloc(
+                cls->n_of_fields * sizeof(hdvmfieldanalysis_t *));
+        auto fields = classAnalysis->get_fields();
+        i = 0;
+        for (auto &fld: fields) {
+            cls->fields[i++] = get_field_analysis(opaque_struct,
+                                                  fld.second.get());
+        }
+        if (opaque_struct->created_xrefs) {
+            // ToDo create xrefs
+        }
+        opaque_struct->class_analyses.insert({full_name, cls});
+        return cls;
+    }
+
+    /// @brief Correctly free the memory from a disassembled method
+    /// @param method_core_api method to destroy
+    void destroy_disassembled_method(dvmdisassembled_method_t *method_core_api) {
+        if (method_core_api->n_of_instructions > 0 && method_core_api->instructions != nullptr)
+            free(method_core_api->instructions);
+        if (method_core_api->n_of_exceptions > 0 && method_core_api->exception_information != nullptr) {
+            if (method_core_api->exception_information->n_of_handlers > 0 && method_core_api->exception_information->handler != nullptr) {
+                free(method_core_api->exception_information->handler);
+                method_core_api->exception_information->handler = nullptr;
+            }
+            free(method_core_api->exception_information);
+            method_core_api->exception_information = nullptr;
+        }
+    }
+
     /// @brief Correctly free the memory from a hdvmclass_t
     /// @param class_ class to release its memory
     void destroy_class_data(hdvmclass_t *class_) {
@@ -261,9 +437,15 @@ namespace {
             delete dex_opaque_struct->disassembler;
             dex_opaque_struct->disassembler = nullptr;
         }
-    }
 
+        if (dex_opaque_struct->analysis) {
+            delete dex_opaque_struct->analysis;
+            dex_opaque_struct->analysis = nullptr;
+        }
+    }
 }// namespace
+
+///--------------------------- Parser API ---------------------------
 
 hDexContext parse_dex(const char *filePath) {
     auto *opaque_struct = new dex_opaque_struct_t();
@@ -333,6 +515,8 @@ hdvmmethod_t *get_method_by_name(hDexContext context, const char *method_name) {
     return opaque_struct->methods.at(m_name);
 }
 
+///--------------------------- Disassembler API ---------------------------
+
 void disassemble_dex(hDexContext context) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
@@ -344,14 +528,31 @@ dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const cha
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != TAG || opaque_struct->disassembler == nullptr) return nullptr;
     auto m_name = std::string_view{method_name};
-    // if it was previously created
-    if (opaque_struct->disassembled_methods.contains(m_name)) return opaque_struct->disassembled_methods.at(m_name);
     // if not create it
-    auto disassembled_method = opaque_struct->disassembler->get_disassembled_method(m_name);
-    auto *method = (dvmdisassembled_method_t *) malloc(sizeof(dvmdisassembled_method_t));
-    fill_dex_disassembled_method(opaque_struct, disassembled_method, method);
-    // add it to the cache
-    opaque_struct->disassembled_methods[disassembled_method->get_method_id()->dalvik_name_format()] = method;
+    auto *method = return_or_create_disassembled_method_internal(opaque_struct, m_name);
     /// return it
     return method;
+}
+
+///--------------------------- Analysis API ---------------------------
+void create_dex_analysis(hDexContext context, char create_xrefs) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
+    opaque_struct->created_xrefs = create_xrefs == 0 ? false : true;
+    opaque_struct->analysis = new Analysis(opaque_struct->parser, opaque_struct->disassembler, opaque_struct->created_xrefs);
+}
+
+void analyze_classes(hDexContext context) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
+    if (opaque_struct->analysis == nullptr) throw std::runtime_error{"Error, analysis object cannot be null"};
+    opaque_struct->analysis->create_xrefs();
+}
+
+hdvmclassanalysis_t * get_analyzed_class(hDexContext context, char * class_name) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
+    auto cls = opaque_struct->analysis->get_class_analysis(class_name);
+    if (cls == nullptr) throw std::runtime_error{"Error, given class does not exists"};
+    return ::get_class_analysis(opaque_struct, cls);
 }
