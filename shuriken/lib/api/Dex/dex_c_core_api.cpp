@@ -378,6 +378,39 @@ namespace {
         return cls;
     }
 
+    void destroy_field_analysis(dex_opaque_struct_t *dex_opaque_struct) {
+        for (auto &name_field_analysis: dex_opaque_struct->field_analyses) {
+            auto field_analysis = name_field_analysis.second;
+            free(field_analysis->xrefread);
+            free(field_analysis->xrefwrite);
+            delete field_analysis;
+            field_analysis = nullptr;
+        }
+        dex_opaque_struct->field_analyses.clear();
+    }
+
+    void destroy_method_analysis(dex_opaque_struct_t *dex_opaque_struct) {
+        for (auto &name_method_analysis: dex_opaque_struct->method_analyses) {
+            auto method_analysis = name_method_analysis.second;
+            // ToDo delete the xrefs (not created yet)
+            delete method_analysis;
+            method_analysis = nullptr;
+        }
+        dex_opaque_struct->method_analyses.clear();
+    }
+
+    void destroy_class_analysis(dex_opaque_struct_t *dex_opaque_struct) {
+        for (auto &name_class_analysis: dex_opaque_struct->class_analyses) {
+            auto class_analysis = name_class_analysis.second;
+            free(class_analysis->methods);
+            free(class_analysis->fields);
+            // ToDo delete xrefs
+            delete class_analysis;
+            class_analysis = nullptr;
+        }
+        dex_opaque_struct->class_analyses.clear();
+    }
+
     /// @brief Correctly free the memory from a disassembled method
     /// @param method_core_api method to destroy
     void destroy_disassembled_method(dvmdisassembled_method_t *method_core_api) {
@@ -442,7 +475,12 @@ namespace {
             delete dex_opaque_struct->analysis;
             dex_opaque_struct->analysis = nullptr;
         }
+        // Destroy the analysis classes
+        destroy_class_analysis(dex_opaque_struct);
+        destroy_method_analysis(dex_opaque_struct);
+        destroy_field_analysis(dex_opaque_struct);
     }
+
 }// namespace
 
 ///--------------------------- Parser API ---------------------------
@@ -549,7 +587,7 @@ void analyze_classes(hDexContext context) {
     opaque_struct->analysis->create_xrefs();
 }
 
-hdvmclassanalysis_t * get_analyzed_class(hDexContext context, char * class_name) {
+hdvmclassanalysis_t *get_analyzed_class(hDexContext context, char *class_name) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     auto cls = opaque_struct->analysis->get_class_analysis(class_name);

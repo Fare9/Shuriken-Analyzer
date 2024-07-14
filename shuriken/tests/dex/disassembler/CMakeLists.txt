@@ -42,4 +42,23 @@ if(DEX AND DEX_TESTS)
 
     add_test(NAME test-code-with-switch
             COMMAND test-code-with-switch)
+
+    # Core Disassembler API
+    message(STATUS "Compiling test core-api-test-disassembler")
+    add_executable(core-api-test-disassembler
+            core-api-test-disassembler.cpp
+    )
+
+    target_include_directories(core-api-test-disassembler
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH}
+    )
+
+    # Add dependency on shuriken library
+    add_dependencies(core-api-test-disassembler shuriken)
+
+    target_link_libraries(core-api-test-disassembler shuriken)
+
+    add_test(NAME core-api-test-disassembler
+        COMMAND core-api-test-disassembler)
 endif()
