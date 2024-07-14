@@ -253,7 +253,7 @@ namespace {
             bbs->blocks[i].catch_block = node->is_catch_block() ? 1 : 0;
             if (node->is_catch_block())
                 bbs->blocks[i].handler_type = node->get_handler_type()->get_raw_type().data();
-            bbs->blocks[i].block_string = node->toString().c_str();
+            bbs->blocks[i].block_string = node->toString().data();
             // For the instructions we will use the disassembled instructions from the disassembler
             bbs->blocks[i].n_of_instructions = node->get_instructions().size();
             std::uint64_t first_instr_addr = node->get_first_address();
@@ -266,6 +266,7 @@ namespace {
             }
             if (bbs->blocks[i].instructions == nullptr)
                 throw std::runtime_error{"Error, instructions not found in the disassembler."};
+            i++;
         }
 
         return bbs;
@@ -286,6 +287,7 @@ namespace {
         if (opaque_struct->field_analyses.contains(full_name))
             return opaque_struct->field_analyses[full_name];
         hdvmfieldanalysis_t *f_struct = new hdvmfieldanalysis_t{};
+        opaque_struct->field_analyses.insert({full_name, f_struct});
         f_struct->name = fieldAnalysis->get_name().data();
         if (opaque_struct->created_xrefs) {
             size_t i = 0;
@@ -319,7 +321,6 @@ namespace {
                 i++;
             }
         }
-        opaque_struct->field_analyses.insert({full_name, f_struct});
         return f_struct;
     }
 
@@ -329,15 +330,16 @@ namespace {
         if (opaque_struct->method_analyses.contains(full_name))
             return opaque_struct->method_analyses[full_name];
         hdvmmethodanalysis_t *method = new hdvmmethodanalysis_t{};
+        opaque_struct->method_analyses.insert({full_name, method});
         method->name = methodAnalysis->get_name().data();
         method->descriptor = methodAnalysis->get_descriptor().data();
+        method->full_name = methodAnalysis->get_full_name().data();
         method->access_flags = static_cast<access_flags_e>(methodAnalysis->get_access_flags());
         method->class_name = methodAnalysis->get_class_name().data();
         method->basic_blocks = create_basic_blocks(opaque_struct, methodAnalysis);
         if (opaque_struct->created_xrefs) {
             // ToDo create xrefs
         }
-        opaque_struct->method_analyses.insert({full_name, method});
         return method;
     }
 
@@ -347,6 +349,7 @@ namespace {
         if (opaque_struct->class_analyses.contains(full_name))
             return opaque_struct->class_analyses[full_name];
         hdvmclassanalysis_t *cls = new hdvmclassanalysis_t{};
+        opaque_struct->class_analyses.insert({full_name, cls});
 
         cls->is_external = classAnalysis->is_class_external() ? 1 : 0;
         if (!classAnalysis->extends().empty())
@@ -374,7 +377,6 @@ namespace {
         if (opaque_struct->created_xrefs) {
             // ToDo create xrefs
         }
-        opaque_struct->class_analyses.insert({full_name, cls});
         return cls;
     }
 
@@ -587,10 +589,11 @@ void analyze_classes(hDexContext context) {
     opaque_struct->analysis->create_xrefs();
 }
 
-hdvmclassanalysis_t *get_analyzed_class(hDexContext context, char *class_name) {
+hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
-    auto cls = opaque_struct->analysis->get_class_analysis(class_name);
+    std::string dalvik_name = class_name;
+    auto cls = opaque_struct->analysis->get_class_analysis(dalvik_name);
     if (cls == nullptr) throw std::runtime_error{"Error, given class does not exists"};
     return ::get_class_analysis(opaque_struct, cls);
 }

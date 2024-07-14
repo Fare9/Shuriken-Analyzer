@@ -394,6 +394,8 @@ typedef struct hdvmmethodanalysis_t_ {
     const char *name;
     /// @brief descriptor of the method
     const char *descriptor;
+    /// @brief full name of the method including class name and descriptor
+    const char *full_name;
     /// @brief access flags
     access_flags_e access_flags;
     /// @brief class name
@@ -468,7 +470,7 @@ SHURIKENCOREAPI void analyze_classes(hDexContext context);
 /// @brief Obtain one hdvmclassanalysis_t given its name.
 /// @param context context from the CORE API
 /// @param class_name name of the class to retrieve
-SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, char *class_name);
+SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name);
 };
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H

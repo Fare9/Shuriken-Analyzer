@@ -76,7 +76,7 @@ void DVMBasicBlock::set_handler_type(shuriken::parser::dex::DVMType *handler) {
     this->handler_type = handler;
 }
 
-std::string DVMBasicBlock::toString() {
+std::string_view DVMBasicBlock::toString() {
     if (block_string.empty()) {
         std::stringstream ss;
         ss << get_name().data() << '\n';

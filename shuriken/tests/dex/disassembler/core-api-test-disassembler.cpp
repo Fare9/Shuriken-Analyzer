@@ -107,6 +107,8 @@ int main(int argc, char *argv[]) {
     hDexContext dexContext = parse_dex(file);
     disassemble_dex(dexContext);
     checkDisassembledMethod(dexContext);
+    destroy_dex(dexContext);
+    return 0;
 }
 
 void checkDisassembledMethod(hDexContext dexContext) {

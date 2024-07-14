@@ -125,7 +125,7 @@ namespace shuriken::analysis::dex {
         /// @param handler handler type
         void set_handler_type(parser::dex::DVMType *handler);
 
-        std::string toString();
+        std::string_view toString();
     };
 
     /// @brief Class to keep all the Dalvik Basic Blocks from a method
