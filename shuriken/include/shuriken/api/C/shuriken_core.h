@@ -396,6 +396,8 @@ typedef struct hdvmmethodanalysis_t_ {
     const char *descriptor;
     /// @brief full name of the method including class name and descriptor
     const char *full_name;
+    /// @brief flag indicating if the method is external or not
+    char external;
     /// @brief access flags
     access_flags_e access_flags;
     /// @brief class name

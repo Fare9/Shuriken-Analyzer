@@ -237,6 +237,12 @@ namespace {
     basic_blocks_t *create_basic_blocks(dex_opaque_struct_t *opaque_struct, MethodAnalysis *methodAnalysis) {
         basic_blocks_t *bbs = (basic_blocks_t *) malloc(sizeof(basic_blocks_t));
 
+        if (methodAnalysis->external()) {
+            bbs->n_of_blocks = 0;
+            bbs->blocks = nullptr;
+            return bbs;
+        }
+
         // get the number of blocks
         bbs->n_of_blocks = methodAnalysis->get_basic_blocks().get_number_of_basic_blocks();
         // allocate memory for the blocks
@@ -332,13 +338,77 @@ namespace {
         hdvmmethodanalysis_t *method = new hdvmmethodanalysis_t{};
         opaque_struct->method_analyses.insert({full_name, method});
         method->name = methodAnalysis->get_name().data();
+        method->external = methodAnalysis->external() ? 1 : 0;
         method->descriptor = methodAnalysis->get_descriptor().data();
         method->full_name = methodAnalysis->get_full_name().data();
         method->access_flags = static_cast<access_flags_e>(methodAnalysis->get_access_flags());
         method->class_name = methodAnalysis->get_class_name().data();
         method->basic_blocks = create_basic_blocks(opaque_struct, methodAnalysis);
         if (opaque_struct->created_xrefs) {
-            // ToDo create xrefs
+            //------------------------------------ xrefread
+            auto xrefreads = methodAnalysis->get_xrefread();
+            method->n_of_xrefread = std::distance(xrefreads.begin(), xrefreads.end());
+            method->xrefread = (hdvm_class_field_idx_t *) malloc (sizeof(hdvm_class_field_idx_t) * method->n_of_xrefread);
+            int i = 0;
+            for (auto & xref : xrefreads) {
+                method->xrefread[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xrefread[i].field = get_field_analysis(opaque_struct, std::get<FieldAnalysis*>(xref));
+                method->xrefread[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+            //------------------------------------ xrefwrite
+            auto xrefwrites = methodAnalysis->get_xrefwrite();
+            method->n_of_xrefwrite = std::distance(xrefwrites.begin(), xrefwrites.end());
+            method->xrefwrite = (hdvm_class_field_idx_t *) malloc (sizeof(hdvm_class_field_idx_t) * method->n_of_xrefwrite);
+            i = 0;
+            for (auto & xref : xrefwrites) {
+                method->xrefwrite[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xrefwrite[i].field = get_field_analysis(opaque_struct, std::get<FieldAnalysis*>(xref));
+                method->xrefwrite[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+            //------------------------------------ xrefto
+            auto xrefto = methodAnalysis->get_xrefto();
+            method->n_of_xrefto = std::distance(xrefto.begin(), xrefto.end());
+            method->xrefto = (hdvm_class_method_idx_t*) malloc (sizeof(hdvm_class_method_idx_t) * method->n_of_xrefto);
+            i = 0;
+            for (auto & xref : xrefto) {
+                method->xrefto[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xrefto[i].method = get_method_analysis(opaque_struct, std::get<MethodAnalysis*>(xref));
+                method->xrefto[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+            //------------------------------------ xreffrom
+            auto xreffrom = methodAnalysis->get_xreffrom();
+            method->n_of_xreffrom = std::distance(xreffrom.begin(), xreffrom.end());
+            method->xreffrom = (hdvm_class_method_idx_t*) malloc (sizeof(hdvm_class_method_idx_t) * method->n_of_xreffrom);
+            i = 0;
+            for (auto & xref : xreffrom) {
+                method->xreffrom[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xreffrom[i].method = get_method_analysis(opaque_struct, std::get<MethodAnalysis*>(xref));
+                method->xreffrom[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+            //------------------------------------ xrefnewinstance
+            auto xrefnewinstance = methodAnalysis->get_xrefnewinstance();
+            method->n_of_xrefnewinstance = std::distance(xrefnewinstance.begin(), xrefnewinstance.end());
+            method->xrefnewinstance = (hdvm_class_idx_t *) malloc (sizeof(hdvm_class_idx_t) * method->n_of_xrefnewinstance);
+            i = 0;
+            for (auto & xref : xrefnewinstance) {
+                method->xrefnewinstance[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xrefnewinstance[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+            //------------------------------------ xrefconstclass
+            auto xrefconstclass = methodAnalysis->get_xrefconstclass();
+            method->n_of_xrefconstclass = std::distance(xrefconstclass.begin(), xrefconstclass.end());
+            method->xrefconstclass = (hdvm_class_idx_t *) malloc (sizeof(hdvm_class_idx_t) * method->n_of_xrefconstclass);
+            i = 0;
+            for (auto & xref : xrefconstclass) {
+                method->xrefconstclass[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                method->xrefconstclass[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
         }
         return method;
     }
@@ -383,8 +453,10 @@ namespace {
     void destroy_field_analysis(dex_opaque_struct_t *dex_opaque_struct) {
         for (auto &name_field_analysis: dex_opaque_struct->field_analyses) {
             auto field_analysis = name_field_analysis.second;
-            free(field_analysis->xrefread);
-            free(field_analysis->xrefwrite);
+            if (dex_opaque_struct->created_xrefs) {
+                free(field_analysis->xrefread);
+                free(field_analysis->xrefwrite);
+            }
             delete field_analysis;
             field_analysis = nullptr;
         }
@@ -395,6 +467,14 @@ namespace {
         for (auto &name_method_analysis: dex_opaque_struct->method_analyses) {
             auto method_analysis = name_method_analysis.second;
             // ToDo delete the xrefs (not created yet)
+            if (dex_opaque_struct->created_xrefs) {
+                free(method_analysis->xreffrom);
+                free(method_analysis->xrefto);
+                free(method_analysis->xrefwrite);
+                free(method_analysis->xrefread);
+                free(method_analysis->xrefconstclass);
+                free(method_analysis->xrefnewinstance);
+            }
             delete method_analysis;
             method_analysis = nullptr;
         }
