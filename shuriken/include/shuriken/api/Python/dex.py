@@ -235,6 +235,12 @@ class hdvm_class_field_idx_t(ctypes.Structure):
         ("idx", ctypes.c_int64)
     ]
 
+class hdvm_method_idx_t(ctypes.Structure):
+    _fields_ = [
+        ("method", ctypes.POINTER(hdvmmethodanalysis_t)),
+        ("idx", ctypes.c_int64)
+    ]
+
 # @brief Xref that contains class and instruction address
 class hdvm_class_idx_t(ctypes.Structure):
     _fields_ = [
@@ -292,3 +298,16 @@ hdvmmethodanalysis_t._fields_ = [
         ("method_string", ctypes.c_char_p),
     ]
 
+hdvmclassanalysis_t._fields_ = [
+        ("is_external", ctypes.c_char),
+        ("extends_", ctypes.c_char_p),
+        ("name_", ctypes.c_char_p),
+        ("n_of_methods", ctypes.c_size_t),
+        ("methods", ctypes.POINTER(ctypes.POINTER(hdvmmethodanalysis_t))),
+        ("n_of_fields", ctypes.c_size_t),
+        ("fields", ctypes.POINTER(ctypes.POINTER(hdvmfieldanalysis_t))),
+        ("n_of_xrefnewinstance", ctypes.c_size_t),
+        ("xrefnewinstance", ctypes.POINTER(hdvm_method_idx_t)),
+        ("n_of_xrefconstclass", ctypes.c_size_t),
+        ("xrefconstclass", ctypes.POINTER(hdvm_method_idx_t)),
+    ]
