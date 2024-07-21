@@ -345,6 +345,7 @@ namespace {
         method->full_name = methodAnalysis->get_full_name().data();
         method->access_flags = static_cast<access_flags_e>(methodAnalysis->get_access_flags());
         method->class_name = methodAnalysis->get_class_name().data();
+        method->method_string = methodAnalysis->toString().data();
         method->basic_blocks = create_basic_blocks(opaque_struct, methodAnalysis);
         if (opaque_struct->created_xrefs) {
             //------------------------------------ xrefread

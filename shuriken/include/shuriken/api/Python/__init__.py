@@ -304,6 +304,7 @@ if __name__ == "__main__":
             class_: hdvmclass_t = dex.get_class_by_id(j)
             class_name = class_.class_name.decode()
             class_analysis: hdvmclassanalysis_t = dex.get_analyzed_class(class_name)
+            print("Class Analysis Information")
             print(f"Class analyzed name: {class_analysis.name_.decode()}")
             print(f"Number of methods: {class_analysis.n_of_methods}")
             if class_analysis.extends_:
@@ -313,3 +314,9 @@ if __name__ == "__main__":
                 print("False")
             else:
                 print("True")
+            for i in range(int(class_analysis.n_of_methods)):
+                print("Method Analysis Information")
+                method_analysis: hdvmmethodanalysis_t = class_analysis.methods[i].contents
+                print(f"Method name: {method_analysis.full_name.decode()}")
+                if method_analysis.method_string is not None:
+                    print(f"{method_analysis.method_string.decode()}")
