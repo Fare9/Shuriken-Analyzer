@@ -389,7 +389,7 @@ typedef struct hdvmstringanalysis_t_ {
     hdvm_class_method_idx_t *xreffrom;
 } hdvmstringanalysis_t;
 
-typedef struct hdvmmethodanalysis_t_ {
+typedef struct hdvmmethodanalysis_t_    {
     /// @brief name of the method
     const char *name;
     /// @brief descriptor of the method
@@ -447,7 +447,6 @@ typedef struct hdvmclassanalysis_t_ {
     size_t n_of_fields;
     /// @brief pointer to an array of fields
     hdvmfieldanalysis_t **fields;
-
     /// @brief number of xrefnewinstance
     size_t n_of_xrefnewinstance;
     /// @brief New instance of this class

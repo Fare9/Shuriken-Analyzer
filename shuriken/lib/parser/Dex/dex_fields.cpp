@@ -10,7 +10,7 @@
 
 using namespace shuriken::parser::dex;
 
-FieldID::FieldID(DVMType *class_, DVMType *type_, std::string_view name_) : class_(class_), type_(type_), name_(name_) {}
+FieldID::FieldID(DVMType *class_, DVMType *type_, std::string_view name_) : class_(class_), type_(type_), name_(name_), encoded_field(nullptr) {}
 
 const DVMType *FieldID::field_class() const {
     return class_;

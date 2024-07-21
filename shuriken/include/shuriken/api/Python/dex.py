@@ -168,6 +168,7 @@ class hdvmclass_t(ctypes.Structure):
         ('static_fields', ctypes.POINTER(hdvmfield_t))
     )
 
+# @brief Structure for an instruction in the dalvik virtual machine
 class hdvminstruction_t(ctypes.Structure):
     _fields_ = [
         ("instruction_type", dexinsttype_e),
@@ -177,12 +178,15 @@ class hdvminstruction_t(ctypes.Structure):
         ("disassembly", ctypes.c_char_p)
     ]
 
+# @brief Structure that keeps information about a handler
 class dvmhandler_data_t(ctypes.Structure):
     _fields_ = [
         ("handler_type", ctypes.c_char_p),
         ("handler_start_addr", ctypes.c_uint64)
     ]
 
+# @brief Structure with the information from the exceptions
+# in the code
 class dvmexceptions_data_t(ctypes.Structure):
     _fields_ = [
         ("try_value_start_addr", ctypes.c_uint64),
@@ -191,6 +195,8 @@ class dvmexceptions_data_t(ctypes.Structure):
         ("handler", ctypes.POINTER(dvmhandler_data_t))
     ]
 
+# @brief Structure that represents a disassembled method from
+# the dalvik file
 class dvmdisassembled_method_t(ctypes.Structure):
     _fields_ = [
         ("method_id", ctypes.POINTER(hdvmmethod_t)),
@@ -200,5 +206,89 @@ class dvmdisassembled_method_t(ctypes.Structure):
         ("n_of_instructions", ctypes.c_size_t),
         ("instructions", ctypes.POINTER(hdvminstruction_t)),
         ("method_string", ctypes.c_char_p)
+    ]
+
+# Forward declarations (empty classes to act as placeholders)
+# later we will declare the fields
+class hdvmclassanalysis_t(ctypes.Structure):
+    pass
+
+class hdvmmethodanalysis_t(ctypes.Structure):
+    pass
+
+class hdvmfieldanalysis_t(ctypes.Structure):
+    pass
+
+# @brief Xref that contains class, method and instruction address
+class hdvm_class_method_idx_t(ctypes.Structure):
+    _fields_ = [
+        ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
+        ("method", ctypes.POINTER(hdvmmethodanalysis_t)),
+        ("idx", ctypes.c_int64)
+    ]
+
+# @brief Xref that contains class, field and instruction address
+class hdvm_class_field_idx_t(ctypes.Structure):
+    _fields_ = [
+        ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
+        ("field", ctypes.POINTER(hdvmfieldanalysis_t)),
+        ("idx", ctypes.c_int64)
+    ]
+
+# @brief Xref that contains class and instruction address
+class hdvm_class_idx_t(ctypes.Structure):
+    _fields_ = [
+        ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
+        ("idx", ctypes.c_int64)
+    ]
+
+# @brief Structure that stores information of a basic block
+class hdvmbasicblock_t(ctypes.Structure):
+    _fields_ = [
+        ("n_of_instructions", ctypes.c_size_t),
+        ("instructions", ctypes.POINTER(hdvminstruction_t)),
+        ("try_block", ctypes.c_char),
+        ("catch_block", ctypes.c_char),
+        ("handler_type", ctypes.c_char_p),
+        ("name", ctypes.c_char_p),
+        ("block_string", ctypes.c_char_p),
+    ]
+
+class basic_blocks_t(ctypes.Structure):
+    _fields_ = [
+        ("n_of_blocks", ctypes.c_size_t),
+        ("block", ctypes.POINTER(hdvmbasicblock_t))
+    ]
+
+# @brief FieldAnalysis structure
+hdvmfieldanalysis_t._fields_ = [
+    ("name", ctypes.c_char_p),
+    ("n_of_xrefread", ctypes.c_size_t),
+    ("xrefread", ctypes.POINTER(hdvm_class_method_idx_t)),
+    ("n_of_xrefwrite", ctypes.c_size_t),
+    ("xrefwrite", ctypes.POINTER(hdvm_class_method_idx_t)),
+]
+
+hdvmmethodanalysis_t._fields_ = [
+        ("name", ctypes.c_char_p),
+        ("descriptor", ctypes.c_char_p),
+        ("full_name", ctypes.c_char_p),
+        ("external", ctypes.c_char),
+        ("access_flags", accessflags_e),
+        ("class_name", ctypes.c_char_p),
+        ("basic_blocks", ctypes.POINTER(basic_blocks_t)),
+        ("n_of_xrefread", ctypes.c_size_t),
+        ("xrefread", ctypes.POINTER(hdvm_class_field_idx_t)),
+        ("n_of_xrefwrite", ctypes.c_size_t),
+        ("xrefwrite", ctypes.POINTER(hdvm_class_field_idx_t)),
+        ("n_of_xrefto", ctypes.c_size_t),
+        ("xrefto", ctypes.POINTER(hdvm_class_method_idx_t)),
+        ("n_of_xreffrom", ctypes.c_size_t),
+        ("xreffrom", ctypes.POINTER(hdvm_class_method_idx_t)),
+        ("n_of_xrefnewinstance", ctypes.c_size_t),
+        ("xrefnewinstance", ctypes.POINTER(hdvm_class_idx_t)),
+        ("n_of_xrefconstclass", ctypes.c_size_t),
+        ("xrefconstclass", ctypes.POINTER(hdvm_class_idx_t)),
+        ("method_string", ctypes.c_char_p),
     ]
 
