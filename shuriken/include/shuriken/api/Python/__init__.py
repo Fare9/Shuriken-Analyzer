@@ -298,3 +298,18 @@ if __name__ == "__main__":
 
         dex.create_dex_analysis(1)
         dex.analyze_classes()
+
+        print("Analysis information:")
+        for j in range(int(dex.get_number_of_classes())):
+            class_: hdvmclass_t = dex.get_class_by_id(j)
+            class_name = class_.class_name.decode()
+            class_analysis: hdvmclassanalysis_t = dex.get_analyzed_class(class_name)
+            print(f"Class analyzed name: {class_analysis.name_.decode()}")
+            print(f"Number of methods: {class_analysis.n_of_methods}")
+            if class_analysis.extends_:
+                print(f"Extends a class: {class_analysis.extends_.decode()}")
+            print(f"Is external?: ", end="")
+            if class_analysis.is_external == 0:
+                print("False")
+            else:
+                print("True")

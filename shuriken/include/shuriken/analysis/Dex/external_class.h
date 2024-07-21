@@ -19,7 +19,7 @@ namespace shuriken::analysis::dex {
     class ExternalClass {
     private:
         /// @brief name of the external class
-        std::string_view name;
+        std::string name;
         /// @brief Vector with all the external methods from the current class
         std::vector<ExternalMethod *> methods;
         /// @brief Vector of EncodedFields created through FieldID

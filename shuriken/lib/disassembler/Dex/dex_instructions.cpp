@@ -161,36 +161,34 @@ namespace {
             DexOpcodes::opcodes::OP_REM_INT_LIT8,
     };
 
-    std::string get_kind_type_as_string(kind_type_t source_id, std::uint16_t iBBBB) {
-        std::string instruction_str = "";
+    std::string get_kind_type_as_string(const kind_type_t & source_id, std::uint16_t iBBBB) {
+        std::stringstream instruction_str;
 
         if (std::holds_alternative<std::monostate>(source_id)) {
-            instruction_str += " // UNKNOWN@" + std::to_string(iBBBB);
+            instruction_str << " // UNKNOWN@" << iBBBB;
         } else if (std::holds_alternative<shuriken::parser::dex::DVMType *>(source_id)) {
             auto type = std::get<shuriken::parser::dex::DVMType *>(source_id);
-            instruction_str += type->get_raw_type();
-            instruction_str += " // type@" + std::to_string(iBBBB);
+            instruction_str << type->get_raw_type();
+            instruction_str << " // type@" << iBBBB;
         } else if (std::holds_alternative<shuriken::parser::dex::FieldID *>(source_id)) {
             auto field = std::get<shuriken::parser::dex::FieldID *>(source_id);
-            instruction_str += field->pretty_field();
-            instruction_str += " // field@" + std::to_string(iBBBB);
+            instruction_str << field->pretty_field();
+            instruction_str << " // field@" << iBBBB;
         } else if (std::holds_alternative<shuriken::parser::dex::MethodID *>(source_id)) {
             auto method = std::get<shuriken::parser::dex::MethodID *>(source_id);
-            instruction_str += method->dalvik_name_format();
-            instruction_str += " // method@" + std::to_string(iBBBB);
+            instruction_str << method->dalvik_name_format();
+            instruction_str << " // method@" << iBBBB;
         } else if (std::holds_alternative<shuriken::parser::dex::ProtoID *>(source_id)) {
             auto proto = std::get<shuriken::parser::dex::ProtoID *>(source_id);
-            instruction_str += proto->get_shorty_idx();
-            instruction_str += " // proto@" + std::to_string(iBBBB);
+            instruction_str << proto->get_shorty_idx();
+            instruction_str << " // proto@" << iBBBB;
         } else if (std::holds_alternative<std::string_view>(source_id)) {
             auto str = std::get<std::string_view>(source_id);
-            instruction_str += "\"";
-            instruction_str += str;
-            instruction_str += "\"";
-            instruction_str += " // string@" + std::to_string(iBBBB);
+            instruction_str << "\"" << str << "\"";
+            instruction_str << " // string@" << iBBBB;
         }
 
-        return instruction_str;
+        return instruction_str.str();
     }
 };// namespace
 

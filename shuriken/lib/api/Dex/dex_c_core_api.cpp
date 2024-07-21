@@ -42,11 +42,11 @@ namespace {
         /// @brief to check if create the xrefs or not
         bool created_xrefs;
         /// @brief all the class analysis by name
-        std::unordered_map<std::string_view, hdvmclassanalysis_t *> class_analyses;
+        std::unordered_map<std::string, hdvmclassanalysis_t *> class_analyses;
         /// @brief all the method analysis by name
-        std::unordered_map<std::string_view, hdvmmethodanalysis_t *> method_analyses;
+        std::unordered_map<std::string, hdvmmethodanalysis_t *> method_analyses;
         /// @brief all the field analysis by name
-        std::unordered_map<std::string_view, hdvmfieldanalysis_t *> field_analyses;
+        std::unordered_map<std::string, hdvmfieldanalysis_t *> field_analyses;
     } dex_opaque_struct_t;
 
     /// @brief Add the data to an instruction from the core API, from an instruction from shuriken library
@@ -290,10 +290,11 @@ namespace {
     hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
                                             FieldAnalysis *fieldAnalysis) {
         auto full_name = fieldAnalysis->get_encoded_field()->get_field()->pretty_field();
-        if (opaque_struct->field_analyses.contains(full_name))
-            return opaque_struct->field_analyses[full_name];
+        auto full_name_str = std::string(full_name);
+        if (opaque_struct->field_analyses.contains(full_name_str))
+            return opaque_struct->field_analyses[full_name_str];
         hdvmfieldanalysis_t *f_struct = new hdvmfieldanalysis_t{};
-        opaque_struct->field_analyses.insert({full_name, f_struct});
+        opaque_struct->field_analyses.insert({full_name_str, f_struct});
         f_struct->name = fieldAnalysis->get_name().data();
         if (opaque_struct->created_xrefs) {
             size_t i = 0;
@@ -314,7 +315,7 @@ namespace {
 
             // Create the xrefwrite
             auto xrefwrite = fieldAnalysis->get_xrefwrite();
-            f_struct->n_of_xrefwrite = std::distance(xrefread.begin(), xrefread.end());
+            f_struct->n_of_xrefwrite = std::distance(xrefwrite.begin(), xrefwrite.end());
             f_struct->xrefwrite = (hdvm_class_method_idx_t *) malloc(f_struct->n_of_xrefwrite *
                                                                      sizeof(hdvm_class_method_idx_t));
             i = 0;
@@ -333,10 +334,11 @@ namespace {
     hdvmmethodanalysis_t *get_method_analysis(dex_opaque_struct_t *opaque_struct,
                                               MethodAnalysis *methodAnalysis) {
         auto full_name = methodAnalysis->get_full_name();
-        if (opaque_struct->method_analyses.contains(full_name))
-            return opaque_struct->method_analyses[full_name];
+        auto full_name_str = std::string(full_name);
+        if (opaque_struct->method_analyses.contains(full_name_str))
+            return opaque_struct->method_analyses[full_name_str];
         hdvmmethodanalysis_t *method = new hdvmmethodanalysis_t{};
-        opaque_struct->method_analyses.insert({full_name, method});
+        opaque_struct->method_analyses.insert({full_name_str, method});
         method->name = methodAnalysis->get_name().data();
         method->external = methodAnalysis->external() ? 1 : 0;
         method->descriptor = methodAnalysis->get_descriptor().data();
@@ -416,10 +418,11 @@ namespace {
     hdvmclassanalysis_t *get_class_analysis(dex_opaque_struct_t *opaque_struct,
                                             ClassAnalysis *classAnalysis) {
         auto full_name = classAnalysis->name();
-        if (opaque_struct->class_analyses.contains(full_name))
-            return opaque_struct->class_analyses[full_name];
+        auto full_name_str = std::string(full_name);
+        if (opaque_struct->class_analyses.contains(full_name_str))
+            return opaque_struct->class_analyses[full_name_str];
         hdvmclassanalysis_t *cls = new hdvmclassanalysis_t{};
-        opaque_struct->class_analyses.insert({full_name, cls});
+        opaque_struct->class_analyses.insert({full_name_str, cls});
 
         cls->is_external = classAnalysis->is_class_external() ? 1 : 0;
         if (!classAnalysis->extends().empty())
@@ -466,7 +469,14 @@ namespace {
     void destroy_method_analysis(dex_opaque_struct_t *dex_opaque_struct) {
         for (auto &name_method_analysis: dex_opaque_struct->method_analyses) {
             auto method_analysis = name_method_analysis.second;
-            // ToDo delete the xrefs (not created yet)
+            if (method_analysis->basic_blocks) {
+                if (method_analysis->basic_blocks->blocks) {
+                    free(method_analysis->basic_blocks->blocks);
+                    method_analysis->basic_blocks->blocks = nullptr;
+                }
+                free(method_analysis->basic_blocks);
+                method_analysis->basic_blocks = nullptr;
+            }
             if (dex_opaque_struct->created_xrefs) {
                 free(method_analysis->xreffrom);
                 free(method_analysis->xrefto);
@@ -486,7 +496,10 @@ namespace {
             auto class_analysis = name_class_analysis.second;
             free(class_analysis->methods);
             free(class_analysis->fields);
-            // ToDo delete xrefs
+            if (dex_opaque_struct->created_xrefs) {
+                // free(class_analysis->xrefnewinstance);
+                // free(class_analysis->xrefconstclass);
+            }
             delete class_analysis;
             class_analysis = nullptr;
         }
@@ -631,7 +644,7 @@ hdvmclass_t *get_class_by_name(hDexContext context, const char *class_name) {
 hdvmmethod_t *get_method_by_name(hDexContext context, const char *method_name) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     std::string_view m_name{method_name};
-    if (!opaque_struct || opaque_struct->tag != TAG || opaque_struct->methods.contains(m_name)) return nullptr;
+    if (!opaque_struct || opaque_struct->tag != TAG || !opaque_struct->methods.contains(m_name)) return nullptr;
     return opaque_struct->methods.at(m_name);
 }
 

@@ -13,10 +13,10 @@ using namespace shuriken::analysis::dex;
 
 std::string_view java_lang_object = "Ljava/lang/Object;";
 
-ClassAnalysis::ClassAnalysis(shuriken::parser::dex::ClassDef *class_def) : class_def(class_def), is_external(false) {
+ClassAnalysis::ClassAnalysis(shuriken::parser::dex::ClassDef *class_def) : class_def(class_def), is_external(false), name_("") {
 }
 
-ClassAnalysis::ClassAnalysis(ExternalClass *class_def) : class_def(class_def), is_external(true) {
+ClassAnalysis::ClassAnalysis(ExternalClass *class_def) : class_def(class_def), is_external(true), name_("") {
 }
 
 void ClassAnalysis::add_method(MethodAnalysis *method_analysis) {

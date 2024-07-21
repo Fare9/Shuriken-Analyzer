@@ -78,7 +78,7 @@ std::string_view MethodAnalysis::get_full_name() const {
                        : std::get<shuriken::parser::dex::EncodedMethod *>(method_encoded)->getMethodID()->dalvik_name_format();
 }
 
-std::string MethodAnalysis::toString() {
+std::string_view MethodAnalysis::toString() {
     if (method_string.empty()) {
         std::stringstream ss;
         ss << get_full_name() << '\n';
