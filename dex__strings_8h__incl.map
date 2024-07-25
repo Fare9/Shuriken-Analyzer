@@ -1,6 +1,6 @@
 <map id="shuriken/include/shuriken/parser/Dex/dex_strings.h" name="shuriken/include/shuriken/parser/Dex/dex_strings.h">
 <area shape="rect" id="Node000001" title=" " alt="" coords="385,5,554,46"/>
-<area shape="rect" id="Node000002" href="$shurikenstream_8h.html" title=" " alt="" coords="11,94,238,120"/>
+<area shape="rect" id="Node000002" href="$shurikenstream_8h.html" title=" " alt="" coords="10,94,238,120"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="386,49,193,93,192,87,384,44"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="262,94,336,120"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="428,49,340,90,338,85,426,44"/>
@@ -10,7 +10,7 @@
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="472,46,472,78,467,78,467,46"/>
 <area shape="rect" id="Node000009" title=" " alt="" coords="519,94,572,120"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="490,45,525,81,521,84,486,48"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="597,94,684,120"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="596,94,684,120"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="513,44,601,85,599,90,511,49"/>
 <area shape="rect" id="Node000011" title=" " alt="" coords="708,94,765,120"/>
 <area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="537,44,693,90,692,95,535,49"/>

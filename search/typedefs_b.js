@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['read_5finstructions_5fiterator_5ft_0',['read_instructions_iterator_t',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#a57e3194c29e379f49d4c64e3fecdc329',1,'shuriken::analysis::dex::DVMBasicBlock']]],
-  ['read_5finstructions_5freverse_5fiterator_5ft_1',['read_instructions_reverse_iterator_t',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#a3c8ee6a108b0d673ef80a7762eeba527',1,'shuriken::analysis::dex::DVMBasicBlock']]],
-  ['read_5finstructions_5ft_2',['read_instructions_t',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#ac023667857161df10e7a367fb9acf97e',1,'shuriken::analysis::dex::DVMBasicBlock']]],
-  ['reference_3',['reference',['../structshuriken_1_1deref__iterator__range_1_1iterator.html#a1c3ed8352db6fc64635d16f0a8a9a0c3',1,'shuriken::deref_iterator_range::iterator']]],
-  ['reverseedgesiterator_5ft_4',['reverseedgesiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a08521e92f326ec068d4a24a09669a632',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reversenodesetiterator_5ft_5',['reversenodesetiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3f8a5bdbe1d1e0653a1ee4b6ee6fb7ce',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reversenodesiterator_5ft_6',['reversenodesiterator_t',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac20176465122d1aeb43df968ade6e487',1,'shuriken::analysis::dex::BasicBlocks']]]
+  ['parameter_5fannotations_5fid_5ft_0',['parameter_annotations_id_t',['../classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem.html#a5792082aff54a93ec4b420c2a657463c',1,'shuriken::parser::dex::AnnotationDirectoryItem']]],
+  ['parameters_5ftype_5ft_1',['parameters_type_t',['../classshuriken_1_1parser_1_1dex_1_1ProtoID.html#a1d6c0369c7760f02f0f2f2d57bd60a41',1,'shuriken::parser::dex::ProtoID']]],
+  ['pointer_2',['pointer',['../structshuriken_1_1deref__iterator__range_1_1iterator.html#a389da9ac2c6c0f0206b223f56ede2cbe',1,'shuriken::deref_iterator_range::iterator']]],
+  ['protos_5fid_5fs_5ft_3',['protos_id_s_t',['../classshuriken_1_1parser_1_1dex_1_1DexProtos.html#ae8ce9123b685b39842f3f0ef7195ac3b',1,'shuriken::parser::dex::DexProtos']]],
+  ['protos_5fid_5ft_4',['protos_id_t',['../classshuriken_1_1parser_1_1dex_1_1DexProtos.html#a13894b20efe1b8361a218ece0ad5e2ea',1,'shuriken::parser::dex::DexProtos']]]
 ];

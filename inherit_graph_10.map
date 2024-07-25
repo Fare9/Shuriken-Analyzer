@@ -1,3 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html" title="Class to represent a basic block in a dalvik method, basic blocks contains instructions and some meta..." alt="" coords="5,5,154,46"/>
+<area shape="rect" id="Node000000" href="$structhdvmbasicblock__t__.html" title="Structure that stores information of a basic block." alt="" coords="5,5,139,31"/>
 </map>

@@ -26,13 +26,14 @@ var searchData=
   ['exceptions_23',['exceptions',['../namespaceexceptions.html',1,'']]],
   ['exceptions_5fdata_5ft_24',['exceptions_data_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#ae408a80d8ca50935f6a30d2642fd0b5b',1,'shuriken::disassembler::dex']]],
   ['extends_25',['extends',['../classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae9403292a83d3383bda280173b90889a',1,'shuriken::analysis::dex::ClassAnalysis']]],
-  ['external_26',['external',['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732',1,'shuriken::analysis::dex::MethodAnalysis']]],
-  ['external_5fclass_2eh_27',['external_class.h',['../external__class_8h.html',1,'']]],
-  ['external_5fclasses_5fs_5ft_28',['external_classes_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a1ca12a5b3081da6e5e53ae9b07be8b28',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fclasses_5ft_29',['external_classes_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a383c45f9ba220743aa09d08dff731d14',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethod_2eh_30',['external_method.h',['../external__method_8h.html',1,'']]],
-  ['external_5fmethods_5fs_5ft_31',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethods_5ft_32',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]],
-  ['externalclass_33',['ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html',1,'shuriken::analysis::dex::ExternalClass'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a640ee1289e02d834266c9a7f0b64eb40',1,'shuriken::analysis::dex::ExternalClass::ExternalClass()']]],
-  ['externalmethod_34',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html',1,'shuriken::analysis::dex::ExternalMethod'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod::ExternalMethod()']]]
+  ['extends_5f_26',['extends_',['../structhdvmclassanalysis__t__.html#a022f4d49355c173b70bc5353798d823b',1,'hdvmclassanalysis_t_']]],
+  ['external_27',['external',['../structhdvmmethodanalysis__t__.html#acf5d179529923d0825742a0b90ca8c30',1,'hdvmmethodanalysis_t_::external'],['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732',1,'shuriken::analysis::dex::MethodAnalysis::external()']]],
+  ['external_5fclass_2eh_28',['external_class.h',['../external__class_8h.html',1,'']]],
+  ['external_5fclasses_5fs_5ft_29',['external_classes_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a1ca12a5b3081da6e5e53ae9b07be8b28',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fclasses_5ft_30',['external_classes_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a383c45f9ba220743aa09d08dff731d14',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethod_2eh_31',['external_method.h',['../external__method_8h.html',1,'']]],
+  ['external_5fmethods_5fs_5ft_32',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethods_5ft_33',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]],
+  ['externalclass_34',['ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html',1,'shuriken::analysis::dex::ExternalClass'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a640ee1289e02d834266c9a7f0b64eb40',1,'shuriken::analysis::dex::ExternalClass::ExternalClass()']]],
+  ['externalmethod_35',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html',1,'shuriken::analysis::dex::ExternalMethod'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod::ExternalMethod()']]]
 ];

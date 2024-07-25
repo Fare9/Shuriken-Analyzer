@@ -24,6 +24,7 @@ var searchData=
   ['add_5fxrefto_21',['add_xrefto',['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#ad64c64d0d9c02be80855e0283e3ebd9b',1,'shuriken::analysis::dex::MethodAnalysis']]],
   ['add_5fxrefwrite_22',['add_xrefwrite',['../classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html#a421545dfa7dc4b073580d48f01bf7b0d',1,'shuriken::analysis::dex::FieldAnalysis::add_xrefwrite()'],['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a6c764ef46ad756b47907f5cae79effd0',1,'shuriken::analysis::dex::MethodAnalysis::add_xrefwrite()']]],
   ['analysis_23',['Analysis',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a8d35b866454e85694c01aacfe606a73b',1,'shuriken::analysis::dex::Analysis']]],
-  ['annotationdirectoryitem_24',['AnnotationDirectoryItem',['../classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem.html#ab4c27a44c8790915107818cfdfc8ebf1',1,'shuriken::parser::dex::AnnotationDirectoryItem']]],
-  ['annotationelement_25',['AnnotationElement',['../classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html#a6e1518b85e60b3c4acce4c4bff9f3ccc',1,'shuriken::parser::dex::AnnotationElement']]]
+  ['analyze_5fclasses_24',['analyze_classes',['../shuriken__core_8h.html#a50c8d4947ad14701f0dade31c6e7c92d',1,'shuriken_core.h']]],
+  ['annotationdirectoryitem_25',['AnnotationDirectoryItem',['../classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem.html#ab4c27a44c8790915107818cfdfc8ebf1',1,'shuriken::parser::dex::AnnotationDirectoryItem']]],
+  ['annotationelement_26',['AnnotationElement',['../classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html#a6e1518b85e60b3c4acce4c4bff9f3ccc',1,'shuriken::parser::dex::AnnotationElement']]]
 ];

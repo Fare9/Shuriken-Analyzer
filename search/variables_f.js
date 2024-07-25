@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['t_0',['t',['../structshuriken_1_1deref__iterator__range.html#a5febd4e5de70bf5a57b171838715c50a',1,'shuriken::deref_iterator_range']]],
-  ['tries_5fsize_1',['tries_size',['../structshuriken_1_1parser_1_1dex_1_1CodeItemStruct_1_1code__item__struct__t.html#aa0bf8f871be3cefb57ff0238862c9350',1,'shuriken::parser::dex::CodeItemStruct::code_item_struct_t']]],
-  ['try_5fvalue_5fend_5faddr_2',['try_value_end_addr',['../structdvmexceptions__data__t__.html#a3c24de181fb8372ba33ea28723ec5a23',1,'dvmexceptions_data_t_::try_value_end_addr'],['../structshuriken_1_1disassembler_1_1dex_1_1__exception__data.html#a69e1bd79a339c7edeac93f735308c3c1',1,'shuriken::disassembler::dex::_exception_data::try_value_end_addr']]],
-  ['try_5fvalue_5fstart_5faddr_3',['try_value_start_addr',['../structdvmexceptions__data__t__.html#a73bdf02a8974ebb7982e125e7a70a66f',1,'dvmexceptions_data_t_::try_value_start_addr'],['../structshuriken_1_1disassembler_1_1dex_1_1__exception__data.html#a687bb6d7bf31421e09ab693fb78db10e',1,'shuriken::disassembler::dex::_exception_data::try_value_start_addr']]],
-  ['type_4',['type',['../structhdvmfield__t__.html#ab603021687d51c31d3c93646fa01105e',1,'hdvmfield_t_::type'],['../structshuriken_1_1parser_1_1dex_1_1EncodedTypePair.html#ac779c711dc3a90cb5a7d5912ecdc5370',1,'shuriken::parser::dex::EncodedTypePair::type'],['../structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a03d6e2dd1e4006ab047c8e7c37fc890b',1,'shuriken::parser::dex::DexMapList::map_item::type']]],
-  ['type_5fids_5foff_5',['type_ids_off',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#aab8b0019de67ee1a8ff57d4fcd2305db',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
-  ['type_5fids_5fsize_6',['type_ids_size',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a8961b83d91dae0186eca785be47cd731',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
-  ['type_5fnames_7',['type_names',['../classshuriken_1_1parser_1_1dex_1_1DexMapList.html#a999857c75408511c9e22e8045733c868',1,'shuriken::parser::dex::DexMapList']]],
-  ['type_5fvalue_8',['type_value',['../structhdvmfield__t__.html#ab8e82648ca6bf703614ba0c661047ed5',1,'hdvmfield_t_']]]
+  ['signature_0',['signature',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#ae6d83f7a571cc29f5825324a8ba0469e',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
+  ['size_1',['size',['../structshuriken_1_1parser_1_1dex_1_1DexMapList_1_1map__item.html#a650af5940042116462a20537a45782f6',1,'shuriken::parser::dex::DexMapList::map_item']]],
+  ['source_5ffile_2',['source_file',['../structhdvmclass__t.html#a9f25f969778e7c3f0d89387a9c95e71d',1,'hdvmclass_t']]],
+  ['source_5ffile_5fidx_3',['source_file_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#afe15e542328abf4bdff33a11dbd5f1df',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
+  ['start_5faddr_4',['start_addr',['../structshuriken_1_1parser_1_1dex_1_1TryItem.html#a4a330d4fb5045fba220b3fc34a0e2a55',1,'shuriken::parser::dex::TryItem']]],
+  ['static_5ffields_5',['static_fields',['../structhdvmclass__t.html#ada31ff2d592f20f435e41387fddc8176',1,'hdvmclass_t']]],
+  ['static_5ffields_5fsize_6',['static_fields_size',['../structhdvmclass__t.html#a189943af8e85420de3762799889eb052',1,'hdvmclass_t']]],
+  ['static_5fvalues_5foff_7',['static_values_off',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#a347c02086de4de1e8fb013e9f50509f2',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
+  ['string_5fids_5foff_8',['string_ids_off',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a201a1a9c156c9cc8b23eafb8db57f91b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
+  ['string_5fids_5fsize_9',['string_ids_size',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
+  ['super_5fclass_10',['super_class',['../structhdvmclass__t.html#a08f3a328d31ab53ba65e47527ce2525f',1,'hdvmclass_t']]],
+  ['superclass_5fidx_11',['superclass_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#ab0a7913f949fc89c4c422d59e579720a',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]]
 ];

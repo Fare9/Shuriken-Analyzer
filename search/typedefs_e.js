@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../structshuriken_1_1deref__iterator__range_1_1iterator.html#ae4624d17f75445fd74be022801ff2fff',1,'shuriken::deref_iterator_range::iterator']]]
+  ['try_5fitems_5ft_0',['try_items_t',['../classshuriken_1_1parser_1_1dex_1_1CodeItemStruct.html#afb9d680464d6c239dd2af8bb0aeacd84',1,'shuriken::parser::dex::CodeItemStruct']]]
 ];

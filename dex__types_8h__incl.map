@@ -1,18 +1,18 @@
 <map id="shuriken/include/shuriken/parser/Dex/dex_types.h" name="shuriken/include/shuriken/parser/Dex/dex_types.h">
 <area shape="rect" id="Node000001" title=" " alt="" coords="516,5,684,46"/>
-<area shape="rect" id="Node000002" href="$shurikenstream_8h.html" title=" " alt="" coords="11,183,238,208"/>
+<area shape="rect" id="Node000002" href="$shurikenstream_8h.html" title=" " alt="" coords="10,183,238,208"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="516,47,430,68,340,97,242,138,161,178,158,173,239,133,338,91,429,63,515,42"/>
 <area shape="rect" id="Node000006" href="$dex__strings_8h.html" title=" " alt="" coords="401,94,538,135"/>
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="572,49,513,87,510,83,569,44"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="262,183,336,208"/>
 <area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="517,46,453,66,391,96,349,133,317,172,313,168,345,129,388,92,451,61,515,41"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="597,183,684,208"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="596,183,684,208"/>
 <area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="601,46,602,87,609,134,626,168,621,171,604,135,597,88,596,47"/>
 <area shape="rect" id="Node000012" title=" " alt="" coords="708,183,765,208"/>
 <area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="608,46,625,88,653,133,676,155,701,172,698,176,672,159,649,136,620,90,603,48"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="663,102,735,127"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="663,102,734,127"/>
 <area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="624,45,676,89,672,93,621,49"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="759,102,826,127"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="758,102,826,127"/>
 <area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="645,44,753,92,751,97,643,49"/>
 <area shape="rect" id="Node000015" title=" " alt="" coords="850,102,961,127"/>
 <area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="671,44,849,94,848,99,669,49"/>

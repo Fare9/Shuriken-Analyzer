@@ -113,11 +113,23 @@ var annotated_dup =
       [ "is_reference_wrapper< std::reference_wrapper< U > >", "structshuriken_1_1is__reference__wrapper_3_01std_1_1reference__wrapper_3_01U_01_4_01_4.html", null ],
       [ "iterator_range", "classshuriken_1_1iterator__range.html", "classshuriken_1_1iterator__range" ]
     ] ],
+    [ "basic_blocks_t_", "structbasic__blocks__t__.html", "structbasic__blocks__t__" ],
     [ "dvmdisassembled_method_t_", "structdvmdisassembled__method__t__.html", "structdvmdisassembled__method__t__" ],
     [ "dvmexceptions_data_t_", "structdvmexceptions__data__t__.html", "structdvmexceptions__data__t__" ],
     [ "dvmhandler_data_t_", "structdvmhandler__data__t__.html", "structdvmhandler__data__t__" ],
+    [ "hdvm_class_field_idx_t_", "structhdvm__class__field__idx__t__.html", "structhdvm__class__field__idx__t__" ],
+    [ "hdvm_class_idx_t_", "structhdvm__class__idx__t__.html", "structhdvm__class__idx__t__" ],
+    [ "hdvm_class_method_idx_t_", "structhdvm__class__method__idx__t__.html", "structhdvm__class__method__idx__t__" ],
+    [ "hdvm_classxref_t_", "structhdvm__classxref__t__.html", "structhdvm__classxref__t__" ],
+    [ "hdvm_method_idx_t_", "structhdvm__method__idx__t__.html", "structhdvm__method__idx__t__" ],
+    [ "hdvm_reftype_method_idx_t_", "structhdvm__reftype__method__idx__t__.html", "structhdvm__reftype__method__idx__t__" ],
+    [ "hdvmbasicblock_t_", "structhdvmbasicblock__t__.html", "structhdvmbasicblock__t__" ],
     [ "hdvmclass_t", "structhdvmclass__t.html", "structhdvmclass__t" ],
+    [ "hdvmclassanalysis_t_", "structhdvmclassanalysis__t__.html", "structhdvmclassanalysis__t__" ],
     [ "hdvmfield_t_", "structhdvmfield__t__.html", "structhdvmfield__t__" ],
+    [ "hdvmfieldanalysis_t_", "structhdvmfieldanalysis__t__.html", "structhdvmfieldanalysis__t__" ],
     [ "hdvminstruction_t_", "structhdvminstruction__t__.html", "structhdvminstruction__t__" ],
-    [ "hdvmmethod_t_", "structhdvmmethod__t__.html", "structhdvmmethod__t__" ]
+    [ "hdvmmethod_t_", "structhdvmmethod__t__.html", "structhdvmmethod__t__" ],
+    [ "hdvmmethodanalysis_t_", "structhdvmmethodanalysis__t__.html", "structhdvmmethodanalysis__t__" ],
+    [ "hdvmstringanalysis_t_", "structhdvmstringanalysis__t__.html", "structhdvmstringanalysis__t__" ]
 ];

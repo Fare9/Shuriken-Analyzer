@@ -155,7 +155,8 @@ var NAVTREEINDEX8 =
 "functions_v.html":[1,3,0,20],
 "functions_vars.html":[1,3,2],
 "functions_w.html":[1,3,0,21],
-"functions_~.html":[1,3,0,22],
+"functions_x.html":[1,3,0,22],
+"functions_~.html":[1,3,0,23],
 "globals.html":[2,1,0],
 "globals_defs.html":[2,1,5],
 "globals_enum.html":[2,1,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "namespaceshuriken_1_1dex_1_1TYPES.html#ab782217a115198b0c10620c020ad9922add80d832f6acd219b301ac47d7c99f4d":[0,0,1,2,0,3,9],
 "namespaceshuriken_1_1dex_1_1TYPES.html#ab782217a115198b0c10620c020ad9922ae32ea8c618a95ad40c374bd526b2880e":[0,0,1,2,0,3,8],
 "namespaceshuriken_1_1dex_1_1TYPES.html#ab782217a115198b0c10620c020ad9922aed0ed90bb7b9379788007a07d5fb0733":[0,0,1,2,0,3,7],
-"namespaceshuriken_1_1dex_1_1TYPES.html#ae3b5dca787a2792d0be4a274d049bd5c":[0,0,1,2,0,0],
-"namespaceshuriken_1_1dex_1_1TYPES.html#ae3b5dca787a2792d0be4a274d049bd5ca129ecbc4decb1b64bf79e0136bf59406":[0,0,1,2,0,0,18]
+"namespaceshuriken_1_1dex_1_1TYPES.html#ae3b5dca787a2792d0be4a274d049bd5c":[0,0,1,2,0,0]
 };
