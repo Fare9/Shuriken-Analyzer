@@ -161,7 +161,7 @@ namespace {
             DexOpcodes::opcodes::OP_REM_INT_LIT8,
     };
 
-    std::string get_kind_type_as_string(const kind_type_t & source_id, std::uint16_t iBBBB) {
+    std::string get_kind_type_as_string(const kind_type_t &source_id, std::uint16_t iBBBB) {
         std::stringstream instruction_str;
 
         if (std::holds_alternative<std::monostate>(source_id)) {

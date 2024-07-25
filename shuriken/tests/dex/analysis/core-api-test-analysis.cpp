@@ -125,8 +125,7 @@ void check_analysis_classes(hDexContext dexContext) {
                 auto basic_block = basic_blocks->blocks[z];
                 printf("%s\n", basic_block.block_string);
                 auto data = methods[method_analysis->full_name][z].data();
-                assert(strcmp(data, basic_block.block_string) == 0
-                       && "Error, basic block disassembly is not correct");
+                assert(strcmp(data, basic_block.block_string) == 0 && "Error, basic block disassembly is not correct");
             }
         }
     }

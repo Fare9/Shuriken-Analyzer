@@ -300,6 +300,23 @@ SHURIKENCOREAPI void disassemble_dex(hDexContext context);
 SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const char *method_name);
 
 ///--------------------------- Analysis API ---------------------------
+enum ref_type {
+    REF_NEW_INSTANCE = 0x22,// new instance of a class
+    REF_CLASS_USAGE = 0x1c, // class is used somewhere
+    INVOKE_VIRTUAL = 0x6e,  // call of a method from a class
+    INVOKE_SUPER = 0x6f,    // call of constructor of super class
+    INVOKE_DIRECT = 0x70,   // call a method from a class
+    INVOKE_STATIC = 0x71,   // call a static method from a class
+    INVOKE_INTERFACE = 0x72,// call an interface method
+    // same with ranges
+    INVOKE_VIRTUAL_RANGE = 0x74,
+    INVOKE_SUPER_RANGE = 0x75,
+    INVOKE_DIRECT_RANGE = 0x76,
+    INVOKE_STATIC_RANGE = 0x77,
+    INVOKE_INTERFACE_RANGE = 0x78
+};
+
+
 typedef struct hdvmclassanalysis_t_ hdvmclassanalysis_t;
 
 typedef struct hdvmmethodanalysis_t_ hdvmmethodanalysis_t;
@@ -322,6 +339,7 @@ typedef struct hdvm_method_idx_t_ {
     int64_t idx;
 } hdvm_method_idx_t;
 
+
 /// @brief Xref that contains class, field and instruction address
 typedef struct hdvm_class_field_idx_t_ {
     /// @brief class of the xref
@@ -339,6 +357,21 @@ typedef struct hdvm_class_idx_t_ {
     /// @brief idx
     int64_t idx;
 } hdvm_class_idx_t;
+
+/// @brief Structure that contains a type of reference, a method analysis where reference is
+/// and the idx in the method where the reference to a class is
+typedef struct hdvm_reftype_method_idx_t_ {
+    ref_type reType;
+    hdvmmethodanalysis_t *methodAnalysis;
+    uint64_t idx;
+} hdvm_reftype_method_idx_t;
+
+typedef struct hdvm_classxref_t_ {
+    hdvmclassanalysis_t *classAnalysis;
+    size_t n_of_reftype_method_idx;
+    hdvm_reftype_method_idx_t *hdvmReftypeMethodIdx;
+} hdvm_classxref_t;
+
 
 /// @brief Structure that stores information of a basic block
 typedef struct hdvmbasicblock_t_ {
@@ -389,7 +422,7 @@ typedef struct hdvmstringanalysis_t_ {
     hdvm_class_method_idx_t *xreffrom;
 } hdvmstringanalysis_t;
 
-typedef struct hdvmmethodanalysis_t_    {
+typedef struct hdvmmethodanalysis_t_ {
     /// @brief name of the method
     const char *name;
     /// @brief descriptor of the method
@@ -455,6 +488,14 @@ typedef struct hdvmclassanalysis_t_ {
     size_t n_of_xrefconstclass;
     /// @brief use of const class of this class
     hdvm_method_idx_t *xrefconstclass;
+    /// @brief number of xrefto
+    size_t n_of_xrefto;
+    /// @brief Classes that this class calls
+    hdvm_classxref_t *xrefto;
+    /// @brief number of xreffrom
+    size_t n_of_xreffrom;
+    /// @brief Classes that call this class
+    hdvm_classxref_t *xreffrom;
 } hdvmclassanalysis_t;
 
 /// @brief Create a DEX analysis object inside of context, for obtaining the analysis

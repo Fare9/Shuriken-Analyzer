@@ -123,6 +123,27 @@ class dexinsttype_e(ctypes.c_int):
                 return name
         return str(self.value)
 
+## ref_type
+class dexref_type_e(ctypes.c_int):
+    REF_NEW_INSTANCE = 0x22
+    REF_CLASS_USAGE = 0x1c
+    INVOKE_VIRTUAL = 0x6e
+    INVOKE_SUPER = 0x6f
+    INVOKE_DIRECT = 0x70
+    INVOKE_STATIC = 0x71
+    INVOKE_INTERFACE = 0x72
+    INVOKE_VIRTUAL_RANGE = 0x74
+    INVOKE_SUPER_RANGE = 0x75
+    INVOKE_DIRECT_RANGE = 0x76
+    INVOKE_STATIC_RANGE = 0x77
+    INVOKE_INTERFACE_RANGE = 0x78
+
+    def __str__(self):
+        for name, value in vars(dexref_type_e).items():
+            if value == self.value:
+                return name
+        return str(self.value)
+
 # C structures but in Python
 
 # @brief Structure which keeps information from a field
@@ -248,6 +269,20 @@ class hdvm_class_idx_t(ctypes.Structure):
         ("idx", ctypes.c_int64)
     ]
 
+class hdvm_reftype_method_idx_t(ctypes.Structure):
+    _fields_ = [
+        ("refType", dexref_type_e),
+        ("methodAnalysis", ctypes.POINTER(hdvmmethodanalysis_t)),
+        ("idx", ctypes.c_uint64)
+    ]
+
+class hdvm_classxref_t(ctypes.Structure):
+    _fields_ = [
+        ("classAnalysis", ctypes.POINTER(hdvmclassanalysis_t)),
+        ("n_of_reftype_method_idx", ctypes.c_size_t),
+        ("hdvmReftypeMethodIdx", ctypes.POINTER(hdvm_reftype_method_idx_t))
+    ]
+
 # @brief Structure that stores information of a basic block
 class hdvmbasicblock_t(ctypes.Structure):
     _fields_ = [
@@ -310,4 +345,8 @@ hdvmclassanalysis_t._fields_ = [
         ("xrefnewinstance", ctypes.POINTER(hdvm_method_idx_t)),
         ("n_of_xrefconstclass", ctypes.c_size_t),
         ("xrefconstclass", ctypes.POINTER(hdvm_method_idx_t)),
-    ]
+        ("n_of_xrefto", ctypes.c_size_t),
+        ("xrefto", ctypes.POINTER(hdvm_classxref_t)),
+        ("n_of_xreffrom", ctypes.c_size_t),
+        ("xreffrom", ctypes.POINTER(hdvm_classxref_t)),
+]

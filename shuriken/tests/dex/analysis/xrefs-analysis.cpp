@@ -35,10 +35,10 @@ int main() {
 
     dex_analysis->get_fields();
 
-    for (auto & clazz : dex_analysis->get_classes()) {
-        auto & clazz_value = clazz.second.get();
+    for (auto &clazz: dex_analysis->get_classes()) {
+        auto &clazz_value = clazz.second.get();
         std::cout << clazz_value.name() << "\n";
-        for (auto & method : clazz_value.get_methods()) {
+        for (auto &method: clazz_value.get_methods()) {
             auto method_value = method.second;
             if (!method_value->external())
                 std::cout << method_value->toString();
