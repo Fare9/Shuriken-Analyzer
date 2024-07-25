@@ -16,7 +16,7 @@
 #include <iostream>
 
 int main() {
-    std::string test_file = std::string(DEX_FILES_FOLDER) + "_xrefs.dex";
+    std::string test_file = std::string(DEX_FILES_FOLDER) + "_instance.dex";
 
     std::unique_ptr<shuriken::parser::dex::Parser> dex_parser = nullptr;
     std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> dex_disassembler = nullptr;
@@ -34,6 +34,16 @@ int main() {
     dex_analysis->create_xrefs();
 
     dex_analysis->get_fields();
+
+    for (auto &clazz: dex_analysis->get_classes()) {
+        auto &clazz_value = clazz.second.get();
+        std::cout << clazz_value.name() << "\n";
+        for (auto &method: clazz_value.get_methods()) {
+            auto method_value = method.second;
+            if (!method_value->external())
+                std::cout << method_value->toString();
+        }
+    }
 
     return 0;
 }

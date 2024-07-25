@@ -16,13 +16,13 @@ namespace shuriken::analysis::dex {
     class ExternalMethod {
     private:
         /// @brief name of the class
-        std::string_view class_idx;
+        std::string class_idx;
 
         /// @brief name of the method
-        std::string_view name_idx;
+        std::string name_idx;
 
         /// @brief prototype of the method
-        std::string_view proto_idx;
+        std::string proto_idx;
 
         /// @brief name that joins class+method+proto
         std::string pretty_name;

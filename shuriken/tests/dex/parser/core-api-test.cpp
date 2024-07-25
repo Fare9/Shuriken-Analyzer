@@ -7,7 +7,6 @@
 
 #include "../../../include/shuriken/api/C/shuriken_core.h"
 #include "dex-files-folder.inc"
-#include "shuriken/api/C/shuriken_core.h"
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>

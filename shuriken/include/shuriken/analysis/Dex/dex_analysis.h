@@ -125,7 +125,7 @@ namespace shuriken::analysis::dex {
         /// @param handler handler type
         void set_handler_type(parser::dex::DVMType *handler);
 
-        std::string toString();
+        std::string_view toString();
     };
 
     /// @brief Class to keep all the Dalvik Basic Blocks from a method
@@ -440,7 +440,7 @@ namespace shuriken::analysis::dex {
         /// @return full name of the method in Dalvik Format
         std::string_view get_full_name() const;
 
-        std::string toString();
+        std::string_view toString();
 
         /// @brief Retrieve a pointer to an instruction by a given address
         /// @param addr address of the instruction to retrieve

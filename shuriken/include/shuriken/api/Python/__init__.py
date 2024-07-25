@@ -58,6 +58,8 @@ class Dex(object):
         self.method_by_name = dict()
         # cache of the disassembled method
         self.disassembled_methods = dict()
+        # cache of the class analysis
+        self.class_analysis_by_name = dict()
 
         _shuriken.parse_dex.restype = ctypes.c_void_p
         _shuriken.parse_dex.argtypes = [ctypes.c_char_p]
@@ -181,6 +183,35 @@ class Dex(object):
         self.disassembled_methods[method_name] = ptr.contents
         return self.disassembled_methods[method_name]
 
+    def create_dex_analysis(self, create_xrefs):
+        """
+        Create a DEX analysis object inside of context, for obtaining the analysis
+        user must also call `analyze_classes`.
+        :param create_xrefs: Boolean flag to create xrefs or not
+        """
+        _shuriken.create_dex_analysis.argtypes = [ctypes.c_void_p, ctypes.c_char]
+        _shuriken.create_dex_analysis(self.dex_context_object, create_xrefs)
+
+    def analyze_classes(self):
+        """
+        Analyze the classes, add fields and methods into the classes, optionally
+        create the xrefs.
+        """
+        _shuriken.analyze_classes.argtypes = [ctypes.c_void_p]
+        _shuriken.analyze_classes(self.dex_context_object)
+
+    def get_analyzed_class(self, class_name: str) -> hdvmclassanalysis_t:
+        if class_name in self.class_analysis_by_name:
+            return self.class_analysis_by_name[class_name]
+        _shuriken.get_analyzed_class.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        _shuriken.get_analyzed_class.restype = ctypes.POINTER(hdvmclassanalysis_t)
+        ptr = ctypes.cast(_shuriken.get_analyzed_class(self.dex_context_object, ctypes.c_char_p(class_name.encode("utf-8"))),
+                          ctypes.POINTER(hdvmclassanalysis_t))
+        if ptr == 0:
+            return None
+        self.class_analysis_by_name[class_name] = ptr.contents
+        return self.class_analysis_by_name[class_name]
+
 
 
 if __name__ == "__main__":
@@ -264,3 +295,28 @@ if __name__ == "__main__":
                 disassembled_method = dex.get_disassembled_method(method_name)
                 disassembler_str = disassembled_method.method_string
                 print(f"{disassembler_str.decode()}\n")
+
+        dex.create_dex_analysis(1)
+        dex.analyze_classes()
+
+        print("Analysis information:")
+        for j in range(int(dex.get_number_of_classes())):
+            class_: hdvmclass_t = dex.get_class_by_id(j)
+            class_name = class_.class_name.decode()
+            class_analysis: hdvmclassanalysis_t = dex.get_analyzed_class(class_name)
+            print("Class Analysis Information")
+            print(f"Class analyzed name: {class_analysis.name_.decode()}")
+            print(f"Number of methods: {class_analysis.n_of_methods}")
+            if class_analysis.extends_:
+                print(f"Extends a class: {class_analysis.extends_.decode()}")
+            print(f"Is external?: ", end="")
+            if class_analysis.is_external == 0:
+                print("False")
+            else:
+                print("True")
+            for i in range(int(class_analysis.n_of_methods)):
+                print("Method Analysis Information")
+                method_analysis: hdvmmethodanalysis_t = class_analysis.methods[i].contents
+                print(f"Method name: {method_analysis.full_name.decode()}")
+                if method_analysis.method_string is not None:
+                    print(f"{method_analysis.method_string.decode()}")

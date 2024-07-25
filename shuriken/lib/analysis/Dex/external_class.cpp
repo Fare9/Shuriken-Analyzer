@@ -9,7 +9,7 @@
 using namespace shuriken::analysis::dex;
 
 ExternalClass::ExternalClass(std::string_view name)
-    : name(name) {
+    : name(std::string(name)) {
 }
 
 std::string_view ExternalClass::get_name() {
