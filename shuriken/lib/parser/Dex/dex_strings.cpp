@@ -42,10 +42,6 @@ void DexStrings::parse_strings(common::ShurikenStream &shuriken_stream,
 
         dex_strings.emplace_back(shuriken_stream.read_dex_string(str_offset));
     }
-    // create a string_view version of the DexStrings
-    for (auto &str: dex_strings) {
-        dex_strings_view.emplace_back(str);
-    }
 
     shuriken_stream.seekg(current_offset, std::ios_base::beg);
     my_logger->info("Finished parsing strings");
@@ -76,25 +72,30 @@ void DexStrings::dump_binary(std::ofstream &fos, std::int64_t offset) {
 }
 
 std::string_view DexStrings::get_string_by_id(std::uint32_t str_id) const {
-    if (str_id >= dex_strings_view.size())
+    if (str_id >= dex_strings.size())
         throw std::runtime_error("Error id of string out of bound");
-    return dex_strings_view.at(str_id);
+    return dex_strings.at(str_id);
 }
 
 size_t DexStrings::get_number_of_strings() const {
-    return dex_strings_view.size();
+    return dex_strings.size();
 }
 
 std::int64_t DexStrings::get_id_by_string(std::string_view str) const {
-    auto it = std::ranges::find(dex_strings_view, str);
+    auto it = std::ranges::find(dex_strings, str);
 
-    if (it == dex_strings_view.end())
+    if (it == dex_strings.end())
         return -1;
 
-    return std::distance(dex_strings_view.begin(), it);
+    return std::distance(dex_strings.begin(), it);
 }
 
 const std::vector<std::string_view> DexStrings::get_strings() const {
+    if (dex_strings_view.empty() || dex_strings_view.size() != dex_strings.size()) {
+        for (auto &str: dex_strings) {
+            dex_strings_view.emplace_back(str);
+        }
+    }
     return dex_strings_view;
 }
 
@@ -105,6 +106,5 @@ std::uint32_t DexStrings::add_string(std::string str) {
         return static_cast<std::uint32_t>(value);
     // if it doesn´t exist, add it and return the id
     dex_strings.push_back(str);
-    dex_strings_view.push_back(dex_strings.back());
     return static_cast<std::uint32_t>(dex_strings.size() - 1);
 }

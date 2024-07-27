@@ -2,6 +2,7 @@
 // Created by fare9 on 30/12/23.
 //
 
+#include <chrono>
 #include <fmt/core.h>
 #include <functional>
 #include <iostream>
@@ -36,12 +37,15 @@ bool fields = false;
 bool code = false;
 bool disassembly = false;
 bool blocks = false;
+bool running_time = false;
 
 std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
 std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
 
 int main(int argc, char **argv) {
     std::vector<std::string> args{argv, argv + argc};
+
+    auto start_time = std::chrono::high_resolution_clock::now();
 
     if (args.size() == 1) {
         show_help(args[0]);
@@ -56,6 +60,7 @@ int main(int argc, char **argv) {
             {"-b", [&]() { code = true; }},
             {"-D", [&]() { disassembly = true; }},
             {"-B", [&]() { blocks = true; }},
+            {"-T", [&]() { running_time = true; }}
     };
 
     for (const auto &s: args) {
@@ -90,6 +95,28 @@ int main(int argc, char **argv) {
     } catch (std::runtime_error &re) {
         fmt::println("Exception: {}", re.what());
     }
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    if (running_time) {
+        // Calculate the duration
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+
+        // Convert duration to hours, minutes, seconds, and milliseconds
+        auto hours = std::chrono::duration_cast<std::chrono::hours>(duration);
+        duration -= hours;
+        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(duration);
+        duration -= minutes;
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(duration);
+        duration -= seconds;
+        auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
+
+        // Print the duration
+        fmt::print("Execution time: {:02}h:{:02}m:{:02}s:{:03}ms\n",
+                   hours.count(), minutes.count(), seconds.count(), milliseconds.count());
+    }
+
+    return 0;
 }
 
 void print_header(shuriken::parser::dex::DexHeader &header) {
@@ -132,7 +159,7 @@ void print_header(shuriken::parser::dex::DexHeader &header) {
 void print_classes(shuriken::parser::dex::DexClasses &classes) {
     size_t I = 0;
     for (auto &class_def: classes.get_classdefs()) {
-        fmt::print("Class #{} data:\n", I);
+        fmt::print("Class #{} data:\n", I++);
 
         const auto class_idx = class_def.get_class_idx();
         const auto super_class = class_def.get_superclass();
@@ -211,10 +238,15 @@ void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
     fmt::print("\t\t\tAccess Flags:   0x{:X} ({})\n", static_cast<std::uint32_t>(method->get_flags()),
                shuriken::dex::Utils::get_types_as_string(method->get_flags()));
     auto code_item_struct = method->get_code_item();
-    fmt::print("\t\t\tRegisters:      {}\n", code_item_struct->get_registers_size());
-    fmt::print("\t\t\tIns:            {}\n", code_item_struct->get_incomings_args());
-    fmt::print("\t\t\tOuts:           {}\n", code_item_struct->get_outgoing_args());
-    fmt::print("\t\t\tCode size:      {}\n", code_item_struct->get_instructions_size());
+    if (code_item_struct) {
+        fmt::print("\t\t\tCode:           {}\n", "-");
+        fmt::print("\t\t\tRegisters:      {}\n", code_item_struct->get_registers_size());
+        fmt::print("\t\t\tIns:            {}\n", code_item_struct->get_incomings_args());
+        fmt::print("\t\t\tOuts:           {}\n", code_item_struct->get_outgoing_args());
+        fmt::print("\t\t\tCode size:      {}\n", code_item_struct->get_instructions_size());
+    } else {
+        fmt::print("\t\t\tCode:           {}\n", "<None>");
+    }
     if (code) {
         print_code(code_item_struct->get_bytecode());
     }

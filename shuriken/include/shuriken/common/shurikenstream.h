@@ -87,6 +87,18 @@ namespace shuriken::common {
         /// @param offset the offset in the file where to read the string
         /// @return string read
         std::string read_dex_string(std::int64_t offset);
+
+        std::int32_t readSignedInt(int zwidth);
+
+        std::uint32_t readUnsignedInt(int zwidth, bool fillOnRight);
+
+        std::int64_t readSignedLong(int zwidth);
+
+        std::uint64_t readUnsignedLong(int zwidth, bool fillOnRight);
+
+        float readFloat(int zwidth, bool fillOnRight);
+
+        double readDouble(int zwidth, bool fillOnRight);
     };
 }// namespace shuriken::common
 

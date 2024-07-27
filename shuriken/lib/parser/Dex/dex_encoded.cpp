@@ -6,6 +6,8 @@
 // @file encoded.cpp
 
 #include "shuriken/parser/Dex/dex_encoded.h"
+#include "shuriken/common/logger.h"
+#include <sstream>
 
 using namespace shuriken::parser::dex;
 
@@ -119,12 +121,33 @@ AnnotationElement *EncodedAnnotation::get_annotation_by_pos(std::uint32_t pos) {
 void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
                                        DexTypes &types,
                                        DexStrings &strings) {
-    auto read_from_stream = [&](size_t size) {
-        std::uint8_t aux;
+    auto my_logger = shuriken::logger();
+
+    auto transform_u32_to_bytevector = [&](std::uint32_t intValue) {
         auto &value_data = std::get<std::vector<std::uint8_t>>(value);
-        for (size_t I = 0; I <= size; ++I) {
-            stream.read_data<std::uint8_t>(aux, sizeof(std::uint8_t));
-            value_data.push_back(aux);
+        for (size_t i = 0; i < sizeof(uint32_t); ++i) {
+            value_data.push_back(static_cast<uint8_t>((intValue >> (i * 8)) & 0xFF));
+        }
+    };
+
+    auto transform_i32_to_bytevector = [&](std::int32_t intValue) {
+        auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+        for (size_t i = 0; i < sizeof(int32_t); ++i) {
+            value_data.push_back(static_cast<uint8_t>((intValue >> (i * 8)) & 0xFF));
+        }
+    };
+
+    auto transform_u64_to_bytevector = [&](std::uint64_t intValue) {
+        auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+        for (size_t i = 0; i < sizeof(std::uint64_t); ++i) {
+            value_data.push_back(static_cast<uint8_t>((intValue >> (i * 8)) & 0xFF));
+        }
+    };
+
+    auto transform_i64_to_bytevector = [&](std::int64_t intValue) {
+        auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+        for (size_t i = 0; i < sizeof(std::int64_t); ++i) {
+            value_data.push_back(static_cast<uint8_t>((intValue >> (i * 8)) & 0xFF));
         }
     };
 
@@ -132,24 +155,68 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
     std::uint8_t aux;
     stream.read_data<std::uint8_t>(aux, sizeof(std::uint8_t));
     format = static_cast<shuriken::dex::TYPES::value_format>(aux & 0x1f);
-    auto size = (aux >> 5);
+    auto arg = (aux >> 5);
 
     switch (format) {
         case shuriken::dex::TYPES::value_format::VALUE_BYTE:
+        {
+            auto value = stream.readSignedInt(arg) & 0xFF;
+            transform_i32_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_SHORT:
+        {
+            auto value = stream.readSignedInt(arg) & 0xFFFF;
+            transform_i32_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_CHAR:
+        {
+            auto value = stream.readUnsignedInt(arg, false) & 0xFFFF;
+            transform_u32_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_INT:
+        {
+            auto value = stream.readSignedInt(arg);
+            transform_i32_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_FLOAT:
+        {
+            auto value = stream.readUnsignedInt(arg, true);
+            transform_u32_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_LONG:
+        {
+            auto value = stream.readSignedLong(arg);
+            transform_i64_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_DOUBLE:
+        {
+            auto value = stream.readUnsignedLong(arg, true);
+            transform_u64_to_bytevector(value);
+            break;
+        }
         case shuriken::dex::TYPES::value_format::VALUE_STRING:
         case shuriken::dex::TYPES::value_format::VALUE_TYPE:
         case shuriken::dex::TYPES::value_format::VALUE_FIELD:
         case shuriken::dex::TYPES::value_format::VALUE_METHOD:
-        case shuriken::dex::TYPES::value_format::VALUE_ENUM: {
-            read_from_stream(size);
+        case shuriken::dex::TYPES::value_format::VALUE_ENUM:
+        {
+            auto value = stream.readUnsignedInt(arg, false);
+            transform_u32_to_bytevector(value);
             break;
         }
+        case shuriken::dex::TYPES::value_format::VALUE_BOOLEAN:
+        {
+            auto &value_data = std::get<std::vector<std::uint8_t>>(value);
+            value_data.push_back(arg);
+            break;
+        }
+        case shuriken::dex::TYPES::value_format::VALUE_NULL: break;
         case shuriken::dex::TYPES::value_format::VALUE_ARRAY: {
             auto &array = std::get<std::unique_ptr<EncodedArray>>(value);
             array = std::make_unique<EncodedArray>();
@@ -161,7 +228,10 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
             annotation->parse_encoded_annotation(stream, types, strings);
         }
         default:
-            throw std::runtime_error("Value for format not implemented");
+            std::stringstream error_msg;
+            error_msg << "Value for format not implemented: " << static_cast<std::uint32_t>(format);
+            error_msg << "(arg: " << arg << ")";
+            throw std::runtime_error(error_msg.str());
     }
 }
 
@@ -218,17 +288,29 @@ std::int16_t EncodedValue::convert_data_to_short() {
 }
 
 double EncodedValue::convert_data_to_double() {
+    union long_double {
+        std::uint64_t long_bits;
+        double double_bits;
+    };
     if (format != shuriken::dex::TYPES::value_format::VALUE_DOUBLE)
         throw std::runtime_error("Error encoded value is not a double type");
+    long_double data;
     auto &value_data = std::get<std::vector<std::uint8_t>>(value);
-    return *(reinterpret_cast<double *>(value_data.data()));
+    data.long_bits = *(reinterpret_cast<std::uint64_t *>(value_data.data()));
+    return data.double_bits;
 }
 
 float EncodedValue::convert_data_to_float() {
+    union int_float {
+        std::uint32_t int_bits;
+        float float_bits;
+    };
     if (format != shuriken::dex::TYPES::value_format::VALUE_FLOAT)
         throw std::runtime_error("Error encoded value is not a float type");
+    int_float data;
     auto &value_data = std::get<std::vector<std::uint8_t>>(value);
-    return *(reinterpret_cast<float *>(value_data.data()));
+    data.int_bits = *(reinterpret_cast<std::uint32_t *>(value_data.data()));
+    return data.float_bits;
 }
 
 std::uint16_t EncodedValue::convert_data_to_char() {
