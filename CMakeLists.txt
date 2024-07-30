@@ -9,5 +9,6 @@ project(
         HOMEPAGE_URL https://github.com/Fare9/Shuriken-Analyzer/
 )
 
+enable_testing()
 add_subdirectory(shuriken/)
 add_subdirectory(shuriken-dump/)
