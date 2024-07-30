@@ -62,14 +62,6 @@ jobs:
       run: sudo apt install git
     - name: Install JDK
       run: sudo apt install default-jdk
-      if: runner.os == 'Linux'
-      shell: bash
-    - name: Display compiler version
-      run: $CC --version
-    - name: Install cmake
-      run: sudo apt-get install cmake
-    - name: Install git
-      run: sudo apt install git
     - name: Create build in CMake
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON -DDEX_TESTS=ON
     - name: Build with cmake
