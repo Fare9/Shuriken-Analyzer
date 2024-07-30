@@ -1,7 +1,7 @@
 if(DEX AND DEX_TESTS)
     configure_file(
-            dex-files-folder.in
-            dex-files-folder.inc
+            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.in
+            ${CMAKE_CURRENT_SOURCE_DIR}/dex-files-folder.inc
     )
 
     # First Test Executable
