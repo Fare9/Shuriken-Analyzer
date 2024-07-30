@@ -62,20 +62,14 @@ jobs:
       run: sudo apt install git
     - name: Install JDK
       run: sudo apt install default-jdk
-      if: runner.os == 'Linux'
-      shell: bash
-    - name: Display compiler version
-      run: $CC --version
-    - name: Install cmake
-      run: sudo apt-get install cmake
-    - name: Install git
-      run: sudo apt install git
     - name: Create build in CMake
-      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON -DDEX_TESTS=ON
     - name: Build with cmake
       run: cmake --build build/ -j
     - name: Install with cmake
       run: sudo cmake --install build/
+    - name : Run tests
+      run: ctest --test-dir build/
     - name: Verify shuriken-dump exit code
       run: |
         set +e # Prevent the script from exiting immediately on error

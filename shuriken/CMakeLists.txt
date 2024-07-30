@@ -141,7 +141,6 @@ endif ()
 
 message(STATUS "Path to DEX Folder: ${DEX_FILES_FOLDER}")
 add_subdirectory(tests)
-enable_testing()
 
 # Assuming this variable points to your project's include directory
 set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
