@@ -69,14 +69,19 @@ void DexDisassembler::disassembly_dex() {
 
 void DexDisassembler::disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method) {
     auto code_item_struct = method->get_code_item();
-    auto buffer_instructions = code_item_struct->get_bytecode();
     std::unique_ptr<DisassembledMethod> disassembled_method;
+    std::vector<exception_data_t> exceptions_data;
+    std::vector<std::unique_ptr<Instruction>> instructions;
+    std::uint16_t n_of_registers = 0;
 
-    auto exceptions_data = internal_disassembler->determine_exception(method);
-    auto instructions = linear_sweep.disassembly(code_item_struct->get_bytecode());
+    if (code_item_struct != nullptr) {
+        n_of_registers = code_item_struct->get_registers_size();
+        exceptions_data = internal_disassembler->determine_exception(method);
+        instructions = linear_sweep.disassembly(code_item_struct->get_bytecode());
+    }
 
     disassembled_methods[method->getMethodID()->dalvik_name_format()] = std::make_unique<DisassembledMethod>(
-            method->getMethodID(), code_item_struct->get_registers_size(), exceptions_data, instructions, method->get_flags());
+            method->getMethodID(), n_of_registers, exceptions_data, instructions, method->get_flags());
 }
 
 std::vector<std::unique_ptr<Instruction>> DexDisassembler::disassembly_buffer(std::span<std::uint8_t> buffer) {
