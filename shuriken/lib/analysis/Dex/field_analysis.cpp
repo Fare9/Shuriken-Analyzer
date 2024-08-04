@@ -9,11 +9,23 @@
 using namespace shuriken::analysis::dex;
 
 FieldAnalysis::FieldAnalysis(parser::dex::EncodedField *field)
-    : field(field), name(field->get_field()->field_name()) {
+    : field(field), name(field->get_field()->pretty_field()), external(false) {
 }
 
-shuriken::parser::dex::EncodedField *FieldAnalysis::get_encoded_field() {
-    return field;
+FieldAnalysis::FieldAnalysis(ExternalField *field)
+    : field(field), name(field->pretty_field_name()), external(true) {
+}
+
+bool FieldAnalysis::is_external() const {
+    return external;
+}
+
+shuriken::parser::dex::EncodedField *FieldAnalysis::get_encoded_field() const {
+    return std::get<shuriken::parser::dex::EncodedField *>(field);
+}
+
+ExternalField *FieldAnalysis::get_external_field() const {
+    return std::get<ExternalField *>(field);
 }
 
 std::string_view FieldAnalysis::get_name() {

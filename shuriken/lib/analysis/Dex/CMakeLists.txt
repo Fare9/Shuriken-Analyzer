@@ -1,4 +1,5 @@
 target_sources(dex-obj PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/external_field.cpp
         ${CMAKE_CURRENT_LIST_DIR}/external_method.cpp
         ${CMAKE_CURRENT_LIST_DIR}/external_class.cpp
         ${CMAKE_CURRENT_LIST_DIR}/basic_blocks.cpp

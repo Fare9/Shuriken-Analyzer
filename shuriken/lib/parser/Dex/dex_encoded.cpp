@@ -158,44 +158,37 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
     auto arg = (aux >> 5);
 
     switch (format) {
-        case shuriken::dex::TYPES::value_format::VALUE_BYTE:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_BYTE: {
             auto value = stream.readSignedInt(arg) & 0xFF;
             transform_i32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_SHORT:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_SHORT: {
             auto value = stream.readSignedInt(arg) & 0xFFFF;
             transform_i32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_CHAR:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_CHAR: {
             auto value = stream.readUnsignedInt(arg, false) & 0xFFFF;
             transform_u32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_INT:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_INT: {
             auto value = stream.readSignedInt(arg);
             transform_i32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_FLOAT:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_FLOAT: {
             auto value = stream.readUnsignedInt(arg, true);
             transform_u32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_LONG:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_LONG: {
             auto value = stream.readSignedLong(arg);
             transform_i64_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_DOUBLE:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_DOUBLE: {
             auto value = stream.readUnsignedLong(arg, true);
             transform_u64_to_bytevector(value);
             break;
@@ -204,19 +197,18 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
         case shuriken::dex::TYPES::value_format::VALUE_TYPE:
         case shuriken::dex::TYPES::value_format::VALUE_FIELD:
         case shuriken::dex::TYPES::value_format::VALUE_METHOD:
-        case shuriken::dex::TYPES::value_format::VALUE_ENUM:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_ENUM: {
             auto value = stream.readUnsignedInt(arg, false);
             transform_u32_to_bytevector(value);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_BOOLEAN:
-        {
+        case shuriken::dex::TYPES::value_format::VALUE_BOOLEAN: {
             auto &value_data = std::get<std::vector<std::uint8_t>>(value);
             value_data.push_back(arg);
             break;
         }
-        case shuriken::dex::TYPES::value_format::VALUE_NULL: break;
+        case shuriken::dex::TYPES::value_format::VALUE_NULL:
+            break;
         case shuriken::dex::TYPES::value_format::VALUE_ARRAY: {
             auto &array = std::get<std::unique_ptr<EncodedArray>>(value);
             array = std::make_unique<EncodedArray>();

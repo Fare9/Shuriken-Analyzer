@@ -129,7 +129,7 @@ std::string ShurikenStream::read_dex_string(std::int64_t offset) {
 std::int32_t ShurikenStream::readSignedInt(int zwidth) {
     std::int32_t result = 0;
     std::uint8_t aux;
-    for (int i = zwidth; i>= 0; i--) {
+    for (int i = zwidth; i >= 0; i--) {
         input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
         result = (result >> 8) | ((aux & 0xff) << 24);
     }

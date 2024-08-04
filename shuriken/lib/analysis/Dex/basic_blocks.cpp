@@ -16,6 +16,9 @@ DVMBasicBlock::DVMBasicBlock(read_instructions_t instructions_)
     : instructions_(instructions_) {
 }
 
+DVMBasicBlock::DVMBasicBlock(std::uint64_t first_address, std::uint64_t last_address) : is_empty_block(true), first_address(first_address), last_address(last_address) {
+}
+
 size_t DVMBasicBlock::get_nb_instructions() const {
     return instructions_.size();
 }
@@ -31,12 +34,14 @@ shuriken::disassembler::dex::Instruction *DVMBasicBlock::get_terminator() {
 }
 
 std::uint64_t DVMBasicBlock::get_first_address() const {
+    if (is_empty_block) return first_address;
     if (instructions_.empty())
         throw std::runtime_error("Error, basic block does not contain any instruction");
     return instructions_.front()->get_address();
 }
 
 std::uint64_t DVMBasicBlock::get_last_address() const {
+    if (is_empty_block) return last_address;
     if (instructions_.empty())
         throw std::runtime_error("Error, basic block does not contain any instruction");
     return instructions_.back()->get_address() + instructions_.back()->get_instruction_length();
@@ -60,6 +65,14 @@ void DVMBasicBlock::set_try_block(bool try_block) {
     this->try_block = try_block;
 }
 
+std::set<DVMBasicBlock *> &DVMBasicBlock::get_catch_blocks() {
+    return this->catch_blocks;
+}
+
+void DVMBasicBlock::add_catch_block(DVMBasicBlock *bb) {
+    this->catch_blocks.insert(bb);
+}
+
 bool DVMBasicBlock::is_catch_block() const {
     return catch_block;
 }
@@ -69,20 +82,29 @@ void DVMBasicBlock::set_catch_block(bool catch_block) {
 }
 
 shuriken::parser::dex::DVMType *DVMBasicBlock::get_handler_type() {
-    return handler_type;
+    return handler_types;
 }
 
 void DVMBasicBlock::set_handler_type(shuriken::parser::dex::DVMType *handler) {
-    this->handler_type = handler;
+    this->handler_types = handler;
 }
 
 std::string_view DVMBasicBlock::toString() {
     if (block_string.empty()) {
         std::stringstream ss;
         ss << get_name().data() << '\n';
-        if (is_try_block())
-            ss << ".try_block" << '\n';
-        else if (is_catch_block())
+        if (is_try_block()) {
+            ss << ".try_block ";
+
+            for (DVMBasicBlock *basicBlock: catch_blocks) {
+                ss << " catch-block "
+                   << basicBlock->get_name();
+                if (basicBlock->get_handler_type())
+                    ss << " (" << basicBlock->get_handler_type()->print_type() << ")";
+            }
+
+            ss << '\n';
+        } else if (is_catch_block())
             ss << ".catch_block" << '\n';
         for (disassembler::dex::Instruction *insn: instructions_) {
             ss << std::hex << std::setw(8)
@@ -94,6 +116,8 @@ std::string_view DVMBasicBlock::toString() {
     }
     return block_string;
 }
+
+// ---------------------- BasicBlocks ----------------------
 
 
 shuriken::iterator_range<BasicBlocks::nodesiterator_t> BasicBlocks::nodes() {
@@ -135,8 +159,6 @@ shuriken::iterator_range<BasicBlocks::reversenodesetiterator_t> BasicBlocks::rev
         throw std::runtime_error("Given node has no predecessors");
     return make_range(predecessors_[node].rbegin(), predecessors_[node].rend());
 }
-
-// ---------------------- BasicBlocks ----------------------
 
 size_t BasicBlocks::get_number_of_basic_blocks() const {
     return nodes_.size();
