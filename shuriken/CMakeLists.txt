@@ -13,6 +13,12 @@ project(
 # C++ Standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+# enable compiler warnings
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+add_compile_options(-Wall -Wpedantic -Wextra -Werror)
+elseif(MSVC)
+add_compile_options(/W4 /WX)
+endif()
 
 # Compiler for the project
 if(CMAKE_CXX_COMPILER_LOADED)
