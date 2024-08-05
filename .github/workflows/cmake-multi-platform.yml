@@ -25,14 +25,11 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-       include:
-          - name: ubuntu-24.04-gcc-compile
-            os: ubuntu-24.04
-            compiler: gcc
+        os: [ubuntu-24.04]
+        compiler: [gcc, clang]
+        build_type: [Debug, Release]
 
-          - name: ubuntu-24.04-clang-compile
-            os: ubuntu-24.04
-            compiler: clang
+    name: ${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.build_type }}
             
       # clang custom placeholder
     steps:
@@ -63,7 +60,7 @@ jobs:
     - name: Install JDK
       run: sudo apt install default-jdk
     - name: Create build in CMake
-      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DGITHUB_ACTION=ON -DDEX_TESTS=ON
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DGITHUB_ACTION=ON -DDEX_TESTS=ON
     - name: Build with cmake
       run: cmake --build build/ -j
     - name: Install with cmake
