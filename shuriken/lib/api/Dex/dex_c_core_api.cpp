@@ -294,7 +294,7 @@ namespace {
     /// @brief get or create a hdvmfieldanalysis_t structure given a FieldAnalysis object
     hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
                                             FieldAnalysis *fieldAnalysis) {
-        auto full_name = fieldAnalysis->get_encoded_field()->get_field()->pretty_field();
+        auto full_name = fieldAnalysis->get_name().data();
         auto full_name_str = std::string(full_name);
         if (opaque_struct->field_analyses.contains(full_name_str))
             return opaque_struct->field_analyses[full_name_str];
