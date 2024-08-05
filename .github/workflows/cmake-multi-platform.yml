@@ -63,7 +63,7 @@ jobs:
     - name: Install JDK
       run: sudo apt install default-jdk
     - name: Create build in CMake
-      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=DEBUG -DGITHUB_ACTION=ON -DDEX_TESTS=ON
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DGITHUB_ACTION=ON -DDEX_TESTS=ON
     - name: Build with cmake
       run: cmake --build build/ -j
     - name: Install with cmake
