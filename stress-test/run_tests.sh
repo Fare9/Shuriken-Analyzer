@@ -63,7 +63,7 @@ run_binary_on_dex_files() {
         echo "Running $binary_path on $dex_file"
         echo "Command: $binary_path '$dex_file' -c -f -m -T"
         # Run the binary and capture any error message
-        output=$($binary_path "$dex_file" -c -f -m -T 2>&1)
+        output=$($binary_path "$dex_file" -c -f -m -N -T 2>&1)
         if [ $? -ne 0 ]
         then
             # Add to failures if command failed
@@ -99,7 +99,7 @@ run_binary_on_dex_files() {
             echo "Running $binary_path on $dex_file"
             echo "Command: $binary_path '$dex_file' -c -m -D -T"
             # Run the binary and capture any error message
-            output=$($binary_path "$dex_file" -c -m -D -T 2>&1)
+            output=$($binary_path "$dex_file" -c -m -D -N -T 2>&1)
             if [ $? -ne 0 ]
             then
                 # Add to failures if command failed
@@ -133,9 +133,9 @@ run_binary_on_dex_files() {
         # Run the binary on each .dex file found
         for dex_file in $dex_files; do
             echo "Running $binary_path on $dex_file"
-            echo "Command: $binary_path '$dex_file' -c -f -m -x"
+            echo "Command: $binary_path '$dex_file' -c -f -m -x -N -T"
             # Run the binary and capture any error message
-            output=$($binary_path "$dex_file" -c -f -m -x -T 2>&1)
+            output=$($binary_path "$dex_file" -c -f -m -x -N -T 2>&1)
             if [ $? -ne 0 ]
             then
                 # Add to failures if command failed

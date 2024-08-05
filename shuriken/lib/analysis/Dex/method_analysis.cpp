@@ -192,6 +192,8 @@ void MethodAnalysis::create_basic_blocks() {
         }
     }
 
+    entry_points.erase(0);
+
     /// Start of a block, end of a block
     std::int64_t start = 0, end = 0;
     /// current created block, previous block

@@ -40,6 +40,7 @@ bool disassembly = false;
 bool blocks = false;
 bool running_time = false;
 bool xrefs = false;
+bool no_print = false;
 
 std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
 std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
@@ -63,7 +64,8 @@ int main(int argc, char **argv) {
             {"-D", [&]() { disassembly = true; }},
             {"-B", [&]() { blocks = true; }},
             {"-x", [&]() { xrefs = true; }},
-            {"-T", [&]() { running_time = true; }}
+            {"-T", [&]() { running_time = true; }},
+            {"-N", [&]() { no_print = true; }}
     };
 
     for (const auto &s: args) {
@@ -91,10 +93,12 @@ int main(int argc, char **argv) {
             dex_analysis->create_xrefs();
         }
 
-        auto &header = parsed_dex->get_header();
+        if (!no_print) {
+            auto &header = parsed_dex->get_header();
 
-        if (headers) print_header(header);
-        if (show_classes) print_classes(parsed_dex->get_classes());
+            if (headers) print_header(header);
+            if (show_classes) print_classes(parsed_dex->get_classes());
+        }
     } catch (std::runtime_error &re) {
         fmt::println("Exception: {}", re.what());
     }
