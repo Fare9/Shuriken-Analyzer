@@ -36,7 +36,9 @@ var searchData=
   ['is_5fandroid_5fapi_33',['is_android_api',['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a77345a011f53ef4546085d3bebf2950e',1,'shuriken::analysis::dex::MethodAnalysis']]],
   ['is_5fcatch_5fblock_34',['is_catch_block',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#a51430ac371f3c562cbf2df75a7c02794',1,'shuriken::analysis::dex::DVMBasicBlock']]],
   ['is_5fclass_5fexternal_35',['is_class_external',['../classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#aeb5fff33c261951875f7dd47f898fd0c',1,'shuriken::analysis::dex::ClassAnalysis']]],
-  ['is_5fterminator_36',['is_terminator',['../classshuriken_1_1disassembler_1_1dex_1_1Instruction.html#a8afdc2af8206e256ce77a1b3394db8e6',1,'shuriken::disassembler::dex::Instruction']]],
-  ['is_5ftry_5fblock_37',['is_try_block',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#a9478064f00d01e244a79bb86cb4cbad9',1,'shuriken::analysis::dex::DVMBasicBlock']]],
-  ['iterator_5frange_38',['iterator_range',['../classshuriken_1_1iterator__range.html#ac58cdcdf986cff4ca6f84010735f6f34',1,'shuriken::iterator_range::iterator_range(Container &amp;&amp;c)'],['../classshuriken_1_1iterator__range.html#a86c4d8311cec83e98e731e382fe30835',1,'shuriken::iterator_range::iterator_range(IteratorT begin_iterator, IteratorT end_iterator)']]]
+  ['is_5fexternal_36',['is_external',['../classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html#a3bb1fc4a27353fa6f06b053863a089c4',1,'shuriken::analysis::dex::FieldAnalysis']]],
+  ['is_5fjump_5finstruction_37',['is_jump_instruction',['../classshuriken_1_1disassembler_1_1dex_1_1InstructionUtils.html#a3c38aad2c6c75a18804ad4b6899995a5',1,'shuriken::disassembler::dex::InstructionUtils']]],
+  ['is_5fterminator_38',['is_terminator',['../classshuriken_1_1disassembler_1_1dex_1_1Instruction.html#a8afdc2af8206e256ce77a1b3394db8e6',1,'shuriken::disassembler::dex::Instruction']]],
+  ['is_5ftry_5fblock_39',['is_try_block',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#a9478064f00d01e244a79bb86cb4cbad9',1,'shuriken::analysis::dex::DVMBasicBlock']]],
+  ['iterator_5frange_40',['iterator_range',['../classshuriken_1_1iterator__range.html#ac58cdcdf986cff4ca6f84010735f6f34',1,'shuriken::iterator_range::iterator_range(Container &amp;&amp;c)'],['../classshuriken_1_1iterator__range.html#a86c4d8311cec83e98e731e382fe30835',1,'shuriken::iterator_range::iterator_range(IteratorT begin_iterator, IteratorT end_iterator)']]]
 ];

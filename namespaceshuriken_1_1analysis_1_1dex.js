@@ -5,6 +5,7 @@ var namespaceshuriken_1_1analysis_1_1dex =
     [ "ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis" ],
     [ "DVMBasicBlock", "classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html", "classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock" ],
     [ "ExternalClass", "classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html", "classshuriken_1_1analysis_1_1dex_1_1ExternalClass" ],
+    [ "ExternalField", "classshuriken_1_1analysis_1_1dex_1_1ExternalField.html", "classshuriken_1_1analysis_1_1dex_1_1ExternalField" ],
     [ "ExternalMethod", "classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html", "classshuriken_1_1analysis_1_1dex_1_1ExternalMethod" ],
     [ "FieldAnalysis", "classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html", "classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis" ],
     [ "MethodAnalysis", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis" ],
@@ -16,5 +17,5 @@ var namespaceshuriken_1_1analysis_1_1dex =
     [ "class_method_idx_iterator_t", "namespaceshuriken_1_1analysis_1_1dex.html#abc0f6b98bb5018b4192a10642ded4a3e", null ],
     [ "class_method_idx_t", "namespaceshuriken_1_1analysis_1_1dex.html#a3d5c1196f56af70c332c64de3c92e829", null ],
     [ "classxref_iterator_t", "namespaceshuriken_1_1analysis_1_1dex.html#a18223d3a4ee9458a731a837f84520bd8", null ],
-    [ "classxref_t", "namespaceshuriken_1_1analysis_1_1dex.html#a8836b7bf1faa5136e9e23136529784dc", null ]
+    [ "classxref_t", "namespaceshuriken_1_1analysis_1_1dex.html#a981a99c81572c48c3f3d3d959eac83f4", null ]
 ];

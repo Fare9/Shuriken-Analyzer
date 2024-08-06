@@ -146,17 +146,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ed80733cca1cedd99138790ade196fa" id="r_a5ed80733cca1cedd99138790ade196fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ed80733cca1cedd99138790ade196fa">get_field_analysis</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *field)</td></tr>
 <tr class="memdesc:a5ed80733cca1cedd99138790ade196fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an encoded field return a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html" title="specification of a field analysis">FieldAnalysis</a> pointer.  <br /></td></tr>
 <tr class="separator:a5ed80733cca1cedd99138790ade196fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a345664e8e0074af46be4a1297a62c105" id="r_a345664e8e0074af46be4a1297a62c105"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a345664e8e0074af46be4a1297a62c105">add_field_xref_read</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *field, std::uint64_t off)</td></tr>
-<tr class="separator:a345664e8e0074af46be4a1297a62c105"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0b758ad4f92fba7f98e9bd6393740b2" id="r_ae0b758ad4f92fba7f98e9bd6393740b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0b758ad4f92fba7f98e9bd6393740b2">add_field_xref_write</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *field, std::uint64_t off)</td></tr>
-<tr class="separator:ae0b758ad4f92fba7f98e9bd6393740b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfcc8d8c0889b178843073499f23d84b" id="r_acfcc8d8c0889b178843073499f23d84b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfcc8d8c0889b178843073499f23d84b">get_field_analysis</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> *field)</td></tr>
+<tr class="memdesc:acfcc8d8c0889b178843073499f23d84b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an encoded field return a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html" title="specification of a field analysis">FieldAnalysis</a> pointer.  <br /></td></tr>
+<tr class="separator:acfcc8d8c0889b178843073499f23d84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c38c05cd3be00027e2842e76064772" id="r_a30c38c05cd3be00027e2842e76064772"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30c38c05cd3be00027e2842e76064772">add_field_xref_read</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, std::variant&lt; <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> * &gt; field, std::uint64_t off)</td></tr>
+<tr class="memdesc:a30c38c05cd3be00027e2842e76064772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross reference of a field read.  <br /></td></tr>
+<tr class="separator:a30c38c05cd3be00027e2842e76064772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbf816ea0b76b146338f19c03240461f" id="r_afbf816ea0b76b146338f19c03240461f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbf816ea0b76b146338f19c03240461f">add_field_xref_write</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, std::variant&lt; <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> * &gt; field, std::uint64_t off)</td></tr>
+<tr class="memdesc:afbf816ea0b76b146338f19c03240461f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross reference of a field write.  <br /></td></tr>
+<tr class="separator:afbf816ea0b76b146338f19c03240461f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac97523355472f0cd4b14ba355fcf0bce" id="r_ac97523355472f0cd4b14ba355fcf0bce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac97523355472f0cd4b14ba355fcf0bce">add_method_xref_to</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method1, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method2, std::uint64_t off)</td></tr>
+<tr class="memdesc:ac97523355472f0cd4b14ba355fcf0bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross reference of a method called to.  <br /></td></tr>
 <tr class="separator:ac97523355472f0cd4b14ba355fcf0bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87c7b484d7145108681ef814d49978c6" id="r_a87c7b484d7145108681ef814d49978c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87c7b484d7145108681ef814d49978c6">add_method_xref_from</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method1, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *method2, std::uint64_t off)</td></tr>
+<tr class="memdesc:a87c7b484d7145108681ef814d49978c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a cross reference of a method called from.  <br /></td></tr>
 <tr class="separator:a87c7b484d7145108681ef814d49978c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac56a0d2183eb023175edb39bf67679b2" id="r_ac56a0d2183eb023175edb39bf67679b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac56a0d2183eb023175edb39bf67679b2">add_xref_to</a> (<a class="el" href="namespaceshuriken_1_1dex_1_1TYPES.html#a11baa132bc6b9a70a74f914a11834427">shuriken::dex::TYPES::ref_type</a> ref_kind, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *methodobj, std::uint64_t offset)</td></tr>
+<tr class="memdesc:ac56a0d2183eb023175edb39bf67679b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add xref to another class.  <br /></td></tr>
 <tr class="separator:ac56a0d2183eb023175edb39bf67679b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d45a513c5beb9106d0ff1cb4d0c371" id="r_ae8d45a513c5beb9106d0ff1cb4d0c371"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8d45a513c5beb9106d0ff1cb4d0c371">add_xref_from</a> (<a class="el" href="namespaceshuriken_1_1dex_1_1TYPES.html#a11baa132bc6b9a70a74f914a11834427">shuriken::dex::TYPES::ref_type</a> ref_kind, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html">ClassAnalysis</a> *classobj, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *methodobj, std::uint64_t offset)</td></tr>
+<tr class="memdesc:ae8d45a513c5beb9106d0ff1cb4d0c371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add xref from another class.  <br /></td></tr>
 <tr class="separator:ae8d45a513c5beb9106d0ff1cb4d0c371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5035edc21e57adff5c00d7d52e54170b" id="r_a5035edc21e57adff5c00d7d52e54170b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5035edc21e57adff5c00d7d52e54170b">add_xref_new_instance</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html">MethodAnalysis</a> *methodobj, std::uint64_t offset)</td></tr>
 <tr class="separator:a5035edc21e57adff5c00d7d52e54170b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,7 +183,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Specification of the class analysis, this class contains fields, strings, methods... </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00498">498</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00534">534</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a88da8904d94b7f84e34d2ab9da6723a1" name="a88da8904d94b7f84e34d2ab9da6723a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88da8904d94b7f84e34d2ab9da6723a1">&#9670;&#160;</a></span>ClassAnalysis() <span class="overload">[1/2]</span></h2>
@@ -211,8 +220,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a345664e8e0074af46be4a1297a62c105" name="a345664e8e0074af46be4a1297a62c105"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a345664e8e0074af46be4a1297a62c105">&#9670;&#160;</a></span>add_field_xref_read()</h2>
+<a id="a30c38c05cd3be00027e2842e76064772" name="a30c38c05cd3be00027e2842e76064772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30c38c05cd3be00027e2842e76064772">&#9670;&#160;</a></span>add_field_xref_read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +239,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *</td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+          <td class="paramtype">std::variant&lt; <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> * &gt;</td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -240,10 +249,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a cross reference of a field read. </p>
+
 </div>
 </div>
-<a id="ae0b758ad4f92fba7f98e9bd6393740b2" name="ae0b758ad4f92fba7f98e9bd6393740b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0b758ad4f92fba7f98e9bd6393740b2">&#9670;&#160;</a></span>add_field_xref_write()</h2>
+<a id="afbf816ea0b76b146338f19c03240461f" name="afbf816ea0b76b146338f19c03240461f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbf816ea0b76b146338f19c03240461f">&#9670;&#160;</a></span>add_field_xref_write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,7 +272,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *</td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
+          <td class="paramtype">std::variant&lt; <a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">shuriken::parser::dex::EncodedField</a> *, <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> * &gt;</td>          <td class="paramname"><span class="paramname"><em>field</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -270,6 +281,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a cross reference of a field write. </p>
 
 </div>
 </div>
@@ -327,6 +340,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a cross reference of a method called from. </p>
+
 </div>
 </div>
 <a id="ac97523355472f0cd4b14ba355fcf0bce" name="ac97523355472f0cd4b14ba355fcf0bce"></a>
@@ -357,6 +372,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a cross reference of a method called to. </p>
 
 </div>
 </div>
@@ -410,6 +427,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add xref from another class. </p>
+
 </div>
 </div>
 <a id="a5035edc21e57adff5c00d7d52e54170b" name="a5035edc21e57adff5c00d7d52e54170b"></a>
@@ -461,6 +480,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add xref to another class. </p>
 
 </div>
 </div>
@@ -518,8 +539,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="acfcc8d8c0889b178843073499f23d84b" name="acfcc8d8c0889b178843073499f23d84b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfcc8d8c0889b178843073499f23d84b">&#9670;&#160;</a></span>get_field_analysis() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> * shuriken::analysis::dex::ClassAnalysis::get_field_analysis </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> *</td>          <td class="paramname"><span class="paramname"><em>field</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given an encoded field return a <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html" title="specification of a field analysis">FieldAnalysis</a> pointer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">field</td><td>field to look for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html" title="specification of a field analysis">FieldAnalysis</a> pointer </dd></dl>
+
+</div>
+</div>
 <a id="a5ed80733cca1cedd99138790ade196fa" name="a5ed80733cca1cedd99138790ade196fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ed80733cca1cedd99138790ade196fa">&#9670;&#160;</a></span>get_field_analysis()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed80733cca1cedd99138790ade196fa">&#9670;&#160;</a></span>get_field_analysis() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

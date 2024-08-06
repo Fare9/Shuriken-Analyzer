@@ -27,13 +27,14 @@ var searchData=
   ['_7eencodedmethod_24',['~EncodedMethod',['../classshuriken_1_1parser_1_1dex_1_1EncodedMethod.html#a523245b9be2e040b64e249a8053af972',1,'shuriken::parser::dex::EncodedMethod']]],
   ['_7eencodedvalue_25',['~EncodedValue',['../classshuriken_1_1parser_1_1dex_1_1EncodedValue.html#aa8b07849d5d548f1281c92f0b46f2f50',1,'shuriken::parser::dex::EncodedValue']]],
   ['_7eexternalclass_26',['~ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a68eec5b12111b2d3275bbf1ecf76b0a6',1,'shuriken::analysis::dex::ExternalClass']]],
-  ['_7eexternalmethod_27',['~ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a6490a20ba87e360dc9e0f646d6c45d74',1,'shuriken::analysis::dex::ExternalMethod']]],
-  ['_7efieldanalysis_28',['~FieldAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html#a5583a64cb587397290cef6dce7b9ebf0',1,'shuriken::analysis::dex::FieldAnalysis']]],
-  ['_7efieldid_29',['~FieldID',['../classshuriken_1_1parser_1_1dex_1_1FieldID.html#a86751f037b78bb0b43d67739f199f8c7',1,'shuriken::parser::dex::FieldID']]],
-  ['_7einstruction_30',['~Instruction',['../classshuriken_1_1disassembler_1_1dex_1_1Instruction.html#abc5eb1ced761de73d0b11505c48d1a41',1,'shuriken::disassembler::dex::Instruction']]],
-  ['_7emethodid_31',['~MethodID',['../classshuriken_1_1parser_1_1dex_1_1MethodID.html#adf891785a6e414e1b873a91359a15525',1,'shuriken::parser::dex::MethodID']]],
-  ['_7eparser_32',['~Parser',['../classshuriken_1_1parser_1_1dex_1_1Parser.html#a4fcfe27b58023fcc4767d579b4a60381',1,'shuriken::parser::dex::Parser']]],
-  ['_7eshurikenstream_33',['~ShurikenStream',['../classshuriken_1_1common_1_1ShurikenStream.html#abbb646007186960c475902b50d49fc61',1,'shuriken::common::ShurikenStream']]],
-  ['_7estringanalysis_34',['~StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a268dedd647648a4ad18d8b91e4077481',1,'shuriken::analysis::dex::StringAnalysis']]],
-  ['_7eunknown_35',['~Unknown',['../classshuriken_1_1parser_1_1dex_1_1Unknown.html#a59ddc7128e8f0a8ad2376abd37d73513',1,'shuriken::parser::dex::Unknown']]]
+  ['_7eexternalfield_27',['~ExternalField',['../classshuriken_1_1analysis_1_1dex_1_1ExternalField.html#aa065b84a2e8c6a81089fc3019f52feb6',1,'shuriken::analysis::dex::ExternalField']]],
+  ['_7eexternalmethod_28',['~ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a6490a20ba87e360dc9e0f646d6c45d74',1,'shuriken::analysis::dex::ExternalMethod']]],
+  ['_7efieldanalysis_29',['~FieldAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html#a5583a64cb587397290cef6dce7b9ebf0',1,'shuriken::analysis::dex::FieldAnalysis']]],
+  ['_7efieldid_30',['~FieldID',['../classshuriken_1_1parser_1_1dex_1_1FieldID.html#a86751f037b78bb0b43d67739f199f8c7',1,'shuriken::parser::dex::FieldID']]],
+  ['_7einstruction_31',['~Instruction',['../classshuriken_1_1disassembler_1_1dex_1_1Instruction.html#abc5eb1ced761de73d0b11505c48d1a41',1,'shuriken::disassembler::dex::Instruction']]],
+  ['_7emethodid_32',['~MethodID',['../classshuriken_1_1parser_1_1dex_1_1MethodID.html#adf891785a6e414e1b873a91359a15525',1,'shuriken::parser::dex::MethodID']]],
+  ['_7eparser_33',['~Parser',['../classshuriken_1_1parser_1_1dex_1_1Parser.html#a4fcfe27b58023fcc4767d579b4a60381',1,'shuriken::parser::dex::Parser']]],
+  ['_7eshurikenstream_34',['~ShurikenStream',['../classshuriken_1_1common_1_1ShurikenStream.html#abbb646007186960c475902b50d49fc61',1,'shuriken::common::ShurikenStream']]],
+  ['_7estringanalysis_35',['~StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a268dedd647648a4ad18d8b91e4077481',1,'shuriken::analysis::dex::StringAnalysis']]],
+  ['_7eunknown_36',['~Unknown',['../classshuriken_1_1parser_1_1dex_1_1Unknown.html#a59ddc7128e8f0a8ad2376abd37d73513',1,'shuriken::parser::dex::Unknown']]]
 ];

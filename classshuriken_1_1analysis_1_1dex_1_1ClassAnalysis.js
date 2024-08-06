@@ -2,8 +2,8 @@ var classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis =
 [
     [ "ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a88da8904d94b7f84e34d2ab9da6723a1", null ],
     [ "ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a8f9d1af1567a27c2e87f6fe655091c32", null ],
-    [ "add_field_xref_read", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a345664e8e0074af46be4a1297a62c105", null ],
-    [ "add_field_xref_write", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae0b758ad4f92fba7f98e9bd6393740b2", null ],
+    [ "add_field_xref_read", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a30c38c05cd3be00027e2842e76064772", null ],
+    [ "add_field_xref_write", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#afbf816ea0b76b146338f19c03240461f", null ],
     [ "add_method", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a30cd2e3d337eedbcff744300d1cf8e52", null ],
     [ "add_method_xref_from", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a87c7b484d7145108681ef814d49978c6", null ],
     [ "add_method_xref_to", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ac97523355472f0cd4b14ba355fcf0bce", null ],
@@ -14,6 +14,7 @@ var classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis =
     [ "extends", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae9403292a83d3383bda280173b90889a", null ],
     [ "get_classdef", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ad13bbf0c051b0bdcdb969342356eb499", null ],
     [ "get_externalclass", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#acd86698195fb12d273da6d9112a43989", null ],
+    [ "get_field_analysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#acfcc8d8c0889b178843073499f23d84b", null ],
     [ "get_field_analysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a5ed80733cca1cedd99138790ade196fa", null ],
     [ "get_fields", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#a5c88c0b10e1d984f8e72fdc12a085676", null ],
     [ "get_method_analysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#aba5240424af636c0dc54dfed82d46cca", null ],

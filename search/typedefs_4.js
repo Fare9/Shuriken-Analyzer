@@ -14,6 +14,8 @@ var searchData=
   ['exceptions_5fdata_5ft_11',['exceptions_data_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#ae408a80d8ca50935f6a30d2642fd0b5b',1,'shuriken::disassembler::dex']]],
   ['external_5fclasses_5fs_5ft_12',['external_classes_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a1ca12a5b3081da6e5e53ae9b07be8b28',1,'shuriken::analysis::dex::Analysis']]],
   ['external_5fclasses_5ft_13',['external_classes_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a383c45f9ba220743aa09d08dff731d14',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethods_5fs_5ft_14',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethods_5ft_15',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]]
+  ['external_5ffields_5fs_5ft_14',['external_fields_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a6ff2b1535a252d1b80704b296a5db9e4',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5ffields_5ft_15',['external_fields_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a8876eceb4f00a2bca93b1ec262b1b688',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethods_5fs_5ft_16',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethods_5ft_17',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]]
 ];

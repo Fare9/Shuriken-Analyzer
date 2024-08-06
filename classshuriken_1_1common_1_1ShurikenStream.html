@@ -142,6 +142,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a63e2a506435caec85a2099623c217021" id="r_a63e2a506435caec85a2099623c217021"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63e2a506435caec85a2099623c217021">read_dex_string</a> (std::int64_t offset)</td></tr>
 <tr class="memdesc:a63e2a506435caec85a2099623c217021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a dex string, these DexStrings start always with their size in uleb128 format.  <br /></td></tr>
 <tr class="separator:a63e2a506435caec85a2099623c217021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7e3238a804c607d2f3087b1d6a05cb" id="r_ada7e3238a804c607d2f3087b1d6a05cb"><td class="memItemLeft" align="right" valign="top">std::int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada7e3238a804c607d2f3087b1d6a05cb">readSignedInt</a> (int zwidth)</td></tr>
+<tr class="separator:ada7e3238a804c607d2f3087b1d6a05cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0de3ccf22edd6c6380d0f84f94a694" id="r_abb0de3ccf22edd6c6380d0f84f94a694"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb0de3ccf22edd6c6380d0f84f94a694">readUnsignedInt</a> (int zwidth, bool fillOnRight)</td></tr>
+<tr class="separator:abb0de3ccf22edd6c6380d0f84f94a694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1164fe27eace1cee1e2ac5c19824159b" id="r_a1164fe27eace1cee1e2ac5c19824159b"><td class="memItemLeft" align="right" valign="top">std::int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1164fe27eace1cee1e2ac5c19824159b">readSignedLong</a> (int zwidth)</td></tr>
+<tr class="separator:a1164fe27eace1cee1e2ac5c19824159b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80aca2edaf079f5184a619af353d7d70" id="r_a80aca2edaf079f5184a619af353d7d70"><td class="memItemLeft" align="right" valign="top">std::uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80aca2edaf079f5184a619af353d7d70">readUnsignedLong</a> (int zwidth, bool fillOnRight)</td></tr>
+<tr class="separator:a80aca2edaf079f5184a619af353d7d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24d11a7c6ebcb5386496837121f5e221" id="r_a24d11a7c6ebcb5386496837121f5e221"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a24d11a7c6ebcb5386496837121f5e221">readFloat</a> (int zwidth, bool fillOnRight)</td></tr>
+<tr class="separator:a24d11a7c6ebcb5386496837121f5e221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473ccc7773b5c6e1a43ddf0f410cb969" id="r_a473ccc7773b5c6e1a43ddf0f410cb969"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a473ccc7773b5c6e1a43ddf0f410cb969">readDouble</a> (int zwidth, bool fillOnRight)</td></tr>
+<tr class="separator:a473ccc7773b5c6e1a43ddf0f410cb969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -366,6 +378,124 @@ template&lt;typename T &gt; </div>
 
 <p>Read a number in uleb128 format. </p>
 <dl class="section return"><dt>Returns</dt><dd>uint64_t with the number </dd></dl>
+
+</div>
+</div>
+<a id="a473ccc7773b5c6e1a43ddf0f410cb969" name="a473ccc7773b5c6e1a43ddf0f410cb969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a473ccc7773b5c6e1a43ddf0f410cb969">&#9670;&#160;</a></span>readDouble()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double shuriken::common::ShurikenStream::readDouble </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>fillOnRight</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24d11a7c6ebcb5386496837121f5e221" name="a24d11a7c6ebcb5386496837121f5e221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24d11a7c6ebcb5386496837121f5e221">&#9670;&#160;</a></span>readFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float shuriken::common::ShurikenStream::readFloat </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>fillOnRight</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada7e3238a804c607d2f3087b1d6a05cb" name="ada7e3238a804c607d2f3087b1d6a05cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7e3238a804c607d2f3087b1d6a05cb">&#9670;&#160;</a></span>readSignedInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::int32_t shuriken::common::ShurikenStream::readSignedInt </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1164fe27eace1cee1e2ac5c19824159b" name="a1164fe27eace1cee1e2ac5c19824159b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1164fe27eace1cee1e2ac5c19824159b">&#9670;&#160;</a></span>readSignedLong()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::int64_t shuriken::common::ShurikenStream::readSignedLong </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb0de3ccf22edd6c6380d0f84f94a694" name="abb0de3ccf22edd6c6380d0f84f94a694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0de3ccf22edd6c6380d0f84f94a694">&#9670;&#160;</a></span>readUnsignedInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::uint32_t shuriken::common::ShurikenStream::readUnsignedInt </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>fillOnRight</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80aca2edaf079f5184a619af353d7d70" name="a80aca2edaf079f5184a619af353d7d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80aca2edaf079f5184a619af353d7d70">&#9670;&#160;</a></span>readUnsignedLong()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::uint64_t shuriken::common::ShurikenStream::readUnsignedLong </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zwidth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>fillOnRight</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -12,5 +12,6 @@ var searchData=
   ['extends_9',['extends',['../classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae9403292a83d3383bda280173b90889a',1,'shuriken::analysis::dex::ClassAnalysis']]],
   ['external_10',['external',['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732',1,'shuriken::analysis::dex::MethodAnalysis']]],
   ['externalclass_11',['ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a640ee1289e02d834266c9a7f0b64eb40',1,'shuriken::analysis::dex::ExternalClass']]],
-  ['externalmethod_12',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod']]]
+  ['externalfield_12',['ExternalField',['../classshuriken_1_1analysis_1_1dex_1_1ExternalField.html#a4a4854c4f7625dbd6954c4e28d1b731a',1,'shuriken::analysis::dex::ExternalField']]],
+  ['externalmethod_13',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod']]]
 ];

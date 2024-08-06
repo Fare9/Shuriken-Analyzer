@@ -125,6 +125,10 @@ Public Types</h2></td></tr>
 <tr class="separator:ad28f2185b3644aa95dff3f9a06177bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af74d9166a79ad379279c59e08b38ca3c" id="r_af74d9166a79ad379279c59e08b38ca3c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af74d9166a79ad379279c59e08b38ca3c">external_methods_s_t</a> = std::unordered_map&lt;std::string, std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html">ExternalMethod</a>&gt;&gt;</td></tr>
 <tr class="separator:af74d9166a79ad379279c59e08b38ca3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8876eceb4f00a2bca93b1ec262b1b688" id="r_a8876eceb4f00a2bca93b1ec262b1b688"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8876eceb4f00a2bca93b1ec262b1b688">external_fields_t</a> = std::unordered_map&lt;std::string, std::unique_ptr&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a>&gt;&gt;</td></tr>
+<tr class="separator:a8876eceb4f00a2bca93b1ec262b1b688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff2b1535a252d1b80704b296a5db9e4" id="r_a6ff2b1535a252d1b80704b296a5db9e4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ff2b1535a252d1b80704b296a5db9e4">external_fields_s_t</a> = std::unordered_map&lt;std::string, std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a>&gt;&gt;</td></tr>
+<tr class="separator:a6ff2b1535a252d1b80704b296a5db9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18c95aea4c50fe0d2b6b584036ce43c1" id="r_a18c95aea4c50fe0d2b6b584036ce43c1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18c95aea4c50fe0d2b6b584036ce43c1">string_analyses_t</a> = std::unordered_map&lt;std::string, std::unique_ptr&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a>&gt;&gt;</td></tr>
 <tr class="separator:a18c95aea4c50fe0d2b6b584036ce43c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd1e8235eefb7c9f95dd947601d0c0e9" id="r_abd1e8235eefb7c9f95dd947601d0c0e9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd1e8235eefb7c9f95dd947601d0c0e9">string_analyses_s_t</a> = std::unordered_map&lt;std::string, std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html">StringAnalysis</a>&gt;&gt;</td></tr>
@@ -164,6 +168,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41e415f80e5c949eb000ab03f4254ba9" id="r_a41e415f80e5c949eb000ab03f4254ba9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af74d9166a79ad379279c59e08b38ca3c">external_methods_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41e415f80e5c949eb000ab03f4254ba9">get_external_methods</a> ()</td></tr>
 <tr class="memdesc:a41e415f80e5c949eb000ab03f4254ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the ExternalMethods.  <br /></td></tr>
 <tr class="separator:a41e415f80e5c949eb000ab03f4254ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245123408b7bcd2b1c20bbdc0b5c4212" id="r_a245123408b7bcd2b1c20bbdc0b5c4212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a6ff2b1535a252d1b80704b296a5db9e4">external_fields_s_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a245123408b7bcd2b1c20bbdc0b5c4212">get_external_fields</a> ()</td></tr>
+<tr class="memdesc:a245123408b7bcd2b1c20bbdc0b5c4212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the ExternalFields.  <br /></td></tr>
+<tr class="separator:a245123408b7bcd2b1c20bbdc0b5c4212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a877cef708d04c055e1bcd595cbe92cbe" id="r_a877cef708d04c055e1bcd595cbe92cbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1FieldAnalysis.html">FieldAnalysis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a877cef708d04c055e1bcd595cbe92cbe">get_field_analysis</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1EncodedField.html">parser::dex::EncodedField</a> *field)</td></tr>
 <tr class="memdesc:a877cef708d04c055e1bcd595cbe92cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a field given an encoded field.  <br /></td></tr>
 <tr class="separator:a877cef708d04c055e1bcd595cbe92cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -254,6 +261,38 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6ff2b1535a252d1b80704b296a5db9e4" name="a6ff2b1535a252d1b80704b296a5db9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff2b1535a252d1b80704b296a5db9e4">&#9670;&#160;</a></span>external_fields_s_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a6ff2b1535a252d1b80704b296a5db9e4">shuriken::analysis::dex::Analysis::external_fields_s_t</a> = std::unordered_map&lt;std::string, std::reference_wrapper&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00034">34</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
+
+</div>
+</div>
+<a id="a8876eceb4f00a2bca93b1ec262b1b688" name="a8876eceb4f00a2bca93b1ec262b1b688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8876eceb4f00a2bca93b1ec262b1b688">&#9670;&#160;</a></span>external_fields_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a8876eceb4f00a2bca93b1ec262b1b688">shuriken::analysis::dex::Analysis::external_fields_t</a> = std::unordered_map&lt;std::string, std::unique_ptr&lt;<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a>&gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00033">33</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
+
+</div>
+</div>
 <a id="af74d9166a79ad379279c59e08b38ca3c" name="af74d9166a79ad379279c59e08b38ca3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af74d9166a79ad379279c59e08b38ca3c">&#9670;&#160;</a></span>external_methods_s_t</h2>
 
@@ -330,7 +369,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00034">34</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00037">37</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +385,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00033">33</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="analysis_8h_source.html#l00036">36</a> of file <a class="el" href="analysis_8h_source.html">analysis.h</a>.</p>
 
 </div>
 </div>
@@ -634,6 +673,26 @@ Public Member Functions</h2></td></tr>
 
 <p>Get a reference to external classes. </p>
 <dl class="section return"><dt>Returns</dt><dd>reference to external classes </dd></dl>
+
+</div>
+</div>
+<a id="a245123408b7bcd2b1c20bbdc0b5c4212" name="a245123408b7bcd2b1c20bbdc0b5c4212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245123408b7bcd2b1c20bbdc0b5c4212">&#9670;&#160;</a></span>get_external_fields()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a6ff2b1535a252d1b80704b296a5db9e4">external_fields_s_t</a> &amp; shuriken::analysis::dex::Analysis::get_external_fields </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return a reference to the ExternalFields. </p>
+<dl class="section return"><dt>Returns</dt><dd>reference to map with <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1ExternalField.html">ExternalField</a> </dd></dl>
 
 </div>
 </div>

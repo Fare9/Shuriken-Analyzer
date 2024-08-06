@@ -129,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad6bd2cb64f727c6bedf96fa0f5a31eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac32389bb42cc409f6afbffad8187c8b7" id="r_ac32389bb42cc409f6afbffad8187c8b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac32389bb42cc409f6afbffad8187c8b7">DVMBasicBlock</a> (<a class="el" href="#ac023667857161df10e7a367fb9acf97e">read_instructions_t</a> instructions_)</td></tr>
 <tr class="separator:ac32389bb42cc409f6afbffad8187c8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8affaa4295bd9820274a4873be0d933" id="r_ab8affaa4295bd9820274a4873be0d933"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8affaa4295bd9820274a4873be0d933">DVMBasicBlock</a> (std::uint64_t first_address, std::uint64_t last_address)</td></tr>
+<tr class="separator:ab8affaa4295bd9820274a4873be0d933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70564a46a3d5812b4a8b862c1c0768c2" id="r_a70564a46a3d5812b4a8b862c1c0768c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70564a46a3d5812b4a8b862c1c0768c2">DVMBasicBlock</a> (const <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> &amp;temp_obj)=delete</td></tr>
 <tr class="memdesc:a70564a46a3d5812b4a8b862c1c0768c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">avoid any kind of copy constructor  <br /></td></tr>
 <tr class="separator:a70564a46a3d5812b4a8b862c1c0768c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +160,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64cc3d9df1ca7f729ce662927bf97078" id="r_a64cc3d9df1ca7f729ce662927bf97078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64cc3d9df1ca7f729ce662927bf97078">set_try_block</a> (bool try_block)</td></tr>
 <tr class="memdesc:a64cc3d9df1ca7f729ce662927bf97078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the block is a try block.  <br /></td></tr>
 <tr class="separator:a64cc3d9df1ca7f729ce662927bf97078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a42029ed77d4e9a8c3b83b106c5c3e8" id="r_a4a42029ed77d4e9a8c3b83b106c5c3e8"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a42029ed77d4e9a8c3b83b106c5c3e8">get_catch_blocks</a> ()</td></tr>
+<tr class="separator:a4a42029ed77d4e9a8c3b83b106c5c3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6a53eb9564566391d4a6bf4a653a53" id="r_a6f6a53eb9564566391d4a6bf4a653a53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f6a53eb9564566391d4a6bf4a653a53">add_catch_block</a> (<a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> *bb)</td></tr>
+<tr class="memdesc:a6f6a53eb9564566391d4a6bf4a653a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a catch block for the try block.  <br /></td></tr>
+<tr class="separator:a6f6a53eb9564566391d4a6bf4a653a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51430ac371f3c562cbf2df75a7c02794" id="r_a51430ac371f3c562cbf2df75a7c02794"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51430ac371f3c562cbf2df75a7c02794">is_catch_block</a> () const</td></tr>
 <tr class="memdesc:a51430ac371f3c562cbf2df75a7c02794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the current block a catch-block?  <br /></td></tr>
 <tr class="separator:a51430ac371f3c562cbf2df75a7c02794"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,7 +183,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to represent a basic block in a dalvik method, basic blocks contains instructions and some metadata about the block. </p>
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00042">42</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00046">46</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a57e3194c29e379f49d4c64e3fecdc329" name="a57e3194c29e379f49d4c64e3fecdc329"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57e3194c29e379f49d4c64e3fecdc329">&#9670;&#160;</a></span>read_instructions_iterator_t</h2>
@@ -190,7 +197,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00062">62</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00077">77</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 
 </div>
 </div>
@@ -206,7 +213,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00063">63</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00078">78</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 
 </div>
 </div>
@@ -222,13 +229,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00061">61</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__analysis_8h_source.html#l00076">76</a> of file <a class="el" href="dex__analysis_8h_source.html">dex_analysis.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac32389bb42cc409f6afbffad8187c8b7" name="ac32389bb42cc409f6afbffad8187c8b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac32389bb42cc409f6afbffad8187c8b7">&#9670;&#160;</a></span>DVMBasicBlock() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32389bb42cc409f6afbffad8187c8b7">&#9670;&#160;</a></span>DVMBasicBlock() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,8 +251,29 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab8affaa4295bd9820274a4873be0d933" name="ab8affaa4295bd9820274a4873be0d933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8affaa4295bd9820274a4873be0d933">&#9670;&#160;</a></span>DVMBasicBlock() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">shuriken::analysis::dex::DVMBasicBlock::DVMBasicBlock </td>
+          <td>(</td>
+          <td class="paramtype">std::uint64_t</td>          <td class="paramname"><span class="paramname"><em>first_address</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::uint64_t</td>          <td class="paramname"><span class="paramname"><em>last_address</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a70564a46a3d5812b4a8b862c1c0768c2" name="a70564a46a3d5812b4a8b862c1c0768c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70564a46a3d5812b4a8b862c1c0768c2">&#9670;&#160;</a></span>DVMBasicBlock() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a70564a46a3d5812b4a8b862c1c0768c2">&#9670;&#160;</a></span>DVMBasicBlock() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,6 +300,49 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6f6a53eb9564566391d4a6bf4a653a53" name="a6f6a53eb9564566391d4a6bf4a653a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f6a53eb9564566391d4a6bf4a653a53">&#9670;&#160;</a></span>add_catch_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shuriken::analysis::dex::DVMBasicBlock::add_catch_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> *</td>          <td class="paramname"><span class="paramname"><em>bb</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a catch block for the try block. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">catch_block</td><td>the block to include </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4a42029ed77d4e9a8c3b83b106c5c3e8" name="a4a42029ed77d4e9a8c3b83b106c5c3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a42029ed77d4e9a8c3b83b106c5c3e8">&#9670;&#160;</a></span>get_catch_blocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt; <a class="el" href="classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html">DVMBasicBlock</a> * &gt; &amp; shuriken::analysis::dex::DVMBasicBlock::get_catch_blocks </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Get the catch blocks belonging to the try block </dd></dl>
+
+</div>
+</div>
 <a id="aa4b6f9db2de979c5942031b802de2f27" name="aa4b6f9db2de979c5942031b802de2f27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4b6f9db2de979c5942031b802de2f27">&#9670;&#160;</a></span>get_first_address()</h2>
 

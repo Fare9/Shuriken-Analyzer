@@ -48,6 +48,7 @@ var hierarchy =
       [ "exceptions::InvalidInstructionException", "classexceptions_1_1InvalidInstructionException.html", null ]
     ] ],
     [ "shuriken::analysis::dex::ExternalClass", "classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html", null ],
+    [ "shuriken::analysis::dex::ExternalField", "classshuriken_1_1analysis_1_1dex_1_1ExternalField.html", null ],
     [ "shuriken::analysis::dex::ExternalMethod", "classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html", null ],
     [ "std::false_type", null, [
       [ "shuriken::is_reference_wrapper< T::value_type >", "structshuriken_1_1is__reference__wrapper.html", [

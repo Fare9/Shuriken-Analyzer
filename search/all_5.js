@@ -31,9 +31,13 @@ var searchData=
   ['external_5fclass_2eh_28',['external_class.h',['../external__class_8h.html',1,'']]],
   ['external_5fclasses_5fs_5ft_29',['external_classes_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a1ca12a5b3081da6e5e53ae9b07be8b28',1,'shuriken::analysis::dex::Analysis']]],
   ['external_5fclasses_5ft_30',['external_classes_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a383c45f9ba220743aa09d08dff731d14',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethod_2eh_31',['external_method.h',['../external__method_8h.html',1,'']]],
-  ['external_5fmethods_5fs_5ft_32',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
-  ['external_5fmethods_5ft_33',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]],
-  ['externalclass_34',['ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html',1,'shuriken::analysis::dex::ExternalClass'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a640ee1289e02d834266c9a7f0b64eb40',1,'shuriken::analysis::dex::ExternalClass::ExternalClass()']]],
-  ['externalmethod_35',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html',1,'shuriken::analysis::dex::ExternalMethod'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod::ExternalMethod()']]]
+  ['external_5ffield_2eh_31',['external_field.h',['../external__field_8h.html',1,'']]],
+  ['external_5ffields_5fs_5ft_32',['external_fields_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a6ff2b1535a252d1b80704b296a5db9e4',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5ffields_5ft_33',['external_fields_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a8876eceb4f00a2bca93b1ec262b1b688',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethod_2eh_34',['external_method.h',['../external__method_8h.html',1,'']]],
+  ['external_5fmethods_5fs_5ft_35',['external_methods_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af74d9166a79ad379279c59e08b38ca3c',1,'shuriken::analysis::dex::Analysis']]],
+  ['external_5fmethods_5ft_36',['external_methods_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad28f2185b3644aa95dff3f9a06177bee',1,'shuriken::analysis::dex::Analysis']]],
+  ['externalclass_37',['ExternalClass',['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html',1,'shuriken::analysis::dex::ExternalClass'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalClass.html#a640ee1289e02d834266c9a7f0b64eb40',1,'shuriken::analysis::dex::ExternalClass::ExternalClass()']]],
+  ['externalfield_38',['ExternalField',['../classshuriken_1_1analysis_1_1dex_1_1ExternalField.html',1,'shuriken::analysis::dex::ExternalField'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalField.html#a4a4854c4f7625dbd6954c4e28d1b731a',1,'shuriken::analysis::dex::ExternalField::ExternalField()']]],
+  ['externalmethod_39',['ExternalMethod',['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html',1,'shuriken::analysis::dex::ExternalMethod'],['../classshuriken_1_1analysis_1_1dex_1_1ExternalMethod.html#a2d6e795209e76cb350eaf4a57f05770e',1,'shuriken::analysis::dex::ExternalMethod::ExternalMethod()']]]
 ];

@@ -5,10 +5,16 @@ var searchData=
   ['read_5fdex_5fstring_2',['read_dex_string',['../classshuriken_1_1common_1_1ShurikenStream.html#a63e2a506435caec85a2099623c217021',1,'shuriken::common::ShurikenStream']]],
   ['read_5fsleb128_3',['read_sleb128',['../classshuriken_1_1common_1_1ShurikenStream.html#a439795a02ba4bda389428820e216ab99',1,'shuriken::common::ShurikenStream']]],
   ['read_5fuleb128_4',['read_uleb128',['../classshuriken_1_1common_1_1ShurikenStream.html#a8ede699ae8947fddd2b88b07d1bb35b6',1,'shuriken::common::ShurikenStream']]],
-  ['remove_5fnode_5',['remove_node',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3eb68b08dbfd1301e90b2185cfd68f49',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reverse_5fedges_6',['reverse_edges',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a0c0146bf285c3c0664d002b4e74f01eb',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reverse_5finstructions_7',['reverse_instructions',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#ad6bd2cb64f727c6bedf96fa0f5a31eb6',1,'shuriken::analysis::dex::DVMBasicBlock']]],
-  ['reverse_5fnodes_8',['reverse_nodes',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9d8fa85abc7d064ce303ae5862670d03',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reverse_5fpredecessors_9',['reverse_predecessors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aedcc3c4279291d734dc4b52976888b5b',1,'shuriken::analysis::dex::BasicBlocks']]],
-  ['reverse_5fsuccessors_10',['reverse_successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae95f95307dc7de5099529124ee96e564',1,'shuriken::analysis::dex::BasicBlocks']]]
+  ['readdouble_5',['readDouble',['../classshuriken_1_1common_1_1ShurikenStream.html#a473ccc7773b5c6e1a43ddf0f410cb969',1,'shuriken::common::ShurikenStream']]],
+  ['readfloat_6',['readFloat',['../classshuriken_1_1common_1_1ShurikenStream.html#a24d11a7c6ebcb5386496837121f5e221',1,'shuriken::common::ShurikenStream']]],
+  ['readsignedint_7',['readSignedInt',['../classshuriken_1_1common_1_1ShurikenStream.html#ada7e3238a804c607d2f3087b1d6a05cb',1,'shuriken::common::ShurikenStream']]],
+  ['readsignedlong_8',['readSignedLong',['../classshuriken_1_1common_1_1ShurikenStream.html#a1164fe27eace1cee1e2ac5c19824159b',1,'shuriken::common::ShurikenStream']]],
+  ['readunsignedint_9',['readUnsignedInt',['../classshuriken_1_1common_1_1ShurikenStream.html#abb0de3ccf22edd6c6380d0f84f94a694',1,'shuriken::common::ShurikenStream']]],
+  ['readunsignedlong_10',['readUnsignedLong',['../classshuriken_1_1common_1_1ShurikenStream.html#a80aca2edaf079f5184a619af353d7d70',1,'shuriken::common::ShurikenStream']]],
+  ['remove_5fnode_11',['remove_node',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3eb68b08dbfd1301e90b2185cfd68f49',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['reverse_5fedges_12',['reverse_edges',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a0c0146bf285c3c0664d002b4e74f01eb',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['reverse_5finstructions_13',['reverse_instructions',['../classshuriken_1_1analysis_1_1dex_1_1DVMBasicBlock.html#ad6bd2cb64f727c6bedf96fa0f5a31eb6',1,'shuriken::analysis::dex::DVMBasicBlock']]],
+  ['reverse_5fnodes_14',['reverse_nodes',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9d8fa85abc7d064ce303ae5862670d03',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['reverse_5fpredecessors_15',['reverse_predecessors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aedcc3c4279291d734dc4b52976888b5b',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['reverse_5fsuccessors_16',['reverse_successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae95f95307dc7de5099529124ee96e564',1,'shuriken::analysis::dex::BasicBlocks']]]
 ];

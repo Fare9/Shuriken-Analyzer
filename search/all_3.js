@@ -27,7 +27,7 @@ var searchData=
   ['classdef_24',['ClassDef',['../classshuriken_1_1parser_1_1dex_1_1ClassDef.html',1,'shuriken::parser::dex::ClassDef'],['../classshuriken_1_1parser_1_1dex_1_1ClassDef.html#aecf20769be4af4895eaf7b6286e64bc2',1,'shuriken::parser::dex::ClassDef::ClassDef()=default']]],
   ['classdefstruct_5ft_25',['classdefstruct_t',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html',1,'shuriken::parser::dex::ClassDef']]],
   ['classxref_5fiterator_5ft_26',['classxref_iterator_t',['../namespaceshuriken_1_1analysis_1_1dex.html#a18223d3a4ee9458a731a837f84520bd8',1,'shuriken::analysis::dex']]],
-  ['classxref_5ft_27',['classxref_t',['../namespaceshuriken_1_1analysis_1_1dex.html#a8836b7bf1faa5136e9e23136529784dc',1,'shuriken::analysis::dex']]],
+  ['classxref_5ft_27',['classxref_t',['../namespaceshuriken_1_1analysis_1_1dex.html#a981a99c81572c48c3f3d3d959eac83f4',1,'shuriken::analysis::dex']]],
   ['cls_28',['cls',['../structhdvm__class__method__idx__t__.html#a68ebd08289277cfddebce5e548496812',1,'hdvm_class_method_idx_t_::cls'],['../structhdvm__class__field__idx__t__.html#aafeb230db3bac0cdfc19137815cb2971',1,'hdvm_class_field_idx_t_::cls'],['../structhdvm__class__idx__t__.html#a80f9023148c37f073ef63470798b46fc',1,'hdvm_class_idx_t_::cls']]],
   ['code_29',['code',['../structhdvmmethod__t__.html#abb5094d4ea0314f6caa51ec6f3e3c782',1,'hdvmmethod_t_']]],
   ['code_5fitem_5fstruct_5ft_30',['code_item_struct_t',['../structshuriken_1_1parser_1_1dex_1_1CodeItemStruct_1_1code__item__struct__t.html',1,'shuriken::parser::dex::CodeItemStruct']]],

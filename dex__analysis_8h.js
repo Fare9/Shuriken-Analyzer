@@ -13,5 +13,5 @@ var dex__analysis_8h =
     [ "class_method_idx_iterator_t", "dex__analysis_8h.html#abc0f6b98bb5018b4192a10642ded4a3e", null ],
     [ "class_method_idx_t", "dex__analysis_8h.html#a3d5c1196f56af70c332c64de3c92e829", null ],
     [ "classxref_iterator_t", "dex__analysis_8h.html#a18223d3a4ee9458a731a837f84520bd8", null ],
-    [ "classxref_t", "dex__analysis_8h.html#a8836b7bf1faa5136e9e23136529784dc", null ]
+    [ "classxref_t", "dex__analysis_8h.html#a981a99c81572c48c3f3d3d959eac83f4", null ]
 ];

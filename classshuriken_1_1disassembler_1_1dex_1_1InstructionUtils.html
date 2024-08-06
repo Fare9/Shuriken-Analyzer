@@ -111,11 +111,50 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3211e6c6e4ca87cd9334432e4aa05ade" id="r_a3211e6c6e4ca87cd9334432e4aa05ade"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030">DexOpcodes::operation_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3211e6c6e4ca87cd9334432e4aa05ade">get_operation_type_from_opcode</a> (<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae793f3a51805cd231cd51b0c39851a0c">DexOpcodes::opcodes</a> opcode)</td></tr>
 <tr class="memdesc:a3211e6c6e4ca87cd9334432e4aa05ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the operation type from the given opcode.  <br /></td></tr>
 <tr class="separator:a3211e6c6e4ca87cd9334432e4aa05ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64106bab7bd5d9d525e817daf072e7a2" id="r_a64106bab7bd5d9d525e817daf072e7a2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030">DexOpcodes::operation_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64106bab7bd5d9d525e817daf072e7a2">get_operation_type_from_instruction</a> (<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">Instruction</a> *instr)</td></tr>
+<tr class="memdesc:a64106bab7bd5d9d525e817daf072e7a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get operation type from a given instruction.  <br /></td></tr>
+<tr class="separator:a64106bab7bd5d9d525e817daf072e7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c38aad2c6c75a18804ad4b6899995a5" id="r_a3c38aad2c6c75a18804ad4b6899995a5"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c38aad2c6c75a18804ad4b6899995a5">is_jump_instruction</a> (<a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">Instruction</a> *instr)</td></tr>
+<tr class="separator:a3c38aad2c6c75a18804ad4b6899995a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="dex__instructions_8h_source.html#l00051">51</a> of file <a class="el" href="dex__instructions_8h_source.html">dex_instructions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dex__instructions_8h_source.html#l00054">54</a> of file <a class="el" href="dex__instructions_8h_source.html">dex_instructions.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a64106bab7bd5d9d525e817daf072e7a2" name="a64106bab7bd5d9d525e817daf072e7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64106bab7bd5d9d525e817daf072e7a2">&#9670;&#160;</a></span>get_operation_type_from_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030">DexOpcodes::operation_type</a> shuriken::disassembler::dex::InstructionUtils::get_operation_type_from_instruction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">Instruction</a> *</td>          <td class="paramname"><span class="paramname"><em>instr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get operation type from a given instruction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instr</td><td>instruction to retrieve the operation type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>operation type </dd></dl>
+
+</div>
+</div>
 <a id="a3211e6c6e4ca87cd9334432e4aa05ade" name="a3211e6c6e4ca87cd9334432e4aa05ade"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3211e6c6e4ca87cd9334432e4aa05ade">&#9670;&#160;</a></span>get_operation_type_from_opcode()</h2>
 
@@ -141,6 +180,32 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Get the operation type from the given opcode. </p>
 <dl class="section return"><dt>Returns</dt><dd>operation type </dd></dl>
+
+</div>
+</div>
+<a id="a3c38aad2c6c75a18804ad4b6899995a5" name="a3c38aad2c6c75a18804ad4b6899995a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c38aad2c6c75a18804ad4b6899995a5">&#9670;&#160;</a></span>is_jump_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool shuriken::disassembler::dex::InstructionUtils::is_jump_instruction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1Instruction.html">Instruction</a> *</td>          <td class="paramname"><span class="paramname"><em>instr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>if operation type is a jump of any type unconditional, conditional, switch </dd></dl>
 
 </div>
 </div>
