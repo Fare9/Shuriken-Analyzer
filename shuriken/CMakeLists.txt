@@ -15,9 +15,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 # enable compiler warnings
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-add_compile_options(-Wall -Wpedantic -Wextra -Werror)
+add_compile_options(-Wall -Wpedantic -Wextra -Werror -Wno-zero-length-array)
 elseif(MSVC)
-add_compile_options(/W4 /WX)
+add_compile_options(/W4 /WX /wd4200)
 endif()
 
 # Compiler for the project
