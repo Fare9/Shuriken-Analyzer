@@ -160,6 +160,15 @@ shuriken::iterator_range<BasicBlocks::reversenodesetiterator_t> BasicBlocks::rev
     return make_range(predecessors_[node].rbegin(), predecessors_[node].rend());
 }
 
+BasicBlocks::~BasicBlocks() {
+    if (nodes_.size() > 0) {
+        for (auto & node : nodes_) {
+            delete node;
+        }
+        nodes_.clear();
+    }
+}
+
 size_t BasicBlocks::get_number_of_basic_blocks() const {
     return nodes_.size();
 }

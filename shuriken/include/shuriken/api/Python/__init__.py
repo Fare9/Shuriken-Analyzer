@@ -212,6 +212,18 @@ class Dex(object):
         self.class_analysis_by_name[class_name] = ptr.contents
         return self.class_analysis_by_name[class_name]
 
+    def get_analyzed_class_by_hdvmclass(self, class_: ctypes.POINTER(hdvmclass_t)) -> hdvmclassanalysis_t:
+        class_name = class_.class_name.decode()
+        _shuriken.get_analyzed_class_by_hdvmclass.argtypes = [ctypes.c_void_p, ctypes.POINTER(hdvmclass_t)]
+        _shuriken.get_analyzed_class.restype = ctypes.POINTER(hdvmclassanalysis_t)
+        ptr = ctypes.cast(
+            _shuriken.get_analyzed_class(self.dex_context_object, class_),
+            ctypes.POINTER(hdvmclassanalysis_t))
+        if ptr == 0:
+            return None
+        self.class_analysis_by_name[class_name] = ptr.contents
+        return self.class_analysis_by_name[class_name]
+
 
 
 if __name__ == "__main__":

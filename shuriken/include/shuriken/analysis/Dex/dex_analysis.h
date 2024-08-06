@@ -239,7 +239,7 @@ namespace shuriken::analysis::dex {
 
         /// @brief Destructor of the BasicBlocks, we need
         /// to free the memory
-        ~BasicBlocks() = default;
+        ~BasicBlocks();
 
         /// @brief Return the number of basic blocks in the graph
         /// @return number of basic blocks
@@ -394,7 +394,7 @@ namespace shuriken::analysis::dex {
         shuriken::disassembler::dex::DisassembledMethod *disassembled;
 
         /// @brief basic blocks from the method
-        BasicBlocks basic_blocks;
+        std::unique_ptr<BasicBlocks> basic_blocks;
 
         /// @brief fields read in the method
         class_field_idx_t xrefread;
@@ -441,6 +441,8 @@ namespace shuriken::analysis::dex {
 
         MethodAnalysis(ExternalMethod *external_method);
 
+        ~MethodAnalysis() = default;
+
         /// @brief Dump the method as a dot file into
         /// the current path
         /// @param file_path reference to a path where
@@ -452,7 +454,7 @@ namespace shuriken::analysis::dex {
         bool external() const;
 
         /// @return Basic blocks of the method with the CFG
-        BasicBlocks &get_basic_blocks();
+        BasicBlocks *get_basic_blocks();
 
         /// @return Disassembled method object which contains the instructions
         shuriken::disassembler::dex::DisassembledMethod *get_disassembled_method();

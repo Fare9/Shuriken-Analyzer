@@ -14,12 +14,13 @@ using namespace shuriken::analysis::dex;
 
 MethodAnalysis::MethodAnalysis(shuriken::parser::dex::EncodedMethod *encoded_method,
                                shuriken::disassembler::dex::DisassembledMethod *disassembled)
-    : is_external(false), method_encoded(encoded_method), disassembled(disassembled) {
+    : is_external(false), method_encoded(encoded_method), disassembled(disassembled),
+        basic_blocks(std::make_unique<BasicBlocks>()) {
     create_basic_blocks();
 }
 
 MethodAnalysis::MethodAnalysis(ExternalMethod *external_method)
-    : is_external(true), method_encoded(external_method) {
+    : is_external(true), method_encoded(external_method), basic_blocks(std::make_unique<BasicBlocks>())  {
 }
 
 void MethodAnalysis::dump_dot_file(std::string &file_path) {
@@ -32,8 +33,8 @@ bool MethodAnalysis::external() const {
     return is_external;
 }
 
-BasicBlocks &MethodAnalysis::get_basic_blocks() {
-    return basic_blocks;
+BasicBlocks *MethodAnalysis::get_basic_blocks() {
+    return basic_blocks.get();
 }
 
 shuriken::disassembler::dex::DisassembledMethod *MethodAnalysis::get_disassembled_method() {
@@ -81,7 +82,7 @@ std::string_view MethodAnalysis::toString() {
     if (method_string.empty()) {
         std::stringstream ss;
         ss << get_full_name() << '\n';
-        ss << basic_blocks.toString();
+        ss << basic_blocks->toString();
         method_string = ss.str();
     }
     return method_string;
@@ -213,7 +214,7 @@ void MethodAnalysis::create_basic_blocks() {
 
             // always insert the first block
             if (start == 0)
-                basic_blocks.add_node(current);
+                basic_blocks->add_node(current);
             // for the next block
             start = end + current->get_terminator()->get_instruction_length();
 
@@ -223,11 +224,11 @@ void MethodAnalysis::create_basic_blocks() {
                 /// from a fallthrough block
                 auto next = internal_disassembler.determine_next(prev->get_terminator(), prev->get_last_address());
                 if (next.size() == 1 && next[0] == start)// it's a fallthrough
-                    basic_blocks.add_edge(prev, current);
+                    basic_blocks->add_edge(prev, current);
                 /// in other case, just add the node, and later
                 /// will be added the edge
                 else
-                    basic_blocks.add_node(current);
+                    basic_blocks->add_node(current);
             }
         }
         /// update the end pointer
@@ -236,15 +237,15 @@ void MethodAnalysis::create_basic_blocks() {
 
     if (current == nullptr) {
         current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
-        basic_blocks.add_node(current);
+        basic_blocks->add_node(current);
     } else if (start != end) {
         prev = current;
         current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
         auto next = internal_disassembler.determine_next(prev->get_terminator(), prev->get_last_address());
         if (next.size() == 1 && next[0] == start)// it's a fallthrough
-            basic_blocks.add_edge(prev, current);
+            basic_blocks->add_edge(prev, current);
         else
-            basic_blocks.add_node(current);
+            basic_blocks->add_node(current);
     }
 
     auto &last_instr = disassembled->get_instructions_container().back();
@@ -253,37 +254,37 @@ void MethodAnalysis::create_basic_blocks() {
     /// add the jump targets
     for (const auto &jump_target: target_jumps) {
         auto src_idx = jump_target.first;
-        auto src = basic_blocks.get_basic_block_by_idx(src_idx);
+        auto src = basic_blocks->get_basic_block_by_idx(src_idx);
         /// need to check how target jump is generated
         if (src_idx >= out_range || src == nullptr)
             continue;
 
         for (auto dst_idx: jump_target.second) {
-            auto dst = basic_blocks.get_basic_block_by_idx(dst_idx);
+            auto dst = basic_blocks->get_basic_block_by_idx(dst_idx);
             /// need to check how target jump is generated
             // TODO: Needs review on casting
             if (dst_idx >= (int64_t) out_range || dst == nullptr)
                 continue;
-            basic_blocks.add_edge(src, dst);
+            basic_blocks->add_edge(src, dst);
         }
     }
 
     for (const auto &except: disassembled->get_exceptions()) {
         for (const auto &handler: except.handler) {
-            auto catch_bb = basic_blocks.get_basic_block_by_idx(handler.handler_start_addr);
+            auto catch_bb = basic_blocks->get_basic_block_by_idx(handler.handler_start_addr);
             if (catch_bb == nullptr) {
-                basic_blocks.add_node(new DVMBasicBlock(handler.handler_start_addr, handler.handler_start_addr + 1));
+                basic_blocks->add_node(new DVMBasicBlock(handler.handler_start_addr, handler.handler_start_addr + 1));
             }
         }
     }
 
     /// add the exceptions
     for (const auto &except: disassembled->get_exceptions()) {
-        auto try_bb = basic_blocks.get_basic_block_by_idx(except.try_value_start_addr);
+        auto try_bb = basic_blocks->get_basic_block_by_idx(except.try_value_start_addr);
         try_bb->set_try_block(true);
 
         for (const auto &handler: except.handler) {
-            auto catch_bb = basic_blocks.get_basic_block_by_idx(handler.handler_start_addr);
+            auto catch_bb = basic_blocks->get_basic_block_by_idx(handler.handler_start_addr);
             try_bb->add_catch_block(catch_bb);
             catch_bb->set_catch_block(true);
             catch_bb->set_handler_type(handler.handler_type);
@@ -365,10 +366,10 @@ void MethodAnalysis::dump_method_dot(std::ofstream &dot_file) {
     dot_file << "node [shape=box, style=filled, fillcolor=lightgrey, fontname=\"Courier\", fontsize=\"10\"];\n";
     dot_file << "edge [color=black, arrowhead=open];\n";
 
-    for (auto bb: basic_blocks.nodes())
+    for (auto bb: basic_blocks->nodes())
         dump_block_dot(dot_file, bb);
 
-    for (const auto &edge: basic_blocks.edges()) {
+    for (const auto &edge: basic_blocks->edges()) {
         auto terminator_instr = edge.first->get_terminator();
 
         auto operation = shuriken::disassembler::dex::InstructionUtils::get_operation_type_from_opcode(

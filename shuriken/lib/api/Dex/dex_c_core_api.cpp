@@ -251,7 +251,7 @@ namespace {
         }
 
         // get the number of blocks
-        bbs->n_of_blocks = methodAnalysis->get_basic_blocks().get_number_of_basic_blocks();
+        bbs->n_of_blocks = methodAnalysis->get_basic_blocks()->get_number_of_basic_blocks();
         // allocate memory for the blocks
         bbs->blocks = (hdvmbasicblock_t *) malloc(bbs->n_of_blocks * sizeof(hdvmbasicblock_t));
         // get the disassembled instructions of the method to
@@ -259,7 +259,7 @@ namespace {
                 return_or_create_disassembled_method_internal(opaque_struct, methodAnalysis->get_full_name());
         // now create all the data in the blocks
         int i = 0;
-        auto nodes = methodAnalysis->get_basic_blocks().nodes();
+        auto nodes = methodAnalysis->get_basic_blocks()->nodes();
         for (auto node: nodes) {
             bbs->blocks[i].name = node->get_name().data();
             bbs->blocks[i].try_block = node->is_try_block() ? 1 : 0;
@@ -609,6 +609,8 @@ namespace {
                 free(method_core_api->exception_information->handler);
                 method_core_api->exception_information->handler = nullptr;
             }
+        }
+        if (method_core_api->exception_information) {
             free(method_core_api->exception_information);
             method_core_api->exception_information = nullptr;
         }
@@ -652,6 +654,7 @@ namespace {
         if (dex_opaque_struct->disassembler) {
             for (auto &method: dex_opaque_struct->disassembled_methods) {
                 destroy_disassembled_method(method.second);
+                free(method.second);
                 method.second = nullptr;
             }
             dex_opaque_struct->disassembled_methods.clear();
@@ -773,6 +776,11 @@ void analyze_classes(hDexContext context) {
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     if (opaque_struct->analysis == nullptr) throw std::runtime_error{"Error, analysis object cannot be null"};
     opaque_struct->analysis->create_xrefs();
+}
+
+hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t * class_) {
+    if (class_ == nullptr) throw std::runtime_error{"hdvmclass_t provided is null"};
+    return get_analyzed_class(context, class_->class_name);
 }
 
 hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) {
