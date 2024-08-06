@@ -125,3 +125,84 @@ std::string ShurikenStream::read_dex_string(std::int64_t offset) {
     // return the new string
     return new_str;
 }
+
+std::int32_t ShurikenStream::readSignedInt(int zwidth) {
+    std::int32_t result = 0;
+    std::uint8_t aux;
+    for (int i = zwidth; i >= 0; i--) {
+        input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+        result = (result >> 8) | ((aux & 0xff) << 24);
+    }
+    result >>= (3 - zwidth) * 8;
+    return result;
+}
+
+std::uint32_t ShurikenStream::readUnsignedInt(int zwidth, bool fillOnRight) {
+    std::uint32_t result = 0;
+    std::uint8_t aux;
+    if (!fillOnRight) {
+        for (int i = zwidth; i >= 0; i--) {
+            input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+            result = (result >> 8) | ((aux & 0xff) << 24);
+        }
+        result >>= (3 - zwidth) * 8;
+    } else {
+        for (int i = zwidth; i >= 0; i--) {
+            input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+            result = (result >> 8) | ((aux & 0xff) << 24);
+        }
+    }
+    return result;
+}
+
+std::int64_t ShurikenStream::readSignedLong(int zwidth) {
+    std::int64_t result = 0;
+    std::uint8_t aux;
+    for (int i = zwidth; i >= 0; i--) {
+        input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+        result = (result >> 8) | ((aux & 0xffL) << 56);
+    }
+    result >>= (7 - zwidth) * 8;
+    return result;
+}
+
+std::uint64_t ShurikenStream::readUnsignedLong(int zwidth, bool fillOnRight) {
+    std::uint64_t result = 0;
+    std::uint8_t aux;
+
+    if (!fillOnRight) {
+        for (int i = zwidth; i >= 0; i--) {
+            input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+            result = (result >> 8) | ((aux & 0xffL) << 56);
+        }
+        result >>= (7 - zwidth) * 8;
+    } else {
+        for (int i = zwidth; i >= 0; i--) {
+            input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
+            result = (result >> 8) | ((aux & 0xffL) << 56);
+        }
+    }
+
+    return result;
+}
+
+float ShurikenStream::readFloat(int zwidth, bool fillOnRight) {
+    union int_float_bits {
+        uint32_t int_bits;
+        float float_bits;
+    };
+
+    int_float_bits bits;
+    bits.int_bits = readUnsignedInt(zwidth, fillOnRight);
+    return bits.float_bits;
+}
+
+double ShurikenStream::readDouble(int zwidth, bool fillOnRight) {
+    union long_double_bits {
+        std::uint64_t long_bits;
+        double double_bits;
+    };
+    long_double_bits bits;
+    bits.long_bits = readUnsignedLong(zwidth, fillOnRight);
+    return bits.double_bits;
+}

@@ -10,6 +10,7 @@
 #define SHURIKENPROJECT_DEX_ANALYSIS_H
 
 #include "shuriken/analysis/Dex/external_class.h"
+#include "shuriken/analysis/Dex/external_field.h"
 #include "shuriken/analysis/Dex/external_method.h"
 #include "shuriken/disassembler/Dex/disassembled_method.h"
 #include "shuriken/parser/Dex/dex_encoded.h"
@@ -34,7 +35,10 @@ namespace shuriken::analysis::dex {
     using class_idx_t = std::vector<std::pair<ClassAnalysis *, std::uint64_t>>;
     using class_idx_iterator_t = class_idx_t::iterator;
 
-    using classxref_t = std::unordered_map<ClassAnalysis *, std::set<std::tuple<shuriken::dex::TYPES::ref_type, MethodAnalysis *, std::uint64_t>>>;
+    using classxref_t = std::unordered_map<ClassAnalysis *,
+                                           std::set<std::tuple<shuriken::dex::TYPES::ref_type,
+                                                               MethodAnalysis *,
+                                                               std::uint64_t>>>;
     using classxref_iterator_t = classxref_t::iterator;
 
     /// @brief Class to represent a basic block in a dalvik method, basic blocks contains
@@ -46,10 +50,21 @@ namespace shuriken::analysis::dex {
 
         /// @brief does it contain the code from try
         bool try_block = false;
+        /// @brief which are their catch blocks
+        std::set<DVMBasicBlock *> catch_blocks;
+
         /// @brief does it contain the code from catch block
         bool catch_block = false;
+
+        /// @brief some catch block at the end of the code will
+        /// be empty
+        bool is_empty_block = false;
+
+        std::uint64_t first_address = 0;
+        std::uint64_t last_address = 0;
+
         /// @brief type of contained handler
-        parser::dex::DVMType *handler_type;
+        parser::dex::DVMType *handler_types;
 
         /// @brief Name of the block composed by first and last address
         std::string name;
@@ -72,6 +87,8 @@ namespace shuriken::analysis::dex {
 
     public:
         DVMBasicBlock(read_instructions_t instructions_);
+
+        DVMBasicBlock(std::uint64_t first_address, std::uint64_t last_address);
 
         /// avoid any kind of copy constructor
         DVMBasicBlock(const DVMBasicBlock &temp_obj) = delete;
@@ -108,6 +125,14 @@ namespace shuriken::analysis::dex {
         /// @brief Set the block is a try block
         /// @param try_block new value
         void set_try_block(bool try_block);
+
+        /// @return Get the catch blocks belonging to
+        /// the try block
+        std::set<DVMBasicBlock *> &get_catch_blocks();
+
+        /// @brief Add a catch block for the try block
+        /// @param catch_block the block to include
+        void add_catch_block(DVMBasicBlock *bb);
 
         /// @brief Is the current block a catch-block?
         /// @return true in case this is a catch block
@@ -262,8 +287,13 @@ namespace shuriken::analysis::dex {
     /// @brief specification of a field analysis
     class FieldAnalysis {
     private:
-        /// @brief Encoded field that contains the information of the Field
-        parser::dex::EncodedField *field;
+        /// @brief Encoded field or ExternalField that contains the information of the Field
+        std::variant<parser::dex::EncodedField *,
+                     ExternalField *>
+                field;
+
+        /// @brief boolean saying if it is external
+        bool external;
         /// @brief name of the field
         std::string_view name;
         /// @brief xrefs where field is read
@@ -274,9 +304,15 @@ namespace shuriken::analysis::dex {
     public:
         FieldAnalysis(parser::dex::EncodedField *field);
 
+        FieldAnalysis(ExternalField *field);
+
         ~FieldAnalysis() = default;
 
-        parser::dex::EncodedField *get_encoded_field();
+        bool is_external() const;
+
+        parser::dex::EncodedField *get_encoded_field() const;
+
+        ExternalField *get_external_field() const;
 
         std::string_view get_name();
 
@@ -585,31 +621,45 @@ namespace shuriken::analysis::dex {
         /// @return FieldAnalysis pointer
         FieldAnalysis *get_field_analysis(shuriken::parser::dex::EncodedField *field);
 
+        /// @brief Given an encoded field return a FieldAnalysis pointer
+        /// @param field field to look for
+        /// @return FieldAnalysis pointer
+        FieldAnalysis *get_field_analysis(ExternalField *field);
+
+
+        /// @brief Add a cross reference of a field read
         void add_field_xref_read(MethodAnalysis *method,
                                  ClassAnalysis *classobj,
-                                 shuriken::parser::dex::EncodedField *field,
+                                 std::variant<shuriken::parser::dex::EncodedField *,
+                                              ExternalField *>
+                                         field,
                                  std::uint64_t off);
 
+        /// @brief Add a cross reference of a field write
         void add_field_xref_write(MethodAnalysis *method,
                                   ClassAnalysis *classobj,
-                                  shuriken::parser::dex::EncodedField *field,
+                                  std::variant<shuriken::parser::dex::EncodedField *,
+                                               ExternalField *>
+                                          field,
                                   std::uint64_t off);
 
+        /// @brief Add a cross reference of a method called to
         void add_method_xref_to(MethodAnalysis *method1,
                                 ClassAnalysis *classobj,
                                 MethodAnalysis *method2,
                                 std::uint64_t off);
 
+        /// @brief Add a cross reference of a method called from
         void add_method_xref_from(MethodAnalysis *method1,
                                   ClassAnalysis *classobj,
                                   MethodAnalysis *method2,
                                   std::uint64_t off);
-
+        /// @brief Add xref to another class
         void add_xref_to(shuriken::dex::TYPES::ref_type ref_kind,
                          ClassAnalysis *classobj,
                          MethodAnalysis *methodobj,
                          std::uint64_t offset);
-
+        /// @brief Add xref from another class
         void add_xref_from(shuriken::dex::TYPES::ref_type ref_kind,
                            ClassAnalysis *classobj,
                            MethodAnalysis *methodobj,

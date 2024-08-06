@@ -124,8 +124,13 @@ namespace {
         method->method_name = method_id->get_method_name().data();
         method->prototype = method_id->get_prototype()->get_dalvik_prototype().data();
         method->access_flags = encoded_method->get_flags();
-        method->code_size = encoded_method->get_code_item()->get_bytecode().size();
-        method->code = encoded_method->get_code_item()->get_bytecode().data();
+        if (encoded_method->get_code_item()) {
+            method->code_size = encoded_method->get_code_item()->get_bytecode().size();
+            method->code = encoded_method->get_code_item()->get_bytecode().data();
+        } else {
+            method->code_size = 0;
+            method->code = nullptr;
+        }
         method->dalvik_name = encoded_method->getMethodID()->dalvik_name_format().data();
         method->demangled_name = encoded_method->getMethodID()->demangle().data();
     }
@@ -289,7 +294,7 @@ namespace {
     /// @brief get or create a hdvmfieldanalysis_t structure given a FieldAnalysis object
     hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
                                             FieldAnalysis *fieldAnalysis) {
-        auto full_name = fieldAnalysis->get_encoded_field()->get_field()->pretty_field();
+        auto full_name = fieldAnalysis->get_name().data();
         auto full_name_str = std::string(full_name);
         if (opaque_struct->field_analyses.contains(full_name_str))
             return opaque_struct->field_analyses[full_name_str];

@@ -48,11 +48,22 @@ namespace shuriken::disassembler::dex {
         NONE_SWITCH
     };
 
+    /// Declaration for using it in InstructionUtils
+    class Instruction;
+
     class InstructionUtils {
     public:
         /// @brief Get the operation type from the given opcode
         /// @return operation type
         static DexOpcodes::operation_type get_operation_type_from_opcode(DexOpcodes::opcodes opcode);
+
+        /// @brief Get operation type from a given instruction
+        /// @param instr instruction to retrieve the operation type
+        /// @return operation type
+        static DexOpcodes::operation_type get_operation_type_from_instruction(Instruction *instr);
+
+        /// @return if operation type is a jump of any type unconditional, conditional, switch
+        static bool is_jump_instruction(Instruction *instr);
     };
 
     /// @brief Base type for all the instructions

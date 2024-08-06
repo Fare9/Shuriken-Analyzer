@@ -198,6 +198,18 @@ DexOpcodes::operation_type InstructionUtils::get_operation_type_from_opcode(DexO
     return opcodes_instruction_operation.at(opcode);
 }
 
+DexOpcodes::operation_type InstructionUtils::get_operation_type_from_instruction(Instruction *instr) {
+    if (instr == nullptr) return DexOpcodes::operation_type::NONE_OPCODE;
+    DexOpcodes::opcodes opcode = static_cast<DexOpcodes::opcodes>(instr->get_instruction_opcode());
+    return get_operation_type_from_opcode(opcode);
+}
+
+bool InstructionUtils::is_jump_instruction(Instruction *instr) {
+    DexOpcodes::operation_type operation = get_operation_type_from_instruction(instr);
+    if (operation == DexOpcodes::CONDITIONAL_BRANCH_DVM_OPCODE || operation == DexOpcodes::UNCONDITIONAL_BRANCH_DVM_OPCODE || operation == DexOpcodes::MULTI_BRANCH_DVM_OPCODE) return true;
+    return false;
+}
+
 Instruction::Instruction(std::span<uint8_t> bytecode, std::size_t index, DexOpcodes::dexinsttype instruction_type)
     : instruction_type(instruction_type), length(0), op(0), op_codes({}) {
 }

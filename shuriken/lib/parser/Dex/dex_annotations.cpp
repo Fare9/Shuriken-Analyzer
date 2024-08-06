@@ -19,7 +19,7 @@ void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenSt
     std::uint32_t annotated_parameters_size;
     std::uint32_t idx, annotations_off;
 
-    my_logger->info("Started parsing of annotations");
+    my_logger->debug("Started parsing of annotations");
 
     // first read the offset
     stream.read_data<std::uint32_t>(class_annotations_off, sizeof(std::uint32_t));
@@ -46,7 +46,7 @@ void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenSt
         parameter_annotations_by_id[idx] = {.method_idx = idx, .annotations_off = annotations_off};
     }
 
-    my_logger->info("Finished parsing of annotations");
+    my_logger->debug("Finished parsing of annotations");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }

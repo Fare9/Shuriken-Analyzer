@@ -27,7 +27,7 @@ namespace shuriken::parser::dex {
         /// @brief Vector with all the DexStrings from the dex file
         dex_strings_t dex_strings;
         /// @brief View of the previous DexStrings for quickly accessing them
-        dex_strings_view_t dex_strings_view;
+        mutable dex_strings_view_t dex_strings_view;
 
     public:
         /// @brief Constructor of the class, default one

@@ -165,16 +165,14 @@ void MethodAnalysis::create_basic_blocks() {
     std::unordered_map<std::uint64_t, std::vector<std::int64_t>> target_jumps;
     shuriken::disassembler::dex::Disassembler internal_disassembler;
 
-    // useful variables
-    auto method = std::get<shuriken::parser::dex::EncodedMethod *>(method_encoded);
-
     log->debug("Started creating basic blocks from method {}", get_full_name());
 
-    for (auto instruction: disassembled->get_instructions()) {
-        auto operation = shuriken::disassembler::dex::InstructionUtils::get_operation_type_from_opcode(
-                static_cast<shuriken::disassembler::dex::DexOpcodes::opcodes>(instruction->get_instruction_opcode()));
+    if (disassembled->get_number_of_instructions() == 0)
+        return;
 
-        if (operation == shuriken::disassembler::dex::DexOpcodes::CONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::UNCONDITIONAL_BRANCH_DVM_OPCODE || operation == shuriken::disassembler::dex::DexOpcodes::MULTI_BRANCH_DVM_OPCODE) {
+    for (auto instruction: disassembled->get_instructions()) {
+        /// Is some branch?
+        if (shuriken::disassembler::dex::InstructionUtils::is_jump_instruction(instruction)) {
             auto idx = instruction->get_address();
             auto ins = instruction;
 
@@ -185,7 +183,7 @@ void MethodAnalysis::create_basic_blocks() {
         }
     }
 
-    // now analyze the exceptions and obtain the entry point addresses
+    /// now analyze the exceptions and obtain the entry point addresses
     for (const auto &except: disassembled->get_exceptions()) {
         /// entry point of try values can start in the middle
         /// of a block
@@ -194,21 +192,30 @@ void MethodAnalysis::create_basic_blocks() {
         }
     }
 
+    entry_points.erase(0);
+
+    /// Start of a block, end of a block
     std::int64_t start = 0, end = 0;
+    /// current created block, previous block
     DVMBasicBlock *current = nullptr, *prev = nullptr;
 
     for (auto instruction: disassembled->get_instructions()) {
         auto idx = instruction->get_address();
         auto ins = instruction;
 
+        // we are in the entry point of a basic block
         if (entry_points.find(idx) != entry_points.end()) {
+            // current becomes the prev block
             prev = current;
+            // create a new block, for not create a copy
+            // of the instructions, we retrieve a std::span
+            // that contains only the needed instructions
             current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
 
             // always insert the first block
             if (start == 0)
                 basic_blocks.add_node(current);
-
+            // for the next block
             start = end + current->get_terminator()->get_instruction_length();
 
             if (prev != nullptr) {
@@ -226,7 +233,7 @@ void MethodAnalysis::create_basic_blocks() {
         }
         /// update the end pointer
         end = ins->get_address();
-    }
+    }//! end for loop
 
     if (current == nullptr) {
         current = new DVMBasicBlock(disassembled->get_ref_to_instructions(start, end));
@@ -261,6 +268,15 @@ void MethodAnalysis::create_basic_blocks() {
         }
     }
 
+    for (const auto &except: disassembled->get_exceptions()) {
+        for (const auto &handler: except.handler) {
+            auto catch_bb = basic_blocks.get_basic_block_by_idx(handler.handler_start_addr);
+            if (catch_bb == nullptr) {
+                basic_blocks.add_node(new DVMBasicBlock(handler.handler_start_addr, handler.handler_start_addr + 1));
+            }
+        }
+    }
+
     /// add the exceptions
     for (const auto &except: disassembled->get_exceptions()) {
         auto try_bb = basic_blocks.get_basic_block_by_idx(except.try_value_start_addr);
@@ -268,6 +284,7 @@ void MethodAnalysis::create_basic_blocks() {
 
         for (const auto &handler: except.handler) {
             auto catch_bb = basic_blocks.get_basic_block_by_idx(handler.handler_start_addr);
+            try_bb->add_catch_block(catch_bb);
             catch_bb->set_catch_block(true);
             catch_bb->set_handler_type(handler.handler_type);
         }

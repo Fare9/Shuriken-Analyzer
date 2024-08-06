@@ -13,6 +13,8 @@ using namespace shuriken::analysis::dex;
 using namespace shuriken::disassembler::dex;
 
 namespace {
+    /// Given a full name, return a vector of std::string_view with the
+    /// class name, the method name, and the prototype of the method
     std::vector<std::string_view> split(std::string_view s) {
         std::vector<std::string_view> tokens;
         size_t delimiter_pos = s.find("->");
@@ -51,8 +53,16 @@ Analysis::Analysis(parser::dex::Parser *parser,
         add(parser);
 }
 
+
 void Analysis::add(parser::dex::Parser *parser) {
     auto logger = shuriken::logger();
+
+    /// For adding more DEX files to the analysis classes
+    /// what we do is to retrieve the parser to get all the
+    /// information from the DEX file and add it to the list
+    /// of analysis. Retrieve the instructions from the
+    /// disassembler. Finally, retrieve the class def items
+    /// that will be used later for creating the class analysis.
 
     parsers.push_back(parser);
 
@@ -77,6 +87,7 @@ void Analysis::_add_classdef(
                 &all_methods_instructions) {
     auto logger = shuriken::logger();
 
+    // Create a class analysis, we will work with the created object
     auto name = std::string(class_def_item.get_class_idx()->get_class_name());
     class_analyses.insert({name, std::make_unique<ClassAnalysis>(&class_def_item)});
     auto &new_class = class_analyses[name];
@@ -113,6 +124,19 @@ void Analysis::_add_encoded_method(
     auto new_method = method_analyses[method_name].get();
 
     new_class->add_method(new_method);
+}
+
+ExternalField *Analysis::get_external_field(shuriken::parser::dex::FieldID *field) {
+    auto full_name = std::string(field->pretty_field());
+    if (external_fields.contains(full_name))
+        return external_fields[full_name].get();
+    external_fields.insert({full_name,
+                            std::make_unique<ExternalField>(
+                                    field->field_class()->get_raw_type(),
+                                    field->field_name(),
+                                    field->field_type()->print_type())});
+    auto &external_field = external_fields[full_name];
+    return external_field.get();
 }
 
 void Analysis::create_xrefs() {
@@ -155,7 +179,7 @@ void Analysis::create_xrefs() {
 
 void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
 
-    /// take thename of the analyzed class
+    /// take the name of the analyzed class
     auto current_class_name = std::string(current_class.get_class_idx()->get_class_name());
     auto &class_data_item = current_class.get_class_data_item();
 
@@ -166,7 +190,7 @@ void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
         _analyze_encoded_method(&virtual_method, current_class_name);
     }
 
-    /// get the direc methods
+    /// get the direct methods
     auto it_direct_methods = class_data_item.get_direct_methods();
 
     for (auto &direct_method: it_direct_methods) {
@@ -196,14 +220,14 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
             op_value == DexOpcodes::opcodes::OP_NEW_INSTANCE) {
             auto const_class_new_instance =
                     reinterpret_cast<disassembler::dex::Instruction21c *>(instruction);
+            auto source_dvmtype = std::get<parser::dex::DVMType *>(
+                    const_class_new_instance->get_source_as_kind());
 
             // check we get a TYPE from CONST_CLASS
             // or from NEW_INSTANCE, any other Kind (FIELD, PROTO, etc)
             // it is not valid in this case
             if (const_class_new_instance->get_kind() != shuriken::dex::TYPES::TYPE ||
-                std::get<parser::dex::DVMType *>(
-                        const_class_new_instance->get_source_as_kind())
-                                ->get_type() != parser::dex::CLASS)
+                source_dvmtype->get_type() != parser::dex::CLASS)
                 return;
 
             auto dvm_class = reinterpret_cast<parser::dex::DVMClass *>(
@@ -351,29 +375,46 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
 
             if (operation == DexOpcodes::FIELD_READ_DVM_OPCODE) {
                 auto field_item = checked_field->get_encoded_field();
+                FieldAnalysis *field_analysis = nullptr;
 
-                class_analyses[current_class_name]->add_field_xref_read(
-                        current_method_analysis, class_analysis_working_on, field_item,
-                        off);
+                if (field_item != nullptr) {
+                    class_analyses[current_class_name]->add_field_xref_read(
+                            current_method_analysis, class_analysis_working_on, field_item,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(field_item);
+                } else {
+                    auto external_field = get_external_field(checked_field);
+                    class_analyses[current_class_name]->add_field_xref_read(
+                            current_method_analysis, class_analysis_working_on, external_field,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(external_field);
+                }
 
-                // necessary to give a field analysis to the add_xref_read method
-                // we can get the created by the add_field_xref_read.
-                auto field_analysis =
-                        class_analyses[current_class_name]->get_field_analysis(field_item);
                 current_method_analysis->add_xrefread(class_analysis_working_on,
                                                       field_analysis, off);
+
+
             } else if (operation == DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
                 // retrieve the encoded field from the FieldID
                 auto field_item = checked_field->get_encoded_field();
+                FieldAnalysis *field_analysis = nullptr;
 
-                class_analyses[current_class_name]->add_field_xref_write(
-                        current_method_analysis, class_analysis_working_on, field_item,
-                        off);
-
-                // same as before
-                auto field_analysis =
-                        class_analyses[current_class_name]->get_field_analysis(field_item);
-
+                if (field_item != nullptr) {
+                    class_analyses[current_class_name]->add_field_xref_write(
+                            current_method_analysis, class_analysis_working_on, field_item,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(field_item);
+                } else {
+                    auto external_field = get_external_field(checked_field);
+                    class_analyses[current_class_name]->add_field_xref_write(
+                            current_method_analysis, class_analysis_working_on, external_field,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(external_field);
+                }
                 current_method_analysis->add_xrefwrite(class_analysis_working_on,
                                                        field_analysis, off);
             }
@@ -396,34 +437,42 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
 
             if (operation == DexOpcodes::FIELD_READ_DVM_OPCODE) {
                 auto field_item = checked_field->get_encoded_field();
-
-                if (field_item == nullptr)// probably an external field
-                    continue;
-
-                class_analyses[current_class_name]->add_field_xref_read(
-                        current_method_analysis, class_analysis_working_on, field_item,
-                        off);
-
-                // necessary to give a field analysis to the add_xref_read method
-                // we can get the created by the add_field_xref_read.
-                auto field_analysis =
-                        class_analyses[current_class_name]->get_field_analysis(field_item);
+                FieldAnalysis *field_analysis = nullptr;
+                if (field_item != nullptr) {
+                    class_analyses[current_class_name]->add_field_xref_read(
+                            current_method_analysis, class_analysis_working_on, field_item,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(field_item);
+                } else {
+                    auto external_field = get_external_field(checked_field);
+                    class_analyses[current_class_name]->add_field_xref_read(
+                            current_method_analysis, class_analysis_working_on, external_field,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(external_field);
+                }
                 current_method_analysis->add_xrefread(class_analysis_working_on,
                                                       field_analysis, off);
             } else if (operation == DexOpcodes::FIELD_WRITE_DVM_OPCODE) {
                 // retrieve the encoded field from the FieldID
                 auto field_item = checked_field->get_encoded_field();
+                FieldAnalysis *field_analysis = nullptr;
 
-                if (field_item == nullptr)// probably an external field
-                    continue;
-
-                class_analyses[current_class_name]->add_field_xref_write(
-                        current_method_analysis, class_analysis_working_on, field_item,
-                        off);
-
-                // same as before
-                auto field_analysis =
-                        class_analyses[current_class_name]->get_field_analysis(field_item);
+                if (field_item != nullptr) {
+                    class_analyses[current_class_name]->add_field_xref_write(
+                            current_method_analysis, class_analysis_working_on, field_item,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(field_item);
+                } else {
+                    auto external_field = get_external_field(checked_field);
+                    class_analyses[current_class_name]->add_field_xref_write(
+                            current_method_analysis, class_analysis_working_on, external_field,
+                            off);
+                    field_analysis =
+                            class_analyses[current_class_name]->get_field_analysis(external_field);
+                }
 
                 current_method_analysis->add_xrefwrite(class_analysis_working_on,
                                                        field_analysis, off);
@@ -553,12 +602,30 @@ Analysis::get_external_methods() {
     return external_methods_s;
 }
 
+Analysis::external_fields_s_t &
+Analysis::get_external_fields() {
+    if (external_fields_s.empty() || external_fields_s.size() != external_fields.size()) {
+        for (const auto &entry: external_fields)
+            external_fields_s.insert({entry.first, std::ref(*entry.second)});
+    }
+    return external_fields_s;
+}
+
 FieldAnalysis *Analysis::get_field_analysis(parser::dex::EncodedField *field) {
+    if (field_analyses.empty())
+        get_fields();
+
     auto f_it = std::ranges::find_if(
             field_analyses, [&](FieldAnalysis *field_analysis) -> bool {
-                return field_analysis->get_encoded_field()
-                               ->get_field()
-                               ->pretty_field() == field->get_field()->pretty_field();
+                if (field_analysis->is_external()) {
+                    return field_analysis->get_external_field()->pretty_field_name()
+                           == field->get_field()->pretty_field();
+                }
+                else {
+                    return field_analysis->get_encoded_field()
+                                   ->get_field()
+                                   ->pretty_field() == field->get_field()->pretty_field();
+                }
             });
 
     if (f_it == field_analyses.end())

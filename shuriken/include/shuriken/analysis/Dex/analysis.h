@@ -30,6 +30,9 @@ namespace shuriken::analysis::dex {
         using external_methods_t = std::unordered_map<std::string, std::unique_ptr<ExternalMethod>>;
         using external_methods_s_t = std::unordered_map<std::string, std::reference_wrapper<ExternalMethod>>;
 
+        using external_fields_t = std::unordered_map<std::string, std::unique_ptr<ExternalField>>;
+        using external_fields_s_t = std::unordered_map<std::string, std::reference_wrapper<ExternalField>>;
+
         using string_analyses_t = std::unordered_map<std::string, std::unique_ptr<StringAnalysis>>;
         using string_analyses_s_t = std::unordered_map<std::string, std::reference_wrapper<StringAnalysis>>;
 
@@ -57,6 +60,9 @@ namespace shuriken::analysis::dex {
         /// @brief external methods by dalvik name of the method
         external_methods_t external_methods;
         external_methods_s_t external_methods_s;
+
+        external_fields_t external_fields;
+        external_fields_s_t external_fields_s;
 
         std::vector<FieldAnalysis *> field_analyses;
 
@@ -109,6 +115,9 @@ namespace shuriken::analysis::dex {
                                  ClassAnalysis *new_class,
                                  DexDisassembler::disassembled_methods_t
                                          &all_methods_instructions);
+
+        /// @brief Helper to get an external field already created or create and return
+        ExternalField *get_external_field(shuriken::parser::dex::FieldID *field);
 
     public:
         /// @brief Create class, method, string and field cross references
@@ -163,6 +172,11 @@ namespace shuriken::analysis::dex {
         /// @return reference to map with ExternalMethod
         external_methods_s_t &
         get_external_methods();
+
+        /// @brief Return a reference to the ExternalFields
+        /// @return reference to map with ExternalField
+        external_fields_s_t &
+        get_external_fields();
 
         /// @brief Get a field given an encoded field
         /// @param field field to obtain the FieldAnalysis
