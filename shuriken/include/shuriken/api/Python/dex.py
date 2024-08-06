@@ -146,10 +146,14 @@ class dexref_type_e(ctypes.c_int):
 
 # C structures but in Python
 
-# @brief Structure which keeps information from a field
-# this can be accessed from the class data
 class hdvmfield_t(ctypes.Structure):
+    '''
+    Structure which keeps information from a field
+    this can be accessed from the class data
+    '''
+
     _fields_ = (
+        ('class_name', ctypes.c_char_p),
         ('name', ctypes.c_char_p),
         ('type', htype_e),
         ('fundamental_value', hfundamental_e),
@@ -157,11 +161,13 @@ class hdvmfield_t(ctypes.Structure):
         ('access_flags', accessflags_e)
     )
 
-
-# @brief Structure which keeps information from a method
-# this can be accessed from the class data
 class hdvmmethod_t(ctypes.Structure):
+    '''
+    Structure which keeps information from a method
+    this can be accessed from the class data
+    '''
     _fields_ = (
+        ('class_name', ctypes.c_char_p),
         ('method_name', ctypes.c_char_p),
         ('prototype', ctypes.c_char_p),
         ('access_flags', accessflags_e),
@@ -171,9 +177,10 @@ class hdvmmethod_t(ctypes.Structure):
         ('demangled_name', ctypes.c_char_p)
     )
 
-
-# @brief Structure representing the classes in the DEX file
 class hdvmclass_t(ctypes.Structure):
+    '''
+    Structure representing the classes in the DEX file
+    '''
     _fields_ = (
         ('class_name', ctypes.c_char_p),
         ('super_class', ctypes.c_char_p),
@@ -188,9 +195,10 @@ class hdvmclass_t(ctypes.Structure):
         ('static_fields_size', ctypes.c_uint16),
         ('static_fields', ctypes.POINTER(hdvmfield_t))
     )
-
-# @brief Structure for an instruction in the dalvik virtual machine
 class hdvminstruction_t(ctypes.Structure):
+    '''
+    Structure for an instruction in the dalvik virtual machine
+    '''
     _fields_ = [
         ("instruction_type", dexinsttype_e),
         ("instruction_length", ctypes.c_uint32),
@@ -199,16 +207,20 @@ class hdvminstruction_t(ctypes.Structure):
         ("disassembly", ctypes.c_char_p)
     ]
 
-# @brief Structure that keeps information about a handler
 class dvmhandler_data_t(ctypes.Structure):
+    '''
+    Structure that keeps information about a handler
+    '''
     _fields_ = [
         ("handler_type", ctypes.c_char_p),
         ("handler_start_addr", ctypes.c_uint64)
     ]
 
-# @brief Structure with the information from the exceptions
-# in the code
 class dvmexceptions_data_t(ctypes.Structure):
+    '''
+    Structure with the information from the exceptions
+    in the code
+    '''
     _fields_ = [
         ("try_value_start_addr", ctypes.c_uint64),
         ("try_value_end_addr", ctypes.c_uint64),
@@ -216,9 +228,11 @@ class dvmexceptions_data_t(ctypes.Structure):
         ("handler", ctypes.POINTER(dvmhandler_data_t))
     ]
 
-# @brief Structure that represents a disassembled method from
-# the dalvik file
 class dvmdisassembled_method_t(ctypes.Structure):
+    '''
+    Structure that represents a disassembled method from
+    the dalvik file
+    '''
     _fields_ = [
         ("method_id", ctypes.POINTER(hdvmmethod_t)),
         ("n_of_registers", ctypes.c_uint16),
@@ -240,16 +254,20 @@ class hdvmmethodanalysis_t(ctypes.Structure):
 class hdvmfieldanalysis_t(ctypes.Structure):
     pass
 
-# @brief Xref that contains class, method and instruction address
 class hdvm_class_method_idx_t(ctypes.Structure):
+    '''
+    Xref that contains class, method and instruction address
+    '''
     _fields_ = [
         ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
         ("method", ctypes.POINTER(hdvmmethodanalysis_t)),
         ("idx", ctypes.c_int64)
     ]
 
-# @brief Xref that contains class, field and instruction address
 class hdvm_class_field_idx_t(ctypes.Structure):
+    '''
+    Xref that contains class, field and instruction address
+    '''
     _fields_ = [
         ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
         ("field", ctypes.POINTER(hdvmfieldanalysis_t)),
@@ -262,8 +280,10 @@ class hdvm_method_idx_t(ctypes.Structure):
         ("idx", ctypes.c_int64)
     ]
 
-# @brief Xref that contains class and instruction address
 class hdvm_class_idx_t(ctypes.Structure):
+    '''
+    Xref that contains class and instruction address
+    '''
     _fields_ = [
         ("cls", ctypes.POINTER(hdvmclassanalysis_t)),
         ("idx", ctypes.c_int64)
@@ -283,8 +303,10 @@ class hdvm_classxref_t(ctypes.Structure):
         ("hdvmReftypeMethodIdx", ctypes.POINTER(hdvm_reftype_method_idx_t))
     ]
 
-# @brief Structure that stores information of a basic block
 class hdvmbasicblock_t(ctypes.Structure):
+    '''
+    Structure that stores information of a basic block
+    '''
     _fields_ = [
         ("n_of_instructions", ctypes.c_size_t),
         ("instructions", ctypes.POINTER(hdvminstruction_t)),
@@ -296,12 +318,15 @@ class hdvmbasicblock_t(ctypes.Structure):
     ]
 
 class basic_blocks_t(ctypes.Structure):
+    '''
+    Structure that stores all the basic blocks
+    from a method.
+    '''
     _fields_ = [
         ("n_of_blocks", ctypes.c_size_t),
         ("block", ctypes.POINTER(hdvmbasicblock_t))
     ]
 
-# @brief FieldAnalysis structure
 hdvmfieldanalysis_t._fields_ = [
     ("name", ctypes.c_char_p),
     ("n_of_xrefread", ctypes.c_size_t),

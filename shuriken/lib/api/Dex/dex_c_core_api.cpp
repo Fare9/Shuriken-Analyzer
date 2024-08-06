@@ -121,6 +121,7 @@ namespace {
     void fill_dex_method(shuriken::parser::dex::EncodedMethod *encoded_method, hdvmmethod_t *method) {
         const auto method_id = encoded_method->getMethodID();
 
+        method->class_name = method_id->get_class()->get_raw_type().data();
         method->method_name = method_id->get_method_name().data();
         method->prototype = method_id->get_prototype()->get_dalvik_prototype().data();
         method->access_flags = encoded_method->get_flags();
@@ -142,6 +143,7 @@ namespace {
         auto field_id = encoded_field->get_field();
         auto field_type = field_id->field_type();
 
+        field->class_name = field_id->field_class()->get_raw_type().data();
         field->name = field_id->field_name().data();
         field->access_flags = encoded_field->get_flags();
         field->type_value = field_id->field_type()->get_raw_type().data();

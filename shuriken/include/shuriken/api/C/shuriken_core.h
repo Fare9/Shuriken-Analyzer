@@ -88,6 +88,8 @@ enum access_flags_e {
 /// @brief Structure which keeps information from a field
 /// this can be accessed from the class data
 typedef struct hdvmfield_t_ {
+    /// @brief Name of the class the field belong to
+    const char *class_name;
     /// @brief Name of the field
     const char *name;
     /// @brief Type of the field
@@ -105,6 +107,8 @@ typedef struct hdvmfield_t_ {
 /// @brief Structure which keeps information from a method
 /// this can be accessed from the class data
 typedef struct hdvmmethod_t_ {
+    /// @brief Name of the class the field belong to
+    const char *class_name;
     /// @brief name of the method
     const char *method_name;
     /// @brief prototype of the method
