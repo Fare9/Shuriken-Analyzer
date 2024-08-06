@@ -44,6 +44,6 @@ int main() {
                 std::cout << method_value->toString();
         }
     }
-
+    dex_analysis.release();
     return 0;
 }

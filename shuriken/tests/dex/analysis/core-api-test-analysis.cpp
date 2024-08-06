@@ -98,7 +98,7 @@ std::unordered_map<std::string, std::vector<std::string>> methods = {
 
 void check_analysis_classes(hDexContext dexContext);
 
-int main(int argc, char *argv[]) {
+int main() {
     hDexContext dexContext = parse_dex(file);
     disassemble_dex(dexContext);
     create_dex_analysis(dexContext, true);
@@ -124,7 +124,7 @@ void check_analysis_classes(hDexContext dexContext) {
             for (uint32_t z = 0; z < basic_blocks->n_of_blocks; z++) {
                 auto basic_block = basic_blocks->blocks[z];
                 printf("%s\n", basic_block.block_string);
-                auto data = methods[method_analysis->full_name][z].data();
+                [[maybe_unused]] auto data = methods[method_analysis->full_name][z].data();
                 assert(strcmp(data, basic_block.block_string) == 0 && "Error, basic block disassembly is not correct");
             }
         }

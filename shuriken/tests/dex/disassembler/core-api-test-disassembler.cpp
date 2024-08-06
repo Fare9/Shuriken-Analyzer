@@ -103,7 +103,7 @@ std::map<std::string, std::string> all_methods = {
 
 void checkDisassembledMethod(hDexContext dexContext);
 
-int main(int argc, char *argv[]) {
+int main() {
     hDexContext dexContext = parse_dex(file);
     disassemble_dex(dexContext);
     checkDisassembledMethod(dexContext);

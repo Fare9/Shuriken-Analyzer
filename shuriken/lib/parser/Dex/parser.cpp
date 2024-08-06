@@ -138,7 +138,7 @@ namespace shuriken {
         std::unique_ptr<dex::Parser> parse_dex(common::ShurikenStream &file) {
             auto p = std::make_unique<dex::Parser>();
             p->parse_dex(file);
-            return std::move(p);
+            return p;
         }
 
         std::unique_ptr<dex::Parser> parse_dex(const std::string &file_path) {
@@ -147,7 +147,7 @@ namespace shuriken {
 
             auto p = std::make_unique<dex::Parser>();
             p->parse_dex(file);
-            return std::move(p);
+            return p;
         }
 
         dex::Parser *parse_dex(const char *file_path) {

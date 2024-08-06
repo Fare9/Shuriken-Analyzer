@@ -9,11 +9,11 @@
 using namespace shuriken::analysis::dex;
 
 FieldAnalysis::FieldAnalysis(parser::dex::EncodedField *field)
-    : field(field), name(field->get_field()->pretty_field()), external(false) {
+    : field(field), external(false), name(field->get_field()->pretty_field()) {
 }
 
 FieldAnalysis::FieldAnalysis(ExternalField *field)
-    : field(field), name(field->pretty_field_name()), external(true) {
+    : field(field), external(true), name(field->pretty_field_name()) {
 }
 
 bool FieldAnalysis::is_external() const {

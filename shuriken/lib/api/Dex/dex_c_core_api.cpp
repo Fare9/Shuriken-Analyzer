@@ -268,7 +268,7 @@ namespace {
             // For the instructions we will use the disassembled instructions from the disassembler
             bbs->blocks[i].n_of_instructions = node->get_instructions().size();
             std::uint64_t first_instr_addr = node->get_first_address();
-            int j = 0;
+            size_t j = 0;
             for (j = 0; j < instructions_structure->n_of_instructions; j++) {
                 if (instructions_structure->instructions[j].address == first_instr_addr) {
                     bbs->blocks[i].instructions = &instructions_structure->instructions[j];
@@ -571,14 +571,14 @@ namespace {
             free(class_analysis->fields);
             if (dex_opaque_struct->created_xrefs) {
                 if (class_analysis->xrefto) {
-                    for (int i = 0; i < class_analysis->n_of_xrefto; i++) {
+                    for (size_t i = 0; i < class_analysis->n_of_xrefto; i++) {
                         free(class_analysis->xrefto[i].hdvmReftypeMethodIdx);
                         class_analysis->xrefto[i].hdvmReftypeMethodIdx = nullptr;
                     }
                     free(class_analysis->xrefto);
                 }
                 if (class_analysis->xreffrom) {
-                    for (int i = 0; i < class_analysis->n_of_xreffrom; i++) {
+                    for (size_t i = 0; i < class_analysis->n_of_xreffrom; i++) {
                         free(class_analysis->xreffrom[i].hdvmReftypeMethodIdx);
                         class_analysis->xreffrom[i].hdvmReftypeMethodIdx = nullptr;
                     }

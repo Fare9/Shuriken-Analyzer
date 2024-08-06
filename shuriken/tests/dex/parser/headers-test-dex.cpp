@@ -107,7 +107,7 @@ int main() {
 
 
 void check_header(shuriken::parser::dex::DexHeader &header) {
-    auto &dex_header = header.get_dex_header_const();
+    [[maybe_unused]] auto &dex_header = header.get_dex_header_const();
 
     assert(memcmp(static_cast<const void *>(magic),
                   static_cast<const void *>(dex_header.magic),
@@ -136,10 +136,10 @@ void check_header(shuriken::parser::dex::DexHeader &header) {
 void check_class(shuriken::parser::dex::DexClasses &classes) {
 
     for (auto &class_def: classes.get_classdefs()) {
-        const auto class_idx = class_def.get_class_idx();
-        const auto super_class = class_def.get_superclass();
-        std::string_view source_file = class_def.get_source_file();
-        auto access_flags = class_def.get_access_flags();
+        [[maybe_unused]] const auto class_idx = class_def.get_class_idx();
+        [[maybe_unused]] const auto super_class = class_def.get_superclass();
+        [[maybe_unused]] std::string_view source_file = class_def.get_source_file();
+        [[maybe_unused]] auto access_flags = class_def.get_access_flags();
 
         assert(class_idx->get_raw_type() == class_descriptor && "Error class_descriptor is not correct");
         assert(super_class->get_raw_type() == super_class_name && "Error super_class_name is not correct");
@@ -148,14 +148,14 @@ void check_class(shuriken::parser::dex::DexClasses &classes) {
         auto &class_data_item = class_def.get_class_data_item();
 
         for (size_t i = 0, e = class_data_item.get_number_of_instance_fields(); i < e; i++) {
-            auto field = class_data_item.get_instance_field_by_id(i);
+            [[maybe_unused]] auto field = class_data_item.get_instance_field_by_id(i);
             assert(fields[i].flags == static_cast<std::uint32_t>(field->get_flags()) && "Error field flags are not correct");
             assert(fields[i].name == field->get_field()->field_name() && "Error field name is not correct");
             assert(fields[i].type == field->get_field()->field_type()->get_raw_type() && "Error field type is not correct");
         }
 
         for (size_t i = 0, e = class_data_item.get_number_of_direct_methods(); i < e; i++) {
-            auto method = class_data_item.get_direct_method_by_id(i);
+            [[maybe_unused]] auto method = class_data_item.get_direct_method_by_id(i);
             assert(methods[i].name == method->getMethodID()->get_method_name() && "Error method name not correct");
             assert(methods[i].type == method->getMethodID()->get_prototype()->get_shorty_idx() && "Error method prototype not correct");
             assert(methods[i].flags == static_cast<std::uint32_t>(method->get_flags()) && "Error method flags are not correct");

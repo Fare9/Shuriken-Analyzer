@@ -100,7 +100,7 @@ struct field_struct static_fields[] = {};
 void check_strings(hDexContext parser);
 void check_classes_list(hDexContext parser);
 
-int main(int argc, char *argv[]) {
+int main() {
     hDexContext dexParser = parse_dex(file);
 
     check_strings(dexParser);
@@ -113,7 +113,7 @@ void check_strings(hDexContext parser) {
     size_t n_of_strings = get_number_of_strings(parser);
     assert(n_of_strings == 33 && "Number of strings is incorrect");
     for (size_t i = 0; i < n_of_strings; i++) {
-        const char *str = get_string_by_id(parser, i);
+        [[maybe_unused]] const char *str = get_string_by_id(parser, i);
         assert(strcmp(strs[i], str) == 0 && "Error string is incorrect");
     }
 }

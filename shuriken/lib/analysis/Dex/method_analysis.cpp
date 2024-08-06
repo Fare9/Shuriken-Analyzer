@@ -14,13 +14,12 @@ using namespace shuriken::analysis::dex;
 
 MethodAnalysis::MethodAnalysis(shuriken::parser::dex::EncodedMethod *encoded_method,
                                shuriken::disassembler::dex::DisassembledMethod *disassembled)
-    : method_encoded(encoded_method), disassembled(disassembled),
-      is_external(false) {
+    : is_external(false), method_encoded(encoded_method), disassembled(disassembled) {
     create_basic_blocks();
 }
 
 MethodAnalysis::MethodAnalysis(ExternalMethod *external_method)
-    : method_encoded(external_method), is_external(true) {
+    : is_external(true), method_encoded(external_method) {
 }
 
 void MethodAnalysis::dump_dot_file(std::string &file_path) {
@@ -262,7 +261,8 @@ void MethodAnalysis::create_basic_blocks() {
         for (auto dst_idx: jump_target.second) {
             auto dst = basic_blocks.get_basic_block_by_idx(dst_idx);
             /// need to check how target jump is generated
-            if (dst_idx >= out_range || dst == nullptr)
+            // TODO: Needs review on casting
+            if (dst_idx >= (int64_t) out_range || dst == nullptr)
                 continue;
             basic_blocks.add_edge(src, dst);
         }
