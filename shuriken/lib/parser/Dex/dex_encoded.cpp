@@ -213,12 +213,12 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
             auto &array = std::get<std::unique_ptr<EncodedArray>>(value);
             array = std::make_unique<EncodedArray>();
             array->parse_encoded_array(stream, types, strings);
-        }
+        } break;
         case shuriken::dex::TYPES::value_format::VALUE_ANNOTATION: {
             auto &annotation = std::get<std::unique_ptr<EncodedAnnotation>>(value);
             annotation = std::make_unique<EncodedAnnotation>();
             annotation->parse_encoded_annotation(stream, types, strings);
-        }
+        } break;
         default:
             std::stringstream error_msg;
             error_msg << "Value for format not implemented: " << static_cast<std::uint32_t>(format);
