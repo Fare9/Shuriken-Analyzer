@@ -670,6 +670,9 @@ namespace {
         destroy_class_analysis(dex_opaque_struct);
         destroy_method_analysis(dex_opaque_struct);
         destroy_field_analysis(dex_opaque_struct);
+
+        delete dex_opaque_struct;
+        dex_opaque_struct = nullptr;
     }
 
 }// namespace
