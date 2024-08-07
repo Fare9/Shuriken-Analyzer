@@ -794,3 +794,17 @@ hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_n
     if (cls == nullptr) throw std::runtime_error{"Error, given class does not exists"};
     return ::get_class_analysis(opaque_struct, cls);
 }
+
+hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t * method) {
+    if (method == nullptr) throw std::runtime_error{"hdvmmethod_t provided is null"};
+    return get_analyzed_method(context, method->dalvik_name);
+}
+
+hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
+    std::string dalvik_name = method_full_name;
+    auto method = opaque_struct->analysis->get_method_analysis_by_name(dalvik_name);
+    if (method == nullptr) throw std::runtime_error{"Error, given class does not exists"};
+    return ::get_method_analysis(opaque_struct, method);
+}
