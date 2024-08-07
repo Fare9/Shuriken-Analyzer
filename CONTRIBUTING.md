@@ -17,6 +17,54 @@ We will follow some of the recommendations from the [LLVM Coding Standards](http
 - For initializing `maps` or `lists` with many values, try to use a table definition file, and an include for expanding the values at compilation time (it makes code more clear and smaller).
 - This project uses C++20, so all the APIs available can be used.
 
+## Development
+The project uses CMake for building.
+
+### Configuring the project
+```
+cmake -S . -B build -DDEX_TESTS=ON -DCMAKE_BUILD_TYPE=Debug # -DSANITIZE=ON
+```
+Due to different development environments, sanitizers are not enabled by default.
+You can remove the comment about sanitizers to enable them.
+
+### Building the project
+```
+cmake --build build -j
+```
+To build the project with the number of cores available.
+
+### Running the tests
+```
+ctest --test-dir build --output-on-failure
+```
+
+Run the test that is in the `build` directory and if a test fails, it will show the output of the test.
+
+If the sanitizers are enabled, the tests will run with the sanitizers enabled.
+
+Here is an example when the sanitizers uncovers a leak or an error:
+```
+=================================================================
+==1997314==ERROR: LeakSanitizer: detected memory leaks
+
+...
+...
+...
+Indirect leak of 336 byte(s) in 1 object(s) allocated from:
+    #0 0xffff906dbb8c in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:99
+    #1 0xffff8ef95230 in parse_dex /home/workspace/Shuriken-Analyzer/shuriken/lib/api/Dex/dex_c_core_api.cpp:675
+    #2 0xaaaadb557828 in main /home/workspace/Shuriken-Analyzer/shuriken/tests/dex/parser/core-api-test.cpp:104
+    #3 0xffff8c9773f8 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0xffff8c9774c8 in __libc_start_main_impl ../csu/libc-start.c:392
+    #5 0xaaaadb55772c in _start (/home/workspace/Shuriken-Analyzer/build/shuriken/tests/dex/parser/core-api-test+0x772c)
+
+Indirect leak of 160 byte(s) in 4 object(s) allocated from:
+    #0 0xffff906dbb8c in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:99
+...
+...
+...
+SUMMARY: AddressSanitizer: 6164 byte(s) leaked in 26 allocation(s).
+```
 ## How to work in the project?
 
 Commits in master should be explanatory of the features included or the problems fixed. Also, we will try to keep the number of commits as low as possible. We will work by issues, so if an issue for a new feature or a bug does not exist, create it and work from there. Let's explain this:
