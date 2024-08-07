@@ -15,9 +15,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 # enable compiler warnings
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-add_compile_options(-Wall -Wpedantic -Wextra -Werror -Wno-zero-length-array)
+    add_compile_options(-Wall -Wpedantic -Wextra -Werror)
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        add_compile_options(-Wno-zero-length-array)
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        add_compile_options(-Wno-strict-flex-arrays -Wno-multichar -Wno-dangling-reference)
+    endif()
 elseif(MSVC)
-add_compile_options(/W4 /WX /wd4200)
+add_compile_options(/W4 /WX /wd4200 \xXX)
 endif()
 
 # Compiler for the project
@@ -32,15 +37,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Debug build")
-    message(STATUS "Sanitizers enabled by debug mode")
-    # Set up sanitizer for address and undefined behavior
-    set(SANITIZER_FLAGS "-fsanitize=address,undefined")
-    message(STATUS "Sanitizer flags: ${SANITIZER_FLAGS}")
-    add_compile_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
-    add_link_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
-endif()
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 
 # for debug configuration set specific flags
@@ -54,7 +50,17 @@ endif()
 # with the options to compile only part of the project
 option(DEX "Disable the DEX analysis from the library (enable by default)" ON)
 option(DEX_TESTS "Compile all the tests for DEX files" OFF)
+option(SANITIZE "Enable sanitizers for the project" OFF)
 
+if ((CMAKE_BUILD_TYPE STREQUAL "Debug" ) AND SANITIZE)
+    message(STATUS "Debug build")
+    message(STATUS "Sanitizers enabled by debug mode")
+    # Set up sanitizer for address and undefined behavior
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined")
+    message(STATUS "Sanitizer flags: ${SANITIZER_FLAGS}")
+    add_compile_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
+    add_link_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
+endif()
 # Variables that need to be set for compiling dalvik files
 set(JAVAC_BINARY "" CACHE FILEPATH "Path to javac binary for compiling java files")
 set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
