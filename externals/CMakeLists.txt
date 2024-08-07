@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.5)
 
 include(FetchContent)
@@ -31,6 +32,37 @@ if (GITHUB_ACTION)
     message(WARNING "Running as a github action, download fetch the content")
     set(FETCHCONTENT_FULLY_DISCONNECTED OFF)
 endif ()
+
+# ------------------------------------
+# Download the Logging utility from spdlog
+# repo
+# ------------------------------------
+FetchContent_Declare(
+    extern_spdlog
+
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+
+FetchContent_GetProperties(extern_spdlog)
+
+if(NOT extern_spdlog_POPULATED)
+    message(STATUS "Cloning spdlog")
+    FetchContent_Populate(extern_spdlog)
+    add_subdirectory(
+            ${extern_spdlog_SOURCE_DIR}
+            ${extern_spdlog_BINARY_DIR}
+    )
+endif()
+
+
+set_target_properties(spdlog
+        PROPERTIES
+        POSITION_INDEPENDENT_CODE 1
+)
+
+# Make the project available
+FetchContent_MakeAvailable(extern_spdlog)
 
 FetchContent_Declare(
         fmt

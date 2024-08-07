@@ -10,5 +10,6 @@ project(
 )
 
 enable_testing()
+add_subdirectory(externals/)
 add_subdirectory(shuriken/)
 add_subdirectory(shuriken-dump/)

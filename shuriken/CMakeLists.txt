@@ -67,16 +67,6 @@ set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-
-# include the externals
-add_subdirectory(external)
-
-set_target_properties(spdlog
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE 1
-)
-
-
 # Shuriken will contain only the basic classes, nothing more
 # the analyses for the different files are included optionally
 # we will include all the content in an object file
