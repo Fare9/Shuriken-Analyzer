@@ -53,7 +53,6 @@ Analysis::Analysis(parser::dex::Parser *parser,
         add(parser);
 }
 
-
 void Analysis::add(parser::dex::Parser *parser) {
     auto logger = shuriken::logger();
 

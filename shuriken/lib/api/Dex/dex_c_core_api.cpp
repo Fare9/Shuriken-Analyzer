@@ -121,6 +121,7 @@ namespace {
     void fill_dex_method(shuriken::parser::dex::EncodedMethod *encoded_method, hdvmmethod_t *method) {
         const auto method_id = encoded_method->getMethodID();
 
+        method->class_name = method_id->get_class()->get_raw_type().data();
         method->method_name = method_id->get_method_name().data();
         method->prototype = method_id->get_prototype()->get_dalvik_prototype().data();
         method->access_flags = encoded_method->get_flags();
@@ -142,6 +143,7 @@ namespace {
         auto field_id = encoded_field->get_field();
         auto field_type = field_id->field_type();
 
+        field->class_name = field_id->field_class()->get_raw_type().data();
         field->name = field_id->field_name().data();
         field->access_flags = encoded_field->get_flags();
         field->type_value = field_id->field_type()->get_raw_type().data();
@@ -249,7 +251,7 @@ namespace {
         }
 
         // get the number of blocks
-        bbs->n_of_blocks = methodAnalysis->get_basic_blocks().get_number_of_basic_blocks();
+        bbs->n_of_blocks = methodAnalysis->get_basic_blocks()->get_number_of_basic_blocks();
         // allocate memory for the blocks
         bbs->blocks = (hdvmbasicblock_t *) malloc(bbs->n_of_blocks * sizeof(hdvmbasicblock_t));
         // get the disassembled instructions of the method to
@@ -257,7 +259,7 @@ namespace {
                 return_or_create_disassembled_method_internal(opaque_struct, methodAnalysis->get_full_name());
         // now create all the data in the blocks
         int i = 0;
-        auto nodes = methodAnalysis->get_basic_blocks().nodes();
+        auto nodes = methodAnalysis->get_basic_blocks()->nodes();
         for (auto node: nodes) {
             bbs->blocks[i].name = node->get_name().data();
             bbs->blocks[i].try_block = node->is_try_block() ? 1 : 0;
@@ -607,6 +609,8 @@ namespace {
                 free(method_core_api->exception_information->handler);
                 method_core_api->exception_information->handler = nullptr;
             }
+        }
+        if (method_core_api->exception_information) {
             free(method_core_api->exception_information);
             method_core_api->exception_information = nullptr;
         }
@@ -650,6 +654,7 @@ namespace {
         if (dex_opaque_struct->disassembler) {
             for (auto &method: dex_opaque_struct->disassembled_methods) {
                 destroy_disassembled_method(method.second);
+                free(method.second);
                 method.second = nullptr;
             }
             dex_opaque_struct->disassembled_methods.clear();
@@ -665,6 +670,9 @@ namespace {
         destroy_class_analysis(dex_opaque_struct);
         destroy_method_analysis(dex_opaque_struct);
         destroy_field_analysis(dex_opaque_struct);
+
+        delete dex_opaque_struct;
+        dex_opaque_struct = nullptr;
     }
 
 }// namespace
@@ -773,6 +781,11 @@ void analyze_classes(hDexContext context) {
     opaque_struct->analysis->create_xrefs();
 }
 
+hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t * class_) {
+    if (class_ == nullptr) throw std::runtime_error{"hdvmclass_t provided is null"};
+    return get_analyzed_class(context, class_->class_name);
+}
+
 hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
@@ -780,4 +793,18 @@ hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_n
     auto cls = opaque_struct->analysis->get_class_analysis(dalvik_name);
     if (cls == nullptr) throw std::runtime_error{"Error, given class does not exists"};
     return ::get_class_analysis(opaque_struct, cls);
+}
+
+hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t * method) {
+    if (method == nullptr) throw std::runtime_error{"hdvmmethod_t provided is null"};
+    return get_analyzed_method(context, method->dalvik_name);
+}
+
+hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
+    std::string dalvik_name = method_full_name;
+    auto method = opaque_struct->analysis->get_method_analysis_by_name(dalvik_name);
+    if (method == nullptr) throw std::runtime_error{"Error, given class does not exists"};
+    return ::get_method_analysis(opaque_struct, method);
 }

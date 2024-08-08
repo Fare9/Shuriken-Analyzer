@@ -4,43 +4,54 @@ from platform import system
 # Shuriken C interface
 
 import ctypes, ctypes.util
-from os.path import split, join, dirname
+from os.path import split, join, dirname, exists
 
 if sys.platform == "darwin":
     raise Exception("Not supported platform (yet...)")
 elif sys.platform in ("win32", "cygwin"):
     _lib = "libshuriken.dll"
+    common_paths = [
+        "C:\\Program Files\\Shuriken",
+        "C:\\Program Files (x86)\\Shuriken",
+        os.getenv("PROGRAMFILES", "C:\\Program Files"),
+        os.getenv("PROGRAMFILES(X86)", "C:\\Program Files (x86)")
+    ]
 else:
     _lib = "libshuriken.so"
-
-_found = False
-
+    common_paths = [
+        "/usr/local/lib",
+        "/usr/lib",
+        "/lib",
+        "/usr/local/lib/shuriken",
+        "/usr/lib/shuriken",
+        "/lib/shuriken"
+    ]
 
 def _load_lib(path):
     lib_file = join(path, _lib)
-    if os.path.exists(lib_file):
+    if exists(lib_file):
         return ctypes.cdll.LoadLibrary(lib_file)
     return None
 
-
 _shuriken = None
 
-# Loading attempts for the library
-os.environ["SHURIKEN_PATH"] = "../../../../build/"
+# Attempt to load library from SHURIKEN_PATH environment variable if set
 _path_list = [os.getenv("SHURIKEN_PATH", None)]
+# Append common system paths
+_path_list.extend(common_paths)
 
 for _path in _path_list:
     if _path is None:
         continue
     _shuriken = _load_lib(_path)
     if _shuriken is not None:
+        print(f"Library loaded from: {_path}")
         break
 else:
     raise ImportError("ERROR: fail to load the dynamic library")
 
 # import dex structures
-from dex import *
-
+from shuriken.dex import *
 
 class Dex(object):
     def __init__(self, dex_path: str = None):
@@ -60,6 +71,8 @@ class Dex(object):
         self.disassembled_methods = dict()
         # cache of the class analysis
         self.class_analysis_by_name = dict()
+        # cache of the method analysis
+        self.method_analysis_by_name = dict()
 
         _shuriken.parse_dex.restype = ctypes.c_void_p
         _shuriken.parse_dex.argtypes = [ctypes.c_char_p]
@@ -212,10 +225,46 @@ class Dex(object):
         self.class_analysis_by_name[class_name] = ptr.contents
         return self.class_analysis_by_name[class_name]
 
+    def get_analyzed_class_by_hdvmclass(self, class_: ctypes.POINTER(hdvmclass_t)) -> hdvmclassanalysis_t:
+        class_name = class_.class_name.decode()
+        _shuriken.get_analyzed_class_by_hdvmclass.argtypes = [ctypes.c_void_p, ctypes.POINTER(hdvmclass_t)]
+        _shuriken.get_analyzed_class_by_hdvmclass.restype = ctypes.POINTER(hdvmclassanalysis_t)
+        ptr = ctypes.cast(
+            _shuriken.get_analyzed_class_by_hdvmclass(self.dex_context_object, class_),
+            ctypes.POINTER(hdvmclassanalysis_t))
+        if ptr == 0:
+            return None
+        self.class_analysis_by_name[class_name] = ptr.contents
+        return self.class_analysis_by_name[class_name]
+
+    def get_analyzed_method(self, method_name: str) -> hdvmmethodanalysis_t:
+        if method_name in self.method_analysis_by_name:
+            return self.method_analysis_by_name[method_name]
+        _shuriken.get_analyzed_method.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        _shuriken.get_analyzed_method.restype = ctypes.POINTER(hdvmmethodanalysis_t)
+        ptr = ctypes.cast(_shuriken.get_analyzed_method(self.dex_context_object, ctypes.c_char_p(method_name.encode("utf-8"))),
+                          ctypes.POINTER(hdvmmethodanalysis_t))
+        if ptr == 0:
+            return None
+        self.method_analysis_by_name[method_name] = ptr.contents
+        return self.method_analysis_by_name[method_name]
+
+    def get_analyzed_method_by_hdvmmethod(self, method: ctypes.POINTER(hdvmmethod_t)) -> hdvmmethodanalysis_t:
+        method_name = method.dalvik_name.decode()
+        if method_name in self.method_analysis_by_name:
+            return self.method_analysis_by_name[method_name]
+        _shuriken.get_analyzed_method_by_hdvmmethod.argtypes = [ctypes.c_void_p, ctypes.POINTER(hdvmmethod_t)]
+        _shuriken.get_analyzed_method_by_hdvmmethod.restype = ctypes.POINTER(hdvmmethodanalysis_t)
+        ptr = ctypes.cast(_shuriken.get_analyzed_method_by_hdvmmethod(self.dex_context_object, method),
+                          ctypes.POINTER(hdvmmethodanalysis_t))
+        if ptr == 0:
+            return None
+        self.method_analysis_by_name[method_name] = ptr.contents
+        return self.method_analysis_by_name[method_name]
 
 
 if __name__ == "__main__":
-    path = "../../../../tests/compiled/"
+    path = "../../../tests/compiled/"
     for file in os.listdir(path):
 
         if not file.endswith(".dex"):
