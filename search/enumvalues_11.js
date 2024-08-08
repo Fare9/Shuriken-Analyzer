@@ -19,6 +19,6 @@ var searchData=
   ['value_5fstring_16',['VALUE_STRING',['../namespaceshuriken_1_1dex_1_1TYPES.html#ab782217a115198b0c10620c020ad9922add80d832f6acd219b301ac47d7c99f4d',1,'shuriken::dex::TYPES']]],
   ['value_5ftype_17',['VALUE_TYPE',['../namespaceshuriken_1_1dex_1_1TYPES.html#ab782217a115198b0c10620c020ad9922a2990260a99720a49de68bce1935cf1f3',1,'shuriken::dex::TYPES']]],
   ['varies_18',['VARIES',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38a258e067ef29d1d2ba1153c087fb7aabb',1,'shuriken::dex::TYPES']]],
-  ['void_19',['VOID',['../shuriken__core_8h.html#acecc48e8b38e72643a63e4aab22b3e65adb31f5ef7acca5e1131fcc0fbfa6911d',1,'VOID:&#160;shuriken_core.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270a03cf93bf572d63fcb1231d5a3ce6be00',1,'shuriken::parser::dex::VOID']]],
+  ['void_19',['VOID',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65adb31f5ef7acca5e1131fcc0fbfa6911d',1,'VOID:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270a03cf93bf572d63fcb1231d5a3ce6be00',1,'shuriken::parser::dex::VOID']]],
   ['vtable_5foffset_20',['VTABLE_OFFSET',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38a86c7fe01f2ce7e4b3995b9763ceab2ab',1,'shuriken::dex::TYPES']]]
 ];

@@ -1,6 +1,7 @@
 var structhdvmmethod__t__ =
 [
     [ "access_flags", "structhdvmmethod__t__.html#ab1f0731c1a0a2365b1dcc38d9620aea4", null ],
+    [ "class_name", "structhdvmmethod__t__.html#ac5390dcee625385fbafdc5f3dae3310e", null ],
     [ "code", "structhdvmmethod__t__.html#abb5094d4ea0314f6caa51ec6f3e3c782", null ],
     [ "code_size", "structhdvmmethod__t__.html#a184370348f6eda1f0676293af6cf545d", null ],
     [ "dalvik_name", "structhdvmmethod__t__.html#aa34e56a6076aabe669071d318fc17656", null ],

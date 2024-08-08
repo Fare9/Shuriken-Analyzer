@@ -13,6 +13,7 @@ var classshuriken_1_1analysis_1_1dex_1_1Analysis =
     [ "string_analyses_s_t", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#abd1e8235eefb7c9f95dd947601d0c0e9", null ],
     [ "string_analyses_t", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a18c95aea4c50fe0d2b6b584036ce43c1", null ],
     [ "Analysis", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a8d35b866454e85694c01aacfe606a73b", null ],
+    [ "~Analysis", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ab8a8f17bdfe49056045acb891424f24a", null ],
     [ "add", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#ad1fcbf470243fbce6ee5b361dde52490", null ],
     [ "create_xrefs", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#acf6d2c610cfaf83285bfa82ca4657d47", null ],
     [ "find_classes", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a2502d6ae68520ff680443144053778b4", null ],

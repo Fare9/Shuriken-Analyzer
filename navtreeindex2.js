@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa3336206ea2726b1519c6ad398b31872c":[0,0,1,3,0,4,0,17],
+"classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa3336206ea2726b1519c6ad398b31872c":[1,0,1,3,0,4,0,17],
+"classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa336e28d9cc7d04291ce91b53290aae30":[0,0,1,3,0,4,0,6],
+"classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa336e28d9cc7d04291ce91b53290aae30":[1,0,1,3,0,4,0,6],
 "classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa33b46f58e357eceabcd069b77221cbf4":[0,0,1,3,0,4,0,16],
 "classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa33b46f58e357eceabcd069b77221cbf4":[1,0,1,3,0,4,0,16],
 "classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae955ed640850b021e45e661f73b9359fa3c860cac46bb212433bb6e9ca9495f6e":[0,0,1,3,0,4,0,3],
@@ -245,9 +249,5 @@ var NAVTREEINDEX2 =
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html":[0,0,1,3,0,14],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html":[1,0,1,3,0,14],
 "classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#a000a4f43d63e976ff8db64649e4c865a":[0,0,1,3,0,14,7],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#a000a4f43d63e976ff8db64649e4c865a":[1,0,1,3,0,14,7],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#a7cfd0242fefaa6c07ce77daf85f6e01b":[0,0,1,3,0,14,5],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#a7cfd0242fefaa6c07ce77daf85f6e01b":[1,0,1,3,0,14,5],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#ac5a2b18ca6a0e1a4812e8cffcc675127":[0,0,1,3,0,14,3],
-"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#ac5a2b18ca6a0e1a4812e8cffcc675127":[1,0,1,3,0,14,3]
+"classshuriken_1_1disassembler_1_1dex_1_1Instruction12x.html#a000a4f43d63e976ff8db64649e4c865a":[1,0,1,3,0,14,7]
 };

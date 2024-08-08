@@ -2,6 +2,7 @@ var classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis =
 [
     [ "MethodAnalysis", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#ac57556fcf2f5ccfe1db8aaf60863e9e5", null ],
     [ "MethodAnalysis", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a0b01dc5518638c3b197a6156fd1fa28f", null ],
+    [ "~MethodAnalysis", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#ab44c2bd5fd348ad3fe5b66a50a340631", null ],
     [ "add_xrefconstclass", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a88d353f3ac6fd95a358f9bf5558ee445", null ],
     [ "add_xreffrom", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#ab1369520bac2e3c10bd9e77b195f52c9", null ],
     [ "add_xrefnewinstance", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a7b7d4a4f152697024d54d93de3117ed0", null ],
@@ -11,7 +12,7 @@ var classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis =
     [ "dump_dot_file", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#af2edf532e9dfbe9f2c9b8248852e44c6", null ],
     [ "external", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732", null ],
     [ "get_access_flags", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#ad79ad05ae800687cf7ec92d3eddfa8f3", null ],
-    [ "get_basic_blocks", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a7878cd5aaf4ecdec8464f185e64f9232", null ],
+    [ "get_basic_blocks", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a5a678b087f3d9636ece4da7ab8770595", null ],
     [ "get_class_name", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#aa29ee2381bfa76f71b36b8c9e10e0c88", null ],
     [ "get_descriptor", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a2ee7974150e0953d729e9cc3455172c6", null ],
     [ "get_disassembled_method", "classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a21e22573c49f14f649955473688fd7bf", null ],

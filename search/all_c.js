@@ -13,5 +13,5 @@ var searchData=
   ['logger_10',['logger',['../namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5',1,'shuriken']]],
   ['logger_2eh_11',['logger.h',['../logger_8h.html',1,'']]],
   ['logger_5foutput_5ft_12',['logger_output_t',['../namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b',1,'shuriken']]],
-  ['long_13',['LONG',['../shuriken__core_8h.html#acecc48e8b38e72643a63e4aab22b3e65aaee055c4a5aba7d55774e4f1c01dacea',1,'LONG:&#160;shuriken_core.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270a3448eb06184588a61faff36ea1c29409',1,'shuriken::parser::dex::LONG']]]
+  ['long_13',['LONG',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65aaee055c4a5aba7d55774e4f1c01dacea',1,'LONG:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270a3448eb06184588a61faff36ea1c29409',1,'shuriken::parser::dex::LONG']]]
 ];

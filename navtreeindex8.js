@@ -1,5 +1,9 @@
 var NAVTREEINDEX8 =
 {
+"dex__analysis_8h.html#ad806b09b9907989170d490d26ca43af7":[2,0,0,0,0,0,0,1,8],
+"dex__analysis_8h_source.html":[2,0,0,0,0,0,0,1],
+"dex__annotations_8h.html":[2,0,0,0,0,5,0,0],
+"dex__annotations_8h_source.html":[2,0,0,0,0,5,0,0],
 "dex__classes_8h.html":[2,0,0,0,0,5,0,1],
 "dex__classes_8h_source.html":[2,0,0,0,0,5,0,1],
 "dex__disassembler_8h.html":[2,0,0,0,0,3,0,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX8 =
 "namespaces.html":[0,0],
 "namespaceshuriken.html":[0,0,1],
 "namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5":[0,0,1,15],
-"namespaceshuriken.html#a4efb9ef98f13ecd6e10482c674fca7c4":[0,0,1,14],
-"namespaceshuriken.html#a59a1d6c048f6bcec26800e2b1863b485":[0,0,1,16],
-"namespaceshuriken.html#aa08244a5e05ca5cbd8b842186f670e75":[0,0,1,13],
-"namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b":[0,0,1,11],
-"namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd":[0,0,1,11,0]
+"namespaceshuriken.html#a4efb9ef98f13ecd6e10482c674fca7c4":[0,0,1,14]
 };

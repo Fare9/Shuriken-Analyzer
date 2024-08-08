@@ -15,7 +15,7 @@ var classshuriken_1_1analysis_1_1dex_1_1BasicBlocks =
     ] ],
     [ "BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ae047df804e0a5df940c54234d8eacf85", null ],
     [ "BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a9a1e8d30007952873d31008d76df6a0a", null ],
-    [ "~BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ac9b0c53be6efc9edd80238424457f723", null ],
+    [ "~BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a1ce64bb73a7f740e7034a5373dd0286c", null ],
     [ "add_edge", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a3e3187e3832e6c06134ac8d2bd3ad0f4", null ],
     [ "add_node", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#adc9bb44d41657b2d7984aa2eecfae942", null ],
     [ "add_predecessor", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#aec050265a65e32e2e59a4033a8d34701", null ],

@@ -24,11 +24,11 @@ var searchData=
   ['find_5ffields_21',['find_fields',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a21c509b63468de0f4e2934eaae122f4c',1,'shuriken::analysis::dex::Analysis']]],
   ['find_5fmethods_22',['find_methods',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a4b9cdbab0b720f426b0d63ae7ca7eb40',1,'shuriken::analysis::dex::Analysis']]],
   ['find_5fstrings_23',['find_strings',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#af47fde3da8c98c88679f1f3dbc0ffac5',1,'shuriken::analysis::dex::Analysis']]],
-  ['float_24',['FLOAT',['../shuriken__core_8h.html#acecc48e8b38e72643a63e4aab22b3e65a9cf4a0866224b0bb4a7a895da27c9c4c',1,'FLOAT:&#160;shuriken_core.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270ab3000af10c38913ddd1469f0c9c91779',1,'shuriken::parser::dex::FLOAT']]],
+  ['float_24',['FLOAT',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65a9cf4a0866224b0bb4a7a895da27c9c4c',1,'FLOAT:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270ab3000af10c38913ddd1469f0c9c91779',1,'shuriken::parser::dex::FLOAT']]],
   ['full_5fname_25',['full_name',['../structhdvmmethodanalysis__t__.html#a388314142feefe9e1ebfa5999b5ef127',1,'hdvmmethodanalysis_t_']]],
-  ['fundamental_26',['FUNDAMENTAL',['../shuriken__core_8h.html#a68f230416ae6406d36231f5b039fae8aa11f58475fa1ddbb0690d5c4b04456e93',1,'FUNDAMENTAL:&#160;shuriken_core.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a3d5adbafb14ad957257116f1c32fd734a314012d43868e7df9659c94d3410bda8',1,'shuriken::parser::dex::FUNDAMENTAL']]],
+  ['fundamental_26',['FUNDAMENTAL',['../shuriken__core__data_8h.html#a68f230416ae6406d36231f5b039fae8aa11f58475fa1ddbb0690d5c4b04456e93',1,'FUNDAMENTAL:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a3d5adbafb14ad957257116f1c32fd734a314012d43868e7df9659c94d3410bda8',1,'shuriken::parser::dex::FUNDAMENTAL']]],
   ['fundamental_5fe_27',['fundamental_e',['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270',1,'shuriken::parser::dex']]],
-  ['fundamental_5fnone_28',['FUNDAMENTAL_NONE',['../shuriken__core_8h.html#acecc48e8b38e72643a63e4aab22b3e65a36775aabe50cb47048f1dec683da4769',1,'shuriken_core.h']]],
+  ['fundamental_5fnone_28',['FUNDAMENTAL_NONE',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65a36775aabe50cb47048f1dec683da4769',1,'shuriken_core_data.h']]],
   ['fundamental_5fs_29',['fundamental_s',['../namespaceshuriken_1_1parser_1_1dex.html#a966415518e9d6e6d18d746a7aac73b02',1,'shuriken::parser::dex']]],
   ['fundamental_5fvalue_30',['fundamental_value',['../structhdvmfield__t__.html#a53b60cbc37c8c642f906516a60c0c1f8',1,'hdvmfield_t_']]]
 ];
