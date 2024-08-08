@@ -1,0 +1,29 @@
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@")
+endif()
+
+# Paths to remove
+set(REMOVE_DIRS "${CMAKE_INSTALL_PREFIX}/include/shuriken")
+set(REMOVE_FILES "${CMAKE_INSTALL_PREFIX}/lib/libshuriken.so")
+list(APPEND REMOVE_FILES "${CMAKE_INSTALL_PREFIX}/binary/shuriken-dump")
+
+
+# Print and remove directories
+foreach(dir ${REMOVE_DIRS})
+    if(EXISTS "${dir}")
+        message(STATUS "Removing directory: ${dir}")
+        file(REMOVE_RECURSE "${dir}")
+    else()
+        message(STATUS "Directory not found, skipping: ${dir}")
+    endif()
+endforeach()
+
+# Print and remove files
+foreach(file ${REMOVE_FILES})
+    if(EXISTS "${file}")
+        message(STATUS "Removing file: ${file}")
+        file(REMOVE "${file}")
+    else()
+        message(STATUS "File not found, skipping: ${file}")
+    endif()
+endforeach()

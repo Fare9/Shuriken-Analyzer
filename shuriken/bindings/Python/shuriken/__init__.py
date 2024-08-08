@@ -51,7 +51,7 @@ else:
     raise ImportError("ERROR: fail to load the dynamic library")
 
 # import dex structures
-from dex import *
+from shuriken.dex import *
 
 class Dex(object):
     def __init__(self, dex_path: str = None):
@@ -264,7 +264,7 @@ class Dex(object):
 
 
 if __name__ == "__main__":
-    path = "../../../../tests/compiled/"
+    path = "../../../tests/compiled/"
     for file in os.listdir(path):
 
         if not file.endswith(".dex"):
