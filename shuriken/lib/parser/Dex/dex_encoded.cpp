@@ -121,7 +121,7 @@ AnnotationElement *EncodedAnnotation::get_annotation_by_pos(std::uint32_t pos) {
 void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
                                        DexTypes &types,
                                        DexStrings &strings) {
-    auto my_logger = shuriken::logger();
+    /*auto my_logger = shuriken::logger();*/
 
     auto transform_u32_to_bytevector = [&](std::uint32_t intValue) {
         auto &value_data = std::get<std::vector<std::uint8_t>>(value);
@@ -213,12 +213,12 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
             auto &array = std::get<std::unique_ptr<EncodedArray>>(value);
             array = std::make_unique<EncodedArray>();
             array->parse_encoded_array(stream, types, strings);
-        }
+        } break;
         case shuriken::dex::TYPES::value_format::VALUE_ANNOTATION: {
             auto &annotation = std::get<std::unique_ptr<EncodedAnnotation>>(value);
             annotation = std::make_unique<EncodedAnnotation>();
             annotation->parse_encoded_annotation(stream, types, strings);
-        }
+        } break;
         default:
             std::stringstream error_msg;
             error_msg << "Value for format not implemented: " << static_cast<std::uint32_t>(format);
@@ -418,7 +418,7 @@ void CodeItemStruct::parse_code_item_struct(common::ShurikenStream &stream,
     // check if there are try-catch stuff
     if (code_item.tries_size > 0) {
 
-        TryItem try_item = {0};
+        TryItem try_item = {0, 0, 0};
 
         for (I = 0; I < code_item.tries_size; ++I) {
             stream.read_data<TryItem>(try_item, sizeof(TryItem));

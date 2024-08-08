@@ -44,10 +44,6 @@ namespace shuriken::common {
         /// @param read_size size to read from the file
         template<typename T>
         void read_data(T &buffer, size_t read_size) {
-            if (read_size < 0) {
-                throw std::runtime_error("read_size cannot be lower than 0");
-            }
-
             input_file.read(reinterpret_cast<char *>(&buffer), read_size);
 
             if (!input_file) {

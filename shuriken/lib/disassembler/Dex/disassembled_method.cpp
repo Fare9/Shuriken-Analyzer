@@ -101,7 +101,7 @@ std::string_view DisassembledMethod::print_method(bool print_address) {
         output << ".method " << access_flags_str << " ";
         output << method_id->dalvik_name_format() << '\n';
         output << ".registers " << std::to_string(n_of_registers) << '\n';
-        int id = 0;
+        std::uint64_t id = 0;
         for (auto instr: instructions_raw) {
             /// check the information for showing exception
             for (const auto &exception: exception_information) {

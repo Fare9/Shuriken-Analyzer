@@ -48,11 +48,10 @@ namespace {
 Analysis::Analysis(parser::dex::Parser *parser,
                    disassembler::dex::DexDisassembler *disassembler,
                    bool create_xrefs)
-    : created_xrefs(!create_xrefs), disassembler(disassembler) {
+    : disassembler(disassembler), created_xrefs(!create_xrefs) {
     if (parser)
         add(parser);
 }
-
 
 void Analysis::add(parser::dex::Parser *parser) {
     auto logger = shuriken::logger();
@@ -618,10 +617,8 @@ FieldAnalysis *Analysis::get_field_analysis(parser::dex::EncodedField *field) {
     auto f_it = std::ranges::find_if(
             field_analyses, [&](FieldAnalysis *field_analysis) -> bool {
                 if (field_analysis->is_external()) {
-                    return field_analysis->get_external_field()->pretty_field_name()
-                           == field->get_field()->pretty_field();
-                }
-                else {
+                    return field_analysis->get_external_field()->pretty_field_name() == field->get_field()->pretty_field();
+                } else {
                     return field_analysis->get_encoded_field()
                                    ->get_field()
                                    ->pretty_field() == field->get_field()->pretty_field();

@@ -14,8 +14,6 @@ project(
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_subdirectory(external/)
-
 add_executable(shuriken-dump
 shuriken-dump.cpp
 )

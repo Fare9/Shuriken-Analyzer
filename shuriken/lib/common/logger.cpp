@@ -52,6 +52,7 @@ spdlog::logger *shuriken::logger() {
                                              "provided is empty");
                 logger = spdlog::basic_logger_mt("file_logger", log_filename);
             }
+            break;
         default:
             throw std::runtime_error("logger(): Option provided for "
                                      "'global_logger_output' not valid");

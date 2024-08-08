@@ -13,6 +13,17 @@ project(
 # C++ Standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+# enable compiler warnings
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    add_compile_options(-Wall -Wextra -Werror)
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        add_compile_options(-Wno-zero-length-array)
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        add_compile_options(-Wno-strict-flex-arrays -Wno-multichar -Wno-dangling-reference -Wno-array-bounds -Wno-stringop-overflow)
+    endif()
+elseif(MSVC)
+add_compile_options(/W4 /WX /wd4200 \xXX)
+endif()
 
 # Compiler for the project
 if(CMAKE_CXX_COMPILER_LOADED)
@@ -39,22 +50,22 @@ endif()
 # with the options to compile only part of the project
 option(DEX "Disable the DEX analysis from the library (enable by default)" ON)
 option(DEX_TESTS "Compile all the tests for DEX files" OFF)
+option(SANITIZE "Enable sanitizers for the project" OFF)
 
+if ((CMAKE_BUILD_TYPE STREQUAL "Debug" ) AND SANITIZE)
+    message(STATUS "Debug build")
+    message(STATUS "Sanitizers enabled by debug mode")
+    # Set up sanitizer for address and undefined behavior
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined")
+    message(STATUS "Sanitizer flags: ${SANITIZER_FLAGS}")
+    add_compile_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
+    add_link_options(${SANITIZER_FLAGS} -fno-omit-frame-pointer)
+endif()
 # Variables that need to be set for compiling dalvik files
 set(JAVAC_BINARY "" CACHE FILEPATH "Path to javac binary for compiling java files")
 set(D8_BINARY "" CACHE FILEPATH "Path to d8 binary for compiling dex files")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-
-# include the externals
-add_subdirectory(external)
-
-set_target_properties(spdlog
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE 1
-)
-
 
 # Shuriken will contain only the basic classes, nothing more
 # the analyses for the different files are included optionally
@@ -145,27 +156,38 @@ add_subdirectory(tests)
 # Assuming this variable points to your project's include directory
 set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
+#------------------------------------------------------------- Installation Flags
+
+
+# Default paths for installation
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX "/usr/local" CACHE PATH "Default installation directory" FORCE)
+endif()
+
 # Check for operating system and set install paths accordingly
-set(include_install_path "/usr/include") # Default path
-set(library_install_path "/usr/lib") # Default path
+# Define default include and library paths based on CMAKE_INSTALL_PREFIX
+set(include_install_path "${CMAKE_INSTALL_PREFIX}/include") # Default path
+set(library_install_path "${CMAKE_INSTALL_PREFIX}/lib") # Default path
 
-
+# Conditional installation paths for different platforms
 if(APPLE)
     find_program(HOMEBREW_FOUND brew)
     if(HOMEBREW_FOUND)
         execute_process(COMMAND brew --prefix
-                        OUTPUT_VARIABLE HOMEBREW_PREFIX
-                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+                OUTPUT_VARIABLE HOMEBREW_PREFIX
+                 OUTPUT_STRIP_TRAILING_WHITESPACE)
         set(include_install_path "${HOMEBREW_PREFIX}/include")
         set(library_install_path "${HOMEBREW_PREFIX}/lib")
+        set(CMAKE_INSTALL_PREFIX "${HOMEBREW_PREFIX}")
     endif()
 elseif(UNIX AND NOT APPLE) # Explicitly differentiate UNIX from APPLE
     # Linux specific paths (already set as default)
 endif()
 
+# Ensure install paths are properly set
 set_target_properties(shuriken PROPERTIES
-    INSTALL_NAME_DIR "${library_install_path}"
-    BUILD_WITH_INSTALL_RPATH TRUE
+        INSTALL_NAME_DIR "${library_install_path}"
+        BUILD_WITH_INSTALL_RPATH TRUE
 )
 
 # Install the Shuriken library's binary
@@ -178,6 +200,22 @@ install(DIRECTORY ${SHURIKEN_INCLUDE_PATH}/
         DESTINATION ${include_install_path}
         FILES_MATCHING PATTERN "*.h*"
 )
+
+#------------------------------------------------------ Uninstallation Flags
+
+# Define the uninstall target
+if(NOT TARGET uninstall)
+    configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+            "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+            IMMEDIATE @ONLY
+    )
+
+    add_custom_target(uninstall
+            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
+    )
+endif()
+
 
 # Optional: if you have public headers in other directories added by subdirectories,
 # you should install them as well using additional install(DIRECTORY ...) commands.

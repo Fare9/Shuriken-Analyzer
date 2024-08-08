@@ -103,7 +103,8 @@ int main() {
     dex_disassembler->disassembly_dex();
 
     for (auto disassembled_method: disassembled_methods) {
-        auto method = dex_disassembler->get_disassembled_method(disassembled_method.first);
+        // TODO: A getter so i'm not sure if we should store it inside method
+        [[maybe_unused]] auto method = dex_disassembler->get_disassembled_method(disassembled_method.first);
         std::cout << disassembled_method.first << " check\n";
         assert(strcmp(disassembled_method.second.data(), method->print_method(true).data()) == 0 && "Error, the method has not been properly disassembled");
         std::cout << disassembled_method.first << " correct\n";

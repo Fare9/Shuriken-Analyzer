@@ -44,6 +44,5 @@ int main() {
                 std::cout << method_value->toString();
         }
     }
-
     return 0;
 }

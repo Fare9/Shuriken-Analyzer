@@ -9,6 +9,12 @@ project(
         HOMEPAGE_URL https://github.com/Fare9/Shuriken-Analyzer/
 )
 
+
+# Set CMake MacOS runtime path to find .so files on mac
+set(CMAKE_MACOSX_RPATH 1)
+# Append runtime path to find .so files on unix, needed before install
+list( APPEND CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
 enable_testing()
+add_subdirectory(externals/)
 add_subdirectory(shuriken/)
 add_subdirectory(shuriken-dump/)
