@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_C_COMPILER "afl-cc")
-set(CMAKE_CXX_COMPILER "afl-c++")
 
+# Check if the FUZZBUILD flag is set
+if(FUZZBUILD)
+    set(CMAKE_C_COMPILER "afl-cc")
+    set(CMAKE_CXX_COMPILER "afl-c++")
+endif()
 
 # Information from Shuriken project
 project(
