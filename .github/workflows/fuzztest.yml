@@ -1,0 +1,88 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: false
+
+      # Set up a matrix to run the following configurations:
+      # 1. <Ubuntu, Release/Debug, GCC>
+      # 2. <Ubuntu, Release/Debug, Clang>
+      # 3. <Ubuntu, Release/Debug, afl-cc>
+      # 4. <Ubuntu, Release/Debug, afl-c++>
+      #
+      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
+      matrix:
+        os: [ubuntu-24.04]
+        compiler: [gcc, clang, afl-cc, afl-c++]
+        build_type: [Debug, Release]
+
+    name: ${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.build_type }}
+            
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup compiler on Linux
+      run: |
+        sudo apt-get update
+        if [ "${{ matrix.compiler }}" = "gcc" ]; then
+          sudo apt-get install -y gcc-13 g++-13
+          echo "CC=gcc-13" >> $GITHUB_ENV
+          echo "CXX=g++-13" >> $GITHUB_ENV
+        elif [ "${{ matrix.compiler }}" = "clang" ]; then
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-18 main"
+          sudo apt-get update
+          sudo apt-get install -y clang-18
+          echo "CC=clang-18" >> $GITHUB_ENV
+          echo "CXX=clang++-18" >> $GITHUB_ENV
+        elif [[ "${{ matrix.compiler }}" == "afl-cc" || "${{ matrix.compiler }}" == "afl-c++" ]]; then
+          git clone https://github.com/AFLplusplus/AFLplusplus.git
+          cd AFLplusplus
+          make clean all
+          sudo make install
+          echo "CC=afl-cc" >> $GITHUB_ENV
+          echo "CXX=afl-g++" >> $GITHUB_ENV
+        fi
+      if: runner.os == 'Linux'
+      shell: bash
+    - name: Display compiler version
+      run: $CC --version
+    - name: Install cmake
+      run: sudo apt-get install cmake
+    - name: Install git
+      run: sudo apt install git
+    - name: Install JDK
+      run: sudo apt install default-jdk
+    - name: Create build in CMake
+      run: cmake -S . -B build -DFUZZBUILD=ON -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DGITHUB_ACTION=ON -DDEX_TESTS=ON
+    - name: Build with cmake
+      run: cmake --build build/ -j
+    - name: Install with cmake
+      run: sudo cmake --install build/
+    - name : Run tests
+      run: ctest --test-dir build/ --output-on-failure
+    - name: Verify shuriken-dump exit code
+      run: |
+        set +e # Prevent the script from exiting immediately on error
+        shuriken-dump
+        exit_code=$?
+        set -e # Re-enable immediate script exit on error
+        if [ $exit_code -eq 255 ]; then
+          echo "shuriken-dump exited with the expected exit code."
+        else
+          echo "Unexpected exit code from shuriken-dump: $exit_code"
+          exit 1
+        fi
