@@ -54,6 +54,10 @@ else:
 from shuriken.dex import *
 
 class Dex(object):
+    """
+    Object that will load a dex from a provided path.
+    All the returned structures belong to `dex.py`
+    """
     def __init__(self, dex_path: str = None):
         if dex_path is None:
             raise Exception("Error, you must provide a path to a dex file")

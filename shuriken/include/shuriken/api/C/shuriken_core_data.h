@@ -102,7 +102,7 @@ typedef struct hdvmfield_t_ {
 /// @brief Structure which keeps information from a method
 /// this can be accessed from the class data
 typedef struct hdvmmethod_t_ {
-    /// @brief Name of the class the field belong to
+    /// @brief Name of the class the method belongs to
     const char *class_name;
     /// @brief name of the method
     const char *method_name;
@@ -110,7 +110,7 @@ typedef struct hdvmmethod_t_ {
     const char *prototype;
     /// @brief access flags
     uint16_t access_flags;
-    /// @brief number of registers
+    /// @brief number of bytes from the code
     uint32_t code_size;
     /// @brief pointer to a code buffer
     uint8_t *code;
@@ -213,7 +213,7 @@ typedef struct dvmhandler_data_t_ {
 /// @brief Structure with the information from the exceptions
 /// in the code
 typedef struct dvmexceptions_data_t_ {
-    /// @brief start address from the try
+    /// @brief start address of the try
     uint64_t try_value_start_addr;
     /// @brief last address from the try
     uint64_t try_value_end_addr;
@@ -234,9 +234,9 @@ typedef struct dvmdisassembled_method_t_ {
     size_t n_of_exceptions;
     /// @brief all the exceptions from the method
     dvmexceptions_data_t *exception_information;
-    /// @brief number of instructions from the method
+    /// @brief number of instructions in the method
     size_t n_of_instructions;
-    /// @brief array of all the instructions from the method
+    /// @brief array of all the instructions in the method
     hdvminstruction_t *instructions;
     /// @brief Full disassembled method
     const char *method_string;
