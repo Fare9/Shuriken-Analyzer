@@ -18,7 +18,7 @@ add_executable(shuriken-dump
 shuriken-dump.cpp
 )
 
-target_link_libraries(shuriken-dumb
+target_link_libraries(shuriken-dump
     PRIVATE
         shuriken
         spdlog

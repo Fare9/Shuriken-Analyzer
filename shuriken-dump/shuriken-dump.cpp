@@ -72,8 +72,8 @@ int main(int argc, char **argv) {
             {"-B", [&]() { blocks = true; }},
             {"-x", [&]() { xrefs = true; }},
             {"-T", [&]() { running_time = true; }},
-            {"-N", [&]() { no_print = true; }}
-	    {"-i", [&]() { td_in = true; }},
+            {"-N", [&]() { no_print = true; }},
+	    {"-i", [&]() { td_in = true; }}
     };
 
     for (const auto &s: args) {
@@ -100,6 +100,10 @@ int main(int argc, char **argv) {
         temp_file << buffer.str();
         temp_file.close();
         dex_input = temp_filename;
+	if (std::remove(temp_filename) != 0) {
+            std::cerr << "Error: Could not remove temporary file" << std::endl;
+	    return -1;
+        }
     } else {
 
        	dex_input = args[1];
