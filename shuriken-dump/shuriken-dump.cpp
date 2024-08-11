@@ -12,6 +12,12 @@
 #include <shuriken/parser/Dex/parser.h>
 #include <shuriken/parser/shuriken_parsers.h>
 #include <vector>
+#include <sstream>
+#include <iostream>
+#include <fstream>
+#include <memory>
+#include <cstdio>  // for std::tmpfile
+#include <stdexcept>
 
 void show_help(std::string &prog_name) {
     fmt::println("USAGE: {} <file_to_analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
@@ -41,6 +47,7 @@ bool blocks = false;
 bool running_time = false;
 bool xrefs = false;
 bool no_print = false;
+bool td_in = false;
 
 std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
 std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
@@ -66,6 +73,7 @@ int main(int argc, char **argv) {
             {"-x", [&]() { xrefs = true; }},
             {"-T", [&]() { running_time = true; }},
             {"-N", [&]() { no_print = true; }}
+	    {"-i", [&]() { td_in = true; }},
     };
 
     for (const auto &s: args) {
@@ -74,9 +82,31 @@ int main(int argc, char **argv) {
         }
     }
 
-    try {
-        auto parsed_dex = shuriken::parser::parse_dex(args[1]);
+    std::string dex_input;
+    
+    if (td_in) {
+	// Read data from stdin and write to a temporary file
+        std::stringstream buffer;
+        buffer << std::cin.rdbuf();
 
+        char temp_filename[L_tmpnam];
+        std::tmpnam(temp_filename);
+
+        std::ofstream temp_file(temp_filename);
+        if (!temp_file) {
+            std::cerr << "Error: Could not create temporary file" << std::endl;
+            return -1;
+        }
+        temp_file << buffer.str();
+        temp_file.close();
+        dex_input = temp_filename;
+    } else {
+
+       	dex_input = args[1];
+    }
+
+    try {
+	auto parsed_dex = shuriken::parser::parse_dex(dex_input);
         if (disassembly) {
             disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
             disassembler->disassembly_dex();
