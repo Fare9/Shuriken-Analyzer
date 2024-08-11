@@ -83,13 +83,13 @@ int main(int argc, char **argv) {
     }
 
     std::string dex_input;
+    char temp_filename[L_tmpnam];
     
     if (td_in) {
 	// Read data from stdin and write to a temporary file
         std::stringstream buffer;
         buffer << std::cin.rdbuf();
 
-        char temp_filename[L_tmpnam];
         std::tmpnam(temp_filename);
 
         std::ofstream temp_file(temp_filename);
@@ -100,10 +100,6 @@ int main(int argc, char **argv) {
         temp_file << buffer.str();
         temp_file.close();
         dex_input = temp_filename;
-	if (std::remove(temp_filename) != 0) {
-            std::cerr << "Error: Could not remove temporary file" << std::endl;
-	    return -1;
-        }
     } else {
 
        	dex_input = args[1];
@@ -155,6 +151,10 @@ int main(int argc, char **argv) {
         // Print the duration
         fmt::print("Execution time: {:02}h:{:02}m:{:02}s:{:03}ms\n",
                    hours.count(), minutes.count(), seconds.count(), milliseconds.count());
+    }
+    if (std::remove(temp_filename) != 0) {
+      std::cerr << "Error: Could not remove temporary file" << std::endl;
+      return -1;
     }
 
     return 0;
