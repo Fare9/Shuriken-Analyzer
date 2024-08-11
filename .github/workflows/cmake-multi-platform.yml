@@ -65,9 +65,6 @@ jobs:
     - name: Install AFL++
       working-directory: AFLplusplus
       run: sudo make install
-    - name: Verify installation
-      run: |
-        afl-fuzz -h
     - name: Install JDK
       run: sudo apt install default-jdk
     - name: Create build in CMake
