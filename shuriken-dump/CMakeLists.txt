@@ -26,38 +26,15 @@ target_link_libraries(shuriken-dump
 )
 
 # Assuming this variable points to your project's include directory
-set(SHURIKEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-# Check for operating system and set install paths accordingly
-set(include_install_path "/usr/local/include") # Default path
-set(binary_install_path "/usr/local/bin") # Default path
-
-if(APPLE)
-    find_program(HOMEBREW_FOUND brew)
-    if(HOMEBREW_FOUND)
-        execute_process(COMMAND brew --prefix
-                        OUTPUT_VARIABLE HOMEBREW_PREFIX
-                        OUTPUT_STRIP_TRAILING_WHITESPACE)
-        set(include_install_path "${HOMEBREW_PREFIX}/include")
-        set(binary_install_path "${HOMEBREW_PREFIX}/bin")
-    endif()
-    set_target_properties(shuriken-dump PROPERTIES
-    INSTALL_RPATH "${library_install_path}"
-)
-elseif(UNIX AND NOT APPLE) # Explicitly differentiate UNIX from APPLE
-    # Linux specific paths (already set as default)
-endif()
-
-
+set(SHURIKEN_DUMP_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Install the Shuriken library's binary
 install(TARGETS shuriken-dump
-
         RUNTIME DESTINATION ${binary_install_path}
 )
 
 # Install the Shuriken library's header files
-install(DIRECTORY ${SHURIKEN_INCLUDE_PATH}/
+install(DIRECTORY ${SHURIKEN_DUMP_INCLUDE_PATH}/
         DESTINATION ${include_install_path}
         FILES_MATCHING PATTERN "*.h*"
 )
