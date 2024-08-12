@@ -21,11 +21,11 @@ We will follow some of the recommendations from the [LLVM Coding Standards](http
 The project uses CMake for building.
 
 ### Configuring the project
-```
-cmake -S . -B build -DDEX_TESTS=ON -DCMAKE_BUILD_TYPE=Debug # -DSANITIZE=ON
+```bash
+cmake -S . -B build -DDEX_TESTS=ON -DCMAKE_BUILD_TYPE=Debug  
 ```
 Due to different development environments, sanitizers are not enabled by default.
-You can remove the comment about sanitizers to enable them.
+You can enable them by appending -DSANITIZE=ON
 
 ### Building the project
 ```
