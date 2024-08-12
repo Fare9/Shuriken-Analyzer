@@ -10,10 +10,6 @@ project(
 )
 
 
-# Set CMake MacOS runtime path to find .so files on mac
-set(CMAKE_MACOSX_RPATH 1)
-# Append runtime path to find .so files on unix, needed before install
-list( APPEND CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
 enable_testing()
 include(cmake/cmake_install_uninstall.cmake)
 add_subdirectory(externals/)

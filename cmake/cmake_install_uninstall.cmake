@@ -1,6 +1,10 @@
 
 #------------------------------------------------------------- Installation Flags
 # Default paths for installation
+# Set CMake MacOS runtime path to find .so files on mac
+set(CMAKE_MACOSX_RPATH 1)
+# Append runtime path to find .so files on unix, needed before install
+list( APPEND CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
 
 # Check for operating system and set install paths accordingly
 # Conditional installation paths for different platforms
