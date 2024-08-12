@@ -79,3 +79,13 @@ jobs:
           echo "Unexpected exit code from shuriken-dump: $exit_code"
           exit 1
         fi
+    - name: Verify that uninstall target works 
+      run: |
+        sudo cmake --build build/ --target uninstall \
+          ls /usr/local/ -R | grep "shuriken" \
+          if [ $? -eq 1 ]; then \
+            echo "Uninstall target worked as expected"; \
+          else \
+            echo "Uninstall target did not work as expected"; \
+            exit 1; \
+          fi
