@@ -44,3 +44,4 @@ cmake-build-release/
 
 # Python
 __pycache__/
+ShurikenAnalyzer.egg-info/
