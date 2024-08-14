@@ -1,3 +1,4 @@
+
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
     set(CMAKE_INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@")
 endif()
@@ -5,7 +6,7 @@ endif()
 # Paths to remove
 set(REMOVE_DIRS "${CMAKE_INSTALL_PREFIX}/include/shuriken")
 set(REMOVE_FILES "${CMAKE_INSTALL_PREFIX}/lib/libshuriken.so")
-list(APPEND REMOVE_FILES "${CMAKE_INSTALL_PREFIX}/binary/shuriken-dump")
+list(APPEND REMOVE_FILES "${CMAKE_INSTALL_PREFIX}/bin/shuriken-dump")
 
 
 # Print and remove directories
