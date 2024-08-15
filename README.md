@@ -20,6 +20,24 @@ the code from the parsers, the disassemblers, etc.
 * [shuriken-dump](./shuriken-dump/): command line tool for dumping the structure of a DEX file (for the moment).
 
 ## Installation
+### With python3 and pip
+#### Install
+To install the library, you can use pip. Just run the following command:
+```
+ pip install git+https://github.com/Fare9/Shuriken-Analyzer.git@main#subdirectory=shuriken/bindings/Python/
+```
+This uses `git clone` to clone the repository and invoke setup.py in the `shuriken/bindings/Python/` folder.
+
+setup.py will install the shuriken library as well as provides python api bindings for the library. 
+
+#### Uninstall
+To uninstall, pip provides `uninstall` command
+```
+pip uninstall ShurikenAnalyzer
+```
+
+### With raw cmake
+#### Install
 To install, start by cloning the respotory and then run the following commands:
 
 ```bash
@@ -31,6 +49,7 @@ This helps:
 - Build the project with all the cores
 - Install the project in usr/local/bin, thus needing sudo permissions
 
+#### Uninstall
 For uninstalling, run
 ```bash
 sudo cmake --build build/ --target uninstall
