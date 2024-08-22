@@ -38,20 +38,21 @@ endif ()
 # repo
 # ------------------------------------
 FetchContent_Declare(
-        spdlog
+        extern_spdlog
 
         GIT_REPOSITORY https://github.com/gabime/spdlog.git
         GIT_TAG v1.12.0
 )
 
-FetchContent_GetProperties(spdlog)
+FetchContent_GetProperties(extern_spdlog)
 
-if(NOT spdlog_POPULATED)
+if(NOT extern_spdlog_POPULATED)
     message(STATUS "Cloning spdlog")
-    FetchContent_Populate(spdlog)
+    FetchContent_Populate(extern_spdlog)
+    set(SPDLOG_BUILD_SHARED OFF)
     add_subdirectory(
-            ${spdlog_SOURCE_DIR}
-            ${spdlog_BINARY_DIR}
+            ${extern_spdlog_SOURCE_DIR}
+            ${extern_spdlog_BINARY_DIR}
     )
 endif()
 
@@ -62,7 +63,7 @@ set_target_properties(spdlog
 )
 
 # Make the project available
-FetchContent_MakeAvailable(spdlog)
+FetchContent_MakeAvailable(extern_spdlog)
 
 # ------------------------------------
 # Download the printing utility fmt
