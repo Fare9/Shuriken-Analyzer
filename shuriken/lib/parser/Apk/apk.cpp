@@ -9,6 +9,7 @@
 #include "shuriken/parser/shuriken_parsers.h"
 #include "zip.h"
 #include <filesystem>
+#include <sstream>
 
 using namespace shuriken::parser::apk;
 
@@ -134,10 +135,10 @@ namespace shuriken {
             return apk;
         }
 
-        std::unique_ptr<apk::Apk> parse_apk(const char * file_path, bool created_xrefs) {
+        std::unique_ptr<apk::Apk> parse_apk(const char *file_path, bool created_xrefs) {
             auto apk = std::make_unique<apk::Apk>(file_path);
             apk->analyze_apk_file(created_xrefs);
             return apk;
         }
-    }
-}
+    }// namespace parser
+}// namespace shuriken

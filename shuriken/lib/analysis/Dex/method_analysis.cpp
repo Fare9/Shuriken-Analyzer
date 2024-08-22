@@ -7,6 +7,7 @@
 #include "shuriken/analysis/Dex/dex_analysis.h"
 #include "shuriken/common/logger.h"
 #include "shuriken/disassembler/Dex/internal_disassembler.h"
+#include <sstream>
 
 #include <iomanip>
 
