@@ -24,8 +24,7 @@ namespace {
 void DexStrings::parse_strings(common::ShurikenStream &shuriken_stream,
                                std::uint32_t strings_offset,
                                std::uint32_t n_of_strings) {
-    auto my_logger = shuriken::logger();
-    my_logger->info("Start parsing strings");
+    log(LEVEL::INFO, "Start parsing strings");
 
     auto current_offset = shuriken_stream.tellg();
     std::uint32_t str_offset;// we will read offsets
@@ -44,7 +43,7 @@ void DexStrings::parse_strings(common::ShurikenStream &shuriken_stream,
     }
 
     shuriken_stream.seekg(current_offset, std::ios_base::beg);
-    my_logger->info("Finished parsing strings");
+    log(LEVEL::INFO, "Finished parsing strings");
 }
 
 void DexStrings::to_xml(std::ofstream &fos) {

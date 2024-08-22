@@ -15,12 +15,12 @@ using namespace shuriken::analysis::dex;
 MethodAnalysis::MethodAnalysis(shuriken::parser::dex::EncodedMethod *encoded_method,
                                shuriken::disassembler::dex::DisassembledMethod *disassembled)
     : is_external(false), method_encoded(encoded_method), disassembled(disassembled),
-        basic_blocks(std::make_unique<BasicBlocks>()) {
+      basic_blocks(std::make_unique<BasicBlocks>()) {
     create_basic_blocks();
 }
 
 MethodAnalysis::MethodAnalysis(ExternalMethod *external_method)
-    : is_external(true), method_encoded(external_method), basic_blocks(std::make_unique<BasicBlocks>())  {
+    : is_external(true), method_encoded(external_method), basic_blocks(std::make_unique<BasicBlocks>()) {
 }
 
 void MethodAnalysis::dump_dot_file(std::string &file_path) {
@@ -158,14 +158,12 @@ void MethodAnalysis::add_xrefconstclass(ClassAnalysis *c, std::uint64_t offset) 
 }
 
 void MethodAnalysis::create_basic_blocks() {
-    auto log = logger();
-
     /// utilities to create the basic blocks
     std::set<std::int64_t> entry_points;
     std::unordered_map<std::uint64_t, std::vector<std::int64_t>> target_jumps;
     shuriken::disassembler::dex::Disassembler internal_disassembler;
 
-    log->debug("Started creating basic blocks from method {}", get_full_name());
+    log(LEVEL::MYDEBUG, "Started creating basic blocks from method {}", get_full_name());
 
     if (disassembled->get_number_of_instructions() == 0)
         return;

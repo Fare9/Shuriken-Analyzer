@@ -38,20 +38,20 @@ endif ()
 # repo
 # ------------------------------------
 FetchContent_Declare(
-    extern_spdlog
+        spdlog
 
         GIT_REPOSITORY https://github.com/gabime/spdlog.git
         GIT_TAG v1.12.0
 )
 
-FetchContent_GetProperties(extern_spdlog)
+FetchContent_GetProperties(spdlog)
 
-if(NOT extern_spdlog_POPULATED)
+if(NOT spdlog_POPULATED)
     message(STATUS "Cloning spdlog")
-    FetchContent_Populate(extern_spdlog)
+    FetchContent_Populate(spdlog)
     add_subdirectory(
-            ${extern_spdlog_SOURCE_DIR}
-            ${extern_spdlog_BINARY_DIR}
+            ${spdlog_SOURCE_DIR}
+            ${spdlog_BINARY_DIR}
     )
 endif()
 
@@ -62,8 +62,11 @@ set_target_properties(spdlog
 )
 
 # Make the project available
-FetchContent_MakeAvailable(extern_spdlog)
+FetchContent_MakeAvailable(spdlog)
 
+# ------------------------------------
+# Download the printing utility fmt
+# ------------------------------------
 FetchContent_Declare(
         fmt
 
@@ -82,6 +85,30 @@ if(NOT fmt_POPULATED)
     )
 endif()
 
-
 # Make the project available
 FetchContent_MakeAvailable(fmt)
+
+
+# ------------------------------------
+# Download the zip libary
+# ------------------------------------
+
+FetchContent_Declare(
+        libzip
+        GIT_REPOSITORY https://github.com/nih-at/libzip.git
+        GIT_TAG        main  # Or a specific version tag
+)
+
+FetchContent_GetProperties(libzip)
+
+if(NOT libzip_POPULATED)
+    message(STATUS "Cloning libzip")
+    FetchContent_Populate(libzip)
+    add_subdirectory(
+            ${libzip_SOURCE_DIR}
+            ${libzip_BINARY_DIR}
+    )
+endif()
+
+FetchContent_MakeAvailable(libzip)
+

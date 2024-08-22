@@ -66,7 +66,6 @@ void DexMethods::parse_methods(
         DexStrings &strings,
         std::uint32_t methods_offset,
         std::uint32_t methods_size) {
-    auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
     std::uint16_t class_idx;
     std::uint16_t proto_idx;
@@ -74,7 +73,7 @@ void DexMethods::parse_methods(
 
     std::unique_ptr<MethodID> method_id;
 
-    my_logger->info("Started parsing methods at offset {}", methods_offset);
+    log(LEVEL::INFO, "Started parsing methods at offset {}", std::to_string(methods_offset));
 
     stream.seekg(methods_offset, std::ios_base::beg);
 
@@ -91,7 +90,7 @@ void DexMethods::parse_methods(
         method_ids.push_back(std::move(method_id));
     }
 
-    my_logger->info("Finshed parsing methods");
+    log(LEVEL::INFO, "Finshed parsing methods");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }

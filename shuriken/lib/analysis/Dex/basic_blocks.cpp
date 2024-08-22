@@ -162,7 +162,7 @@ shuriken::iterator_range<BasicBlocks::reversenodesetiterator_t> BasicBlocks::rev
 
 BasicBlocks::~BasicBlocks() {
     if (nodes_.size() > 0) {
-        for (auto & node : nodes_) {
+        for (auto &node: nodes_) {
             delete node;
         }
         nodes_.clear();

@@ -113,17 +113,17 @@ SHURIKENCOREAPI void analyze_classes(hDexContext context);
 /// @brief Obtain one hdvmclassanalysis_t given its hdvmclass_t
 /// @param context context from the CORE API
 /// @param class_ hdvmclass_t to get its analysis
-SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t * class_);
+SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t *class_);
 
 /// @brief Obtain one hdvmclassanalysis_t given its name.
 /// @param context context from the CORE API
 /// @param class_name name of the class to retrieve
 SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name);
 
-SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t * method);
+SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t *method);
 
-SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name);;
-
+SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name);
+;
 };
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H

@@ -16,9 +16,8 @@ DexHeader::DexHeader(DexHeader &header) {
 }
 
 void DexHeader::parse_header(common::ShurikenStream &stream) {
-    auto my_logger = shuriken::logger();
 
-    my_logger->info("Start parsing header");
+    log(LEVEL::INFO, "Start parsing header");
 
     auto f_size = stream.get_file_size();
 
@@ -49,7 +48,7 @@ void DexHeader::parse_header(common::ShurikenStream &stream) {
     if (dexheader.data_off > f_size)
         throw std::runtime_error(ERROR_MESSAGE(data_off));
 
-    my_logger->info("Finished parsing header");
+    log(LEVEL::INFO, "Finished parsing header");
 }
 
 void DexHeader::to_xml(std::ofstream &fos) {

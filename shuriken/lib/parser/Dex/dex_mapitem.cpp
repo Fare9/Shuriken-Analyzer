@@ -12,14 +12,13 @@ using namespace shuriken::parser::dex;
 
 
 void DexMapList::parse_map_list(common::ShurikenStream &stream, std::uint32_t map_off) {
-    auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 
     std::uint32_t size;
 
     map_item item;
 
-    my_logger->info("Started parsing map_list at offset {}", map_off);
+    log(LEVEL::INFO, "Started parsing map_list at offset {}", std::to_string(map_off));
 
     stream.seekg(map_off, std::ios_base::beg);
 
@@ -32,7 +31,7 @@ void DexMapList::parse_map_list(common::ShurikenStream &stream, std::uint32_t ma
         items[item.type] = {item.type, item.unused, item.size, item.offset};
     }
 
-    my_logger->info("Finished parsing map_list");
+    log(LEVEL::INFO, "Finished parsing map_list");
     stream.seekg(current_offset, std::ios_base::beg);
 }
 

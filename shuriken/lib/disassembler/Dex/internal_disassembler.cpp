@@ -331,7 +331,6 @@ std::unique_ptr<Instruction> Disassembler::disassemble_instruction(
     auto op = static_cast<DexOpcodes::opcodes>(opcode);
 
     std::unique_ptr<Instruction> instr = nullptr;
-    auto logger = shuriken::logger();
 
     if (DexOpcodes::opcodes::OP_NOP == op) {
         auto second_opcode = bytecode[index + 1];
@@ -351,7 +350,7 @@ std::unique_ptr<Instruction> Disassembler::disassemble_instruction(
             instr = it->second(bytecode, index, parser);
 
         else {
-            logger->error("Error in disassembler, opcode {} not recognized", opcode);
+            log(LEVEL::ERR, "Error in disassembler, opcode {} not recognized", std::to_string(opcode));
             throw std::runtime_error("Error in disassembler, not recognized opcode");
         }
     }

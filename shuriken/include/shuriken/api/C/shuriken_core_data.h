@@ -442,7 +442,6 @@ typedef struct hdvmclassanalysis_t_ {
     /// @brief Classes that call this class
     hdvm_classxref_t *xreffrom;
 } hdvmclassanalysis_t;
-
 }
 
 #endif//SHURIKENPROJECT_SHURIKEN_CORE_DATA_H

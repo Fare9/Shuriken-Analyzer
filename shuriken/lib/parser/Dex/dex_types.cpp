@@ -54,8 +54,7 @@ void DexTypes::parse_types(common::ShurikenStream &shurikenStream,
                            DexStrings &strings_,
                            std::uint32_t offset_types,
                            std::uint32_t n_of_types) {
-    auto my_logger = shuriken::logger();
-    my_logger->info("Start parsing types");
+    log(LEVEL::INFO, "Start parsing types");
 
     auto current_offset = shurikenStream.tellg();
 
@@ -73,7 +72,7 @@ void DexTypes::parse_types(common::ShurikenStream &shurikenStream,
     }
 
     shurikenStream.seekg(current_offset, std::ios_base::beg);
-    my_logger->info("Finished parsing types");
+    log(LEVEL::INFO, "Finished parsing types");
 }
 
 void DexTypes::to_xml(std::ofstream &fos) {

@@ -13,8 +13,7 @@ using namespace shuriken::parser::dex;
 
 void Parser::parse_dex(common::ShurikenStream &stream) {
     std::uint8_t magic[4];
-    auto my_logger = shuriken::logger();
-    my_logger->info("Start parsing dex file");
+    log(LEVEL::INFO, "Start parsing dex file");
 
     if (stream.get_file_size() < sizeof(DexHeader::dexheader_t))
         throw std::runtime_error("Error file provided to java has an incorrect size");
@@ -66,7 +65,7 @@ void Parser::parse_dex(common::ShurikenStream &stream) {
                            fields_,
                            methods_);
 
-    my_logger->info("Finished parsing dex file");
+    log(LEVEL::INFO, "Finished parsing dex file");
 }
 
 DexHeader &Parser::get_header() {
