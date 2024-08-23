@@ -117,8 +117,8 @@ if(NOT libzip_POPULATED)
     )
 
 endif()
-
 FetchContent_MakeAvailable(libzip)
+set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 function(check_static_lib lib_name)
     get_target_property(external_target_type ${lib_name} TYPE)
