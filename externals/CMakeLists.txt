@@ -2,6 +2,11 @@
 cmake_minimum_required(VERSION 3.5)
 
 include(FetchContent)
+set(BUILD_SHARED_LIBS OFF)
+
+# Libzip relies on the BUILD_SHARED_LIBS option (NOT FLAGS) for its library type 
+# It sets BUILD_SHARED_LIBS to ON by default so we need to set it again
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 set(FETCHCONTENT_QUIET off)
 
@@ -48,8 +53,8 @@ FetchContent_GetProperties(extern_spdlog)
 
 if(NOT extern_spdlog_POPULATED)
     message(STATUS "Cloning spdlog")
-    FetchContent_Populate(extern_spdlog)
     set(SPDLOG_BUILD_SHARED OFF)
+    FetchContent_Populate(extern_spdlog)
     add_subdirectory(
             ${extern_spdlog_SOURCE_DIR}
             ${extern_spdlog_BINARY_DIR}
@@ -84,6 +89,7 @@ if(NOT fmt_POPULATED)
             ${fmt_SOURCE_DIR}
             ${fmt_BINARY_DIR}
     )
+
 endif()
 
 # Make the project available
@@ -109,7 +115,20 @@ if(NOT libzip_POPULATED)
             ${libzip_SOURCE_DIR}
             ${libzip_BINARY_DIR}
     )
+
 endif()
 
 FetchContent_MakeAvailable(libzip)
 
+function(check_static_lib lib_name)
+    get_target_property(external_target_type ${lib_name} TYPE)
+    if (NOT external_target_type STREQUAL STATIC_LIBRARY)
+        message(FATAL_ERROR "${lib_name} is not a static library")
+    endif()
+endfunction()
+
+check_static_lib(zip)
+check_static_lib(fmt)
+check_static_lib(spdlog)
+
+set(BUILD_SHARED_LIBS ON)
