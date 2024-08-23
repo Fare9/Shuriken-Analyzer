@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 namespace spdlog {
     class logger;
