@@ -2,10 +2,9 @@
 cmake_minimum_required(VERSION 3.5)
 
 include(FetchContent)
-set(BUILD_SHARED_LIBS OFF)
 
-# Libzip relies on the BUILD_SHARED_LIBS option (NOT FLAGS) for its library type 
-# It sets BUILD_SHARED_LIBS to ON by default so we need to set it again
+# By default, all libraries built here must be static
+set(BUILD_SHARED_LIBS OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 set(FETCHCONTENT_QUIET off)
@@ -110,12 +109,17 @@ FetchContent_GetProperties(libzip)
 
 if(NOT libzip_POPULATED)
     message(STATUS "Cloning libzip")
+    set(BUILD_SHARED_LIBS ON)
+    option(BUILD_SHARED_LIBS ON)
     FetchContent_Populate(libzip)
     add_subdirectory(
             ${libzip_SOURCE_DIR}
             ${libzip_BINARY_DIR}
     )
-    set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set(BUILD_SHARED_LIBS OFF)
+    option(BUILD_SHARED_LIBS OFF)
+
+    # set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 endif()
 
@@ -134,8 +138,8 @@ function(check_position_independent_code lib_name)
         message(FATAL_ERROR "${lib_name} is not a library built with POSITION_INDEPENDENT_CODE option")
     endif()
 endfunction()
-check_static_lib(zip)
-check_position_independent_code(zip)
+# check_static_lib(zip)
+# check_position_independent_code(zip)
 check_static_lib(fmt)
 check_static_lib(spdlog)
 
