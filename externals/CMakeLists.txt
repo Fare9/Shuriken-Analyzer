@@ -115,10 +115,11 @@ if(NOT libzip_POPULATED)
             ${libzip_SOURCE_DIR}
             ${libzip_BINARY_DIR}
     )
+    set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 endif()
+
 FetchContent_MakeAvailable(libzip)
-set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 function(check_static_lib lib_name)
     get_target_property(external_target_type ${lib_name} TYPE)
@@ -127,7 +128,14 @@ function(check_static_lib lib_name)
     endif()
 endfunction()
 
+function(check_position_independent_code lib_name)
+    get_target_property(external_target_type ${lib_name} POSITION_INDEPDENT_CODE)
+    if (external_target_type EQUAL False)
+        message(FATAL_ERROR "${lib_name} is not a library built with POSITION_INDEPENDENT_CODE option")
+    endif()
+endfunction()
 check_static_lib(zip)
+check_position_independent_code(zip)
 check_static_lib(fmt)
 check_static_lib(spdlog)
 
