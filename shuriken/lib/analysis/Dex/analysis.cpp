@@ -73,7 +73,7 @@ void Analysis::add(parser::dex::Parser *parser) {
     auto it_classes = class_dex.get_classdefs();
 
     log(LEVEL::INFO, "Adding to the analysis {} number of classes",
-                  std::to_string(std::distance(it_classes.begin(), it_classes.end())));
+        std::to_string(std::distance(it_classes.begin(), it_classes.end())));
 
     auto &all_methods_instructions = disassembler->get_disassembled_methods_ownership();
 
@@ -96,8 +96,8 @@ void Analysis::_add_classdef(
     auto &class_data_item = class_def_item.get_class_data_item();
 
     log(LEVEL::MYDEBUG, "Adding to the class {} direct and {} virtual methods",
-                  std::to_string(class_data_item.get_number_of_direct_methods()),
-                  std::to_string(class_data_item.get_number_of_static_fields()));
+        std::to_string(class_data_item.get_number_of_direct_methods()),
+        std::to_string(class_data_item.get_number_of_static_fields()));
 
     // first use the virtual methods
     for (auto &encoded_method: class_data_item.get_virtual_methods()) {
@@ -144,9 +144,9 @@ void Analysis::create_xrefs() {
     if (created_xrefs) {
         log(LEVEL::INFO, "Requested create_xref() method more than once.");
         log(LEVEL::INFO,
-                "create_xref() will not work again, function will exit right now.");
+            "create_xref() will not work again, function will exit right now.");
         log(LEVEL::INFO, "Please if you want to analyze various dex parsers, add all "
-                     "of them first, then call this function.");
+                         "of them first, then call this function.");
 
         return;
     }
@@ -154,7 +154,7 @@ void Analysis::create_xrefs() {
     created_xrefs = true;
 
     log(LEVEL::MYDEBUG, "create_xref(): creating xrefs for {} dex files",
-                  std::to_string(parsers.size()));
+        std::to_string(parsers.size()));
 
     for (auto parser: parsers) {
         static size_t i = 0;
@@ -164,7 +164,7 @@ void Analysis::create_xrefs() {
         auto it_classes = class_dex.get_classdefs();
 
         log(LEVEL::MYDEBUG, "Number of classes to analyze: {}",
-                      std::to_string(std::distance(it_classes.begin(), it_classes.end())));
+            std::to_string(std::distance(it_classes.begin(), it_classes.end())));
 
         for (auto &class_def_item: it_classes) {
             static size_t j = 0;
@@ -273,7 +273,7 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
 
             if (invoked_method->get_class()->get_type() != parser::dex::CLASS) {
                 log(LEVEL::WARN, "Found a call to a method from non class (type found {})",
-                             invoked_method->get_class()->print_type());
+                    invoked_method->get_class()->print_type());
                 continue;
             }
 

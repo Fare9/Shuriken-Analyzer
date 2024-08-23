@@ -9,9 +9,9 @@
 #ifndef SHURIKENLIB_LOGGER_H
 #define SHURIKENLIB_LOGGER_H
 
+#include <cstdint>
 #include <iostream>
 #include <vector>
-#include <cstdint>
 
 namespace spdlog {
     class logger;
@@ -34,7 +34,7 @@ namespace shuriken {
 
     LEVEL get_level();
 
-    const char * to_string(LEVEL e);
+    const char *to_string(LEVEL e);
 
     void disable();
 
@@ -45,40 +45,38 @@ namespace shuriken {
     void set_level(LEVEL level);
 
     //! Change the logger as a file-base logging and set its path
-    void set_path(const std::string& path);
+    void set_path(const std::string &path);
 
     //! Log a message with the LIEF's logger
-    void log(LEVEL level, const std::string& msg);
+    void log(LEVEL level, const std::string &msg);
 
-    void log(LEVEL level, const std::string& fmt,
-                      const std::vector<std::string>& args);
+    void log(LEVEL level, const std::string &fmt,
+             const std::vector<std::string> &args);
 
-    template <typename... Args>
-    void log(LEVEL level, const std::string& fmt, const Args &... args) {
+    template<typename... Args>
+    void log(LEVEL level, const std::string &fmt, const Args &...args) {
         std::vector<std::string> vec_args;
-        vec_args.insert(vec_args.end(), { static_cast<decltype(vec_args)::value_type>(args)...});
+        vec_args.insert(vec_args.end(), {static_cast<decltype(vec_args)::value_type>(args)...});
         return log(level, fmt, vec_args);
     }
 
-    void set_logger(const spdlog::logger& logger);
+    void set_logger(const spdlog::logger &logger);
 
     void reset();
 
     class Scoped {
     public:
-        Scoped(const Scoped&) = delete;
-        Scoped& operator=(const Scoped&) = delete;
+        Scoped(const Scoped &) = delete;
+        Scoped &operator=(const Scoped &) = delete;
 
-        Scoped(Scoped&&) = delete;
-        Scoped& operator=(Scoped&&) = delete;
+        Scoped(Scoped &&) = delete;
+        Scoped &operator=(Scoped &&) = delete;
 
-        explicit Scoped(LEVEL level) :
-                                       level_(get_level())
-        {
+        explicit Scoped(LEVEL level) : level_(get_level()) {
             set_level(level);
         }
 
-        const Scoped& set_level(LEVEL lvl) const {
+        const Scoped &set_level(LEVEL lvl) const {
             shuriken::set_level(lvl);
             return *this;
         }

@@ -7,6 +7,9 @@
 #include "shuriken/parser/Apk/apk.h"
 #include "shuriken/common/logger.h"
 #include "shuriken/parser/shuriken_parsers.h"
+
+#include "apk_extractor.h"
+
 #include "zip.h"
 #include <filesystem>
 #include <sstream>
@@ -52,35 +55,38 @@ namespace {
     }
 }// namespace
 
-Apk::Apk(const char *path_to_apk) : apk_path(path_to_apk) {
+
+// Private API
+ApkExtractor::ApkExtractor(const char *path_to_apk) : path_to_apk(path_to_apk) {
     if (!std::filesystem::exists(path_to_apk))
         throw std::runtime_error("Error APK provided for the analysis does not exists");
-    temporal_file_path += std::filesystem::temp_directory_path().c_str();
-    temporal_file_path += std::filesystem::path::preferred_separator;
-    temporal_file_path += std::filesystem::path(path_to_apk).stem();
-}
+    path_to_temporal_file += std::filesystem::temp_directory_path().c_str();
+    path_to_temporal_file += std::filesystem::path::preferred_separator;
+    path_to_temporal_file += std::filesystem::path(path_to_apk).stem();
 
-Apk::~Apk() {
-    if (std::filesystem::exists(temporal_file_path)) {
-        for (const auto &file: std::filesystem::directory_iterator(temporal_file_path))
-            std::filesystem::remove(file.path().c_str());
-        std::filesystem::remove(temporal_file_path);
-    }
-}
-
-void Apk::analyze_apk_file(bool create_xrefs) {
-    zip_t *apk_file;
-
+    // open the APK
     int error;
     // open the APK with the zip folder
-    apk_file = zip_open(apk_path.c_str(), ZIP_RDONLY, &error);
+    apk_file = zip_open(path_to_apk, ZIP_RDONLY, &error);
     if (!apk_file) {
         std::stringstream ss;
         ss << "Error opening the APK file as a zip: " << error;
         throw std::runtime_error(ss.str());
     }
+}
 
-    log(LEVEL::INFO, "Starting the APK analysis of {}", apk_path);
+ApkExtractor::~ApkExtractor() {
+    // remove the files
+    if (std::filesystem::exists(path_to_temporal_file)) {
+        for (const auto &file:
+             std::filesystem::directory_iterator(path_to_temporal_file))
+            std::filesystem::remove(file.path().c_str());
+    }
+    zip_close(apk_file);
+}
+
+void ApkExtractor::analyze_apk(bool create_xrefs) {
+    log(LEVEL::INFO, "Starting the APK analysis of {}", path_to_apk);
 
     global_disassembler = std::make_unique<disassembler::dex::DexDisassembler>();
 
@@ -93,7 +99,7 @@ void Apk::analyze_apk_file(bool create_xrefs) {
         if (name.empty() || !name.ends_with(".dex")) continue;
 
         // create the file path in the temporal folder
-        std::string file_path = temporal_file_path;
+        std::string file_path = path_to_temporal_file;
         file_path += std::filesystem::path::preferred_separator;
         file_path += name;
 
@@ -108,36 +114,98 @@ void Apk::analyze_apk_file(bool create_xrefs) {
 
         global_disassembler->disassemble_new_dex(current_parser.get());
 
-        dex_files.insert({name, std::move(current_parser)});
+        dex_parsers.insert({name, std::move(current_parser)});
     }
 
-    log(LEVEL::MYDEBUG, "Creating a global analysis for {}", apk_path);
+    log(LEVEL::MYDEBUG, "Creating a global analysis for {}", path_to_apk);
 
     global_analysis = std::make_unique<analysis::dex::Analysis>(global_disassembler.get(), create_xrefs);
 
-    for (auto &dex_parsers: dex_files) {
-        global_analysis->add(dex_parsers.second.get());
+    for (auto &dex_parser: dex_parsers) {
+        global_analysis->add(dex_parser.second.get());
     }
 
     global_analysis->create_xrefs();
 
-    zip_close(apk_file);
+    log(LEVEL::INFO, "Finished the analysis of the APK {}", path_to_apk);
+}
 
-    log(LEVEL::INFO, "Finished the analysis of the APK {}", apk_path);
+std::unordered_map<std::string,
+                   std::unique_ptr<shuriken::parser::dex::Parser>> &
+ApkExtractor::retrieve_parsers() {
+    return dex_parsers;
+}
+
+std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> &
+ApkExtractor::retrieve_disassembler() {
+    return global_disassembler;
+}
+
+std::unique_ptr<shuriken::analysis::dex::Analysis> &
+ApkExtractor::retrieve_analysis() {
+    return global_analysis;
+}
+
+std::string ApkExtractor::get_path_to_apk() const {
+    return path_to_apk;
+}
+
+std::string ApkExtractor::get_path_to_temporal_file() const {
+    return path_to_temporal_file;
+}
+
+// Public API
+
+Apk::Apk(const char *apk_path,
+         std::unordered_map<std::string,
+                            std::unique_ptr<parser::dex::Parser>> &dex_files,
+         std::unique_ptr<disassembler::dex::DexDisassembler> &global_disassembler,
+         std::unique_ptr<analysis::dex::Analysis> &global_analysis) : apk_path(apk_path),
+                                                                      dex_files(std::move(dex_files)), global_disassembler(std::move(global_disassembler)),
+                                                                      global_analysis(std::move(global_analysis)) {
+    for (auto &dex_file: this->dex_files)
+        dex_files_s.insert({dex_file.first, std::ref(*dex_file.second)});
+}
+
+shuriken::parser::dex::Parser *Apk::get_parser_by_file(std::string dex_file) {
+    if (!dex_files.contains(dex_file)) return nullptr;
+    return dex_files[dex_file].get();
+}
+
+std::unordered_map<std::string,
+                   std::reference_wrapper<shuriken::parser::dex::Parser>> &
+Apk::get_dex_parsers() {
+    return dex_files_s;
+}
+
+shuriken::disassembler::dex::DexDisassembler *Apk::get_global_disassembler() {
+    return global_disassembler.get();
+}
+
+shuriken::analysis::dex::Analysis *Apk::get_global_analysis() {
+    return global_analysis.get();
 }
 
 
 namespace shuriken {
     namespace parser {
         std::unique_ptr<apk::Apk> parse_apk(const std::string &file_path, bool created_xrefs) {
-            auto apk = std::make_unique<apk::Apk>(file_path.c_str());
-            apk->analyze_apk_file(created_xrefs);
+            ApkExtractor apkExtractor(file_path.c_str());
+            apkExtractor.analyze_apk(created_xrefs);
+            auto apk = std::make_unique<apk::Apk>(file_path.c_str(),
+                                                  apkExtractor.retrieve_parsers(),
+                                                  apkExtractor.retrieve_disassembler(),
+                                                  apkExtractor.retrieve_analysis());
             return apk;
         }
 
         std::unique_ptr<apk::Apk> parse_apk(const char *file_path, bool created_xrefs) {
-            auto apk = std::make_unique<apk::Apk>(file_path);
-            apk->analyze_apk_file(created_xrefs);
+            ApkExtractor apkExtractor(file_path);
+            apkExtractor.analyze_apk(created_xrefs);
+            auto apk = std::make_unique<apk::Apk>(file_path,
+                                                  apkExtractor.retrieve_parsers(),
+                                                  apkExtractor.retrieve_disassembler(),
+                                                  apkExtractor.retrieve_analysis());
             return apk;
         }
     }// namespace parser

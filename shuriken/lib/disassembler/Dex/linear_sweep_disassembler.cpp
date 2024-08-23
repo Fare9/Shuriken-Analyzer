@@ -46,8 +46,8 @@ std::vector<std::unique_ptr<Instruction>> LinearSweepDisassembler::disassembly(s
             }
         } catch (const exceptions::InvalidInstructionException &i) {
             log(LEVEL::ERR, "InvalidInstructionException in the index: {}, opcode: {}, message: {}, instr size: {}",
-                       std::to_string(idx),
-                        std::to_string(static_cast<std::uint32_t>(opcode)),
+                std::to_string(idx),
+                std::to_string(static_cast<std::uint32_t>(opcode)),
                 i.what(),
                 std::to_string(i.size()));
             // in case there was an invalid instr
@@ -60,7 +60,7 @@ std::vector<std::unique_ptr<Instruction>> LinearSweepDisassembler::disassembly(s
             idx += i.size();
         } catch (const std::exception &e) {
             log(LEVEL::ERR, "Error reading index: {}, opcode: {}, message: {}",
-                       std::to_string(idx),
+                std::to_string(idx),
                 std::to_string(static_cast<std::uint32_t>(opcode)), e.what());
             idx += 1;
         }

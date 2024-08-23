@@ -30,12 +30,15 @@ namespace shuriken::parser::apk {
     private:
         /// @brief path to the apk
         std::string apk_path;
-        /// @brief path to a temporal file
-        std::string temporal_file_path;
         /// @brief Map with all the DEX files inside of the Apk
         std::unordered_map<std::string,
                            std::unique_ptr<parser::dex::Parser>>
                 dex_files;
+        /// @brief Reference for the map, it does not contain
+        /// ownership
+        std::unordered_map<std::string,
+                           std::reference_wrapper<parser::dex::Parser>>
+                dex_files_s;
         /// @brief A Global disassembler
         std::unique_ptr<disassembler::dex::DexDisassembler> global_disassembler;
         /// @brief A Global analysis for DEX
@@ -47,32 +50,41 @@ namespace shuriken::parser::apk {
          *
          * @param path_to_apk path to the apk file
          */
-        Apk(const char *path_to_apk);
+        Apk(const char *apk_path,
+            std::unordered_map<std::string, std::unique_ptr<parser::dex::Parser>> &dex_files,
+            std::unique_ptr<disassembler::dex::DexDisassembler> &global_disassembler,
+            std::unique_ptr<analysis::dex::Analysis> &global_analysis);
 
         /**
-         * Destructor for the APK object, it removes all the
+         * @brief Destructor for the APK object, it removes all the
          * temporal files.
          */
-        ~Apk();
+        ~Apk() = default;
 
         /**
-         * @brief Analyze the given apk file for extracting
-         * all the DEX files, the AndroidManifest.xml and
-         * all the .so files (ELF).
+         * @param dex_file file to retrieve its parser
+         * @return pointer to a Parser object, or null
          */
-        void analyze_apk_file(bool create_xrefs);
+        parser::dex::Parser *get_parser_by_file(std::string dex_file);
+
+        /**
+         * @return reference to the map with the parser objects
+         */
+        std::unordered_map<std::string,
+                           std::reference_wrapper<parser::dex::Parser>> &
+        get_dex_parsers();
 
         /**
          * @return a global disassembler with the disassembly
          * from all the DEX files.
          */
-        disassembler::dex::DexDisassembler * get_global_disassembler();
+        disassembler::dex::DexDisassembler *get_global_disassembler();
 
         /**
          * @return get the global analysis from all the DEX
          * files.
          */
-        analysis::dex::Analysis * get_global_analysis();
+        analysis::dex::Analysis *get_global_analysis();
     };
 }// namespace shuriken::parser::apk
 

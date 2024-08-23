@@ -9,14 +9,14 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-#include "spdlog/spdlog.h"
 #include "spdlog/fmt/bundled/args.h"
+#include "spdlog/spdlog.h"
 
 using namespace shuriken;
 
 
-Logger::Logger(Logger&&) = default;
-Logger& Logger::operator=(Logger&&) = default;
+Logger::Logger(Logger &&) = default;
+Logger &Logger::operator=(Logger &&) = default;
 Logger::~Logger() = default;
 
 Logger::Logger() {
@@ -29,7 +29,7 @@ Logger::Logger() {
 }
 
 LEVEL Logger::get_level() {
-    auto& instance = Logger::instance();
+    auto &instance = Logger::instance();
     spdlog::level::level_enum lvl = instance.sink_->level();
     switch (lvl) {
         default:
@@ -51,14 +51,14 @@ LEVEL Logger::get_level() {
     return LEVEL::TRACE;
 }
 
-Logger::Logger(const std::string& filepath) {
+Logger::Logger(const std::string &filepath) {
     sink_ = spdlog::basic_logger_mt("SHURIKEN", filepath, /* truncate */ true);
     sink_->set_level(spdlog::level::warn);
     sink_->set_pattern("%v");
     sink_->flush_on(spdlog::level::warn);
 }
 
-Logger& Logger::instance() {
+Logger &Logger::instance() {
     if (instance_ == nullptr) {
         instance_ = new Logger{};
         std::atexit(destroy);
@@ -77,13 +77,13 @@ void Logger::destroy() {
     instance_ = nullptr;
 }
 
-Logger& Logger::set_log_path(const std::string& path) {
+Logger &Logger::set_log_path(const std::string &path) {
     if (instance_ == nullptr) {
         instance_ = new Logger{path};
         std::atexit(destroy);
         return *instance_;
     }
-    auto& logger = Logger::instance();
+    auto &logger = Logger::instance();
     spdlog::details::registry::instance().drop("SHURIKEN");
     logger.sink_ = spdlog::basic_logger_mt("SHURIKEN", path,
                                            /*truncate=*/true);
@@ -93,12 +93,12 @@ Logger& Logger::set_log_path(const std::string& path) {
     return logger;
 }
 
-void Logger::set_logger(const spdlog::logger& logger) {
+void Logger::set_logger(const spdlog::logger &logger) {
     if (logger.name() != "SHURIKEN") {
         return;
     }
 
-    auto& instance = Logger::instance();
+    auto &instance = Logger::instance();
     spdlog::details::registry::instance().drop("SHURIKEN");
 
     instance.sink_ = std::make_shared<spdlog::logger>(logger);
@@ -107,16 +107,24 @@ void Logger::set_logger(const spdlog::logger& logger) {
     instance.sink_->flush_on(spdlog::level::warn);
 }
 
-const char* to_string(LEVEL e) {
+const char *to_string(LEVEL e) {
     switch (e) {
-        case LEVEL::OFF: return "OFF";
-        case LEVEL::TRACE: return "TRACE";
-        case LEVEL::MYDEBUG: return "DEBUG";
-        case LEVEL::INFO: return "INFO";
-        case LEVEL::ERR: return "ERROR";
-        case LEVEL::WARN: return "WARN";
-        case LEVEL::CRITICAL: return "CRITICAL";
-        default: return "UNDEFINED";
+        case LEVEL::OFF:
+            return "OFF";
+        case LEVEL::TRACE:
+            return "TRACE";
+        case LEVEL::MYDEBUG:
+            return "DEBUG";
+        case LEVEL::INFO:
+            return "INFO";
+        case LEVEL::ERR:
+            return "ERROR";
+        case LEVEL::WARN:
+            return "WARN";
+        case LEVEL::CRITICAL:
+            return "CRITICAL";
+        default:
+            return "UNDEFINED";
     }
     return "UNDEFINED";
 }
@@ -132,51 +140,44 @@ void Logger::enable() {
 
 void Logger::set_level(LEVEL level) {
     switch (level) {
-        case LEVEL::OFF:
-        {
+        case LEVEL::OFF: {
             Logger::instance().sink_->set_level(spdlog::level::off);
             Logger::instance().sink_->flush_on(spdlog::level::off);
             break;
         }
 
-        case LEVEL::TRACE:
-        {
+        case LEVEL::TRACE: {
             Logger::instance().sink_->set_level(spdlog::level::trace);
             Logger::instance().sink_->flush_on(spdlog::level::trace);
             break;
         }
 
-        case LEVEL::MYDEBUG:
-        {
+        case LEVEL::MYDEBUG: {
             Logger::instance().sink_->set_level(spdlog::level::debug);
             Logger::instance().sink_->flush_on(spdlog::level::debug);
             break;
         }
 
-        case LEVEL::INFO:
-        {
+        case LEVEL::INFO: {
             Logger::instance().sink_->set_level(spdlog::level::info);
             Logger::instance().sink_->flush_on(spdlog::level::info);
             break;
         }
 
         default:
-        case LEVEL::WARN:
-        {
+        case LEVEL::WARN: {
             Logger::instance().sink_->set_level(spdlog::level::warn);
             Logger::instance().sink_->flush_on(spdlog::level::warn);
             break;
         }
 
-        case LEVEL::ERR:
-        {
+        case LEVEL::ERR: {
             Logger::instance().sink_->set_level(spdlog::level::err);
             Logger::instance().sink_->flush_on(spdlog::level::err);
             break;
         }
 
-        case LEVEL::CRITICAL:
-        {
+        case LEVEL::CRITICAL: {
             Logger::instance().sink_->set_level(spdlog::level::critical);
             Logger::instance().sink_->flush_on(spdlog::level::critical);
             break;
@@ -198,11 +199,11 @@ void set_level(LEVEL level) {
     Logger::set_level(level);
 }
 
-void set_path(const std::string& path) {
+void set_path(const std::string &path) {
     Logger::set_log_path(path);
 }
 
-void set_logger(const spdlog::logger& logger) {
+void set_logger(const spdlog::logger &logger) {
     Logger::set_logger(logger);
 }
 
@@ -220,34 +221,30 @@ void shuriken::log(shuriken::LEVEL level, const std::string &msg) {
         case LEVEL::OFF:
             break;
         case LEVEL::TRACE:
-        case LEVEL::MYDEBUG:
-        {
+        case LEVEL::MYDEBUG: {
             SHURIKEN_DEBUG("{}", msg);
             break;
         }
-        case LEVEL::INFO:
-        {
+        case LEVEL::INFO: {
             SHURIKEN_INFO("{}", msg);
             break;
         }
-        case LEVEL::WARN:
-        {
+        case LEVEL::WARN: {
             SHURIKEN_WARN("{}", msg);
             break;
         }
         case LEVEL::CRITICAL:
-        case LEVEL::ERR:
-        {
+        case LEVEL::ERR: {
             SHURIKEN_ERR("{}", msg);
             break;
         }
     }
 }
 
-void shuriken::log(LEVEL level, const std::string& fmt,
-         const std::vector<std::string>& args) {
+void shuriken::log(LEVEL level, const std::string &fmt,
+                   const std::vector<std::string> &args) {
     fmt::dynamic_format_arg_store<fmt::format_context> store;
-    for (const std::string& arg : args) {
+    for (const std::string &arg: args) {
         store.push_back(arg);
     }
     std::string result = fmt::vformat(fmt, store);
