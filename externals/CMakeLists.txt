@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.5)
 include(FetchContent)
 
 # By default, all libraries built here must be static
+
+set(SHURIKEN_EXTERNAL_LIB_TYPE ${BUILD_SHARED_LIBS}) 
+message("-- Preverse build shared libs to into SHURIKEN_EXTERNAL_LIB_TYPE, setting it to OFF")
+
 set(BUILD_SHARED_LIBS OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
@@ -143,4 +147,8 @@ endfunction()
 check_static_lib(fmt)
 check_static_lib(spdlog)
 
-set(BUILD_SHARED_LIBS ON)
+message("-- Reversing build shared libs to SHURIKEN_EXTERNAL_LIB_TYPE, setting it to ${SHURIKEN_EXTERNAL_LIB_TYPE}")
+
+set(BUILD_SHARED_LIBS ${SHURIKEN_EXTERNAL_LIB_TYPE})
+option(BUILD_SHARED_LIBS "Build shared libraries" ${SHURIKEN_EXTERNAL_LIB_TYPE})
+
