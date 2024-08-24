@@ -9,8 +9,10 @@
 #ifndef SHURIKENPROJECT_ANALYSIS_H
 #define SHURIKENPROJECT_ANALYSIS_H
 
+#include "dex_analysis.h"
 #include "shuriken/analysis/Dex/dex_analysis.h"
 #include "shuriken/disassembler/Dex/dex_disassembler.h"
+#include <map>
 
 namespace shuriken::analysis::dex {
 
@@ -234,6 +236,24 @@ namespace shuriken::analysis::dex {
                                                  const std::string &accessflags);
     };
 
+    class Dominance {
+        // https://pages.cs.wisc.edu/~fischer/cs701.f07/lectures/Lecture20.pdf
+        // page 6
+    public:
+        using DOM_SET = std::set<DVMBasicBlock *>;
+        std::map<DVMBasicBlock *, DOM_SET> dom_sets;
+
+
+        Dominance(BasicBlocks simple_CFG);
+        ~Dominance() = default;
+
+        bool is_idom(DVMBasicBlock *dominator, DVMBasicBlock *dominated);
+    };
+    class DominanceTree {
+    };
+
+    class DominanceFrontier {
+    };
 }// namespace shuriken::analysis::dex
 
 
