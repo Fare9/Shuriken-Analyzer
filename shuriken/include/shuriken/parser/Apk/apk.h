@@ -27,40 +27,23 @@ namespace shuriken::parser::apk {
     // - SO (ELF) files (not implemented yet).
     // - XML file: for the AndroidManifest.xml.
     class Apk {
-    private:
-        /// @brief path to the apk
-        std::string apk_path;
-        /// @brief Map with all the DEX files inside of the Apk
-        std::unordered_map<std::string,
-                           std::unique_ptr<parser::dex::Parser>>
-                dex_files;
-        /// @brief Reference for the map, it does not contain
-        /// ownership
-        std::unordered_map<std::string,
-                           std::reference_wrapper<parser::dex::Parser>>
-                dex_files_s;
-        /// @brief A Global disassembler
-        std::unique_ptr<disassembler::dex::DexDisassembler> global_disassembler;
-        /// @brief A Global analysis for DEX
-        std::unique_ptr<analysis::dex::Analysis> global_analysis;
-
     public:
-        /**
-         * Constructor for the APK Object
-         *
-         * @param path_to_apk path to the apk file
-         */
-        Apk(const char *apk_path,
-            std::unordered_map<std::string, std::unique_ptr<parser::dex::Parser>> &dex_files,
-            std::unique_ptr<disassembler::dex::DexDisassembler> &global_disassembler,
-            std::unique_ptr<analysis::dex::Analysis> &global_analysis);
+        class ApkExtractor;
+    private:
+        std::unique_ptr<ApkExtractor> apk_extractor;
+    public:
+        Apk(std::unique_ptr<ApkExtractor>& apk_extractor);
 
         /**
          * @brief Destructor for the APK object, it removes all the
          * temporal files.
          */
-        ~Apk() = default;
+        ~Apk();
 
+        /**
+         * @return name of all the DEX files found in APK
+         */
+        std::vector<std::string_view> & get_dex_files_names();
         /**
          * @param dex_file file to retrieve its parser
          * @return pointer to a Parser object, or null

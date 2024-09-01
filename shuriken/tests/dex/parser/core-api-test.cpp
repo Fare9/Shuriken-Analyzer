@@ -5,7 +5,7 @@
 // @file core-api-test.c
 // @brief Test for the Core API in C of the project
 
-#include "../../../include/shuriken/api/C/shuriken_core.h"
+#include "shuriken/api/C/shuriken_core.h"
 #include "dex-files-folder.inc"
 #include <assert.h>
 #include <stdint.h>
