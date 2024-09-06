@@ -6,15 +6,17 @@
 #include <fmt/core.h>
 #include <functional>
 #include <iostream>
+// Dex & APK stuff
 #include <shuriken/analysis/Dex/analysis.h>
 #include <shuriken/common/Dex/dvm_types.h>
 #include <shuriken/disassembler/Dex/dex_disassembler.h>
-#include <shuriken/parser/Dex/parser.h>
 #include <shuriken/parser/shuriken_parsers.h>
+
+
 #include <vector>
 
 void show_help(std::string &prog_name) {
-    fmt::println("USAGE: {} <file_to_analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
+    fmt::println("USAGE: {} <dex/apk file to analyze> [-h] [-c] [-f] [-m] [-b]", prog_name);
     fmt::println(" -h: show file header");
     fmt::println(" -c: show classes from file");
     fmt::println(" -f: show fields from classes (it needs -c)");
@@ -23,8 +25,12 @@ void show_help(std::string &prog_name) {
     fmt::println(" -D: show the disassembled code from methods (it needs -m)");
     fmt::println(" -B: show the methods as basic blocks (it needs -m)");
     fmt::println(" -x: show the xrefs from classes (it needs -c), from methods (it requires -m) or from fields (it needs -f)");
+    fmt::println(" -T: measure and print after the execution the time taken for the analysis");
+    fmt::println(" -N: analyze but do not print any information");
 }
 
+void parse_dex(std::string& dex_file);
+void parse_apk(std::string& apk_file);
 void print_header(shuriken::parser::dex::DexHeader &);
 void print_classes(shuriken::parser::dex::DexClasses &);
 void print_method(shuriken::parser::dex::EncodedMethod *, size_t);
@@ -42,8 +48,12 @@ bool running_time = false;
 bool xrefs = false;
 bool no_print = false;
 
-std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler;
-std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis;
+std::unique_ptr<shuriken::parser::apk::Apk> parsed_apk = nullptr;
+std::unique_ptr<shuriken::parser::dex::Parser> parsed_dex = nullptr;
+std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> disassembler_own = nullptr;
+shuriken::disassembler::dex::DexDisassembler * disassembler = nullptr;
+std::unique_ptr<shuriken::analysis::dex::Analysis> dex_analysis_own = nullptr;
+shuriken::analysis::dex::Analysis * analysis = nullptr;
 
 int main(int argc, char **argv) {
     std::vector<std::string> args{argv, argv + argc};
@@ -75,29 +85,10 @@ int main(int argc, char **argv) {
     }
 
     try {
-        auto parsed_dex = shuriken::parser::parse_dex(args[1]);
-
-        if (disassembly) {
-            disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
-            disassembler->disassembly_dex();
-        }
-
-        if (blocks || xrefs) {
-            if (disassembler == nullptr) {
-                disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
-                disassembler->disassembly_dex();
-            }
-            dex_analysis = std::make_unique<shuriken::analysis::dex::Analysis>(parsed_dex.get(),
-                                                                               disassembler.get(),
-                                                                               xrefs ? true : false);
-            dex_analysis->create_xrefs();
-        }
-
-        if (!no_print) {
-            auto &header = parsed_dex->get_header();
-
-            if (headers) print_header(header);
-            if (show_classes) print_classes(parsed_dex->get_classes());
+        if (args[1].ends_with(".dex")) { // manage dex file :)
+            parse_dex(args[1]);
+        } else if (args[1].ends_with(".apk")) {
+            parse_apk(args[1]);
         }
     } catch (std::runtime_error &re) {
         fmt::println("Exception: {}", re.what());
@@ -124,6 +115,60 @@ int main(int argc, char **argv) {
     }
 
     return 0;
+}
+
+void parse_dex(std::string& dex_file) {
+    parsed_dex = shuriken::parser::parse_dex(dex_file);
+
+    if (disassembly) {
+        disassembler_own = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+        disassembler_own->disassembly_dex();
+        disassembler = disassembler_own.get();
+    }
+
+    if (blocks || xrefs) {
+        if (disassembler_own == nullptr) {
+            disassembler_own = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
+            disassembler_own->disassembly_dex();
+        }
+        dex_analysis_own = std::make_unique<shuriken::analysis::dex::Analysis>(parsed_dex.get(),
+                                                                               disassembler_own.get(),
+                                                                               xrefs ? true : false);
+        dex_analysis_own->create_xrefs();
+
+        disassembler = disassembler_own.get();
+        analysis = dex_analysis_own.get();
+    }
+
+    if (!no_print) {
+        auto &header = parsed_dex->get_header();
+
+        if (headers) print_header(header);
+        if (show_classes) print_classes(parsed_dex->get_classes());
+    }
+}
+
+void parse_apk(std::string& apk_file) {
+    parsed_apk = shuriken::parser::parse_apk(apk_file, xrefs ? true : false);
+
+    disassembler = parsed_apk->get_global_disassembler();
+    analysis = parsed_apk->get_global_analysis();
+
+    for (auto & file_name : parsed_apk->get_dex_files_names()) {
+        fmt::println("DEX File: {}", file_name);
+    }
+
+    if (!no_print) {
+        for (auto & file_parser : parsed_apk->get_dex_parsers()) {
+            auto & parsed_dex = file_parser.second.get();
+            auto & header = parsed_dex.get_header();
+
+            fmt::println("Analysis of file: {}", file_parser.first);
+            if (headers) print_header(header);
+            if (show_classes) print_classes(parsed_dex.get_classes());
+        }
+    }
+
 }
 
 void print_header(shuriken::parser::dex::DexHeader &header) {
@@ -225,7 +270,7 @@ void print_classes(shuriken::parser::dex::DexClasses &classes) {
 
         if (xrefs) {
             fmt::print(" XREFs\n");
-            auto class_analysis = dex_analysis->get_class_analysis(class_idx->get_class_name().data());
+            auto class_analysis = analysis->get_class_analysis(class_idx->get_class_name().data());
 
             auto xrefconstclass = class_analysis->get_xrefconstclass();
             fmt::print("  XREF Const Class:\n");
@@ -250,7 +295,7 @@ void print_field(shuriken::parser::dex::EncodedField *field, size_t j) {
                shuriken::dex::Utils::get_types_as_string(field->get_flags()));
     if (xrefs) {
         fmt::print("   XRefs:\n");
-        auto field_analysis = dex_analysis->get_field_analysis(field);
+        auto field_analysis = analysis->get_field_analysis(field);
         if (field_analysis == nullptr) return;
         auto xref_read = field_analysis->get_xrefread();
         fmt::print("    Xrefs Read:\n");
@@ -301,7 +346,7 @@ void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
         fmt::print("{}\n", disassembled_method->print_method());
     }
     if (blocks) {
-        auto method_analysis = dex_analysis->get_method(method);
+        auto method_analysis = analysis->get_method(method);
         if (method_analysis == nullptr) return;
 
         if (method_analysis) {
@@ -309,7 +354,7 @@ void print_method(shuriken::parser::dex::EncodedMethod *method, size_t j) {
         }
     }
     if (xrefs) {
-        auto method_analysis = dex_analysis->get_method(method);
+        auto method_analysis = analysis->get_method(method);
         if (method_analysis == nullptr) return;
 
         fmt::print("    XREFs\n");

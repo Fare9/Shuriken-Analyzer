@@ -12,7 +12,7 @@
 
 
 int main() {
-    std::string zip_file = std::string(DEX_FILES_FOLDER) + "test_zip.zip";
+    std::string zip_file = std::string(DEX_FILES_FOLDER) + "test_zip.apk";
 
     auto apk_analysis = shuriken::parser::parse_apk(zip_file, false);
 
