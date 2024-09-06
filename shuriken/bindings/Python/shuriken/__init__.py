@@ -128,7 +128,8 @@ class Dex(object):
             _shuriken.get_class_by_id(self.dex_context_object, id),
             ctypes.POINTER(hdvmclass_t),
         )
-        if ptr == 0:
+
+        if not ptr:
             return None
 
         self.class_by_id[id] = ptr.contents
@@ -150,7 +151,8 @@ class Dex(object):
             ),
             ctypes.POINTER(hdvmclass_t),
         )
-        if ptr == 0:
+ 
+        if not ptr:
             return None
         self.class_by_names[name] = ptr.contents
         return self.class_by_names[name]
@@ -171,7 +173,7 @@ class Dex(object):
             ),
             ctypes.POINTER(hdvmmethod_t),
         )
-        if ptr == 0:
+        if not ptr:    
             return None
         self.method_by_name[method_name] = ptr.contents
         return self.method_by_name[method_name]
@@ -195,7 +197,8 @@ class Dex(object):
         ptr = ctypes.cast(
             _shuriken.get_disassembled_method(self.dex_context_object, ctypes.c_char_p(method_name.encode("utf-8"))),
                                               ctypes.POINTER(dvmdisassembled_method_t))
-        if ptr == 0:
+        
+        if not ptr:
             return None
         self.disassembled_methods[method_name] = ptr.contents
         return self.disassembled_methods[method_name]
@@ -224,7 +227,7 @@ class Dex(object):
         _shuriken.get_analyzed_class.restype = ctypes.POINTER(hdvmclassanalysis_t)
         ptr = ctypes.cast(_shuriken.get_analyzed_class(self.dex_context_object, ctypes.c_char_p(class_name.encode("utf-8"))),
                           ctypes.POINTER(hdvmclassanalysis_t))
-        if ptr == 0:
+        if not ptr:
             return None
         self.class_analysis_by_name[class_name] = ptr.contents
         return self.class_analysis_by_name[class_name]
