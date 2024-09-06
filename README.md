@@ -19,6 +19,16 @@ Inside the repository you will find the next folders:
 the code from the parsers, the disassemblers, etc.
 * [shuriken-dump](./shuriken-dump/): command line tool for dumping the structure of a DEX file (for the moment).
 
+## Staff
+
+Shuriken Analyzer is a project maintained by the Shuriken Team:
+
+* R&D Leader/Software Protection Shihan (師範): Robert Y. <[@yates82](https://x.com/yates82)>
+* CI/CD Master/Compilers Lover: Jasmine T. <[@thisisjjasmine](https://x.com/thisisjjasmine)>
+* Advisor/Developer on Free Time: Antonio N. <[@jeppojeps](https://x.com/jeppojeps)>
+* Project lead/Chief Architect/That guy who program things: Eduardo B. <[@Farenain](https://x.com/Farenain)>
+
+
 ## Installation
 ### With python3 and pip
 #### Install
