@@ -159,38 +159,38 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
 
     switch (format) {
         case shuriken::dex::TYPES::value_format::VALUE_BYTE: {
-            auto value = stream.readSignedInt(arg) & 0xFF;
-            transform_i32_to_bytevector(value);
+            auto value_read = stream.readSignedInt(arg) & 0xFF;
+            transform_i32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_SHORT: {
-            auto value = stream.readSignedInt(arg) & 0xFFFF;
-            transform_i32_to_bytevector(value);
+            auto value_read = stream.readSignedInt(arg) & 0xFFFF;
+            transform_i32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_CHAR: {
-            auto value = stream.readUnsignedInt(arg, false) & 0xFFFF;
-            transform_u32_to_bytevector(value);
+            auto value_read = stream.readUnsignedInt(arg, false) & 0xFFFF;
+            transform_u32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_INT: {
-            auto value = stream.readSignedInt(arg);
-            transform_i32_to_bytevector(value);
+            auto value_read = stream.readSignedInt(arg);
+            transform_i32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_FLOAT: {
-            auto value = stream.readUnsignedInt(arg, true);
-            transform_u32_to_bytevector(value);
+            auto value_read = stream.readUnsignedInt(arg, true);
+            transform_u32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_LONG: {
-            auto value = stream.readSignedLong(arg);
-            transform_i64_to_bytevector(value);
+            auto value_read = stream.readSignedLong(arg);
+            transform_i64_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_DOUBLE: {
-            auto value = stream.readUnsignedLong(arg, true);
-            transform_u64_to_bytevector(value);
+            auto value_read = stream.readUnsignedLong(arg, true);
+            transform_u64_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_STRING:
@@ -198,13 +198,13 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
         case shuriken::dex::TYPES::value_format::VALUE_FIELD:
         case shuriken::dex::TYPES::value_format::VALUE_METHOD:
         case shuriken::dex::TYPES::value_format::VALUE_ENUM: {
-            auto value = stream.readUnsignedInt(arg, false);
-            transform_u32_to_bytevector(value);
+            auto value_read = stream.readUnsignedInt(arg, false);
+            transform_u32_to_bytevector(value_read);
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_BOOLEAN: {
             auto &value_data = std::get<std::vector<std::uint8_t>>(value);
-            value_data.push_back(arg);
+            value_data.push_back(static_cast<std::uint8_t>(arg));
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_NULL:
@@ -329,8 +329,8 @@ shuriken::dex::TYPES::access_flags EncodedField::get_flags() {
     return flags;
 }
 
-void EncodedField::set_initial_value(EncodedArray *initial_value) {
-    this->initial_value = initial_value;
+void EncodedField::set_initial_value(EncodedArray *the_initial_value) {
+    this->initial_value = the_initial_value;
 }
 
 const EncodedArray *EncodedField::get_initial_value() const {
@@ -456,11 +456,11 @@ std::uint16_t CodeItemStruct::get_number_try_items() const {
 }
 
 std::uint16_t CodeItemStruct::get_offset_to_debug_info() const {
-    return code_item.debug_info_off;
+    return static_cast<uint16_t>(code_item.debug_info_off);
 }
 
 std::uint16_t CodeItemStruct::get_instructions_size() const {
-    return code_item.insns_size;
+    return static_cast<uint16_t>(code_item.insns_size);
 }
 
 std::span<std::uint8_t> CodeItemStruct::get_bytecode() {

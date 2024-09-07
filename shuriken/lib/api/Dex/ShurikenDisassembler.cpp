@@ -22,7 +22,7 @@ namespace shurikenapi {
           public:
             // IInstruction overrides - Public facing APIs
             const shurikenapi::disassembly::IMnemonic& getMnemonic() const override { return std::cref(*m_mnemonic); }
-            const std::uint8_t getSize() const override { return m_size; }
+            const std::uint32_t getSize() const override { return m_size; }
 
             std::vector<std::reference_wrapper<const IOperand>> getOperands() const override {
                 std::vector<std::reference_wrapper<const IOperand>> operandRefs;
@@ -40,10 +40,10 @@ namespace shurikenapi {
                 m_mnemonic->set(mnemonic);
             }
 
-            void setSize(std::uint8_t size) { m_size = size; }
+            void setSize(std::uint32_t size) { m_size = size; }
 
           private:
-            std::uint8_t m_size;
+            std::uint32_t m_size;
             std::unique_ptr<ShurikenMnemonic> m_mnemonic;
             std::vector<std::unique_ptr<IOperand>> m_operands;
         };

@@ -318,7 +318,7 @@ void MethodAnalysis::dump_instruction_dot(std::ofstream &dot_file, disassembler:
         for (const auto opcode: opcodes)
             dot_file << std::right << std::setfill('0') << std::setw(2) << std::hex << (std::uint32_t) opcode << " ";
 
-        for (std::uint8_t i = 0, remaining_size = 8 - opcodes.size(); i < remaining_size; ++i)
+        for (std::uint8_t i = 0, remaining_size = 8 - static_cast<uint8_t>(opcodes.size()); i < remaining_size; ++i)
             dot_file << "   ";
     }
 
@@ -355,13 +355,13 @@ void MethodAnalysis::dump_block_dot(std::ofstream &dot_file, DVMBasicBlock *bb) 
 void MethodAnalysis::dump_method_dot(std::ofstream &dot_file) {
     shuriken::disassembler::dex::Disassembler d;
 
-    auto full_name = get_full_name();
+    auto returned_full_name = get_full_name();
 
     // first dump the headers of the dot file
-    dot_file << "digraph \"" << full_name << "\"{\n";
+    dot_file << "digraph \"" << returned_full_name << "\"{\n";
     dot_file << "style=\"dashed\";\n";
     dot_file << "color=\"black\";\n";
-    dot_file << "label=\"" << full_name << "\";\n";
+    dot_file << "label=\"" << returned_full_name << "\";\n";
     dot_file << "node [shape=box, style=filled, fillcolor=lightgrey, fontname=\"Courier\", fontsize=\"10\"];\n";
     dot_file << "edge [color=black, arrowhead=open];\n";
 

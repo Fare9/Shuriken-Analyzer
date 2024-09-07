@@ -56,7 +56,7 @@ namespace shuriken::parser::dex {
         ProtoID *get_prototype();
 
         /// @return name of the method
-        std::string_view get_method_name();
+        std::string_view get_method_name() const;
 
         /// @return Demangled version of a name (e.g. "java.lang.Integer java.lang.Integer(int)")
         std::string_view demangle();

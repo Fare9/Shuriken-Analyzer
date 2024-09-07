@@ -25,7 +25,7 @@ ProtoID *MethodID::get_prototype() {
     return protoId;
 }
 
-std::string_view MethodID::get_method_name() {
+std::string_view MethodID::get_method_name() const {
     return name;
 }
 

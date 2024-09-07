@@ -61,8 +61,8 @@ bool DVMBasicBlock::is_try_block() const {
     return try_block;
 }
 
-void DVMBasicBlock::set_try_block(bool try_block) {
-    this->try_block = try_block;
+void DVMBasicBlock::set_try_block(bool try_block_entry) {
+    this->try_block = try_block_entry;
 }
 
 std::set<DVMBasicBlock *> &DVMBasicBlock::get_catch_blocks() {
@@ -77,8 +77,8 @@ bool DVMBasicBlock::is_catch_block() const {
     return catch_block;
 }
 
-void DVMBasicBlock::set_catch_block(bool catch_block) {
-    this->catch_block = catch_block;
+void DVMBasicBlock::set_catch_block(bool catch_block_entry) {
+    this->catch_block = catch_block_entry;
 }
 
 shuriken::parser::dex::DVMType *DVMBasicBlock::get_handler_type() {
@@ -287,12 +287,12 @@ void BasicBlocks::remove_node(DVMBasicBlock *node) {
         }
 
         if (successors_[node].size() == 1) {
-            auto suc = *successors_[node].begin();
+            auto returned_suc = *successors_[node].begin();
 
             // delete from predecessors of sucessor
-            predecessors_[suc].erase(node);
+            predecessors_[returned_suc].erase(node);
             // remove the edge
-            static_cast<void>(std::ranges::remove(edges_, std::make_pair(node, suc)));
+            static_cast<void>(std::ranges::remove(edges_, std::make_pair(node, returned_suc)));
         }
 
         if (pred != nullptr && suc != nullptr) {

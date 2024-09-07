@@ -237,7 +237,7 @@ namespace shurikenapi {
             IInstruction& operator=(IInstruction&&) = delete;
 
             virtual const IMnemonic& getMnemonic() const = 0;
-            virtual const std::uint8_t getSize() const = 0;
+            virtual const std::uint32_t getSize() const = 0;
             virtual std::vector<std::reference_wrapper<const IOperand>> getOperands() const = 0;
         };
     } // namespace disassembly

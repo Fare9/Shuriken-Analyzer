@@ -229,7 +229,7 @@ namespace shuriken::parser::dex {
 
         /// @brief Those fields that are static contains an initial value
         /// @param initial_value initial value for the field
-        void set_initial_value(EncodedArray *initial_value);
+        void set_initial_value(EncodedArray *the_initial_value);
 
         /// @brief Get the pointer to the initial value
         /// @return EncodedArray of initial values

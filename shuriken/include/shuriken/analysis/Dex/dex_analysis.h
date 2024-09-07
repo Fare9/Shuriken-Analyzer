@@ -124,7 +124,7 @@ namespace shuriken::analysis::dex {
 
         /// @brief Set the block is a try block
         /// @param try_block new value
-        void set_try_block(bool try_block);
+        void set_try_block(bool try_block_entry);
 
         /// @return Get the catch blocks belonging to
         /// the try block
@@ -140,7 +140,7 @@ namespace shuriken::analysis::dex {
 
         /// @brief Set the block is a catch block
         /// @param catch_block new value
-        void set_catch_block(bool catch_block);
+        void set_catch_block(bool catch_block_entry);
 
         /// @brief Get the type of handler in case is a catch block
         /// @return handler type

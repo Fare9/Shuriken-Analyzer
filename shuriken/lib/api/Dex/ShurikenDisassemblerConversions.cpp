@@ -77,7 +77,7 @@ namespace shurikenapi {
                 return std::make_unique<DVMTypeOperand>(iBBBB, std::string(type->get_raw_type()));
             } else if (std::holds_alternative<shuriken::parser::dex::FieldID*>(source_id)) {
                 auto field = std::get<shuriken::parser::dex::FieldID*>(source_id);
-                return std::make_unique<FieldOperand>(iBBBB, field->pretty_field());
+                return std::make_unique<FieldOperand>(iBBBB, std::string(field->pretty_field()));
             } else if (std::holds_alternative<shuriken::parser::dex::MethodID*>(source_id)) {
                 auto method = std::get<shuriken::parser::dex::MethodID*>(source_id);
                 return std::make_unique<MethodOperand>(iBBBB, std::string(method->dalvik_name_format()));

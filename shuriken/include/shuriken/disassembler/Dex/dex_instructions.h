@@ -124,7 +124,7 @@ namespace shuriken::disassembler::dex {
 
         /// @brief Set the address of the instruction
         /// @param address new address of the instruction
-        virtual void set_address(std::uint64_t address);
+        virtual void set_address(std::uint64_t new_address);
 
         /// @brief Get the address of the instruction
         /// @return address of the instruction
