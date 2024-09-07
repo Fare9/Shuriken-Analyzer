@@ -396,7 +396,6 @@ void CodeItemStruct::parse_code_item_struct(common::ShurikenStream &stream,
     /// first read the code_item_struct_t
     stream.read_data<code_item_struct_t>(code_item, sizeof(code_item_struct_t));
 
-    code_item.code_location = static_cast<std::uint64_t>(stream.tellg());
     // now we can work with the values
 
     // first read the instructions for the CodeItem
@@ -490,6 +489,7 @@ CodeItemStruct::encoded_catch_handlers_s_t &CodeItemStruct::get_encoded_catch_ha
     }
     return encoded_catch_handlers_s;
 }
+
 std::uint64_t CodeItemStruct::get_bytecode_location() const {
     return code_item.code_location;
 }
@@ -506,6 +506,8 @@ void EncodedMethod::parse_encoded_method(common::ShurikenStream &stream,
         stream.seekg(code_off, std::ios_base::beg);
         // parse the code item
         code_item = std::make_unique<CodeItemStruct>();
+        code_location = static_cast<uint64_t>(stream.tellg());
+        code_location += sizeof(shuriken::parser::dex::CodeItemStruct::code_item_struct_t);
         code_item->parse_code_item_struct(stream, types);
     }
 
@@ -531,4 +533,8 @@ const CodeItemStruct *EncodedMethod::get_code_item() const {
 
 CodeItemStruct *EncodedMethod::get_code_item() {
     return code_item.get();
+}
+
+uint64_t EncodedMethod::get_code_location() {
+    return code_location;
 }
