@@ -239,7 +239,7 @@ class Dex(object):
         ptr = ctypes.cast(
             _shuriken.get_analyzed_class_by_hdvmclass(self.dex_context_object, class_),
             ctypes.POINTER(hdvmclassanalysis_t))
-        if ptr == 0:
+        if not ptr:
             return None
         self.class_analysis_by_name[class_name] = ptr.contents
         return self.class_analysis_by_name[class_name]
@@ -251,7 +251,7 @@ class Dex(object):
         _shuriken.get_analyzed_method.restype = ctypes.POINTER(hdvmmethodanalysis_t)
         ptr = ctypes.cast(_shuriken.get_analyzed_method(self.dex_context_object, ctypes.c_char_p(method_name.encode("utf-8"))),
                           ctypes.POINTER(hdvmmethodanalysis_t))
-        if ptr == 0:
+        if not ptr:
             return None
         self.method_analysis_by_name[method_name] = ptr.contents
         return self.method_analysis_by_name[method_name]
@@ -264,7 +264,7 @@ class Dex(object):
         _shuriken.get_analyzed_method_by_hdvmmethod.restype = ctypes.POINTER(hdvmmethodanalysis_t)
         ptr = ctypes.cast(_shuriken.get_analyzed_method_by_hdvmmethod(self.dex_context_object, method),
                           ctypes.POINTER(hdvmmethodanalysis_t))
-        if ptr == 0:
+        if not ptr:
             return None
         self.method_analysis_by_name[method_name] = ptr.contents
         return self.method_analysis_by_name[method_name]

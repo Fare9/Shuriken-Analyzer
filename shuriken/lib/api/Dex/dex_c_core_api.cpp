@@ -229,6 +229,7 @@ namespace {
         // if it was previously created
         if (opaque_struct->disassembled_methods.contains(method_name)) return opaque_struct->disassembled_methods.at(method_name);
         auto disassembled_method = opaque_struct->disassembler->get_disassembled_method(method_name);
+        if (disassembled_method == nullptr) return nullptr;
         auto *method = (dvmdisassembled_method_t *) malloc(sizeof(dvmdisassembled_method_t));
         fill_dex_disassembled_method(opaque_struct, disassembled_method, method);
         // add it to the cache
@@ -782,7 +783,7 @@ void analyze_classes(hDexContext context) {
 }
 
 hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t * class_) {
-    if (class_ == nullptr) throw std::runtime_error{"hdvmclass_t provided is null"};
+    if (class_ == nullptr) return nullptr;
     return get_analyzed_class(context, class_->class_name);
 }
 
@@ -791,12 +792,12 @@ hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_n
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     std::string dalvik_name = class_name;
     auto cls = opaque_struct->analysis->get_class_analysis(dalvik_name);
-    if (cls == nullptr) throw std::runtime_error{"Error, given class does not exists"};
+    if (cls == nullptr) return nullptr;
     return ::get_class_analysis(opaque_struct, cls);
 }
 
 hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t * method) {
-    if (method == nullptr) throw std::runtime_error{"hdvmmethod_t provided is null"};
+    if (method == nullptr) return nullptr;
     return get_analyzed_method(context, method->dalvik_name);
 }
 
@@ -805,6 +806,6 @@ hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *metho
     if (!opaque_struct || opaque_struct->tag != TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     std::string dalvik_name = method_full_name;
     auto method = opaque_struct->analysis->get_method_analysis_by_name(dalvik_name);
-    if (method == nullptr) throw std::runtime_error{"Error, given class does not exists"};
+    if (method == nullptr) return nullptr;
     return ::get_method_analysis(opaque_struct, method);
 }
