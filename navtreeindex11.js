@@ -1,5 +1,6 @@
 var NAVTREEINDEX11 =
 {
+"structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b":[1,0,1,4,0,7,0,20],
 "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a1536ff4a11d2f9b7a20bb2f95d6f0604":[0,0,1,4,0,7,0,15],
 "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a1536ff4a11d2f9b7a20bb2f95d6f0604":[1,0,1,4,0,7,0,15],
 "structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a1e01eabd584e81b691fbe2621bed2eae":[0,0,1,4,0,7,0,3],

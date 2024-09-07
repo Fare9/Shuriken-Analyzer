@@ -2,7 +2,7 @@ var structhdvmclassanalysis__t__ =
 [
     [ "extends_", "structhdvmclassanalysis__t__.html#a022f4d49355c173b70bc5353798d823b", null ],
     [ "fields", "structhdvmclassanalysis__t__.html#a2e2a43645883489148c1ad4a35746b5e", null ],
-    [ "is_external", "structhdvmclassanalysis__t__.html#aa1e01184f38c948490d9a48e26376d14", null ],
+    [ "is_external", "structhdvmclassanalysis__t__.html#a98d08ec14bc1c6396ea2fec5e1420e05", null ],
     [ "methods", "structhdvmclassanalysis__t__.html#a0c8063d1a9f16a11a23c0d9bd5f3230f", null ],
     [ "n_of_fields", "structhdvmclassanalysis__t__.html#a1e823163cc45012a600480cf0124e800", null ],
     [ "n_of_methods", "structhdvmclassanalysis__t__.html#a8f92bd9408f0f9dbcce589642f1f1377", null ],

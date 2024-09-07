@@ -11,6 +11,7 @@ var searchData=
   ['instruction_5ftype_8',['instruction_type',['../structhdvminstruction__t__.html#a0c0c1d5e14ab71ce3914f0f577566598',1,'hdvminstruction_t_']]],
   ['instructions_9',['instructions',['../structdvmdisassembled__method__t__.html#a0f2d0aa7b28cf6a42bbd8e1f14cb73bc',1,'dvmdisassembled_method_t_::instructions'],['../structhdvmbasicblock__t__.html#a25a4e414e0d1937c2f741cfc0a59e086',1,'hdvmbasicblock_t_::instructions']]],
   ['interfaces_5foff_10',['interfaces_off',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#aa86547e462c3dfade87c842ad647cf61',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],
-  ['is_5fexternal_11',['is_external',['../structhdvmclassanalysis__t__.html#aa1e01184f38c948490d9a48e26376d14',1,'hdvmclassanalysis_t_']]],
-  ['it_12',['it',['../structshuriken_1_1deref__iterator__range_1_1iterator.html#aae032ad17a52a2f5ec683ad2537efe28',1,'shuriken::deref_iterator_range::iterator']]]
+  ['is_5fandroid_5fapi_11',['is_android_api',['../structhdvmmethodanalysis__t__.html#ae6bcf0fb670314357cfe0936c94096ff',1,'hdvmmethodanalysis_t_']]],
+  ['is_5fexternal_12',['is_external',['../structhdvmclassanalysis__t__.html#a98d08ec14bc1c6396ea2fec5e1420e05',1,'hdvmclassanalysis_t_']]],
+  ['it_13',['it',['../structshuriken_1_1deref__iterator__range_1_1iterator.html#aae032ad17a52a2f5ec683ad2537efe28',1,'shuriken::deref_iterator_range::iterator']]]
 ];

@@ -27,7 +27,7 @@ var searchData=
   ['exceptions_5fdata_5ft_24',['exceptions_data_t',['../namespaceshuriken_1_1disassembler_1_1dex.html#ae408a80d8ca50935f6a30d2642fd0b5b',1,'shuriken::disassembler::dex']]],
   ['extends_25',['extends',['../classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html#ae9403292a83d3383bda280173b90889a',1,'shuriken::analysis::dex::ClassAnalysis']]],
   ['extends_5f_26',['extends_',['../structhdvmclassanalysis__t__.html#a022f4d49355c173b70bc5353798d823b',1,'hdvmclassanalysis_t_']]],
-  ['external_27',['external',['../structhdvmmethodanalysis__t__.html#acf5d179529923d0825742a0b90ca8c30',1,'hdvmmethodanalysis_t_::external'],['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732',1,'shuriken::analysis::dex::MethodAnalysis::external()']]],
+  ['external_27',['external',['../structhdvmmethodanalysis__t__.html#a8fd33e0db9cb789bdb83cbb3343c43cf',1,'hdvmmethodanalysis_t_::external'],['../classshuriken_1_1analysis_1_1dex_1_1MethodAnalysis.html#a94d4d432ab7d546c17700dcb9aa7e732',1,'shuriken::analysis::dex::MethodAnalysis::external()']]],
   ['external_5fclass_2eh_28',['external_class.h',['../external__class_8h.html',1,'']]],
   ['external_5fclasses_5fs_5ft_29',['external_classes_s_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a1ca12a5b3081da6e5e53ae9b07be8b28',1,'shuriken::analysis::dex::Analysis']]],
   ['external_5fclasses_5ft_30',['external_classes_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a383c45f9ba220743aa09d08dff731d14',1,'shuriken::analysis::dex::Analysis']]],
