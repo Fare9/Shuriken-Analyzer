@@ -349,6 +349,7 @@ namespace {
         opaque_struct->method_analyses.insert({full_name_str, method});
         method->name = methodAnalysis->get_name().data();
         method->external = methodAnalysis->external() ? 1 : 0;
+        method->is_android_api = methodAnalysis->is_android_api() ? 1 : 0;
         method->descriptor = methodAnalysis->get_descriptor().data();
         method->full_name = methodAnalysis->get_full_name().data();
         method->access_flags = static_cast<access_flags_e>(methodAnalysis->get_access_flags());

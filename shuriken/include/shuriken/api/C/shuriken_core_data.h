@@ -323,9 +323,9 @@ typedef struct hdvmbasicblock_t_ {
     /// @brief Pointer to the instructions in the block
     hdvminstruction_t *instructions;
     /// @brief Is it a try block?
-    char try_block;
+    int try_block;
     /// @brief Is it a catch block
-    char catch_block;
+    int catch_block;
     /// @brief String value of the handler type
     const char *handler_type;
     /// @brief Name of the basic block
@@ -373,7 +373,9 @@ typedef struct hdvmmethodanalysis_t_ {
     /// @brief full name of the method including class name and descriptor
     const char *full_name;
     /// @brief flag indicating if the method is external or not
-    char external;
+    int external;
+    /// @brief flag indicating if the method is an android API
+    int is_android_api;
     /// @brief access flags
     access_flags_e access_flags;
     /// @brief class name
@@ -410,7 +412,7 @@ typedef struct hdvmmethodanalysis_t_ {
 
 typedef struct hdvmclassanalysis_t_ {
     /// @brief is external class?
-    char is_external;
+    int is_external;
     /// @brief Name of the class it extends
     const char *extends_;
     /// @brief name of the class
