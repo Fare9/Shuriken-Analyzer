@@ -77,7 +77,7 @@ void DexMethods::parse_methods(
 
     stream.seekg(methods_offset, std::ios_base::beg);
 
-    for (size_t I = 0; I < methods_size; ++I) {
+    for (uint32_t I = 0; I < methods_size; ++I) {
         stream.read_data<std::uint16_t>(class_idx, sizeof(std::uint16_t));
         stream.read_data<std::uint16_t>(proto_idx, sizeof(std::uint16_t));
         stream.read_data<std::uint32_t>(name_idx, sizeof(std::uint32_t));
@@ -86,7 +86,10 @@ void DexMethods::parse_methods(
         method_id = std::make_unique<MethodID>(
                 types.get_type_by_id(class_idx),
                 protos.get_proto_by_id(proto_idx),
-                strings.get_string_by_id(name_idx));
+                strings.get_string_by_id(name_idx),
+                I,
+                class_idx
+                );
         method_ids.push_back(std::move(method_id));
     }
 

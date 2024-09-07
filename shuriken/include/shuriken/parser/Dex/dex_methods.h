@@ -29,13 +29,18 @@ namespace shuriken::parser::dex {
         std::string demangled_name;
         /// @brief Name in the dalvik format
         std::string dalvik_name;
+        /// @brief Raw method id from the DEX file
+        uint32_t rawMethodId;
+        /// @brief Raw class id from the DEX file
+        uint16_t rawClassId;
 
     public:
         /// @brief Constructor of the MethodID
         /// @param class_ class of the method
         /// @param return_type type returned by prototype of the method
         /// @param name_ name of the method
-        MethodID(DVMType *class_, ProtoID *protoId, std::string_view name) : class_(class_), protoId(protoId), name(name) {}
+        MethodID(DVMType* class_, ProtoID* protoId, std::string_view name, uint32_t rawMethodId, uint16_t rawClassId) :
+                    class_(class_), protoId(protoId), name(name), rawMethodId(rawMethodId), rawClassId(rawClassId) {}
 
         /// @brief Destructor of MethodID, default constructor
         ~MethodID() = default;
@@ -58,6 +63,14 @@ namespace shuriken::parser::dex {
 
         /// @return Method in a Dalvik format (e.g. "Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;")
         std::string_view dalvik_name_format();
+
+        uint32_t get_raw_method_id() const {
+            return rawMethodId;
+        }
+
+        uint16_t get_raw_class_id() const {
+            return rawClassId;
+        }
     };
 
     class DexMethods {
