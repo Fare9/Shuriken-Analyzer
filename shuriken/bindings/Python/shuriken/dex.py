@@ -393,7 +393,7 @@ class hdvmmethodanalysis_t(ctypes.Structure):
     - name (type: c_char_p): Name of the method.
     - descriptor (type: c_char_p): Descriptor of the method.
     - full_name (type: c_char_p): Full name of the method, including class name and descriptor.
-    - external (type: c_char): Flag indicating if the method is external or not.
+    - external (type: c_int): Flag indicating if the method is external or not.
     - access_flags (type: accessflags_e): Access flags of the method.
     - class_name (type: c_char_p): Name of the class to which the method belongs.
     - basic_blocks (type: POINTER(basic_blocks_t)): Pointer to the basic blocks of the method.
@@ -528,8 +528,8 @@ class hdvmbasicblock_t(ctypes.Structure):
     Fields:
     - n_of_instructions (type: c_size_t): Number of instructions in the block.
     - instructions (type: POINTER(hdvminstruction_t)): Pointer to the instructions in the block.
-    - try_block (type: c_char): Flag indicating if this block is a try block.
-    - catch_block (type: c_char): Flag indicating if this block is a catch block.
+    - try_block (type: c_int): Flag indicating if this block is a try block.
+    - catch_block (type: c_int): Flag indicating if this block is a catch block.
     - handler_type (type: c_char_p): String representing the handler type.
     - name (type: c_char_p): Name of the basic block.
     - block_string (type: c_char_p): String representation of the entire basic block.
@@ -537,8 +537,8 @@ class hdvmbasicblock_t(ctypes.Structure):
     _fields_ = [
         ("n_of_instructions", ctypes.c_size_t),
         ("instructions", ctypes.POINTER(hdvminstruction_t)),
-        ("try_block", ctypes.c_char),
-        ("catch_block", ctypes.c_char),
+        ("try_block", ctypes.c_int),
+        ("catch_block", ctypes.c_int),
         ("handler_type", ctypes.c_char_p),
         ("name", ctypes.c_char_p),
         ("block_string", ctypes.c_char_p),
@@ -572,7 +572,8 @@ hdvmmethodanalysis_t._fields_ = [
     ("name", ctypes.c_char_p),
     ("descriptor", ctypes.c_char_p),
     ("full_name", ctypes.c_char_p),
-    ("external", ctypes.c_char),
+    ("external", ctypes.c_int),
+    ("is_android_api", ctypes.c_int),
     ("access_flags", accessflags_e),
     ("class_name", ctypes.c_char_p),
     ("basic_blocks", ctypes.POINTER(basic_blocks_t)),
@@ -592,7 +593,7 @@ hdvmmethodanalysis_t._fields_ = [
 ]
 
 hdvmclassanalysis_t._fields_ = [
-    ("is_external", ctypes.c_char),
+    ("is_external", ctypes.c_int),
     ("extends_", ctypes.c_char_p),
     ("name_", ctypes.c_char_p),
     ("n_of_methods", ctypes.c_size_t),
