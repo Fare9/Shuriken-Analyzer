@@ -149,9 +149,9 @@ namespace shuriken::parser::dex {
         /// @brief Structure with the definition of the class
         classdefstruct_t classdefstruct;
         /// @brief DVMClass for the current class
-        DVMClass *class_idx;
+        DVMClass* class_idx;
         /// @brief DVMClass for the parent/super class
-        DVMClass *superclass_idx;
+        DVMClass* superclass_idx;
         /// @brief String with the source file
         std::string_view source_file;
         /// @brief vector with the interfaces implemented
@@ -162,10 +162,11 @@ namespace shuriken::parser::dex {
         ClassDataItem class_data_item;
         /// @brief Array of initial values for static fields.
         EncodedArray static_values;
-
+        /// @brief Raw class index from the dex file
+        uint32_t raw_class_idx;
     public:
         /// @brief Constructor of ClassDef
-        ClassDef() = default;
+        explicit ClassDef(uint32_t id) : raw_class_idx(id) {};
         /// @brief Destructor of ClassDef
         ~ClassDef() = default;
 
@@ -221,9 +222,9 @@ namespace shuriken::parser::dex {
         /// @return reference to the class data item
         ClassDataItem &get_class_data_item();
 
-        /// @brief Return a constant reference to the encoded array
-        /// @return static values as encoded array
-        const EncodedArray &get_static_values() const;
+        /// @brief Get the raw class index from the dex file
+        /// @return raw class index
+        uint32_t get_raw_class_idx() const { return raw_class_idx; };
 
         /// @brief Return a reference to the encoded array
         /// @return static values as encoded array

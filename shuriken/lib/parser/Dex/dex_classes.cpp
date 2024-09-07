@@ -286,7 +286,7 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
                                DexMethods &methods) {
     auto current_offset = stream.tellg();
     std::unique_ptr<ClassDef> classdef;
-    size_t I;
+    uint32_t I;
 
     log(LEVEL::INFO, "Started parsing classes");
 
@@ -294,7 +294,7 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
     stream.seekg(offset, std::ios_base::beg);
 
     for (I = 0; I < number_of_classes; ++I) {
-        classdef = std::make_unique<ClassDef>();
+        classdef = std::make_unique<ClassDef>(++I);
         classdef->parse_class_def(stream, strings, types, fields, methods);
         class_defs.push_back(std::move(classdef));
         // since classdef restore the pointer it found, move it to next
