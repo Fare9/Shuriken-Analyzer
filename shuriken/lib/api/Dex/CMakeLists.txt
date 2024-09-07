@@ -8,4 +8,6 @@ target_sources(dex-obj PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/ShurikenClassMethod.cpp
         ${CMAKE_CURRENT_LIST_DIR}/ShurikenDexClass.cpp
         ${CMAKE_CURRENT_LIST_DIR}/ShurikenClassManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/ShurikenDisassembler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/ShurikenDisassemblerConversions.cpp
 )

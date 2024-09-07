@@ -3,6 +3,7 @@
 #define SHURIKEN_CPP_CORE_H
 
 #include "shuriken_structs.h"
+#include "shuriken_cpp_disassembly.h"
 
 #if defined(_WIN32) || defined(__WIN32__)
     #ifdef SHURIKENLIB_EXPORTS
@@ -29,7 +30,7 @@ namespace shurikenapi {
       public:
         virtual ~IDisassembler() = default;
         IDisassembler& operator=(IDisassembler&&) = delete;
-        virtual void sayHello() const = 0;
+        virtual std::unique_ptr<shurikenapi::disassembly::IInstruction> decodeInstruction(std::span<std::uint8_t> byteCode) const = 0;
     };
 
     /// @brief This class holds the information about a type in the dex file.
@@ -56,6 +57,7 @@ namespace shurikenapi {
       public:
         virtual ~IClassMethod() = default;
         IClassMethod& operator=(IClassMethod&&) = delete;
+        virtual std::uint32_t getId() const = 0;
         virtual const std::string& getName() const = 0;
         virtual const std::string& getDalvikName() const = 0;
         virtual const std::string& getDemangledName() const = 0;
@@ -88,6 +90,9 @@ namespace shurikenapi {
         virtual std::vector<std::reference_wrapper<const IClassField>> getInstanceFields() const = 0;
         virtual std::vector<std::reference_wrapper<const IClassMethod>> getDirectMethods() const = 0;
         virtual std::vector<std::reference_wrapper<const IClassMethod>> getVirtualMethods() const = 0;
+        virtual std::vector<std::reference_wrapper<const IClassMethod>> getExternalMethods() const = 0;
+        virtual bool isExternal() const = 0;
+        virtual uint32_t getClassId() const = 0;
     };
 
     /// @brief The class manager is responsible for holding all the classes in the dex file.
@@ -114,6 +119,7 @@ namespace shurikenapi {
         SHURIKENLIB_API std::string DexType2String(const shurikenapi::IDexTypeInfo& dexType);
         SHURIKENLIB_API std::string DexValue2String(shurikenapi::FundamentalValue dexType);
     } // namespace utils
+
 } // namespace shurikenapi
 
 #endif // SHURIKEN_CPP_CORE_H

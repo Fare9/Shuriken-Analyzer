@@ -83,7 +83,7 @@ namespace shuriken::disassembler::dex {
         /// @brief op code from the instruction
         std::uint32_t op;
         /// @brief address of the instruction
-        std::uint64_t address;
+        std::uint64_t address = 0;
         /// @brief string representation of the instruction
         std::string instruction_str;
 

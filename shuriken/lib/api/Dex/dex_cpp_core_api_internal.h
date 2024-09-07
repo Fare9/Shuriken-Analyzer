@@ -9,6 +9,8 @@
 #include <memory>
 #include <string>
 
+using shurikenapi::disassembly::IOperand;
+
 /*
 Implementation classes of the C++ public API.
 */
@@ -54,9 +56,10 @@ namespace shurikenapi {
 
         class ShurikenClassMethod : public IClassMethod {
           public:
-            explicit ShurikenClassMethod(const std::string& name, const std::string& dalvikName, const std::string& demangledName,
+            explicit ShurikenClassMethod(std::uint32_t id, const std::string& name, const std::string& dalvikName, const std::string& demangledName,
                                          std::unique_ptr<IPrototype> prototype, shurikenapi::AccessFlags flags,
                                          std::span<uint8_t> byteCode, std::uint64_t codeLocation);
+            std::uint32_t getId() const override;
             const std::string& getName() const override;
             const std::string& getDalvikName() const override;
             const std::string& getDemangledName() const override;
@@ -66,6 +69,7 @@ namespace shurikenapi {
             std::uint64_t getCodeLocation() const override;
 
           private:
+            std::uint32_t m_id;
             std::string m_name;
             std::string m_dalvikName;
             std::string m_demangledName;
@@ -90,7 +94,7 @@ namespace shurikenapi {
         };
         class ShurikenDexClass : public IDexClass {
           public:
-            explicit ShurikenDexClass(const std::string& className, const std::string& superName, const std::string& sourceName,
+            explicit ShurikenDexClass(uint32_t id, const std::string& className, const std::string& superName, const std::string& sourceName,
                                       shurikenapi::AccessFlags accessFlags);
             const std::string& getName() const override;
             const std::string& getSuperClassName() const override;
@@ -100,14 +104,23 @@ namespace shurikenapi {
             std::vector<std::reference_wrapper<const IClassField>> getInstanceFields() const override;
             std::vector<std::reference_wrapper<const IClassMethod>> getDirectMethods() const override;
             std::vector<std::reference_wrapper<const IClassMethod>> getVirtualMethods() const override;
+            std::vector<std::reference_wrapper<const IClassMethod>> getExternalMethods() const override;
+
+            bool isExternal() const override { return m_isExternal; };
+            uint32_t getClassId() const override { return m_classId; };
 
             // --Internal
             void addStaticField(std::unique_ptr<IClassField> entry);
             void addInstanceField(std::unique_ptr<IClassField> entry);
             void addDirectMethod(std::unique_ptr<IClassMethod> entry);
             void addVirtualMethod(std::unique_ptr<IClassMethod> entry);
+            void addExternalMethod(std::unique_ptr<IClassMethod> entry);
+            void setExternal() { m_isExternal = true; };
+
 
           private:
+            bool m_isExternal = false;
+            uint32_t m_classId;
             std::string m_name;
             std::string m_superClassName;
             std::string m_sourceFileName;
@@ -116,6 +129,7 @@ namespace shurikenapi {
             std::vector<std::unique_ptr<IClassField>> m_instanceFields;
             std::vector<std::unique_ptr<IClassMethod>> m_directMethods;
             std::vector<std::unique_ptr<IClassMethod>> m_virtualMethods;
+            std::vector<std::unique_ptr<IClassMethod>> m_externalMethods;
         };
 
         class ShurikenClassManager : public IClassManager {
@@ -129,32 +143,42 @@ namespace shurikenapi {
             std::vector<std::unique_ptr<IDexClass>> m_classes;
         };
 
-        class ShurikenDex : public IDex, public IDisassembler{
+        class ShurikenDex : public IDex, public IDisassembler {
           public:
             ShurikenDex(const std::string& filePath);
             const DexHeader& getHeader() const override;
             const IClassManager& getClassManager() const override;
-
-            void processFields(shuriken::parser::dex::ClassDataItem& classDataItem, details::ShurikenDexClass& classEntry);
-            std::unique_ptr<IClassMethod> processMethods(shuriken::parser::dex::EncodedMethod* data);
-            const IDisassembler& getDisassembler() const override {
-              return static_cast<const IDisassembler&>(*this);
-            }
-
-            void sayHello() const override {
-              std::cout << "Hello from Disassembler" << std::endl;
-            }
+            const IDisassembler& getDisassembler() const override;
 
           private:
+            void processFields(shuriken::parser::dex::ClassDataItem& classDataItem, details::ShurikenDexClass& classEntry);
+            std::unique_ptr<IClassMethod> processMethods(shuriken::parser::dex::EncodedMethod* data);
             std::unique_ptr<details::ShurikenClassField> createFieldEntry(shuriken::parser::dex::EncodedField* data);
             std::unique_ptr<IDexTypeInfo> createTypeInfo(shuriken::parser::dex::DVMType* rawType);
+            void inferExternalClasses();
 
             // The order of these 2 is important.
-            std::unique_ptr<shuriken::disassembler::dex::DexDisassembler> m_disassembler;
+            std::unique_ptr<shuriken::disassembler::dex::Disassembler> m_disassembler;
             std::unique_ptr<shuriken::parser::dex::Parser> m_parser;
 
             ShurikenClassManager m_classManager;
             DexHeader m_header;
+
+            // Disassembler Methods
+            std::unique_ptr<shurikenapi::disassembly::IInstruction> decodeInstruction(std::span<std::uint8_t> byteCode) const override;
+            std::unique_ptr<IOperand> createRegisterOperand(std::uint8_t reg) const;
+            std::unique_ptr<IOperand> createRegisterOperand(std::uint16_t reg) const;
+            std::unique_ptr<IOperand> createOperandFromSourceId(shuriken::disassembler::dex::kind_type_t source_id,
+                                                                std::uint16_t iBBBB) const;
+            std::unique_ptr<IOperand> createRegisterList(std::span<std::uint8_t> regs) const;
+            std::unique_ptr<IOperand> createRegisterList(std::span<std::uint16_t> regs) const;
+            std::unique_ptr<IOperand> createImm8(std::int8_t value) const;
+            std::unique_ptr<IOperand> createImm16(std::int16_t value) const;
+            std::unique_ptr<IOperand> createImm32(std::int32_t value) const;
+            std::unique_ptr<IOperand> createImm64(std::int64_t value) const;
+            std::unique_ptr<IOperand> creatUnconditionalBranch(std::int32_t value, std::int8_t offsetSize) const;
+            std::unique_ptr<IOperand> createConditionalBranch(std::int32_t value, std::int8_t offsetSize) const;
+            std::unique_ptr<IOperand> createSwitch(std::uint32_t tableOffset) const;
         };
 
     } // namespace details
