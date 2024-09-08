@@ -226,6 +226,10 @@ namespace shuriken::parser::dex {
         /// @return raw class index
         uint32_t get_raw_class_idx() const { return raw_class_idx; };
 
+        /// @brief Return a constant reference to the encoded array
+        /// @return static values as encoded array
+        const EncodedArray &get_static_values() const;
+        
         /// @brief Return a reference to the encoded array
         /// @return static values as encoded array
         EncodedArray &get_static_values();
