@@ -102,7 +102,6 @@ int main(int argc, char **argv) {
         if (show_classes) print_classes(parsed_dex->getClassManager());
 
         const shurikenapi::IDisassembler& disassembler = parsed_dex->getDisassembler();
-        disassembler.sayHello();
         /*
         if (disassembly) {
             disassembler = std::make_unique<shuriken::disassembler::dex::DexDisassembler>(parsed_dex.get());
