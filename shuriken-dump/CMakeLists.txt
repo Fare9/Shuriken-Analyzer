@@ -32,8 +32,10 @@ install(TARGETS shuriken-dump
         RUNTIME DESTINATION ${binary_install_path}
 )
 
-# Install the Shuriken library's header files
-install(DIRECTORY ${SHURIKEN_DUMP_INCLUDE_PATH}/
-        DESTINATION ${include_install_path}
-        FILES_MATCHING PATTERN "*.h*"
-)
+if (NOT WIN32)
+        # Install the Shuriken library's header files
+        install(DIRECTORY ${SHURIKEN_DUMP_INCLUDE_PATH}/
+                DESTINATION ${include_install_path}
+                FILES_MATCHING PATTERN "*.h*"
+        )
+endif()

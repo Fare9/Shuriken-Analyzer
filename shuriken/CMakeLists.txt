@@ -22,7 +22,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         add_compile_options(-Wno-strict-flex-arrays -Wno-multichar -Wno-dangling-reference -Wno-array-bounds -Wno-stringop-overflow)
     endif()
 elseif(MSVC)
-add_compile_options(/W4 /WX /wd4200 \xXX)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+add_compile_options(/W4 /WX /wd4200)
 endif()
 
 # Compiler for the project
@@ -176,11 +177,13 @@ install(TARGETS shuriken
         LIBRARY DESTINATION ${library_install_path}
 )
 
-# Install the Shuriken library's header files
-install(DIRECTORY ${SHURIKEN_INCLUDE_PATH}/
-        DESTINATION ${include_install_path}
-        FILES_MATCHING PATTERN "*.h*"
-)
+if (NOT WIN32)
+        # Install the Shuriken library's header files
+        install(DIRECTORY ${SHURIKEN_INCLUDE_PATH}/
+                DESTINATION ${include_install_path}
+                FILES_MATCHING PATTERN "*.h*"
+        )
+endif()
 
 # Optional: if you have public headers in other directories added by subdirectories,
 # you should install them as well using additional install(DIRECTORY ...) commands.
