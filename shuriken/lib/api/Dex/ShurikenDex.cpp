@@ -35,11 +35,11 @@ namespace shurikenapi {
                 // --Process Methods
                 for (size_t i = 0; i < c.get_class_data_item().get_number_of_direct_methods(); i++) {
                     auto data = c.get_class_data_item().get_direct_method_by_id(static_cast<std::uint32_t>(i));
-                    classEntry->addDirectMethod(std::move(processMethods(data)));
+                    classEntry->addDirectMethod(processMethods(data));
                 }
                 for (size_t i = 0; i < c.get_class_data_item().get_number_of_virtual_methods(); i++) {
                     auto data = c.get_class_data_item().get_virtual_method_by_id(static_cast<std::uint32_t>(i));
-                    classEntry->addVirtualMethod(std::move(processMethods(data)));
+                    classEntry->addVirtualMethod(processMethods(data));
                 }
 
                 // --Add the Class into the ClassManager
@@ -103,12 +103,12 @@ namespace shurikenapi {
             for (size_t i = 0; i < classDataItem.get_number_of_instance_fields(); i++) {
                 auto data = classDataItem.get_instance_field_by_id(static_cast<std::uint32_t>(i));
 
-                classEntry.addInstanceField(std::move(createFieldEntry(data)));
+                classEntry.addInstanceField(createFieldEntry(data));
             }
             for (size_t i = 0; i < classDataItem.get_number_of_static_fields(); i++) {
                 auto data = classDataItem.get_static_field_by_id(static_cast<std::uint32_t>(i));
 
-                classEntry.addStaticField(std::move(createFieldEntry(data)));
+                classEntry.addStaticField(createFieldEntry(data));
             }
         }
 

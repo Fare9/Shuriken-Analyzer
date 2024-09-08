@@ -49,9 +49,9 @@ namespace shurikenapi {
             const std::string& getString() const override;
 
           private:
+            std::string m_string;
             std::unique_ptr<IDexTypeInfo> m_returnType;
             std::vector<std::unique_ptr<IDexTypeInfo>> m_parameters;
-            std::string m_string;
         };
 
         class ShurikenClassMethod : public IClassMethod {
@@ -120,11 +120,11 @@ namespace shurikenapi {
 
           private:
             bool m_isExternal = false;
-            uint32_t m_classId;
             std::string m_name;
             std::string m_superClassName;
             std::string m_sourceFileName;
             AccessFlags m_accessFlags;
+            uint32_t m_classId;
             std::vector<std::unique_ptr<IClassField>> m_staticFields;
             std::vector<std::unique_ptr<IClassField>> m_instanceFields;
             std::vector<std::unique_ptr<IClassMethod>> m_directMethods;

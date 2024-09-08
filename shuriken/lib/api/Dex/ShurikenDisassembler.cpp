@@ -11,7 +11,7 @@ namespace shurikenapi {
           public:
             void set(shurikenapi::disassembly::Mnemonic mnemonic) { m_mnemonic = mnemonic; }
 
-            const shurikenapi::disassembly::Mnemonic value() const { return m_mnemonic; }
+            shurikenapi::disassembly::Mnemonic value() const { return m_mnemonic; }
             const std::string& string() const { return shurikenapi::disassembly::opcodeNames.at(m_mnemonic); }
 
           private:
@@ -22,7 +22,7 @@ namespace shurikenapi {
           public:
             // IInstruction overrides - Public facing APIs
             const shurikenapi::disassembly::IMnemonic& getMnemonic() const override { return std::cref(*m_mnemonic); }
-            const std::uint32_t getSize() const override { return m_size; }
+            std::uint32_t getSize() const override { return m_size; }
 
             std::vector<std::reference_wrapper<const IOperand>> getOperands() const override {
                 std::vector<std::reference_wrapper<const IOperand>> operandRefs;
@@ -61,8 +61,6 @@ namespace shurikenapi {
                 printf("\nFailed to disassemble instruction: %02X\n", byteCode[0]);
                 return nullptr;
             }
-
-            printf(" - Type: %d\n", instr->get_instruction_type());
 
             auto newInstruction = std::make_unique<ShurikenInstruction>();
             newInstruction->setMnemonic(static_cast<shurikenapi::disassembly::Mnemonic>(opcode));
@@ -234,8 +232,8 @@ namespace shurikenapi {
                 }
                 default: {
                     char errMsg[1024];
-                    sprintf(errMsg, "Unhandled Instruction Type: %d\n", instr->get_instruction_type());
-                    printf("Unhandled Instruction Type: %d\n", instr->get_instruction_type());
+                    sprintf(errMsg, "Unhandled Instruction Type: %d\n", static_cast<int>(instr->get_instruction_type()));
+                    printf("Unhandled Instruction Type: %d\n", static_cast<int>(instr->get_instruction_type()));
                     throw exceptions::InvalidInstructionException(errMsg, 0);
 
                     return nullptr;
