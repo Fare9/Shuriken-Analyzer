@@ -210,7 +210,7 @@ namespace shurikenapi {
                     shuriken::disassembler::dex::Instruction35c* insn =
                         dynamic_cast<shuriken::disassembler::dex::Instruction35c*>(instr.get());
                     newInstruction->addOperand(createRegisterList(insn->get_registers()));
-                    newInstruction->addOperand(createOperandFromSourceId(insn->get_array_value(), insn->get_type_idx()));
+                    newInstruction->addOperand(createOperandFromSourceId(insn->get_value(), insn->get_type_idx()));
 
                     newInstruction->setSize(insn->get_instruction_length());
                     break;
