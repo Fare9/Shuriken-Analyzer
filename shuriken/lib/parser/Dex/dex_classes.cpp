@@ -14,7 +14,6 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream &stream,
                                           DexMethods &methods,
                                           DexTypes &types) {
     auto current_offset = stream.tellg();
-    auto my_logger = shuriken::logger();
 
     std::uint64_t I;
     // IDs for the different variables
@@ -22,7 +21,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream &stream,
     std::uint64_t access_flags;// access flags of the variables
     std::uint64_t code_offset; // offset for parsing
 
-    my_logger->debug("Started parsing a class data item");
+    log(LEVEL::MYDEBUG, "Started parsing a class data item");
 
     // read the sizes of the different variables
     std::uint64_t const static_fields_size = stream.read_uleb128();
@@ -68,7 +67,7 @@ void ClassDataItem::parse_class_data_item(common::ShurikenStream &stream,
         virtual_methods.back()->parse_encoded_method(stream, code_offset, types);
     }
 
-    my_logger->debug("Finished parsing a class data item");
+    log(LEVEL::MYDEBUG, "Finished parsing a class data item");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }
@@ -176,12 +175,11 @@ void ClassDef::parse_class_def(common::ShurikenStream &stream,
                                DexFields &fields,
                                DexMethods &methods) {
     auto current_offset = stream.tellg();
-    auto my_logger = shuriken::logger();
     size_t I;
     std::uint32_t size;
     std::uint16_t idx;
 
-    my_logger->debug("Starting parsing a class def");
+    log(LEVEL::MYDEBUG, "Starting parsing a class def");
 
     // first read the classdefstruct_t
     stream.read_data<classdefstruct_t>(classdefstruct, sizeof(classdefstruct_t));
@@ -228,7 +226,7 @@ void ClassDef::parse_class_def(common::ShurikenStream &stream,
     }
 
 
-    my_logger->debug("Finished parsing a class def");
+    log(LEVEL::MYDEBUG, "Finished parsing a class def");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }
@@ -287,11 +285,10 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
                                DexFields &fields,
                                DexMethods &methods) {
     auto current_offset = stream.tellg();
-    auto my_logger = shuriken::logger();
     std::unique_ptr<ClassDef> classdef;
     size_t I;
 
-    my_logger->info("Started parsing classes");
+    log(LEVEL::INFO, "Started parsing classes");
 
     // go to the offset
     stream.seekg(offset, std::ios_base::beg);
@@ -305,7 +302,7 @@ void DexClasses::parse_classes(common::ShurikenStream &stream,
         stream.seekg(sizeof(ClassDef::classdefstruct_t), std::ios_base::cur);
     }
 
-    my_logger->info("Finished parsing classes");
+    log(LEVEL::INFO, "Finished parsing classes");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }

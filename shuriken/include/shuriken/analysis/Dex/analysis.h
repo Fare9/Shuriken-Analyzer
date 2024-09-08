@@ -99,6 +99,8 @@ namespace shuriken::analysis::dex {
         Analysis(parser::dex::Parser *parser,
                  disassembler::dex::DexDisassembler *disassembler, bool create_xrefs);
 
+        Analysis(disassembler::dex::DexDisassembler *disassembler, bool create_xrefs);
+
         ~Analysis() = default;
 
         /// @brief Add all the classes and methods from a parser

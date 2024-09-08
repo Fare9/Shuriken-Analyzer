@@ -19,7 +19,6 @@ void ProtoID::parse_parameters(
         common::ShurikenStream &stream,
         DexTypes &types,
         std::uint32_t parameters_off) {
-    auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
     std::uint32_t n_parameters;
     std::uint16_t type_id;
@@ -27,7 +26,7 @@ void ProtoID::parse_parameters(
     if (!parameters_off)
         return;
 
-    my_logger->debug("Started parsing parameter at offset {}", parameters_off);
+    log(LEVEL::INFO, "Started parsing parameter at offset {}", std::to_string(parameters_off));
 
     stream.seekg(parameters_off, std::ios_base::beg);
 
@@ -39,7 +38,7 @@ void ProtoID::parse_parameters(
         parameters.push_back(types.get_type_by_id(type_id));
     }
 
-    my_logger->debug("Finished parsing parameter at offset{}", parameters_off);
+    log(LEVEL::INFO, "Finished parsing parameter at offset{}", std::to_string(parameters_off));
 
     stream.seekg(current_offset, std::ios_base::beg);
 }
@@ -93,7 +92,6 @@ void DexProtos::parse_protos(common::ShurikenStream &stream,
                              std::uint32_t offset,
                              DexStrings &strings,
                              DexTypes &types) {
-    auto my_logger = shuriken::logger();
     auto current_offset = stream.tellg();
 
     std::unique_ptr<ProtoID> proto = nullptr;
@@ -101,7 +99,7 @@ void DexProtos::parse_protos(common::ShurikenStream &stream,
             return_type_idx = 0, //! id for type of return
             parameters_off = 0;  //! offset of parameters
 
-    my_logger->info("Started parsing of protos");
+    log(LEVEL::INFO, "Started parsing of protos");
 
     stream.seekg(offset, std::ios_base::beg);
 
@@ -115,7 +113,7 @@ void DexProtos::parse_protos(common::ShurikenStream &stream,
         protos.push_back(std::move(proto));
     }
 
-    my_logger->info("Finished parsing of protos");
+    log(LEVEL::INFO, "Finished parsing of protos");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }

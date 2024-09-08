@@ -3,6 +3,14 @@ cmake_minimum_required(VERSION 3.5)
 
 include(FetchContent)
 
+# By default, all libraries built here must be static
+
+set(SHURIKEN_EXTERNAL_LIB_TYPE ${BUILD_SHARED_LIBS}) 
+message("-- Preverse build shared libs to into SHURIKEN_EXTERNAL_LIB_TYPE, setting it to OFF")
+
+set(BUILD_SHARED_LIBS OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
 set(FETCHCONTENT_QUIET off)
 
 # check if we have connection using PING
@@ -38,7 +46,7 @@ endif ()
 # repo
 # ------------------------------------
 FetchContent_Declare(
-    extern_spdlog
+        extern_spdlog
 
         GIT_REPOSITORY https://github.com/gabime/spdlog.git
         GIT_TAG v1.12.0
@@ -48,6 +56,7 @@ FetchContent_GetProperties(extern_spdlog)
 
 if(NOT extern_spdlog_POPULATED)
     message(STATUS "Cloning spdlog")
+    set(SPDLOG_BUILD_SHARED OFF)
     FetchContent_Populate(extern_spdlog)
     add_subdirectory(
             ${extern_spdlog_SOURCE_DIR}
@@ -64,6 +73,9 @@ set_target_properties(spdlog
 # Make the project available
 FetchContent_MakeAvailable(extern_spdlog)
 
+# ------------------------------------
+# Download the printing utility fmt
+# ------------------------------------
 FetchContent_Declare(
         fmt
 
@@ -80,8 +92,63 @@ if(NOT fmt_POPULATED)
             ${fmt_SOURCE_DIR}
             ${fmt_BINARY_DIR}
     )
-endif()
 
+endif()
 
 # Make the project available
 FetchContent_MakeAvailable(fmt)
+
+
+# ------------------------------------
+# Download the zip libary
+# ------------------------------------
+
+FetchContent_Declare(
+        libzip
+        GIT_REPOSITORY https://github.com/nih-at/libzip.git
+        GIT_TAG        main  # Or a specific version tag
+)
+
+FetchContent_GetProperties(libzip)
+
+if(NOT libzip_POPULATED)
+    message(STATUS "Cloning libzip")
+    set(BUILD_SHARED_LIBS ON)
+    option(BUILD_SHARED_LIBS ON)
+    FetchContent_Populate(libzip)
+    add_subdirectory(
+            ${libzip_SOURCE_DIR}
+            ${libzip_BINARY_DIR}
+    )
+    set(BUILD_SHARED_LIBS OFF)
+    option(BUILD_SHARED_LIBS OFF)
+
+    # set_property(TARGET zip PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+endif()
+
+FetchContent_MakeAvailable(libzip)
+
+function(check_static_lib lib_name)
+    get_target_property(external_target_type ${lib_name} TYPE)
+    if (NOT external_target_type STREQUAL STATIC_LIBRARY)
+        message(FATAL_ERROR "${lib_name} is not a static library")
+    endif()
+endfunction()
+
+function(check_position_independent_code lib_name)
+    get_target_property(external_target_type ${lib_name} POSITION_INDEPDENT_CODE)
+    if (external_target_type EQUAL False)
+        message(FATAL_ERROR "${lib_name} is not a library built with POSITION_INDEPENDENT_CODE option")
+    endif()
+endfunction()
+# check_static_lib(zip)
+# check_position_independent_code(zip)
+check_static_lib(fmt)
+check_static_lib(spdlog)
+
+message("-- Reversing build shared libs to SHURIKEN_EXTERNAL_LIB_TYPE, setting it to ${SHURIKEN_EXTERNAL_LIB_TYPE}")
+
+set(BUILD_SHARED_LIBS ${SHURIKEN_EXTERNAL_LIB_TYPE})
+option(BUILD_SHARED_LIBS "Build shared libraries" ${SHURIKEN_EXTERNAL_LIB_TYPE})
+

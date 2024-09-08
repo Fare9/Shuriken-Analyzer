@@ -15,6 +15,14 @@ DexDisassembler::DexDisassembler(parser::dex::Parser *parser)
     linear_sweep.set_disassembler(internal_disassembler.get());
 }
 
+void DexDisassembler::disassemble_new_dex(parser::dex::Parser *new_parser) {
+    this->parser = new_parser;
+    internal_disassembler = std::make_unique<Disassembler>(parser);
+    linear_sweep.set_disassembler(internal_disassembler.get());
+    // finally call the disassembly
+    disassembly_dex();
+}
+
 void DexDisassembler::set_disassembly_algorithm(disassembly_algorithm_t algorithm) {
     this->disassembly_algorithm = algorithm;
 }
@@ -46,9 +54,8 @@ DexDisassembler::get_disassembled_methods_ownership() {
 }
 
 void DexDisassembler::disassembly_dex() {
-    auto log = logger();
 
-    log->info("Starting disassembly of the DEX file");
+    log(LEVEL::INFO, "Starting disassembly of the DEX file");
 
     auto &classes = parser->get_classes();
 
@@ -64,7 +71,7 @@ void DexDisassembler::disassembly_dex() {
         }
     }
 
-    log->info("Finished method disassembly");
+    log(LEVEL::INFO, "Finished method disassembly");
 }
 
 void DexDisassembler::disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method) {

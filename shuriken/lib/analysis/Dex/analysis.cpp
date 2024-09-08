@@ -53,8 +53,11 @@ Analysis::Analysis(parser::dex::Parser *parser,
         add(parser);
 }
 
+Analysis::Analysis(disassembler::dex::DexDisassembler *disassembler, bool create_xrefs)
+    : disassembler(disassembler), created_xrefs(!create_xrefs) {
+}
+
 void Analysis::add(parser::dex::Parser *parser) {
-    auto logger = shuriken::logger();
 
     /// For adding more DEX files to the analysis classes
     /// what we do is to retrieve the parser to get all the
@@ -69,23 +72,21 @@ void Analysis::add(parser::dex::Parser *parser) {
 
     auto it_classes = class_dex.get_classdefs();
 
-    logger->debug("Adding to the analysis {} number of classes",
-                  std::distance(it_classes.begin(), it_classes.end()));
+    log(LEVEL::INFO, "Adding to the analysis {} number of classes",
+        std::to_string(std::distance(it_classes.begin(), it_classes.end())));
 
     auto &all_methods_instructions = disassembler->get_disassembled_methods_ownership();
 
     for (auto &class_def_item: it_classes) {
         _add_classdef(class_def_item, all_methods_instructions);
     }
-    logger->info("Analysis: correctly added parser to analysis object");
+    log(LEVEL::INFO, "Analysis: correctly added parser to analysis object");
 }
 
 void Analysis::_add_classdef(
         parser::dex::ClassDef &class_def_item,
         DexDisassembler::disassembled_methods_t
                 &all_methods_instructions) {
-    auto logger = shuriken::logger();
-
     // Create a class analysis, we will work with the created object
     auto name = std::string(class_def_item.get_class_idx()->get_class_name());
     class_analyses.insert({name, std::make_unique<ClassAnalysis>(&class_def_item)});
@@ -94,9 +95,9 @@ void Analysis::_add_classdef(
     // get the class data item to retrieve the methods
     auto &class_data_item = class_def_item.get_class_data_item();
 
-    logger->debug("Adding to the class {} direct and {} virtual methods",
-                  class_data_item.get_number_of_direct_methods(),
-                  class_data_item.get_number_of_static_fields());
+    log(LEVEL::MYDEBUG, "Adding to the class {} direct and {} virtual methods",
+        std::to_string(class_data_item.get_number_of_direct_methods()),
+        std::to_string(class_data_item.get_number_of_static_fields()));
 
     // first use the virtual methods
     for (auto &encoded_method: class_data_item.get_virtual_methods()) {
@@ -139,41 +140,40 @@ ExternalField *Analysis::get_external_field(shuriken::parser::dex::FieldID *fiel
 }
 
 void Analysis::create_xrefs() {
-    auto logger = shuriken::logger();
 
     if (created_xrefs) {
-        logger->info("Requested create_xref() method more than once.");
-        logger->info(
-                "create_xref() will not work again, function will exit right now.");
-        logger->info("Please if you want to analyze various dex parsers, add all "
-                     "of them first, then call this function.");
+        log(LEVEL::INFO, "Requested create_xref() method more than once.");
+        log(LEVEL::INFO,
+            "create_xref() will not work again, function will exit right now.");
+        log(LEVEL::INFO, "Please if you want to analyze various dex parsers, add all "
+                         "of them first, then call this function.");
 
         return;
     }
 
     created_xrefs = true;
 
-    logger->debug("create_xref(): creating xrefs for {} dex files",
-                  parsers.size());
+    log(LEVEL::MYDEBUG, "create_xref(): creating xrefs for {} dex files",
+        std::to_string(parsers.size()));
 
     for (auto parser: parsers) {
         static size_t i = 0;
-        logger->debug("Analyzing {} parser", i++);
+        log(LEVEL::MYDEBUG, "Analyzing {} parser", std::to_string(i++));
 
         auto &class_dex = parser->get_classes();
         auto it_classes = class_dex.get_classdefs();
 
-        logger->debug("Number of classes to analyze: {}",
-                      std::distance(it_classes.begin(), it_classes.end()));
+        log(LEVEL::MYDEBUG, "Number of classes to analyze: {}",
+            std::to_string(std::distance(it_classes.begin(), it_classes.end())));
 
         for (auto &class_def_item: it_classes) {
             static size_t j = 0;
-            logger->debug("Analyzing class number {}", j++);
+            log(LEVEL::MYDEBUG, "Analyzing class number {}", std::to_string(j++));
 
             _create_xrefs(class_def_item);
         }
     }
-    logger->info("Cross-references correctly created");
+    log(LEVEL::INFO, "Cross-references correctly created");
 }
 
 void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
@@ -199,8 +199,6 @@ void Analysis::_create_xrefs(parser::dex::ClassDef &current_class) {
 
 void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
                                        std::string &current_class_name) {
-    auto logger = shuriken::logger();
-
     // Obtain the Method Analysis
     auto current_method_analysis =
             method_analyses[std::string(method->getMethodID()->dalvik_name_format())].get();
@@ -274,8 +272,8 @@ void Analysis::_analyze_encoded_method(parser::dex::EncodedMethod *method,
                     std::get<parser::dex::MethodID *>(invoke_->get_value());
 
             if (invoked_method->get_class()->get_type() != parser::dex::CLASS) {
-                logger->warn("Found a call to a method from non class (type found {})",
-                             invoked_method->get_class()->print_type());
+                log(LEVEL::WARN, "Found a call to a method from non class (type found {})",
+                    invoked_method->get_class()->print_type());
                 continue;
             }
 

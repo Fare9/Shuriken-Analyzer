@@ -56,12 +56,11 @@ void DexFields::parse_fields(
         std::uint32_t fields_offset,
         std::uint32_t n_of_fields) {
     auto current_offset = stream.tellg();
-    auto my_logger = shuriken::logger();
     std::uint16_t class_idx, type_idx;
     std::uint32_t name_idx;
     std::unique_ptr<FieldID> field_id = nullptr;
 
-    my_logger->info("Started parsing of fields at offset {}", fields_offset);
+    log(LEVEL::INFO, "Started parsing of fields at offset {}", std::to_string(fields_offset));
 
     stream.seekg(fields_offset, std::ios_base::beg);
 
@@ -77,7 +76,7 @@ void DexFields::parse_fields(
         fields.push_back(std::move(field_id));
     }
 
-    my_logger->info("Finished parsing of fields");
+    log(LEVEL::INFO, "Finished parsing of fields");
     stream.seekg(current_offset, std::ios_base::beg);
 }
 

@@ -1,4 +1,5 @@
 add_subdirectory(dex/parser)
 add_subdirectory(dex/disassembler)
 add_subdirectory(dex/analysis)
+add_subdirectory(apk)
 add_subdirectory(code)

@@ -11,7 +11,6 @@ using namespace shuriken::parser::dex;
 
 void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenStream &stream) {
     auto current_offset = stream.tellg();
-    auto my_logger = shuriken::logger();
 
     size_t I;
     std::uint32_t fields_size;
@@ -19,7 +18,7 @@ void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenSt
     std::uint32_t annotated_parameters_size;
     std::uint32_t idx, annotations_off;
 
-    my_logger->debug("Started parsing of annotations");
+    log(LEVEL::MYDEBUG, "Started parsing of annotations");
 
     // first read the offset
     stream.read_data<std::uint32_t>(class_annotations_off, sizeof(std::uint32_t));
@@ -46,7 +45,7 @@ void AnnotationDirectoryItem::parse_annotation_directory_item(common::ShurikenSt
         parameter_annotations_by_id[idx] = {.method_idx = idx, .annotations_off = annotations_off};
     }
 
-    my_logger->debug("Finished parsing of annotations");
+    log(LEVEL::MYDEBUG, "Finished parsing of annotations");
 
     stream.seekg(current_offset, std::ios_base::beg);
 }

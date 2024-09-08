@@ -48,11 +48,19 @@ namespace shuriken::disassembler::dex {
         void disassemble_encoded_method(shuriken::parser::dex::EncodedMethod *method);
 
     public:
+        /// @brief Empty constructor for calling disassemble_new_dex whenever
+        /// needed to disassemble more than one dex file.
+        DexDisassembler() = default;
+
         /// @brief Constructor of the DexDisassembler, this should be called
         /// only if the parsing was correct
         /// @param parser parser for the internal disassembler, this is used
         /// in some of the instructions
         DexDisassembler(parser::dex::Parser *parser);
+
+        /// @brief in case we want to reuse the disassembler to keep
+        /// disassembling DEX files, and keep adding disassembled methods
+        void disassemble_new_dex(parser::dex::Parser *new_parser);
 
         /// @brief Set the disassembly algorithm to use in the next calls to
         /// the different disassembly methods.

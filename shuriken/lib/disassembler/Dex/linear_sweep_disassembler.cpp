@@ -16,7 +16,6 @@ void LinearSweepDisassembler::set_disassembler(Disassembler *disassembler) {
 }
 
 std::vector<std::unique_ptr<Instruction>> LinearSweepDisassembler::disassembly(std::span<std::uint8_t> buffer_bytes) {
-    auto log = logger();
     std::unordered_map<std::uint64_t, Instruction *> cache_instr;
     std::uint64_t idx = 0;                                 // index of the instr
     std::vector<std::unique_ptr<Instruction>> instructions;// all the instructions from the method
@@ -46,8 +45,11 @@ std::vector<std::unique_ptr<Instruction>> LinearSweepDisassembler::disassembly(s
                 idx += instructions.back()->get_instruction_length();
             }
         } catch (const exceptions::InvalidInstructionException &i) {
-            log->error("InvalidInstructionException in the index: {}, opcode: {}, message: {}, instr size: {}",
-                       idx, static_cast<std::uint32_t>(opcode), i.what(), i.size());
+            log(LEVEL::ERR, "InvalidInstructionException in the index: {}, opcode: {}, message: {}, instr size: {}",
+                std::to_string(idx),
+                std::to_string(static_cast<std::uint32_t>(opcode)),
+                i.what(),
+                std::to_string(i.size()));
             // in case there was an invalid instr
             // create a DalvikIncorrectInstruction
             instr = std::make_unique<DalvikIncorrectInstruction>(buffer_bytes, idx, i.size());
@@ -57,8 +59,9 @@ std::vector<std::unique_ptr<Instruction>> LinearSweepDisassembler::disassembly(s
             cache_instr[idx] = instructions.back().get();
             idx += i.size();
         } catch (const std::exception &e) {
-            log->error("Error reading index: {}, opcode: {}, message: {}",
-                       idx, static_cast<std::uint32_t>(opcode), e.what());
+            log(LEVEL::ERR, "Error reading index: {}, opcode: {}, message: {}",
+                std::to_string(idx),
+                std::to_string(static_cast<std::uint32_t>(opcode)), e.what());
             idx += 1;
         }
     }

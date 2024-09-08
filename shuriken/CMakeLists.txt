@@ -83,8 +83,9 @@ set_target_properties(shuriken-obj
 
 # subdirectories for shuriken
 add_subdirectory(lib/common/)
-target_link_libraries(shuriken-obj PRIVATE spdlog::spdlog)
 
+target_link_libraries(shuriken-obj PRIVATE spdlog::spdlog)
+target_link_libraries(shuriken-obj PRIVATE zip)
 
 # more information of object files
 list(APPEND LIB_MODULES
@@ -98,18 +99,22 @@ if (DEX)
     add_library(dex-obj
             OBJECT
     )
-    target_link_libraries(dex-obj PRIVATE spdlog::spdlog)
 
     set_target_properties(dex-obj
             PROPERTIES
             POSITION_INDEPENDENT_CODE 1
     )
 
+    # Dex files
     add_subdirectory(lib/parser/Dex)
     add_subdirectory(lib/disassembler/Dex)
     add_subdirectory(lib/analysis/Dex)
     add_subdirectory(lib/api/Dex)
+    # APK files
+    add_subdirectory(lib/parser/Apk)
 
+    target_link_libraries(dex-obj PRIVATE spdlog::spdlog)
+    target_link_libraries(dex-obj PRIVATE zip)
 
     target_include_directories(dex-obj
             BEFORE
@@ -130,6 +135,8 @@ add_library(shuriken SHARED
 message(STATUS "Linking libraries into Shuriken library")
 
 target_link_libraries(shuriken PRIVATE spdlog::spdlog)
+target_link_libraries(shuriken PRIVATE zip)
+
 target_include_directories(shuriken
         PUBLIC
         "${CMAKE_SOURCE_DIR}/shuriken/include/"

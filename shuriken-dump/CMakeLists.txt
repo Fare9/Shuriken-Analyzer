@@ -21,7 +21,6 @@ shuriken-dump.cpp
 target_link_libraries(shuriken-dump
     PRIVATE
         shuriken
-        spdlog
         fmt
 )
 
