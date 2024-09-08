@@ -5,6 +5,7 @@ var hierarchy =
     [ "shuriken::analysis::dex::Analysis", "classshuriken_1_1analysis_1_1dex_1_1Analysis.html", null ],
     [ "shuriken::parser::dex::AnnotationDirectoryItem", "classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem.html", null ],
     [ "shuriken::parser::dex::AnnotationElement", "classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html", null ],
+    [ "shuriken::parser::apk::Apk", "classshuriken_1_1parser_1_1apk_1_1Apk.html", null ],
     [ "basic_blocks_t_", "structbasic__blocks__t__.html", null ],
     [ "shuriken::analysis::dex::BasicBlocks", "classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html", null ],
     [ "shuriken::analysis::dex::ClassAnalysis", "classshuriken_1_1analysis_1_1dex_1_1ClassAnalysis.html", null ],
@@ -121,6 +122,7 @@ var hierarchy =
     [ "shuriken::parser::dex::ParameterAnnotation", "structshuriken_1_1parser_1_1dex_1_1ParameterAnnotation.html", null ],
     [ "shuriken::parser::dex::Parser", "classshuriken_1_1parser_1_1dex_1_1Parser.html", null ],
     [ "shuriken::parser::dex::ProtoID", "classshuriken_1_1parser_1_1dex_1_1ProtoID.html", null ],
+    [ "shuriken::Scoped", "classshuriken_1_1Scoped.html", null ],
     [ "shuriken::common::ShurikenStream", "classshuriken_1_1common_1_1ShurikenStream.html", null ],
     [ "shuriken::analysis::dex::StringAnalysis", "classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html", null ],
     [ "std::true_type", null, [

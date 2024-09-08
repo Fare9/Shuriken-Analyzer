@@ -1,7 +1,9 @@
 <map id="shuriken/include/shuriken/common/logger.h" name="shuriken/include/shuriken/common/logger.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="34,5,202,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,117,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,48,81,83,77,79,102,45"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="141,94,213,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,45,161,80,157,83,131,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="41,5,209,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,66,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,48,62,86,59,82,101,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,94,160,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,46,128,78,122,78,122,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="184,94,242,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="148,44,190,81,186,85,145,48"/>
 </map>

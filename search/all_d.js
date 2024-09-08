@@ -26,5 +26,6 @@ var searchData=
   ['methodannotation_23',['MethodAnnotation',['../structshuriken_1_1parser_1_1dex_1_1MethodAnnotation.html',1,'shuriken::parser::dex']]],
   ['methodid_24',['MethodID',['../classshuriken_1_1parser_1_1dex_1_1MethodID.html',1,'shuriken::parser::dex::MethodID'],['../classshuriken_1_1parser_1_1dex_1_1MethodID.html#aea927324cd0b7d129d52afd3254ebf68',1,'shuriken::parser::dex::MethodID::MethodID()']]],
   ['methods_25',['methods',['../structhdvmclassanalysis__t__.html#a0c8063d1a9f16a11a23c0d9bd5f3230f',1,'hdvmclassanalysis_t_']]],
-  ['multi_5fbranch_5fdvm_5fopcode_26',['MULTI_BRANCH_DVM_OPCODE',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030ad45945d5a5c218339c53466d355c27f5',1,'shuriken::disassembler::dex::DexOpcodes']]]
+  ['multi_5fbranch_5fdvm_5fopcode_26',['MULTI_BRANCH_DVM_OPCODE',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030ad45945d5a5c218339c53466d355c27f5',1,'shuriken::disassembler::dex::DexOpcodes']]],
+  ['mydebug_27',['MYDEBUG',['../namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea2fc6bc2f13ab9f18449d7a25702b2f93',1,'shuriken']]]
 ];

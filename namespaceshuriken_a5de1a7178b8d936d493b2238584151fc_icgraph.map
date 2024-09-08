@@ -1,0 +1,9 @@
+<map id="shuriken::set_level" name="shuriken::set_level">
+<area shape="rect" id="Node000001" title="Change the logging level (hierarchical)" alt="" coords="416,35,544,60"/>
+<area shape="rect" id="Node000002" href="$classshuriken_1_1Scoped.html#a40c04b3c1ac04a77e79c11387d8ba385" title=" " alt="" coords="224,27,368,68"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="401,50,368,50,368,45,401,45"/>
+<area shape="rect" id="Node000003" href="$classshuriken_1_1Scoped.html#ad04886e83700aa072c1dfcc9c1cb6d43" title=" " alt="" coords="5,5,176,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="207,38,176,33,177,28,208,32"/>
+<area shape="rect" id="Node000004" href="$classshuriken_1_1Scoped.html#aa5bc80e603c6e4464899b8a08fbaed16" title=" " alt="" coords="27,55,154,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="208,62,154,70,154,64,208,57"/>
+</map>

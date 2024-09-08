@@ -43,5 +43,6 @@ var searchData=
   ['convert_5fdata_5fto_5flong_40',['convert_data_to_long',['../classshuriken_1_1parser_1_1dex_1_1EncodedValue.html#a33bfda32f2f01f03c57cdbfc8daa210e',1,'shuriken::parser::dex::EncodedValue']]],
   ['convert_5fdata_5fto_5fshort_41',['convert_data_to_short',['../classshuriken_1_1parser_1_1dex_1_1EncodedValue.html#ac4b66015e019bc528beb3f951861d8ba',1,'shuriken::parser::dex::EncodedValue']]],
   ['create_5fdex_5fanalysis_42',['create_dex_analysis',['../shuriken__core_8h.html#a9f61af4a585e7bbc365220fcafef5c4b',1,'shuriken_core.h']]],
-  ['create_5fxrefs_43',['create_xrefs',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#acf6d2c610cfaf83285bfa82ca4657d47',1,'shuriken::analysis::dex::Analysis']]]
+  ['create_5fxrefs_43',['create_xrefs',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#acf6d2c610cfaf83285bfa82ca4657d47',1,'shuriken::analysis::dex::Analysis']]],
+  ['critical_44',['CRITICAL',['../namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea99cd1c61610c76a57cb8d10d6df6b870',1,'shuriken']]]
 ];

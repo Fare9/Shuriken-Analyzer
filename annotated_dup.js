@@ -71,6 +71,9 @@ var annotated_dup =
         ] ]
       ] ],
       [ "parser", "namespaceshuriken_1_1parser.html", [
+        [ "apk", "namespaceshuriken_1_1parser_1_1apk.html", [
+          [ "Apk", "classshuriken_1_1parser_1_1apk_1_1Apk.html", "classshuriken_1_1parser_1_1apk_1_1Apk" ]
+        ] ],
         [ "dex", "namespaceshuriken_1_1parser_1_1dex.html", [
           [ "AnnotationDirectoryItem", "classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem.html", "classshuriken_1_1parser_1_1dex_1_1AnnotationDirectoryItem" ],
           [ "AnnotationElement", "classshuriken_1_1parser_1_1dex_1_1AnnotationElement.html", "classshuriken_1_1parser_1_1dex_1_1AnnotationElement" ],
@@ -112,7 +115,8 @@ var annotated_dup =
       [ "is_container_of_reference_wrapper< T, std::void_t< typename T::value_type > >", "structshuriken_1_1is__container__of__reference__wrapper_3_01T_00_01std_1_1void__t_3_01typename_01T_1_1value__type_01_4_01_4.html", null ],
       [ "is_reference_wrapper", "structshuriken_1_1is__reference__wrapper.html", null ],
       [ "is_reference_wrapper< std::reference_wrapper< U > >", "structshuriken_1_1is__reference__wrapper_3_01std_1_1reference__wrapper_3_01U_01_4_01_4.html", null ],
-      [ "iterator_range", "classshuriken_1_1iterator__range.html", "classshuriken_1_1iterator__range" ]
+      [ "iterator_range", "classshuriken_1_1iterator__range.html", "classshuriken_1_1iterator__range" ],
+      [ "Scoped", "classshuriken_1_1Scoped.html", "classshuriken_1_1Scoped" ]
     ] ],
     [ "basic_blocks_t_", "structbasic__blocks__t__.html", "structbasic__blocks__t__" ],
     [ "dvmdisassembled_method_t_", "structdvmdisassembled__method__t__.html", "structdvmdisassembled__method__t__" ],

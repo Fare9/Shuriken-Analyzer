@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['short_0',['SHORT',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65a7a1fe3ba88f0c16cb494922948a9597d',1,'SHORT:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270a07bf52e076c657ff18e6559d40fb2e2a',1,'shuriken::parser::dex::SHORT']]],
-  ['sparse_5fswitch_1',['SPARSE_SWITCH',['../namespaceshuriken_1_1disassembler_1_1dex.html#a2df0c8546972a4f644d33cce47604360a374d3c64481b127a83c49db6820edd1e',1,'shuriken::disassembler::dex']]],
-  ['string_2',['STRING',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38af54a0a815c4762a13df80fdaed992a2d',1,'shuriken::dex::TYPES']]]
+  ['raw_0',['RAW',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#a18e50a004d475555194b3d14bac3925bafc467a378ba90c19d8f929e379ff4303',1,'shuriken::disassembler::dex::DexOpcodes']]],
+  ['raw_5fstring_1',['RAW_STRING',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38a604a817b665c24f7b43e81935c003624',1,'shuriken::dex::TYPES']]],
+  ['ref_5fclass_5fusage_2',['REF_CLASS_USAGE',['../shuriken__core__data_8h.html#a88211ab565370cfdb5f37484dbc6c827aca8e20cd95040719351c3d3f79335270',1,'REF_CLASS_USAGE:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1dex_1_1TYPES.html#a11baa132bc6b9a70a74f914a11834427a7d6aa019d1dcd5def50725636fb27d74',1,'shuriken::dex::TYPES::REF_CLASS_USAGE']]],
+  ['ref_5fnew_5finstance_3',['REF_NEW_INSTANCE',['../shuriken__core__data_8h.html#a88211ab565370cfdb5f37484dbc6c827a20275c778b9b352379208da7ffa8da55',1,'REF_NEW_INSTANCE:&#160;shuriken_core_data.h'],['../namespaceshuriken_1_1dex_1_1TYPES.html#a11baa132bc6b9a70a74f914a11834427ad5c2f7f6bc75fa003b552cd8d779746f',1,'shuriken::dex::TYPES::REF_NEW_INSTANCE']]],
+  ['register_4',['REGISTER',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#a18e50a004d475555194b3d14bac3925ba97e8e786f8ab0c3e9fef7bee59f8e6e7',1,'shuriken::disassembler::dex::DexOpcodes']]],
+  ['regular_5fnode_5',['REGULAR_NODE',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81feab3a758b46ec93b058b706b38e527a168',1,'shuriken::analysis::dex::BasicBlocks']]],
+  ['ret_5fbranch_5fdvm_5fopcode_6',['RET_BRANCH_DVM_OPCODE',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#afcf4e337a076b98fc3fbe7fe0642a030ac78f3fd1fcb8534f7521d9f9eec406c4',1,'shuriken::disassembler::dex::DexOpcodes']]]
 ];

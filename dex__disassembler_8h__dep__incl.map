@@ -1,5 +1,10 @@
 <map id="shuriken/include/shuriken/disassembler/Dex/dex_disassembler.h" name="shuriken/include/shuriken/disassembler/Dex/dex_disassembler.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,252,46"/>
-<area shape="rect" id="Node000002" href="$analysis_8h.html" title=" " alt="" coords="44,94,213,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,62,131,94,126,94,126,62"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="26,5,273,46"/>
+<area shape="rect" id="Node000002" href="$analysis_8h.html" title=" " alt="" coords="5,94,174,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,60,105,95,101,92,125,57"/>
+<area shape="rect" id="Node000003" href="$apk_8h.html" title=" " alt="" coords="65,183,234,223"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="173,58,188,93,191,114,188,135,178,161,166,184,161,181,173,159,183,134,186,114,183,95,169,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="114,146,138,181,134,184,110,149"/>
+<area shape="rect" id="Node000004" href="$shuriken__parsers_8h.html" title=" " alt="" coords="62,271,237,312"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="152,239,152,271,147,271,147,239"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kind_0',['KIND',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#a18e50a004d475555194b3d14bac3925ba30ff5942cf74df6b49aa177b02c0986a',1,'shuriken::disassembler::dex::DexOpcodes']]]
+  ['join_5fnode_0',['JOIN_NODE',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#ad36c34725ac6ade0cfd6e7b1d86f81fea5ba1f096971d2dc5e7988da04a138dd0',1,'shuriken::analysis::dex::BasicBlocks']]]
 ];

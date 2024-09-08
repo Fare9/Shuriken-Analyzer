@@ -98,14 +98,16 @@ $(function(){initNavTree('logger_8h.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">logger.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;spdlog/spdlog.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for logger.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -113,41 +115,75 @@ $(function(){initNavTree('logger_8h.html',''); initResizable(true); });
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="logger_8h__incl.png" border="0" usemap="#ashuriken_2include_2shuriken_2common_2logger_8h" alt=""/></div>
 <map name="ashuriken_2include_2shuriken_2common_2logger_8h" id="ashuriken_2include_2shuriken_2common_2logger_8h">
-<area shape="rect" title=" " alt="" coords="34,5,202,46"/>
-<area shape="rect" title=" " alt="" coords="5,94,117,120"/>
-<area shape="poly" title=" " alt="" coords="106,48,81,83,77,79,102,45"/>
-<area shape="rect" title=" " alt="" coords="141,94,213,120"/>
-<area shape="poly" title=" " alt="" coords="135,45,161,80,157,83,131,48"/>
+<area shape="rect" title=" " alt="" coords="41,5,209,46"/>
+<area shape="rect" title=" " alt="" coords="5,94,66,120"/>
+<area shape="poly" title=" " alt="" coords="105,48,62,86,59,82,101,44"/>
+<area shape="rect" title=" " alt="" coords="89,94,160,120"/>
+<area shape="poly" title=" " alt="" coords="128,46,128,78,122,78,122,46"/>
+<area shape="rect" title=" " alt="" coords="184,94,242,120"/>
+<area shape="poly" title=" " alt="" coords="148,44,190,81,186,85,145,48"/>
 </map>
 </div>
 </div>
 <p><a href="logger_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshuriken_1_1Scoped.html">shuriken::Scoped</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacespdlog.html">spdlog</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html">shuriken</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa5468fa70d47b9d47c9512ce3bf3222b" id="r_aa5468fa70d47b9d47c9512ce3bf3222b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b">shuriken::logger_output_t</a> { <a class="el" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222ba5f6b00c22aa36c55ac5f07a233fc44fd">shuriken::TO_CONSOLE</a> = 0
-, <a class="el" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222bac569e1409e749972d5d16b0ff8a9e3bf">shuriken::TO_STDERR</a>
-, <a class="el" href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222baa7bc122dc409c76ec50516d61f3b48ef">shuriken::TO_FILE</a>
+<tr class="memitem:ad6077f094241bc295b3b90992a34159e" id="r_ad6077f094241bc295b3b90992a34159e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">shuriken::LEVEL</a> : uint32_t { <br />
+&#160;&#160;<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea88559a0cfd8250c9d65970cc145c92d4">shuriken::OFF</a> = 0
+, <a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea2d3e4144aa384b18849ab9a8abad74d6">shuriken::TRACE</a>
+, <a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea2fc6bc2f13ab9f18449d7a25702b2f93">shuriken::MYDEBUG</a>
+, <a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea551b723eafd6a31d444fcb2f5920fbd3">shuriken::INFO</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea32bd8a1db2275458673903bdb84cb277">shuriken::WARN</a>
+, <a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159eacd22bad976363fdd1bfbf6759fede482">shuriken::ERR</a>
+, <a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea99cd1c61610c76a57cb8d10d6df6b870">shuriken::CRITICAL</a>
+<br />
  }</td></tr>
-<tr class="memdesc:aa5468fa70d47b9d47c9512ce3bf3222b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output where to drop the logging from Shuriken.  <a href="namespaceshuriken.html#aa5468fa70d47b9d47c9512ce3bf3222b">More...</a><br /></td></tr>
-<tr class="separator:aa5468fa70d47b9d47c9512ce3bf3222b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ad6077f094241bc295b3b90992a34159e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output where to drop the logging from Shuriken.  <a href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">More...</a><br /></td></tr>
+<tr class="separator:ad6077f094241bc295b3b90992a34159e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa08244a5e05ca5cbd8b842186f670e75" id="r_aa08244a5e05ca5cbd8b842186f670e75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aa08244a5e05ca5cbd8b842186f670e75">shuriken::LOG_TO_STDERR</a> ()</td></tr>
-<tr class="separator:aa08244a5e05ca5cbd8b842186f670e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4efb9ef98f13ecd6e10482c674fca7c4" id="r_a4efb9ef98f13ecd6e10482c674fca7c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#a4efb9ef98f13ecd6e10482c674fca7c4">shuriken::LOG_TO_STDOUT</a> ()</td></tr>
-<tr class="separator:a4efb9ef98f13ecd6e10482c674fca7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae53d974c0c2c3a35fc5119eec1706d2d" id="r_ae53d974c0c2c3a35fc5119eec1706d2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ae53d974c0c2c3a35fc5119eec1706d2d">shuriken::LOG_TO_FILE</a> ()</td></tr>
-<tr class="separator:ae53d974c0c2c3a35fc5119eec1706d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a384205b44b16d248417a2ecbe4bd8ff5" id="r_a384205b44b16d248417a2ecbe4bd8ff5"><td class="memItemLeft" align="right" valign="top">spdlog::logger *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#a384205b44b16d248417a2ecbe4bd8ff5">shuriken::logger</a> ()</td></tr>
-<tr class="memdesc:a384205b44b16d248417a2ecbe4bd8ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to retrieve a logger object, this object will be different depending on the type of logging required.  <br /></td></tr>
-<tr class="separator:a384205b44b16d248417a2ecbe4bd8ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb02862bcb966b255144ea5b8ee58cc" id="r_aceb02862bcb966b255144ea5b8ee58cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aceb02862bcb966b255144ea5b8ee58cc">shuriken::get_level</a> ()</td></tr>
+<tr class="separator:aceb02862bcb966b255144ea5b8ee58cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4251e1d8edee83896b1ba0f128cb125" id="r_ac4251e1d8edee83896b1ba0f128cb125"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ac4251e1d8edee83896b1ba0f128cb125">shuriken::to_string</a> (<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a> e)</td></tr>
+<tr class="separator:ac4251e1d8edee83896b1ba0f128cb125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa15b935b1e336b37d1cbc2448240a250" id="r_aa15b935b1e336b37d1cbc2448240a250"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aa15b935b1e336b37d1cbc2448240a250">shuriken::disable</a> ()</td></tr>
+<tr class="separator:aa15b935b1e336b37d1cbc2448240a250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5573c5d18c6ddf2700c87f2d4136e23" id="r_af5573c5d18c6ddf2700c87f2d4136e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#af5573c5d18c6ddf2700c87f2d4136e23">shuriken::enable</a> ()</td></tr>
+<tr class="memdesc:af5573c5d18c6ddf2700c87f2d4136e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Globally enable the logging module.  <br /></td></tr>
+<tr class="separator:af5573c5d18c6ddf2700c87f2d4136e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de1a7178b8d936d493b2238584151fc" id="r_a5de1a7178b8d936d493b2238584151fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#a5de1a7178b8d936d493b2238584151fc">shuriken::set_level</a> (<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a> level)</td></tr>
+<tr class="memdesc:a5de1a7178b8d936d493b2238584151fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the logging level (<b>hierarchical</b>)  <br /></td></tr>
+<tr class="separator:a5de1a7178b8d936d493b2238584151fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41421ad9556d5881cc5eef0534dfad5" id="r_ae41421ad9556d5881cc5eef0534dfad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ae41421ad9556d5881cc5eef0534dfad5">shuriken::set_path</a> (const std::string &amp;path)</td></tr>
+<tr class="memdesc:ae41421ad9556d5881cc5eef0534dfad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the logger as a file-base logging and set its path.  <br /></td></tr>
+<tr class="separator:ae41421ad9556d5881cc5eef0534dfad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a984294bfb5673abad4ec63569125e963" id="r_a984294bfb5673abad4ec63569125e963"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#a984294bfb5673abad4ec63569125e963">shuriken::log</a> (<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a> level, const std::string &amp;msg)</td></tr>
+<tr class="memdesc:a984294bfb5673abad4ec63569125e963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a message with the LIEF's logger.  <br /></td></tr>
+<tr class="separator:a984294bfb5673abad4ec63569125e963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa5240ced6eef03c9f7c27267044d3a" id="r_aeaa5240ced6eef03c9f7c27267044d3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aeaa5240ced6eef03c9f7c27267044d3a">shuriken::log</a> (<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a> level, const std::string &amp;fmt, const std::vector&lt; std::string &gt; &amp;args)</td></tr>
+<tr class="separator:aeaa5240ced6eef03c9f7c27267044d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9d24cc230121ff5c66a899ef2998f6" id="r_aeb9d24cc230121ff5c66a899ef2998f6"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:aeb9d24cc230121ff5c66a899ef2998f6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#aeb9d24cc230121ff5c66a899ef2998f6">shuriken::log</a> (<a class="el" href="namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e">LEVEL</a> level, const std::string &amp;fmt, const Args &amp;...args)</td></tr>
+<tr class="separator:aeb9d24cc230121ff5c66a899ef2998f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ba4dab993eaf6fe47afd937030b0b9" id="r_ad2ba4dab993eaf6fe47afd937030b0b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ad2ba4dab993eaf6fe47afd937030b0b9">shuriken::set_logger</a> (const spdlog::logger &amp;logger)</td></tr>
+<tr class="separator:ad2ba4dab993eaf6fe47afd937030b0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dcf2b03a640f990a0849e5b749ac70" id="r_ad5dcf2b03a640f990a0849e5b749ac70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceshuriken.html#ad5dcf2b03a640f990a0849e5b749ac70">shuriken::reset</a> ()</td></tr>
+<tr class="separator:ad5dcf2b03a640f990a0849e5b749ac70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

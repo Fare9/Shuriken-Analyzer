@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['packed_5fswitch_0',['PACKED_SWITCH',['../namespaceshuriken_1_1disassembler_1_1dex.html#a2df0c8546972a4f644d33cce47604360a522c40d4a5508af2ef4ef38def592d13',1,'shuriken::disassembler::dex']]],
-  ['proto_1',['PROTO',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38aaf2fded699e376528ecc01bbb9bbe604',1,'shuriken::dex::TYPES']]]
+  ['off_0',['OFF',['../namespaceshuriken.html#ad6077f094241bc295b3b90992a34159ea88559a0cfd8250c9d65970cc145c92d4',1,'shuriken']]],
+  ['offset_1',['OFFSET',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#a18e50a004d475555194b3d14bac3925bac6b7360c58ee29d103b56c53aa4a3437',1,'shuriken::disassembler::dex::DexOpcodes']]],
+  ['opcode_2',['OPCODE',['../classshuriken_1_1disassembler_1_1dex_1_1DexOpcodes.html#ae793f3a51805cd231cd51b0c39851a0ca1aca7cd5a9699534ea1653ff2a3a63c8',1,'shuriken::disassembler::dex::DexOpcodes']]]
 ];

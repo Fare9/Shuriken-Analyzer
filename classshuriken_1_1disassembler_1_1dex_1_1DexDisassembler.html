@@ -116,9 +116,15 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3e305ac163cc8ce765280031eb9e50d6" id="r_a3e305ac163cc8ce765280031eb9e50d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e305ac163cc8ce765280031eb9e50d6">DexDisassembler</a> ()=default</td></tr>
+<tr class="memdesc:a3e305ac163cc8ce765280031eb9e50d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor for calling disassemble_new_dex whenever needed to disassemble more than one dex file.  <br /></td></tr>
+<tr class="separator:a3e305ac163cc8ce765280031eb9e50d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d88430e9f9f5cefb32efbbb3a78cbbd" id="r_a4d88430e9f9f5cefb32efbbb3a78cbbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d88430e9f9f5cefb32efbbb3a78cbbd">DexDisassembler</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1Parser.html">parser::dex::Parser</a> *parser)</td></tr>
 <tr class="memdesc:a4d88430e9f9f5cefb32efbbb3a78cbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of the <a class="el" href="classshuriken_1_1disassembler_1_1dex_1_1DexDisassembler.html">DexDisassembler</a>, this should be called only if the parsing was correct.  <br /></td></tr>
 <tr class="separator:a4d88430e9f9f5cefb32efbbb3a78cbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fccff8247cdd41a1941a8cfb5eadec1" id="r_a3fccff8247cdd41a1941a8cfb5eadec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fccff8247cdd41a1941a8cfb5eadec1">disassemble_new_dex</a> (<a class="el" href="classshuriken_1_1parser_1_1dex_1_1Parser.html">parser::dex::Parser</a> *new_parser)</td></tr>
+<tr class="memdesc:a3fccff8247cdd41a1941a8cfb5eadec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">in case we want to reuse the disassembler to keep disassembling DEX files, and keep adding disassembled methods  <br /></td></tr>
+<tr class="separator:a3fccff8247cdd41a1941a8cfb5eadec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb9fa483fa8a1b4e89b72a02780c1293" id="r_abb9fa483fa8a1b4e89b72a02780c1293"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb9fa483fa8a1b4e89b72a02780c1293">set_disassembly_algorithm</a> (<a class="el" href="namespaceshuriken_1_1disassembler_1_1dex.html#ab31302cf7e9f36fb749b0aa3bf212a5d">disassembly_algorithm_t</a> algorithm)</td></tr>
 <tr class="memdesc:abb9fa483fa8a1b4e89b72a02780c1293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the disassembly algorithm to use in the next calls to the different disassembly methods.  <br /></td></tr>
 <tr class="separator:abb9fa483fa8a1b4e89b72a02780c1293"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,8 +187,35 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3e305ac163cc8ce765280031eb9e50d6" name="a3e305ac163cc8ce765280031eb9e50d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e305ac163cc8ce765280031eb9e50d6">&#9670;&#160;</a></span>DexDisassembler() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">shuriken::disassembler::dex::DexDisassembler::DexDisassembler </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor for calling disassemble_new_dex whenever needed to disassemble more than one dex file. </p>
+
+</div>
+</div>
 <a id="a4d88430e9f9f5cefb32efbbb3a78cbbd" name="a4d88430e9f9f5cefb32efbbb3a78cbbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d88430e9f9f5cefb32efbbb3a78cbbd">&#9670;&#160;</a></span>DexDisassembler()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d88430e9f9f5cefb32efbbb3a78cbbd">&#9670;&#160;</a></span>DexDisassembler() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,6 +240,25 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3fccff8247cdd41a1941a8cfb5eadec1" name="a3fccff8247cdd41a1941a8cfb5eadec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fccff8247cdd41a1941a8cfb5eadec1">&#9670;&#160;</a></span>disassemble_new_dex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shuriken::disassembler::dex::DexDisassembler::disassemble_new_dex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshuriken_1_1parser_1_1dex_1_1Parser.html">parser::dex::Parser</a> *</td>          <td class="paramname"><span class="paramname"><em>new_parser</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>in case we want to reuse the disassembler to keep disassembling DEX files, and keep adding disassembled methods </p>
+
+</div>
+</div>
 <a id="a0ce118ef094607b50eb1a5060cd7ca6e" name="a0ce118ef094607b50eb1a5060cd7ca6e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ce118ef094607b50eb1a5060cd7ca6e">&#9670;&#160;</a></span>disassembly_buffer()</h2>
 

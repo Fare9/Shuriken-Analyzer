@@ -9,5 +9,7 @@ var searchData=
   ['shuriken_3a_3adisassembler_6',['disassembler',['../namespaceshuriken_1_1disassembler.html',1,'shuriken']]],
   ['shuriken_3a_3adisassembler_3a_3adex_7',['dex',['../namespaceshuriken_1_1disassembler_1_1dex.html',1,'shuriken::disassembler']]],
   ['shuriken_3a_3aparser_8',['parser',['../namespaceshuriken_1_1parser.html',1,'shuriken']]],
-  ['shuriken_3a_3aparser_3a_3adex_9',['dex',['../namespaceshuriken_1_1parser_1_1dex.html',1,'shuriken::parser']]]
+  ['shuriken_3a_3aparser_3a_3aapk_9',['apk',['../namespaceshuriken_1_1parser_1_1apk.html',1,'shuriken::parser']]],
+  ['shuriken_3a_3aparser_3a_3adex_10',['dex',['../namespaceshuriken_1_1parser_1_1dex.html',1,'shuriken::parser']]],
+  ['spdlog_11',['spdlog',['../namespacespdlog.html',1,'']]]
 ];
