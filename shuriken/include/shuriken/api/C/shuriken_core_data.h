@@ -28,7 +28,10 @@
 
 extern "C" {
 
+/// @brief opaque pointers user will use for calling the different methods
 typedef void *hDexContext;
+
+typedef void *hApkContext;
 
 ///--------------------------- Parser Data ---------------------------
 
@@ -356,6 +359,8 @@ typedef struct hdvmfieldanalysis_t_ {
     hdvm_class_method_idx_t *xrefwrite;
 } hdvmfieldanalysis_t;
 
+/// @brief Structure to keep information about the string analysis
+/// [UNUSED FOR NOW]
 typedef struct hdvmstringanalysis_t_ {
     /// @brief value of that string
     const char *value;
@@ -365,6 +370,7 @@ typedef struct hdvmstringanalysis_t_ {
     hdvm_class_method_idx_t *xreffrom;
 } hdvmstringanalysis_t;
 
+/// @brief Structure to keep information about the method analysis
 typedef struct hdvmmethodanalysis_t_ {
     /// @brief name of the method
     const char *name;
@@ -410,6 +416,7 @@ typedef struct hdvmmethodanalysis_t_ {
     const char *method_string;
 } hdvmmethodanalysis_t;
 
+/// @brief Structure to keep information about the class analysis
 typedef struct hdvmclassanalysis_t_ {
     /// @brief is external class?
     int is_external;
