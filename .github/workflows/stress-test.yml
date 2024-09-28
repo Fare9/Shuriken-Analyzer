@@ -1,0 +1,34 @@
+name: Weekend Stress test 
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    
+  # Schedule to run every week on Saturday at 00:00 UTC
+  schedule:
+    - cron: "0 0 * * 6"  # Every Saturday
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get submodule 
+      run: |
+        cd stress-test
+        git submodule update --init
+
+
+    - name: Run normal test
+      run: |
+       cd stress-test
+       ./run_tests.sh
+    - name: Run androguard test
+      run: |
+       cd stress-test
+       ./run_tests_androguard.sh
+

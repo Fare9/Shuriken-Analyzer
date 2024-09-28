@@ -36,7 +36,7 @@ build_and_get_binary_path() {
 run_binary_on_dex_files() {
   # Build the project and get the binary path
   local binary_path=$(build_and_get_binary_path)
-
+  local file_failed=1
   # Check if the build was successful
     if [ $? -ne 0 ]; then
         echo "Failed to build the project"
@@ -88,7 +88,8 @@ run_binary_on_dex_files() {
     for failure in "${failures[@]}"; do
         echo "$failure"
     done
-
+    
+    ((file_failed = file_failed || ${#failure[@]} > 0))
 
     echo "Testing Shuriken disassembler with shuriken-dump"
     local successes=()
@@ -124,6 +125,8 @@ run_binary_on_dex_files() {
         for failure in "${failures[@]}"; do
             echo "$failure"
         done
+
+        ((file_failed = file_failed || ${#failure[@]} > 0))
 
 
         echo "Testing Shuriken analysis with shuriken-dump"
@@ -161,9 +164,11 @@ run_binary_on_dex_files() {
             echo "$failure"
         done
 
+        ((file_failed = file_failed || ${#failure[@]} > 0))
+
 
     # Return success
-    return 0
+    return $file_failed
 }
 
 run_binary_on_dex_files
