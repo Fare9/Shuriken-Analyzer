@@ -1,9 +1,6 @@
 name: Weekend Stress test 
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     
   # Schedule to run every week on Saturday at 00:00 UTC
@@ -44,7 +41,10 @@ jobs:
        ./run_tests.sh
     - name: Run androguard test
       run: |
-       echo $(pwd)
        cd stress-test
+       python3 -m venv .venv
+       source .venv/bin/activate
+       pip install -r requirements.txt
+       echo $(pwd)
        ./run_tests_androguard.sh
 

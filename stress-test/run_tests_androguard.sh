@@ -4,6 +4,7 @@ run_binary_on_dex_files() {
     # Find all .dex files in the current directory and subdirectories
     local dex_files=$(find . -type f -name "*.dex")
 
+    local file_failed=0
     # Check if any .dex files were found
     if [ -z "$dex_files" ]; then
         echo "No .dex files found"
@@ -46,6 +47,7 @@ run_binary_on_dex_files() {
     done
 
 
+    ((file_failed = file_failed || ${#failures[@]} > 0))
     # Return success
     return 0
 }
