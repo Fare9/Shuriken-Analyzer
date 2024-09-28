@@ -1,3 +1,3 @@
 [submodule "stress-test/Shuriken-Stress-Test-Files"]
 	path = stress-test/Shuriken-Stress-Test-Files
-	url = git@github.com:Fare9/Shuriken-Stress-Test-Files.git
+	url = https://github.com/Fare9/Shuriken-Stress-Test-Files.git

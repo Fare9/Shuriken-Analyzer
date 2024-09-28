@@ -4,13 +4,13 @@ build_and_get_binary_path() {
   local current_dir=$(pwd)
   cd ..
   local build_dir="build"
-  cmake -S . -B $build_dir -DCMAKE_BUILD_TYPE=Release > /dev/null 2> /dev/null
-  cmake --build $build_dir -j > /dev/null 2> /dev/null
-
-  if [ $? -ne 0 ]; then
-        echo "Build failed"
-        return 1
-  fi
+  # cmake -S . -B $build_dir -DCMAKE_BUILD_TYPE=Release -DGITHUB_ACTION=ON > /dev/null 2> /dev/null
+  # cmake --build $build_dir -j > /dev/null 2> /dev/null
+  #
+  # if [ $? -ne 0 ]; then
+  #       echo "Build failed"
+  #       return 1
+  # fi
 
   local binary_name="shuriken-dump"
 
@@ -36,7 +36,7 @@ build_and_get_binary_path() {
 run_binary_on_dex_files() {
   # Build the project and get the binary path
   local binary_path=$(build_and_get_binary_path)
-
+  local file_failed=0
   # Check if the build was successful
     if [ $? -ne 0 ]; then
         echo "Failed to build the project"
@@ -88,7 +88,8 @@ run_binary_on_dex_files() {
     for failure in "${failures[@]}"; do
         echo "$failure"
     done
-
+    
+    ((file_failed = file_failed || ${#failures[@]} > 0))
 
     echo "Testing Shuriken disassembler with shuriken-dump"
     local successes=()
@@ -124,6 +125,8 @@ run_binary_on_dex_files() {
         for failure in "${failures[@]}"; do
             echo "$failure"
         done
+
+        ((file_failed = file_failed || ${#failures[@]} > 0))
 
 
         echo "Testing Shuriken analysis with shuriken-dump"
@@ -161,9 +164,11 @@ run_binary_on_dex_files() {
             echo "$failure"
         done
 
+        ((file_failed = file_failed || ${#failures[@]} > 0))
+
 
     # Return success
-    return 0
+    return $file_failed
 }
 
 run_binary_on_dex_files

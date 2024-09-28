@@ -1,0 +1,48 @@
+name: Weekend Stress test 
+
+on:    
+  # Schedule to run every week on Saturday at 00:00 UTC
+  schedule:
+    - cron: "0 0 * * 6"  # Every Saturday
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Install build deps
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y gcc-13 g++-13
+        echo "CC=gcc-13" >> $GITHUB_ENV
+        echo "CXX=g++-13" >> $GITHUB_ENV
+        sudo apt-get install -y cmake git default-jdk
+
+    - name: Get submodule 
+      run: |
+        cd stress-test
+        echo $(pwd)
+        git submodule update --init --recursive
+
+    - name: Build normally 
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGITHUB_ACTION=ON 
+        cmake --build build -j 
+        sudo cmake --install build/
+
+    - name: Run normal test
+      run: |
+       cd stress-test
+       echo $(pwd)
+       ./run_tests.sh
+    - name: Run androguard test
+      run: |
+       cd stress-test
+       python3 -m venv .venv
+       source .venv/bin/activate
+       pip install -r requirements.txt
+       echo $(pwd)
+       ./run_tests_androguard.sh
+
