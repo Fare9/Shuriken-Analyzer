@@ -35,6 +35,7 @@ jobs:
       run: |
         cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGITHUB_ACTION=ON 
         cmake --build build -j 
+        sudo cmake --install build/
 
     - name: Run normal test
       run: |
