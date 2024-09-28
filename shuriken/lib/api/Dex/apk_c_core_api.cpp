@@ -740,7 +740,7 @@ dvmdisassembled_method_t *get_disassembled_method_from_apk(hApkContext context, 
 
 hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass_from_apk(hApkContext context, hdvmclass_t *class_) {
     if (class_ == nullptr) return nullptr;
-    return get_analyzed_class(context, class_->class_name);
+    return get_analyzed_class_from_apk(context, class_->class_name);
 }
 
 hdvmclassanalysis_t *get_analyzed_class_from_apk(hApkContext context, const char *class_name) {
@@ -754,7 +754,7 @@ hdvmclassanalysis_t *get_analyzed_class_from_apk(hApkContext context, const char
 
 hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod_from_apk(hApkContext context, hdvmmethod_t *method) {
     if (method == nullptr) return nullptr;
-    return get_analyzed_method(context, method->dalvik_name);
+    return get_analyzed_method_from_apk(context, method->dalvik_name);
 }
 
 hdvmmethodanalysis_t *get_analyzed_method_from_apk(hApkContext context, const char *method_full_name) {
