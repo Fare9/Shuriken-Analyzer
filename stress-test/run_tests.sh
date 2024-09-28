@@ -36,7 +36,7 @@ build_and_get_binary_path() {
 run_binary_on_dex_files() {
   # Build the project and get the binary path
   local binary_path=$(build_and_get_binary_path)
-  local file_failed=1
+  local file_failed=0
   # Check if the build was successful
     if [ $? -ne 0 ]; then
         echo "Failed to build the project"

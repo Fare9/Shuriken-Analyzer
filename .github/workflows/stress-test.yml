@@ -11,24 +11,35 @@ on:
     - cron: "0 0 * * 6"  # Every Saturday
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    
+    - name: Install build deps
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y gcc-13 g++-13
+        echo "CC=gcc-13" >> $GITHUB_ENV
+        echo "CXX=g++-13" >> $GITHUB_ENV
+        sudo apt-get install -y cmake git default-jdk
 
     - name: Get submodule 
       run: |
         cd stress-test
-        git submodule update --init
+        echo $(pwd)
+        git submodule update --init --recursive
 
 
     - name: Run normal test
       run: |
        cd stress-test
+       echo $(pwd)
        ./run_tests.sh
     - name: Run androguard test
       run: |
+       echo $(pwd)
        cd stress-test
        ./run_tests_androguard.sh
 
