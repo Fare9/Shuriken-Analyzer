@@ -1,8 +1,6 @@
 name: Weekend Stress test 
 
-on:
-  pull_request:
-    
+on:    
   # Schedule to run every week on Saturday at 00:00 UTC
   schedule:
     - cron: "0 0 * * 6"  # Every Saturday
