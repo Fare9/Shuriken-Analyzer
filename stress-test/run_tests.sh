@@ -4,7 +4,7 @@ build_and_get_binary_path() {
   local current_dir=$(pwd)
   cd ..
   local build_dir="build"
-  cmake -S . -B $build_dir -DCMAKE_BUILD_TYPE=Release > /dev/null 2> /dev/null
+  cmake -S . -B $build_dir -DCMAKE_BUILD_TYPE=Release -DGITHUB_ACTION=ON > /dev/null 2> /dev/null
   cmake --build $build_dir -j > /dev/null 2> /dev/null
 
   if [ $? -ne 0 ]; then

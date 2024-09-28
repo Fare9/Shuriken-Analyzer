@@ -31,6 +31,10 @@ jobs:
         echo $(pwd)
         git submodule update --init --recursive
 
+    - name: Build normally 
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGITHUB_ACTION=ON 
+        cmake --build build -j 
 
     - name: Run normal test
       run: |
