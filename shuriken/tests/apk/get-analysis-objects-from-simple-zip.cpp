@@ -52,6 +52,11 @@ int main() {
                 assert(method_analysis2 != nullptr && "Error get_analyzed_method_from_apk didn't work");
 
                 assert(method_analysis == method_analysis2 && "Error, returned two different hdvmmethodanalysis_t");
+
+                [[maybe_unused]] dvmdisassembled_method_t * disassembled_method = get_disassembled_method_from_apk(apk_context, method->dalvik_name);
+
+                assert(disassembled_method != nullptr && "Error get_disassembled_method_from_apk didn't work");
+
             }
 
             for (int z = 0,
@@ -69,6 +74,10 @@ int main() {
                 assert(method_analysis2 != nullptr && "Error get_analyzed_method_from_apk didn't work");
 
                 assert(method_analysis == method_analysis2 && "Error, returned two different hdvmmethodanalysis_t");
+
+                [[maybe_unused]] dvmdisassembled_method_t * disassembled_method = get_disassembled_method_from_apk(apk_context, method->dalvik_name);
+
+                assert(disassembled_method != nullptr && "Error get_disassembled_method_from_apk didn't work");
             }
         }
     }
