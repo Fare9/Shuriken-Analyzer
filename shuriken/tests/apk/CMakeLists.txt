@@ -22,4 +22,41 @@ if(DEX AND DEX_TESTS)
 
     add_test(NAME analyze-simple-zip
             COMMAND analyze-simple-zip)
+
+    # Load core API
+    message(STATUS "Compiling test core-api-test")
+    add_executable(apk-core-api-test
+            ${CMAKE_CURRENT_SOURCE_DIR}/apk-core-api-test.cpp
+    )
+
+    target_include_directories(apk-core-api-test
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH}
+    )
+
+    # Add dependency on shuriken library
+    add_dependencies(apk-core-api-test shuriken)
+
+    target_link_libraries(apk-core-api-test shuriken)
+
+    add_test(NAME apk-core-api-test
+            COMMAND apk-core-api-test)
+
+    # Load get-analysis-objects-from-simple-zip
+    message(STATUS "Compiling get-analysis-objects-from-simple-zip")
+    add_executable(get-analysis-objects-from-simple-zip
+            ${CMAKE_CURRENT_SOURCE_DIR}/get-analysis-objects-from-simple-zip.cpp)
+
+    target_include_directories(get-analysis-objects-from-simple-zip
+            BEFORE
+            PUBLIC ${SHURIKEN_INCLUDE_PATH})
+
+    # Add dependency on shuriken library
+    add_dependencies(get-analysis-objects-from-simple-zip shuriken)
+
+    target_link_libraries(get-analysis-objects-from-simple-zip shuriken)
+
+    add_test(NAME get-analysis-objects-from-simple-zip
+            COMMAND get-analysis-objects-from-simple-zip)
+
 endif()

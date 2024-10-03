@@ -111,19 +111,93 @@ SHURIKENCOREAPI void analyze_classes(hDexContext context);
 
 
 /// @brief Obtain one hdvmclassanalysis_t given its hdvmclass_t
-/// @param context context from the CORE API
+/// @param context DEX context from the CORE API
 /// @param class_ hdvmclass_t to get its analysis
 SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmclass_t *class_);
 
 /// @brief Obtain one hdvmclassanalysis_t given its name.
-/// @param context context from the CORE API
+/// @param context DEX context from the CORE API
 /// @param class_name name of the class to retrieve
 SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name);
 
+/// @brief Obtain one hdvmmethodanalysis_t given its hdvmmethod_t
+/// @param context DEX context from the CORE API
+/// @param method hdvmmethod_t to get its analysis
 SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdvmmethod_t *method);
 
+/// @brief Obtain one hdvmmethodanalysis_t given its name
+/// @param context DEX context from the CORE API
+/// @param method_full_name dalvik name of the method
 SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name);
-;
+
+/// C - APK part of the CORE API from ShurikenLib
+
+///--------------------------- Parser API ---------------------------
+
+/// @brief main method from the APK Core API
+/// it parses the APK file and it retrieves a context object
+/// @param filePath path to the APK file to analyze
+/// @param create_xref `1` to create xrefs, `0` to avoid creating xrefs
+/// @return context object to obtain information from the APK file
+SHURIKENCOREAPI hApkContext parse_apk(const char *filePath, boolean_e create_xref);
+
+/// @brief Since the context object use dynamic memory this method
+/// will properly destroy the object.
+/// @param context object to destroys
+SHURIKENCOREAPI void destroy_apk(hApkContext context);
+
+/// @brief APKs contain a number of DEX files with the classes,
+/// with this you retrieve the number of those dex files
+/// @return number of dex files in the APK
+SHURIKENCOREAPI int get_number_of_dex_files(hApkContext context);
+
+/// @brief Given an idx retrieve the name of one of the dex files
+/// @param idx index of the dex file to retrieve
+/// @return a string with the path of the dex file in the apk
+SHURIKENCOREAPI const char * get_dex_file_by_index(hApkContext context, unsigned int idx);
+
+/// @brief Every dex file contains a number of classes, retrieve it by
+/// the name of the dex file
+/// @param dex_file file to retrieve the number of classes
+/// @return number of classes in the dex file
+SHURIKENCOREAPI int get_number_of_classes_for_dex_file(hApkContext context, const char * dex_file);
+
+/// @brief retrieve one of the hdvmclass_t from a dex file
+/// @param dex_file dex file from where to retrieve the class
+/// @param idx index of the class to retrieve
+/// @return hdvmclass_t in the given position
+SHURIKENCOREAPI hdvmclass_t * get_hdvmclass_from_dex_by_index(hApkContext context, const char * dex_file, unsigned int idx);
+
+//------------------------------------ Disassembly API
+
+/// @brief Get a method structure given a full dalvik name.
+/// @param context APK from where to retrieve the method
+/// @param method_name LclassName;->methodName(parameters)RetType
+/// @return pointer to a disassembled method
+SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method_from_apk(hApkContext context, const char *method_name);
+
+//------------------------------------- Analysis API
+
+/// @brief Obtain one hdvmclassanalysis_t given its hdvmclass_t
+/// @param context context from the CORE API
+/// @param class_ hdvmclass_t to get its analysis
+SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass_from_apk(hApkContext context, hdvmclass_t *class_);
+
+/// @brief Obtain one hdvmclassanalysis_t given its name.
+/// @param context APK context from the CORE API
+/// @param class_name name of the class to retrieve
+SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_from_apk(hApkContext context, const char *class_name);
+
+/// @brief Obtain one hdvmmethodanalysis_t given its hdvmmethod_t
+/// @param context APK context from the CORE API
+/// @param method hdvmmethod_t to get its analysis
+SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod_from_apk(hApkContext context, hdvmmethod_t *method);
+
+/// @brief Obtain one hdvmmethodanalysis_t given its name
+/// @param context APK context from the CORE API
+/// @param method_full_name dalvik name of the method
+SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_from_apk(hApkContext context, const char *method_full_name);
+
 };
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H
