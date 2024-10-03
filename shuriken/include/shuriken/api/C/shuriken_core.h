@@ -139,7 +139,7 @@ SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, c
 /// @param filePath path to the APK file to analyze
 /// @param create_xref `1` to create xrefs, `0` to avoid creating xrefs
 /// @return context object to obtain information from the APK file
-SHURIKENCOREAPI hApkContext parse_apk(const char *filePath, int create_xref);
+SHURIKENCOREAPI hApkContext parse_apk(const char *filePath, boolean_e create_xref);
 
 /// @brief Since the context object use dynamic memory this method
 /// will properly destroy the object.

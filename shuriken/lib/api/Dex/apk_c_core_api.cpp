@@ -680,11 +680,11 @@ namespace {
 
 ///--------------------------- Parser API ---------------------------
 
-hApkContext parse_apk(const char *filePath, int create_xref) {
+hApkContext parse_apk(const char *filePath, boolean_e create_xref) {
     std::unique_ptr<shuriken::parser::apk::Apk> apk;
 
     try {
-        apk = shuriken::parser::parse_apk(filePath, create_xref == 0 ? false : true);
+        apk = shuriken::parser::parse_apk(filePath, create_xref == FALSE ? false : true);
     } catch (std::runtime_error &) {
         return nullptr;
     }

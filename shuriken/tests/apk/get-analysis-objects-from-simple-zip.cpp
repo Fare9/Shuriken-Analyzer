@@ -7,13 +7,14 @@
 
 #include "dex-files-folder.inc"
 #include "shuriken/api/C/shuriken_core.h"
+#include "shuriken/api/C/shuriken_core_data.h"
 #include <iostream>
 #include <cassert>
 
 int main() {
     std::string zip_file = std::string(DEX_FILES_FOLDER) + "test_zip.apk";
 
-    hApkContext apk_context = parse_apk(zip_file.c_str(), 1);
+    hApkContext apk_context = parse_apk(zip_file.c_str(), TRUE);
 
     for (int i = 0,
              n_of_dex_files = get_number_of_dex_files(apk_context);

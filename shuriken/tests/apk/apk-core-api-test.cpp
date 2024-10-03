@@ -6,6 +6,7 @@
 // @brief Test for the Core API in C of the project
 
 #include "shuriken/api/C/shuriken_core.h"
+#include "shuriken/api/C/shuriken_core_data.h"
 #include "dex-files-folder.inc"
 
 #include <iostream>
@@ -15,7 +16,7 @@ const char *file = DEX_FILES_FOLDER
         "test_zip.apk";
 
 int main() {
-    hApkContext apk_context = parse_apk(file, 1);
+    hApkContext apk_context = parse_apk(file, TRUE);
 
     int number_of_dex_files = get_number_of_dex_files(apk_context);
 

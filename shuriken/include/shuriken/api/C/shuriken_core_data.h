@@ -33,6 +33,11 @@ typedef void *hDexContext;
 
 typedef void *hApkContext;
 
+enum boolean_e {
+    FALSE = 0,
+    TRUE = 1
+};
+
 ///--------------------------- Parser Data ---------------------------
 
 /// @brief DexTypes of the DVM we have by default fundamental,
