@@ -1,5 +1,5 @@
 <map id="hdvmclassanalysis_t_" name="hdvmclassanalysis_t_">
-<area shape="rect" id="Node000001" title=" " alt="" coords="255,262,404,288"/>
+<area shape="rect" id="Node000001" title="Structure to keep information about the class analysis." alt="" coords="255,262,404,288"/>
 <area shape="rect" id="Node000006" href="$structhdvm__class__field__idx__t__.html" title="Xref that contains class, field and instruction address." alt="" coords="493,346,655,372"/>
 <area shape="poly" id="edge6_Node000006_Node000001" title=" " alt="" coords="363,294,394,313,429,329,493,346,492,351,427,334,392,318,360,299"/>
 <area shape="rect" id="Node000008" href="$structhdvm__class__method__idx__t__.html" title="Xref that contains class, method and instruction address." alt="" coords="1102,301,1284,326"/>
@@ -8,7 +8,7 @@
 <area shape="poly" id="edge13_Node000009_Node000001" title=" " alt="" coords="419,262,507,252,508,257,420,267"/>
 <area shape="rect" id="Node000011" href="$structhdvm__classxref__t__.html" title=" " alt="" coords="1476,121,1607,146"/>
 <area shape="poly" id="edge18_Node000011_Node000001" title=" " alt="" coords="351,249,389,214,442,175,472,158,504,144,538,134,573,131,1194,131,1476,131,1476,136,1194,136,573,136,539,140,506,149,474,163,445,180,393,218,354,253"/>
-<area shape="rect" id="Node000002" href="$structhdvmmethodanalysis__t__.html" title=" " alt="" coords="797,224,959,249"/>
+<area shape="rect" id="Node000002" href="$structhdvmmethodanalysis__t__.html" title="Structure to keep information about the method analysis." alt="" coords="797,224,959,249"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="827,221,773,207,676,196,599,198,523,213,429,242,366,264,364,259,427,236,522,208,598,193,676,191,774,202,829,215"/>
 <area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="927,253,983,271,1104,298,1103,303,982,277,925,258"/>
 <area shape="rect" id="Node000010" href="$structhdvm__method__idx__t__.html" title="xref that contains a method and instruction address" alt="" coords="1121,441,1265,466"/>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['hfundamental_5fe_0',['hfundamental_e',['../shuriken__core__data_8h.html#acecc48e8b38e72643a63e4aab22b3e65',1,'shuriken_core_data.h']]],
-  ['htype_5fe_1',['htype_e',['../shuriken__core__data_8h.html#a68f230416ae6406d36231f5b039fae8a',1,'shuriken_core_data.h']]]
+  ['fundamental_5fe_0',['fundamental_e',['../namespaceshuriken_1_1parser_1_1dex.html#a9773f0d5c00d57a54c8f7408aa8bd270',1,'shuriken::parser::dex']]]
 ];

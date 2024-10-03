@@ -185,9 +185,44 @@ Functions</h2></td></tr>
 <tr class="memdesc:a04ced0be4b4dd827a8b140275f94b4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmclassanalysis_t given its name.  <br /></td></tr>
 <tr class="separator:a04ced0be4b4dd827a8b140275f94b4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac398f2fe568457f5e2bad17f49ce07a3" id="r_ac398f2fe568457f5e2bad17f49ce07a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac398f2fe568457f5e2bad17f49ce07a3">get_analyzed_method_by_hdvmmethod</a> (<a class="el" href="shuriken__core__data_8h.html#a2e7b337a62e39243e884328a0588bc4b">hDexContext</a> context, <a class="el" href="shuriken__core__data_8h.html#add5b92d2b92299632ce1ec6171916311">hdvmmethod_t</a> *method)</td></tr>
+<tr class="memdesc:ac398f2fe568457f5e2bad17f49ce07a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmmethodanalysis_t given its hdvmmethod_t.  <br /></td></tr>
 <tr class="separator:ac398f2fe568457f5e2bad17f49ce07a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a458bd61163edda6a16b5c3b8f6c00e28" id="r_a458bd61163edda6a16b5c3b8f6c00e28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a458bd61163edda6a16b5c3b8f6c00e28">get_analyzed_method</a> (<a class="el" href="shuriken__core__data_8h.html#a2e7b337a62e39243e884328a0588bc4b">hDexContext</a> context, const char *method_full_name)</td></tr>
+<tr class="memdesc:a458bd61163edda6a16b5c3b8f6c00e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmmethodanalysis_t given its name.  <br /></td></tr>
 <tr class="separator:a458bd61163edda6a16b5c3b8f6c00e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a461a3e0b34f846640ee2248aec1d1" id="r_a20a461a3e0b34f846640ee2248aec1d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20a461a3e0b34f846640ee2248aec1d1">parse_apk</a> (const char *filePath, <a class="el" href="shuriken__core__data_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">boolean_e</a> create_xref)</td></tr>
+<tr class="memdesc:a20a461a3e0b34f846640ee2248aec1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">C - APK part of the CORE API from ShurikenLib.  <br /></td></tr>
+<tr class="separator:a20a461a3e0b34f846640ee2248aec1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b16291a79012e18a62b78288e2d93a" id="r_a88b16291a79012e18a62b78288e2d93a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88b16291a79012e18a62b78288e2d93a">destroy_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context)</td></tr>
+<tr class="memdesc:a88b16291a79012e18a62b78288e2d93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Since the context object use dynamic memory this method will properly destroy the object.  <br /></td></tr>
+<tr class="separator:a88b16291a79012e18a62b78288e2d93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a410db66c170112472b8994430ad42f66" id="r_a410db66c170112472b8994430ad42f66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a410db66c170112472b8994430ad42f66">get_number_of_dex_files</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context)</td></tr>
+<tr class="memdesc:a410db66c170112472b8994430ad42f66"><td class="mdescLeft">&#160;</td><td class="mdescRight">APKs contain a number of DEX files with the classes, with this you retrieve the number of those dex files.  <br /></td></tr>
+<tr class="separator:a410db66c170112472b8994430ad42f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de7aa29e035349e71b4461ab5bee6f0" id="r_a8de7aa29e035349e71b4461ab5bee6f0"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8de7aa29e035349e71b4461ab5bee6f0">get_dex_file_by_index</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, unsigned int idx)</td></tr>
+<tr class="memdesc:a8de7aa29e035349e71b4461ab5bee6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an idx retrieve the name of one of the dex files.  <br /></td></tr>
+<tr class="separator:a8de7aa29e035349e71b4461ab5bee6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdeffbeac89373573c06533f111c2d43" id="r_afdeffbeac89373573c06533f111c2d43"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdeffbeac89373573c06533f111c2d43">get_number_of_classes_for_dex_file</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *dex_file)</td></tr>
+<tr class="memdesc:afdeffbeac89373573c06533f111c2d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every dex file contains a number of classes, retrieve it by the name of the dex file.  <br /></td></tr>
+<tr class="separator:afdeffbeac89373573c06533f111c2d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae33c4181a6eaef64ded4d5bc0675a75" id="r_aae33c4181a6eaef64ded4d5bc0675a75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhdvmclass__t.html">hdvmclass_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae33c4181a6eaef64ded4d5bc0675a75">get_hdvmclass_from_dex_by_index</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *dex_file, unsigned int idx)</td></tr>
+<tr class="memdesc:aae33c4181a6eaef64ded4d5bc0675a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve one of the <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> from a dex file  <br /></td></tr>
+<tr class="separator:aae33c4181a6eaef64ded4d5bc0675a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8379f8b7020f8e874283616b0140c3" id="r_a0e8379f8b7020f8e874283616b0140c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#aecb7736c1d69317e06841ae183e4814f">dvmdisassembled_method_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e8379f8b7020f8e874283616b0140c3">get_disassembled_method_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *method_name)</td></tr>
+<tr class="memdesc:a0e8379f8b7020f8e874283616b0140c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a method structure given a full dalvik name.  <br /></td></tr>
+<tr class="separator:a0e8379f8b7020f8e874283616b0140c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da838a0951ffc6e31a2e02deb7eb587" id="r_a3da838a0951ffc6e31a2e02deb7eb587"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a6546ddc792f4fc9749220e5890f84cdc">hdvmclassanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3da838a0951ffc6e31a2e02deb7eb587">get_analyzed_class_by_hdvmclass_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, <a class="el" href="structhdvmclass__t.html">hdvmclass_t</a> *class_)</td></tr>
+<tr class="memdesc:a3da838a0951ffc6e31a2e02deb7eb587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmclassanalysis_t given its <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a>.  <br /></td></tr>
+<tr class="separator:a3da838a0951ffc6e31a2e02deb7eb587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b9b49de4722d5c09db0a6371fc604c" id="r_a17b9b49de4722d5c09db0a6371fc604c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a6546ddc792f4fc9749220e5890f84cdc">hdvmclassanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17b9b49de4722d5c09db0a6371fc604c">get_analyzed_class_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *class_name)</td></tr>
+<tr class="memdesc:a17b9b49de4722d5c09db0a6371fc604c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmclassanalysis_t given its name.  <br /></td></tr>
+<tr class="separator:a17b9b49de4722d5c09db0a6371fc604c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a0499a7b6d9cf77c2b4858d7d04412" id="r_a21a0499a7b6d9cf77c2b4858d7d04412"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21a0499a7b6d9cf77c2b4858d7d04412">get_analyzed_method_by_hdvmmethod_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, <a class="el" href="shuriken__core__data_8h.html#add5b92d2b92299632ce1ec6171916311">hdvmmethod_t</a> *method)</td></tr>
+<tr class="memdesc:a21a0499a7b6d9cf77c2b4858d7d04412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmmethodanalysis_t given its hdvmmethod_t.  <br /></td></tr>
+<tr class="separator:a21a0499a7b6d9cf77c2b4858d7d04412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5291f9f42cfc7cfe7b019e48377ad7c" id="r_ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5291f9f42cfc7cfe7b019e48377ad7c">get_analyzed_method_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *method_full_name)</td></tr>
+<tr class="memdesc:ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmmethodanalysis_t given its name.  <br /></td></tr>
+<tr class="separator:ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8e8f1dee9bcbbe6e249e1c5de9a78b9d" name="a8e8f1dee9bcbbe6e249e1c5de9a78b9d"></a>
@@ -256,6 +291,31 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">context</td><td>context from the CORE API </td></tr>
     <tr><td class="paramname">create_xrefs</td><td>boolean to generate or not xrefs (analysis takes longer) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a88b16291a79012e18a62b78288e2d93a" name="a88b16291a79012e18a62b78288e2d93a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b16291a79012e18a62b78288e2d93a">&#9670;&#160;</a></span>destroy_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void destroy_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Since the context object use dynamic memory this method will properly destroy the object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>object to destroys </td></tr>
   </table>
   </dd>
 </dl>
@@ -334,7 +394,7 @@ Functions</h2></td></tr>
 <p>Obtain one hdvmclassanalysis_t given its name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">context</td><td>context from the CORE API </td></tr>
+    <tr><td class="paramname">context</td><td>DEX context from the CORE API </td></tr>
     <tr><td class="paramname">class_name</td><td>name of the class to retrieve </td></tr>
   </table>
   </dd>
@@ -364,8 +424,68 @@ Functions</h2></td></tr>
 <p>Obtain one hdvmclassanalysis_t given its <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">context</td><td>DEX context from the CORE API </td></tr>
+    <tr><td class="paramname">class_</td><td><a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> to get its analysis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3da838a0951ffc6e31a2e02deb7eb587" name="a3da838a0951ffc6e31a2e02deb7eb587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da838a0951ffc6e31a2e02deb7eb587">&#9670;&#160;</a></span>get_analyzed_class_by_hdvmclass_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a6546ddc792f4fc9749220e5890f84cdc">hdvmclassanalysis_t</a> * get_analyzed_class_by_hdvmclass_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhdvmclass__t.html">hdvmclass_t</a> *</td>          <td class="paramname"><span class="paramname"><em>class_</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain one hdvmclassanalysis_t given its <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">context</td><td>context from the CORE API </td></tr>
     <tr><td class="paramname">class_</td><td><a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> to get its analysis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17b9b49de4722d5c09db0a6371fc604c" name="a17b9b49de4722d5c09db0a6371fc604c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b9b49de4722d5c09db0a6371fc604c">&#9670;&#160;</a></span>get_analyzed_class_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a6546ddc792f4fc9749220e5890f84cdc">hdvmclassanalysis_t</a> * get_analyzed_class_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>class_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain one hdvmclassanalysis_t given its name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>APK context from the CORE API </td></tr>
+    <tr><td class="paramname">class_name</td><td>name of the class to retrieve </td></tr>
   </table>
   </dd>
 </dl>
@@ -391,6 +511,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Obtain one hdvmmethodanalysis_t given its name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>DEX context from the CORE API </td></tr>
+    <tr><td class="paramname">method_full_name</td><td>dalvik name of the method </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ac398f2fe568457f5e2bad17f49ce07a3" name="ac398f2fe568457f5e2bad17f49ce07a3"></a>
@@ -411,6 +540,75 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Obtain one hdvmmethodanalysis_t given its hdvmmethod_t. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>DEX context from the CORE API </td></tr>
+    <tr><td class="paramname">method</td><td>hdvmmethod_t to get its analysis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a21a0499a7b6d9cf77c2b4858d7d04412" name="a21a0499a7b6d9cf77c2b4858d7d04412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a0499a7b6d9cf77c2b4858d7d04412">&#9670;&#160;</a></span>get_analyzed_method_by_hdvmmethod_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> * get_analyzed_method_by_hdvmmethod_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#add5b92d2b92299632ce1ec6171916311">hdvmmethod_t</a> *</td>          <td class="paramname"><span class="paramname"><em>method</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain one hdvmmethodanalysis_t given its hdvmmethod_t. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>APK context from the CORE API </td></tr>
+    <tr><td class="paramname">method</td><td>hdvmmethod_t to get its analysis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae5291f9f42cfc7cfe7b019e48377ad7c" name="ae5291f9f42cfc7cfe7b019e48377ad7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5291f9f42cfc7cfe7b019e48377ad7c">&#9670;&#160;</a></span>get_analyzed_method_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> * get_analyzed_method_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>method_full_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain one hdvmmethodanalysis_t given its name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>APK context from the CORE API </td></tr>
+    <tr><td class="paramname">method_full_name</td><td>dalvik name of the method </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -476,6 +674,36 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a8de7aa29e035349e71b4461ab5bee6f0" name="a8de7aa29e035349e71b4461ab5bee6f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de7aa29e035349e71b4461ab5bee6f0">&#9670;&#160;</a></span>get_dex_file_by_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * get_dex_file_by_index </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given an idx retrieve the name of one of the dex files. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>index of the dex file to retrieve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a string with the path of the dex file in the apk </dd></dl>
+
+</div>
+</div>
 <a id="ad489bbdd56d08fe6e597716fa002173f" name="ad489bbdd56d08fe6e597716fa002173f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad489bbdd56d08fe6e597716fa002173f">&#9670;&#160;</a></span>get_disassembled_method()</h2>
 
@@ -504,6 +732,73 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to a disassembled method </dd></dl>
+
+</div>
+</div>
+<a id="a0e8379f8b7020f8e874283616b0140c3" name="a0e8379f8b7020f8e874283616b0140c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e8379f8b7020f8e874283616b0140c3">&#9670;&#160;</a></span>get_disassembled_method_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#aecb7736c1d69317e06841ae183e4814f">dvmdisassembled_method_t</a> * get_disassembled_method_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>method_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a method structure given a full dalvik name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>APK from where to retrieve the method </td></tr>
+    <tr><td class="paramname">method_name</td><td>LclassName;-&gt;methodName(parameters)RetType </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to a disassembled method </dd></dl>
+
+</div>
+</div>
+<a id="aae33c4181a6eaef64ded4d5bc0675a75" name="aae33c4181a6eaef64ded4d5bc0675a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae33c4181a6eaef64ded4d5bc0675a75">&#9670;&#160;</a></span>get_hdvmclass_from_dex_by_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhdvmclass__t.html">hdvmclass_t</a> * get_hdvmclass_from_dex_by_index </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>dex_file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>retrieve one of the <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> from a dex file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dex_file</td><td>dex file from where to retrieve the class </td></tr>
+    <tr><td class="paramname">idx</td><td>index of the class to retrieve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> in the given position </dd></dl>
 
 </div>
 </div>
@@ -564,6 +859,56 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afdeffbeac89373573c06533f111c2d43" name="afdeffbeac89373573c06533f111c2d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdeffbeac89373573c06533f111c2d43">&#9670;&#160;</a></span>get_number_of_classes_for_dex_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_number_of_classes_for_dex_file </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>dex_file</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Every dex file contains a number of classes, retrieve it by the name of the dex file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dex_file</td><td>file to retrieve the number of classes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of classes in the dex file </dd></dl>
+
+</div>
+</div>
+<a id="a410db66c170112472b8994430ad42f66" name="a410db66c170112472b8994430ad42f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a410db66c170112472b8994430ad42f66">&#9670;&#160;</a></span>get_number_of_dex_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_number_of_dex_files </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>APKs contain a number of DEX files with the classes, with this you retrieve the number of those dex files. </p>
+<dl class="section return"><dt>Returns</dt><dd>number of dex files in the APK </dd></dl>
+
+</div>
+</div>
 <a id="a68362aab482c9b72707a5e62ebc53d8d" name="a68362aab482c9b72707a5e62ebc53d8d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68362aab482c9b72707a5e62ebc53d8d">&#9670;&#160;</a></span>get_number_of_strings()</h2>
 
@@ -618,6 +963,38 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string from the id </dd></dl>
+
+</div>
+</div>
+<a id="a20a461a3e0b34f846640ee2248aec1d1" name="a20a461a3e0b34f846640ee2248aec1d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a461a3e0b34f846640ee2248aec1d1">&#9670;&#160;</a></span>parse_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> parse_apk </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filePath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">boolean_e</a></td>          <td class="paramname"><span class="paramname"><em>create_xref</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>C - APK part of the CORE API from ShurikenLib. </p>
+<p>------------------------&mdash; Parser API ------------------------&mdash;</p>
+<p>main method from the APK Core API it parses the APK file and it retrieves a context object </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>path to the APK file to analyze </td></tr>
+    <tr><td class="paramname">create_xref</td><td><code>1</code> to create xrefs, <code>0</code> to avoid creating xrefs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>context object to obtain information from the APK file </dd></dl>
 
 </div>
 </div>

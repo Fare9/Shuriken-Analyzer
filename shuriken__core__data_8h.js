@@ -24,6 +24,7 @@ var shuriken__core__data_8h =
     [ "dvmdisassembled_method_t", "shuriken__core__data_8h.html#aecb7736c1d69317e06841ae183e4814f", null ],
     [ "dvmexceptions_data_t", "shuriken__core__data_8h.html#a2798a862b13c21181a8804a3c3f811e2", null ],
     [ "dvmhandler_data_t", "shuriken__core__data_8h.html#abb9c61d535618f4957aa29f0551bf120", null ],
+    [ "hApkContext", "shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e", null ],
     [ "hDexContext", "shuriken__core__data_8h.html#a2e7b337a62e39243e884328a0588bc4b", null ],
     [ "hdvm_class_field_idx_t", "shuriken__core__data_8h.html#a7614309dafcdb264e717e9c98967144b", null ],
     [ "hdvm_class_idx_t", "shuriken__core__data_8h.html#a1073dc19bf5f126a43ba2dd4946511c1", null ],
@@ -62,6 +63,10 @@ var shuriken__core__data_8h =
       [ "UNUSED", "shuriken__core__data_8h.html#a71c82c3549a4a4c6e7631fd2cdc3cc84aa09b651ef326a9d8efcee5cc5b720ab4", null ],
       [ "ACC_CONSTRUCTOR", "shuriken__core__data_8h.html#a71c82c3549a4a4c6e7631fd2cdc3cc84ae0f9b682191d560d2c41ba3dc10118b6", null ],
       [ "ACC_DECLARED_SYNCHRONIZED", "shuriken__core__data_8h.html#a71c82c3549a4a4c6e7631fd2cdc3cc84a74248750505507f8100e26e8f5918531", null ]
+    ] ],
+    [ "boolean_e", "shuriken__core__data_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9", [
+      [ "FALSE", "shuriken__core__data_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a", null ],
+      [ "TRUE", "shuriken__core__data_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839", null ]
     ] ],
     [ "dexinsttype_e", "shuriken__core__data_8h.html#a9e0db86709ea002bac5a67631a872af3", [
       [ "DEX_INSTRUCTION00X", "shuriken__core__data_8h.html#a9e0db86709ea002bac5a67631a872af3a98185565ea5bdc557a63c527b983842f", null ],

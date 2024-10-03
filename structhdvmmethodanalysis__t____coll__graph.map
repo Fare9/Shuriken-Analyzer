@@ -1,6 +1,6 @@
 <map id="hdvmmethodanalysis_t_" name="hdvmmethodanalysis_t_">
-<area shape="rect" id="Node000001" title=" " alt="" coords="279,271,441,297"/>
-<area shape="rect" id="Node000006" href="$structhdvmclassanalysis__t__.html" title=" " alt="" coords="252,474,401,500"/>
+<area shape="rect" id="Node000001" title="Structure to keep information about the method analysis." alt="" coords="279,271,441,297"/>
+<area shape="rect" id="Node000006" href="$structhdvmclassanalysis__t__.html" title="Structure to keep information about the class analysis." alt="" coords="252,474,401,500"/>
 <area shape="poly" id="edge6_Node000006_Node000001" title=" " alt="" coords="300,305,258,327,240,343,225,361,220,378,221,394,229,409,241,424,272,451,305,472,302,476,269,456,237,428,224,412,216,395,214,377,221,359,236,339,255,323,297,300"/>
 <area shape="rect" id="Node000008" href="$structhdvm__class__method__idx__t__.html" title="Xref that contains class, method and instruction address." alt="" coords="560,578,742,604"/>
 <area shape="poly" id="edge10_Node000008_Node000001" title=" " alt="" coords="457,286,549,297,588,306,615,319,641,347,657,381,666,419,670,458,666,529,656,578,651,577,660,528,665,458,661,420,652,383,636,350,612,323,586,311,548,302,456,291"/>

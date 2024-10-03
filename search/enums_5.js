@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level_0',['LEVEL',['../namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e',1,'shuriken']]]
+  ['kind_0',['kind',['../namespaceshuriken_1_1dex_1_1TYPES.html#ae4390cfbf486be995d7606f5b0727c38',1,'shuriken::dex::TYPES']]]
 ];

@@ -1,6 +1,6 @@
 <map id="hdvm_classxref_t_" name="hdvm_classxref_t_">
 <area shape="rect" id="Node000001" title=" " alt="" coords="432,5,562,31"/>
-<area shape="rect" id="Node000002" href="$structhdvmclassanalysis__t__.html" title=" " alt="" coords="536,109,685,135"/>
+<area shape="rect" id="Node000002" href="$structhdvmclassanalysis__t__.html" title="Structure to keep information about the class analysis." alt="" coords="536,109,685,135"/>
 <area shape="poly" id="edge18_Node000002_Node000001" title=" " alt="" coords="558,35,583,53,602,81,611,108,606,110,597,83,579,57,555,40"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,107,496,87,490,73,488,58,491,31,496,32,493,58,495,71,500,83,523,103"/>
 <area shape="rect" id="Node000007" href="$structhdvm__class__field__idx__t__.html" title="Xref that contains class, field and instruction address." alt="" coords="591,612,753,638"/>
@@ -9,7 +9,7 @@
 <area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="615,151,616,275,610,339,603,364,594,383,573,402,548,414,545,410,570,397,590,379,598,362,604,338,611,274,610,151"/>
 <area shape="rect" id="Node000010" href="$structhdvm__class__idx__t__.html" title="Xref that contains class and instruction address." alt="" coords="440,198,573,223"/>
 <area shape="poly" id="edge14_Node000010_Node000002" title=" " alt="" coords="586,147,523,199,519,195,583,143"/>
-<area shape="rect" id="Node000003" href="$structhdvmmethodanalysis__t__.html" title=" " alt="" coords="294,301,455,327"/>
+<area shape="rect" id="Node000003" href="$structhdvmmethodanalysis__t__.html" title="Structure to keep information about the method analysis." alt="" coords="294,301,455,327"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="364,287,359,242,362,218,373,196,406,164,448,142,492,129,535,122,536,128,494,134,450,147,409,168,377,199,367,220,364,242,369,286"/>
 <area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="378,342,382,362,391,379,410,397,433,410,431,414,407,401,387,383,377,363,373,343"/>
 <area shape="rect" id="Node000011" href="$structhdvm__method__idx__t__.html" title="xref that contains a method and instruction address" alt="" coords="589,412,734,438"/>
