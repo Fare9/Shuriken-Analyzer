@@ -148,14 +148,14 @@ void check_class(shuriken::parser::dex::DexClasses &classes) {
         auto &class_data_item = class_def.get_class_data_item();
 
         for (size_t i = 0, e = class_data_item.get_number_of_instance_fields(); i < e; i++) {
-            [[maybe_unused]] auto field = class_data_item.get_instance_field_by_id(i);
+            [[maybe_unused]] auto field = class_data_item.get_instance_field_by_id(static_cast<uint32_t>(i));
             assert(fields[i].flags == static_cast<std::uint32_t>(field->get_flags()) && "Error field flags are not correct");
             assert(fields[i].name == field->get_field()->field_name() && "Error field name is not correct");
             assert(fields[i].type == field->get_field()->field_type()->get_raw_type() && "Error field type is not correct");
         }
 
         for (size_t i = 0, e = class_data_item.get_number_of_direct_methods(); i < e; i++) {
-            [[maybe_unused]] auto method = class_data_item.get_direct_method_by_id(i);
+            [[maybe_unused]] auto method = class_data_item.get_direct_method_by_id(static_cast<uint32_t>(i));
             assert(methods[i].name == method->getMethodID()->get_method_name() && "Error method name not correct");
             assert(methods[i].type == method->getMethodID()->get_prototype()->get_shorty_idx() && "Error method prototype not correct");
             assert(methods[i].flags == static_cast<std::uint32_t>(method->get_flags()) && "Error method flags are not correct");

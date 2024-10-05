@@ -318,7 +318,7 @@ void MethodAnalysis::dump_instruction_dot(std::ofstream &dot_file, disassembler:
         for (const auto opcode: opcodes)
             dot_file << std::right << std::setfill('0') << std::setw(2) << std::hex << (std::uint32_t) opcode << " ";
 
-        for (std::uint8_t i = 0, remaining_size = 8 - opcodes.size(); i < remaining_size; ++i)
+        for (size_t i = 0, remaining_size = 8 - opcodes.size(); i < remaining_size; ++i)
             dot_file << "   ";
     }
 

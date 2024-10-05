@@ -423,9 +423,9 @@ namespace {
         method->class_name = method_id->get_class()->get_raw_type().data();
         method->method_name = method_id->get_method_name().data();
         method->prototype = method_id->get_prototype()->get_dalvik_prototype().data();
-        method->access_flags = encoded_method->get_flags();
+        method->access_flags = static_cast<uint16_t>(encoded_method->get_flags());
         if (encoded_method->get_code_item()) {
-            method->code_size = encoded_method->get_code_item()->get_bytecode().size();
+            method->code_size = static_cast<uint32_t>(encoded_method->get_code_item()->get_bytecode().size());
             method->code = encoded_method->get_code_item()->get_bytecode().data();
         } else {
             method->code_size = 0;
@@ -444,7 +444,7 @@ namespace {
 
         field->class_name = field_id->field_class()->get_raw_type().data();
         field->name = field_id->field_name().data();
-        field->access_flags = encoded_field->get_flags();
+        field->access_flags = static_cast<uint16_t>(encoded_field->get_flags());
         field->type_value = field_id->field_type()->get_raw_type().data();
         field->fundamental_value = FUNDAMENTAL_NONE;
 
@@ -485,14 +485,14 @@ namespace {
         if (!class_def.get_source_file().empty())
             new_class->source_file = class_def.get_source_file().data();
 
-        new_class->access_flags = class_def.get_access_flags();
-        new_class->direct_methods_size = class_data_item.get_number_of_direct_methods();
-        new_class->virtual_methods_size = class_data_item.get_number_of_virtual_methods();
-        new_class->instance_fields_size = class_data_item.get_number_of_instance_fields();
-        new_class->static_fields_size = class_data_item.get_number_of_static_fields();
+        new_class->access_flags = static_cast<uint16_t>(class_def.get_access_flags());
+        new_class->direct_methods_size = static_cast<uint16_t>(class_data_item.get_number_of_direct_methods());
+        new_class->virtual_methods_size = static_cast<uint16_t>(class_data_item.get_number_of_virtual_methods());
+        new_class->instance_fields_size = static_cast<uint16_t>(class_data_item.get_number_of_instance_fields());
+        new_class->static_fields_size = static_cast<uint16_t>(class_data_item.get_number_of_static_fields());
 
         new_class->virtual_methods = new hdvmmethod_t[new_class->virtual_methods_size];
-        for (size_t j = 0; j < new_class->virtual_methods_size; j++) {
+        for (auto j = 0; j < new_class->virtual_methods_size; j++) {
             fill_dex_method(class_data_item.get_virtual_method_by_id(j), &new_class->virtual_methods[j]);
             opaque_struct->methods.insert({
                     class_data_item.get_virtual_method_by_id(j)->getMethodID()->dalvik_name_format(),
@@ -500,7 +500,7 @@ namespace {
             });
         }
         new_class->direct_methods = new hdvmmethod_t[new_class->direct_methods_size];
-        for (size_t j = 0; j < new_class->direct_methods_size; j++) {
+        for (auto j = 0; j < new_class->direct_methods_size; j++) {
             fill_dex_method(class_data_item.get_direct_method_by_id(j), &new_class->direct_methods[j]);
             opaque_struct->methods.insert({
                     class_data_item.get_direct_method_by_id(j)->getMethodID()->dalvik_name_format(),
@@ -509,10 +509,10 @@ namespace {
         }
         /// fill the fields
         new_class->instance_fields = new hdvmfield_t[new_class->instance_fields_size];
-        for (size_t j = 0; j < new_class->instance_fields_size; j++)
+        for (auto j = 0; j < new_class->instance_fields_size; j++)
             fill_dex_field(class_data_item.get_instance_field_by_id(j), &new_class->instance_fields[j]);
         new_class->static_fields = new hdvmfield_t[new_class->static_fields_size];
-        for (size_t j = 0; j < new_class->static_fields_size; j++)
+        for (auto j = 0; j < new_class->static_fields_size; j++)
             fill_dex_field(class_data_item.get_static_field_by_id(j), &new_class->static_fields[j]);
 
         return new_class;

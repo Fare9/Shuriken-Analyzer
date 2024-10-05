@@ -204,7 +204,7 @@ void EncodedValue::parse_encoded_value(common::ShurikenStream &stream,
         }
         case shuriken::dex::TYPES::value_format::VALUE_BOOLEAN: {
             auto &value_data = std::get<std::vector<std::uint8_t>>(value);
-            value_data.push_back(arg);
+            value_data.push_back(static_cast<std::uint8_t>(arg));
             break;
         }
         case shuriken::dex::TYPES::value_format::VALUE_NULL:
@@ -456,11 +456,11 @@ std::uint16_t CodeItemStruct::get_number_try_items() const {
 }
 
 std::uint16_t CodeItemStruct::get_offset_to_debug_info() const {
-    return code_item.debug_info_off;
+    return static_cast<std::uint16_t>(code_item.debug_info_off);
 }
 
 std::uint16_t CodeItemStruct::get_instructions_size() const {
-    return code_item.insns_size;
+    return static_cast<std::uint16_t>(code_item.insns_size);
 }
 
 std::span<std::uint8_t> CodeItemStruct::get_bytecode() {

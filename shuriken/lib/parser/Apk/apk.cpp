@@ -85,9 +85,9 @@ public:
     ApkExtractor(const char *path_to_apk) {
         if (!std::filesystem::exists(path_to_apk))
             throw std::runtime_error("Error APK provided for the analysis does not exists");
-        path_to_temporal_file += std::filesystem::temp_directory_path().c_str();
+        path_to_temporal_file += std::filesystem::temp_directory_path().string();
         path_to_temporal_file += std::filesystem::path::preferred_separator;
-        path_to_temporal_file += std::filesystem::path(path_to_apk).stem();
+        path_to_temporal_file += std::filesystem::path(path_to_apk).stem().string();
         std::filesystem::create_directories(path_to_temporal_file);
 
         // open the APK
@@ -125,7 +125,7 @@ public:
 
             if (name.empty() || !name.ends_with(".dex")) continue;
 
-            std::string base_name = std::filesystem::path(name).filename();
+            std::string base_name = std::filesystem::path(name).filename().string();
 
             // create the file path in the temporal folder
             std::string file_path = path_to_temporal_file;

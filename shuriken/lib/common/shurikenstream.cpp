@@ -160,7 +160,7 @@ std::int64_t ShurikenStream::readSignedLong(int zwidth) {
     std::uint8_t aux;
     for (int i = zwidth; i >= 0; i--) {
         input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
-        result = (result >> 8) | ((aux & 0xffL) << 56);
+        result = (result >> 8) | (static_cast<std::uint64_t>(aux) << 56);
     }
     result >>= (7 - zwidth) * 8;
     return result;
@@ -173,13 +173,13 @@ std::uint64_t ShurikenStream::readUnsignedLong(int zwidth, bool fillOnRight) {
     if (!fillOnRight) {
         for (int i = zwidth; i >= 0; i--) {
             input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
-            result = (result >> 8) | ((aux & 0xffL) << 56);
+            result = (result >> 8) | ((static_cast<std::uint64_t>(aux) & 0xffL) << 56);
         }
         result >>= (7 - zwidth) * 8;
     } else {
         for (int i = zwidth; i >= 0; i--) {
             input_file.read(reinterpret_cast<char *>(&aux), sizeof(std::uint8_t));
-            result = (result >> 8) | ((aux & 0xffL) << 56);
+            result = (result >> 8) | ((static_cast<std::uint64_t>(aux) & 0xffL) << 56);
         }
     }
 

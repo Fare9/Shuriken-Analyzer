@@ -6,7 +6,7 @@
 
 #include "shuriken/parser/Dex/dex_mapitem.h"
 #include "shuriken/common/logger.h"
-
+#include <string>
 
 using namespace shuriken::parser::dex;
 

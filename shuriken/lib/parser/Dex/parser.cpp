@@ -141,7 +141,7 @@ namespace shuriken {
         }
 
         std::unique_ptr<dex::Parser> parse_dex(const std::string &file_path) {
-            std::ifstream ifs(file_path);
+            std::ifstream ifs(file_path, std::ios::binary);
             common::ShurikenStream file(ifs);
 
             auto p = std::make_unique<dex::Parser>();
@@ -150,7 +150,7 @@ namespace shuriken {
         }
 
         dex::Parser *parse_dex(const char *file_path) {
-            std::ifstream ifs(file_path);
+            std::ifstream ifs(file_path, std::ios::binary);
             common::ShurikenStream file(ifs);
 
             auto *p = new Parser();
