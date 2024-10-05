@@ -88,7 +88,7 @@ SHURIKENCOREAPI hdvmmethod_t *get_method_by_name(hDexContext context, const char
 
 /// @brief Disassemble a DEX file and generate an internal DexDisassembler
 /// @param context DEX to disassemble the methods
-SHURIKENCOREAPI void disassemble_dex(hDexContext context);
+SHURIKENCOREAPI void disassemble_dex(hDexContext context) noexcept(false);
 
 /// @brief Get a method structure given a full dalvik name.
 /// @param context DEX from where to retrieve the method
@@ -102,12 +102,12 @@ SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method(hDexContext co
 /// user must also call `analyze_classes`.
 /// @param context context from the CORE API
 /// @param create_xrefs boolean to generate or not xrefs (analysis takes longer)
-SHURIKENCOREAPI void create_dex_analysis(hDexContext context, char create_xrefs);
+SHURIKENCOREAPI void create_dex_analysis(hDexContext context, char create_xrefs) noexcept(false);
 
 /// @brief Analyze the classes, add fields and methods into the classes, optionally
 /// create the xrefs.
 /// @param context context from the CORE API
-SHURIKENCOREAPI void analyze_classes(hDexContext context);
+SHURIKENCOREAPI void analyze_classes(hDexContext context) noexcept(false);
 
 
 /// @brief Obtain one hdvmclassanalysis_t given its hdvmclass_t
@@ -118,7 +118,7 @@ SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext
 /// @brief Obtain one hdvmclassanalysis_t given its name.
 /// @param context DEX context from the CORE API
 /// @param class_name name of the class to retrieve
-SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name);
+SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) noexcept(false);
 
 /// @brief Obtain one hdvmmethodanalysis_t given its hdvmmethod_t
 /// @param context DEX context from the CORE API
@@ -128,7 +128,7 @@ SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexCont
 /// @brief Obtain one hdvmmethodanalysis_t given its name
 /// @param context DEX context from the CORE API
 /// @param method_full_name dalvik name of the method
-SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name);
+SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name) noexcept(false);
 
 /// C - APK part of the CORE API from ShurikenLib
 

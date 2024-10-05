@@ -48,7 +48,6 @@ LEVEL Logger::get_level() {
         case spdlog::level::level_enum::critical:
             return LEVEL::CRITICAL;
     }
-    return LEVEL::TRACE;
 }
 
 Logger::Logger(const std::string &filepath) {
@@ -126,7 +125,6 @@ const char *to_string(LEVEL e) {
         default:
             return "UNDEFINED";
     }
-    return "UNDEFINED";
 }
 
 

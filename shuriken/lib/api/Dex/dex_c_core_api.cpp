@@ -753,7 +753,7 @@ hdvmmethod_t *get_method_by_name(hDexContext context, const char *method_name) {
 
 ///--------------------------- Disassembler API ---------------------------
 
-void disassemble_dex(hDexContext context) {
+void disassemble_dex(hDexContext context) noexcept(false) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     opaque_struct->disassembler = new shuriken::disassembler::dex::DexDisassembler(opaque_struct->parser);
@@ -771,14 +771,14 @@ dvmdisassembled_method_t *get_disassembled_method(hDexContext context, const cha
 }
 
 ///--------------------------- Analysis API ---------------------------
-void create_dex_analysis(hDexContext context, char create_xrefs) {
+void create_dex_analysis(hDexContext context, char create_xrefs) noexcept(false) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     opaque_struct->created_xrefs = create_xrefs == 0 ? false : true;
     opaque_struct->analysis = new Analysis(opaque_struct->parser, opaque_struct->disassembler, opaque_struct->created_xrefs);
 }
 
-void analyze_classes(hDexContext context) {
+void analyze_classes(hDexContext context) noexcept(false) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     if (opaque_struct->analysis == nullptr) throw std::runtime_error{"Error, analysis object cannot be null"};
@@ -790,7 +790,7 @@ hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass(hDexContext context, hdvmcl
     return get_analyzed_class(context, class_->class_name);
 }
 
-hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) {
+hdvmclassanalysis_t *get_analyzed_class(hDexContext context, const char *class_name) noexcept(false) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     std::string dalvik_name = class_name;
@@ -804,7 +804,7 @@ hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod(hDexContext context, hdv
     return get_analyzed_method(context, method->dalvik_name);
 }
 
-hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name) {
+hdvmmethodanalysis_t *get_analyzed_method(hDexContext context, const char *method_full_name) noexcept(false) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) throw std::runtime_error{"Error, provided DEX context is incorrect"};
     std::string dalvik_name = method_full_name;
