@@ -125,9 +125,9 @@ namespace {
         method->class_name = method_id->get_class()->get_raw_type().data();
         method->method_name = method_id->get_method_name().data();
         method->prototype = method_id->get_prototype()->get_dalvik_prototype().data();
-        method->access_flags = encoded_method->get_flags();
+        method->access_flags = static_cast<uint16_t>(encoded_method->get_flags());
         if (encoded_method->get_code_item()) {
-            method->code_size = encoded_method->get_code_item()->get_bytecode().size();
+            method->code_size = static_cast<uint32_t>(encoded_method->get_code_item()->get_bytecode().size());
             method->code = encoded_method->get_code_item()->get_bytecode().data();
         } else {
             method->code_size = 0;
@@ -146,7 +146,7 @@ namespace {
 
         field->class_name = field_id->field_class()->get_raw_type().data();
         field->name = field_id->field_name().data();
-        field->access_flags = encoded_field->get_flags();
+        field->access_flags = static_cast<uint16_t>(encoded_field->get_flags());
         field->type_value = field_id->field_type()->get_raw_type().data();
         field->fundamental_value = FUNDAMENTAL_NONE;
 
@@ -179,7 +179,7 @@ namespace {
             return;
         opaque_struct->tag = DEX_TAG;
         opaque_struct->parser = parser;
-        opaque_struct->number_of_classes = parser->get_header().get_dex_header_const().class_defs_size;
+        opaque_struct->number_of_classes = static_cast<uint16_t>(parser->get_header().get_dex_header_const().class_defs_size);
         opaque_struct->classes = new hdvmclass_t[opaque_struct->number_of_classes];
         size_t i = 0;
 
@@ -197,29 +197,29 @@ namespace {
                 new_class->super_class = super_class->get_class_name().data();
             if (!class_def.get_source_file().empty())
                 new_class->source_file = class_def.get_source_file().data();
-            new_class->access_flags = class_def.get_access_flags();
-            new_class->direct_methods_size = class_data_item.get_number_of_direct_methods();
-            new_class->virtual_methods_size = class_data_item.get_number_of_virtual_methods();
-            new_class->instance_fields_size = class_data_item.get_number_of_instance_fields();
-            new_class->static_fields_size = class_data_item.get_number_of_static_fields();
+            new_class->access_flags = static_cast<uint16_t>(class_def.get_access_flags());
+            new_class->direct_methods_size = static_cast<uint16_t>(class_data_item.get_number_of_direct_methods());
+            new_class->virtual_methods_size = static_cast<uint16_t>(class_data_item.get_number_of_virtual_methods());
+            new_class->instance_fields_size = static_cast<uint16_t>(class_data_item.get_number_of_instance_fields());
+            new_class->static_fields_size = static_cast<uint16_t>(class_data_item.get_number_of_static_fields());
 
             /// fill the methods
             new_class->virtual_methods = new hdvmmethod_t[new_class->virtual_methods_size];
-            for (size_t j = 0; j < new_class->virtual_methods_size; j++) {
+            for (auto j = 0; j < new_class->virtual_methods_size; j++) {
                 fill_dex_method(class_data_item.get_virtual_method_by_id(j), &new_class->virtual_methods[j]);
                 opaque_struct->methods[class_data_item.get_virtual_method_by_id(j)->getMethodID()->dalvik_name_format()] = &new_class->virtual_methods[j];
             }
             new_class->direct_methods = new hdvmmethod_t[new_class->direct_methods_size];
-            for (size_t j = 0; j < new_class->direct_methods_size; j++) {
+            for (auto j = 0; j < new_class->direct_methods_size; j++) {
                 fill_dex_method(class_data_item.get_direct_method_by_id(j), &new_class->direct_methods[j]);
                 opaque_struct->methods[class_data_item.get_direct_method_by_id(j)->getMethodID()->dalvik_name_format()] = &new_class->direct_methods[j];
             }
             /// fill the fields
             new_class->instance_fields = new hdvmfield_t[new_class->instance_fields_size];
-            for (size_t j = 0; j < new_class->instance_fields_size; j++)
+            for (auto j = 0; j < new_class->instance_fields_size; j++)
                 fill_dex_field(class_data_item.get_instance_field_by_id(j), &new_class->instance_fields[j]);
             new_class->static_fields = new hdvmfield_t[new_class->static_fields_size];
-            for (size_t j = 0; j < new_class->static_fields_size; j++)
+            for (auto j = 0; j < new_class->static_fields_size; j++)
                 fill_dex_field(class_data_item.get_static_field_by_id(j), &new_class->static_fields[j]);
         }
     }
@@ -717,7 +717,7 @@ const char *get_string_by_id(hDexContext context, size_t i) {
     auto &strings = p->get_strings();
     if (i >= strings.get_number_of_strings()) return nullptr;
     return reinterpret_cast<
-            const char *>(strings.get_string_by_id(i).data());
+            const char *>(strings.get_string_by_id(static_cast<uint32_t>(i)).data());
 }
 
 uint16_t get_number_of_classes(hDexContext context) {

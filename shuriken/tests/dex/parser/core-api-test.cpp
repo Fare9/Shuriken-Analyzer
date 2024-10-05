@@ -84,7 +84,7 @@ struct method_struct direct_methods[] = {
         {.dalvik_name = "LDexParserTest;->printMessage()V",
          .access_flags = 2}};
 
-struct method_struct virtual_methods[] = {};
+struct method_struct virtual_methods[1] = {};
 
 struct field_struct instance_fields[] = {
         {.name = "field1",
@@ -94,7 +94,7 @@ struct field_struct instance_fields[] = {
          .type = "Ljava/lang/String;",
          .access_flags = 2}};
 
-struct field_struct static_fields[] = {};
+struct field_struct static_fields[1] = {};
 
 
 void check_strings(hDexContext parser);

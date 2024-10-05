@@ -1521,10 +1521,10 @@ Instruction3rc::Instruction3rc(std::span<uint8_t> bytecode, std::size_t index, s
 
     switch (get_kind()) {
         case shuriken::dex::TYPES::TYPE:
-            index_value = parser->get_types().get_type_by_id(index);
+            index_value = parser->get_types().get_type_by_id(static_cast<uint32_t>(index));
             break;
         case shuriken::dex::TYPES::METH:
-            index_value = parser->get_methods().get_method_by_id(index);
+            index_value = parser->get_methods().get_method_by_id(static_cast<uint32_t>(index));
             break;
         default:
             throw std::runtime_error("Instruction3rc: error, kind instruction not supported");

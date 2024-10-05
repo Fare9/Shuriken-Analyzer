@@ -94,9 +94,9 @@ std::string_view DisassembledMethod::print_method(bool print_address) {
                        access_flags_str.begin(),
                        [](unsigned char c) {
                            if (c == '|')
-                               return (int) ' ';
+                               return ' ';
                            else
-                               return tolower(c);
+                               return static_cast<char>(tolower(c));
                        });
         output << ".method " << access_flags_str << " ";
         output << method_id->dalvik_name_format() << '\n';
