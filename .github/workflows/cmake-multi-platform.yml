@@ -57,6 +57,14 @@ jobs:
       run: sudo apt-get install cmake
     - name: Install git
       run: sudo apt install git
+    - name: Get AFL++
+      run: git clone https://github.com/AFLplusplus/AFLplusplus.git
+    - name: Build AFL++
+      working-directory: AFLplusplus
+      run: make clean all
+    - name: Install AFL++
+      working-directory: AFLplusplus
+      run: sudo make install
     - name: Install JDK
       run: sudo apt install default-jdk
     - name: Create build in CMake
