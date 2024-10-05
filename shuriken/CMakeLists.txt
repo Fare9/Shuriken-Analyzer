@@ -9,6 +9,7 @@ project(
         HOMEPAGE_URL https://github.com/Fare9/Shuriken-Analyzer/
 )
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 ##############################################################
 # C++ Standard
 set(CMAKE_CXX_STANDARD 20)
