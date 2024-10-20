@@ -728,6 +728,25 @@ hdvmclass_t * get_hdvmclass_from_dex_by_index(hApkContext context, const char * 
     return opaque_struct->classes_by_dex[dex_file][idx];
 }
 
+int get_number_of_strings_from_dex(hApkContext context, const char * dex_file) {
+    auto *opaque_struct = reinterpret_cast<apk_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != APK_TAG) return -1;
+    if (!opaque_struct->classes_by_dex.contains(dex_file)) return -1;
+    auto *p = opaque_struct->apk->get_parser_by_file(dex_file);
+    auto &strings = p->get_strings();
+    return static_cast<int>(strings.get_number_of_strings());
+}
+
+const char *get_string_by_id_from_dex(hApkContext context, const char * dex_file, unsigned int i) {
+    auto *opaque_struct = reinterpret_cast<apk_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != APK_TAG) return nullptr;
+    auto *p = opaque_struct->apk->get_parser_by_file(dex_file);
+    auto &strings = p->get_strings();
+    if (i >= strings.get_number_of_strings()) return nullptr;
+    return reinterpret_cast<
+            const char *>(strings.get_string_by_id(i).data());
+}
+
 //------------------------------------ Disassembly API
 
 dvmdisassembled_method_t *get_disassembled_method_from_apk(hApkContext context, const char *method_name) {

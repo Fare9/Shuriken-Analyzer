@@ -367,7 +367,7 @@ class Apk(object):
             ctypes.c_char_p(dex_file.encode("utf-8"))
         )
 
-    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint16) -> hdvmclass_t | None:
+    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint32_t) -> hdvmclass_t | None:
         """
         :param dex_file: DEX file from the APK
         :param idx: index of the DEX file
@@ -379,7 +379,7 @@ class Apk(object):
         _shuriken.get_hdvmclass_from_dex_by_index.argtypes = [
             ctypes.c_void_p,
             ctypes.c_char_p,
-            ctypes.c_uint16
+            ctypes.c_uint32_t
         ]
         # call the function
         ptr = ctypes.cast(
@@ -398,6 +398,39 @@ class Apk(object):
             self.class_by_id[dex_file] = dict()
         self.class_by_id[dex_file][idx] = ptr.contents
         return self.class_by_id[dex_file][idx]
+
+    def get_number_of_strings_from_dex(self, dex_file: str) -> int:
+        """
+        :return: Number of strings inside the DEX file
+        """
+        _shuriken.get_number_of_strings_from_dex.restype = ctypes.c_int
+        _shuriken.get_number_of_strings_from_dex.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        return _shuriken.get_number_of_strings_from_dex(
+            self.apk_context_object,
+            ctypes.c_char_p(dex_file.encode("utf-8"))
+        )
+
+    def get_string_by_id_from_dex(self, dex_file: str, idx: ctypes.c_uint32_t) -> str:
+        """
+        :param dex_file: DEX file from the APK
+        :param idx: index of the DEX file for the string
+        :return: string from the dex file
+        """
+        _shuriken.get_string_by_id_from_dex.restype = ctypes.c_char_p
+        _shuriken.get_string_by_id_from_dex.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_char_p,
+            ctypes.c_uint32_t
+        ]
+        # call the function
+        string =  _shuriken.get_string_by_id_from_dex(
+                self.apk_context_object,
+                ctypes.c_char_p(dex_file.encode("utf-8")),
+                idx
+            )
+        if not string:
+            return None
+        return string.decode()
 
     def get_disassembled_method_from_apk(self, method_name: str) -> dvmdisassembled_method_t | None:
         """

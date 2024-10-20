@@ -168,6 +168,17 @@ SHURIKENCOREAPI int get_number_of_classes_for_dex_file(hApkContext context, cons
 /// @return hdvmclass_t in the given position
 SHURIKENCOREAPI hdvmclass_t * get_hdvmclass_from_dex_by_index(hApkContext context, const char * dex_file, unsigned int idx);
 
+/// @brief retrieve the number of strings from a given dex
+/// @param dex_file file to get the number of strings
+/// @return number of strings in dex
+SHURIKENCOREAPI int get_number_of_strings_from_dex(hApkContext context, const char * dex_file);
+
+/// @brief get a string from a dex by an id
+/// @param dex_file file to get the string
+/// @param i index of the string to retrieve
+/// @return string from the dex with id
+SHURIKENCOREAPI const char *get_string_by_id_from_dex(hApkContext context, const char * dex_file, unsigned int i);
+
 //------------------------------------ Disassembly API
 
 /// @brief Get a method structure given a full dalvik name.
