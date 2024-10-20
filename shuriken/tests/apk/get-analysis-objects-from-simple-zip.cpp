@@ -33,6 +33,9 @@ int main() {
 
             assert(str != nullptr && "Error retrieved a null string");
 
+            [[maybe_unused]] auto * str_analysis = get_analyzed_string_from_apk(apk_context, str);
+
+            //assert(str_analysis != nullptr && "Error retrieved a null StringAnalysis");
         }
 
         for (int j = 0,

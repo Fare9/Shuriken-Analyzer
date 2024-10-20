@@ -192,23 +192,32 @@ SHURIKENCOREAPI dvmdisassembled_method_t *get_disassembled_method_from_apk(hApkC
 /// @brief Obtain one hdvmclassanalysis_t given its hdvmclass_t
 /// @param context context from the CORE API
 /// @param class_ hdvmclass_t to get its analysis
+/// @return pointer to hdvmclassanalysis_t structure
 SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_by_hdvmclass_from_apk(hApkContext context, hdvmclass_t *class_);
 
 /// @brief Obtain one hdvmclassanalysis_t given its name.
 /// @param context APK context from the CORE API
 /// @param class_name name of the class to retrieve
+/// @return pointer to hdvmclassanalysis_t structure
 SHURIKENCOREAPI hdvmclassanalysis_t *get_analyzed_class_from_apk(hApkContext context, const char *class_name);
 
 /// @brief Obtain one hdvmmethodanalysis_t given its hdvmmethod_t
 /// @param context APK context from the CORE API
 /// @param method hdvmmethod_t to get its analysis
+/// @return pointer to hdvmmethodanalysis_t structure
 SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_by_hdvmmethod_from_apk(hApkContext context, hdvmmethod_t *method);
 
 /// @brief Obtain one hdvmmethodanalysis_t given its name
 /// @param context APK context from the CORE API
 /// @param method_full_name dalvik name of the method
+/// @return pointer to hdvmmethodanalysis_t structure
 SHURIKENCOREAPI hdvmmethodanalysis_t *get_analyzed_method_from_apk(hApkContext context, const char *method_full_name);
 
+/// @brief Obtain a hdvmstringanalysis_t given a string
+/// @param context APK context from the CORE API
+/// @param string string to get its analysis
+/// @return pointer to hdvmstringanalysis_t structure
+SHURIKENCOREAPI hdvmstringanalysis_t *get_analyzed_string_from_apk(hApkContext context, const char *string);
 };
 
 #endif//SHURIKENLIB_SHURIKEN_PARSERS_CORE_H
