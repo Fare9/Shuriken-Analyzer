@@ -33,9 +33,11 @@ int main() {
 
             assert(str != nullptr && "Error retrieved a null string");
 
-            [[maybe_unused]] auto * str_analysis = get_analyzed_string_from_apk(apk_context, str);
+            [[maybe_unused]] hdvmstringanalysis_t * str_analysis = get_analyzed_string_from_apk(apk_context, str);
 
-            //assert(str_analysis != nullptr && "Error retrieved a null StringAnalysis");
+            if (str_analysis != nullptr) {
+                assert(str_analysis->n_of_xreffrom > 0 && "The StringAnalysis must have xrefs");
+            }
         }
 
         for (int j = 0,
