@@ -22,6 +22,24 @@ int main() {
          i++) {
         const char * dex_file = get_dex_file_by_index(apk_context, i);
 
+        size_t number_of_strings = get_number_of_strings_from_dex(apk_context, dex_file);
+
+        for (size_t j = 0;
+                 j < number_of_strings;
+             j++) {
+            [[maybe_unused]] auto * str = get_string_by_id_from_dex(apk_context, dex_file, j);
+
+            std::cout << str << '\n';
+
+            assert(str != nullptr && "Error retrieved a null string");
+
+            [[maybe_unused]] hdvmstringanalysis_t * str_analysis = get_analyzed_string_from_apk(apk_context, str);
+
+            if (str_analysis != nullptr) {
+                assert(str_analysis->n_of_xreffrom > 0 && "The StringAnalysis must have xrefs");
+            }
+        }
+
         for (int j = 0,
                 n_of_classes = get_number_of_classes_for_dex_file(apk_context, dex_file);
              j < n_of_classes;

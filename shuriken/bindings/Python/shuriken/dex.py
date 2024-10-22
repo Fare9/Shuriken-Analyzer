@@ -427,6 +427,16 @@ class hdvmfieldanalysis_t(ctypes.Structure):
     """
     pass
 
+class hdvmstringanalysis_t(ctypes.Structure):
+    """
+    Structure representing string analysis in HDVM.
+
+    Fields:
+    - value (type: c_char_p): Value of the string.
+    - n_of_xreffrom (type: c_size_t): Number of references where the string is read.
+    - xreffrom (type: POINTER(hdvm_class_method_idx_t)): Pointer to the methods where the string is read.
+    """
+    pass
 
 class hdvm_class_method_idx_t(ctypes.Structure):
     """
@@ -559,6 +569,11 @@ class basic_blocks_t(ctypes.Structure):
         ("blocks", ctypes.POINTER(hdvmbasicblock_t))
     ]
 
+hdvmstringanalysis_t._fields_ = [
+    ("value", ctypes.c_char_p),
+    ("n_of_xreffrom", ctypes.c_size_t),
+    ("xreffrom", ctypes.POINTER(hdvm_class_method_idx_t)),
+]
 
 hdvmfieldanalysis_t._fields_ = [
     ("name", ctypes.c_char_p),

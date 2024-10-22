@@ -337,12 +337,12 @@ namespace shuriken::analysis::dex {
     class StringAnalysis {
     private:
         /// @brief Value of the string
-        std::string_view value;
+        std::string value;
         /// @brief xref where the string is used
         class_method_idx_t xreffrom;
 
     public:
-        StringAnalysis(std::string_view value);
+        StringAnalysis(std::string value);
 
         ~StringAnalysis() = default;
 
@@ -353,6 +353,9 @@ namespace shuriken::analysis::dex {
         /// @param m method where is read
         /// @param offset offset where is read
         void add_xreffrom(ClassAnalysis *c, MethodAnalysis *m, std::uint64_t offset);
+
+        /// @return get the value of the string analysis
+        std::string_view get_value();
     };
 
     /// @brief Specification of the method analysis, a method contains

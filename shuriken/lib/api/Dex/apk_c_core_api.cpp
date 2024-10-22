@@ -40,6 +40,8 @@ namespace {
         std::unordered_map<std::string, hdvmmethodanalysis_t *> method_analyses;
         /// @brief all the field analysis by name
         std::unordered_map<std::string, hdvmfieldanalysis_t *> field_analyses;
+        /// @brief all the string analysis
+        std::unordered_map<std::string, hdvmstringanalysis_t *> string_analysis;
     } apk_opaque_struct_t;
 
     // Methods for the disassembly
@@ -172,12 +174,50 @@ namespace {
     }
 
     // definitions
+    hdvmstringanalysis_t *get_string_analysis(apk_opaque_struct_t *opaque_struct,
+                                              std::string str);
     hdvmfieldanalysis_t *get_field_analysis(apk_opaque_struct_t *opaque_struct,
                                             FieldAnalysis *fieldAnalysis);
     hdvmmethodanalysis_t *get_method_analysis(apk_opaque_struct_t *opaque_struct,
                                               MethodAnalysis *methodAnalysis);
     hdvmclassanalysis_t *get_class_analysis(apk_opaque_struct_t *opaque_struct,
                                             ClassAnalysis *classAnalysis);
+
+    hdvmstringanalysis_t *get_string_analysis(apk_opaque_struct_t *opaque_struct,
+                                              std::string str) {
+        if (opaque_struct->string_analysis.contains(str))
+            return opaque_struct->string_analysis[str];
+        auto &str_analysis_map = opaque_struct->apk->get_global_analysis()->get_string_analysis();
+        StringAnalysis *str_analysis = nullptr;
+        for (auto & ref : str_analysis_map) {
+            if (str == ref.first) {
+                str_analysis = &ref.second.get();
+                break;
+            }
+        }
+        if (str_analysis == nullptr) return nullptr;
+        hdvmstringanalysis_t *f_string = new hdvmstringanalysis_t {};
+        opaque_struct->string_analysis.insert({str, f_string});
+        f_string->value = reinterpret_cast<const char*>(str_analysis->get_value().data());
+
+        if (opaque_struct->created_xrefs) {
+            size_t i = 0;
+
+            // create the xrefs
+            auto xrefs = str_analysis->get_xreffrom();
+            f_string->n_of_xreffrom = std::distance(xrefs.begin(), xrefs.end());
+            f_string->xreffrom = new hdvm_class_method_idx_t[f_string->n_of_xreffrom];
+            for (auto xref : xrefs) {
+                f_string->xreffrom[i].cls = get_class_analysis(opaque_struct, std::get<ClassAnalysis*>(xref));
+                f_string->xreffrom[i].method = get_method_analysis(opaque_struct,
+                                                                   std::get<MethodAnalysis *>(xref));
+                f_string->xreffrom[i].idx = std::get<std::uint64_t>(xref);
+                i++;
+            }
+        }
+
+        return f_string;
+    }
 
     /// @brief get or create a hdvmfieldanalysis_t structure given a FieldAnalysis object
     hdvmfieldanalysis_t *get_field_analysis(apk_opaque_struct_t *opaque_struct,
@@ -540,6 +580,17 @@ namespace {
         }
     }
 
+    void destroy_string_analysis(apk_opaque_struct_t *dex_opaque_struct) {
+        for (auto str_str_analysis : dex_opaque_struct->string_analysis) {
+            auto str_analysis = str_str_analysis.second;
+            if (dex_opaque_struct->created_xrefs) {
+                delete [] str_analysis->xreffrom;
+            }
+            delete str_analysis;
+            str_analysis = nullptr;
+        }
+        dex_opaque_struct->string_analysis.clear();
+    }
 
     void destroy_field_analysis(apk_opaque_struct_t *dex_opaque_struct) {
         for (auto &name_field_analysis: dex_opaque_struct->field_analyses) {
@@ -671,6 +722,7 @@ namespace {
         destroy_class_analysis(opaque_struct);
         destroy_method_analysis(opaque_struct);
         destroy_field_analysis(opaque_struct);
+        destroy_string_analysis(opaque_struct);
 
         // finally destroy opaque_struct itself
         delete opaque_struct;
@@ -728,6 +780,25 @@ hdvmclass_t * get_hdvmclass_from_dex_by_index(hApkContext context, const char * 
     return opaque_struct->classes_by_dex[dex_file][idx];
 }
 
+int get_number_of_strings_from_dex(hApkContext context, const char * dex_file) {
+    auto *opaque_struct = reinterpret_cast<apk_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != APK_TAG) return -1;
+    if (!opaque_struct->classes_by_dex.contains(dex_file)) return -1;
+    auto *p = opaque_struct->apk->get_parser_by_file(dex_file);
+    auto &strings = p->get_strings();
+    return static_cast<int>(strings.get_number_of_strings());
+}
+
+const char *get_string_by_id_from_dex(hApkContext context, const char * dex_file, unsigned int i) {
+    auto *opaque_struct = reinterpret_cast<apk_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != APK_TAG) return nullptr;
+    auto *p = opaque_struct->apk->get_parser_by_file(dex_file);
+    auto &strings = p->get_strings();
+    if (i >= strings.get_number_of_strings()) return nullptr;
+    return reinterpret_cast<
+            const char *>(strings.get_string_by_id(i).data());
+}
+
 //------------------------------------ Disassembly API
 
 dvmdisassembled_method_t *get_disassembled_method_from_apk(hApkContext context, const char *method_name) {
@@ -764,4 +835,12 @@ hdvmmethodanalysis_t *get_analyzed_method_from_apk(hApkContext context, const ch
     auto method = opaque_struct->apk->get_global_analysis()->get_method_analysis_by_name(dalvik_name);
     if (method == nullptr) return nullptr;
     return ::get_method_analysis(opaque_struct, method);
+}
+
+hdvmstringanalysis_t *get_analyzed_string_from_apk(hApkContext context, const char *string) {
+    auto *opaque_struct = reinterpret_cast<apk_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != APK_TAG) return nullptr;
+    if (string == nullptr) return nullptr;
+    std::string cpp_str(string);
+    return ::get_string_analysis(opaque_struct, cpp_str);
 }

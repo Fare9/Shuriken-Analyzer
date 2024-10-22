@@ -8,7 +8,7 @@
 
 using namespace shuriken::analysis::dex;
 
-StringAnalysis::StringAnalysis(std::string_view value)
+StringAnalysis::StringAnalysis(std::string value)
     : value(value) {
 }
 
@@ -18,4 +18,8 @@ shuriken::iterator_range<class_method_idx_iterator_t> StringAnalysis::get_xreffr
 
 void StringAnalysis::add_xreffrom(ClassAnalysis *c, MethodAnalysis *m, std::uint64_t offset) {
     xreffrom.emplace_back(std::make_tuple(c, m, offset));
+}
+
+std::string_view StringAnalysis::get_value() {
+    return value;
 }

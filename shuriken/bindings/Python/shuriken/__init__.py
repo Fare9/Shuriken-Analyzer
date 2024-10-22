@@ -316,6 +316,8 @@ class Apk(object):
         self.class_analysis_by_name = dict()
         # cache of the method analysis
         self.method_analysis_by_name = dict()
+        # cache of the string analysis
+        self.string_analysis_by_str = dict()
 
         _shuriken.parse_apk.restype = ctypes.c_void_p
         _shuriken.parse_apk.argtypes = [ctypes.c_char_p, ctypes.c_int]
@@ -367,7 +369,7 @@ class Apk(object):
             ctypes.c_char_p(dex_file.encode("utf-8"))
         )
 
-    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint16) -> hdvmclass_t | None:
+    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint32) -> hdvmclass_t | None:
         """
         :param dex_file: DEX file from the APK
         :param idx: index of the DEX file
@@ -379,7 +381,7 @@ class Apk(object):
         _shuriken.get_hdvmclass_from_dex_by_index.argtypes = [
             ctypes.c_void_p,
             ctypes.c_char_p,
-            ctypes.c_uint16
+            ctypes.c_uint32
         ]
         # call the function
         ptr = ctypes.cast(
@@ -398,6 +400,39 @@ class Apk(object):
             self.class_by_id[dex_file] = dict()
         self.class_by_id[dex_file][idx] = ptr.contents
         return self.class_by_id[dex_file][idx]
+
+    def get_number_of_strings_from_dex(self, dex_file: str) -> int:
+        """
+        :return: Number of strings inside the DEX file
+        """
+        _shuriken.get_number_of_strings_from_dex.restype = ctypes.c_int
+        _shuriken.get_number_of_strings_from_dex.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        return _shuriken.get_number_of_strings_from_dex(
+            self.apk_context_object,
+            ctypes.c_char_p(dex_file.encode("utf-8"))
+        )
+
+    def get_string_by_id_from_dex(self, dex_file: str, idx: ctypes.c_uint32) -> str:
+        """
+        :param dex_file: DEX file from the APK
+        :param idx: index of the DEX file for the string
+        :return: string from the dex file
+        """
+        _shuriken.get_string_by_id_from_dex.restype = ctypes.c_char_p
+        _shuriken.get_string_by_id_from_dex.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_char_p,
+            ctypes.c_uint32
+        ]
+        # call the function
+        string =  _shuriken.get_string_by_id_from_dex(
+                self.apk_context_object,
+                ctypes.c_char_p(dex_file.encode("utf-8")),
+                idx
+            )
+        if not string:
+            return None
+        return string.decode()
 
     def get_disassembled_method_from_apk(self, method_name: str) -> dvmdisassembled_method_t | None:
         """
@@ -489,3 +524,24 @@ class Apk(object):
             return None
         self.method_analysis_by_name[method_name] = ptr.contents
         return self.method_analysis_by_name[method_name]
+
+    def get_analyzed_string_from_apk(self, string: str) -> hdvmstringanalysis_t | None:
+        """
+        :param string: string to retrieve its analysis
+        :return: :class:`hdvmstringanalysis_t` structure
+        """
+        if string is None:
+            return None
+        if string in self.string_analysis_by_str:
+            return self.string_analysis_by_str[string]
+        _shuriken.get_analyzed_string_from_apk.restype = ctypes.POINTER(hdvmstringanalysis_t)
+        _shuriken.get_analyzed_string_from_apk.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        ptr = ctypes.cast(
+            _shuriken.get_analyzed_string_from_apk(self.apk_context_object,
+                                                   ctypes.c_char_p(string.encode("utf-8"))),
+            ctypes.POINTER(hdvmstringanalysis_t)
+        )
+        if not ptr:
+            return None
+        self.string_analysis_by_str[string] = ptr.contents
+        return self.string_analysis_by_str[string]
