@@ -90,6 +90,8 @@ if __name__ == '__main__':
                     print(f"{str_raw} does not contain any analysis")
                 else:
                     print(f"{str_analysis.value} contains analysis {str_analysis.n_of_xreffrom} xrefs")
+                    for k in range(str_analysis.n_of_xreffrom):
+                        print(f"\tCalled from Class: {str_analysis.xreffrom[k].cls.contents.name_}, Method: {str_analysis.xreffrom[k].method.contents.name}, IDX: {str_analysis.xreffrom[k].idx}")
 
 
             print(f"Number of classes for the dex file: {apk.get_number_of_classes_for_dex_file(dex_file)}")
