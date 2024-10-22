@@ -50,7 +50,7 @@ var searchData=
   ['string_5fanalyses_5ft_47',['string_analyses_t',['../classshuriken_1_1analysis_1_1dex_1_1Analysis.html#a18c95aea4c50fe0d2b6b584036ce43c1',1,'shuriken::analysis::dex::Analysis']]],
   ['string_5fids_5foff_48',['string_ids_off',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a201a1a9c156c9cc8b23eafb8db57f91b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
   ['string_5fids_5fsize_49',['string_ids_size',['../structshuriken_1_1parser_1_1dex_1_1DexHeader_1_1dexheader__t.html#a0c0964d3313a30694ff4c7150718856b',1,'shuriken::parser::dex::DexHeader::dexheader_t']]],
-  ['stringanalysis_50',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html',1,'shuriken::analysis::dex::StringAnalysis'],['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a25ebb765cfb397251317f3f55a0d0f9d',1,'shuriken::analysis::dex::StringAnalysis::StringAnalysis()']]],
+  ['stringanalysis_50',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html',1,'shuriken::analysis::dex::StringAnalysis'],['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a95f0db2d66a63821b61f7d66e5675b7a',1,'shuriken::analysis::dex::StringAnalysis::StringAnalysis()']]],
   ['successors_51',['successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673',1,'shuriken::analysis::dex::BasicBlocks']]],
   ['super_5fclass_52',['super_class',['../structhdvmclass__t.html#a08f3a328d31ab53ba65e47527ce2525f',1,'hdvmclass_t']]],
   ['superclass_5fidx_53',['superclass_idx',['../structshuriken_1_1parser_1_1dex_1_1ClassDef_1_1classdefstruct__t.html#ab0a7913f949fc89c4c422d59e579720a',1,'shuriken::parser::dex::ClassDef::classdefstruct_t']]],

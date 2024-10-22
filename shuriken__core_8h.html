@@ -208,6 +208,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aae33c4181a6eaef64ded4d5bc0675a75" id="r_aae33c4181a6eaef64ded4d5bc0675a75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhdvmclass__t.html">hdvmclass_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae33c4181a6eaef64ded4d5bc0675a75">get_hdvmclass_from_dex_by_index</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *dex_file, unsigned int idx)</td></tr>
 <tr class="memdesc:aae33c4181a6eaef64ded4d5bc0675a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve one of the <a class="el" href="structhdvmclass__t.html" title="Structure representing the classes in the DEX file.">hdvmclass_t</a> from a dex file  <br /></td></tr>
 <tr class="separator:aae33c4181a6eaef64ded4d5bc0675a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8608b0240927ba8f991323acab9bc2" id="r_a2c8608b0240927ba8f991323acab9bc2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8608b0240927ba8f991323acab9bc2">get_number_of_strings_from_dex</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *dex_file)</td></tr>
+<tr class="memdesc:a2c8608b0240927ba8f991323acab9bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve the number of strings from a given dex  <br /></td></tr>
+<tr class="separator:a2c8608b0240927ba8f991323acab9bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af870cc563ed37899f0bd5e4487a3d1c5" id="r_af870cc563ed37899f0bd5e4487a3d1c5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af870cc563ed37899f0bd5e4487a3d1c5">get_string_by_id_from_dex</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *dex_file, unsigned int i)</td></tr>
+<tr class="memdesc:af870cc563ed37899f0bd5e4487a3d1c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">get a string from a dex by an id  <br /></td></tr>
+<tr class="separator:af870cc563ed37899f0bd5e4487a3d1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e8379f8b7020f8e874283616b0140c3" id="r_a0e8379f8b7020f8e874283616b0140c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#aecb7736c1d69317e06841ae183e4814f">dvmdisassembled_method_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e8379f8b7020f8e874283616b0140c3">get_disassembled_method_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *method_name)</td></tr>
 <tr class="memdesc:a0e8379f8b7020f8e874283616b0140c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a method structure given a full dalvik name.  <br /></td></tr>
 <tr class="separator:a0e8379f8b7020f8e874283616b0140c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,6 +229,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae5291f9f42cfc7cfe7b019e48377ad7c" id="r_ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a377b2d29da853f3b6f96b4a1c164dce0">hdvmmethodanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5291f9f42cfc7cfe7b019e48377ad7c">get_analyzed_method_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *method_full_name)</td></tr>
 <tr class="memdesc:ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain one hdvmmethodanalysis_t given its name.  <br /></td></tr>
 <tr class="separator:ae5291f9f42cfc7cfe7b019e48377ad7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812b2e6481ca4377506a347cb0e7dedf" id="r_a812b2e6481ca4377506a347cb0e7dedf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="shuriken__core__data_8h.html#a6f81b03ebd144f47373a5f8f1bab0ccd">hdvmstringanalysis_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a812b2e6481ca4377506a347cb0e7dedf">get_analyzed_string_from_apk</a> (<a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a> context, const char *string)</td></tr>
+<tr class="memdesc:a812b2e6481ca4377506a347cb0e7dedf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a hdvmstringanalysis_t given a string.  <br /></td></tr>
+<tr class="separator:a812b2e6481ca4377506a347cb0e7dedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8e8f1dee9bcbbe6e249e1c5de9a78b9d" name="a8e8f1dee9bcbbe6e249e1c5de9a78b9d"></a>
@@ -459,6 +468,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to hdvmclassanalysis_t structure </dd></dl>
 
 </div>
 </div>
@@ -489,6 +499,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to hdvmclassanalysis_t structure </dd></dl>
 
 </div>
 </div>
@@ -579,6 +590,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to hdvmmethodanalysis_t structure </dd></dl>
 
 </div>
 </div>
@@ -609,6 +621,38 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to hdvmmethodanalysis_t structure </dd></dl>
+
+</div>
+</div>
+<a id="a812b2e6481ca4377506a347cb0e7dedf" name="a812b2e6481ca4377506a347cb0e7dedf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812b2e6481ca4377506a347cb0e7dedf">&#9670;&#160;</a></span>get_analyzed_string_from_apk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="shuriken__core__data_8h.html#a6f81b03ebd144f47373a5f8f1bab0ccd">hdvmstringanalysis_t</a> * get_analyzed_string_from_apk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>string</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain a hdvmstringanalysis_t given a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>APK context from the CORE API </td></tr>
+    <tr><td class="paramname">string</td><td>string to get its analysis </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to hdvmstringanalysis_t structure </dd></dl>
 
 </div>
 </div>
@@ -935,6 +979,36 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2c8608b0240927ba8f991323acab9bc2" name="a2c8608b0240927ba8f991323acab9bc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8608b0240927ba8f991323acab9bc2">&#9670;&#160;</a></span>get_number_of_strings_from_dex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_number_of_strings_from_dex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>dex_file</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>retrieve the number of strings from a given dex </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dex_file</td><td>file to get the number of strings </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>number of strings in dex </dd></dl>
+
+</div>
+</div>
 <a id="adb3698546550eddd1173bf4486d1f5cb" name="adb3698546550eddd1173bf4486d1f5cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb3698546550eddd1173bf4486d1f5cb">&#9670;&#160;</a></span>get_string_by_id()</h2>
 
@@ -963,6 +1037,42 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string from the id </dd></dl>
+
+</div>
+</div>
+<a id="af870cc563ed37899f0bd5e4487a3d1c5" name="af870cc563ed37899f0bd5e4487a3d1c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af870cc563ed37899f0bd5e4487a3d1c5">&#9670;&#160;</a></span>get_string_by_id_from_dex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * get_string_by_id_from_dex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="shuriken__core__data_8h.html#a80ff042885a9a9c097863506ad74f90e">hApkContext</a></td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>dex_file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get a string from a dex by an id </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dex_file</td><td>file to get the string </td></tr>
+    <tr><td class="paramname">i</td><td>index of the string to retrieve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>string from the dex with id </dd></dl>
 
 </div>
 </div>

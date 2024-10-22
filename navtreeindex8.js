@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"classshuriken_1_1parser_1_1dex_1_1Parser.html#afd17091e6a71f4f697fa64f8320a27e6":[0,0,1,4,1,29,6],
+"classshuriken_1_1parser_1_1dex_1_1Parser.html#afd17091e6a71f4f697fa64f8320a27e6":[1,0,1,4,1,29,6],
 "classshuriken_1_1parser_1_1dex_1_1ProtoID.html":[0,0,1,4,1,30],
 "classshuriken_1_1parser_1_1dex_1_1ProtoID.html":[1,0,1,4,1,30],
 "classshuriken_1_1parser_1_1dex_1_1ProtoID.html#a1d6c0369c7760f02f0f2f2d57bd60a41":[0,0,1,4,1,30,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "functions_t.html":[1,3,0,18],
 "functions_type.html":[1,3,3],
 "functions_u.html":[1,3,0,19],
-"functions_v.html":[1,3,0,20],
-"functions_vars.html":[1,3,2],
-"functions_w.html":[1,3,0,21]
+"functions_v.html":[1,3,0,20]
 };

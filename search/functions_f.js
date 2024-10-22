@@ -19,6 +19,6 @@ var searchData=
   ['shurikenstream_16',['ShurikenStream',['../classshuriken_1_1common_1_1ShurikenStream.html#a7caad12b247aa50bd75a231d1ccb69b7',1,'shuriken::common::ShurikenStream']]],
   ['size_17',['size',['../classexceptions_1_1InvalidInstructionException.html#a5ae9f9933f5e7a22b30b8a37073f363f',1,'exceptions::InvalidInstructionException']]],
   ['sparseswitch_18',['SparseSwitch',['../classshuriken_1_1disassembler_1_1dex_1_1SparseSwitch.html#a414f9d1edef8d642a2c6d2aca579345c',1,'shuriken::disassembler::dex::SparseSwitch::SparseSwitch(std::span&lt; uint8_t &gt; bytecode, std::size_t index)'],['../classshuriken_1_1disassembler_1_1dex_1_1SparseSwitch.html#a67a6ab06883579fc78f3c23af67ee058',1,'shuriken::disassembler::dex::SparseSwitch::SparseSwitch(std::span&lt; uint8_t &gt; bytecode, std::size_t index, shuriken::parser::dex::Parser *parser)']]],
-  ['stringanalysis_19',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a25ebb765cfb397251317f3f55a0d0f9d',1,'shuriken::analysis::dex::StringAnalysis']]],
+  ['stringanalysis_19',['StringAnalysis',['../classshuriken_1_1analysis_1_1dex_1_1StringAnalysis.html#a95f0db2d66a63821b61f7d66e5675b7a',1,'shuriken::analysis::dex::StringAnalysis']]],
   ['successors_20',['successors',['../classshuriken_1_1analysis_1_1dex_1_1BasicBlocks.html#a13c1bdc405c3caedaa6e897e2ad28673',1,'shuriken::analysis::dex::BasicBlocks']]]
 ];

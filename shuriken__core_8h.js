@@ -14,6 +14,7 @@ var shuriken__core_8h =
     [ "get_analyzed_method_by_hdvmmethod", "shuriken__core_8h.html#ac398f2fe568457f5e2bad17f49ce07a3", null ],
     [ "get_analyzed_method_by_hdvmmethod_from_apk", "shuriken__core_8h.html#a21a0499a7b6d9cf77c2b4858d7d04412", null ],
     [ "get_analyzed_method_from_apk", "shuriken__core_8h.html#ae5291f9f42cfc7cfe7b019e48377ad7c", null ],
+    [ "get_analyzed_string_from_apk", "shuriken__core_8h.html#a812b2e6481ca4377506a347cb0e7dedf", null ],
     [ "get_class_by_id", "shuriken__core_8h.html#ad9d77cdbf753cefbd85b0d96ae6389a9", null ],
     [ "get_class_by_name", "shuriken__core_8h.html#a6bbd9b20f5d8fe4dc027d2fea7789221", null ],
     [ "get_dex_file_by_index", "shuriken__core_8h.html#a8de7aa29e035349e71b4461ab5bee6f0", null ],
@@ -25,7 +26,9 @@ var shuriken__core_8h =
     [ "get_number_of_classes_for_dex_file", "shuriken__core_8h.html#afdeffbeac89373573c06533f111c2d43", null ],
     [ "get_number_of_dex_files", "shuriken__core_8h.html#a410db66c170112472b8994430ad42f66", null ],
     [ "get_number_of_strings", "shuriken__core_8h.html#a68362aab482c9b72707a5e62ebc53d8d", null ],
+    [ "get_number_of_strings_from_dex", "shuriken__core_8h.html#a2c8608b0240927ba8f991323acab9bc2", null ],
     [ "get_string_by_id", "shuriken__core_8h.html#adb3698546550eddd1173bf4486d1f5cb", null ],
+    [ "get_string_by_id_from_dex", "shuriken__core_8h.html#af870cc563ed37899f0bd5e4487a3d1c5", null ],
     [ "parse_apk", "shuriken__core_8h.html#a20a461a3e0b34f846640ee2248aec1d1", null ],
     [ "parse_dex", "shuriken__core_8h.html#a73c6a3ab8f1ba408c229eee905ab9a87", null ]
 ];

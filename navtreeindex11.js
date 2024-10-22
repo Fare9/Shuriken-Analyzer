@@ -1,5 +1,10 @@
 var NAVTREEINDEX11 =
 {
+"structshuriken_1_1deref__iterator__range.html#a5febd4e5de70bf5a57b171838715c50a":[0,0,1,5,4],
+"structshuriken_1_1deref__iterator__range.html#a5febd4e5de70bf5a57b171838715c50a":[1,0,1,5,4],
+"structshuriken_1_1deref__iterator__range.html#a73c4114ae1e82dca303c8da94bf8d775":[0,0,1,5,2],
+"structshuriken_1_1deref__iterator__range.html#a73c4114ae1e82dca303c8da94bf8d775":[1,0,1,5,2],
+"structshuriken_1_1deref__iterator__range_1_1iterator.html":[0,0,1,5,0],
 "structshuriken_1_1deref__iterator__range_1_1iterator.html":[1,0,1,5,0],
 "structshuriken_1_1deref__iterator__range_1_1iterator.html#a0b8217cfbfadcfc1f2ccf0ce4fcda692":[0,0,1,5,0,7],
 "structshuriken_1_1deref__iterator__range_1_1iterator.html#a0b8217cfbfadcfc1f2ccf0ce4fcda692":[1,0,1,5,0,7],
