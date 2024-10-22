@@ -337,12 +337,12 @@ namespace shuriken::analysis::dex {
     class StringAnalysis {
     private:
         /// @brief Value of the string
-        std::string_view value;
+        std::string value;
         /// @brief xref where the string is used
         class_method_idx_t xreffrom;
 
     public:
-        StringAnalysis(std::string_view value);
+        StringAnalysis(std::string value);
 
         ~StringAnalysis() = default;
 

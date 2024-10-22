@@ -8,7 +8,7 @@
 
 using namespace shuriken::analysis::dex;
 
-StringAnalysis::StringAnalysis(std::string_view value)
+StringAnalysis::StringAnalysis(std::string value)
     : value(value) {
 }
 

@@ -80,6 +80,18 @@ if __name__ == '__main__':
 
             print(f"Dex file {j}: {dex_file}")
 
+            print(f"Number of strings for the dex file: {apk.get_number_of_strings_from_dex(dex_file)}")
+
+            for i in range(apk.get_number_of_strings_from_dex(dex_file)):
+                str_raw = apk.get_string_by_id_from_dex(dex_file, i)
+                print(f"Retrieved string: {str_raw}")
+                str_analysis = apk.get_analyzed_string_from_apk(str_raw)
+                if str_analysis is None:
+                    print(f"{str_raw} does not contain any analysis")
+                else:
+                    print(f"{str_analysis.value} contains analysis {str_analysis.n_of_xreffrom} xrefs")
+
+
             print(f"Number of classes for the dex file: {apk.get_number_of_classes_for_dex_file(dex_file)}")
 
             for i in range(apk.get_number_of_classes_for_dex_file(dex_file)):

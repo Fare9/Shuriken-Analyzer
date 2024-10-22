@@ -530,6 +530,8 @@ class Apk(object):
         :param string: string to retrieve its analysis
         :return: :class:`hdvmstringanalysis_t` structure
         """
+        if string is None:
+            return None
         if string in self.string_analysis_by_str:
             return self.string_analysis_by_str[string]
         _shuriken.get_analyzed_string_from_apk.restype = ctypes.POINTER(hdvmstringanalysis_t)
