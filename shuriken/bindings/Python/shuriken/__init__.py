@@ -369,7 +369,7 @@ class Apk(object):
             ctypes.c_char_p(dex_file.encode("utf-8"))
         )
 
-    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint32_t) -> hdvmclass_t | None:
+    def get_hdvmclass_from_dex_by_index(self, dex_file: str, idx: ctypes.c_uint32) -> hdvmclass_t | None:
         """
         :param dex_file: DEX file from the APK
         :param idx: index of the DEX file
@@ -381,7 +381,7 @@ class Apk(object):
         _shuriken.get_hdvmclass_from_dex_by_index.argtypes = [
             ctypes.c_void_p,
             ctypes.c_char_p,
-            ctypes.c_uint32_t
+            ctypes.c_uint32
         ]
         # call the function
         ptr = ctypes.cast(
@@ -412,7 +412,7 @@ class Apk(object):
             ctypes.c_char_p(dex_file.encode("utf-8"))
         )
 
-    def get_string_by_id_from_dex(self, dex_file: str, idx: ctypes.c_uint32_t) -> str:
+    def get_string_by_id_from_dex(self, dex_file: str, idx: ctypes.c_uint32) -> str:
         """
         :param dex_file: DEX file from the APK
         :param idx: index of the DEX file for the string
@@ -422,7 +422,7 @@ class Apk(object):
         _shuriken.get_string_by_id_from_dex.argtypes = [
             ctypes.c_void_p,
             ctypes.c_char_p,
-            ctypes.c_uint32_t
+            ctypes.c_uint32
         ]
         # call the function
         string =  _shuriken.get_string_by_id_from_dex(

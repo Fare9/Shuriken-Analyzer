@@ -75,7 +75,7 @@ cmdclass = {
 setup(
     packages=['shuriken'],
     name='ShurikenAnalyzer',
-    version='0.0.2',
+    version='0.0.3',
     author='Fare9',
     author_email='kunai.static.analysis@gmail.com',
     description='Shuriken-Analyzer a library for Dalvik Analysis',
