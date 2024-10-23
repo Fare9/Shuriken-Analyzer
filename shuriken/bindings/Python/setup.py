@@ -1,6 +1,9 @@
+import contextlib
 import os
 import platform
 import subprocess
+from pathlib import Path
+from contextlib import contextmanager
 from setuptools import setup, find_packages
 from setuptools.command.build_ext import build_ext as _build_ext
 from setuptools.command.sdist import sdist as _sdist
@@ -12,30 +15,43 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+SUBFOLDERS_NUMBER=2
+ROOT_FOLDER = Path(__file__).resolve().parents[SUBFOLDERS_NUMBER]
+BUILD_FOLDER = ROOT_FOLDER / 'build'
+
+
+@contextmanager
+def change_directory(path: Path):
+    current_dir = os.getcwd()
+    try:
+        os.chdir(path)
+        yield
+    finally:
+        os.chdir(current_dir)
+
 
 def build_libraries():
     """Function to compile the Shuriken library using CMake on Linux."""
+
+    # Ensure our build folder exists
+    BUILD_FOLDER.mkdir(parents=True, exist_ok=True)
+
     if platform.system() == 'Linux':
+        try:
+            with change_directory(BUILD_FOLDER):
+                logger.info("Configuring with CMake...")
+                subprocess.check_call(['cmake', '..', '-DCMAKE_BUILD_TYPE=Release'])
 
-        current_folder = os.getcwd()
+                logger.info("Building with CMake...")
+                subprocess.check_call(['cmake', '--build', '.', '-j'])
 
-        root_folder = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), '..', '..', '..')
-        )
-        build_folder = os.path.join(root_folder, 'build')
-        os.makedirs(build_folder, exist_ok=True)
-        os.chdir(build_folder)
+                logger.info("Installing with CMake...")
+                subprocess.check_call(['sudo', 'cmake', '--install', '.'])
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Cmake build failed: {e}")
+        except Exception as e:
+            logger.error(f"An error ocurred: {e}")
 
-        logger.info("Configuring with CMake...")
-        subprocess.check_call(['cmake', '..', '-DCMAKE_BUILD_TYPE=Release'])
-
-        logger.info("Building with CMake...")
-        subprocess.check_call(['cmake', '--build', '.', '-j'])
-
-        logger.info("Installing with CMake...")
-        subprocess.check_call(['sudo', 'cmake', '--install', '.'])
-
-        os.chdir(current_folder)
     else:
         logger.warning("CMake build is only supported on Linux for now.")
 
@@ -75,7 +91,7 @@ cmdclass = {
 setup(
     packages=['shuriken'],
     name='ShurikenAnalyzer',
-    version='0.0.3',
+    version='0.0.4',
     author='Fare9',
     author_email='kunai.static.analysis@gmail.com',
     description='Shuriken-Analyzer a library for Dalvik Analysis',
@@ -87,5 +103,5 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.10',
 )
